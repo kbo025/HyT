@@ -1,0 +1,53 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    <div
+        ng-controller="NoAvailabilityCtrl"
+        ng-cloak
+    >
+        <main
+            class="admin nvc-admin__AAVVDirectPayment visible-md visible-lg"
+        >
+            <div>
+                <div class="nvc-secondaryTableHeader--admin">
+                    {% include "NavicuInfrastructureBundle:Admin:accommodations/noAvailability/noAvailabilityHeader.html.twig" %}
+                </div>
+                <div class="nvc-table--admin nvc-container">
+                    {% include "NavicuInfrastructureBundle:Admin:accommodations/noAvailability/noAvailabilityTable.html.twig" %}
+                </div>
+                <div ng-if="pagination.pages > 1">
+                    {% include "NavicuInfrastructureBundle:Admin:accommodations/noAvailability/noAvailabilityPagination.html.twig" %}
+                </div>
+            </div>
+        </main>
+
+        {# Versión movil #}
+        <main
+            class="admin nvc-admin__AAVVDirectPayment visible-sm visible-xs"
+        >
+            <div>
+                <div class="nvc-secondaryTableHeader--admin--movil">
+                    <div class="col-xs-16 col-sm-16">
+                        {% include "NavicuInfrastructureBundle:Admin:accommodations/noAvailability/movil/noAvailabilityHeaderMovil.html.twig" %}
+                    </div>
+                </div>
+                <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+                    {% include "NavicuInfrastructureBundle:Admin:accommodations/noAvailability/movil/noAvailabilityTableMovil.html.twig" %}
+                </div>
+                <div ng-if="pagination.pages > 1">
+                    {% include "NavicuInfrastructureBundle:Admin:invoicing/directPayments/directPaymentsPagination.html.twig" %}
+                </div>
+            </div>
+        </main>
+    </div>
+    {# Versión desktop #}
+
+{% endblock content %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var extension = "{{ app.request.get('extension') }}"
+    </script>
+    {{ parent() }}
+{% endblock %}

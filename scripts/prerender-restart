@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PID_FILE=/tmp/navicu-prerender.pid
+
+if [[ -e "$PID_FILE" ]]
+then
+  xargs -L 1 kill -SIGINT < $PID_FILE
+fi
+
+cd services/prerender-cache
+
+export NODE_ENV=production
+export PRERENDER_NUM_WORKERS=1
+export PRERENDER_NUM_ITERATIONS=5
+export DEBUG=prerender-cache:*
+
+#(npm start > /dev/null 2> /dev/null) &
+npm start

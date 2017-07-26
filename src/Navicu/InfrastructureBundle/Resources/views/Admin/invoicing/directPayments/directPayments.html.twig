@@ -1,0 +1,49 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    {# Versión desktop #}
+    <main
+        class="admin nvc-admin__AAVVDirectPayment visible-md visible-lg"
+        ng-controller="DirectPaymentsCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/directPayments/directPaymentsHeader.html.twig" %}
+            </div>
+            <div class="nvc-table--admin nvc-container">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/directPayments/directPaymentsTable.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/directPayments/directPaymentsPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+    {# Versión desktop #}
+    <main
+        class="admin nvc-admin__AAVVDirectPayment visible-sm visible-xs"
+        ng-controller="DirectPaymentsCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin--movil">
+                <div class="col-xs-16 col-sm-16">
+                    {% include "NavicuInfrastructureBundle:Admin:invoicing/directPayments/movil/directPaymentsHeaderMovil.html.twig" %}
+                </div>
+            </div>
+            <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/directPayments/movil/directPaymentsTableMovil.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/directPayments/directPaymentsPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

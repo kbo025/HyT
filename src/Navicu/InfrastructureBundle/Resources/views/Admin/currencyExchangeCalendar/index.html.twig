@@ -1,0 +1,41 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+<main class="admin">
+  <header>
+    <hgroup class="container">
+      <h1>Tipos de cambio</h1>
+      <h2>Bs — Bolívares</h2>
+    </hgroup>
+  </header>
+
+  <section id="months" ng-controller="CalendarCtrl">
+    <header class="container">
+      <form class="form-inline" ng-submit="batchApply()">
+        <div class="form-group" id="dateRange">
+          <i class="fa fn-calendar"></i>
+          <input type="text" class="form-control" ng-model="batchFrom" placeholder="Desde" ng-change="updateSelection()">
+          <input type="text" class="form-control" value="-" disabled>
+          <input type="text" class="form-control" ng-model="batchTo" placeholder="Hasta" ng-change="updateSelection()">
+        </div>
+        <div class="form-group pull-right">
+          <button type="submit" class="form-control btn btn-sm" ng-disabled="!batchFrom || !batchTo">Aplicar</button>
+        </div>
+        <div class="form-group pull-right" id="diff-group">
+          <label for="diff">Diferencia a aplicar</label>
+          <span ng-click="focusDiff()"><input id="diff" type="text" class="form-control" maxlength="4" ng-model="rangeDiff"><input type="text" class="form-control" disabled maxlength="1" value="%"></span>
+          <input type="submit">
+        </div>
+      </form>
+    </header>
+
+    {% include "NavicuInfrastructureBundle:Admin:currencyExchangeCalendar/_calendar.html.twig" %}
+  </section>
+
+  {% include "NavicuInfrastructureBundle:Admin:currencyExchangeCalendar/_chart.html.twig" %}
+  {% include "NavicuInfrastructureBundle:Admin:currencyExchangeCalendar/_vef_historic.html.twig" %}
+  {% include "NavicuInfrastructureBundle:Admin:currencyExchangeCalendar/_usd_historic.html.twig" %}
+
+</main>
+
+{% endblock %}

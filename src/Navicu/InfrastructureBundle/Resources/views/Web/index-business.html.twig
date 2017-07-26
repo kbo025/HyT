@@ -1,0 +1,95 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-business.html.twig" %}
+
+{% block body %}
+    <!---
+    <h1><b>navicu.com, encuentra tu hotel preferido en venezuela </b></h1>
+    <h2>Reserva de hoteles en caracas</h2>
+    <h3> hoteles en margarita</h3>
+    <h4>posadas en merida</h4>
+    <h5>posadas en tachira</h5>
+    <h5>incluir alojamiento</h5>
+    <h6>el mejor sistema de reservas online para tus vacaciones, ocio y negocios</h6>
+    -->
+
+    <!--- Slider Index -->
+    <section 
+        id="navicu-home-carousel" 
+        data-ride="carousel" 
+        class='nvc-carousel nvc-carousel__fade nvc-home-business col-sm-9' 
+        style="padding:0px;">
+        <div class="nvc-carousel__inner">
+            <div class="item active">
+                <a class="nvc-navbar__brand" href="{{ path('navicu_homepage_temporal') }}">
+                    <img class="nvc-navbar__logo-second" rel="shortcut icon" src="{{ asset('images/favicon.ico') }}" alt="reserva de alojamientos online"/>
+                </a>
+                <div 
+                    class="nvc-carousel__fill nvc-home-business__transition-initial" 
+                    style="background-image:url({{ asset('images/home/temporal/reserva-de-alojamiento-online.jpg') }});" 
+                    src="http://dummyimage.com/600x400.png/fff/fff"> 
+                    <div class="nvc-container">
+                        <center>
+                            <h1><span class="title">{{ "web.home.meet_new_destinations"|trans }}</span><br><hr>
+                                <span>{{ "web.home.lives_venezuela"|trans }}</span>
+                            </h1>
+                        </center>
+                        <a href="{{ path('navicu_destinations') }}#urban">
+                            <h2>
+                                {{ "web.home.discover_wonderful_destinations"|trans }}<br><p>{{ "web.home.popular_and_majestic_destinations"|trans }}<br> {{ "web.home.the_best_experience"|trans }}</p>
+                            </h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section 
+        id="navicu-home-carousel" 
+        data-ride="carousel" 
+        class='nvc-carousel nvc-carousel__fade nvc-home-business col-sm-7' 
+        style="padding:0px; background-color:#391860;">
+        <div 
+            class="nvc-carousel__inner nvc-home-business__sidebar" 
+            ng-app="mainSearchModule" 
+            ng-controller="mainSearchController" ng-cloak>
+            <div class="item active nvc-scroll" >
+                <div ng-repeat="location in locations" ng-if="location.idType!=224" style=" height:30%;">
+                    <div class="nvc-carousel__fill nvc-home-business__transition-sidebar"  style="background-image:url({{ asset('{[{ location.path }]}') }});" src="http://dummyimage.com/600x400.png/fff/fff">
+                        <h3>
+                            <span class="title">{[{ location.name }]}</span>
+                            <br><hr>
+                            <p>{[{ location.description }]}</p>
+                        </h3>
+                        <a href="{[{ url }]}" type="submit" class="nvc-home-business__image-hover" ng-click="redirectUrl($index)">
+                            <input type="hidden" name="destiny" value="{[{ location.name }]}"/>
+                            <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                            <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                            <input type="hidden" name="room" value="{[{rooms}]}"/>
+                            <input type="hidden" name="type" value="{[{location.type}]}"/>
+                            <input type="hidden" name="type" value="{[{location.slug}]}"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--- No borrar -->
+    <section class='nvc-home-business__after-slider nvc-container hidden-xs'>
+    </section>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = "{{ locations }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}

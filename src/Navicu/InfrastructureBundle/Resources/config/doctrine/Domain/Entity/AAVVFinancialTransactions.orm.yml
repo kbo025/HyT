@@ -1,0 +1,36 @@
+Navicu\Core\Domain\Model\Entity\AAVVFinancialTransactions:
+    type: entity
+    table: aavv_financial_transactions
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVFinancialTransactionsRepository
+
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        date:
+            type: datetime
+            nullable: false
+        description:
+            type: string
+            length: 255
+            nullable: false
+        sign:
+            type: string
+            length: 1
+            nullable: false
+        amount:
+            type: float
+            nullable: false
+
+    manyToOne:
+        aavv:
+            targetEntity: AAVV
+            inversedBy: financial_transactions
+            joinColumn:
+                name: aavv_id
+                referencedColumnName: id
+            cascade: ["persist"]

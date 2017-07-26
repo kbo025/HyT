@@ -1,0 +1,18 @@
+Navicu\Core\Domain\Model\Entity\Hobbies:
+    type: entity
+    table: hobbies
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbHobbiesRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+    manyToMany:
+        clients:
+            targetEntity: ClientProfile
+            cascade: {  }
+            mappedBy: hobbies

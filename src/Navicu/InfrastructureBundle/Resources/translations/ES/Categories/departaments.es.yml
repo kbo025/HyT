@@ -1,0 +1,31 @@
+# Departamento comercial
+commercial_departament: Departamento comercial
+role_dir_commercial: Director comercial
+role_sales_exec: Ejecutivo de venta
+role_telemarketing: Telemarketing
+role_call_center: Call Center
+
+# Departamento financiero
+finnacial_departament: Departamento financiero
+role_dir_financial: Director financiero
+role_accouting: Contabilidad
+role_hhrr: Recursos humanos
+role_financial_assistant: Asistente financiero
+
+# Departamento desarrollo
+development_departament: Departamento desarrollo
+role_dir_developer: Director de desarrollo
+role_developer: Desarrollador
+
+# Departamento de Marketing
+marketing_departament: Departamento publicidad
+role_dir_marketing: Director de publicidad
+role_manager_social: Manager redes sociales
+role_manager_content: Manager contenido
+role_marketing_online:  Marketing Online
+
+# Departamento Gerencial
+managers_departament: Departamento Gerencial
+role_dir_general: Director general
+
+

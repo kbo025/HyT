@@ -1,0 +1,283 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'historyInventory'} %}
+
+{% block title %} {{ "extranet.title.generic"|trans }} {% endblock %}
+
+
+{% block body %}
+    <div ng-app="historyModule" ng-controller="logController">
+        <div class="container historic" ng-cloak>
+            <div class="historic-load">
+                <section class="col-sm-5">
+                    <h5><i class="fa fn-calendar2 "></i> {{ "extranet.message.date_modified"|trans }}: <strong ng-bind="logs.date"></strong></h5>
+                    <h5><i class="fa fn-historial "></i> {{ "extranet.message.time_modified"|trans }}: <strong ng-bind="logs.time"></strong></h5>
+                </section>
+                <section class="col-sm-5">
+                    <h5> {{ "extranet.message.modified_by"|trans }}:  <strong ng-bind="logs.ownerProfile"></strong></h5>
+                    <h5> {{ "extranet.message.day_modified"|trans }}: <strong ng-if="logs.modificationDate" ng-bind="logs.modificationDate"></strong></h5>
+                </section>
+                <div class="col-sm-6" style="margin-top: 29px;">
+                    <h4 align="right">{{ "extranet.message.inventory"|trans }}</h4>
+                    <div ng-if="logs.new.pack" align="right">
+                        <h5>{{"extranet.message.room_type"|trans}}: <strong ng-bind="logs.new.room"></strong></h5>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Si es una habitación -->
+            <div ng-if="!logs.new.pack">
+                <div ng-if="logs.old">
+                    <!-- Habitación Modificada, (Valores antiguos) -->
+                    <div class="col-xs-16 table-responsive">
+                        <div class="historic-values">
+                            <b>{{"extranet.action.old_values"|trans}}:</b>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">{{ "extranet.message.room_type"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.availability"|trans  }} </th>
+                                    <th class="text-center">{{ "extranet.message.min_nights"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.max_nights"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.advance"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.stop_sell"|trans  }} </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" ng-bind="logs.new.room"></td>
+                                    <td class="text-center" ng-if="logs.old.availability" ng-bind="logs.old.availability"></td>
+                                    <td class="text-center" ng-if="!logs.old.availability">-</td>
+                                    <td class="text-center" ng-if="logs.old.minNight" ng-bind="logs.old.minNight"></td>
+                                    <td class="text-center" ng-if="!logs.old.minNight">-</td>
+                                    <td class="text-center" ng-if="logs.old.maxNight" ng-bind="logs.old.maxNight"></td>
+                                    <td class="text-center" ng-if="!logs.old.maxNight">-</td>
+                                    <td class="text-center" ng-if="logs.old.cutOff" ng-bind="logs.old.cutOff"></td>
+                                    <td class="text-center" ng-if="!logs.old.cutOff">-</td>
+                                    <td class="text-center" ng-if="logs.old.stopSell==true">{{ "share.message.yes"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.stopSell==false">{{ "share.message.no"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.stopSell!=true && logs.old.stopSell!=false">-</td>
+                                <tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Servicios Afectados cuando modifico una habitación, (Valores antiguos) -->
+                    <div ng-if="logs.new.affected" class="col-xs-16 table-responsive" style="margin-bottom: 10px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">{{ "extranet.message.services"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.availability"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.min_nights"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.max_nights"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.sell_rate"|transchoice(0) }}</th>
+                                    <th class="text-center">{{ "extranet.message.co"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.ctd"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.cta"|trans  }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="affect in logs.new.affected">
+                                    <td class="text-center" ng-bind="affect.pack"></td>
+                                    <td class="text-center" ng-if="logs.old.availability" ng-bind="logs.old.availability"></td>
+                                    <td class="text-center" ng-if="!logs.old.availability">-</td>
+                                    <td class="text-center" ng-if="logs.old.minNight" ng-bind="logs.old.minNight"></td>
+                                    <td class="text-center" ng-if="!logs.old.minNight">-</td>
+                                    <td class="text-center" ng-if="logs.old.maxNight" ng-bind="logs.old.maxNight"></td>
+                                    <td class="text-center" ng-if="!logs.old.maxNight">-</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center">-</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- Habitación Modificada, (Valores nuevos) -->
+                <div class="col-xs-16 table-responsive">
+                    <div class="historic-values">
+                        <b>{{"extranet.action.updated_values"|trans}}:</b>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="text-center">{{ "extranet.message.room_type"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.availability"|trans  }}</th>
+                                <th class="text-center">{{ "extranet.message.min_nights"|trans  }}</th>
+                                <th class="text-center">{{ "extranet.message.max_nights"|trans  }}</th>
+                                <th class="text-center">{{ "extranet.message.advance"|trans  }}</th>
+                                <th class="text-center">{{ "extranet.message.stop_sell"|trans  }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center" ng-bind="logs.new.room"></td>
+                                <td class="text-center" ng-if="logs.new.availability" ng-bind="logs.new.availability"></td>
+                                <td class="text-center" ng-if="!logs.new.availability">-</td>
+                                <td class="text-center" ng-if="logs.new.minNight" ng-bind="logs.new.minNight"></td>
+                                <td class="text-center" ng-if="!logs.new.minNight">-</td>
+                                <td class="text-center" ng-if="logs.new.maxNight" ng-bind="logs.new.maxNight"></td>
+                                <td class="text-center" ng-if="!logs.new.maxNight">-</td>
+                                <td class="text-center" ng-if="logs.new.cutOff" ng-bind="logs.new.cutOff"></td>
+                                <td class="text-center" ng-if="!logs.new.cutOff">-</td>
+                                <td class="text-center" ng-if="logs.new.stopSell==true">{{ "share.message.yes"|trans }}</td>
+                                <td class="text-center" ng-if="logs.new.stopSell==false">{{ "share.message.no"|trans }}</td>
+                                <td class="text-center" ng-if="logs.new.stopSell!=true && logs.new.stopSell!=false">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Servicios Afectados cuando modifico una habitación, (Valores nuevos) -->
+                <div ng-if="logs.new.affected" class="col-xs-16 table-responsive" style="margin-bottom: 30px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="text-center">{{ "extranet.message.services"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.availability"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.min_nights"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.max_nights"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.sell_rate"|transchoice(0) }}</th>
+                                <th class="text-center">{{ "extranet.message.co"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.ctd"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.cta"|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="affect in logs.new.affected">
+                                <td class="text-center" ng-bind="affect.pack"></td>
+                                <td class="text-center" ng-if="logs.new.availability" ng-bind="logs.new.availability"></td>
+                                <td class="text-center" ng-if="!logs.new.availability">-</td>
+                                <td class="text-center" ng-if="logs.new.minNight" ng-bind="logs.new.minNight"></td>
+                                <td class="text-center" ng-if="!logs.new.minNight">-</td>
+                                <td class="text-center" ng-if="logs.new.maxNight" ng-bind="logs.new.maxNight"></td>
+                                <td class="text-center" ng-if="!logs.new.maxNight">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Si es un servicio -->
+            <div ng-if="logs.new.pack">
+                <div ng-if="logs.old">
+                    <!-- Servicios Afectados (Valores antiguos) -->
+                    <div class="col-xs-16 table-responsive" style="margin-bottom: 10px;">
+                        <div class="historic-values">
+                            <b>{{"extranet.action.old_values"|trans}}:</b>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">{{ "extranet.message.services"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.availability"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.min_nights"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.max_nights"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.sell_rate"|transchoice(0) }}</th>
+                                    <th class="text-center">{{ "extranet.message.co"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.ctd"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.cta"|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" ng-bind="logs.new.pack"></td>
+                                    <td class="text-center" ng-if="logs.old.specificAvailability" ng-bind="logs.old.specificAvailability"></td>
+                                    <td class="text-center" ng-if="!logs.old.specificAvailability">-</td>
+                                    <td class="text-center" ng-if="logs.old.minNight" ng-bind="logs.old.minNight"></td>
+                                    <td class="text-center" ng-if="!logs.old.minNight">-</td>
+                                    <td class="text-center" ng-if="logs.old.maxNight" ng-bind="logs.old.maxNight"></td>
+                                    <td class="text-center" ng-if="!logs.old.maxNight">-</td>
+                                    <td class="text-center" ng-if="logs.old.sellRate" ng-bind="logs.old.sellRate"></td>
+                                    <td class="text-center" ng-if="!logs.old.sellRate">-</td>
+
+                                    <td class="text-center" ng-if="logs.old.closeOut==true">{{ "share.message.yes"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.closeOut==false">{{ "share.message.no"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.closeOut!=true && logs.old.closeOut!=false">-</td>
+
+                                    <td class="text-center" ng-if="logs.old.closedToDeparture==true">{{ "share.message.yes"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.closedToDeparture==false">{{ "share.message.no"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.closedToDeparture!=true && logs.old.closedToDeparture!=false">-</td>
+
+                                    <td class="text-center" ng-if="logs.old.closedToArrival==true">{{ "share.message.yes"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.closedToArrival==false">{{ "share.message.no"|trans }}</td>
+                                    <td class="text-center" ng-if="logs.old.closedToArrival!=true && logs.old.closedToArrival!=false">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Servicios Afectados (Valores nuevos) -->
+                <div class="col-xs-16 table-responsive" style="margin-bottom: 30px;">
+                    <table>
+                        <thead>
+                            <div class="col-xs-16 historic-values">
+                                <b>{{"extranet.action.updated_values"|trans}}:</b>
+                            </div>
+                                <tr>
+                                    <th class="text-center">{{ "extranet.message.services"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.availability"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.min_nights"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.max_nights"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.sell_rate"|transchoice(0) }}</th>
+                                    <th class="text-center">{{ "extranet.message.co"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.ctd"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.cta"|trans }}</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center" ng-bind="logs.new.pack"></td>
+                                <td class="text-center" ng-if="logs.new.specificAvailability" ng-bind="logs.new.specificAvailability"></td>
+                                <td class="text-center" ng-if="!logs.new.specificAvailability">-</td>
+                                <td class="text-center" ng-if="logs.new.minNight" ng-bind="logs.new.minNight"></td>
+                                <td class="text-center" ng-if="!logs.new.minNight">-</td>
+                                <td class="text-center" ng-if="logs.new.maxNight" ng-bind="logs.new.maxNight"></td>
+                                <td class="text-center" ng-if="!logs.new.maxNight">-</td>
+                                <td class="text-center" ng-if="logs.new.sellRate" ng-bind="logs.new.sellRate"></td>
+                                <td class="text-center" ng-if="!logs.new.sellRate">-</td>
+
+                                <td class="text-center" ng-if="logs.old.closeOut==true">{{ "share.message.yes"|trans }}</td>
+                                <td class="text-center" ng-if="logs.old.closeOut==false">{{ "share.message.no"|trans }}</td>
+                                <td class="text-center" ng-if="logs.old.closeOut!=true && logs.old.closeOut!=false">-</td>
+
+                                <td class="text-center" ng-if="logs.old.closedToDeparture==true">{{ "share.message.yes"|trans }}</td>
+                                <td class="text-center" ng-if="logs.old.closedToDeparture==false">{{ "share.message.no"|trans }}</td>
+                                <td class="text-center" ng-if="logs.old.closedToDeparture!=true && logs.old.closedToDeparture!=false">-</td>
+
+                                <td class="text-center" ng-if="logs.old.closedToArrival==true">{{ "share.message.yes"|trans }}</td>
+                                <td class="text-center" ng-if="logs.old.closedToArrival==false">{{ "share.message.no"|trans }}</td>
+                                <td class="text-center" ng-if="logs.old.closedToArrival!=true && logs.old.closedToArrival!=false">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {{ include("NavicuInfrastructureBundle:Extranet/History:modalLogOwner.html.twig") }}
+        {#-- Ventana modal para indicar que se está cargando una petición--#}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var extension ="{{ app.request.attributes.get('extension') }}";
+        var slug = "{{ slug }}";
+        var log = "{{ logfile }}";
+    </script>
+
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

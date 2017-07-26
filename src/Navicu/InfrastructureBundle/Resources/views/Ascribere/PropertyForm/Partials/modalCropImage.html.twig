@@ -1,0 +1,28 @@
+<script id="modal-crop-image.tpl" type="text/ng-template">
+    <div class="modal" tabindex="-1" role="dialog">
+	    <div class="modal-dialog modal-dialog-crop modal-crop">
+	        <div class="modal-content modal-content-crop">
+	        	<div class="row">
+	        		<div class="col-xs-16 col-md-16">
+	            		<button type="button" class="close close-crop" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+	                    <div class="carousel-fill img-modal-hotel-gallery"> 
+	                    	<canvas ng-show="cropper.sourceImage!=null" width="800" height="500" id="canvas" image-cropper 
+	                    			image="cropper.sourceImage" cropped-image="cropper.croppedImage" crop-width="1040" 
+	                    			crop-height="650" keep-aspect="true" touch-radius="30" crop-area-bounds="bounds">
+                            </canvas>
+	                    </div>
+			   		</div> 
+	        	</div>
+	        	<div align="right" style="margin-top:15px;">
+					<button type="button" style="margin-right:20px;" ng-click="$hide()"
+						class="btn btn-primary btn-search-list btn-cancel-crop">Cancelar
+					</button>
+					<button type="button" class="btn btn-primary btn-search-list btn-accept-crop"
+							ng-click="getFileWithButton(cropper.croppedImage, image); $hide()">
+						Recortar y guardar
+					</button>
+				</div>
+	        </div>
+	    </div>     
+    </div>
+</script>    

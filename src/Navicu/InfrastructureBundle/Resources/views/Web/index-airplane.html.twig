@@ -1,0 +1,239 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-airplane.html.twig" %}
+
+{% block body %}
+    <!---
+    <h1><b>navicu.com, encuentra tu hotel preferido en venezuela </b></h1>
+    <h2>Reserva de hoteles en caracas</h2>
+    <h3> hoteles en margarita</h3>
+    <h4>posadas en merida</h4>
+    <h5>posadas en tachira</h5>
+    <h5>incluir alojamiento</h5>
+    <h6>el mejor sistema de reservas online para tus vacaciones, ocio y negocios</h6>
+    -->
+
+    <!--- Slider Index -->
+    <section id="navicu-home-carousel" data-ride="carousel" class='nvc-carousel nvc-carousel__fade'>
+        <div ng-app="mainSearchModule" ng-controller="mainSearchController">
+            {# Campo de busqueda de establecimientos #}
+            <div class="nvc-home-airplane__absolute-center">
+                <div class="nvc-container">
+                    <div class="nvc-row">
+                        <div class="col-xs-16 col-md-12 col-md-offset-2 nvc-panel-search--airplane">
+                            <div class="nvc-row">
+                                <div class="col-xs-15 col-xs-offset-1" style="margin-left:3.25%;">
+                                    <span class="h4 visible-xs">{{ "share.message.search_your_accomodation"|trans }}:</span>
+                                    <div class="text-center hidden-xs">
+                                        <span class="font-bold" style="font-size:40px;"> {{ "share.message.reserve"|trans }}</span>
+                                        <p class="font-semibold" style="font-size:25px;"> {{ "share.message.new_destinations"|trans }}</p>
+                                    </div>
+                                    <form action="{[{url}]}" method="get" class="form-inline nvc-panel-search__content" role="form">
+                                        <input type="hidden" ng-if="selectedDestiny==null || selectedDestiny.type!=5" name="word" value="{[{searchText}]}"/>
+                                        <input type="hidden" ng-if="selectedDestiny && selectedDestiny.type!=5" name="destiny" value="{[{selectedDestiny.firstName}]}"/>
+                                        <input type="hidden" name="adult" value="{[{adults}]}"/>
+                                        <input type="hidden" name="kid" value="{[{kids}]}"/>
+                                        <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                        <input type="hidden" ng-if="selectedDestiny && selectedDestiny.type!=5" name="idType" value="{[{selectedDestiny.id}]}"/>
+                                        <input type="hidden" ng-if="selectedDestiny && selectedDestiny.type!=5" name="type" value="{[{selectedDestiny.type}]}"/>
+
+                                        <div class="nvc-dropdown">
+                                            <input class="nvc-input__home nvc-select__home--main" data-toggle="dropdown" ng-model="searchText"
+                                                   placeholder="{{ "share.message.search_textfield_legend"|trans }}"/>
+                                            <ul class="nvc-dropdown__menu col-xs-16" ng-show="results" role="menu">
+                                                <li>
+                                                    <a class="result" data-id="1" ng-repeat="destiny in results"
+                                                       ng-click="selectDestination(destiny)">
+                                                        <i ng-if="destiny.type==1"class="fa-autocomplete fn-location"></i>
+                                                        <i ng-if="destiny.type==2"class="fa-autocomplete fn-municipio"></i>
+                                                        <i ng-if="destiny.type==3"class="fa-autocomplete fn-parroquia"></i>
+                                                        <i ng-if="destiny.type==4"class="fa-autocomplete fn-city"></i>
+                                                        <i ng-if="destiny.type==5"class="fa-autocomplete fn-accomodations"></i>
+                                                        <strong>{[{destiny.firstName}]}</strong>,
+                                                        {[{destiny.secondName}]}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- Add the extra clearfix for only the required viewport -->
+                                        <div class="clearfix hidden-xs-block"></div>
+                                        <div id="js-date-range">
+                                            <div class="col-xs-8 col-md-2">
+                                                <input type="text" autocomplete="off" class="nvc-input__home nvc-input__home--checkin js-range-check-in"
+                                                       name="startDate" placeholder="{{ 'share.message.start_date'|trans }}"/>
+                                            </div>
+                                            <div class="col-xs-8 col-md-2">
+                                                <input type="text" autocomplete="off" class="nvc-input__home js-range-check-out" name="endDate"
+                                                       placeholder="{{ 'share.message.end_date'|trans }}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5 col-md-3">
+                                            <select class="nvc-select__home" ng-model="adults"
+                                                    ng-options="(n + ' {{ "share.message.adult"|transchoice(2) }}') for n in [] | range:1:9">
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-5 col-md-2">
+                                            <select class="nvc-select__home" ng-model="kids"
+                                                    ng-options="(n + ' {{ "share.message.child"|transchoice(2) }}') for n in [] | range:0:8">
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-6 col-md-4">
+                                            <select class="nvc-select__home" ng-model="rooms"
+                                                    ng-options="(n + ' {{ "share.message.room"|transchoice(2) }}') for n in [] | range:1:10">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 hidden-xs hidden-sm">
+                                            <button class="nvc-button nvc-button__search">{{ "share.action.search"|trans }}</button>
+                                        </div>
+                                        <div class="visible-xs-block visible-sm-block">
+                                            <div class="col-xs-16" style="margin-top: 14px;">
+                                                <button class="nvc-button nvc-button__search" id="clear">{{ "share.action.search"|trans }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nvc-carousel__inner">
+            <div class="item active">
+                <div class="nvc-carousel__fill" style="background-image:url({{ asset('images/home/reserva-de-alojamiento-online.jpg') }});" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+                <h1 class="hidden-xs"><span>Pozo Azul, Edo. Guárico</span><br>
+                    {{ "share.home.photography"|trans }}: Fernando Flores
+                </h1>
+            </div>
+            <div class="item hidden-xs">
+                <div class="nvc-carousel__fill" style="background-image:url({{ asset('images/home/viajes-hoteles-turismo.jpg') }});"></div>
+                <h1><span>Parque Nacional Sierra Nevada, Mérida</span><br>
+                    {{ "share.home.photography"|trans }}: Jesús López
+                </h1>
+            </div>
+            <div class="item hidden-xs">
+                <div class="nvc-carousel__fill" style="background-image:url({{ asset('images/home/Viajar-por-venezuela-navicu.jpg') }});"></div>
+                <h1><span>Monumento Natural Piedra La Tortuga, Amazonas</span><br>
+                    {{ "share.home.photography"|trans }}: Fernando Flores
+                </h1>
+            </div>
+            <div class="item hidden-xs">
+                <div class="nvc-carousel__fill" style="background-image:url({{ asset('images/home/Navicu-hoteles-en-venezuela.jpg') }});"></div>
+                <h1> <span>Tepuys Kukenan y Roraima, Gran Sabana</span><br>
+                    {{ "share.home.photography"|trans }}: Paolo Costa Baldi<br>
+                    <span class="license">{{ "share.home.license"|trans }}:GFDL/CC-BY-SA-3.0</span>
+                </h1>
+            </div>
+            <div class="item hidden-xs">
+                <div class="nvc-carousel__fill" style="background-image:url({{ asset('images/home/viaje-cultura-negocio.jpg') }});"></div>
+                <h1><span>Muelle Naiguatá, Edo. Vargas</span><br>
+                    {{ "share.home.photography"|trans }}: Paolo Costa Baldi<br>
+                    <span class="license">{{ "share.home.license"|trans }}:CC-BY-SA-3.0</span>
+                </h1>
+            </div>
+        </div>
+        <!-- Controls -->
+        <!--<a class="left nvc-carousel__control hidden-xs" href="#navicu-home-carousel" data-slide="prev"><span class="fa fa-angle-left fa-4x"></span></a>
+        <a class="right nvc-carousel__control hidden-xs" href="#navicu-home-carousel" data-slide="next"><span class="fa fa-angle-right fa-4x"></span></a>-->
+    </section>
+
+    <!--- Items Informativos -->
+    <section 
+        class='nvc-home-airplane__after-slider nvc-container  hidden-xs post-body entry-content' 
+        oncontextmenu='return false' 
+        ondragstart='return false' 
+        onmousedown='return false' 
+        onselectstart='return false'>
+        <div class="col-sm-4 text-center">
+            <center>
+                <img src="{{ asset('images/home/items/reserva-de-alojamiento-online.png') }}" class="img-responsive" alt="encuentra tu destino favorito a través de navicu reserva de alojamiento online"/>
+                <h3>{{"web.home.item_hotel"|transchoice(0) }}</h3>
+                <p>{{"web.home.item_hotel"|transchoice(1) }}</p>
+            </center>
+        </div>
+        <div class="col-sm-4 text-center">
+            <center style="padding-top:25px;">
+                <img src="{{ asset('images/home/items/navicu-reserva-disponibilidad-hoteles-en-Venezuela.png') }}" class="img-responsive" alt="compara las mejores ofertas y establecimientos en hoteles a través de navicu"/>
+                <h3>{{"web.home.item_service"|transchoice(0) }}</h3>
+                <p>{{"web.home.item_service"|transchoice(1) }}</p>
+            </center>
+        </div>
+        <div class="col-sm-4 text-center">
+            <center>
+                <img src="{{ asset('images/home/items/navicu-encuentra-tu-hotel-y-reserva-con-la-mayor-seguridad.png') }}" class="img-responsive" alt="en Navicu tenemos un sistema de reserva rápido y seguro"/>
+                <h3>{{"web.home.item_security"|transchoice(0) }}</h3>
+                <p>{{"web.home.item_security"|transchoice(1) }}</p>
+            </center>
+        </div>
+        <div class="col-sm-4 text-center">
+            <center>
+                <img src="{{ asset('images/home/items/viajar-por-venezuela-navicu.png') }}" class="img-responsive" alt="Navicu-hoteles-en-venezuela"/>
+                <h3>{{"web.home.item_payment"|transchoice(0) }}</h3>
+                <p>{{"web.home.item_payment"|transchoice(1) }}</p>
+            </center>
+        </div>
+    </section>
+
+    <!--- Destinos -->
+    <section 
+        class='nvc-home-airplane__destinations nvc-container post-body entry-content' 
+        oncontextmenu='return false' 
+        ondragstart='return false' 
+        onmousedown='return false' 
+        onselectstart='return false'>
+        <div class="col-xs-16" >
+            <h4>{{"web.about_us.variety_of_destinations"|trans }}</h4>
+                <div class="nvc-row">
+                    <div class="col-sm-8 col-md-4 nvc-home-first__destinations--grid">
+                        <a href="{{ path('navicu_destinations') }}#urban">
+                            <img src="{{ asset('images/destinations/destinos-urbanos-en-vacaciones-viajes-y-cultura.jpg') }}" class="img-responsive" alt="Negocios, viajes y cultura. Descubre nuevos destinos en navicu"/>
+                            <h3>{{"web.destinations.urban"|transchoice(1) }}</h3>
+                            <p align="justify">{{"web.destinations.message_urban"|trans }}</p>
+                        </a>
+                    </div>
+                    <hr class="visible-xs">
+                    <div class="col-sm-8 col-md-4 nvc-home-first__destinations--grid">
+                        <a href="{{ path('navicu_destinations') }}#romantic">
+                            <img src="{{ asset('images/destinations/navicu-destino-romántico-en-venezuela.jpg') }}" class="img-responsive" alt="Encuentra tu hotel preferido y conoce los destinos románticos de Venezuela"/>
+                            <h3>{{"web.destinations.romantic"|transchoice(1) }}</h3>
+                            <p align="justify">{{"web.destinations.message_romantic"|trans }}</p>
+                        </a>
+                    </div>
+                    <hr class="visible-xs">
+                    <div class="col-sm-8 col-md-4 nvc-home-first__destinations--grid">
+                        <a href="{{ path('navicu_destinations') }}#mountain">
+                            <img src="{{ asset('images/destinations/navicu-descubre-rutas-destinos-y-montañas.jpg') }}" class="img-responsive" alt="Con navicu puedes disfrutar de hermosos paisajes, rutas y montañas de Venezuela"/>
+                            <h3>{{"web.destinations.mountain"|transchoice(1) }}</h3>
+                            <p align="justify">{{"web.destinations.message_mountain"|trans }}</p>
+                        </a>
+                    </div>
+                    <hr class="visible-xs">
+                    <div class="col-sm-8 col-md-4 nvc-home-first__destinations--grid">
+                        <a href="{{ path('navicu_destinations') }}#beach">
+                            <img src="{{ asset('images/destinations/navicu-costas-del-caribe.jpg') }}" class="img-responsive" alt="Con navicu puedes conocer la costa venezolana, Beach, Hotel, Resort. Conoce a Venezuela  y quédate en los mejores hoteles y posadas ubicadas en las aguas del Caribe y su radiante sol"/>
+                            <h3>{{"web.destinations.beach"|transchoice(1) }}</h3>
+                            <p align="justify">{{"web.destinations.message_beach"|trans }}</p>
+                        </a>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#navicu-home-carousel').carousel({
+                interval: 10000
+            });
+            //*** DON´T TOUCH
+            $( ".js-range-check" ).keypress(function (evt) {  return false; });
+            //////////
+            $('#js-date-range').rangePicker();
+        });
+    </script>
+{% endblock %}

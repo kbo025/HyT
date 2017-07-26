@@ -1,0 +1,405 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block body %}
+    <main
+        class='nvc-container resume-pre-reservation post-body entry-content'
+        {# oncontextmenu='return false' #}
+        ondragstart='return false'
+        ng-app="resumeModule"
+        ng-controller="resumeController"
+        ng-cloak>
+        <div class="margin-tittle">
+            {#  Bloque Derecho #}
+            <section class="col-xs-16 col-md-10">
+                <div class="responsive-header">
+                    <h1>
+                        {{"web.reservation.thank_you_pre"|trans}}
+                        {[{response.propertyName}]}<br>
+
+                    </h1>
+                    <h1 class="margin">
+                        <span>{{"web.reservation.message_pre"|trans}}</span>
+                    </h1>
+                </div>
+
+                <div class="nvc-jumbotron nvc-jumbotron__resume bank-data">
+                    <div class="nvc-container">
+                        <h1 class="visible-md visible-lg">
+                            <img src="/images/resumenPreReservation/datos.png" alt="navicu datos">
+                            Te facilitamos nuestros datos bancarios
+                        </h1>
+                        <hr class="visible-md visible-lg">
+                        {% if ( not foreignCurrency ) %}
+
+
+                        <div class="col-xs-16" ng-init="paymentType = 2">
+                            <div class="row padding-items">
+                                <div class="col-xs-16 col-sm-8 padding-items-xs">
+                                    <i class="fa fn-user"></i>
+                                    <span>{{"word.name"|transchoice(1)}}</span><br>
+                                    <span class="span2">Navicu C.A</span>
+                                </div>
+                                <div class="col-xs-16 col-sm-8 padding-items-xs">
+                                    <i class="fa fn-icono-rif"></i>
+                                    <span>RIF</span><br>
+                                    <span class="span2">J-40621968-1</span>
+                                </div>
+                            </div>
+                            <div class="row padding-items">
+                                <div class="col-xs-16 col-sm-8 padding-items-xs">
+                                    <i class="fa fn-mail"></i>
+                                    <span>E-mail</span><br>
+                                    <span class="span2">preguntas@navicu.com</span>
+                                </div>
+                                <div id="selectBank" class="col-xs-16 col-sm-8 padding-items-xs">
+                                    <i class="fa fn-banc"></i>
+                                    <span>
+                                        <select
+                                            name="bank"
+                                            ng-model="bankSelected">
+                                            <option value="">
+                                                {{ "web.shared_client.table_header.banking_entity_select" | trans}}
+                                            </option>
+                                            <option value="0134-0467-41-4671097039">
+                                                Banesco
+                                            </option>
+
+                                            <option value="0108-0581-31-0100040778">
+                                                Provincial
+                                            </option>
+                                            <option value="0105-0699-92-1699185247">
+                                                Mercantil
+                                            </option>
+                                        </select>
+                                    </span>
+
+                                    <span class="span2">{[{ bankSelected }]}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-xs-16" ng-init="paymentType = 4">
+                            <div class="row padding-items">
+                                <div class="col-xs-16 col-sm-8 padding-items-xs" >
+                                    <i class="fa fn-user"></i>
+                                    <span>{{"word.name"|transchoice(1)}}</span><br>
+                                    <span class="span2">navicu LLC</span>
+                                </div>
+                                <div class="col-xs-16 col-sm-8 padding-items-xs" >
+                                    <i class="fa fn-rif"></i>
+                                    <span>Swift</span><br>
+                                    <span class="span2">BOFAUS3N</span>
+                                </div>
+                            </div>
+                            <div class="row padding-items">
+                                <div class="col-xs-16 col-sm-8 padding-items-xs" >
+                                    <i class="fa fn-banc"></i>
+                                    <span>Número de cuenta</span><br>
+                                    <span class="span2">898076479194</span>
+                                </div>
+                                <div class="col-xs-16 col-sm-8 padding-items-xs" >
+                                    <i class="fa fn-numeroderuta"></i>
+                                    <span>Número de ruta</span><br>
+                                    <span class="span2">063000047</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-16 col-sm-8 padding-items-xs" >
+                                    <i class="fa fn-transferencia"></i>
+                                    <span>Transferencia por cable</span><br>
+                                    <span class="span2">026009593</span>
+                                </div>
+                                <div class="col-xs-16 col-sm-8 padding-items-xs" >
+                                    <i class="fa fn-direccion"></i>
+                                    <span>Dirección</span><br>
+                                    <span class="span2">Bank of America, NA 222 Broadway New York, New York 10038</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="nvc-row nvc-container">
+                    <div class="col-lg-13  col-sm-16 nvc-confirm-booking text-left">
+
+                        <span class="visible-lg visible-sm">
+                            <img src="/images/resumenPreReservation/bandera.png" alt="navicu bandera">
+                            ¡Confirma tu reserva entrando a tu perfil y empieza a disfrutar!
+                        </span>
+
+                        <span class="visible-md visible-xs">
+                            <img src="/images/resumenPreReservation/bandera.png" alt="navicu bandera">
+                            ¡Confirma tu reserva entrando a tu perfil!
+                        </span>
+                    </div>
+                    <div class="
+                        col-lg-3 col-sm-16
+                        nvc-go-client text-center"
+                        ng-click="redirectHomeClient()">
+                        <span>Ir a mi perfil<span>
+                    </div>
+                </div>
+
+                <h3 ng-if="!successPayment">{{"web.reservation.date_payment"|trans}}</h3>
+
+                <h3 ng-if="successPayment">
+                    {{"web.reservation.thank_you_reserve_navicu"|trans}}
+                </h3>
+                <div
+                    class="nvc-jumbotron nvc-jumbotron__resume"
+                    ng-if="successPayment"
+                    style="margin-left: 0%; margin-right: 0%;">
+                    <div class="nvc-container">
+                        <div class="col-xs-16">
+                            <h3>{{"web.reservation.message_received_correctly"|trans}}</h3>
+                            <strong>{{"web.reservation.validate_payment"|trans}}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="pay_later" style="margin-top: 0px !important;">
+                    <div class="style-xs">
+                        <span>{{"web.reservation.payment_later"|trans}}</span>
+                    </div>
+                </div>
+                <div class="nvc-jumbotron">
+                    <div class="nvc-container">
+                        <div class="hidden-xs hidden-sm col-md-2">
+                            <img src="/images/clock-resume.png">
+                        </div>
+                        <div class="col-xs-16 col-md-14">
+                            <li align="justify">
+                                <span>1</span>
+                                {{"web.reservation.step_one"|trans}}
+                            </li>
+                            <li align="justify">
+                                <span>2</span>
+                                {{"web.reservation.step_two"|trans}}
+                            </li>
+                        </div>
+                    </div>
+                </div>
+                <h3>{{"web.reservation.message_email_date_bank"|trans}}</h3>
+                <div class="alert">
+                    <div class="nvc-row">
+                        <div class="col-sm-2 hidden-xs hidden-sm">
+                            <img src="/images/resumenPreReservation/advertencia.png" alt="navicu Advertencia">
+                        </div>
+                        <div class="col-xs-16 col-md-14">
+                            {{"web.reservation.message_infomation_confirmation"|trans}}
+                        </div>
+                    </div>
+
+
+                    <div class="nvc-row">
+                        <div class="col-xs-16 col-md-14">
+                            <p>
+                                {{"web.reservation.message_infomation_confirmation_days"|trans}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+            </section>
+            {#  Barra lateral Izquierda#}
+            <section
+                class="col-md-6 hidden-xs hidden-sm"
+                style="margin-top:20px;">
+                <div
+                    class="col-md-16 best-price"
+                    align="center">
+                    <img ng-src="{{ asset('images/preciogarantizado.png') }}" >
+                    <h3>{{"web.reservation.best_price"|trans}}</h3>
+                </div>
+                <div class="col-md-16 resume">
+                    <h1><strong>{[{response.propertyName}]}</strong></h1>
+                    <h2>{[{response.propertyAddress}]}</h2>
+                    <p class="margin-star">
+                        <span
+                            ng-repeat-n="response.propertyStars"
+                            class="faa-star fa fa-star">
+                        </span>
+                    </p>
+                    <hr>
+                    <h5>
+                        {[{response.numberPack}]}
+                        <strong ng-if="response.numberPack==1">
+                            {{"share.preview.rooms"|transchoice(1) }}
+                        </strong>
+                        <strong ng-if="response.numberPack>1">
+                            {{"share.preview.rooms"|transchoice(0) }}
+                        </strong>
+                        <strong ng-if="response.numberPack==1">
+                            {{"web.reservation.pre_reserved_by_night"|transchoice(0) }}
+                        </strong>
+                        <strong ng-if="response.numberPack>1">
+                            {{"web.reservation.pre_reserved_by_night"|transchoice(1) }}
+                        </strong>
+                        {[{response.reservedNights}]}
+                        {{"web.reservation.night"|trans }}
+                        <strong ng-if="response.reservedNights>1">s</strong>
+                    </h5>
+                    <div class="col-md-8" style="padding-left:0px;">
+                        <h5> Check in:
+                            <span>{[{response.checkinReservation}]}</span>
+                        </h5>
+                    </div>
+                    <div class="col-md-8" style="padding-left:0px;">
+                        <h5>Check out:
+                            <span>{[{response.checkoutReservation}]}</span>
+                        </h5>
+                    </div>
+                    <div class="col-md-8" style="padding-left:0px;">
+                        <h5> {{"word.total_adults"| trans}}:
+                            <span>{[{response.numberAdults}]}</span>
+                        </h5>
+                    </div>
+                    <div
+                        class="col-md-8"
+                        style="padding-left:0px;"
+                        ng-show="response.numberChildren">
+                        <h5>{{ "word.total_children"| trans }}:
+                            <span>{[{ response.numberChildren }]}</span>
+                        </h5>
+                    </div>
+                    <div class="col-md-16" style="padding-left:0px;">
+                        <div ng-repeat="(id,value) in response.rooms">
+                            <div ng-repeat="pack in value.packages">
+                                <h5>{{"web.reservation.type_room"|trans}}:
+                                    <span>{[{value.roomName}]}</span>
+                                </h5>
+                                <h5>{{"web.reservation.type_pack"|trans }}:
+                                    <span>{[{pack.namePack}]}</span>
+                                </h5>
+                                <h5>{{"web.reservation.cancellation_policies"|trans}}:
+                                    <span>{[{pack.namePolicyCancellation}]}</span>
+                                </h5>
+                                <h5>{{"word.number_adults"|trans}}:
+                                    <span>{[{pack.numberAdults}]}</span>
+                                </h5>
+                                <h5 ng-show="pack.numberChildren>0">
+                                    {{ "word.number_children"| trans }}:
+                                    <span>{[{ pack.numberChildren }]}</span>
+                                </h5>
+                                <h5 ng-repeat="age in pack.childrenAges track by $index">
+                                    Edad Niño {[{ $index + 1 }]}:
+                                    <span> {[{ age }]} Años</span>
+                                </h5>
+                                <hr ng-if="response.rooms.length>1 && id != response.rooms.length-1">
+                            </div>
+                        </div>
+                    </div>
+                    <img
+                        ng-src="/uploads/images/images_sm/{[{response.propertyImage}]}"
+                        class="img-responsive room-galery-img">
+                    <h4 ng-if="response.tax>0">
+                        {{"web.reservation.sub_total"|trans}}
+                        {[{ response.alphaCurrency }]}
+                        {[{ response.subTotal | number }]}
+                    </h4>
+                    <h4 ng-if="response.tax>0">
+                        {{"web.reservation.IVA"|trans}}
+                        {[{ response.alphaCurrency }]}
+                        {[{ response.tax | number }]}
+                    </h4>
+                    <div class="col-md-12 col-lg-10 block-total">
+                        <h1>
+                            {{"word.total"|trans}}
+                            {[{ response.alphaCurrency }]}
+                            {[{ response.total | number }]}
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-md-16 text-center resume-footer">
+                    <h1>{{"web.reservation.message_navicu"|trans}}</h1>
+                    <h3>{{"web.reservation.email_navicu"|trans}}</h3>
+                    <h4>{{"web.reservation.phone_navicu"|trans}}</h4>
+                </div>
+                <br>
+            </section>
+        </div>
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalMap.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+    </main>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var response = {{ bookingInformation | raw }};
+        var locations = {{ locations | raw }};
+        console.log("response", response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+  <script type="text/javascript">
+      jQuery(function($) {
+          $('#carousel-resume').carousel({
+              interval: 10000
+          });
+      });
+  </script>
+
+  <script type="text/javascript">
+      jQuery(function($) {
+          $('#thumbcarousel').carousel({
+              interval: 28000
+          });
+      });
+  </script>
+
+  <script type="text/javascript">
+      jQuery(function($) {
+          $('#thumbcarousel-xs').carousel({
+              interval: 28000
+          });
+      });
+  </script>
+
+    <!-- Google Code for Reserva de SEM Conversion Page -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 953752647;
+        var google_conversion_language = "en";
+        var google_conversion_format = "3";
+        var google_conversion_color = "ffffff";
+        var google_conversion_label = "b8lPCPznhnAQx7jkxgM";
+        var google_remarketing_only = false;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/953752647/?label=b8lPCPznhnAQx7jkxgM&amp;guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
+
+    <!-- AFFILIRED CONFIRMATION CODE, PLEASE DON'T REMOVE -->
+    <script type="text/javascript">
+        var orderRef = response.confirmationId+' '+response.propertyName; /* You MUST keep the blank space */
+        var payoutCodes = '';
+        var offlineCode = '';
+        var uid = response.propertySlug;
+        var htname = '';
+        var merchantID = 4552;
+        var pixel = 0;
+        var orderValue = response.total; /* Commissionable Amount */
+        var checkOutDate = response.checkout; /* yyyy-mm-dd (separated by hypen) */
+        var currencyCode ='{{ isoCurrency | raw }}';
+        console.log("currencyCode", currencyCode);
+        console.log("checkoutReservation", response.checkout);
+    </script>
+    <script type="text/javascript" src="//scripts.affilired.com/v2/confirmation.php?merid=4552&uid=HOTEL_UID">
+    </script>
+    <script type="text/javascript">
+        recV3 (orderValue , orderRef, merchantID, uid , htname, pixel, payoutCodes, offlineCode,checkOutDate,currencyCode)
+    </script>
+    <!-- END AFFILIRED CONFIRMATION CODE -->
+
+{% endblock %}
+
+

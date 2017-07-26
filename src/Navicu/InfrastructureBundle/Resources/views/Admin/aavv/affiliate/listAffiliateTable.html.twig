@@ -1,0 +1,142 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'join_date')">
+                    {{ 'message.affiliation_date'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'join_date'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'join_date'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'public_id')">
+                    {{ 'word.id'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'public_id'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'public_id'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'city')">
+                    {{ 'word.city'|transchoice(1) }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'city'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'city'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'name')">
+                    {{ 'word.name'|transchoice(1) }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'name'"
+                        class="fa fn-arrow-down"
+                    ></i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'invoices_accumulated')">
+                    {{ 'message.invoices_accumulated'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'invoices_accumulated'"
+                        class="fa fn-arrow-down"
+                    ></i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'invoices_accumulated'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'invoices_month')">
+                    {{ 'message.invoices_month'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'invoices_month'"
+                        class="fa fn-arrow-down"
+                    ></i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'invoices_month'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'availability_credit')">
+                    {{ 'message.availability_credit'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'availability_credit'"
+                        class="fa fn-arrow-down"
+                    ></i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'availability_credit'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th data-title="''">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="value in data">
+            <td>
+                {[{value.join_date}]}
+            </td>
+            <td>
+                {[{value.public_id}]}
+            </td>
+            <td>
+                {[{value.city}]}
+            </td>
+            <td>
+                {[{value.name}]}
+            </td>
+            <td>
+                Bs. {[{value.invoices_accumulated | number}]}
+            </td>
+            <td>
+                Bs. {[{value.invoices_month | number}]}
+            </td>
+            <td>
+                Bs. {[{value.availability_credit | number}]}
+            </td>
+            <td ng-show="{{ hasPermission('admin_aavv_affiliate_details', 'read') }}">
+                <button
+                    ng-click="redirectDetailsAAVV(value.slug);"
+                    formtarget="_blank"
+                >
+                    Ver detalle
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

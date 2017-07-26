@@ -1,0 +1,160 @@
+<br>
+<div class="row nvc-aavv__step2--payment" ng-if="creditNVC(dataStep2.creditId) !== 0">
+    <div class="nvc-row datosBancarios">
+        <div class="col-md-16">
+            <h1>Te facilitamos nuestros datos bancarios para realizar el pago</h1>
+        </div>
+    </div>
+    <div class="dataBack">
+        <div class="nvc-container">
+            <div class="col-xs-16">
+                {#<div class="row">
+                    <div class="col-sm-5">
+                       <span class="span2">3 distintas entidades bancarias para que puedas realizar tu pago, selecciona la de tu preferencia</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class='nvc-form-group nvc-form-group--step2'>
+                            <label>Entidad bancaria</label>
+                            <select
+                            class='nvc-select__register'
+                            placeholder=''
+                            type='text'
+                            ng-model = "banck_hola"
+                            ng-change="numberBanck(banck_hola)"
+                            >
+                                <option value="">Seleccione</option>
+                                <option value="{{"word.accountOne"|trans}}">{{"word.accountOne"|trans}}</option>
+                                <option value="{{"word.accountTwo"|trans}}">{{"word.accountTwo"|trans}}</option>
+                                <option value="{{"word.accountThree"|trans}}">{{"word.accountThree"|trans}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>#}
+                {#<hr style="margin-left: -12px !important;">#}
+                <div class="nvc-row" style="margin-left: -2.8%">
+                    {#<div class="col-sm-7">
+                        <h5>Datos de cuenta para realizar el ingreso</h5>
+                    </div>#}
+                    <div>
+                        <div class="col-sm-5 widthName separador" >
+                            <i class="fa fn-person-adult"></i>
+                            <h4>{{"word.name"|transchoice(1)}}</h4>
+                            <span class="span2">Navicu C.A</span>
+                        </div>
+                        <div class="col-sm-5 widthRif separador">
+                            <i class="fa fn-icono-rif"></i>
+                            <h4>RIF</h4>
+                            <span class="span2">J-40621968-1</span>
+                        </div>
+                        <div class="col-sm-5 widthEmail separador">
+                            <i class="fa fn-mail"></i>
+                            <h4>Correo Electrónico</h4>
+                            <span class="span2">preguntas@navicu.com</span>
+                        </div>
+                        <div class="col-sm-5 widthBank separador">
+                            <i class="fa fn-usercontra-04"></i>
+                            <h4 class="span2">Número de cuenta</h4>
+                                <select
+                                class='nvc-select__register'
+                                placeholder=''
+                                type='text'
+                                ng-model = "banck_hola"
+                                ng-change="numberBanck(banck_hola)" style="width: 45%; display: inline-block;"
+                                >
+                                    <option value="">Seleccione</option>
+                                    <option value="{{"word.accountOne"|trans}}">{{"word.accountOne"|trans}}</option>
+                                    <option value="{{"word.accountTwo"|trans}}">{{"word.accountTwo"|trans}}</option>
+                                    <option value="{{"word.accountThree"|trans}}">{{"word.accountThree"|trans}}</option>
+
+                                </select>
+                        </div>
+                        <div class="col-sm-5 widthCuenta blockNumberBanck">
+                            <h2>{[{numberB}]}</h2>
+                        </div>
+                    </div>
+                </div>
+{#                 <div class="row">
+                    <div class="col-sm-5">
+                        <i class="fa fn-banc"></i>
+                        <h4>{{"word.accountOne"|trans}}</h4><br>
+                        <span class="span2">0134-0467-41-4671097039</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <i class="fa fn-banc"></i>
+                        <h4>{{"word.accountTwo"|trans}}</h4><br>
+                        <span class="span2">0105-0699-92-1699185247</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <i class="fa fn-banc"></i>
+                        <h4>{{"word.accountThree"|trans}}</h4><br>
+                        <span class="span2">0108-0581-31-0100040778</span>
+                    </div>
+                </div> #}
+            </div>
+        </div>
+    </div>
+    
+    <hr style="margin-bottom: 0; margin-top: 3%;">
+    <div class="nvc-row">
+        <div class="col-md-16">
+            <h1>A continuación indicanos como fue el proceso de tu transferencia y los datos de la misma</h1>
+        </div>
+    </div>
+    <br>
+    <div class="row sizeInput">
+        <div class="col-md-5">
+            <div class='nvc-form-group nvc-form-group--step2'>
+                <label>Entidad bancaria</label>
+                <select
+                    class='nvc-select__register'
+                    placeholder=''
+                    type='text'
+                    ng-model = "dataStep2.bankId"
+                >
+                    <option value="">Seleccione</option>
+                    <option ng-repeat="banck in data.bank"
+                    value="{[{banck.id}]}">{[{banck.title}]}
+                    </option>
+                </select>
+            </div>
+            <span class="error" ng-show="data.validation && !dataStep2.bankId">
+                Este campo es obligatorio
+            </span>
+        </div>
+        <div class="col-md-5">
+            <div class='nvc-form-group nvc-form-group--step2'>
+                <label>Modalidad</label>
+                <select
+                    class='nvc-select__register'
+                    placeholder=''
+                    type='text'
+                    ng-model = "dataStep2.paymentType"
+                >
+                    <option value="">Seleccione</option>
+                    <option value="0">Deposito</option>
+                    <option value="1">Transferencia</option>
+                </select>
+            </div>
+            <span class="error" ng-show="data.validation && !dataStep2.paymentType">
+                Este campo es obligatorio
+            </span>
+        </div>
+        <div class="col-md-6">
+            <div class='nvc-form-group nvc-form-group--step2'>
+                <label>Nº depósito o transferencia</label>
+                <input
+                    class='nvc-input__register'
+                    id='d11'
+                    placeholder=''
+                    type='text'
+                    ng-model = "dataStep2.number"
+                />
+            </div>
+            <span class="error" ng-show="data.validation && !dataStep2.number">
+                Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+</div>
+<hr style="margin-left: -12px !important;">

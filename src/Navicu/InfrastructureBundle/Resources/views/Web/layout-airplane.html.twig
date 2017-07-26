@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+<head>
+	<title>{% block title %}navicu - Encuentra tu hotel preferido y reserva al mejor precio{% endblock %}</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="es"/>
+    <meta name="description" content="reserva de alojamientos online">
+    <meta name="keywords" content=" apartamentos vacacionales, mercadolibre paquetes vacacionales,patilla-turismo en venezuela,informe360.com-turismo,noticiaaldia.com-turismo" />
+    <meta name="keywords" content="hoteles en venezuela, turismo,venezuela,viajes,reservaciones,paquetes turisticos, alquiler de habitaciones, turismo interno, playas, montaña, posadas,quiero conocer los roques,navicu-venezuela business,el placer de viajar,tips para viajar seguro,tourism in venezuela, caribbean Islands">
+
+    {% if app.environment == "prod" %}
+        <meta name="robots" content="index,FOLLOW">
+        <meta name="google-site-verification" content="0KzUyXw3vPb94qIl_1szAI7Jy8LcigoAe9JJYuEqp9U" />
+        <meta name="revisit-after" content="8 days">
+        <meta name="distribution" content="global">
+        <meta name="Robots" content="all"/>
+        <meta name="msvalidate.01" content="F1B5555FB12D48A8D688FB45279E49AE" />
+        <img src="//bat.bing.com/action/0?ti=5104974&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" />
+    {% else %}
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="googlebot" content="noindex,nofollow">
+    {% endif %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/web{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+</head>
+<body>
+    {% block seoTagsBodyOpen %}{% endblock %}
+    {% set userName = app.session.get("userName") %}
+    {% set notifications = app.session.get("notifications") %}
+
+    <div class="nvc-ribbon">
+        <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+    </div>
+
+    <header>
+        <nav class="nvc-navbar nvc-navbar__default" role="navigation">
+            <div class="nvc-container">
+                <div class='nvc-navbar__header post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+                    {# <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-header">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> #}
+                    <a class="nvc-navbar__brand" href="{{ path('navicu_homepage_temporal') }}">
+                        {#<span class="fn-navicu" id="layout-logo"></span>#}
+                        <img class="nvc-navbar__logo" rel="shortcut icon" src="{{ asset('images/favicon.ico') }}" alt="reserva de alojamientos online"/>
+                    </a>
+                </div>
+                <div class="collapse nvc-navbar__collapse" id="bs-example-navbar-collapse-header__stop_working">
+                    <p class="nvc-navbar__text nvc-navbar__right">&nbsp;</p>
+                    <ul class="nvc-navbar__nav nvc-navbar__right">
+                        <li class="nvc-dropdown nvc-dropdown__block hidden">
+                            <a href="#" class="nvc-dropdown__toggle" data-toggle="dropdown">
+                                <span class="faa fa fn-info"></span>
+                            </a>
+                        </li>
+                        <li class="hidden"><a href="#"><span class="faa fa fa-heart-o hidden-xs"></span></a></li>
+                        <li class="hidden"><a href="#"><span class="faa fa fa-bell-o hidden-xs"></span></a></li>
+
+						{% if app.security.token is not null %}
+							{% if is_granted("ROLE_WEB") %}
+								<li><p class="nvc-navbar__text user-text">{{ "share.message.signed_as"|trans({"%username%": userName}) }}</p></li>
+								<li class="nvc-dropdown nvc-dropdown__block ">
+									<a href="#" class="nvc-dropdown__toggle" data-toggle="dropdown">
+										<span><img src="{{ asset('images/iconuser.png') }}" class="user-photo">
+											<span class="caret"></span></span>
+									</a>
+									<ul class="nvc-dropdown__menu" role="menu">
+										<li> <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i>
+											{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+									</ul>
+								</li>
+							{% endif %}
+						{% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    {% block body %}{% endblock %}
+
+    {% block footer %}
+         {% include "NavicuInfrastructureBundle:Web:footer.html.twig" %}
+    {% endblock footer %}
+
+    {% block javascripts %}
+
+        {% if app.environment == "dev" %}
+            <script src="/builds/vendor.bundle.js"></script>
+            <script src="/builds/client.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.vendor }}"></script>
+            <script src="{{ assets.js.client }}"></script>
+        {% endif %}
+
+        {% if app.environment != "dev" %}
+            <script> document.oncontextmenu = function(){return false}</script>
+        {% endif %}
+
+        {% if app.environment == "prod" %}
+            {#-- SEO stuff --#}
+            <script>
+                (function(i,s,o,g,r,a,m) {
+                    i['GoogleAnalyticsObject']=r;i[r]=i[r]||
+                    function() {
+                        (i[r].q=i[r].q||[]).push(arguments)
+                    },
+                    i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })
+                (window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+                ga('create', 'UA-96290392-1', 'auto');
+                ga('send', 'pageview');
+            </script>
+            <script type="text/javascript">
+                /* <![CDATA[ */
+                var google_conversion_id = 895584312;
+                var google_custom_params = window.google_tag_params;
+                var google_remarketing_only = true;
+                /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+            <noscript>
+                <div style="display:inline;">
+                    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/895584312/?value=0&amp;guid=ON&amp;script=0"/>
+                </div>
+            </noscript>
+            {#-- /SEO stuff --#}
+            <!-- Start Alexa Certify Javascript -->
+            <script type="text/javascript">
+                _atrk_opts = { atrk_acct:"btNsm1akGFL1vg", domain:"navicu.com",dynamic: true};
+                (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+            </script>
+            <noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=btNsm1akGFL1vg" style="display:none" height="1" width="1" alt="" /></noscript>
+            <!-- End Alexa Certify Javascript -->
+            <!--------------------------------------------------
+            Es posible que las etiquetas de remarketing todavía no estén asociadas a la información de identificación personal o que estén en páginas relacionadas con las categorías delicadas. Para obtener más información e instrucciones sobre cómo configurar la etiqueta, consulte http://google.com/ads/remarketingsetup.
+            ------------------------------------------------- -->
+            <script type="text/javascript">
+                /* <![CDATA[ */
+                var google_conversion_id = 953752647;
+                var google_custom_params = window.google_tag_params;
+                var google_remarketing_only = true;
+                /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+            <noscript>
+                <div style="display:inline;">
+                    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/953752647/?value=0&amp;guid=ON&amp;script=0"/>
+                </div>
+            </noscript>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>

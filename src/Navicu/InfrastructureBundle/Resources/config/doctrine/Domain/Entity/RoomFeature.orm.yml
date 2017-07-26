@@ -1,0 +1,32 @@
+Navicu\Core\Domain\Model\Entity\RoomFeature:
+    type: entity
+    table: room_feature
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRoomFeatureTypeRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        amount:
+          type: integer
+          nullable: true
+    manyToOne:
+        feature:
+            targetEntity: RoomFeatureType
+            mappedBy: null
+            inversedBy: room_feature
+            joinColumns:
+                feature_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        room:
+            targetEntity: Room
+            cascade: ["persist"]
+            mappedBy: null
+            inversedBy: room_feature
+            joinColumns:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false

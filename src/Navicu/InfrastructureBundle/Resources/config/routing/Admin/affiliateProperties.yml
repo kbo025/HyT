@@ -1,0 +1,133 @@
+# Establecimientos temporales
+navicu_admin_homepage_affiliate_properties:
+    path: /
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:affiliateProperties }
+
+# Listado establecimiento afiliados vía ajax
+navicu_admin_affiliates_properties_async:
+    path: /affiliateProperties/async
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:apiGetAffiliatesProperties }
+    options:
+        expose: true
+
+# Vista del detalle del estableciemiento
+navicu_admin_view_property_details:
+    path: /viewPropertyDetails/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:viewPropertyDetails }
+    options:
+        expose: true
+
+# Data de la vista del detalle del estableciemiento
+navicu_admin_data_property_details:
+    path: /dataPropertyDetails/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:dataPropertyDetails }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST }
+
+# Activar o desactivar establesimiento
+navicu_admin_change_status_property:
+    path: /changeStatusProperty
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:changeStatusProperty }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST }
+
+#Detalles de una reserva
+navicu_admin_reservation_details:
+    path:  /detailsReservation/{id}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:reservationDetailsTemplate }
+    options:
+        expose: true    
+
+navicu_admin_reservation_details_asinc:
+    path:  /asinc/detailsReservation/{publicId}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:reservationDetails }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+#La siguiente ruta edita los datos de una reserva
+navicu_admin_edit_reservation_details:
+    path:  /edit/detailsReservation
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:editReservationDetails }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# La siguiente ruta cambia el estado de una reserva
+navicu_admin_change_reservation_status:
+    path:  /changeReservationStatus
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:changeReservationStatus }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Envio de datos de asignación de un establicimiento temporal o afiliado a un comercial
+navicu_admin_set_property_commercial:
+    path: /setPropertyToCommercial
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:setCommercialToProperty }
+    options:
+        expose: true
+    requirements:
+        { _format: (json), _method: POST }
+
+# Envio de datos de asignación de un establicimiento temporal o afiliado a un captador (nvcProfile)
+navicu_admin_set_property_recruit:
+    path: /setPropertyToRecruit
+    defaults: {_controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:setRecruitToProperty }
+    options:
+        expose: true
+    requirements:
+        { _format: (json), _method: POST }
+
+# Eliminación de dailyPack y/o dailyRoom desde la carga masiva
+navicu_admin_drop_dailyPack_dailyRoom:
+    path: /drop_daily
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:dropDailyFromRoom }
+    options:
+        expose: true
+    requirements:
+        { _format: (json), _method: POST }
+
+# Exportacion de listado de properties a excel
+navicu_admin_list_properties_to_excel:
+    pattern: /list_properties.xls
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:listPropertiesToExcel }
+
+#Home de admin con los establecimientos sin disponibilidad o tarifas (vista)
+navicu_admin_homepage_view_properties_without_price:
+    pattern: /availabilityDays
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:viewPropertiesWithoutPrice }
+    options:
+        expose: true
+
+#Home de admin con los establecimientos sin disponibilidad o tarifas (data)
+navicu_admin_homepage_data_properties_without_price:
+    pattern: /availabilityDaysData
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:dataPropertiesWithoutPrice }
+    options:
+        expose: true
+    requirements:
+        { _format: (json) }
+
+navicu_admin_homepage_properties_without_price_to_download:
+    pattern: /downloadAvailabilityDays
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:downloadPropertiesWithoutAvailability }
+    options:
+        expose: true
+    requirements:
+        { _format: (json) }
+
+#Enlace para descargar los properties sin disponibilidad accedido desde el correo
+navicu_admin_properties_without_price_to_email:
+    pattern: /{username}/properties.xls
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AffiliateProperties:propertiesWithoutPriceToEmail }
+    requirements:
+        { _format: (json) }
+

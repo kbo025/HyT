@@ -1,0 +1,130 @@
+# Entidad representa los datos cliente
+Navicu\Core\Domain\Model\Entity\ClientProfile:
+    type: entity
+    table: cliente_profile
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbClientProfileRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Nombre y Apellido del usuario
+        full_name:
+            type: string
+        # Cedula de identidad
+        identity_card:
+            type: string
+        # Genero del usuario
+        gender:
+            type: integer  # 1: mujer , 2: hombre, 3: señor(a)
+            nullable: true
+        # Correo del usuario
+        email:
+            type: string
+        # Telefono del usuario
+        phone:
+            type: string
+            nullable: true
+        # Recibir correo de noticias
+        email_news:
+            type: boolean
+        # Fecha de nacimiento del usuario
+        birth_date:
+            type: date
+            nullable: true
+        # Dirección de residencia del usuario
+        address:
+            type: string
+            nullable: true
+        # Código postal
+        zip_code:
+            type: string
+            nullable: true
+        # Fecha de creación del usuario en el sistema
+        joined_date:
+            type: datetime
+            nullable: true
+        # Compañia donde trabaja
+        company:
+            type: string
+            nullable: true
+        # Cargo donde trabaja en
+        position:
+            type: string
+            nullable: true
+        # Trato que se debe dar al usuario (sr, sra, srta)
+        treatment:
+            type: integer
+            nullable: true
+        # El país donde es el usuario
+        country:
+            type: integer
+            nullable: true
+        # El estado de donde es el usuario
+        state:
+            type: integer
+            nullable: true
+        typeIdentity:
+            type: string
+            nullable: true
+
+    manyToMany:
+        # Conjunto de hobbies asociados al sistema
+        hobbies:
+            targetEntity: Hobbies
+            inversedBy: clients
+            joinTable:
+                name: client_hobbies
+                joinColumns:
+                    client_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    hobbies_id:
+                        referencedColumnName: id
+        # Conjunto de profesiones que tiene el usuario
+        professions:
+            targetEntity: Profession
+            inversedBy: clients
+            joinTable:
+                name: client_professions
+                joinColumns:
+                    client_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    profession_id:
+                        referencedColumnName: id
+    oneToMany:
+        # Reservas asociadas al usuario
+        reservations:
+            targetEntity: Reservation
+            mappedBy: client_id
+        # Redes sociales asociadas al usuario
+        social:
+            targetEntity: RedSocial
+            mappedBy: client
+            cascade: ["persist"]
+
+    oneToOne:
+        # Usuario asociado al perfil
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: client_profile
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            cascade: ["persist"]
+
+    manyToOne:
+        # Localidad donde se encuentra el usuario
+        location:
+            targetEntity: Location
+            mappedBy: client
+            joinColumn:
+                name: location_id
+                referencedColumnName: id
+
+    lifecycleCallbacks:
+        prePersist: [emailToString,phoneToString]
+        preUpdate: [emailToString,phoneToString]

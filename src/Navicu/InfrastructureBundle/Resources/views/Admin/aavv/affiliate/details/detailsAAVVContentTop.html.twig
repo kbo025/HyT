@@ -1,0 +1,41 @@
+
+<section>
+    <div class="col-md-8">
+        <h3>
+            <strong> Agencia {[{data.name}]}</strong>
+        </h3>
+    </div>
+    <div class="col-md-8">
+        <div class='nvc-form-group'>
+            <button
+                class='nvc-button nvc-button__search--inverse'
+                type='button'
+                ng-click="editAgency(data.slug);"
+                ng-show="{{ hasPermission('admin_aavv_affiliate_details', 'edit_agency_details') }}"
+
+            >
+                Editar datos de agencia
+            </button>
+            <a
+                class='nvc-button nvc-button__search--inverse'
+                ng-click="redirectAAVV()"
+                ng-show="{{ hasPermission('admin_aavv_affiliate_details', 'edit_agency_details') }}"
+            >
+                Acceder a módulo de agencia
+            </a>
+        </div>
+    </div>
+    <div class="col-md-16">
+            <select
+            class="button-rigth up aavv"
+            ng-show="{{ hasPermission('admin_aavv_affiliate_details', 'publish') }}"
+            ng-class="{'up':status == 'Publicado', 'down':status == 'Despublicado' }"
+            ng-model="status"
+            ng-change="changeStatusAgency()"
+            number-converter>
+                <option value="Publicado">Publicado</option>
+                <option value="Despublicado">Despublicado</option>
+            </select>
+    </div>
+</section>
+

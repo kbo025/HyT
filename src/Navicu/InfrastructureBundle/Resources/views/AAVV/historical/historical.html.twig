@@ -1,0 +1,157 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+
+{% block body %}
+    <main
+            class='nvc-aavv nvc-aavv__historical visible-lg visible-md'
+            ng-app='historicalModule'
+            ng-controller='historicalController'
+            ng-cloak
+    >
+        {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+
+        <header class="clearfix nvc-header--aavv">
+            <div class="clearfix nvc-container">
+                <div>
+                    <h1 class="nvc-aavv-customize__title--primary">
+                        {{ 'aavv.historical.header' | trans }}
+                    </h1>
+                    <span class="nvc-aavv-customize__title--primary">·</span>
+                    <h2 class="nvc-aavv-customize__title--primary">
+                        {{ 'aavv.historical.message' | trans }}
+                    </h2>
+                </div>
+            </div>
+        </header>
+
+        <section class="nvc-container">
+            <h3> <i class="fa fn-historical"></i> Historial de <span>{[{aavv}]}</span></h3>
+
+            <section class="nvc-table clearfix">
+                <div class="nvc-table__header col-md-16">
+                    <div class="col-md-4 text-center">
+                        <span>Fecha</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span>Usuario</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span>Módulo</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span></span>
+                    </div>
+                </div>
+                <div
+                    class="nvc-table__body col-md-16"
+                    ng-repeat="log in logs"
+                >
+                    <div class="col-md-4 text-center">
+                        <span>{[{log.date}]}</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span>{[{log.user}]}</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span>{[{log.module}]}</span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <button
+                            type="button"
+                            class="nvc-button nvc-button__default"
+                            ng-click="getDetails(log.date, log.user_id, log.module, $index)"
+                            >
+                            Detalle
+                        </button>
+                    </div>
+                    <div
+                        class="nvc-aavv__details col-md-16"
+                        ng-if="details!=null && $index===indexDetails"
+                    >
+                        <div class="nvc-table__header col-md-16">
+                            <!-- Hora -->
+                            <div class="col-md-3 text-center">
+                                <span>Hora</span>
+                            </div>
+                            <!-- Campo -->
+                            <div class="col-md-3 text-center">
+                                <span>Campo</span>
+                            </div>
+                            <!-- Tipo -->
+                            <div class="col-md-3 text-center">
+                                <span>Tipo</span>
+                            </div>
+                            <!-- Valor anterior -->
+                            <div class="col-md-3 text-center">
+                                <span>Valor anterior</span>
+                            </div>
+                            <!-- Nuevo valor -->
+                            <div class="col-md-3 text-center">
+                                <span>Nuevo valor</span>
+                            </div>
+                            <!-- Relleno -->
+                            <div class="col-md-1 text-center" ng-click="clearDetails()">
+                                <i class="fa fn-arrow-up"></i>
+                            </div>
+                        </div>
+                        <div
+                            class="nvc-table__body col-md-16"
+                            ng-repeat="detail in details"
+                            ng-style="{'margin-bottom': ['0', '-8px'][+(details.length-1===$index)]}"
+                        >
+                            <!-- Hora -->
+                            <div class="col-md-3 text-center">
+                                <span>{[{detail.date}]}</span>
+                            </div>
+                            <!-- Campo -->
+                            <div class="col-md-3 text-center">
+                                <span>{[{detail.field}]}</span>
+                            </div>
+                            <!-- Tipo -->
+                            <div class="col-md-3 text-center">
+                                <span>{[{detail.type}]}</span>
+                            </div>
+                            <!-- Valor anterior -->
+                            <div class="col-md-3 text-center">
+                                <span>{[{detail.oldvalue}]}</span>
+                            </div>
+                            <!-- Nuevo valor -->
+                            <div class="col-md-3 text-center">
+                                <span>{[{detail.newvalue}]}</span>
+                            </div>
+                            <!-- Relleno -->
+                            <div class="col-md-1 text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="nvc-pagination--aavv">
+                <div
+                    class="nvc-pagination__previous"
+                    ng-click="page.pageCount!==1 && getData(page.previous);"
+                >
+                    <i class="fa fa-angle-left"></i>
+                </div>
+
+                <div
+                    class="nvc-pagination__next"
+                    ng-click="page.pageCount!==1 && getData(page.next)"
+                >
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </div>
+        </section>
+
+        {{ include("NavicuInfrastructureBundle:AAVV:partials/loading.html.twig") }}
+    </main>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var slug = "{{ app.request.get('slug') }}";
+    </script>
+{% endblock %}
+

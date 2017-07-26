@@ -1,0 +1,26 @@
+<script id="modal-map.tpl" type="text/ng-template">
+    <div class="nvc-modal " tabindex="-1" role="dialog">
+	    <div class="nvc-modal__dialog nvc-modal__dialog--map nvc-modal--top">
+	        <div class="nvc-modal__header nvc-modal__header--white">
+	            <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+             	<h3 style="padding-left: 20px;">Ubicación del {[{ propertyName }]}</h3>
+             	<h5 class="font-regular" style= "margin-left: 20px; font-size: 16px; color: #7C7C7C;">
+	             	Dirección: {[{ propertyAddress }]}
+	             	<e ng-if="propertyTown">, {[{propertyTown}]}</e>
+	             	<e ng-if="propertyCity">, {[{propertyCity}]}</e>
+             	</h5>
+	        </div>
+	        <div class="nvc-modal__content">
+	            <div width="auto" height="auto" frameborder="0" style="border:5px solid #fff;">
+                    <div class="nvc-map">
+                        <ui-gmap-google-map center="mapProperty.center" zoom="mapProperty.zoom" draggable="true" options="optionsProperty" control="mapProperty.control" ng-click="optionsProperty.scrollwheel=true">
+                          <ui-gmap-marker coords="markerProperty.coords" options="markerProperty.options" events="markerProperty.events" idkey="markerProperty.id" control="markerProperty.control">
+                          </ui-gmap-marker>
+                        </ui-gmap-google-map>
+                    </div>
+              	</div>
+	            <iframe width="100%" height="260" frameborder="0" style="border:0"></iframe>
+	        </div>
+	    </div>
+    </div>
+</script>    

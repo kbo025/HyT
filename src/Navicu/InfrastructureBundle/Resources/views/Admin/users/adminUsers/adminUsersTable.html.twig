@@ -1,0 +1,146 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'user_name')">
+                    Usuario
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'user_name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'user_name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'email')">
+                    E-mail
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'email'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'email'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'phone')">
+                    Teléfono
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'phone'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'phone'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'departament')">
+                    Departamento
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'departament'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'departament'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'position')">
+                    Cargo
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'position'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'position'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'enabled')">
+                    Estado
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'enabled'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'enabled'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th class="nvc-aavv-customize__title--primary"></i>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users">
+            <td class="nvc-aavv-customize__text">
+                {[{ user.user_name }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ user.email }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ user.phone }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ user.departament }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ user.position}]}
+            </td>
+            <td
+                ng-if="user.enabled"
+                class="nvc-aavv-customize__text"
+            >
+                Activo
+            </td>
+            <td
+                ng-if="!user.enabled"
+                class="nvc-aavv-customize__text"
+            >
+                Desactivado
+            </td>
+            <td>
+                <button
+                    ng-click="edit('admin', user.id)"
+                    class="nvc-button__admin"
+                    ng-show="{{ hasPermission('admin_users_admin', 'update') }}"
+                >
+                    Editar
+                </button>
+                <button
+                    class="nvc-button__admin"
+                    ng-click="showModalOnOffState(user.enabled, user.user_name, user.id)"
+                    ng-show="{{ hasPermission('admin_users_admin', 'activate') }}"
+                >
+                    <etiqueta ng-if="user.enabled">Desactivar</etiqueta>
+                    <etiqueta ng-if="!user.enabled">Activar</etiqueta>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

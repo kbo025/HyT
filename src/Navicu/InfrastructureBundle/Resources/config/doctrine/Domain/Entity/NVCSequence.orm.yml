@@ -1,0 +1,23 @@
+Navicu\Core\Domain\Model\Entity\NVCSequence:
+    type: entity
+    table: nvc_sequence
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbNVCSequenceRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        prefix:
+            type: string
+            nullable: true
+        sufix:
+            type: string
+            nullable: true
+        currentnext:
+            type: integer
+            nullable: false

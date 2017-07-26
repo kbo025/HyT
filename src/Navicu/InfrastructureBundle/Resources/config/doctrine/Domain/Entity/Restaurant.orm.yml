@@ -1,0 +1,59 @@
+Navicu\Core\Domain\Model\Entity\Restaurant:
+    type: entity
+    table: restaurant
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRestaurantRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        breakfast_time:
+            type: json_array
+            nullable: true
+        lunch_time:
+            type: json_array
+            nullable: true
+        dinner_time:
+            type: json_array
+            nullable: true
+        dietary_menu:
+            type: boolean
+            nullable: true
+        buffet_carta:
+            type: integer
+            nullable: true
+        description:
+            type: string
+            nullable: true
+        schedule:
+            type: json_array
+            nullable: false
+        status:
+            type: boolean
+            nullable: false
+    manyToOne:
+        service:
+            targetEntity: PropertyService
+            cascade: ["persist"]
+            inversedBy: restaurants
+            joinColumns:
+                service_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        type:
+            targetEntity: FoodType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                food_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [prePersist]

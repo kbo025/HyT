@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, nofollow">
+    <title>Login Web Service</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/extranet{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+
+</head>
+<body>
+    {% set destinationsFooter = destinationsFooter() %}
+
+    <header>
+       <nav class="nvc-navbar nvc-navbar__default" role="navigation">
+            <div class="nvc-container">
+                <div class="nvc-navbar__header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-header">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="nvc-navbar__brand" href="{{ path('navicu_homepage_temporal') }}">
+                        navicu.com
+                    </a>
+                </div>
+                <div class="pull-right font-medium hidden-xs" style="color:#fff; font-size:25px; padding-top:12px;">
+                    WEB SERVICE
+                </div>
+
+            </div>
+        </nav>
+        <div class="nvc-ribbon" style="height:10px;">
+            <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+            <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+            <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+            <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+        </div>
+    </header>
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+        {% endif %}
+    </div>
+
+
+    {% block body %}
+    {% endblock body %}
+
+    {% block footer%}
+
+    {% endblock footer%}
+
+{% block javascripts %}
+
+        {% if app.environment == "dev" %}
+            <script src="/builds/vendor.bundle.js"></script>
+            <script src="/builds/extranet.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.vendor }}"></script>
+            <script src="{{ assets.js.extranet }}"></script>
+        {% endif %}
+
+        <script type="text/javascript">
+            var __dcid = __dcid || [];
+            __dcid.push(["DigiCertClickID_RSxHdSRb", "11", "s", "white", "RSxHdSRb"]);
+        </script>
+        <script type="text/javascript" src="//seal.digicert.com/seals/cascade/seal.min.js" async></script>
+
+        <script type="text/javascript">
+             jQuery(function($) {
+
+                $('.nvc-up').click(function(){
+                    $('body, html').animate({
+                        scrollTop: '0px'
+                    }, 300);
+                });
+
+                $(window).scroll(function(){
+                    if( $(this).scrollTop() > 0 ){
+                        $('.nvc-up').slideDown(300);
+                    } else {
+                        $('.nvc-up').slideUp(300);
+                    }
+                });
+
+            });
+        </script>
+
+{% endblock %}
+
+</body>
+</html>

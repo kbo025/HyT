@@ -1,0 +1,206 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'join_date')">
+                    Fecha de alta
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'join_date'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'join_date'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'name')">
+                    Nombre
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'location')">
+                    Ciudad
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'location'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'location'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'admin_email')">
+                    E-mail responsable
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'admin_email'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'admin_email'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th ng-show="{{ hasPermission('admin_affiliates', 'invoices') }}">
+                <a href="" ng-click="getListFilter(search, 1, 'total_to_pay')">
+                    Facturación
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'total_to_pay'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'total_to_pay'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th ng-show="{{ hasPermission('admin_affiliates', 'reservations') }}">
+                <a href="" ng-click="getListFilter(search, 1, 'number_reservation')">
+                    N° de reservas
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'number_reservation'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'number_reservation'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th
+                style="width: 8%;"
+                ng-show="{{ hasPermission('admin_affiliates', 'assign_responsible') }}"
+            >
+                <a href="" ng-click="getListFilter(search, 1, 'commercial_name')">
+                    Ejecutivo
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'commercial_name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'commercial_name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'discount_rate')">
+                    Comision
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'discount_rate'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'discount_rate'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'credit_days')">
+                    Dias de credito
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'credit_days'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'credit_days'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th class="nvc-aavv-customize__title--primary">
+            </th>
+
+            <th class="nvc-aavv-customize__title--primary">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="property in properties">
+            <td class="nvc-aavv-customize__text">
+                {[{ property.join_date }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ property.name }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ property.location }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ property.admin_email }]}
+            </td>
+            <td
+                ng-if="property.total_to_pay == null"
+                ng-show="{{ hasPermission('admin_affiliates', 'invoices') }}"
+            >
+                Bs. 0
+            </td>
+            <td
+                ng-if="property.total_to_pay != null"
+                ng-show="{{ hasPermission('admin_affiliates', 'invoices') }}"
+            >
+                Bs. {[{ property.total_to_pay | number }]}
+            </td>
+            <td
+                class="nvc-aavv-customize__text"
+                ng-show="{{ hasPermission('admin_affiliates', 'reservations') }}"
+            >
+                {[{ property.number_reservation }]}
+            </td>
+            <td
+                class="nvc-aavv-customize__text"
+                ng-show="{{ hasPermission('admin_affiliates', 'assign_responsible') }}"
+            >
+                <select
+                    class="form-control"
+                    ng-model="property.nvc_profile_id"
+                    ng-change="setCommercial($index, property.nvc_profile_id)"
+                    ng-options="item as item.name for item in commercials track by item.id"
+                >
+                </select>
+            </td>
+            <td>{[{ property.discount_rate | number }]}%</td>
+            <td>{[{ property.credit_days | number }]}</td>
+            <td>
+                <button
+                    class="nvc-aavv-customize__button--primary"
+                    ng-click="redirect(property.slug);"
+                    ng-show="{{ hasPermission('admin_affiliates', 'accommodation_details') }}"
+                >
+                    Ver detalle
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

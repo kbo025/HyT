@@ -1,0 +1,88 @@
+#Navicu\Core\Application\UseCases\Reservation\ProcessReservation\ProcessReservationCommand:
+#    properties:
+#        slug:
+#            - NotBlank:
+#               message: is_null,{{ value }},{{ type }}
+#            - Type:
+#                type: string
+#                message: not_is_string,{{ value }},{{ type }}
+#        user:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#        reservedNights:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#            - Type:
+#                type: integer
+#                message: not_is_integer,{{ value }},{{ type }}
+#        checkinReservation:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#            # Date: ~
+#            - Type:
+#                type: string
+#                message: not_is_string,{{ value }},{{ type }}
+
+#        checkoutReservation:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#            #- Date: ~
+#            - Type:
+#                type: string
+#                message: not_is_string,{{ value }},{{ type }}
+#        numberAdults:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#            - Type:
+#                type: integer
+#                message: not_is_integer,{{ value }},{{ type }}
+#        numberChildren:
+#            #- NotBlank: ~
+#            - Type:
+#                type: integer
+#                message: not_is_integer,{{ value }},{{ type }}
+#        rooms:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#            - Type:
+#                type: array
+#                message: not_is_array,{{ value }},{{ type }}
+#        validRooms:
+#            - "True":
+#                message: is_not_valid,{{ value }},{{ type }}
+#        payments:
+#            - Type:
+#                type: array
+#                message: not_is_array,{{ value }},{{ type }}
+#        validPayments:
+#           - "True":
+#              message: is_not_valid,{{ value }},{{ type }}
+#        ip:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#        idReservation:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#            - Type:
+#                type: string
+#                message: not_is_string,{{ value }},{{ type }}
+#        paymentType:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#            - Type:
+#                type: integer
+#                message: not_is_integer,{{ value }},{{ type }}
+#            - Choice:
+#                choices:  [1,2,3,4,5,6]
+#                message: is_not_valid_choice,{{ value }}
+#        currency:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Reservation\ProcessReservation\GetResumenReservationStructureCommand:
+        id:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: not_is_string,{{ value }},{{ type }}

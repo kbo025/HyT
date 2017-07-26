@@ -1,0 +1,13 @@
+navicu_aavv_material_search_property:
+    path:   /material/searchProperties/{page}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\AdditionalMaterial:SearchProperties, page: 0 }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json) }
+
+navicu_aavv_material_property_pdf:
+    path: /material/{property}/property.pdf
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\AdditionalMaterial:PdfProperty }
+    options:
+        expose: true

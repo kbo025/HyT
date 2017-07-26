@@ -1,0 +1,41 @@
+#La siguiente ruta muestra un listado de todas reserva
+navicu_admin_list_reservation:
+    path:  /listReservation
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:listReservation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# La siguiente ruta carga un listado de reserva segun el estatus
+navicu_admin_property_list_reservation_template:
+    path: /listReservationTemplate/{reservationStatus}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:listReservationTemplate }
+    options:
+        expose: true
+
+# La siguiente ruta carga el detalles de una reserva
+navicu_admin_details_reservations:
+    path: /detailsReservations
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:detailsReservations }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+#La siguiente ruta muestra un listado de todas reserva dentro de admin
+#por medio de una peticiòn asyncrona.
+navicu_admin_async_list_reservation:
+    path:  /async/list
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:reservationListPOF }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# genera el archivo excel de las agencias de viaje registradas en la app
+navicu_admin_reservation_generate_excel:
+    path:   /generateexcel/{status}/{page}/{search}/{totalItems}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:downloadExcelReservations, search: 'empty'}
+    options:
+      expose: true

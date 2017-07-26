@@ -1,0 +1,174 @@
+services:
+
+#Servicios de Infraestructura
+
+    CalendarService:
+        class: Navicu\InfrastructureBundle\Resources\Services\CalendarService
+        arguments: ["@service_container", "@translator"]
+    RepositoryFactory:
+        class: Navicu\InfrastructureBundle\Resources\Services\RepositoryFactory
+        arguments: ["@doctrine.orm.entity_manager"]
+    DbRepositoryFactory:
+        class: Navicu\InfrastructureBundle\Resources\Services\DbRepositoryFactory
+        arguments: ["@doctrine.orm.entity_manager"]
+    FormTempOwner:
+        class: Navicu\InfrastructureBundle\Resources\Services\FormTempOwner
+        arguments: ["@DbRepositoryFactory","@security.context"]
+    pdfCreator:
+        class: Navicu\InfrastructureBundle\Resources\Services\pdf\pdfCreator
+        arguments: ["@slik_dompdf"]
+
+    EmailService:
+        class: Navicu\InfrastructureBundle\Resources\Services\EmailService
+        arguments:
+            - @service_container
+
+    ExcelGenerator:
+        class: Navicu\InfrastructureBundle\Resources\Services\excel\ExcelGeneratorService
+        arguments:
+            - @service_container
+
+    FormTempOwner:
+        class: Navicu\InfrastructureBundle\Resources\Services\FormTempOwner
+        arguments: ["@RepositoryFactory","@security.context"]
+
+    ManagerBDService:
+        class: Navicu\InfrastructureBundle\Resources\Services\ManagerBD
+        arguments:
+            - @doctrine.orm.entity_manager
+
+    ManagerImage:
+        class: Navicu\InfrastructureBundle\Resources\Services\ManagerImage
+        arguments:
+            - @service_container
+
+    pdfCreator:
+        class: Navicu\InfrastructureBundle\Resources\Services\pdf\pdfCreator
+        arguments: ["@slik_dompdf"]
+
+    RepositoryFactory:
+            class: Navicu\InfrastructureBundle\Resources\Services\RepositoryFactory
+            arguments: ["@doctrine.orm.entity_manager"]
+
+    PaymentGatewayService:
+            class: Navicu\InfrastructureBundle\Resources\Services\PaymentGatewayService
+            arguments: ["@service_container"]
+
+    FlightBookingService:
+            class: Navicu\InfrastructureBundle\Resources\Services\FlightBooking\FlightBookingService
+            arguments: ["@service_container"]
+
+    app.twig_extension:
+        class: Navicu\InfrastructureBundle\Resources\Services\TwigExtension
+        arguments: ["@service_container"]
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    LockedAvailabilityService:
+        class: Navicu\Core\Application\Services\LockedAvailabilityService
+        arguments: ["@DbRepositoryFactory"]
+
+#Servicios de la Aplicación
+    CommandBus:
+        class: Navicu\Core\Application\Services\CommandBus
+        arguments: ["@DbRepositoryFactory","@EmailService","@ManagerBDService", "@managerImage"]
+    RegisterTempOwner:
+        class: Navicu\Core\Application\Services\RegisterTempOwner
+        arguments: ["@DbRepositoryFactory"]
+    Pagination:
+        class: Navicu\InfrastructureBundle\Resources\Services\PaginationService
+        arguments:
+            - @service_container
+    AdminProperties:
+        class: Navicu\InfrastructureBundle\Resources\Services\Admin\PropertiesService
+        arguments: ['@DbRepositoryFactory']
+
+    SessionService:
+        class: Navicu\InfrastructureBundle\Resources\Services\SessionService
+        arguments:
+            - @service_container
+            - @security.context
+
+    SecurityService:
+        class: Navicu\InfrastructureBundle\Resources\Services\SecurityService
+        arguments:
+            - @service_container
+            - @doctrine.orm.entity_manager
+
+    session.handler.pdo:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        public: false
+        arguments:
+            - "pgsql:host=%database_host%;dbname=%database_name%"
+            - db_username: %database_user%
+              db_password: %database_password%
+              db_table: session
+              db_id_col: session_id
+              db_data_col: session_value
+              db_time_col: session_time
+              db_lifetime_col: session_lifetime
+              lock_mode: 0 # LOCK_NONE
+
+    listener.request:
+        class: Navicu\InfrastructureBundle\EventListener\RequestNvc
+        arguments:
+            - @service_container
+            - @doctrine.orm.entity_manager
+            - @request_stack
+            - @router.request_context
+        tags:
+            -
+              name: kernel.event_listener
+              event: kernel.request
+              method: onKernelRequest
+            -
+              name: kernel.event_listener
+              event: kernel.request
+              method: onKernelSubDomainRequest
+    callbackSubscriber:
+        class: Navicu\InfrastructureBundle\EventListener\CallbackSubscriber
+        arguments:
+            - @service_container
+        tags:
+            - { name: doctrine.event_subscriber}
+    controllerListener:
+        class: Navicu\InfrastructureBundle\EventListener\ControllerListener
+        arguments:
+            - @service_container
+            - @doctrine.orm.entity_manager
+            - @request_stack
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+    app.exception_listener:
+        arguments:
+            - '@templating'
+        class: Navicu\InfrastructureBundle\EventListener\ExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    app.cors_listener:
+        class:      Navicu\InfrastructureBundle\EventListener\CorsListener
+        arguments:
+                    - @service_container
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
+    acme.listener.maintenance:
+        class: Navicu\InfrastructureBundle\EventListener\MaintenanceListener
+        arguments:
+            container: "@service_container"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    # evento - inicio de sessión fallido
+    navicu.security.authentication_failure_event_listener:
+        class:  Navicu\InfrastructureBundle\EventListener\AuthenticationListener
+        tags:
+            - { name: kernel.event_listener,  event: security.authentication.failure, method: onAuthenticationFailure }
+
+    # evento - inicio de sessión exitoso
+    navicu.security.authentication_success_event_listener:
+        class: Navicu\InfrastructureBundle\EventListener\AuthenticationListener
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.success, method: onAuthenticationSuccess }

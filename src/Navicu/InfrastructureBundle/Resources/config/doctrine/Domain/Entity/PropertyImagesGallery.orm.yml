@@ -1,0 +1,38 @@
+Navicu\Core\Domain\Model\Entity\PropertyImagesGallery:
+    type: entity
+    table: property_images_gallery
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPropertyImagesGalleryRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        order_gallery:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+
+    oneToOne:
+        image:
+            targetEntity: Document
+            inversedBy: property_images_gallery
+            joinColumn:
+                name: image_documet_id
+                referencedColumnName: id
+                onDelete: CASCADE
+            cascade: ["persist"]
+
+    manyToOne:
+        property_gallery:
+            targetEntity: PropertyGallery
+            mappedBy: null
+            inversedBy: images_gallery
+            joinColumns:
+                property_gallery_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

@@ -1,0 +1,48 @@
+Navicu\Core\Domain\Model\Entity\AAVVAgreement:
+    type: entity
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVAgreementRepository
+    table: aavv_agreement
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        client_ip_address:
+            type: string
+            length: 15
+            nullable: false
+        date:
+            type: datetime
+            nullable: false
+        credit_days:
+            type: integer
+            nullable: false
+            options:
+                default: 30 # 30 dias de credito por defecto
+        discount_rate:
+            type: float
+            nullable: false
+            options:
+                default: 0.1 # 10% de descuento
+    oneToOne:
+        aavv:
+            targetEntity: AAVV
+            cascade: [persist]
+            mappedBy: null
+            inversedBy: agreement
+            joinColumns:
+                aavv_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false
+        pdf:
+            targetEntity: Document
+            cascade: [persist]
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+               document_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false

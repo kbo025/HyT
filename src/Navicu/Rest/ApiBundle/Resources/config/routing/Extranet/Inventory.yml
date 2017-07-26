@@ -1,0 +1,20 @@
+navicu_api_extranet_massload_get:
+    path:    /{slug}/massload/
+    defaults: { _controller: NavicuRestApiBundle:Extranet\Inventory:getMassLoad }
+    methods:  [GET]
+    options: 
+        expose: true
+
+navicu_api_extranet_massload_post:
+    path:    /{slug}/massload/
+    defaults: { _controller: NavicuRestApiBundle:Extranet\Inventory:postMassLoad }
+    methods:  [POST]
+    options: 
+        expose: true
+
+navicu_api_extranet_daily_post:
+    path:    /{slug}/daily/
+    defaults: { _controller: NavicuRestApiBundle:Extranet\Inventory:postDaily }
+    methods:  [POST]
+    options: 
+        expose: true

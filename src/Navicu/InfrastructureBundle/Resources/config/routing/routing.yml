@@ -1,0 +1,51 @@
+# ===========Rutas de cliente===========
+# Rutas de módulos del cliente
+navicu_web_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/web.yml"
+    host:     "www.%domain%"
+
+# ===========Rutas del Administrador ===========
+# Rutas de módulos del administrador
+navicu_admin_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/admin.yml"
+    host:   "{subdomain}.%domain%"
+    prefix: "{extension}"
+    defaults:
+        extension: %admin_subdomain%
+        subdomain: www
+    requirements:
+        extension: %admin_subdomain%
+        subdomain: www
+
+# ===========Rutas del Extranet ===========
+# Rutas de módulos del Hotelero (Extranet)
+navicu_extranet_rountig:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/extranet.yml"
+    host:   "www.%domain%"
+    prefix:   "{extension}"
+    defaults:
+        extension: "%extranet_subdomain%"
+    requirements:
+        extension: %extranet_subdomain%|%admin_subdomain%
+
+# ===========Rutas del Ascribere ===========
+# Rutas módulos del establecimientos temporales
+navicu_temp_property_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/temp_property.yml"
+    host:   "www.%domain%"
+    prefix: "{extension}"
+    defaults:
+        extension: "%registration_subdomain%"
+    requirements:
+        extension: %registration_subdomain%|%admin_subdomain%
+
+# ===========Rutas web service ===========
+# Rutas módulos del establecimientos temporales
+navicu_web_service_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/web_service.yml"
+    host:   "www.%domain%"
+    prefix: "{extension}"
+    defaults:
+        extension: "%web_service_subdomain%"
+    requirements:
+        extension: %web_service_subdomain%|%admin_subdomain%

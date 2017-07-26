@@ -1,0 +1,55 @@
+Navicu\Core\Domain\Model\Entity\AAVVBankPayments:
+    type: entity
+    table: aavv_bank_payments
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVBankPaymentsRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+            nullable: false
+        type:
+            type: integer
+            nullable: true
+        status:
+            type: integer
+            nullable: true
+        number_reference:
+            type: string
+            length: 255
+            nullable: true
+        amount:
+            type: float
+            nullable: true
+
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+
+    manyToOne:
+        aavv:
+            targetEntity: AAVV
+            mappedBy: bank_deposit
+            joinColumn:
+                name: aavv_id
+                referencedColumnName: id
+            cascade: ["persist"]
+        bank_type:
+            targetEntity: BankType
+            joinColumn:
+                name: bank_type
+                referencedColumnName: id
+            cascade: ["persist"]

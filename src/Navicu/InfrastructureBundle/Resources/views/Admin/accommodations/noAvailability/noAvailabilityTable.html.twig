@@ -1,0 +1,85 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'name')">
+                    Alojamiento
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'city')">
+                    Ciudad
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'city'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'city'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'full_name')">
+                    Responsable
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'full_name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'full_name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'join_date')">
+                    Sin disponibilidad desde
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'join_date'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'join_date'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th class="nvc-aavv-customize__title--primary">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="property in properties">
+            <td>{[{ property.name }]}</td>
+            <td>{[{ property.city }]}</td>
+            <td>{[{ property.full_name}]}</td>
+            <td>{[{ property.join_date }]}</td>
+            <td>
+                <button
+                    class="nvc-aavv-customize__button--primary"
+                    ng-click="redirectGrid(property.slug)"
+                    ng-disabled="!{{ hasPermission('aavv_reservation_details', 'VIEW') | json_encode | raw }}"
+                >
+                    Ver detalle
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

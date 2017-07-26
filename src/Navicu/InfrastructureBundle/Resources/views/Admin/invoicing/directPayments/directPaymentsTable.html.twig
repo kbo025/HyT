@@ -1,0 +1,155 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'agencyId')">
+                    ID agencia
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'agencyId'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'agencyId'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'agencyName')">
+                    Nombre
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'agencyName'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'agencyName'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'reference')">
+                    Referencia
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'reference'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'reference'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'amount')">
+                    Importe
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'amount'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'amount'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'type')">
+                    Tipo
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'type'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'type'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'invoiceNumber')">
+                    Factura
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'invoiceNumber'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'invoiceNumber'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'status')">
+                    Estatus
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'status'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'status'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="payment in payments">
+            <td class="nvc-aavv-customize__text">
+                {[{ payment.aavvId }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ payment.name }]}
+            </td>
+            <td>
+                <input ng-model="payment.reference" class="form-control"
+                       ng-disabled="payment.status == 1"
+                       type="text" ng-blur="changeData(0, payment.reference, payment.paymentId, payment.type )">
+            </td>
+            <td class="nvc-aavv-customize__text">
+                Bs. {[{ payment.amount | number }]}
+            </td>
+            <td
+                class="nvc-aavv-customize__text"
+                ng-if="payment.type ==0"
+            >
+                Servicio
+            </td>
+            <td
+                class="nvc-aavv-customize__text"
+                ng-if="payment.type ==1"
+            >
+                Reserva
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ payment.InvoiceNumber }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                <select
+                    class="form-control"
+                    ng-disabled="payment.status == 1"
+                    ng-model="payment.status"
+                    ng-change="changeData(1, payment.status, payment.paymentId, payment.type )"
+                >
+                    <option value="0">Pendiente por confirmar</option>
+                    <option value="1">Pagada</option>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>

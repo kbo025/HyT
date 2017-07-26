@@ -1,0 +1,70 @@
+{% extends "NavicuInfrastructureBundle:WebService/Security:layout.html.twig" %}
+
+{% block body %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        Menu administrativo<br>
+        <a href="{{ path('fos_user_security_logout') }}">
+            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+        </a>
+    {% else %}
+        
+    <div id="carousel" class="carousel carousel-extranet carousel-fade" data-ride="carousel">
+        <div class="carousel-inner carousel-inner-hotel">
+            <div class="item active">
+                <div class="carousel-fill" style="background-image:url('/images/images_original/navicu/homepage/login1.jpg');"></div>
+                <h1 style="margin-left:12%; margin-top:-63px; color:#fff; font-size:15px;">
+                    <span class="font-regular-italic">Parque Nacional Laguna de Tacarigua, Miranda, Venezuela</span>
+                <h1>
+            </div>
+            <div class="item">
+                <div class="carousel-fill" style="background-image:url('/images/images_original/navicu/homepage/login2.jpg');"></div>
+                <h1 style="margin-left:12%; margin-top:-63px; color:#fff; font-size:15px;">
+                    <span class="font-regular-italic">Cerro Wichuj, Amazonas, Venezuela</span>
+                <h1>
+            </div>
+            <div class="item">
+                <div class="carousel-fill" style="background-image:url('/images/images_original/navicu/homepage/login3.jpg');"></div>
+                <h1 style="margin-left:12%; margin-top:-63px; color:#fff; font-size:15px;">
+                    <span class="font-regular-italic">Medanos de Coro, Falcón, Venezuela</span>
+                <h1>
+            </div>
+        </div>
+        <div class="container">
+            <form action="{{ path("nvc_web_service_check") }}" class="form-signin" role="form" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <h5 class="form-signin-heading">{{ "word.welcome"|trans }}</h5>
+                
+                {% if error is not null %}
+                    <div class="alert alert-danger  ">
+                        <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <span>{{ 'extranet.message.login_error'|trans }}</span>
+                    </div>
+                {% endif %}
+                <label for="username" class="sr-only">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}"  placeholder="{{ "word.username"|trans }}" required="" autofocus="" class="form-control my-input">
+
+                <label for="password" class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                <input type="password" id="password" name="_password" required="required" class="form-control my-input" placeholder="{{ "word.password"|trans }}">
+                <button type="submit" id="_submit" name="_submit" class="btn btn-md btn-primary btn-login">{{ "word.sign_in"|trans }}</button>
+            </form>
+        </div>
+    </div>
+
+    {% include "NavicuInfrastructureBundle:WebService/Security:footer.html.twig" %}
+
+    {% endif %}
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(function($) {
+            $('#carousel').carousel({
+                interval: 10000
+            });
+        });
+    </script>
+{% endblock %}

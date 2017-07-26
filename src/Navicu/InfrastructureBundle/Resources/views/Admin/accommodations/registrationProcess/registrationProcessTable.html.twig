@@ -1,0 +1,201 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'expired_date')">
+                    Inicio de registro
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'expired_date'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'expired_date'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'name')">
+                    Nombre
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'accommodation_title')">
+                    Tipo de alojamiento
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'accommodation_title'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'accommodation_title'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'location')">
+                    Ciudad
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'location'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'location'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'contact_name')">
+                    Contacto
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'contact_name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'contact_name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'phones')">
+                    Teléfono
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'phones'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'phones'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'progress')">
+                    % Completado
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'progress'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'progress'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th ng-show="{{ hasPermission('admin_temporals', 'assign_responsible') }}">
+                <a href="" ng-click="getListFilter(search, 1, 'commercial_name')">
+                    Ejecutivo
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'commercial_name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'commercial_name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th class="nvc-aavv-customize__title--primary">
+            </th>
+            <th class="nvc-aavv-customize__title--primary">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="property in properties">
+            <td >{[{ property.expired_date }]}</td>
+            <td ng-if="property.name != null">
+                {[{ property.name }]}
+            </td>
+            <td ng-if="property.name == null">
+                No disponible
+            </td>
+            <td ng-if="property.accommodation_title != null">
+                {[{ property.accommodation_title }]}
+            </td>
+            <td ng-if="property.accommodation_title == null">
+                No disponible
+            </td>
+            <td ng-if="property.property.location != null">
+                {[{ property.location }]}
+            </td>
+            <td ng-if="property.property.location == null">
+                No disponible
+            </td>
+            <td ng-if="property.contact_name != null">
+                {[{ property.contact_name }]}
+            </td>
+            <td ng-if="property.contact_name == null">
+                No disponible
+            </td>
+            <td ng-if="property.property.phones != null">
+                {[{ property.phones}]}
+            </td>
+            <td ng-if="property.property.phones == null">
+                No disponible
+            </td>
+            <td>{[{ property.progress }]}%</td>
+            <td ng-show="{{ hasPermission('admin_temporals', 'assign_responsible') }}">
+                <select
+                    class="form-control"
+                    ng-model="property.commercial"
+                    ng-change="setCommercial($index, property.commercial)"
+                    ng-options="item as item.name for item in commercials track by item.id"
+                >
+                    <option value=""> No asignado</option>
+                </select>
+            </td>
+            <td>
+                <button
+                    class="nvc-button__admin"
+                    ng-click="redirectRegister(property.username)"
+                    ng-show="{{ hasPermission('admin_temporals', 'update') }}"
+                >
+                    Editar
+                </button>
+                <button
+                    class="nvc-button__admin"
+                    ng-click="showModalDeleteProperty(property.name, property.id)"
+                    ng-show="{{ hasPermission('admin_temporals', 'delete') }}"
+                >
+                    Borrar
+                </button>
+
+            </td>
+            <td>
+                <button
+                        class="nvc-button__alta"
+                        ng-click="showModalReleaseProperty(property.name, property.username)"
+                        ng-show="({{ (hasPermission('admin_temporals', 'to_register')) }} && property.progress == 100)"               >
+                    Alta
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

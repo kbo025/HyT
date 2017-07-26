@@ -1,0 +1,38 @@
+<div class="nvc-container">
+    <ul class="nvc-tabs nvc-tabs--reservation" class="clearfix">
+        <li
+            ng-class="{active: selectedTab === STATUS_ALL}"
+            ng-click="changeTab(STATUS_ALL)"
+        >
+            Todas
+        </li>
+
+        <li
+            ng-class="{active: selectedTab === STATUS_PRE}"
+            ng-click="changeTab(STATUS_PRE)"
+        >
+            Pre-reservas
+        </li>
+
+        <li
+            ng-class="{active: selectedTab === STATUS_PENDING}"
+            ng-click="changeTab(STATUS_PENDING)"
+        >
+            En proceso de confirmación
+        </li>
+
+        <li
+            ng-class="{active: selectedTab === STATUS_ACCEPTED}"
+            ng-click="changeTab(STATUS_ACCEPTED)"
+        >
+            Aceptadas
+        </li>
+
+        <li
+            ng-class="{active: selectedTab === STATUS_CANCELLED}"
+            ng-click="changeTab(STATUS_CANCELLED)"
+        >
+            Canceladas
+        </li>
+    </ul>
+</div>

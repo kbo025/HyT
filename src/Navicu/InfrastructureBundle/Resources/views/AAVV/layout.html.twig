@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <title>{% block title %}Vicander Registro{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/aavv{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+
+    {% block scripts_header %}
+        <!-- Estilos personalizados -->
+        {% include "NavicuInfrastructureBundle:AAVV:partials/customStyles.html.twig" %}
+    {% endblock %}
+</head>
+<body>
+    <header data-ng-app-secondary="headerModule">
+        <nav
+            class="nvc-navbar nvc-navbar__default nvc-navbar--aavv nvc-aavv-customize__navbar--primary"
+            role="navigation"
+            style="height: 90px;"
+        >
+            <div class="nvc-container--aavv">
+                <div class='nvc-navbar__header post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+                    <a
+                        class="nvc-navbar__brand nvc-navbar__logo fn-logo-navicu nvc-aavv-customize__logo"
+
+                        {%
+                            if app.request.get('_route') == "aavv_register"
+                        %}
+                            href="{{ path('aavv_register', {'step': '1'}) }}"
+                        {%
+                            else
+                        %}
+                            href="{{ pathSubdomain('navicu_aavv_home') }}"
+                        {% endif %}
+                    >
+                        <i class="nvc-navbar__logo fn-logo-navicu" alt="reserva de alojamientos online"></i>
+                    </a>
+                </div>
+
+                {% include "NavicuInfrastructureBundle:AAVV:partials/userMenu.html.twig" %}
+            </div>
+        </nav>
+    </header>
+
+    <div class="nvc-ribbon" style="height:10px;">
+        <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+    </div>
+
+    <div class="nvc-aavv__content">
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block footer %}
+        {% include "NavicuInfrastructureBundle:AAVV:footer.html.twig" %}
+    {% endblock footer %}
+
+    {% block javascripts %}
+        <script>
+            // Si existe alguna plantilla Angular fuera del módulo, las mueve
+            // hacia dentro de él para que puedan ser utilizadas.
+            (function(app) {
+                Array.prototype.slice.call(
+                    document.querySelectorAll(':not([ng-app]) script[type="text/ng-template"]')
+                ).forEach(function(el) {
+                    var el2 = el.cloneNode(true);
+                    el.remove();
+
+                    app.insertBefore(el2, app.firstChild);
+                });
+            })(document.querySelector('[ng-app]'));
+        </script>
+
+        <!-- Routing -->
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        <script>
+            (function(Routing) {
+                var generate = Routing.generate;
+
+                Routing.generate = function() {
+                    var args = Array.prototype.slice.call(arguments);
+                    var route = args[0];
+                    var options = args[1];
+                    var trailing = args.slice(2);
+                    if (options === undefined || options === null) {
+                        options = {};
+                    }
+
+                    if (typeof options.subdomain !== 'string') {
+                        options.subdomain = window.location.hostname.split('.')[0];
+                    }
+
+                    return generate.apply(Routing, [route, options].concat(trailing));
+                };
+            })(window.Routing);
+        </script>
+
+        <!-- i18n -->
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+
+        <!-- Permisos -->
+        {% include "NavicuInfrastructureBundle:AAVV:partials/permissions.html.twig" %}
+
+        {% if app.environment == "dev" %}
+            <script src="/builds/vendor.bundle.js"></script>
+            <script src="/builds/aavv.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.vendor }}"></script>
+            <script src="{{ assets.js.aavv }}"></script>
+        {% endif %}
+
+        {% if app.environment != "dev" %}
+            <script>document.oncontextmenu = function(){return false}</script>
+        {% endif %}
+
+        <script type="text/javascript" src="{{ asset('bundles/navicuinfrastructure/assets/navicu/dist/angular-locale/angular-locale_es.js') }}"></script>
+
+    {% endblock %}
+</body>
+</html>

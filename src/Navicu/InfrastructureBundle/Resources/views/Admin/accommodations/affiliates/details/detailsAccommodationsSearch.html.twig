@@ -1,0 +1,24 @@
+<form ng-show="{{ hasPermission('admin_property_details', 'reservation_details') }}">
+    <h2 >Histórico de reservas</h2>
+
+        <div class="nvc-admin__search">
+            <div class='nvc-form-group'>
+                <input
+                    id='searchdetails'
+                    placeholder=''
+                    ng-model="search"
+                    role="search"
+                    tabindex="1"
+                    type="text"
+                />
+                <button
+                    class='nvc-button nvc-button__search'
+                    type='submit'
+                    ng-click="getData(search, 1, null)"
+                >
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+</form>

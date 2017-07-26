@@ -1,0 +1,83 @@
+<div ng-repeat="value in data">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-8 separatorTitle">
+            <h2>
+                {[{ value.public_id }]}
+            </h2>
+        </div>
+        <div class="col-xs-8">
+            <h2>
+                {[{ value.name }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    {{ 'message.affiliation_date'|trans }}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {{ 'word.city'|transchoice(1) }}
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                    {[{ value.join_date }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ value.city}]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>{{ 'message.invoices_accumulated'|trans }}</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>Bs {[{value.invoices_accumulated}]}</h2>
+            </div>
+        </div>
+        <div class="mainInfo">
+            <div class="col-xs-16">
+                <h2>
+                    {{ 'message.invoices_month'|trans }}
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>
+                    Bs {[{ value.invoices_month }]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>{{ 'message.invoices_accumulated'|trans }}</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>Bs {[{value.availability_credit}]}</h2>
+            </div>
+        </div>
+        <div class="buttonDetails">
+            <button
+                class="nvc-button__login"
+                formtarget="_blank"
+                ng-click="redirectDetailsAAVV(value.slug);"
+            >
+                Ver detalle
+            </button>
+        </div>
+    </div>
+</div>

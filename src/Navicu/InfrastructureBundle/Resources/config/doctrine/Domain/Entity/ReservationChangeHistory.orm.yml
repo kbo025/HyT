@@ -1,0 +1,51 @@
+Navicu\Core\Domain\Model\Entity\ReservationChangeHistory:
+    type: entity
+    table: reservation_change_history
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbReservationChangeHistoryRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: datetime
+            nullable: false
+        data_log:
+            type: json_array
+            nullable: true
+        # representa el estado de una reserva donde:
+        # 0: prereserva: reserva en espera de pago por parte del cliente
+        # 1: por confirmar: pago a la espera de confirmación por parte de navicu
+        # 2: pago confirmado: reserva con pago confirmado
+        # 3: Reserva Cancelada: reserva que no procede por diferentes razones
+        status:
+            type: integer
+            nullable: false
+
+    oneToOne:
+        last_status:
+            targetEntity: ReservationChangeHistory
+            cascade: ["persist"]
+            joinColumn:
+                name: last_status
+                referencedColumnName: id
+
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: reservation_change_history
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+
+    manyToOne:
+        reservation:
+            targetEntity: Reservation
+            inversedBy: change_history
+            mappedBy: null
+            joinColumns:
+                reservation_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

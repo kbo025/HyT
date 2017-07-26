@@ -1,0 +1,27 @@
+#======== Todas las rutas referentes al proceso                 ========
+#======== de login para el usuario AAVV en proceso de registro  ========
+
+#Ruta de Login
+navicu_aavv_login:
+    path:  /login
+    defaults: { _controller:  NavicuInfrastructureBundle:Security\Security:login }
+
+#Ruta de redireccionamiento hacia login
+navicu_aavv_login_redirect:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: navicu_aavv_landing
+        permanent: true
+
+# Verificacion de inicio de sesion
+navicu_aavv_check:
+    path:  /login_check
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:check }
+
+# Cerrar sesion
+navicu_aavv_logout:
+    path:  /logout
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:logout }
+    options:
+      expose: true

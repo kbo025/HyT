@@ -1,0 +1,13 @@
+#Validación BedRoom
+Navicu\Core\Domain\Model\Entity\Bedroom:
+
+    properties:
+        amount_people:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+            - GreaterThan:
+                value: -1
+                message: no_positive,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}

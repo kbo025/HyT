@@ -1,0 +1,1549 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/layout.html.twig" %}
+
+{% set header_title = {'module_title': '1'} %}
+
+{% block body %}
+<div
+	ng-app="generalInformationModule"
+	ng-controller="generalInformationController"
+	novalidate ng-cloak>
+
+	{% include "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/topmenu.html.twig" with header_title %}
+	<!--Top del formualario -->
+	<div class="container" style="font-family:LatoRegular" >
+		<div class="col-md-16" style="color:#572A85; font-size:18px;">
+			<p align="justify">{{"extranet.formProperty.top_message"|trans }}
+			</p>
+		</div>
+	</div>
+	<br>
+	<!--UbicaciÃ³n del establecimiento -->
+	<form name="infoProperty">
+		<div class="container form-font">
+			<div class="jumbotron form-font-top form-group ">
+				<div class="container form-font">
+					<div class="col-sm-10 col-md-8 col-lg-6 right"><h3>{{"extranet.formProperty.location"|trans }}</h3></div>
+					<div class="col-md-8"></div>
+				</div>
+				<br>
+				<div class="container" style="color:#808080">
+					<div class="row">
+						<div class="col-md-4 col-lg-4">
+							<label ng-class="{'label-error' : infoProperty.name.$error.required && infoProperty.name.$touched}"
+								   for="">{{"extranet.formProperty.name_property"|trans }}<strong>*</strong>
+							</label>
+							<input ng-class="{'input-error' : infoProperty.name.$error.required && infoProperty.name.$touched}"
+								   name="name"ng-model="response.GeneralInformation.location.name"style="width:100%" class="form-control my-imput" type="text" required>
+							<span class="error" ng-show="infoProperty.name.$error.required && infoProperty.name.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+							<br>
+						</div>
+						<div class="col-md-3 col-lg-3">
+							<label ng-class="{'label-error' : infoProperty.accommodations.$error.required && infoProperty.accommodations.$touched}">
+								{{"extranet.formProperty.type_of_accommodation"|trans }}<strong>*</strong>
+							</label>
+							<select ng-class="{'input-error' : infoProperty.accommodations.$error.required && infoProperty.accommodations.$touched}"
+								name="accommodations" ng-model="response.GeneralInformation.location.accommodation_name" ng-change="assignId(response.GeneralInformation.location.accommodation_name, response.accommodations,1)" style="width:100%" class="form-control my-imput"
+								ng-options="id.name as id.name for (accommodation, id) in response.accommodations | orderBy:'name'">
+							  	<option value="">Seleccione</option>
+							</select>
+							<span class="error" ng-show="infoProperty.accommodations.$error.required && infoProperty.accommodations.$touched">{{ "share.validation.input_required"|trans }}</span>
+							<br>
+						</div>
+						<div class="col-md-3 col-lg-3">
+							<label ng-class="{'label-error' : infoProperty.star.$error.required && infoProperty.star.$touched}">{{"extranet.formProperty.category_start"|trans }}<strong>*</strong></label>
+							<select ng-class="{'input-error' : infoProperty.star.$error.required && infoProperty.star.$touched}" name="star" type="number" ng-model="response.GeneralInformation.location.star" class="form-control my-select" style="width:100%" ng-options="n for n in [] | range:1:5">
+							  <option value="">Seleccione</option>
+							</select>
+							<span class="error" ng-show="infoProperty.star.$error.required && infoProperty.star.$touched">{{ "share.validation.input_required"|trans }}</span>
+							<br>
+						</div>
+						<div class="col-md-3 col-lg-3">
+							<label ng-class="{'label-error' : infoProperty.phone.$error.required && infoProperty.phone.$touched || (infoProperty.phone.$error.pattern && infoProperty.phone.$touched)} ">{{"extranet.formProperty.phone"|trans }}<strong>*</strong></label>
+							<input ng-class="{'input-error' : infoProperty.phone.$error.required && infoProperty.phone.$touched}" name="phone" ng-model="response.GeneralInformation.location.phone" style="width:100%" class="form-control my-imput" type="text" ng-pattern="/^\+?\d{2,3}-?\d{3}-?\d{6,7}/">
+							<span class="error" ng-show="infoProperty.phone.$error.required && infoProperty.phone.$touched">{{ "share.validation.input_required"|trans }}</span>
+							<span class="error" ng-show="infoProperty.phone.$error.pattern && infoProperty.phone.$touched">{{ "share.validation.error_phone"|trans }}</span>
+							<br>
+						</div>
+						<div class="col-md-4 col-lg-3">
+							<label ng-class="{'label-error' : infoProperty.fax.$error.pattern && infoProperty.fax.$touched}">{{"extranet.formProperty.fax_property"|trans }}</label>
+							<input name="fax"ng-model="response.GeneralInformation.location.fax"style="width:100%" class="form-control my-imput"  ng-pattern="/^\+?\d{2,3}-?\d{3}-?\d{6,7}/">
+							<span class="error" ng-show="infoProperty.fax.$error.pattern && infoProperty.fax.$touched">{{ "share.validation.error_fax"|trans }}</span>
+							<br>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-4 col-lg-4">
+							<label ng-class="{'label-error' : infoProperty.country.$error.required && infoProperty.country.$touched}">{{"extranet.formProperty.country"|trans }}<strong>*</strong></label>
+							<select ng-class="{'input-error' : infoProperty.country.$error.required && infoProperty.country.$touched}"
+									name="country" class="form-control my-imput" style="width:100%" ng-model="pais" ng-change="assignId(pais,paises,2)"
+									ng-options="val.name as val.name for (pais, val) in paises" >
+								<option value="">Seleccione</option>
+							</select>
+							<span class="error" ng-show="infoProperty.country.$error.required && infoProperty.country.$touched">{{ "share.validation.input_required"|trans }}</span>
+							<br>
+						</div>
+						<div class="col-md-4 col-lg-4">
+							<label ng-class="{'label-error' : infoProperty.state.$error.required && infoProperty.state.$touched}">{{"extranet.formProperty.state"|trans }}<strong>*</strong></label>
+							<select ng-class="{'input-error' : infoProperty.state.$error.required && infoProperty.state.$touched}"
+								name="state" ng-disabled="!pais" class="form-control my-imput" style="width:100%" ng-model="estado" ng-change="assignId(estado,states,3)"
+								ng-options="valEstado.name as valEstado.name for (estado, valEstado) in states | orderBy:'name'"
+							required>
+								<option value="">Seleccione</option>
+							</select>
+							<span class="error" ng-show="infoProperty.state.$error.required && infoProperty.state.$touched">{{ "share.validation.input_required"|trans }}</span>
+						</div>
+						<div class="col-md-4 col-lg-4">
+							<label ng-class="{'label-error' : infoProperty.city.$error.required && infoProperty.city.$touched}">{{"extranet.formProperty.town"|trans }}<strong>*</strong></label>
+							<select name="city" ng-class="{'input-error' : infoProperty.city.$error.required && infoProperty.city.$touched}"
+								ng-disabled="!estado" class="form-control my-imput" style="width:100%" ng-model="municipio" ng-change="assignId(municipio,towns,4)"
+								 ng-options="idCiudad.name as idCiudad.name for (ciudad, idCiudad) in towns | orderBy:'name'" required>
+								<option value="">Seleccione</option>
+							</select>
+							<span class="error" ng-show="infoProperty.city.$error.required && infoProperty.city.$touched">{{ "share.validation.input_required"|trans }}</span>
+						</div>
+						<div class="col-md-4 col-lg-4">
+							<label ng-class="{'label-error' : infoProperty.city.$error.required && infoProperty.city.$touched}">{{"extranet.formProperty.parish"|trans }}<strong>*</strong></label>
+							<select name="city" ng-class="{'input-error' : infoProperty.city.$error.required && infoProperty.city.$touched}"
+								ng-disabled="!municipio" class="form-control my-imput" style="width:100%" ng-model="parroquia" ng-change="assignId(parroquia,parishs,5)" ng-options="idCiudad.name as idCiudad.name for (ciudad, idCiudad) in parishs | orderBy:'name'" required>
+								<option value="">Seleccione</option>
+							</select >
+							<span class="error" ng-show="infoProperty.city.$error.required && infoProperty.city.$touched">{{ "share.validation.input_required"|trans }}</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8 col-lg-8">
+							<label ng-class="{'label-error' : infoProperty.addres.$error.required && infoProperty.addres.$touched}">{{"extranet.formProperty.property_address"|trans }}<strong>*</strong></label>
+							<input ng-class="{'input-error' : infoProperty.addres.$error.required && infoProperty.addres.$touched}" name="addres" ng-model="response.GeneralInformation.location.address.address" ng-disabled="!parroquia" id="" style="width:100%" class="form-control my-imput" type="text" required>
+							<span class="error" ng-show="infoProperty.addres.$error.required && infoProperty.addres.$touched">{{ "share.validation.input_required"|trans }}</span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-16">
+							<label for="">{{"extranet.formProperty.location_of_property"|trans }}<strong>* {{"extranet.formProperty.marker_location_of_property"|trans }}</strong></label>
+							<div style="width:100%" >
+								<div id="map_canvas">
+								    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="map.control" ng-click="options.scrollwheel=true">
+								      <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id" control="marker.control">
+								      </ui-gmap-marker>
+								    </ui-gmap-google-map>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Datos del estableciemiento-->
+		<div class="container form-font">
+			<div class="jumbotron form-font-top form-group">
+				<div class="container">
+					<div class="col-md-6 right">
+						<h3>{{"extranet.formProperty.property_details"|trans }}</h3>
+					</div>
+					<div class="col-md-8"></div>
+				</div>
+				<br>
+				<div class="container" style="color:#808080">
+					<div class="row">
+						<div class="col-md-3">
+							<label
+								ng-class="{'label-error' : infoProperty.opening_year.$error.required &&
+														   infoProperty.opening_year.$touched}">
+								{{"extranet.formProperty.year_opened"|trans }}
+								<strong>*</strong>
+							</label>
+							<select
+								ng-class="{'input-error' : infoProperty.opening_year.$error.required &&
+											infoProperty.opening_year.$touched}"
+								name="opening_year"
+								type="number"
+								ng-options="n for n in [] | range2:2015:1899"
+								ng-model="response.GeneralInformation.propertyDetails.opening_year"
+								class="form-control my-select"
+								style="width:100%">
+							  	<option value="">Seleccione</option>
+							</select>
+							<span
+								class="error"
+								ng-show="infoProperty.opening_year.$error.required &&
+										 infoProperty.opening_year.$touched">
+									{{ "share.validation.input_required"|trans }}
+							</span>
+							<br>
+						</div>
+						<div class="col-md-3">
+							<label>{{"extranet.formProperty.last_renewal"|trans }}</label>
+							<select type="number"
+								ng-options="n for n in [] | range2:2015:response.GeneralInformation.propertyDetails.opening_yea-1"
+								ng-model="response.GeneralInformation.propertyDetails.renewal_year"
+								class="form-control my-select"
+								style="width:100%">
+							  	<option value="">Seleccione</option>
+							</select>
+							<br>
+						</div>
+						<div class="col-md-5">
+							<label>{{"extranet.formProperty.last_renovation"|trans }}</label>
+							<select
+								type="number"
+								ng-model="response.GeneralInformation.propertyDetails.public_areas_renewal_year"
+								ng-options="n for n in [] | range2:2015:response.GeneralInformation.propertyDetails.opening_yea-1"
+								class="form-control my-select"
+								style="width:80%">
+							  	<option value="">Seleccione</option>
+							</select>
+							<br>
+						</div>
+						<div class="col-md-4" style=" margin-left: -6%;">
+							<label>{{"extranet.formProperty.website"|trans }}</label>
+							<input
+								placeholder="www.navicu.com"
+								name="url"
+								ng-model="response.GeneralInformation.propertyDetails.url_web"
+								style="width:100%"
+								class="form-control my-imput"
+								type="text">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<label>{{"extranet.formProperty.hotel_chain"|trans }}</label>
+							<md-switch
+								ng-model="response.GeneralInformation.propertyDetails.hotel_chain"
+								aria-label="Switch 2"
+								class="md-warn">
+								<span ng-if="response.GeneralInformation.propertyDetails.hotel_chain == true">
+									{{ "share.message.yes"|trans }}
+								</span>
+								<span ng-if="response.GeneralInformation.propertyDetails.hotel_chain == false">
+									{{ "share.message.no"|trans }}
+								</span>
+							</md-switch>
+						</div>
+						<div ng-show="response.GeneralInformation.propertyDetails.hotel_chain">
+							<div class="col-md-3">
+								<div>
+									<label>{{"extranet.formProperty.name_chain"|trans }}</label>
+									<input ng-model="response.GeneralInformation.propertyDetails.hotel_chain_name"
+									style="color:#000;"
+									type="text"
+									class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label
+								ng-class="{'label-error' : infoProperty.amount_room.$error.required &&
+														   infoProperty.amount_room.$touched}">
+								{{"extranet.formProperty.rooms_number"|trans }}
+								<strong>*</strong>
+							</label>
+							<input
+								ng-class="{'input-error' : infoProperty.amount_room.$error.required &&
+														   infoProperty.amount_room.$touched}"
+								name="amount_room"
+								ng-model="response.GeneralInformation.propertyDetails.amount_room"
+								style="width:100%"
+								class="form-control my-imput"
+								type="number"
+								min="1"
+							>
+							<span
+								class="error"
+								ng-show="infoProperty.amount_room.$error.required &&
+										 infoProperty.amount_room.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+							<span
+								class="error"
+								ng-show="infoProperty.amount_room.$error.number">
+								{{ "share.validation.only_number"|trans }}
+							</span>
+							<span
+								class="error"
+								ng-show="infoProperty.amount_room.$error.min">
+								{{ "share.validation.only_number_positive"|trans }}
+							</span>
+							<br>
+						</div>
+						<div class="col-md-3 col-lg-2">
+							<label
+								ng-class="{'label-error' : infoProperty.number_floor.$error.required &&
+														   infoProperty.number_floor.$touched}">
+								{{"extranet.formProperty.floors"|trans }}
+								<strong>*</strong>
+							</label>
+							<select
+								type="number"
+								ng-class="{'input-error' : infoProperty.number_floor.$error.required &&
+														   infoProperty.number_floor.$touched}"
+								name="number_floor"
+								ng-model="response.GeneralInformation.propertyDetails.number_floor"
+								class="form-control my-select"
+								ng-options="n for n in [] | range:0:60">
+							 	<option value="">Seleccione</option>
+							</select>
+							<span
+								class="error"
+								ng-show="infoProperty.number_floor.$error.required &&
+										infoProperty.number_floor.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+							<br>
+						</div>
+						<div class="col-md-2">
+							<label
+								class="tooltips tooltips-right"
+								ng-class="{'label-error' : infoProperty.check_in.$error.required &&
+														   infoProperty.check_in.$touched}">
+								{{"extranet.formProperty.check-in"|trans }}
+								<i class="fa fn-info fa-x"></i>
+								<strong>*</strong>
+								<span style="width: 219% !important;margin-left: 0px !important;margin-top: -35%; !important">
+									{{"extranet.formProperty.message_ckeckin"|trans }}
+								</span>
+							</label>
+							<select
+								ng-class="{'input-error' : infoProperty.check_in.$error.required &&
+														   infoProperty.check_in.$touched }"
+								name="check_in"
+								ng-model="response.GeneralInformation.propertyDetails.check_in"
+								class="form-control my-select"
+								style="width:100%">
+							  	<option value="">Seleccione</option>
+							   	<option value="07:00">7:00</option>
+								<option value="08:00">8:00</option>
+								<option value="09:00">9:00</option>
+								<option value="10:00">10:00</option>
+								<option value="11:00">11:00</option>
+								<option value="12:00">12:00</option>
+								<option value="13:00">13:00</option>
+								<option value="14:00">14:00</option>
+								<option value="15:00">15:00</option>
+								<option value="16:00">16:00</option>
+								<option value="17:00">17:00</option>
+								<option value="18:00">18:00</option>
+								<option value="19:00">19:00</option>
+								<option value="20:00">20:00</option>
+								<option value="21:00">21:00</option>
+								<option value="22:00">22:00</option>
+								<option value="23:00">23:00</option>
+								<option value="00:00">00:00</option>
+								<option value="01:00">1:00</option>
+								<option value="02:00">2:00</option>
+								<option value="02:00">2:00</option>
+								<option value="03:00">3:00</option>
+								<option value="04:00">4:00</option>
+								<option value="05:00">5:00</option>
+								<option value="06:00">6:00</option>
+							</select>
+							<span
+								class="error"
+								ng-show="infoProperty.check_in.$error.required &&
+										 infoProperty.check_in.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+							<br>
+						</div>
+						<div class="col-md-2">
+							<label
+								class="tooltips tooltips-right"
+								ng-class="{'label-error' : infoProperty.check_out.$error.required &&
+														   infoProperty.check_out.$touched}">
+								{{"extranet.formProperty.check-out"|trans }}
+								<i class="fa fn-info fa-x"></i>
+								<strong>*</strong>
+								<span style="width: 182% !important;margin-left: -1px !important;margin-top: -30%; !important">
+									{{"extranet.formProperty.message_checkout"|trans }}
+								</span>
+							</label>
+							<select
+								ng-class="{'input-error' : infoProperty.check_out.$error.required &&
+														   infoProperty.check_out.$touched}"
+								name="check_out"
+								ng-model="response.GeneralInformation.propertyDetails.check_out"
+								class="form-control my-select"
+								style="width:100%">
+							    <option value="">Seleccione</option>
+							    <option value="07:00">7:00</option>
+							    <option value="08:00">8:00</option>
+							    <option value="09:00">9:00</option>
+							    <option value="10:00">10:00</option>
+							    <option value="11:00">11:00</option>
+							    <option value="12:00">12:00</option>
+							    <option value="13:00">13:00</option>
+							    <option value="14:00">14:00</option>
+							    <option value="15:00">15:00</option>
+							    <option value="16:00">16:00</option>
+							    <option value="17:00">17:00</option>
+							    <option value="18:00">18:00</option>
+							    <option value="19:00">19:00</option>
+							    <option value="20:00">20:00</option>
+							    <option value="21:00">21:00</option>
+							    <option value="22:00">22:00</option>
+							  	<option value="23:00">23:00</option>
+							  	<option value="00:00">00:00</option>
+							  	<option value="01:00">1:00</option>
+							  	<option value="02:00">2:00</option>
+							  	<option value="02:00">2:00</option>
+							  	<option value="03:00">3:00</option>
+							  	<option value="04:00">4:00</option>
+							  	<option value="05:00">5:00</option>
+							  	<option value="06:00">6:00</option>
+							</select>
+							<span
+								class="error"
+								ng-show="infoProperty.check_out.$error.required &&
+										 infoProperty.check_out.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+						</div>
+					</div>
+					<div class="row">
+						<div
+							class="container"
+							ng-init="validate=false">
+							<label>
+								{{"extranet.formProperty.spoken_languages"|trans }}
+								<strong>*</strong>
+							</label>
+						</div>
+						<div
+							ng-repeat-n="response.GeneralInformation.propertyDetails.languages.length">
+							<div class="col-md-2">
+								<select style=""
+									ng-model="response.GeneralInformation.propertyDetails.languages[$index].language_name"
+									class="form-control my-select"
+									ng-click="validation(response.GeneralInformation.propertyDetails.languages[$index].language_name)"
+									ng-change="assignId(response.GeneralInformation.propertyDetails.languages[$index].language_name,response.language,6, $index)"
+									ng-options="value.name as value.name for (pos, value) in response.language">
+								</select>
+							</div>
+						</div>
+						<div
+							ng-if="response.GeneralInformation.propertyDetails.languages.length>0"
+							style="margin-right: -2%;"
+							class="col-md-2">
+							<button
+								style=""
+								type="button"
+								class="btn btn-primary"
+								ng-click="deleteLanguage();">
+								<i class="fa fa-times fa-lg"></i>
+								Eliminar
+							</button>
+						</div>
+						<div class="col-md-2">
+							<button
+								ng-disabled="validate"
+								type="button"
+								class="btn btn-primary"
+								ng-click="addLanguage();">
+								<i class="fa fa-plus-circle fa-lg"></i>
+								{{"extranet.formProperty.add_language"|trans }}
+							</button>
+						</div>
+					</div>
+					<span
+						class="error"
+						ng-show="validate">
+						{{"extranet.formProperty.error_languages"|trans }}
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!--Datos del contacto-->
+		<div class="container form-font">
+			<div class="jumbotron form-font-top form-group">
+				<div class="container">
+					<div class="col-md-6 right">
+						<h3>{{"extranet.formProperty.contact_information"|trans }}</h3>
+					</div>
+					<div class="col-md-8"></div>
+				</div>
+				<br>
+				<!--Datos para la reserva-->
+				<div ng-repeat="(key, value) in response.GeneralInformation.contacts">
+					<div class="container">
+						<h4 ng-if="key>2"
+							class="form-sub-font">
+							{{"extranet.formProperty.type_contact"|trans }}
+						</h4>
+						<h3 ng-if="value.required">{[{value.type}]}</h3>
+						<select
+							ng-if="key>2"
+							ng-model="value.type"
+							class="form-control my-select"
+							style="width:24%">
+							<option value="">Seleccione</option>
+							<option value="Reservas">Reservas</option>
+							<option value="Operaciones">Operaciones</option>
+							<option value="AtenciÃ³n al cliente">AtenciÃ³n al cliente</option>
+						</select>
+						<br>
+						<label ng-if="key>0">
+							<input
+								ng-model="same_dat"
+								ng-click="same_date(key,same_dat)"
+								type="checkbox">
+							{{"extranet.formProperty.previous_contact"|trans }}
+						</label>
+					</div>
+					<div class="container" style="color:#808080">
+						<div class="row">
+							<div class="col-md-4">
+								<label
+									ng-class="{'label-error' : infoProperty.contact_name{[{key}]}.$error.required &&
+															   infoProperty.contact_name{[{key}]}.$touched}">
+									{{"extranet.formProperty.name"|trans }}
+									<strong>*</strong>
+								</label>
+								<input
+									ng-class="{'input-error' : infoProperty.contact_name{[{key}]}.$error.required &&
+															   infoProperty.contact_name{[{key}]}.$touched}"
+									name="contact_name{[{key}]}"
+									ng-model="value.name"
+									style="width:100%"
+									class="form-control my-imput"
+									type="text">
+								<span
+									class="error"
+									ng-show="infoProperty.contact_name{[{key}]}.$error.required &&
+											 infoProperty.contact_name{[{key}]}.$touched">
+											 {{ "share.validation.input_required"|trans }}
+								</span>
+								<br>
+							</div>
+							<div class="col-md-4">
+								<label
+									ng-class="{'label-error' : infoProperty.reservation_contact_charge{[{key}]}.$error.required &&
+															   infoProperty.reservation_contact_charge{[{key}]}.$touched}">
+									{{"extranet.formProperty.charge"|trans }}
+									<strong>*</strong>
+								</label>
+								<input
+									ng-class="{'input-error' : infoProperty.reservation_contact_charge{[{key}]}.$error.required &&
+									    					   infoProperty.reservation_contact_charge{[{key}]}.$touched}"
+									name="reservation_contact_charge{[{key}]}"
+									ng-model="value.charge"
+									style="width:100%"
+									class="form-control my-imput"
+									type="text"
+								>
+								<span
+									class="error"
+									ng-show="infoProperty.reservation_contact_charge{[{key}]}.$error.required &&
+										     infoProperty.reservation_contact_charge{[{key}]}.$touched">
+									{{ "share.validation.input_required"|trans }}
+								</span>
+								<br>
+							</div>
+							<div class="col-md-4">
+								<label
+									ng-class="{'label-error' : infoProperty.reservation_contact_phone{[{key}]}.$error.required &&
+															   infoProperty.reservation_contact_phone{[{key}]}.$touched ||
+															   (infoProperty.reservation_contact_phone{[{key}]}.$error.pattern &&
+															   infoProperty.reservation_contact_phone{[{key}]}.$touched)}">
+									{{"extranet.formProperty.phone"|trans }}
+									<strong>*</strong>
+								</label>
+								<input
+									name="reservation_contact_phone{[{key}]}"
+									ng-model="value.phone"
+									style="width:100%"
+									class="form-control my-imput"
+									type="tel"
+									ng-pattern="/^\+?\d{2,3}-?\d{3}-?\d{6,7}/"
+									ng-class="{'input-error' : infoProperty.reservation_contact_phone{[{key}]}.$error.required &&
+															   infoProperty.reservation_contact_phone{[{key}]}.$touched ||
+															   (infoProperty.reservation_contact_phone{[{key}]}.$error.pattern &&
+															   infoProperty.reservation_contact_phone{[{key}]}.$touched)}"
+								>
+								<span
+									class="error"
+									ng-show="infoProperty.reservation_contact_phone{[{key}]}.$error.required &&
+											 infoProperty.reservation_contact_phone{[{key}]}.$touched">
+									{{ "share.validation.input_required"|trans }}
+								</span>
+								<span
+									class="error"
+									ng-show="infoProperty.reservation_contact_phone{[{key}]}.$error.pattern &&
+											 infoProperty.reservation_contact_phone{[{key}]}.$touched">
+									{{ "share.validation.error_phone"|trans }}
+								</span>
+							</div>
+							<div
+								ng-if="key>2"
+								class="col-md-4"
+								style="margin-top:26px">
+								<button
+									type="button"
+									class="btn btn-primary"
+									ng-click="delete(key);">
+									<i class="fa fa-times fa-lg"></i>
+									{{"extranet.formProperty.delete"|trans }}
+								</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<label
+									ng-class="{'label-error' : infoProperty.reservation_contact_email{[{key}]}.$error.required &&
+															   infoProperty.reservation_contact_email{[{key}]}.$touched ||
+															   infoProperty.reservation_contact_email{[{key}]}.$error.email &&
+															   infoProperty.reservation_contact_email{[{key}]}.$touched}">
+									{{"extranet.formProperty.email"|trans }}
+									<strong>*</strong>
+								</label>
+								<input
+									ng-class="{'input-error' : infoProperty.reservation_contact_email{[{key}]}.$error.required &&
+															   infoProperty.reservation_contact_email{[{key}]}.$touched ||
+															   infoProperty.reservation_contact_email{[{key}]}.$error.email &&
+															   infoProperty.reservation_contact_email{[{key}]}.$touched}"
+									name="reservation_contact_email{[{key}]}"
+									ng-model="value.email"
+									style="width:100%"
+									class="form-control my-imput"
+									type="email"
+								>
+								<span
+									class="error"
+									ng-show="infoProperty.reservation_contact_email{[{key}]}.$error.required &&
+											 infoProperty.reservation_contact_email{[{key}]}.$touched">
+									{{ "share.validation.input_required"|trans }}
+								</span>
+								<span
+									class="error"
+									ng-show="infoProperty.reservation_contact_email{[{key}]}.$error.email &&
+											 infoProperty.reservation_contact_email{[{key}]}.$touched">
+									{{ "share.validation.error_email"|trans }}
+								</span>
+								<br>
+							</div>
+							<div class="col-md-4">
+								<label
+									ng-class="{'label-error': infoProperty.faxR{[{key}]}.$error.pattern &&
+															  infoProperty.faxR{[{key}]}.$touched}">
+									{{"extranet.formProperty.fax"|trans }}
+								</label>
+								<input
+									ng-class="{'input-error': infoProperty.faxR{[{key}]}.$error.pattern &&
+															  infoProperty.faxR{[{key}]}.$touched}"
+									name="faxR{[{key}]}"
+									ng-model="value.fax"
+									style="width:100%"
+									class="form-control my-imput"
+									ng-pattern="/^\+?\d{2,3}-?\d{3}-?\d{6,7}/"
+								>
+								<span
+									class="error"
+									ng-show="infoProperty.faxR{[{key}]}.$error.pattern &&
+											 infoProperty.faxR{[{key}]}.$touched">
+									{{ "share.validation.error_fax"|trans }}
+								</span>
+								<br>
+							</div>
+							<div class="col-md-3">
+								<label class="tooltips tooltips-right">
+									{{"extranet.formProperty.email_receiver"|trans }}
+									<i class="fa fn-info fa-x"></i>
+									<strong>*</strong>
+									<span
+										style="width:252%!important; margin-left:9px!important; margin-top:-31%!important;">
+										{{"extranet.formProperty.email_receiver_message"|trans }}
+									</span>
+								</label>
+								<md-switch
+									ng-model="value.email_reservation_receiver"
+									aria-label="Switch 2"
+									class="md-warn">
+									<span ng-if="value.email_reservation_receiver == true">
+										{{ "share.message.yes"|trans }}
+									</span>
+									<span ng-if="value.email_reservation_receiver == false">
+										{{ "share.message.no"|trans }}
+									</span>
+								</md-switch>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<span
+						class="error"
+						ng-show="validateType">
+						{{"extranet.formProperty.error_contact"|trans }}
+					</span>
+					<br>
+					<button
+						ng-if="response.GeneralInformation.contacts.length"
+						type="button"
+						class="btn btn-primary"
+						ng-click=" add();
+								   form.same_date=false;
+								   response.GeneralInformation.contacts[response.GeneralInformation.contacts.length-1].email_reservation_receiver = false" >
+						<i class="fa fa-plus-circle fa-lg"></i>
+						{{"extranet.formProperty.add_contact"|trans }}
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!--Informacion adicional-->
+		<div class="container form-font">
+			<div class="jumbotron form-font-top form-group">
+				<div class="container">
+					<div class="col-md-6 right">
+						<h3>{{"extranet.formProperty.additional_information"|trans }}</h3>
+					</div>
+					<div class="col-md-8"></div>
+				</div>
+				<br>
+				<div class="container">
+					<h3
+						class="form-sub-font"
+						style="margin-left:1%;">
+						{{"extranet.formProperty.minimum_age"|trans }}
+					</h3>
+					<div class="col-md-2">
+						<label
+							class="tooltips tooltips-right"
+							ng-class="{'label-error' : infoProperty.check_in_age.$error.required &&
+													   infoProperty.check_in_age.$touched}">
+							{{"extranet.formProperty.age"|trans }}
+							<i class="fa fn-info fa-x"></i>
+							<strong>*</strong>
+							<span style="width: 252% !important;margin-left: -1px !important;margin-top: -67%; !important">
+								{{"extranet.formProperty.message_age"|trans }}
+							</span>
+						</label>
+						<select
+							ng-class="{'input-error' : infoProperty.check_in_age.$error.required &&
+													   infoProperty.check_in_age.$touched}"
+							name="check_in_age"
+							ng-model="response.GeneralInformation.additionalInformation.check_in_age"
+							ng-options="n for n in [] | range:18:21"
+							class="form-control my-select">
+						  	<option value="">Seleccione</option>
+						</select>
+						<span
+							class="error"
+							ng-show="infoProperty.check_in_age.$error.required &&
+									 infoProperty.check_in_age.$touched">
+							{{ "share.validation.input_required"|trans }}
+						</span>
+					</div>
+				</div>
+				<br>
+                <!-- CHILDREN -->
+				<div class="container">
+					<h3 class="form-sub-font">
+						{{"extranet.formProperty.children_policy"|transchoice(0)}}
+					</h3>
+					<h4 class="form-sub-font">{{"extranet.formProperty.children_policy"|transchoice(1)}}</h4>
+					<div class="row legend">
+						<div class="col-md-3 accept-child">
+							{{"extranet.formProperty.stay_children"|trans }}
+							<md-switch
+								style="margin-top: 5%;margin-left: 0%;"
+								ng-model="response.GeneralInformation.additionalInformation.child"
+								aria-label="Switch 2"
+								class="md-warn">
+								<span ng-if="child == true">
+									{{ "share.message.yes"|trans }}
+								</span>
+								<span ng-if="child == false">
+									{{ "share.message.no"|trans }}
+								</span>
+							</md-switch>
+						</div>
+						<div class="col-md-7" ng-if="child == true">
+							<div class="row">
+                            <vds-multirange gradient="true"
+                                            ng-model="agesRangeArray"
+                                            style="margin-bottom: 10px;"
+                                            views="views"
+                                            view="view"
+                            ></vds-multirange>
+                            </div>
+                            <div class="row text-center childRangeButtons">
+                                <button class="btn btn-primary" ng-click="addRange()">Agregar Rango</button>
+                                <button class="btn btn-primary" ng-click="removeRange()">Eliminar Rango</button>
+                            </div>
+	          			</div>
+	          			<div class="col-md-5 col-md-offset-1" ng-if="child == true">
+	          				<span
+                                ng-if="agesRangeArray[0].value > 0.04"
+                                class="fa fa-circle fa-lg old-baby">
+                            </span>
+                            <label ng-if="agesRangeArray[0].value > 0.04">
+                                {{"share.message.baby"|transchoice(1)}} hasta {[{agesRangeArray[0].value * 25 - 1 | number: 0}]} años
+                            </label>
+                            <span ng-if="agesRangeArray[0].value > 0.04" style="font-size: 10pt;color: #4D4D4D;">(No se aplican cargos)</span>
+                            <br ng-if="agesRangeArray[0].value > 0.04">
+                            <div ng-repeat="range in agesRangeArray | limitTo:agesRangeArray.length:1">
+                            <span
+                                class="fa fa-circle fa-lg old-child">
+                            </span>
+                            <label>
+                                {{"share.message.child"|transchoice(1)}} entre {[{agesRangeArray[$index].value * 25 | number: 0}]} - {[{range.value * 25 - 1 | number: 0}]} años
+                            </label>
+                            <br>
+                            </div>
+                            <span class="fa fa-circle fa-lg old-adult"></span>
+                            <label>{{"web.reservation.adults"|trans}} a partir de {[{agesRangeArray[agesRangeArray.length - 1].value * 25 | number : 0}]} años</label>
+
+	          			</div>
+	          		</div>
+				</div>
+				<br>
+                <!-- Extras -->
+				<div class="container">
+					<div class="col-md-4">
+						<h3 class="form-sub-font"
+							style="margin-left:1%;">
+							{{"extranet.formProperty.extras"|trans }}
+						</h3>
+						<label>{{"extranet.formProperty.all_inclusive_hotel"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 1%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.all_included"
+							aria-label="Switch 2"
+							class="md-warn">
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.all_included == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.all_included == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-3">
+						<label>{{"extranet.formProperty.additional_beds"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.beds.beds"
+							aria-label="Switch 2"
+							class="md-warn">
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.beds.beds == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.beds.beds == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+					<div
+						ng-if="response.GeneralInformation.additionalInformation.extras.beds.beds"
+						class="col-md-3">
+						<label>{{"extranet.formProperty.extra_charge"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.beds.value_beds_extra"
+							aria-label="Switch 2"
+							class="md-warn" >
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.beds.value_beds_extra == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.beds.value_beds_extra == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+					<div
+						ng-if="response.GeneralInformation.additionalInformation.extras.beds.beds"
+						class="col-md-3">
+						<label>{{"extranet.formProperty.prior_notice"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.beds.prior_notice"
+							aria-label="Switch 2"
+							class="md-warn" >
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.beds.prior_notice == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.beds.prior_notice == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-3">
+						<label>{{"extranet.formProperty.cribs"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.cribs.cribs"
+							aria-label="Switch 2"
+							class="md-warn">
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.cribs.cribs == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.cribs.cribs == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+					<div
+						ng-if="response.GeneralInformation.additionalInformation.extras.cribs.cribs"
+						class="col-md-3">
+						<label>{{"extranet.formProperty.extra_charge"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.cribs.value_cribs"
+							aria-label="Switch 2"
+							class="md-warn">
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.cribs.value_cribs == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.cribs.value_cribs == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+					<div
+						ng-if="response.GeneralInformation.additionalInformation.extras.cribs.cribs"
+						class="col-md-3">
+						<label>{{"extranet.formProperty.prior_notice"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.cribs.prior_notice"
+							aria-label="Switch 2"
+							class="md-warn" >
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.cribs.prior_notice == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.cribs.prior_notice == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+					<div
+						ng-if="response.GeneralInformation.additionalInformation.extras.cribs.cribs"
+						class="col-md-5">
+						<label
+							ng-class="{'label-error' : infoProperty.max_cribs.$error.required &&
+													   infoProperty.max_cribs.$touched}">
+							{{"extranet.formProperty.max_cribs"|trans }}
+						</label>
+						<select
+							type="number"
+							ng-class="{'input-error' : infoProperty.max_cribs.$error.required &&
+													   infoProperty.max_cribs.$touched}"
+							name="max_cribs"
+							ng-options="n for n in [] | range:0:5"
+							ng-model="response.GeneralInformation.additionalInformation.extras.cribs.max_cribs"
+							class="form-control my-select"
+							style="width:50%" >
+						  	<option value="">Seleccione</option>
+						</select>
+						<span
+							class="error"
+							ng-show="infoProperty.max_cribs.$error.required &&
+									 infoProperty.max_cribs.$touched">
+							{{ "share.validation.input_required"|trans }}
+						</span>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-3">
+						<label>{{"extranet.formProperty.mascot"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.pets.pets"
+							aria-label="Switch 2"
+							class="md-warn">
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.pets.pets == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.pets.pets == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+					<div
+						ng-show="response.GeneralInformation.additionalInformation.extras.pets.pets"
+						class="col-md-3">
+						<label>{{"extranet.formProperty.extra_charge"|trans }}</label>
+						<md-switch
+							style="margin-top: 5%;margin-left: 0%;"
+							ng-model="response.GeneralInformation.additionalInformation.extras.pets.value_pets"
+							aria-label="Switch 2"
+							class="md-warn">
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.pets.value_pets == true">
+								{{ "share.message.yes"|trans }}
+							</span>
+							<span ng-if="response.GeneralInformation.additionalInformation.extras.pets.value_pets == false">
+								{{ "share.message.no"|trans }}
+							</span>
+						</md-switch>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-16">
+						<label class="tooltips tooltips-right">
+							{{"extranet.formProperty.comercial_rooms"|trans }}
+							<i class="fa fn-info fa-x"></i>
+							<span style="width: 122% !important;margin-left: 10px !important;margin-top: -21% !important;">
+								{{"extranet.formProperty.message_comercial_rooms"|trans }}
+							</span>
+						</label>
+					</div>
+					<div class="container" style=" margin-top:1%">
+						<div
+							class="col-md-3"
+							style="margin-left:-2.2%; margin-top:-.8%;">
+							<md-switch
+								ng-model="response.GeneralInformation.additionalInformation.extras.comercialRooms.comercial_rooms"
+								aria-label="Switch 2"
+								class="md-warn">
+								<span ng-if="response.GeneralInformation.additionalInformation.extras.comercialRooms.comercial_rooms == true">
+									{{ "share.message.yes"|trans }}
+								</span>
+								<span ng-if="response.GeneralInformation.additionalInformation.extras.comercialRooms.comercial_rooms == false">
+									{{ "share.message.no"|trans }}
+								</span>
+							</md-switch>
+						</div>
+						<div
+							class="col-md-3"
+							style="margin-left: -7%;"
+							ng-if="response.GeneralInformation.additionalInformation.extras.comercialRooms.comercial_rooms">
+							<label>&nbsp;{{"extranet.formProperty.amount"|trans }}</label>
+							<input
+								style="width:50%; color: #000;"
+								ng-model="response.GeneralInformation.additionalInformation.extras.comercialRooms.amount_comercial_rooms"
+								name="amount_comercial_rooms"
+								style="color:#000;"
+								type="number"
+								class="form-control"
+								maxlength="3"
+								min="1">
+							<span
+								class="error"
+								ng-show="infoProperty.amount_comercial_rooms.$error.number">
+								{{ "share.validation.only_number"|trans }}
+							</span>
+							<span
+								class="error"
+								ng-show="infoProperty.amount_comercial_rooms.$error.min">
+								{{ "share.validation.only_number_positive"|trans }}
+							</span>
+						</div>
+					</div>
+					<div class="container">
+						<i style="font-size: 14px;">
+							{{"extranet.formProperty.message_comercial"|trans }}
+						</i>
+					</div>
+				</div>
+				<br>
+				<div class="container">
+					<div class="col-md-16">
+						<label>{{"extranet.formProperty.design_view_property"|trans }}</label>
+					</div>
+					<div
+						class="container"
+						style=" margin-top:1%">
+						<div
+							class="col-md-3"
+							style="margin-left: -2.2%; margin-top: -.8%;">
+							<md-switch
+								style="margin-top:5%;"
+								ng-model="response.GeneralInformation.additionalInformation.extras.design_view_property"
+								class="md-warn"
+								aria-label="Switch"
+								ng-true-value="1"
+								ng-false-value="2">
+								<span ng-if="response.GeneralInformation.additionalInformation.extras.design_view_property == 1">
+									{{ "share.message.design"|transchoice(0) }}
+								</span>
+								<span ng-if="response.GeneralInformation.additionalInformation.extras.design_view_property == 2">
+									{{ "share.message.design"|transchoice(1) }}
+								</span>
+							</md-switch>
+							{[{infoProperty.design_view_property}]}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Pagos Aceptados-->
+		<div class="container form-font">
+			<div class="jumbotron form-font-top form-group">
+				<div class="container">
+					<div class="col-md-16 right">
+						<h3 class="tooltips tooltips-right">
+							{{"extranet.formProperty.payments_accepted"|trans }}
+							<i class="fa fn-info fa-x"></i>
+							<span style="margin-left: -755px; margin-top: -3% !important;  width: 42%;">
+								{{"extranet.formProperty.message_payments"|trans }}
+							</span>
+						</h3>
+					</div>
+				</div>
+				<br>
+				<div class="container">
+					<div class="container">
+						<div class="col-md-3">
+							<label>{{"extranet.formProperty.credit_card"|trans }}</label>
+						</div>
+						<div class="col-md-1">
+							<md-switch
+								style="margin-left: -118%; margin-top: -4%;"
+								ng-model="response.GeneralInformation.paymentsAccepted.credit_card.credit_card"
+								aria-label="Switch 2"
+								class="md-warn">
+								<span ng-if="response.GeneralInformation.paymentsAccepted.credit_card.credit_card == true">
+									{{ "share.message.yes"|trans }}
+								</span>
+								<span ng-if="response.GeneralInformation.paymentsAccepted.credit_card.credit_card == false">
+									{{ "share.message.no"|trans }}
+								</span>
+							</md-switch>
+						</div>
+						<div ng-show="response.GeneralInformation.paymentsAccepted.credit_card.credit_card">
+							<div class="col-md-2">
+								<div style="margin-top:-1%;" class="checkbox">
+									<label>
+										<input
+											ng-model="response.GeneralInformation.paymentsAccepted.credit_card.credit_card_american"
+											type="checkbox">
+										<img
+											style="margin-top: -15%;"
+											src="{{ asset('images/american.png') }}"
+											alt="">
+									</label>
+								</div>
+							</div>
+							<div style="margin-top: -1%;" class="col-md-2">
+								<div class="checkbox">
+									<label>
+										<input
+											ng-model="response.GeneralInformation.paymentsAccepted.credit_card.credit_card_master"
+											type="checkbox">
+										<img
+											style="margin-top: -15%;"
+											src="{{ asset('images/master.png') }}"
+											alt="">
+									</label>
+								</div>
+							</div>
+							<div style="margin-top: -1%;" class="col-md-2">
+								<div class="checkbox">
+									<label>
+										<input
+											ng-model="response.GeneralInformation.paymentsAccepted.credit_card.credit_card_visa"
+											type="checkbox"
+											value="">
+										<img style="margin-top: -15%;"src="{{ asset('images/visa.png') }}" alt="">
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="container">
+						<div class="col-md-3">
+							<label>{{"extranet.formProperty.cash"|trans }}</label>
+						</div>
+						<div class="col-md-1">
+							<md-switch
+								style="margin-left: -118%; margin-top: -4%;"
+								ng-model="response.GeneralInformation.paymentsAccepted.cash.cash"
+								aria-label="Switch 2"
+								class="md-warn">
+								<span ng-if="response.GeneralInformation.paymentsAccepted.cash.cash == true">
+									{{ "share.message.yes"|trans }}
+								</span>
+								<span ng-if="response.GeneralInformation.paymentsAccepted.cash.cash == false">
+									{{ "share.message.no"|trans }}
+								</span>
+							</md-switch>
+						</div>
+						<div ng-show="response.GeneralInformation.paymentsAccepted.cash.cash">
+							<div class="col-md-2">
+								<div style="margin-top: -35%; margin-left: -35%;">
+									<label>{{"extranet.formProperty.until"|trans }}*</label>
+									<input
+										ng-model="response.GeneralInformation.paymentsAccepted.cash.to"
+										name="cashTo"
+										style="color:#000;"
+										type="number"
+										class="form-control"
+										min="1">
+									<span
+										class="error"
+										ng-show="infoProperty.cashTo.$error.number">
+										{{ "share.validation.only_number"|trans }}
+									</span>
+									<span
+										class="error"
+										ng-show="infoProperty.cashTo.$error.min">
+										{{ "share.validation.only_number_positive"|trans }}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="container">
+						<div class="col-md-3">
+							<label>{{"extranet.formProperty.debit"|trans }}</label>
+						</div>
+						<div class="col-md-1">
+							<md-switch
+								style="margin-left: -118%; margin-top: -4%;"
+								ng-model="response.GeneralInformation.paymentsAccepted.debit"
+								aria-label="Switch 2"
+								class="md-warn">
+								<span ng-if="response.GeneralInformation.paymentsAccepted.debit == true">
+									{{ "share.message.yes"|trans }}
+								</span>
+								<span ng-if="response.GeneralInformation.paymentsAccepted.debit == false">
+									{{ "share.message.no"|trans }}
+								</span>
+							</md-switch>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Requisitos de reserva-->
+		<div class="container form-font">
+			<div class="jumbotron form-font-top form-group">
+				<div class="container">
+					<div class="col-md-6 right">
+						<h3>{{"extranet.formProperty.reserve_requirements"|trans }}</h3>
+					</div>
+				</div>
+				<br>
+				<div class="container" style="color:#808080">
+					<div class="row">
+						<h3 class="tooltips tooltips-right form-sub-font" style="margin-left:1%;">
+							{{"extranet.formProperty.tax"|trans }}
+							<i class="fa fn-info fa-x"></i>
+							<span style="margin-left: -872px; margin-top: -3% !important; width: 232px !important;">
+								{{"extranet.formProperty.tax_message"|trans }}
+							</span>
+						</h3>
+						<div class="col-md-2">
+							<label
+								ng-class="{'label-error' : infoProperty.currency.$error.required &&
+														   infoProperty.currency.$touched}">
+								{{"extranet.formProperty.currency"|trans }}
+								<strong>*</strong>
+							</label>
+							<select
+								name="currency"
+								ng-model="response.GeneralInformation.loadingRates.tax.currency_name"
+								ng-options="id.name as id.name for (currency, id) in response.currency | orderBy:'name'"
+								class="form-control my-select"
+								style="width:100%"
+								ng-class="{'input-error' : infoProperty.currency.$error.required &&
+														   infoProperty.currency.$touched}"
+								ng-change="assignId(response.GeneralInformation.loadingRates.tax.currency_name,response.currency,7);
+										   getId(searchId(currencyList, form.currency_name), 'currency');">
+							  	<option value="">Seleccione</option>
+							</select>
+							<span
+								class="error"
+								ng-show="infoProperty.currency.$error.required &&
+										 infoProperty.currency.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+						</div>
+						<div class="col-md-2">
+							<label
+								ng-class="{'label-error' : infoProperty.tax.$error.required &&
+														   infoProperty.tax.$touched}">
+								{{"extranet.formProperty.iva"|trans }}
+							</label>
+							<select
+								ng-class="{'input-error' : infoProperty.tax.$error.required &&
+														   infoProperty.tax.$touched}"
+								name="tax"
+								ng-model="response.GeneralInformation.loadingRates.tax.tax_rate"
+								ng-options="n for n in [] | range:0:21"
+								class="form-control my-select"
+								style="width:100%">
+							  	<option value="">Seleccione</option>
+							</select>
+							<span
+								class="error"
+								ng-show="infoProperty.tax.$error.required && infoProperty.tax.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+						</div>
+						<div class="col-md-4">
+							<label
+								class="tooltips tooltips-right"
+								ng-class="{'label-error' : infoProperty.tax_rate.$error.required &&
+														   infoProperty.tax_rate.$touched}" >
+								{{"extranet.formProperty.iva_inluid"|trans }}
+								<i class="fa fn-info fa-x"></i>
+								<span style="width: 160% !important;margin-left: 8px !important;margin-top: -24%; !important">
+									{{ "extranet.formProperty.message_iva"|trans }}
+								</span>
+							</label>
+							<select
+								number-converter
+								ng-model="response.GeneralInformation.loadingRates.tax.tax"
+								name="tax_rate"
+								class="form-control my-select"
+								ng-class="{'input-error' : infoProperty.tax_rate.$error.required &&
+														   infoProperty.tax_rate.$touched}" >
+							  	<option value="">Seleccione</option>
+							  	<option value="1">si</option>
+							  	<option value="0">no</option>
+							</select>
+							<span
+								class="error"
+								ng-show="infoProperty.tax_rate.$error.required &&
+										 infoProperty.tax_rate.$touched">
+								{{ "share.validation.input_required"|trans }}
+							</span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<h3 style=" margin-left:1%;"
+							class="form-sub-font tooltips tooltips-right">
+							{{"extranet.formProperty.city_tax"|trans }}
+							<i class="fa fn-info fa-x"></i>
+							<span style="margin-left: -744px; margin-top: -3% !important; width: 232px !important;">
+								{{"extranet.formProperty.message_city_tax"|trans }}
+							</span>
+						</h3>
+						<div class="col-md-2">
+							<label
+								ng-class="{'label-error' : infoProperty.amount.$error.number &&
+														   infoProperty.amount.$touched ||
+														   infoProperty.amount.$error.min}">
+								{{"extranet.formProperty.amount"|trans }}
+							</label>
+							<input
+								name="amount"
+								ng-model="response.GeneralInformation.loadingRates.cityTax.city_tax"
+								style="width:100%"
+								class="form-control my-imput"
+								type="number"
+								min="1"
+								ng-class="{'input-error' : infoProperty.amount.$error.number &&
+														   infoProperty.amount.$touched ||
+														   infoProperty.amount.$error.min}"
+							>
+							<span
+								class="error"
+								ng-show="infoProperty.amount.$error.number &&
+										 infoProperty.amount.$touched">
+								{{ "share.validation.only_number"|trans }}
+							</span>
+							<span
+								class="error"
+								ng-show="infoProperty.amount.$error.min">
+								{{ "share.validation.only_number_positive"|trans }}
+							</span>
+						</div>
+						<div class="col-md-2">
+							<label>{{"extranet.formProperty.currency"|trans }}</label>
+							<select
+								ng-model="response.GeneralInformation.loadingRates.cityTax.city_tax_currency_name"
+								ng-change="assignId(response.GeneralInformation.loadingRates.cityTax.city_tax_currency_name,response.currency,8)"
+								class="form-control my-select"
+								style="width:100%"
+								ng-options="id.name as id.name for (currency_city, id) in response.currency| orderBy:'name'">
+							  	<option value="">Seleccione</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label>{{"extranet.formProperty.type_of_currency"|trans }}</label>
+							<select
+								name="nightperson"
+								ng-model="response.GeneralInformation.loadingRates.cityTax.city_tax_type"
+								class="form-control my-select"
+								number-converter
+								style="width:100%">
+								<option value="">Seleccione</option>
+								<option value="1">Persona</option>
+								<option value="2">Noche</option>
+								<option value="3">Persona y Noche</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label>{{"extranet.formProperty.nights_max"|trans }}</label>
+							<select
+								name="max_night"
+								ng-model="response.GeneralInformation.loadingRates.cityTax.city_tax_max_nights"
+								ng-options="n for n in [] | range:1:7"
+								class="form-control my-select"
+								style="width:100%">
+								<option value="">Seleccione</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<h3 style=" margin-left:1%;"
+							class="form-sub-font tooltips tooltips-right">
+							{{"extranet.formProperty.rate"|trans }}
+							<i class="fa fn-info fa-x"></i>
+							<span style="margin-left: -744px; margin-top: -3% !important; width: 232px !important;">
+								{{"extranet.formProperty.rate_message"|trans }}
+							</span>
+						</h3>
+						<div class="col-md-3 rate-type-select-wrapper">
+							<label> Tipo
+								<strong>*</strong>
+							</label>
+							<select
+								name="nightperson"
+								number-converter
+								ng-model="response.GeneralInformation.loadingRates.rate_type"
+								class="form-control my-select"
+								style="width:100%">
+								<option value='0'>Seleccione</option>
+								<option value='1'>Tarifa neta</option>
+								<option value='2'>Tarifa de venta</option>
+							</select>
+						</div>
+						<div class="col-md-9">
+							<p ng-if="response.GeneralInformation.loadingRates.rate_type == 1">
+								{{"extranet.message.net_rate_description"|trans }}
+							</p>
+							<p ng-if="response.GeneralInformation.loadingRates.rate_type == 2">
+								{{"extranet.message.sell_rate_description"|trans }}
+							</p>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<h3 style=" margin-left:1%;"
+							class="form-sub-font tooltips tooltips-right">
+							{{"extranet.formProperty.quota"|trans }}
+							<i class="fa fn-info fa-x"></i>
+							<span style="margin-left: -861px; margin-top: -3% !important; width: 279px !important;">
+								{{"extranet.formProperty.quota_message"|trans }}
+							</span>
+						</h3>
+						<div class="col-md-3">
+							<label> {{"extranet.formProperty.quota"|trans }}
+								<strong>*</strong>
+							</label>
+							<input
+								name="quota_basis"
+								ng-model="response.GeneralInformation.loadingRates.quota_basis"
+								style="width:50%"
+								class="form-control my-imput"
+								type="number"
+								min="1">
+							<span
+								class="error"
+								ng-show="infoProperty.quota_basis.$error.min && infoProperty.quota_basis.$touched">
+								{{ "share.validation.only_number_positive"|trans }}
+							</span>
+						</div>
+					</div>
+					<br>
+				</div>
+			</div>
+		</div>
+
+		<!--Descripciones-->
+		<div class="container form-font">
+			<div class="jumbotron form-font-top form-group">
+				<div class="container">
+					<div class="col-md-6 right">
+						<h3>{{"extranet.formProperty.descriptions"|trans }}</h3>
+					</div>
+				</div>
+				<br>
+				<div class="container" style="color:#808080">
+					<div class="row" style="color:#808080">
+						<div class="col-md-12">
+							<h3 class="form-sub-font tooltips tooltips-right">
+								{{"extranet.formProperty.description_of_property"|trans }}
+								<i class="fa fn-info fa-x"></i>
+								<span style="width:  50% !important;margin-left: -374px !important;margin-top: -5%; !important">
+									{{"extranet.formProperty.descriptions_message"|trans }}
+								</span>*
+							</h3>
+							<textarea
+								type="text"
+								ng-model="response.GeneralInformation.descriptions.description"
+								style="width:100%"
+								rows="5"
+								maxlength="1800"
+								class="form-control">
+							</textarea>
+							{[{response.GeneralInformation.descriptions.description.length}]}/1800
+						</div>
+					</div>
+					<br>
+					<div class="row" style="color:#808080">
+						<div class="col-md-12">
+							<h3 class="form-sub-font tooltips tooltips-right">
+								{{"extranet.formProperty.additional_information"|trans }}
+								<i class="fa fn-info fa-x"></i>
+								<span style="width:  50% !important;margin-left: -487px !important;margin-top: -6%; !important">
+									{{"extranet.formProperty.additional_info_message"|trans }}
+								</span>
+							</h3>
+							<textarea
+								type="text"
+								ng-model="response.GeneralInformation.descriptions.additional_info"
+								style="width:100%"
+								rows="5"
+								maxlength="4000"
+								class="form-control">
+							</textarea>
+							{[{response.GeneralInformation.descriptions.additional_info.length}]}/4000
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="col-md-16"><hr></div>
+		</div>
+		<div align="center">
+			<button
+				ng-disabled="infoProperty.$invalid"
+				ng-click="saveChanges();"
+				type="button"
+				class="btn btn-primary btn-search-list">
+				{{"share.register.save"|trans }}
+			</button>
+		</div>
+		<br>
+		{{ include("NavicuInfrastructureBundle:Ascribere:Partials/modalExito.html.twig") }}
+		{{ include("NavicuInfrastructureBundle:Ascribere:Partials/modalError.html.twig") }}
+		{{ include("NavicuInfrastructureBundle:Ascribere:Partials/modalLoading.html.twig") }}
+	</form>
+
+</div>
+
+{% endblock body %}
+
+{% block javascripts%}
+    {{parent()}}
+	<script>
+		var extension = "{{ app.request.attributes.get('extension') }}";
+		var response = {{ data | raw }};
+		var agePolicy = {{ agePolicy | raw }}
+        var slug = response.slug;
+	</script>
+
+{% endblock %}

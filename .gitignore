@@ -1,0 +1,73 @@
+# Editor backup files.
+*~
+
+# Cache and logs
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+/app/spool/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+**/.sass-cache
+
+# Parameters
+/app/config/parameters.yml
+/app/SymfonyRequirements.php
+/app/check.php
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
+/web/video/
+web/css/*
+/web/files/list_properties.xls
+!web/css/dist
+web/js/*
+!web/js/dist
+web/fonts/font-navicu/navicu_*
+src/Navicu/InfrastructureBundle/Resources/public/assets/vendor
+src/Navicu/InfrastructureBundle/Resources/public/assets/navicu/dist/
+app/Resources/Security/logs/*
+
+# Managed by Composer
+/vendor/
+/bin/
+/composer.phar
+
+# Build data
+/build/
+/app/build/
+**/.fontcustom-manifest.json
+**/fontcustom
+
+# Miscelanea
+.project
+.settings
+.idea/
+/bower_components/
+/node_modules/
+
+# PhpDocumentor
+/docs
+
+# Deployment files
+/deployment/stages/prod.rb
+/deployment/stages/stg.rb
+backups
+
+# Prerender files
+web/snapshots/*
+server/logs/*
+# Track folders
+!web/snapshots/.gitkeep
+!server/logs/.gitkeep
+
+# Assets
+src/Navicu/InfrastructureBundle/Resources/public/assets/navicu/dist/angular-apps
+web/builds/
+web/webpack-assets.json
+app/config/assets.yml
+assets-manifest.json
+
+#netbeans ignore personal stuff
+nbproject/

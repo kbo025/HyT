@@ -1,0 +1,92 @@
+<div class="dropDown-history" ng-click="openHistory = !openHistory">
+    <div class="nvc-container">
+        <i class='fa fn-Servicio-de-despertador icon'></i>
+        <h1>Historial de la reserva</h1>
+        <i ng-if="!openHistory" class='fn-select arrow'></i>
+        <i ng-if="openHistory" class='fn-selectinverse arrow'></i>
+    </div>
+</div>
+<div ng-if="openHistory">
+    <div ng-repeat="payment in detailsReservation.payments">
+        <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    {[{ payment.date }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2 ng-if="payment.city != null">
+                    {[{ payment.city }]}
+                </h2>
+                <h2 ng-if="payment.city === null">
+                    No disponible
+                </h2>
+            </div>
+        </div>
+        <div class="content" ng-if="open">
+            <div ng-class="{'accepted': payment.state === 0 || payment.state === 1, 'cancel': payment.state === 2 }">
+            </div>
+            <div class="mainInfo">
+                <div class="col-xs-16">
+                    <h2>
+                        Modalidad de pago
+                    </h2>
+                </div>
+            </div>
+            <div class="info">
+                <div class="col-xs-16">
+                    <h2 class="nvc-aavv-customize__text" ng-if="payment.type === 1">TDC Instapago</h2>
+                    <h2 class="nvc-aavv-customize__text" ng-if="payment.type === 2">Tranferencia Nacional</h2>
+                    <h2 class="nvc-aavv-customize__text" ng-if="payment.type === 3">TDC Stripe</h2>
+                    <h2 class="nvc-aavv-customize__text" ng-if="payment.type === 4">Transferencia Internacional</h2>
+                    <h2 class="nvc-aavv-customize__text" ng-if="payment.type === 5">AAVV</h2>
+                    <h2 class="nvc-aavv-customize__text" ng-if="payment.type === 6">TDC payeezy</h2>
+                </div>
+            </div>
+            <div class="type">
+                <div class="col-xs-16">
+                    <h2>Mensaje</h2>
+                </div>
+            </div>
+            <div class="info">
+                <div class="col-xs-16">
+                    <h2>{[{ payment.message }]}</h2>
+                </div>
+            </div>
+            <div class="mainInfo">
+                <div class="col-xs-8 separatorOne">
+                    <h2>
+                        Moneda
+                    </h2>
+                </div>
+                <div class="col-xs-8">
+                    <h2>
+                        IP País
+                    </h2>
+                </div>
+            </div>
+            <div class="info">
+                <div class="col-xs-8 separatorOne">
+                    <h2>
+                        {[{ payment.currency}]}
+                    </h2>
+                </div>
+                <div class="col-xs-8">
+                    <h2>
+                        {[{ payment.IpCountry }]}
+                    </h2>
+                </div>
+            </div>
+            <div class="mainInfo">
+                <div class="col-xs-16">
+                    <h2>Nacionalidad</h2>
+                </div>
+            </div>
+            <div class="info">
+                <div class="col-xs-16">
+                    <h2>Venezolano</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

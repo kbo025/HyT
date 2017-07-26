@@ -1,0 +1,102 @@
+<nav class='nvc-navbar nvc-navbar__inverse nvc-topmenu__user--admin nvc-topmenu__user--admin--search'>
+    <div class='nvc-navbar__header'>
+        <button
+            class='nvc-navbar__toggle'
+            data-target='#menu'
+            data-toggle='collapse'
+            type='button'
+        >
+            <span class='sr-only'>Toggle navigation</span>
+            <span class='icon-bar' />
+            <span class='icon-bar' />
+            <span class='icon-bar' />
+        </button>
+        <strong
+            class='nvc-navbar__toggle'
+            data-toggle='collapse'
+        >
+        </strong>
+    </div>
+    <div
+        class='nvc-container collapse nvc-navbar__collapse'
+        id='menu'
+    >
+        <ul class='nvc-nav nvc-nav__justified nvc-nav__arrow--background'>
+            <li class="nvc-step--1" id="arrow"></li>
+        </ul>
+
+        <ul class='nvc-nav nvc-nav__justified nvc-nav__arrow--foreground'>
+            <li
+                class='col-md-3'
+                id='step1'
+               {#  ng-class="{ 'nvc-disabled': !{{ hasPermission('aavv_reservation', 'VIEW') | json_encode | raw }} }" #}
+            >
+                <a href="{{ path('navicu_users_homepage', {"role": 0}) }}" ng-class="{'active': role === '0'}">
+                    <img src="{{ asset('images/todos.png') }}" class="icon-1">
+                    <span>{[{total[4].cantidad}]}</span>
+                    <br>
+                    Todos los usuarios
+                </a>
+            </li>
+
+            <li
+                class='col-md-3'
+                id='step2'
+               ng-class="{ 'nvc-disabled': !{{ hasPermission('admin_users_client', 'read') | json_encode | raw }} }"
+            >
+                <a 
+                    href="{{ hasPermission('admin_users_client', 'read') ? path('navicu_users_homepage', {"role": 3}) : '#' }}"
+                    ng-class="{'active': role === '3'}">
+                    <img src="{{ asset('images/clientes.png') }}" class="icon-2">
+                    <span>{[{total[2].cantidad}]}</span>
+                    <br>
+                    Clientes
+                </a>
+            </li>
+            <li
+                class='col-md-3'
+                id='step3'
+                ng-class="{ 'nvc-disabled': !{{ hasPermission('admin_users_extranet', 'read') | json_encode | raw }} }"
+            >
+                <a
+                    href="{{ hasPermission('admin_users_extranet', 'read') ? path('navicu_users_homepage', {"role": 1}) : '#' }}"
+                    ng-class="{'active': role === '1'}"
+                >
+                    <img src="{{ asset('images/hoteleros.png') }}" class="icon-3">
+                    <span>{[{total[3].cantidad}]}</span>
+                    <br>
+                    Hoteleros
+                </a>
+            </li>
+            <li
+                class='col-md-3'
+                id='step4'
+                ng-class="{ 'nvc-disabled': !{{ hasPermission('admin_users_aavv', 'read') | json_encode | raw }} }"
+            >
+                <a 
+                    href="{{ hasPermission('admin_users_aavv', 'read') ? path('navicu_users_homepage', {"role": 4}) : '#' }}"
+                    ng-class="{'active': role === '4'}">
+                    <img src="{{ asset('images/aavv.png') }}" alt="">
+                    <span>{[{total[0].cantidad}]}</span>
+                    <br>
+                    AAVV
+                </a>
+            </li>
+            <li
+                class='col-md-3'
+                id='step5'
+                ng-class="{ 'nvc-disabled': !{{ hasPermission('admin_users_admin', 'read') | json_encode | raw }} }"
+            >
+                <a
+                    href="{{ hasPermission('admin_users_admin', 'read') ? path('navicu_users_homepage', {"role": 2}) : '#' }}"
+                    ng-class="{'active': role === '2'}"
+                >
+                    <img src="{{ asset('images/usuarios-admin.png') }}" alt="">
+                    <span>{[{total[1].cantidad}]}</span>
+                    <br>
+                    Admin
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

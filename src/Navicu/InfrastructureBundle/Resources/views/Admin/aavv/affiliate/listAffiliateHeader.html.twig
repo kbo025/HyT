@@ -1,0 +1,59 @@
+<div class="clearfix">
+    <header class="clearfix">
+        <div class="nvc-container">
+            <h1>{{ "message.affiliate_agencies"|trans }}</h1>
+            <span>·</span>
+            <h3>{[{pagination.items}]} {{ "word.agencies"|transchoice(2) }} afiliadas</h3>
+            <aside ng-show="{{ hasPermission('admin_affiliates', 'download_excel') }}">
+                <button class="nvc-button" ng-click="downloadExcel()">
+                    {{ 'aavv.reservations.list.form.buttons.download_excel' | trans }}
+                </button>
+            </aside>
+        </div>
+
+    </header>
+</div>
+<form class="nvc-form--aavv nvc-container">
+    <div class="nvc-form__left">
+        <div class="input-group">
+            <span class="input-group-addon">
+                Búsqueda
+            </span>
+            <input
+                id='search'
+                placeholder=''
+                type="text"
+                name="search"
+                ng-model="search"
+            />
+            <span class="input-group-addon">
+                <button
+                    class="nvc-aavv-customize__button--primary"
+                    type="submit"
+                    ng-click="getListFilter(search, 1, null)"
+                >
+                    {{ 'aavv.reservations.list.form.buttons.search' | trans }}
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="dropdown nvc-table__legend">
+        <button
+            class="btn btn-default dropdown-toggle"
+            type="button" id="dropdownlogin"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+        >
+            <img src="{{ asset('images/leyenda.png') }}"/>
+            Ver leyenda de búsqueda
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownlogin">
+            <li>
+                <strong>AAVV afiliadas</strong>
+                <br>
+                <span>join_date:2016-01-01:2016-03-30</span>
+            </li>
+        </ul>
+    </div>
+</form>

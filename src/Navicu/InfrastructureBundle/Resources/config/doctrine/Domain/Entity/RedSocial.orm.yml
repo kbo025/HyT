@@ -1,0 +1,34 @@
+Navicu\Core\Domain\Model\Entity\RedSocial:
+    type: entity
+    table: red_social
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRedSocialRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        id_social:
+            type: string
+        type:
+            type: string
+        link:
+            type: string
+            nullable: true
+        photo:
+            type: string
+            nullable: true
+        age_range:
+            type: integer
+            nullable: true
+
+    manyToOne:
+        client:
+            targetEntity: ClientProfile
+            inversedBy: social
+            joinColumn:
+                name: client_id
+                referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

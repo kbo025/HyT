@@ -1,0 +1,77 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    <main   class="nvc-admin__details visible-md visible-lg"
+            ng-controller="AffiliateDetailsCtrl"
+            ng-cloak
+    >
+
+        <div class="nvc-secondaryTableHeader--admin">
+            {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/detailsAccommodationsHeader.html.twig" %}
+        </div>
+        <div class="nvc-container">
+            <div class="nvc-admin__details--header">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/detailsAccommodationsContentTop.html.twig" %}
+            </div>
+            <div class="nvc-admin__details--content">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/detailsAccommodationsContent.html.twig" %}
+            </div>
+            <div class="nvc-admin__details--content" ng-show="reservation.length > 0">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/detailsAccommodationsSearch.html.twig" %}
+            </div>
+        </div>
+        <div class="nvc-table--admin nvc-container" ng-show="reservation.length > 0">
+            {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/detailsAccommodationsTable.html.twig" %}
+        </div>
+        <div class="nvc-container" ng-if="pagination.pages > 1">
+            {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/detailsAccommodationsPagination.html.twig" %}
+        </div>
+
+        <br />
+        <br />
+        <br />
+
+    </main>
+
+    <main
+        class="visible-sm visible-xs"
+        ng-controller="AffiliateDetailsCtrl"
+        ng-cloak
+    >
+        <div class="nvc-secondaryTableHeader--admin--movil">
+            <div class="col-xs-16 col-sm-16">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/mobile/detailsAccommodationsHeader.html.twig" %}
+            </div>
+        </div>
+        <div class="nvc-admin__details--content">
+            {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/mobile/detailsAccommodationsContent.html.twig" %}
+        </div>
+        <div  ng-if="reservation.length > 0" class="nvc-secondaryTableHeader--admin--movil">
+            {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/mobile/detailsAccommodationsSearch.html.twig" %}
+        </div>
+        <div  ng-if="reservation.length > 0" class="nvc-table--admin--movil">
+            {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/mobile/detailsAccommodationsTable.html.twig" %}
+        </div>
+
+        <div class="nvc-container" ng-if="pagination.pages > 1">
+            {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/details/detailsAccommodationsPagination.html.twig" %}
+        </div>
+    </main>
+
+
+{% endblock content %}
+
+{% block scripts  %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        var slug = "{{slug}}";
+        var extension = "{{ app.request.attributes.get('extension') }}";
+    </script>
+
+    {{ parent() }}
+
+{% endblock %}

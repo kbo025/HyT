@@ -1,0 +1,119 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block body %}
+
+<main class="nvc-container__height">
+    <div class="nvc-container">
+
+        <!--- Headers -->
+        <section>
+            <h1>h1-Componentes Navicu-SASS-Official</h1>
+            <h2>h2-Componentes Navicu-SASS-Official</h2>
+            <h3>h3-Componentes Navicu-SASS-Official</h3>
+            <h4>h4-Componentes Navicu-SASS-Official</h4>
+            <h5>h5-Componentes Navicu-SASS-Official</h5>
+            <h6>h6-Componentes Navicu-SASS-Official</h6>
+        </section>
+
+        <!--- Buttons -->
+        <section>
+            <button class="nvc-button nvc-button__default">
+                nvc-button__default
+            </button>
+            <button class="nvc-button nvc-button__confirmation">
+                nvc-button__confirmation
+            </button>
+            <button class="nvc-button nvc-button__reroute">
+                nvc-button__reroute
+            </button>
+            <button class="nvc-button nvc-button__reroute--border">
+                nvc-button__reroute--border
+            </button>
+                <button class="nvc-button nvc-button__footer">
+                nvc-button__footer
+            </button>
+            <button class="nvc-button nvc-button__search" style="width:auto;">
+                nvc-button__search
+            </button>
+            <button class="nvc-button nvc-button__facebook" style="width:auto;">
+                nvc-button__facebook
+            </button>
+            <button class="nvc-button nvc-button__google" style="width:auto;">
+                nvc-button__google
+            </button>
+            <button class="nvc-button nvc-button__facebook" style="width:auto;">
+                <span class="fa fa-facebook"></span>
+                nvc-button__facebook
+            </button>
+        </section>
+
+        <!--- Inputs -->
+        <section>
+            <input type="text" class="form-control" name="blabla" />
+            <input type="text" class="nvc-form-control" name="blabla" />
+            <input type="text" class="" name="blabla"  placeholder="Placeholder" />
+            <input type="text" class="nvc-input" name="blabla" />
+            <input type="text" class="nvc-input__home" name="blabla" placeholder="Placeholder" />
+            <input type="text" class="nvc-input__search" name="blabla" placeholder="Placeholder" />
+        </section>
+        </section>
+
+        <!--- Selects -->
+        <section>
+            <select class="form-control" name="blabla1">
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+            </select>
+            <select class="nvc-form-control" name="blabla1">
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+            </select>
+            <select class="" name="blabla">
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+            </select>
+            <select class="nvc-select" name="blabla">
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+            </select>
+            <select class="nvc-select__home" name="blabla">
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+            </select>
+            <select class="nvc-select__search" name="blabla">
+                <option value="1"> 1</option>
+                <option value="2"> 2</option>
+            </select>
+        </section>
+
+        <!--- Jumbotron -->
+        <section>
+            <div class="nvc-jumbotron">
+                <h1>Bootstrap Tutorial</h1>
+                <div class="nvc-row">
+                    <div class="col-xs-16">
+                        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
+                        responsive, mobile-first projects on the web.</p>
+                        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
+                        responsive, mobile-first projects on the web.</p>
+                        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
+                        responsive, mobile-first projects on the web.</p>
+                        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
+                        responsive, mobile-first projects on the web.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <br>
+
+</main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+{% endblock %}

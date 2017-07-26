@@ -1,0 +1,75 @@
+Navicu\Core\Domain\Model\Entity\PaymentInfoProperty:
+    type: entity
+    table: payment_info_property
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPaymentInfoPropertyRepository
+    id:
+        id:
+            type: string
+            length: 3
+            generator:
+                strategy: AUTO
+    fields:
+        same_data_property:
+            type: boolean
+            nullable: false
+        charging_system:
+            type: integer
+            nullable: false
+        tax_id:
+            type: string
+            length: 20
+            nullable: false 
+        swift:
+            type: string
+            length: 14
+            nullable: true
+        name:
+            type: string
+            nullable: true
+        address:
+            type: string
+            nullable: true
+        account:
+            type: json_array
+            nullable: false
+
+    manyToOne:
+        currency:
+            targetEntity: CurrencyType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                currency_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: true
+        location:
+            targetEntity: Location
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                location:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: true
+
+    oneToOne:
+        property:
+            targetEntity: Property
+            cascade: [persist]
+            mappedBy: null
+            inversedBy: payment_info
+            joinColumns:
+                property:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        rif:
+            targetEntity: Document
+            InversedBy: rif
+            cascade: ["persist"]
+    lifecycleCallbacks:
+        prePersist: [ prePersist ]
+        preUpdate: [ prePersist ]

@@ -1,0 +1,231 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+
+{% block body %}
+    <!-- incluir topMenu cuando este desarrollado -->
+    <main
+        class='nvc-aavv nvc-aavv__billing visible-lg visible-md'
+        ng-app='billingModule'
+        ng-controller='billingController'
+        ng-cloak
+    >
+    {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+
+        <div class='nvc-container'>
+            <div class='nvc-row'>
+                <div class='col-md-16'>
+                    <p> <span>Facturación</span>  <span class="nvc-space">·</span>  En esta sección podrás ver todas tus facturas, al momento de confirmar el pago de alguna de ellas nuestro equipo verificará la misma </p>
+                </div>
+            </div>
+
+            <div class='nvc-row nvc-aavv__billing--payment'> 
+                <div class="col-md-16 ">
+                    <p> Te facilitamos nuestros datos bancarios para realizar el pago </p>
+                    <div class="dataBack">
+                        <div class="col-sm-3 name border">
+                            <i class="fa fn-person-adult"></i>
+                            <h4>{{"word.name"|transchoice(1)}}</h4>
+                            <span class="span2">Navicu C.A</span>
+                        </div>
+                        <div class="col-sm-3 rif border">
+                            <i class="fa fn-icono-rif"></i>
+                            <h4>RIF</h4>
+                            <span class="span2">J-40621968-1</span>
+                        </div>
+                        <div class="col-sm-3 email border">
+                            <i class="fa fn-mail"></i>
+                            <h4>E-mail</h4>
+                            <span class="span2">preguntas@navicu.com</span>
+                        </div>
+                       
+                        <div class='col-sm-5 bank'>
+                            <i class="fa fn-banc"></i>
+                            <h4>Entidad bancaria</h4>
+                            <select
+                            class='nvc-select__register'
+                            placeholder=''
+                            type='text'
+                            ng-model = "banck_hola"
+                            ng-change="numberBanck(banck_hola)"
+                            >
+                                <option value="">Seleccione</option>
+                                <option value="{{"word.accountOne"|trans}}">{{"word.accountOne"|trans}}</option>
+                                <option value="{{"word.accountTwo"|trans}}">{{"word.accountTwo"|trans}}</option>
+                                <option value="{{"word.accountThree"|trans}}">{{"word.accountThree"|trans}}</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-3" style="margin-top: 5px">
+                            <h2>{[{numberB}]}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='nvc-row'>
+                <div class='col-md-16'>
+                    <div class='col-md-7'>
+                        <form class="nvc-form-inline">
+                            <label for="busqueda" class="nvc-aavv-customize__text">Búsqueda</label>
+                            <div class="nvc-form-group">
+                                <input
+                                    type="text"
+                                    ng-model='word'>
+                            </div>
+                            <button
+                                type="submit"
+                                class="nvc-button
+                                nvc-button__default
+                                nvc-button__search-billing
+                                nvc-aavv-customize__button--primary"
+                                ng-click='search(word)'
+                                >
+                                Buscar
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class='
+                        col-lg-5
+                        col-md-7 nvc-state'
+                        ng-if="!creditZero">
+                        <ol class="clearfix">
+                          <li><i class="fn-checkEmail"></i>Pagada</li>
+                          <li><i class="fn-cancelado"></i>No pagada</li>
+                          <li><i class="fn-pendientedepago"></i>Por aprobación</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nvc-table__responsive">
+                <table class="nvc-table">
+                    <thead class="nvc-aavv-customize__navbar-menu">
+                        <tr>
+                            <!-- Fecha de Facturacion-->
+                            <th class="text-center nvc-table--border-radius-l">
+                                <b class="nvc-aavv-customize__title--primary">Fecha de facturación</b>
+                            </th>
+                            <!-- End Fecha de Facturacion-->
+
+                            <!-- Nº de factura -->
+                            <th class="text-center   ">
+                                <b class="nvc-aavv-customize__title--primary">Nº de factura</b>
+                            </th>
+                            <!-- End Nº de factura -->
+
+                            <!-- Volumen de reservas -->
+                            <th class="text-center ">
+                                <b class="nvc-aavv-customize__title--primary">Volumen de reservas</b>
+                            </th>
+                            <!-- End Volumen de reservas -->
+
+                            <!-- Importe total -->
+                            <th class="text-center ">
+                                <b class="nvc-aavv-customize__title--primary">Importe total</b>
+                            </th>
+                            <!-- End Importe total -->
+
+                            <!-- Vencimiento -->
+                            <th class="text-center " ng-if="!creditZero">
+                                <b class="nvc-aavv-customize__title--primary">Vencimiento</b></th>
+                            <!-- End Vencimiento -->
+
+                            <!-- Icono del Estado -->
+                            <th class="text-center " ng-if="!creditZero">
+                                <b class="nvc-aavv-customize__title--primary">Estatus</b></th>
+                            <!-- End de Icono del Estado -->
+
+                            <!-- Check para cambio de estados -->
+                            <th class="text-center "><b class="nvc-aavv-customize__title--primary"></b></th>
+                            <!-- End Check para cambio de estados -->
+
+                            <!-- Descargar -->
+                            <th class="text-center"><b class="nvc-aavv-customize__title--primary"></b></th>
+                            <!-- End Descargar -->
+
+                            <!-- Descargar -->
+                            <th class="text-center nvc-table--border-radius-r"><b class="nvc-aavv-customize__title--primary"></b></th>
+                            <!-- End Descargar -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            ng-repeat="billing in billingList"
+                            ng-class="{ 'nvc-table--color-even':({[{$index}]}+1)%2!=0,
+                                        'nvc-table--color-odd' :({[{$index}]}+1)%2==0}">
+                            <!-- Fecha de Facturacion-->
+                            <td class="text-center"><b class="nvc-aavv-customize__text">{[{billing.billingDate}]}</b></td>
+                            <!-- Nº de factura -->
+                            <td class="text-center  "><b class="nvc-aavv-customize__text">{[{billing.numberBilling}]}</b></td>
+                            <!-- Volumen de reservas -->
+                            <td class="text-center "><b class="nvc-aavv-customize__text">{[{billing.amountReservations}]}</b></td>
+                            <!-- Importe total -->
+                            <td class="text-center "><b class="nvc-aavv-customize__text">{[{billing.total}]}</b></td>
+                            <!-- Vencimiento -->
+                            <td class="text-center "><b class="nvc-aavv-customize__text">{[{billing.dueDate}]}</b></td>
+                           <!-- Icono del Estado -->
+                            <td class="text-center  ">
+                                <i ng-style="colorIcons[billing.status]" class="{[{ iconsStates[billing.status] }]}"></i>
+                            </td>
+                            <td class="text-rigth">
+                                <input
+                                    type="checkbox"
+                                    ng-show='billing.status === 0'
+                                    ng-model="billing.check"
+                                    ng-change="confirmPayment($index)">
+                            </td>
+
+                            <td class="text-left">
+                                <div
+                                    ng-show='billing.status === 1'>
+                                    Pago enviado
+                                </div>
+                            </td>
+                            <!-- Icono del Estado LG MD-->
+                            <td class="text-center">
+                                <button
+                                    type="button"
+                                    class="nvc-button nvc-button__default nvc-button__download nvc-aavv-customize__button--primary"
+                                    ng-model='billing.status.download'
+                                    ng-click='downloadPdf($index)'>
+                                    Descargar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="nvc-pagination--aavv">
+                <div
+                    class="nvc-pagination__previous"
+                    ng-class="{disabled: previousPageIsDisabled}"
+                    ng-click="previousPage()"
+                >
+                    <i class="fa fa-angle-left"></i>
+                </div>
+
+                <div
+                    class="nvc-pagination__next"
+                    ng-class="{disabled: nextPageIsDisabled}"
+                    ng-click="nextPage()">
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var data = {{ data | raw }};
+        var slug = "{{ app.request.get('slug') }}";
+    </script>
+{% endblock %}
+
+
+
+

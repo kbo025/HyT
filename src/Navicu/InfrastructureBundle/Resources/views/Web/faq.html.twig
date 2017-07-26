@@ -1,0 +1,166 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+        <title>Preguntas frecuentes.</title>
+    {% endif %}
+{% endblock seoMetadata %}
+
+{% block body %}
+
+<main class='nvc-faq post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+    <div class="nvc-container">
+        <!--- Header -->
+        <section class="nvc-faq__header col-xs-16">
+            <h1>{{"web.faq.questions"|trans }}:</h1>
+        </section>
+        <!--- Nav FAQ -->
+        <section class="nvc-faq__nav col-xs-16 col-md-10">
+            <div class="nvc-panel nvc-panel__container--faq" style="margin-top:20px;">
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq1" class="collapsed" aria-expanded="true"> {{"web.faq.what_is"|trans }}</a></h4>
+                    <div id="faq1" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                               {{"web.faq.what_is_answer"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq2" class="collapsed" aria-expanded="true"> {{"web.faq.how_reserve"|trans }}</a></h4>
+                    <div id="faq2" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                - {{"web.faq.choice_address"|trans }}<br>
+                                - {{"web.faq.select_property"|trans }}<br>
+                                - {{"web.faq.choice_room"|trans }}<br>
+                                - {{"web.faq.confirm_room"|trans }}<br >
+                                - {{"web.faq.good_travel"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq3" class="collapsed" aria-expanded="true"> {{"web.faq.guaranteed_reservation"|trans }} </a></h4>
+                    <div id="faq3" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.guaranteed_reservation_answer"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq4" class="collapsed" aria-expanded="true"> {{"web.faq.guaranteeing"|trans }} </a></h4>
+                    <div id="faq4" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.best_prices"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq5" class="collapsed" aria-expanded="true"> {{"web.faq.payment_methods"|trans }} </a></h4>
+                    <div id="faq5" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.payment_methods_answer"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq6" class="collapsed" aria-expanded="true"> {{"web.faq.secure_payment"|trans }}</a></h4>
+                    <div id="faq6" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.secure_payment_answer"|trans }}
+                                (<a href="https://www.digicert.com/" style="color:#572A86;">https://www.digicert.com/</a>),
+                                {{"web.faq.digicert_is"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq7" class="collapsed" aria-expanded="true"> {{"web.faq.what_should_bring"|trans }}</a></h4>
+                    <div id="faq7" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.what_should_bring_answer"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq8" class="collapsed" aria-expanded="true"> {{"web.faq.pay_more"|trans }} </a></h4>
+                    <div id="faq8" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.no_charge"|trans }}<br>
+                                 {{"web.faq.pay_more_answer"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq9" class="collapsed" aria-expanded="true"> {{"web.faq.modify_reservation"|trans }} </a></h4>
+                    <div id="faq9" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.nonrefundable"|trans }}<br>
+                                {{"web.faq.modify_reservation_answer"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-faq__question">
+                    <h4><a data-toggle="collapse" href="#faq10" class="collapsed" aria-expanded="true"> {{"web.faq.contact"|trans }}</a></h4>
+                    <div id="faq10" class="nvc-panel__collapse collapse" style="height: auto;">
+                        <div class="nvc-panel__content--faq">
+                            <p>
+                                {{"web.faq.contact_answer"|trans }}
+                                preguntas@navicu.com {{"web.faq.call"|trans }} 08008-navicu
+                                {{"web.faq.help_you"|trans }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--- Nav Side-Bar MD LG-->
+        <section class="nvc-faq__side col-xs-16 col-md-6 text-center hidden-xs hidden-sm">
+            <div style="margin-left:30px;">
+                <h1>{{"web.faq.query"|trans }}</h1>
+                <h2 >{{"web.faq.communicate_with_us"|trans }}</h2>
+                <h3>preguntas@navicu.com</h3>
+                <h3>{{"web.faq.call"|trans }} 0-8008 navicu</h3>
+                <h2>{{"web.faq.assist_you"|trans }}</h2>
+            </div>
+        </section>
+        <!--- Nav Side-Bar XS SM-->
+        <section class="nvc-faq__side col-xs-16 col-md-6 text-center visible-xs visible-sm">
+            <div style="margin-left:30px;">
+                <h1 style="color:#9D9D9C">{{"web.faq.query"|trans }}</h1>
+                <h3>preguntas@navicu.com</h3>
+                <h3>{{"web.faq.call"|trans }} 0-8008 navicu</h3>
+                <h2 style="color:#9D9D9C">{{"web.faq.assist_you"|trans }}</h2>
+            </div>
+        </section>
+    </div>
+</main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment == "dev" %}
+
+    {% else %}
+
+    {% endif %}
+
+{% endblock %}

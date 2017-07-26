@@ -1,0 +1,49 @@
+navicu_extranet_homepage:
+    pattern:  /home/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:home, slug: null }
+    options:
+        expose: true
+
+# Nuevo home(prueba)
+navicu_extranet_newHomePage:
+    pattern:  /newHome/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:newHome}
+    options:
+        expose: true
+
+# Manejo de todas las rutas referente al módulo de inventario (carga masiva y grilla).
+navicu_extranet_module_inventory:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Extranet/inventory.yml"
+    prefix: /inventory
+
+# Manejo de todas las rutas referente a la seguridad de la extranet
+navicu_extranet_module_security:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Extranet/security.yml"
+
+# Manejo de todas las rutas referente a la seguridad de la extranet
+navicu_extranet_module_resetting:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Extranet/resetting.yml"
+
+# === Rutas de la Vista de Tips ===
+Extranet_tips:
+    path:    /tips
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:tipsView}
+
+# === Rutas de la Vista de Reservas ===
+Extranet_reservations:
+    path:    /{slug}/reservations
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:reservations}
+    options:
+        expose: true
+    #requirements:
+    #    { _format: (xml | json), _method: POST}
+
+#Carga de información para el modal de inforamción detallada de la reserva.
+navicu_extranet_details_reservations:
+    path:   /detailsReservations 
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:detailsReservations }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+

@@ -1,0 +1,28 @@
+<div class="nvc-container">
+    <div class="col-md-16 top" >
+        <i class='fa fn-hotel'></i>
+        <h1>Datos de la reserva</h1>
+        <h2>{[{detailsReservation.propertyName}]}</h2>
+    </div>
+    <div class="col-md-16 col-lg-16 content">
+        <div class="nvc-row">
+            <div class="col-md-16">
+                <h2>Nº de habitaciones {[{detailsReservation.totalRooms}]}</h2>
+            </div>
+        </div>
+        <div class="nvc-row">
+            <div class="col-md-5 col-lg-5">
+                <h3>Tipo de habitación</h3>
+                <h4>{[{detailsReservation.roomName}]}</h4>
+            </div>
+            <div class="col-md-5 col-lg-5">
+                <h3>Tipo de pack</h3>
+                <h4>{[{detailsReservation.namePack}]}</h4>
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <h3>Política de cancelación</h3>
+                <h4>{[{detailsReservation.cancellationPolicy}]}</h4>
+            </div>
+        </div>
+    </div>
+</div>

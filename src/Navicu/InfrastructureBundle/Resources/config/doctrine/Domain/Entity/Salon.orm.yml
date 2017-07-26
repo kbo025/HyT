@@ -1,0 +1,45 @@
+Navicu\Core\Domain\Model\Entity\Salon:
+    type: entity
+    table: salon
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbSalonRepository
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        capacity:
+            type: integer
+            nullable: false
+        type:
+            type: integer
+            nullable: false
+        natural_light:
+            type: boolean
+            nullable: false
+        description:
+            type: string
+            nullable: true
+        size:
+            type: float
+            nullable: true
+        quantity:
+            type: integer
+            nullable: true
+        status:
+            type: boolean
+            nullable: false
+    manyToOne:
+        service:
+            targetEntity: PropertyService
+            cascade: ["persist"]
+            mappedBy: null
+            inversedBy: salons
+            joinColumns:
+                service_id:
+                    referencedColumnName: id
+            orphanRemoval: false

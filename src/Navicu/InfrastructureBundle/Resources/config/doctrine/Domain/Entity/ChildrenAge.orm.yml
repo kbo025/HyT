@@ -1,0 +1,23 @@
+Navicu\Core\Domain\Model\Entity\ChildrenAge:
+    type: entity
+    table: children_age
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbChildrenAgeRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        age:
+            type: integer
+            nullable: true
+
+    manyToOne:
+        reservation_package:
+            targetEntity: ReservationPack
+            mappedBy: children_age
+            joinColumn:
+                name: reservation_pack_id
+                referencedColumnName: id
+            cascade: ["persist"]

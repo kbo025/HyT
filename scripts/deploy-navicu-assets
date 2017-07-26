@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Eliminar dependencias de `npm` que sobren.
+npm prune
+
+# Instalar dependencias de `npm` que falten.
+npm install || exit 1
+
+# Instalar dependencias bower que falten.
+./node_modules/.bin/bower install || exit 1
+
+# Generamos los assets.
+make || exit 1
+
+# Nos aseguramos de que existan los directorios necesarios
+# para prerender, con los permisos necesarios.
+mkdir -p web/snapshots server/logs
+chmod -R 0777 web/snapshots server/logs

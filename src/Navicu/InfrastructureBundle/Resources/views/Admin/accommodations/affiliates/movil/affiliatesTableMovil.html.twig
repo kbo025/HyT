@@ -1,0 +1,117 @@
+<div ng-repeat="property in properties">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-16">
+            <h2>
+                {[{ property.name }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    Fecha de alta
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    Ciudad
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                    {[{ property.join_date }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ property.location }]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>E-mail responsable</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>{[{ property.admin_email }]}</h2>
+            </div>
+        </div>
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    Facturación
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    N° de reserva
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                    Bs. {[{ property.total_to_pay | number }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ property.number_reservation }]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>Ejecutivo</h2>
+            </div>
+        </div>
+        <div >
+            <select
+                class="form-control"
+                ng-model="property.nvc_profile_id"
+                ng-change="setCommercial($index, property.nvc_profile_id)"
+                ng-options="item as item.name for item in commercials track by item.id"
+            >
+            </select>
+        </div>
+
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    % de comision
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    Dias de credito
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                   {[{ property.discount_rate | number }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ property.credit_days | number }]}
+                </h2>
+            </div>
+        </div>
+
+        <div class="buttonDetails">
+            <button
+                class="form-control nvc-admin nvc-button__login"
+                ng-click="redirect(property.slug);"
+            >
+                Ver detalle
+            </button>
+        </div>
+    </div>
+</div>

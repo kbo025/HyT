@@ -1,0 +1,238 @@
+security:
+    encoders:
+        "FOS\UserBundle\Model\UserInterface": sha512
+
+    role_hierarchy:
+        # Rol General
+        ROLE_DIR_GENERAL: ROLE_DIR_GENERAL
+        # Roles Dep. desarrollo (Inactivo)
+        ROLE_DIR_DEVELOPER: ROLE_DEVELOPER
+        # Roles Dep. comercial
+        ROLE_SALES_EXEC: ROLE_TEMPOWNER
+        ROLE_TELEMARKETING: ROLE_TEMPOWNER
+        ROLE_DIR_COMMERCIAL:
+            - ROLE_TELEMARKETING
+        # Roles Dep. Financiero
+        ROLE_DIR_FINANCIAL:
+            - ROLE_ACCOUNTING
+            - ROLE_FINANCIAL_ASSISTANT
+            - ROLE_HHRR
+            - ROLE_CALL_CENTER
+        # Roles Dep. Marketing
+        ROLE_DIR_MARKETING:
+            - ROLE_MANAGER_SOCIAL
+            - ROLE_MARKETING_ONLINE
+            - ROLE_MANAGER_SOCIAL
+        # Roles propietarios en proceso de registro
+        ROLE_TEMPOWNER: ROLE_TEMPOWNER
+        # Roles propietadores de los establecimiento
+        ROLE_EXTRANET_ADMIN: ROLE_EXTRANET_USER
+        # Roles de agencias de viajes
+        ROLE_AAVV: ROLE_AAVV
+        # Roles viejos
+        ROLE_WEB: ROLE_WEB
+        ROLE_TEMPOWNER: ROLE_WEB
+        ROLE_EXTRANET_ADMIN: ROLE_EXTRANET_USER
+        ROLE_COMMERCIAL: ROLE_EXTRANET_ADMIN, ROLE_TEMPOWNER
+        # Rol Administrador
+        ROLE_ADMIN:
+            - ROLE_DIR_GENERAL
+            - ROLE_DIR_DEVELOPER
+            - ROLE_DIR_COMMERCIAL
+            - ROLE_DIR_FINANCIAL
+            - ROLE_DIR_MARKETING
+            - ROLE_TEMPOWNER
+            - ROLE_EXTRANET_ADMIN
+            - ROLE_WEB
+            - ROLE_AAVV
+            - ROLE_COMMERCIAL
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+    firewalls:
+        # Configuración para el servicio rest
+        oauth_token:
+            pattern:      ^/oauth/v2/token
+            security:     false
+        api_doc:
+            pattern:      ^/api/doc
+            security:     false
+        api:
+            pattern:      ^/api
+            fos_oauth:    true
+            stateless:    true
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        #Configuración usuarios para web service
+        nvc_web_service:
+            pattern: ^/%web_service_subdomain%
+            host: "%domain%"
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: nvc_web_service_login
+                check_path: nvc_web_service_check
+                default_target_path: nvc_web_service_login
+            logout:
+                path: nvc_web_service_logout
+                target: nvc_web_service_login
+            anonymous: true
+
+        #Configuración usuario temp_owner
+        extranet_owner:
+            pattern: ^/%registration_subdomain%
+            host: "%domain%"
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: extranet_login
+                check_path: extranet_check
+                default_target_path: extranet_login
+            logout:
+                path: extranet_logout
+                target: extranet_login
+            anonymous: true
+
+        #Configuración usuario hotelero
+        navicu_extranet:
+            pattern: ^/%extranet_subdomain%
+            host: "%domain%"
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: navicu_extranet_security_login
+                check_path: navicu_extranet_security_check
+                default_target_path: navicu_extranet_security_login
+            logout:
+                path: navicu_extranet_security_logout
+                target: navicu_extranet_security_login
+            anonymous: true
+
+        #Configuración usuario Administrador
+        navicu_admin:
+            pattern: ^/%admin_subdomain%
+            host: "%domain%"
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: navicu_admin_login
+                check_path: navicu_admin_check
+                default_target_path: navicu_admin_login
+            logout:
+                path: navicu_admin_logout
+                target: navicu_admin_login
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000
+                path:     /
+                domain:   .%domain%
+            anonymous: true
+
+            #Configuración usuario agencia de viaje
+        navicu_aavv:
+            pattern: ^/%aavv_subdomain%
+            host: "%domain%"
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: navicu_aavv_login
+                check_path: navicu_aavv_check
+                default_target_path: navicu_aavv_login
+            logout:
+                path: navicu_aavv_logout
+                target: navicu_aavv_login
+            anonymous: true
+
+        #Configuración usuario cliente
+        navicu_web:
+            pattern: ^/
+            host: (www.)%domain%
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: navicu_error_401
+                check_path: navicu_web_check
+                default_target_path: navicu_web_login
+            logout:
+                path: navicu_web_logout
+                target: navicu_no_redirect_logout
+            anonymous: true
+
+        #Configuración usuario cliente
+        navicu_subdomain:
+            pattern: ^/
+            host: .%domain%
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: navicu_subdomain_login
+                check_path: navicu_subdomain_check
+                default_target_path: navicu_subdomain_login
+            logout:
+                path: navicu_subdomain_logout
+                target: navicu_subdomain_login
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000
+                path:     /
+                domain:   .%domain%
+            anonymous: true
+
+    access_control:
+        # Acceso a las rutas del restapi OauthBundle
+        - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
+
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register$, role: ROLE_ADMIN }
+        - { path: ^/resetting$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/client/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/client, role: ROLE_WEB }
+
+        # Acceso a las rutas de Registro hotelero
+        - { path: ^/%registration_subdomain%/login, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%registration_subdomain%/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/%registration_subdomain%/registerOwner, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/%registration_subdomain%/desktopregistration, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/%registration_subdomain%, role: ROLE_TEMPOWNER, host: "%domain%" }
+
+        #Acceso a las rutas del usuario hotelero
+        - { path: ^/%extranet_subdomain%/login, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%extranet_subdomain%/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%"}
+        - { path: ^/%extranet_subdomain%, role: ROLE_EXTRANET_USER, host: "%domain%" }
+
+        #Acceso a las rutas del Admin
+        - { path: ^/%admin_subdomain%/login, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%admin_subdomain%/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%admin_subdomain%/async/login, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%admin_subdomain%/tempProperties, role: [ROLE_ADMIN_FIREWALL], host: %domain% }
+        - { path: ^/%admin_subdomain%/affiliateProperties, role: [ROLE_ADMIN_FIREWALL], host: %domain% }
+        - { path: ^/%admin_subdomain%/crudProperties, role: [ROLE_ADMIN_FIREWALL], host: %domain% }
+        - { path: ^/%admin_subdomain%/reservation, role: [ROLE_ADMIN_FIREWALL], host: %domain% }
+        - { path: ^/%admin_subdomain%/users, role: [ROLE_ADMIN_FIREWALL], host: %domain% }
+        - { path: ^/%admin_subdomain%/inventory, role: [ROLE_ADMIN_FIREWALL]}
+        - { path: ^/%admin_subdomain%, role: [ROLE_ADMIN_FIREWALL], host: %domain% }
+        - { path: ^/%admin_subdomain%/currencyExchange, role: [ROLE_ADMIN_FIREWALL]}
+
+        # Acceso a las rutas de agencia de viajes
+        - { path: ^/%aavv_subdomain%/login, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+
+        - { path: ^/%aavv_subdomain%/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%/register, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%/confirm/, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+
+        - { path: ^/%aavv_subdomain%/companyregister, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%/async/save/step2, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%/async/info/step2, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%/registrationRequirements.pdf, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%/validemail, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY, host: "%domain%" }
+        - { path: ^/%aavv_subdomain%, role: [ROLE_AAVV, ROLE_ADMIN], host: "%domain%" }
+
+        - { path: ^/, role: [IS_AUTHENTICATED_ANONYMOUSLY], host: www.%domain% }
+        - { path: ^/accessAdmin, role: IS_AUTHENTICATED_ANONYMOUSLY, host: .%domain% }
+        - { path: ^/, role: [ROLE_AAVV, ROLE_ADMIN], host: .%domain% }
+

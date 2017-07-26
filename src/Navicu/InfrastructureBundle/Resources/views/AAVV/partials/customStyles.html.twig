@@ -1,0 +1,218 @@
+<script>
+    (function(env, aavv, imageUrl) {
+        //
+        // Genera el enlace al CSS dinámico.
+        //
+        function getStylesLink(qs) {
+            var topLevelHost = window.location.hostname
+                .split('.')
+                .slice(1)
+                .join('.');
+
+            var url = '//www.' + topLevelHost + '/css/generate/'+env+'/aavv.css';
+            if (qs) {
+                url += '?' + qs;
+            }
+
+            return url;
+        }
+
+        // Esta función devuelve `true` si ambos colores son similares.
+        //
+        // No podemos comparar directamente con el operador `===` porque,
+        // debido a un bug de la librería de los colorpicker, hay casos
+        // en los que los colores se cambian automáticamente a uno muy
+        // cercano.
+        function isSameColor(colorA, colorB) {
+            var CHARSET = '0123456789abcdef';
+
+            colorA = colorA.toLowerCase();
+            colorB = colorB.toLowerCase();
+
+            if (colorA.indexOf('#') === 0) {
+                colorA = colorA.substr(1);
+            }
+            if (colorB.indexOf('#') === 0) {
+                colorB = colorB.substr(1);
+            }
+
+            var i;
+
+            var a;
+            var b;
+
+            for (i=0; i<colorA.length; i+=2) {
+                if (colorA[i] !== colorB[i]) {
+                    return false;
+                }
+            }
+
+            for (i=1; i<colorA.length; i+=2) {
+                a = CHARSET.indexOf(colorA[i]);
+                b = CHARSET.indexOf(colorB[i]);
+
+                if (Math.abs(a-b) > CHARSET.length/2) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        if (window.localStorage.getItem('disable_custom_styles') === 'true') {
+            return;
+        }
+
+        // Variables que no están relacionadas a estilos.
+        var IGNORED_KEYS = ['urlLogo'];
+
+        // Colores por defecto.
+        var DEFAULT_VALUES = {
+            activeButton: '#62259d',
+            buttonPrimary: '#b42371',
+            footer: '#2e174b',
+            icon: '#391860',
+            navbarMenu: '#391860',
+            navbarPrimary: '#783cbd',
+            text: '#808080',
+            title: '#391860',
+        }
+
+        if (aavv === undefined) {
+            console.warn('aavv has no styles');
+
+            aavv = JSON.parse(JSON.stringify(DEFAULT_VALUES));
+        }
+
+        if (imageUrl) {
+            aavv.urlLogo = '/uploads/images/images_original/' + imageUrl;
+        }
+
+        // A partir del objeto con las variables, obtiene una string
+        // que será usada en la url del servicio.
+        var qs = Object.keys(aavv).reduce(function(a, k) {
+            a.push(k + '=' + encodeURIComponent(aavv[k]));
+
+            return a;
+        }, []).join('&');
+
+        // Crea un elemento `<link>`.
+        var link = document.createElement('link');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        link.media = 'screen,print';
+        link.id = 'custom-styles';
+
+        // Escribe el elemento `<link>` al documento.
+        document.write(link.outerHTML);
+
+        // Si los estilos han sido modificados, entonces inicializamos
+        // el elemento `<link>` con la dirección url de los estilos.
+        if (getIsModified()) {
+            link.href = getStylesLink(qs);
+        }
+
+        // Comprobamos si estamos utilizando un logo personalizado,
+        // y actualizamos la url del header.
+        if (aavv.urlLogo) {
+            document.addEventListener('DOMContentLoaded', function() {
+                var logoContainer = document.querySelector('.nvc-navbar__logo');
+                logoContainer.classList.add('nvc-aavv-customize__logo');
+
+                logoContainer.style.backgroundImage = 'url(' + aavv.urlLogo + ')';
+                logoContainer.style.color = 'transparent';
+                logoContainer.style.top = '8px';
+                logoContainer.style.backgroundRepeat = 'no-repeat';
+            });
+        }
+
+        // Recibe un objeto con estilos y los compara con los estilos
+        // predeterminados.
+        //
+        // Devuelve `true` si los estilos son distintos a los predeterminados,
+        // o `false` si son los mismos (o muy parecidos).
+        function getIsModified(styles) {
+            if (!styles) {
+                styles = aavv;
+            }
+
+            return !Object.keys(styles).filter(function(key) {
+                return IGNORED_KEYS.indexOf(key) === -1;
+            }).every(function(key) {
+                return isSameColor(styles[key], DEFAULT_VALUES[key]);
+            });
+        }
+
+        // Definimos una variable global que nos puede ser de utilidad
+        // más adelante.
+        window.AAVV = {
+            customizations: aavv,
+            isModified: getIsModified(),
+            updateStyles: function(storage) {
+                if (!storage) {
+                    storage = window.localStorage;
+                }
+
+                var data;
+
+                var rawPreview = storage.getItem('preview');
+                if (rawPreview) {
+                    console.log('Cambiando estilos...');
+                    data = JSON.parse(rawPreview);
+                } else {
+                    console.log('Restaurando estilos...');
+                    data = window.AAVV.customizations;
+                }
+
+                var qs = Object.keys(data).reduce(function(a, k) {
+                    a.push(k + '=' + encodeURIComponent(data[k]));
+
+                    return a;
+                }, []).join('&');
+
+                var link = document.getElementById('custom-styles');
+                var isModified = getIsModified(data);
+
+                if (isModified) {
+                    link.href = getStylesLink(qs);
+                } else {
+                    link.href = getStylesLink();
+                }
+
+                var ribbon = document.querySelector('.nvc-ribbon');
+                if (ribbon) {
+                    if (isModified) {
+                        ribbon.style.display = '';
+                    } else {
+                        ribbon.style.display = 'block';
+                    }
+                }
+            },
+        };
+
+        // Cada vez que cambiamos los estilos en la vista de personalización,
+        // se actualiza la clave `preview` en `localStorage`.
+        //
+        // Cuando esto pase, actualizamos los estilos por medio
+        // de esta función.
+        window.addEventListener('storage', function(e) {
+            // Solo nos interesan los cambios en la clave `preview`.
+            if (e.key !== 'preview') {
+                return;
+            }
+
+            //var storage = e.storageArea;
+
+            window.AAVV.updateStyles();
+        });
+
+        // Nos aseguramos de que los estilos se carguen junto con la página.
+        document.addEventListener('DOMContentLoaded', function() {
+            window.AAVV.updateStyles();
+        });
+    })(
+        {{ app.environment | json_encode | raw }},
+        (function(x) {return x})({{ app.session.get('customize') | raw }}),
+        {{ app.session.get('urlLogo') | json_encode | raw }}
+    );
+</script>

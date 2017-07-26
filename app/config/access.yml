@@ -1,0 +1,58 @@
+# Defenición los posibles controladores
+admin_access:
+    # Asignación de los posibles accesos al modulo admin
+    module_access:
+        - { module: affiliates_properties, permissions: [assing_commercial, mass_load, grid, without_availability] }
+        - { module: temp_properties, permissions: [assing_commercial, edit, to_register, delete] }
+        - { module: crud_affiliates, permissions: [edit] }
+        - { module: reservation, permissions: [edit] }
+        - { module: users, permissions: [create, edit, delete] }
+        - { module: currency_exchange, permissions: [edit] }
+    # Asignación  de permisos por defectos dado el rol
+    defaults:
+        -
+            roles: [ROLE_DIR_COMMERCIAL]
+            access:
+                -
+                    module: affiliates_properties
+                    permissions: [assing_commercial, mass_load, grid, without_availability]
+                -
+                    module: temp_properties
+                    permissions: [assing_commercial, edit, to_register, delete]
+                -
+                    module: crud_affiliates
+                    permissions: [edit]
+        -
+            roles: [ROLE_SALES_EXEC, ROLE_TELEMARKETING]
+            access:
+                -
+                    module: affiliates_properties
+                    permissions:
+                        - mass_load
+                        - grid
+                        - without_availability
+                -
+                    module: temp_properties
+                    permissions:
+                        - edit
+                -
+                    module: crud_affiliates
+                    permissions: [edit]
+        -
+            roles: [ ROLE_DIR_FINANCIAL, ROLE_ACCOUNTING, ROLE_FINANCIAL_ASSISTANT, ROLE_HHRR, ROLE_CALL_CENTER ]
+            access:
+                -
+                    module: affiliates_properties
+                    permissions: []
+                -
+                    module: reservation
+                    permission: [edit]
+        -
+            roles: [ROLE_DIR_MARKETING, ROLE_CONTENT_MANAGER, ROLE_MARKETING_ONLINE, ROLE_MANAGER_SOCIAL]
+            access:
+                -
+                    module: affiliates_properties
+                    permissions: []
+                -
+                    module: crud_affiliates
+                    permissions: [edit]

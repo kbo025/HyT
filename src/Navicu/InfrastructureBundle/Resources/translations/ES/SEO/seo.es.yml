@@ -1,0 +1,1413 @@
+SEO:
+  home:
+    title: 'navicu.com: Hoteles y posadas al mejor precio en Venezuela.'
+    description: '¿Necesitas hospedaje en Venezuela? En navicu.com, encontrarás los mejores establecimientos, hoteles, posadas y más... siempre al mejor precio posible y con pagos completamente en Bolívares.'
+  city:
+    anzoategui:
+        title: 'Hospedajes en Anzoátegui al mejor precio.'
+        description: 'Reserva tu hospedaje en los mejores hoteles o posadas de Araure en el estado Anzoátegui, Venezuela, de la manera más sencilla y económica.'  
+    aragua:
+        title: 'Los mejores hoteles y posadas de Aragua, a tan solo un click.'
+        description: 'En navicu.com puedes realizar tu hospedaje en Aragua Venezuela, en hoteles, posadas y más… ¡Siempre con los mejores precios!'
+    aragua-tovar:
+        title: 'Reserva tu hospedaje en tovar de forma rápida y segura'
+        description: 'Encuentra tu hospedaje en uno de los mejores destinos turísticos de Venezuela... ven y disfruta de la Colonia Tovar, Estado Aragua, Venezuela'
+    araure:
+        title: 'Hospedajes en Araure al mejor precio.'
+        description: 'Reserva tu hospedaje en los mejores hoteles o posadas de Araure en el estado Portuguesa, Venezuela, de la manera más sencilla y económica.'
+    atanasio-girardot:
+        title: 'Hospedajes en Atanasio Girardot, a solo un click de forma segura'
+        description: 'En navicu.com puedes realizar tu hospedaje en el municipio Atanasio Girardot Venezuela, en hoteles, posadas y más… ¡Siempre con los mejores precios!'
+    barcelona:
+        title: 'Hospedajes en Barcelona al mejor precio.'
+        description: 'Realiza reservas en tu hotel o posada ideal en Barcelona, con el mejor precio'
+    barinas:
+        title: 'Excelente hospedaje al mejor precio en Barinas, Venezuela'
+        description: 'Tenemos gran variedad de hoteles y posadas en Barinas, con el mejor precio garantizado... Los mejores establecimientos de la zona…  ¡Reserva ya!'
+    barquisimeto:
+        title: 'Encuentra los mejores establecimientos en Barquisimeto.'
+        description: 'Realiza tu Hospedaje en  una de las ciudades más importante de la región centro occidental con navicu.com... Barquisimeto, un lugar con excelentes hoteles y posadas esperando por ti…  ¡Al mejor precio!'
+    bolivar:
+        title: 'Los mejores hoteles y posadas de Bolívar, a tan solo un click.'
+        description: 'Bolívar, una de las ciudades más históricas del país, con grandes paisajes y una hermosa cultura, encuentra tu hospedaje ideal en navicu.com al mejor precio.'
+    carabobo:
+        title: 'Encuentra tu hotel o posada ideal en Carabobo.'
+        description: 'Reserva tu hospedaje en los mejores hoteles o posadas del estado Carabobo, Venezuela, de la manera más sencilla y económica.'
+    caracas:
+        title: 'Reserva hospedajes en Caracas de forma rápida y segura.'
+        description: 'En navicu.com puedes realizar tu hospedaje en Caracas, la capital de Venezuela, en hoteles, posadas y más… ¡Siempre con los mejores precios!'
+    choroni:
+        title: 'Hoteles y posadas, al mejor precios en Choroní, la costa del país'
+        description: 'Disfruta de las mejores playas del país... En navicu.com, te ofrecemos una gran variedad de hoteles y posadas en Choroní, perfectas para tus merecidas vacaciones y siempre al mejor precio.'
+    ciudad-guayana:
+        title: 'Reserva hospedajes en línea, Ciudad Guayana, Venezuela.'
+        description: 'Una de las ciudades más memorables del país es Ciudad Guayana, cuenta con varios de los parques naturales más importantes de Venezuela, entre ellos La Llovizna, consigue tu hospedaje con navicu.com y ten una experiencia de primera.'
+    ciudad-ojeda:
+        title: 'Encuentra el mejor hospedaje en Ciudad Ojeda en navicu.com.'
+        description: 'Reserva tu hospedaje en los mejores hoteles o posadas de Ciudad Ojeda en el estado Zulia, Venezuela, de la manera más sencilla y económica.'
+    cojedes:
+        title: 'Hospedajes en Cojedes a excelente precio.'
+        description: 'Realiza reservas en tu hotel o posada en Cojedes, con el mejor precio posible y disfruta de extensiones de llanuras que predominan el paisaje.'
+    colonia-tovar:
+        title: 'Encuentra tu hotel o posada ideal en la Colonia Tovar.'
+        description: 'El lugar donde la cultura alemana y venezolana se unen… Encuentra en la Colonia Tovar los mejores hoteles y posadas... ¡Fácil, rápido y barato!'
+    coro:
+        title: 'Disfruta de los mejores establecimientos de Coro al mejor precio.'
+        description: 'Posadas y hoteles de Coro a tan solo un  click, al mejor precio... ven y conoce los médanos, playas y más… ¡Coro espera por ti!'
+    el-limon:
+        title: 'Hoteles y posadas, al mejor precios en el Limón.'
+        description: 'Posadas y hoteles en el Limón a tan solo un click y al mejor precio'
+    el-tigre:
+        title: 'Hospedaje en El Tigre, Edo. Anzoátegui, de forma rápida y segura'
+        description: 'El Tigre, es una ciudad petrolera con un gran movimiento, reserva tu hospedaje en el hotel que se adapte a ti, rápido, a buen precio y seguro.'
+    el-tocuyo:
+        title: 'Hospedajes en Tocuyo al mejor precio de forma rápida.'
+        description: 'En navicu.com puedes realizar tu hospedaje en Tocuyo, Lara, Venezuela, en hoteles, posadas y más… ¡Siempre con los mejores precios!'
+    falcon:
+        title: 'Reserva de hospedajes de hoteles y posadas en Falcón, Venezuela.'
+        description: 'Realiza reservas en tu hotel o posada ideal en Falcón, con el mejor precio posible y empieza a disfrutar de lo mejor de la  Península de Paraguaná.'
+    gran-sabana:
+        title: 'Reserva de hospedajes hoteles y posadas, Gran Sabana, Venezuela.'
+        description: 'Realiza reservas en tu hotel o posada ideal en la gran sabana, con el mejor precio posible'
+    guatire:
+        title: 'Hoteles y posadas con los mejores precios en Guatire, Venezuela.'
+        description: 'Encuentra el hospedaje que necesites en Guatire, sea en hotel o posada, con el mejor precio garantizado en navicu.com'
+    guigue:
+        title: 'Reserva hospedajes en Guigue de forma rápida y segura.'
+        description: 'Los mejores establecimientos para hospedarte en Guigue, realiza tu reserva online sin ningun problema, fácil, rápido y seguro.'
+    isla-de-coche:
+        title: 'Hospedajes en Isla de Coche al mejor precio.'
+        description: 'Reserva tu hospedaje en los mejores hoteles o posadas de Isla de coche, Venezuela, de la manera más sencilla y económica.'
+    jose-laurencio-silva:
+        title: 'Reserva hospedajes en línea a buen precio, José Laurencio Silva.'
+        description: 'Reserva tu hospedaje sin problemas y al mejor precio en el Municipio José Laurencio Silva, para que disfrutes en el extremo oriental del estado Falcón'    
+    los-roques:
+        title: 'Posadas y hoteles a buen precio y seguro en los Roques, Venezuela'
+        description: 'Encuentra tu hospedaje en uno de los mejores destinos turísticos de Venezuela... ven y disfruta de las más hermosa playas del país en Los Roques...'
+    maracaibo:
+        title: 'Reserva de Hoteles y Posadas en Maracaibo.'
+        description: 'Los mejores establecimientos para hospedarte en Maracaibo, realiza tu reserva online sin ningun problema, fácil, rápido y seguro.'
+    maracay:
+        title: 'Hoteles y posadas en Maracay, la región central del país.'
+        description: 'Te ofrecemos gran variedad de hoteles y posadas, decide cuál se adapta a ti y empieza a disfrutar de la ciudad de Maracay.'
+    isla-de-margarita:
+        title: 'Hoteles y posadas en Margarita.'
+        description: 'Disfruta de la perla del caribe... En navicu.com te ofrecemos los mejores precios y la mayor variedad de hoteles y posadas en Margarita...'
+    miranda:
+        title: 'Hoteles y posadas con los mejores precios en Miranda, Venezuela.'
+        description: 'Encuentra el hospedaje que necesites en Miranda, sea en hotel o posada, con el mejor precio garantizado en navicu.com'
+    merida:
+        title: 'Reserva de Hoteles y posadas en Mérida.'
+        description: 'Disfruta de los hermosos paisajes, picos y el maravilloso teleférico de Mérida... Mientras te quedas en el mejor establecimiento a buen precio.'
+    ocumare-de-la-costa:
+        title: 'Reserva de Hoteles y Posadas en Ocumare de la Costa.'
+        description: 'Reserva tu hospedaje sin problemas y al mejor precio en Ocumare de la Costa, para que disfrutes de las mejores playas de Venezuela. ¡La costa espera por ti! '
+    ocumare-de-la-costa-de-oro:
+        title: 'Hoteles y posadas en Ocumare de la Costa de Oro en Venezuela'
+        description: 'Reserva en navicu.com y encuentra el hospedaje que necesites en Ocumare de la Costa de Oro, sea en hoteles o posadas, con el mejor precio garantizado'
+    puerto-cabello:
+        title: 'Posadas, Hoteles en Puerto Cabello al mejor precio.'
+        description: 'Reserva tu hospedaje sin problemas y al mejor precio en Puerto Cabello, para que disfrutes de las mejores playas de Venezuela.'
+    punto-fijo:
+        title: 'Hospedajes en Punto Fijo de hoteles y posadas.'
+        description: 'Puedes encontrar hospedaje en los mejores hoteles y posadas de Punto Fijo en navicu.com de forma fácil y segura, con el mejor precio.'
+    quibor:
+        title: 'Hospedajes en Quíbor al mejor precio.'
+        description: 'Realiza reservas en tu hotel o posada ideal en Quíbor, al mejor precio'
+    san-felipe:
+        title: 'Hoteles y posadas en San Felipe, Yaracuy !Reserva ya¡'
+        description: 'La mejor opción para hacer tus reservas de hospedaje de forma rápida y segura en navicu.com, ven y difruta los mejores precios en San Felipe, Yaracuy'
+    san-cristobal:
+        title: 'Posadas y hoteles a buen precio en San Cristóbal.'
+        description: 'Realiza reservas en tu hotel o posada ideal en San Cristóbal, con el mejor precio posible y empieza a disfrutar de lo mejor de Los Andes.'
+    sucre:
+        title: 'Los mejores hoteles y posadas de Sucre, a tan solo un click.'
+        description: 'Viaja a Sucre y disfruta de los mejores establecimientos, la mejor atención y las más bellas posadas y hoteles con navicu.com'
+    trujillo:
+        title: 'Hoteles y posadas en Los Andes, Trujillo a buen precio.'
+        description: 'Viaja a Trujillo y disfruta de los mejores establecimientos, la mejor atención y las más bellas posadas y hoteles con navicu.com'
+    tucacas:
+        title: 'Posadas, Hoteles y Resorts en Tucacas al mejor precio.'
+        description: 'Para los amantes de las playas, Tucacas es una opción perfecta… Con navicu.com puedes reservar tu hospedaje y ahorrarte tiempo y dinero.'
+    tachira:
+        title: 'Hoteles y posadas en Los Andes, Táchira a buen precio.'
+        description: 'La mejor opción para hacer tus reservas de hospedaje en Táchira, es navicu.com te ofrecemos los mejores precios. ¡Disfruta Los Andes!'
+    tariba:
+        title: 'Reserva de hospedaje en Táriba, Venezuela.'
+        description: 'Realiza reservas en tu hotel o posada ideal en Táriba, con el mejor precio posible y empieza a disfrutar de lo mejor de Los Andes.'
+    valencia:
+        title: ' Hoteles en Valencia, Edo. Carabobo al mejor precio.'
+        description: 'Encuentra tu hospedaje ideal en Valencia, la ciudad industrial de Venezuela al mejor precio. ¡Los mejores hoteles y posadas!'
+    valera:
+        title: 'Reserva de Hoteles y posadas en Valera.'
+        description: 'Realiza reservas en tu hotel o posada ideal en Valera, con el mejor precio posible.'
+    vargas:
+        title: 'Hospedajes en Vargas de hoteles y posadas.'
+        description: 'Disfruta de las mejores playas del litoral central, en navicu.com puedes generar tus reservas en distintos hoteles y posadas al mejor precio en Vargas.'
+    villa-de-cura:
+        title: 'Excelente hospedaje a mejor precio en Villa de Cura'
+        description: 'El mejor establecimiento para hospedarte Villa de Cura, realiza tu reserva online sin ningun problema, fácil, rápido y seguro ¡ Los mejores precios!'
+    yaracuy:
+        title: 'Reserva de hospedajes de hoteles y posadas en Yaracuy, Venezuela.'
+        description: 'Te ofrecemos gran variedad de hoteles y posadas, decide cuál se adapta a ti y empieza a disfrutar de Yaracuy.'
+  property:
+    apart-hotel-fatima-del-valle:
+        title: 'Reserva tu hospedaje en la isla de margarita de forma rápida'
+        description: 'En navicu.com puedes realizar tu hospedaje en Arismendi, Nueva Esparta, Venezuela, en hoteles, posadas y más… ¡Siempre con los mejores precios!'
+    apartahotel-hipocampo:
+        title: 'Hotel Apartahotel Hipocampo, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en apartahotel hipocampo!'
+    apart-hotel-ojeda-suite:
+        title: 'Reserva acá en el hotel Apart Hotel Ojeda Suite.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Apart Hotel Ojeda Suite, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    apart-hotel-presidente:
+        title: 'El mejor hotel ¡Reserva ya en el Hotel Apart Hotel Presidente!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Apart Hotel Presidente, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    apart-hotel-suite-golden-monky:
+        title: 'Realiza tu hospedaje seguro en Apart Hotel Suite Golden Monky'
+        description: 'Aparthotel familiar contamos con restaurante, salones de fiesta, piscina,  disponibilidad y excelentes precios en navicu.com ! Reserva ya ¡'
+    aquarius-hotel-boutique:
+        title: 'Hotel AQUARIUS HOTEL BOUTIQUE, Excelente hospedaje a buen precio'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en AQUARIUS HOTEL BOUTIQUE!'
+    ab-beach-hotel:
+        title: 'Hospedajes en Higuerote  a solo un click de forma segura'
+        description: 'Encuentra tu hospedaje en uno de los mejores destinos turísticos de Venezuela... ven y disfruta de Higuerote, Estado Miranda, Venezuela'
+    avos-hotel:
+        title: 'Reserva acá en Avos Hotel C.A..'
+        description: 'El confort y la buena atención nos representa, en Avos Hotel C.A., ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    bahia-de-sirenas:
+        title: 'Bahia de Sirenas, ubicado en José Laurencio Silva, Estado Falcón'
+        description: 'Busca el mejor precio en navicu.com te brindaremos el mejor servicio de alojamiento online, ven y disfruta de posada para comodidad de los turistas'
+    bambuda-posada:
+        title: 'La mejor posada, a un gran precio ¡Reserva ya en Bambuda Posada!'
+        description: 'En navicu.com, puedes reservar ya mismo en Bambuda Posada, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    bijou-amethyste-hotel:
+        title: 'Bijou Amethyste Hotel, le permitirá disfrutar del estado Falcón'
+        description: 'Reserva en navicu.com y disfrutaras de una agradable experiencia para nuestros huéspedes, cómodas habitaciones ambientadas pensadas para su descanso'
+    cabanas-del-tio-jairo:
+        title: 'Realiza hospedaje en Hotel Cabañas del Tio Jairo, de forma rápida'
+        description: 'Encuentra excelentes cabañas acondicionadas para recibir y hospedar viajeros y turistas, navicu.com te brinda servicios de alojamiento online.'
+    casas-del-sol-hotel-suites-beach-resort:
+        title: 'Casas Del Sol Hotel Suites & Beach Resort, Excelente hospedaje.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Casas Del Sol Hotel Suites & Beach Resort!'
+    caraballeda-caribe-club:
+        title: 'Caraballeda Caribe Club, hospedaje económico'
+        description: '!Reserva ya¡ en navicu.com y disfruta de un excelente hospedaje en Caraballeda Caribe Club ubicado en el estado Vargas, Venezuela.'
+    circulo-militar-margarita:
+        title: 'Reserva acá en el hotel Circulo Militar Margarita.'
+        description: 'El confort y la buena atención nos representa, en el Hotel circulo-militar-margarita, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    convencion-hotel-boutique:
+        title: 'El mejor hotel, a un gran precio en Convención Hotel Boutique.'
+        description: 'En navicu.com, puedes reservar ya mismo en Convención Hotel Boutique, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    del-angel-hotel-boutique:
+        title: 'Realiza tu hospedaje en Del Angel Hotel Boutique, de forma rápida'
+        description: 'Realiza tu hospedaje en Del Angel Hotel Boutique, y disfrutaras de una agradable experiencia para nuestros huéspedes, confortables habitaciones.'
+    dinastia-hotel:
+        title: 'Dinastia Hotel, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Dinastia Hotel! '
+    don-quijote:
+        title: 'Reserva acá en el hotel Don Quijote.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Don Quijote, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    el-yaque-beach-hotel:
+        title: 'El mejor hotel ¡Reserva ya en El Yaque Beach Hotel!'
+        description: 'En navicu.com, puedes reservar ya mismo en El Yaque Beach Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    embassy-suites-by-hilton-caracas:
+        title: 'Realiza tu hospedaje en el Hotel Embassy Suites by Hilton Caracas'
+        description: 'Lugar especialmente acondicionado para recibir y hospedar viajeros, ejecutivos y turistas, ubicanos en Caracas, Venezuela.'
+    eurobuilding-express-barinas:
+        title: 'Hotel Eurobuilding Express Barinas, Excelente hospedaje y precio'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Eurobuilding Express Barinas! '
+    eurobuilding-express-el-tigre:
+        title: 'Reserva acá en el hotel Eurobuilding Express El Tigre.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Eurobuilding Express El Tigre, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    eurobuilding-express-maiquetia:
+        title: '¡Reserva ya en el Hotel Eurobuilding Express Maiquetia!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Eurobuilding Express Maiquetia, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    eurobuilding-express-maracay:
+        title: 'Realiza tu hospedaje en el Hotel Eurobuilding Express Maracay'
+        description: 'Hotel Eurobuilding Express Maracay especialmente para el ejecutivo de negocios que desee hospedarse en un lugar estratégico, reserva ya en navicu.com'
+    eurobuilding-hotel-suites-caracas:
+        title: 'Hotel Eurobuilding Hotel & Suites Caracas, Excelente hospedaje'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Eurobuilding Hotel & Suites Caracas!'
+    eurobuilding-hotel-suites-coro:
+        title: 'Reserva acá en el hotel Eurobuilding Hotel & Suites Coro.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Eurobuilding Hotel & Suites Coro, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    eurobuilding-hotel-suites-guayana:
+        title: 'El mejor precio en Hotel Eurobuilding Hotel & Suites Guayana!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Eurobuilding Hotel & Suites Guayana, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    gran-hotel-delicias:
+        title: 'Realiza tu hospedaje en el Hotel Gran Hotel Delicias'
+        description: 'Hotel Gran Hotel Delicias ofrece un ambiente cálido, familiar, mejor servicio y comodas habitaciones estamos ubicados en Maracaibo, Zulia, Venezuela.'
+    hesperia-eden-club:
+        title: 'Hotel Hesperia Edén Club, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hesperia Edén Club!'
+    hesperia-isla-margarita:
+        title: 'Reserva acá en el hotel Hesperia Isla Margarita.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Hesperia Isla Margarita, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    hesperia-playa-el-agua:
+        title: '¡Reserva ya a un gran precio en el Hotel Hesperia Playa el Agua!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Hesperia Playa el Agua, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hesperia-wtc-valencia:
+        title: 'Realiza tu hospedaje en el Hotel Hesperia WTC Valencia.'
+        description: 'Te ofrecemos un ambiente cálido, familiar y con mucho confort,  siempre podrás reservar con el mejor precio posible en navicu.com'
+    hostal-mi-mayita:
+        title: 'Hotel Hostal Mi Mayita, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hostal Mi Mayita!'
+    hostal-rancho-la-quinta:
+        title: 'Hospedaje en San Joaquín a solo un click de forma segura'
+        description: 'Encuentra hospedaje en uno de los mejores destinos turísticos de Venezuela. Ven y disfruta de Hostal Rancho La Quinta en San Joaquín, estado Carabobo'
+    hotel-abana-king:
+        title: 'Reserva acá en el Hotel Abana King.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Abana King, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-america:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Hotel América!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel América, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-aquavi:
+        title: 'Consigue hospedaje económico en Hotel Aquavi'
+        description: 'Hotel Aquavi te ofrece excelentes habitaciones, reserva en navicu.com al mejor precio posible, posadas en bolívares.'
+    hotel-barroco:
+        title: 'Realiza tu hospedaje en el Hotel Barroco, de forma rápida.'
+        description: 'Ofrecemos un ambiente cálido, tranquilo ubicados en Barinas, Venezuela, siempre podrás reservar con el mejor precio posible en navicu.com'
+    hotel-bergland:
+        title: 'Hotel Bergland, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Bergland!'
+    hotel-bello-campo-suites:
+        title: 'Hotel Bello Campo Suites, ubicado en Chacao, Miranda, Venezuela'
+        description: 'Busca el mejor precio en navicu.com, el mejor servicio de alojamiento online y disfruta del Hotel Bello Campo Suites para comodidad de los turistas'    
+    hotel-blue-hantom:
+        title: 'Reserva acá en el HOTEL BLUE HANTOM.'
+        description: 'El confort y la buena atención nos representa, en el HOTEL BLUE HANTOM, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-boulevard:
+        title: '¡Hotel Boulevard Reserva ya! El mejor hotel'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Boulevard, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    hotel-california:
+        title: 'Hotel California, hospedaje barato en Valera,Trujillo, Venezuela'
+        description: 'Reserva en navicu.com y encuentra El Hotel Carlifornia ubicado en Valera,Trujillo, Venezuela, enfocado a dar brindando seguridad y confort.'
+    hotel-cardon:
+        title: 'Realiza tu hospedaje en el Hotel Cardon, de forma rápida y segura'
+        description: 'Te invitamos a reservar con el mejor precio posible en navicu.com y nuestro personal se dedicara a darte la mejor atención ¡Te esperamos! Hotel Cardon'
+    hotel-costa-real:
+        title: 'Hotel Costa Real, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Costa Real!'
+    hotel-descanso-tropical:
+        title: 'Hotel Descanso Tropical, hospedaje barato en la Isla de Margarita'
+        description: 'Reserva en navicu.com y encuentra El Hotel Descanso Tropical ubicado en Nueva Esparta, Venezuela, Venezuela, acogedor hotel estilo posada colonial.'
+    hotel-dona-josefina:
+        title: 'Hospedaje económico en Puerto La Cruz. ¡Hotel Doña Josefina!'
+        description: 'Encuentra tu lugar ideal en el centro de la ciudad para tu comodidad, de fácil acceso disfruta tus vacaciones al mejor precio, Hotel Doña Josefina.'
+    hotel-doral:
+        title: 'Reserva acá en el Hotel Doral.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Doral, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-gaeta:
+        title: 'Hotel Gaeta, Reserva en el mejor hotel ubicado en Puerto la Cruz.'
+        description: 'Hotel Gaeta, un rincón de lujo frente al mar, Reserva en navicu.com y conoce la ciudad turística del oriente del país  acceso a con acceso a la playa.'
+    hotel-el-milagro:
+        title: 'El mejor hotel ¡Reserva ya en el Hotel El Milagro!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel El Milagro, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-el-peregrino:
+        title: 'Realiza tu hospedaje en el Hotel el Peregrino, de forma rápida.'
+        description: 'Reserva en navicu.com tu alojamiento online y obtendras los mejores precios en bolivares, ubicanos en Lara, Venezuela'
+    hotel-emperador:
+        title: 'Hotel Emperador, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Emperador!'
+    hotel-esnujaque:
+        title: 'Reserva acá en el Hotel Esnujaque.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Esnujaque, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-freiburg:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en Hotel Freiburg!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Freiburg, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-garden-valencia:
+        title: 'Realiza tu hospedaje en el Hotel Garden Valencia, de forma rápida'
+        description: 'Hotel Garden Valencia ubicado en Valencia estado Carabobo le permitirá disfrutar su estadía en un lugar estratégico, reserva ya en navicu.com'
+    hotel-gh-buenaventura:
+        title: 'Hotel GH Buenaventura, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel GH Buenaventura!'
+    hotel-gh-guaparo-inn:
+        title: 'Reserva acá en el Hotel GH Guaparo Inn.'
+        description: 'El confort y la buena atención nos representa, en el Hotel GH Guaparo Inn, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    hotel-gh-guaparo-suites:
+        title: 'El mejor precio ¡Reserva ya en el Hotel GH Guaparo Suites!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel GH Guaparo Suites, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-howard-johnson:
+        title: 'Realiza tu hospedaje en el Hotel Howard Johnson, de forma rápida.'
+        description: 'Reserva en navicu.com y conoce y disfruta de las hermosas playas de Venezuela en la isla de margarita, todo esto de la mano de una excelente atención'
+    hotel-jardin:
+        title: 'Hotel Jardin, ubicado en los Taques estado Falcón'
+        description: 'Hotel Jardin ubicado en las mejores zonas de Paraguaná, busca el mejor precio en navicu.com te brindaremos el mejor servicio de alojamiento online.'
+    hotel-kactus:
+        title: 'Hotel Kactus, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Kactus!'
+    hotel-la-cordialidad:
+        title: 'Reserva acá en el Hotel La Cordialidad.'
+        description: 'El confort y la buena atención nos representa, en el Hotel La Cordialidad, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-la-cordialidad-san-cristobal:
+        title: 'El mejor precio, Hotel La Cordialidad San Cristobal'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel La Cordialidad San Cristobal, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-la-cordialidad-tariba:
+        title: 'Realiza tu hospedaje fácil en el Hotel La Cordialidad Táriba'
+        description: 'Conoce un lugar ideal para disfrutar unas vacaciones inolvidables las mejores playas en Venezuela, excelente atención que hará tu estadía más placentera'
+    hotel-lancelot:
+        title: 'Hotel Lancelot, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Lancelot!'
+    hotel-la-terraza:
+        title: 'Reserva acá en el HOTEL LA TERRAZA.'
+        description: 'El confort y la buena atención nos representa, en el HOTEL LA TERRAZA, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    hotel-la-serenidad:
+        title: 'Hotel la Serenidad en Falcón, Venezuela, hospedaje barato'
+        description: 'Hotel ubicado en Punto Fijo a pocos minutos de las playas ideal para tus vacaciones. Reserva ya en navicu.com y disfruta tu estadía'
+    hotel-de-las-americas:
+        title: 'Hotel de Las Americas, le permitirá disfrutar del estado Lara.'
+        description: 'Reserva en navicu.com y disfrutaras de una agradable experiencia para nuestros huéspedes, lujosas y confortables habitaciones.'
+    hotel-los-angeles-palace:
+        title: 'El mejor hotel, a un gran precio en el Hotel Los Angeles Palace!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Los Angeles Palace, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-los-frailes: 
+        title: 'Reserva hospedajes en línea a buen precio, Hotel Los Frailes'
+        description: 'Reserva tu hospedaje en navicu.com sin problemas al mejor precio en Mérida, Venezuela y encontraras un verdadero clásico entre los hostales de montaña'
+    hotel-los-gallegos:
+        title: 'Consigue hospedaje económico, Hotel Los Gallegos'
+        description: 'Reserva en navicu.com y encuentra el lugar ideal para tu descanso en el centro de la capital del estado Trujillo con un clima agradable y fresco.'
+    hotel-marbellamar:
+        title: 'Realiza tu hospedaje en el Hotel Marbellamar, de forma rápida.'
+        description: 'Te ofrecemos ambiente cálido, disfrute de excelentes playas y rápido acceso a las zonas de compra, podrás reservar al mejor precio posible en navicu.com'
+    hotel-margarita-village:
+        title: 'Hotel Margarita Village, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Margarita Village!'
+    hotel-maria-cristina:
+        title: 'Reserva acá en el Hotel Maria Cristina.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Maria Cristina, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-marlin:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Hotel Marlin!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Marlin, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    hotel-milla-suites:
+        title: 'Hotel Milla Suites, hospedaje economico en Mérida, Venezuela'
+        description: 'Reserva en navicu.com y encuentra el hospedaje que necesites Hotel ideal para el viajero de negocios, recreación familiar o de placer.'
+    hotel-murachi:
+        title: 'Hospedaje economico para tu comodidad y descanso, Hotel Murachi'
+        description: 'Reserva en navicu.com ubicado en el casco central de la Cuidad de merida y disfruta de los andes Venezolanos en Hotel Murachi.'
+    hotel-oviana:
+        title: 'Reserva hospedajes en línea a buen precio, Hotel Oviana'
+        description: 'Reserva tu hospedaje sin problemas y al mejor precio en Barcelona estado Anzoátegui, para que disfrutes de una agradable vista a la ciudad'
+    hotel-porlamar:
+        title: 'Hotel Porlamar, hospedaje barato ubicado en la Isla de Margarita.'
+        description: 'Encuentra tu hospedaje en navicu.com y conoce las instalaciones de un hotel familiar, con una ubicación estratégica en las cercanias para toda la isla'
+    hotel-resplandor:
+        title: 'Hotel Resplandor tenemos hospedaje barato para ti reserva en navicu.com'
+        description: 'Hotel en un ambiente único con paisajes inolvidables rodeado de verdes montañas llenas de paz y tranquilidad con vista a la ciudad de valera.'
+    hotel-santa-barbara:
+        title: 'Realiza tu hospedaje en el Hotel Santa Bárbara, de forma segura.'
+        description: 'Hermoso Hotel Santa Barbara ubicado en Maracaibo estado Zulia, ofrece confortables habitaciones, cuenta con un restaurante para su comodidad.'
+    hotel-selva-negra:
+        title: 'Hotel Selva Negra, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Selva Negra!'
+    hotel-sevillana:
+        title: 'Reserva acá en el Hotel Sevillana.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Sevillana, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    hotel-shariff:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Hotel Shariff!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Shariff, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-stauffer:
+        title: 'Realiza tu hospedaje en el Hotel Stauffer, de forma rápida.'
+        description: 'Encuentra habitaciones economicas reserva tu hospedaje en navicu.com, La mayor cantidad de establecimientos al mejor precio'
+    hotel-suite-millennium:
+        title: 'Hotel Suite Millennium, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Suite Millennium!'
+    hotel-sur-italia:
+        title: 'Hotel Sur de Italia en Nueva Esparta hospedaje barato para disfrutar tus vacaciones'
+        description: 'Hotel Sur Italia uno de los mejores destinos turísticos de la isla de margarita cerca de parque el agua y a pocos minutos de playa el agua y parguito.'
+    hotel-terraza-suite:
+        title: 'Reserva acá en el Hotel Terraza Suite c.a.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Terraza Suite, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-tiffany:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Hotel Tiffany!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Tiffany, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-tita:
+        title: 'Realiza tu hospedaje en el Hotel Tita, de forma rápida y segura.'
+        description: 'navicu.com reserva facilmente y difruta de tu estadía en Falcón, Venezuela, Hotel tita creado para el huesped inolvidable, visítenos y no se arrepentirá'
+    hotel-trinitarias-suites:
+        title: 'Hotel Trinitarias Suites, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Trinitarias Suites!'
+    hotel-turistico-santa-maria:
+        title: 'Reserva acá en el Hotel Turistico Santa Maria.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Turistico Santa Maria, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-valladolid:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Hotel Valladolid! '
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Valladolid, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    hotel-venezuela-mia:
+        title: 'Hotel Venezuela Mia en Valera, Trujillo, buen precio !Reserva ya¡'
+        description: 'La mejor opción para hacer reservas de hospedaje de forma rápida en navicu.com y disfruta un excelente clima de montaña lugar ideal para el descanso.'
+    hotel-west-plaza:
+        title: 'Realiza tu hospedaje en el Hotel West Plaza, de forma segura.'
+        description: 'Ofrece espaciosas y elegantes habitaciones para el descanso, ubicanos en Barquisimeto Estado Lara, reserva tu hospedaje en navicu.com'
+    hotel-y-spa-picolino:
+        title: 'Excelente hospedaje a mejor precio en Hotel y SPA Picolino'
+        description: 'El mejor establecimiento para hospedarte Hotel y SPA Picolino, realiza tu reserva online sin ningun problema, fácil y seguro ¡ Los mejores precios!'
+    ikaraton:
+        title: 'Hotel  Ikaraton, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel  Ikaraton!'
+    ld-punta-playa:
+        title: 'Alojamiento barato con los mejores precios en posadas, LD Punta Playa'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, LD Punta Playa ubicado en playa puerto cruz al norte de la isla de Margarita.'
+    katres-posada:
+        title: 'Katres Posada, disfruta de la estadía en la Ciudad de Mérida.'
+        description: 'Bellas habitaciones ubicanos en Mérida, Venezuela, reserva tu hotel en navicu.com donde encontrarás el mejor precio en servicios de alojamiento online'
+    la-abadia-hotel-boutique:
+        title: 'Reserva acá en el hotel la Abadía Hotel Boutique.'
+        description: 'El confort y la buena atención nos representa, en el Hotel la Abadía Hotel Boutique, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    la-costa-playa-el-agua-hotel:
+        title: 'El mejor hotel, a un gran precio en La costa Playa el agua Hotel'
+        description: 'En navicu.com, puedes reservar ya mismo en La costa Playa el agua Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    la-cumbre-encantada:
+        title: 'Realiza tu hospedaje en la posada La Cumbre Encantada.'
+        description: 'Encuentra el lugar especialmente acondicionado para brindarte la atención que tanto mereces, navicu.com te brinda servicios de alojamiento online.'
+    la-posada-de-canelon-y-persida:
+        title: 'La Posada de Canelón y Pérsida, Excelente hospedaje a buen precio'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en La Posada de Canelón y Pérsida!'
+    la-posada-de-richard-de-paraguana:
+        title: 'Reserva acá en La Posada de Richard de Paraguaná.'
+        description: 'El confort y la buena atención nos representa, en La Posada de Richard de Paraguaná, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    las-cabanas-de-los-andes:
+        title: 'Reserva en navicu.com disfruta tu viaje, Las Cabañas de los Andes'
+        description: 'Reserva en navicu.com donde encontraras los mejores precios en servicios de alojamiento online, Cabaña de los Andes ubicada en Mérida, Venezuela.'
+    latitud10hotel:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Hotel Latitud10Hotel!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Latitud10Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    lidotel-centro-lido-caracas:
+        title: 'Realiza tu hospedaje en el Hotel Lidotel Centro Lido Caracas.'
+        description: 'Hotel para el ejecutivo de negocios que desee hospedarse en un lugar estratégico, reserva ya en navicu.com, ubicado cerca de las mejores atracciones de la ciudad.'
+    lidotel-hotel-boutique-barquisimeto:
+        title: 'Hotel Lidotel Hotel Boutique Barquisimeto, Excelente hospedaje.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Lidotel Hotel Boutique Barquisimeto!'
+    marco-suites:
+        title: 'Marco Suites hospedaje económico para disfrutar tus vacaciones.'
+        description: 'Confortable hospedaje en Marco Suites ubicado en Lara, Venezuela, ofrece un maravilloso clima de montaña con hermosa vista, ideal para descansar.'
+    milla-hotel-av-8:
+        title: 'Milla Hotel Av. 8, hospedaje economico en Mérida, Venezuela'
+        description: 'Encuentra tu hospedaje en navicu.com y conoce la comodidad y calidez de sus instalaciones con una hermosa arquitectura colonial en Mérida, Venezuela'
+    milla-hotel-av-1:
+        title: 'Consigue hospedaje económico, Milla Hotel Av. 1 en Mérida.'
+        description: 'Reserva en navicu.com y disfruta de los andes de Casa Colonial ubicada en el centro de la ciudad de Mérida excelente servicio de hospedaje.'
+    milla-inn-av-universidad:
+        title: 'Reserva acá en el posada Milla INN Av Universidad'
+        description: 'El confort y la buena atención nos representa, en la posada Milla INN Av Universidad, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    milla-inn-hotel:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Milla Inn Hotel! '
+        description: 'En navicu.com, puedes reservar ya mismo en el Milla Inn Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    ninos-apatamento:
+        title: 'Ninos Apatamento, Reserva en uno de los mejores apartamentos ubicado en Puerto la Cruz.'
+        description: 'Hermoso apartamento ideal para el disfrute del clima de montaña, navicu.com la mayor cantidad de establecimientos y al mejor precio en bolívares.'
+    palacio-de-verano:
+        title: 'El mejor hotel en Venezuela, Palacio de Verano ubicado en Falcón'
+        description: 'Encuentra el lugar especialmente acondicionado para recibir y hospedar viajeros y turistas, navicu.com te ofrece el mejor precio, hotel en bolívares.'
+    paraguana-mall-hotel:
+        title: 'Realiza tu hospedaje en el Paraguana Mall Hotel, de forma rápida'
+        description: 'Encuentra el mejor precio para el destino que deseas reservar en Venezuela, Paraguana Mall Hotel ubicado a pocos minutos de las playas del estado Falcón.'
+    paraiso-azul-ii:
+        title: 'Posada Paraiso Azul II, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Paraiso Azul II!'
+    posada-agua-de-coco:
+        title: 'Reserva acá en la Posada Agua de Coco.'
+        description: 'El confort y la buena atención nos representa, en la Posada Agua de Coco, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    posada-amada-mia:
+        title: 'Posada Amada Mia tenemos hospedaje barato ubicada en Falcón'
+        description: 'Reserva en navicu.com y disfruta la Posada Amada Mia con lujosas instalaciones,  ideales para pasar unos buenos días de playa en el Estado Falcón'
+    posada-arakemo:
+        title: 'La mejor posada, a buen precio, ¡Reserva ya en la Posada Arakemo!'
+        description: 'En navicu.com, puedes reservar ya mismo en la Posada Arakemo, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-arrecife:
+        title: 'Realiza tu hospedaje en la Posada Arrecife, de forma segura.'
+        description: 'Conoce un lugar ideal para disfrutar de unas vacaciones, ven y disfruta de las hermosas costas Venezolanas, ubicanos en el estado Aragua'
+    posada-aztaki:
+        title: 'Posada Aztaki, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Aztaki!'
+    posada-boca-beach-club:
+        title: 'Consigue hospedaje economico, Posada Boca Beach Club'
+        description: 'Reserva en navicu.com y encuentra hermosa posada ubicada en el estado Anzoátegui con acceso directo a la playa. Ven y disfruta este paraíso tropical.'
+    posada-boutique-las-morocotas:
+        title: ' Reserva acá en la Posada Boutique Las Morocotas. '
+        description: 'El confort y la buena atención nos representa, en la Posada Boutique Las Morocotas, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    posada-brodway:
+        title: 'Posada brodway, excelente hospedaje, disfruta y conoce Venezuela'
+        description: 'Hermosa y confortable Posada Doral ubicada con vista a la playa en el estado Vargas, te ofrecemos un ambiente familiar y romántico'
+    posada-casa-bambu:
+        title: 'La mejor posada ¡Reserva ya en la Posada Casa Bambu!'
+        description: 'En navicu.com, puedes reservar ya mismo en la Posada Casa Bambu, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-casa-las-trinitarias:
+        title: 'Realiza tu hospedaje en la Posada Casa Las Trinitarias'
+        description: 'Reserva tu hospedaje en navicu.com y ubicanos en la isla de margarita, Estado Nueva Esparta, cerca de extensas y espectaculares playas'
+    posada-casandra-suites:
+        title: 'Posada Casandra Suites, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en la Posada Casandra Suites! '
+    posada-cayo-luna:
+        title: 'Reserva acá en la Posada Cayo Luna.'
+        description: 'El confort y la buena atención nos representa, en la Posada Cayo Luna, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    posada-coralmar:
+        title: 'Posada Coralmar hospedaje economico, disfruta y conoce Venezuela.'
+        description: 'Encuentra el mejor precio en posadas para el destino que deseas reservar en Venezuela en Posada Coralmar ubicada Los Taques, Falcón, Venezuela'
+    posada-costa-brava:
+        title: 'El mejor precio en posadas ¡Reserva ya en la Posada Costa Brava!'
+        description: 'En navicu.com, puedes reservar ya mismo en la Posada Costa Brava, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-de-maria-luisa:
+        title: 'Realiza tu hospedaje en la Posada de Maria Luisa, de forma segura'
+        description: 'Reserva en navicu.com y encuentra excelente Posada de Maria Luisa ubicada en el estado Aragua, Venezuela'
+    posada-del-capitan:
+        title: 'Posada del Capitan, hospedaje barato reserva en navicu.com'
+        description: 'Hermosa y confortable Posada del Capitan ubicada a orillas del mar en La Ensenada de La Guardia, Margarita, disfruta y conoce las mejores playas.'
+    posada-don-pedro:
+        title: 'Posada Don Pedro, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio… ¡Te esperamos en la Posada Don Pedro.!'
+    posada-el-remanso-de-pueblo-nuevo:
+        title: 'Reserva acá en la Posada el Remanso de Pueblo Nuevo.'
+        description: 'El confort y la buena atención nos representa, en la Posada el Remanso de Pueblo Nuevo, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    posada-eva:
+        title: 'La mejor posada, a un gran precio ¡Reserva ya en la Posada Eva!'
+        description: 'En navicu.com, puedes reservar ya mismo en la posada Eva, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    posada-flor-marina:
+        title: 'Realiza tu hospedaje en la Posada Flor Marin, de forma rápida.'
+        description: 'Posada la casona ubicado en un excelente ambiente para vacaciones familiares cerca del malecón y Playa Grande, Choroni Aragua, Venezuela.'
+    posada-galapagos:
+        title: 'Posada Galapago, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Galapagos!'
+    posada-guaicora:
+        title: ' Reserva acá en la Posada Guaicora.'
+        description: 'El confort y la buena atención nos representa, en la Posada Guaicora, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    posada-hans:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en la Posada Hans!'
+        description: 'En navicu.com, puedes reservar ya mismo en la Posada Hans, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-hostal-brisas-de-aroa:
+        title: 'Realiza tu hospedaje en la Posada Hostal Brisas de Aroa.'
+        description: 'Hermosa y confortable Posada hostal brisas de aroa ubicada a pocos minutos de las costas de aragua, choroni, disponemos de comodas habitaciones.'
+    posada-hostal-de-alejandra:
+        title: 'Posada Hostal de Alejandra, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en la Posada Hostal de Alejandra!'
+    posada-la-pastora:
+        title: 'Reserva acá en la Posada La Pastora.'
+        description: 'El confort y la buena atención nos representa, en la Posada La Pastora, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    posada-las-garcia:
+        title: 'La mejor posada ¡Reserva ya en la Posada Las Garcia!'
+        description: 'En navicu.com, puedes reservar ya mismo en la Posada Las Garcia, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-la-negra:
+        title: 'Posada la Negra en Vargas, Venezuela buen precio !Reserva ya¡'
+        description: 'La mejor opción para hacer tus reservas de hospedaje de forma rápida en navicu.com, ven y disfruta los mejores precios en Galipán con vista al mar'
+    posada-la-rosita:
+        title: 'Excelente hospedaje a mejor precio en Posada La Rosita'
+        descripcion: 'El mejor establecimiento para hospedarte Posada La Rosita, realiza tu reserva online sin ningun problema, fácil, rápido y seguro ¡ Los mejores precios!'
+    posada-las-ross:
+        title: 'Realiza tu hospedaje en la Posada Las Ross, de forma rápida.'
+        description: 'navicu.com ofrece la forma mas fácil de encontrar tu hospedaje, conoce y disfruta de las hermosas playas venezolanas en la isla de margarita.'
+    Posada-las-trinitarias:
+        title: 'Posada las Trinitarias hospedaje barato para disfrutar tus vacaciones.'
+        description: 'Hermosa y confortable Posada las Trinitarias ubicada en Tinaquillo, Cojedes, ofrece un maravilloso clima tropical, ideal para descansar'
+    posada-las-trinitarias:
+        title: 'Alojamiento económico con el mejor precio, Posada Las Trinitarias'
+        description: 'navicu.com ofrece la forma mas fácil de encontrar tu alojamiento en Posada Las Trinitarias posee un maravilloso clima tropical, ideal para descansar.'
+    posada-los-ravelos:
+        title: 'Posada Los Ravelos tenemos hospedaje barato para ti reserva en navicu.com'
+        description: 'Posada ideal para vacaciones familiares, descanso y disfrute del turismo en la zona oriental de la península de Paraguaná ubicada en el estado Falcón.'
+    posada-mama-nicha:
+        title: 'Posada Mama Nicha, alojamiento al mejor precio en navicu.com.'
+        description: 'La forma más fácil de encontrar tu hospedaje en navicu.com, Te invita a conocer la confortable posada en el Edo. Lara te ofrece un excelente clima.'
+    posada-mama-pancha:
+        title: 'Posada Mama Pancha en Falcón hospedaje barato para vacaciones.'
+        description: 'Hermosa Posada Mama Pancha cuenta con bellos apartamentos ubicada a escasos minutos del parque nacional Morrocoy, reserva en navicu.com en bolivares'
+    posada-mama-tila:
+        title: 'Consigue hospedaje economico, Posada Mama Tila'
+        description: 'Reserva en navicu.com y disfruta de los andes de Casa Colonial ubicada en el centro de la ciudad de Mérida'
+    posada-mijao:
+        title: 'Posada Mijao hospedaje económico, disfruta y conoce Venezuela.'
+        description: 'Encuentra el mejor precio para el destino que deseas reservar en Venezuela, Posada ubicada en la entrada de La Hacienda El Portete Choroni, Aragua'
+    posada-morrocoy:
+        title: 'Posada Morrocoy, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Morrocoy!'
+    posada-palma-dorada:
+        title: 'Posada palma dorada tenemos hospedaje barato para ti'
+        description: 'Reserva en navicu.com y disfruta la Posada palma dorada con lujosas instalaciones, lugar ideal para compartir con familiares en el Estado Falcón'
+    posada-paraiso-queen:
+        title: 'Posada Paraiso Queen, hospedaje barato reserva en navicu.com'
+        descripcion: 'Hermosa y confortable Posada Paraiso Queen ubicada en el Estado Falcón, disfruta y conoce las mejores playas'
+    posada-pittier:
+        title: 'Reserva acá en la Posada Pittier.'
+        description: 'El confort y la buena atención nos representa, en la Posada Pittier, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    posada-playas-de-aragua:
+        title: 'El mejor hotel ¡Reserva ya en la Posada Playas de Aragua!'
+        description: 'En navicu.com, puedes reservar ya mismo en la Posada Playas de Aragua, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-puerta-de-merida:
+        title: 'El mejor precio en posadas, Posada Puerta de Mérida.'
+        description: 'La mayor cantidad de establecimientos al mejor precio posible, posadas en bolívares, reserva ya en navicu.com, ven conoce y disfruta el estado Mérida'
+    posada-ranchos-de-sergi:
+        title: 'Alojamiento económico con el mejor precio, Posada Ranchos de Sergi'
+        description: 'navicu.com ofrece la forma mas fácil de encontrar tu alojamiento, la mayor cantidad de establecimientos al mejor precio posible, posadas en bolívares.'
+    posada-rey-miguel:
+        title: 'Posada Rey Miguel hospedaje barato, disfruta y conoce Venezuela.'
+        description: 'Encuentra el mejor precio en posadas para el destino que deseas reservar en Venezuela, Posada Rey Miguel con ambiente campestre para descansar'
+    posada-sol-y-luna:
+        title: 'Realiza tu hospedaje en la Posada sol y Luna, de forma rápida.'
+        description: ' La forma mas facil de encontrar tu hospedaje en navicu.com, Te invita a conocer la confortable posada en los Roques con una hermosa vista y playas'
+    posada-terramar-los-roques:
+        title: 'Posada Terramar Los Roques, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Terramar Los Roques! '
+    posada-tibaire:
+        title: 'Posada Tibaire Consigue hospedaje económico.'
+        description: 'Bella Posada Tibaire con habitaciones amplias y cómodas, reserva facilmente en navicu.com y conoce las mejores playas en el estado Falcón, Venezuela.'
+    posada-tore:
+        title: 'Hospedaje ideal para disfrutar tus vacaciones, Posada Tore'
+        description: 'Reserva en navicu.com y conoce hermosa y confortable Posada Tore ubicado Puerto Ordaz estado Bolívar, Venezuela, te ofrecemos un ambiente cálido.'
+    posada-tukusito:
+        title: 'Reserva acá en la Posada Tukusito.'
+        description: 'El confort y la buena atención nos representa, en la Posada Tukusito, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    posada-villas-del-carmen:
+        title: 'Los mejores precios en alojamiento, Posada villas del carmen'
+        description: ' La forma más fácil de encontrar tu hospedaje en navicu.com, Te invita a conocer la confortable posada en el Edo. Mérida ubicada en sitio estratégico'
+    posada-villa-del-mar:
+        title: 'Alojamiento barato con el mejor precio, Posada Villa del Mar'
+        description: 'Encuentra tu posada en navicu.com para el destino que deseas reservar en Venezuela, Posada Villa del Mar en Adicora, Paraguaná estado Falcón.'
+    posada-villas-playa-sur:
+        title: 'Posada Villas Playa Sur viaja con nosotros, reserva en navicu.com'
+        description: 'Bella Posada Villas Playa Sur terrazas con vista al mar donde disfrutaras de los paisajes naturales de Chichiriviche, reserva facilmente en navicu.com'
+    posada-vista-al-mar:
+        title: 'Posada vista al mar hospedaje económico, disfruta y conoce Venezuela'
+        description: 'Encuentra el mejor precio para el destino que deseas reservar en Venezuela, Posada vista al mar ubicada en pleno corazón de Galipán del Estado Vargas'
+    rentas-palosano:
+        title: 'El mejor apartamento, a buen precio ¡Reserva en Rentas Palosano!'
+        description: 'En navicu.com, puedes reservar ya mismo en Rentas Palosano, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    residencias-avila-caribe:
+        title: 'Residencias Avila Caribe te espera reserva en navicu.com'
+        description: 'Conoce un lugar exquisito para el descanso realiza tu reserva Residencias Avila Caribe ideal para ti, ofrece un confortable apartamento vacacional'
+    residencias-parque-mar-suites:
+        title: 'Realiza tu hospedaje en las Residencias parque mar suites.'
+        description: 'Residencias Parque Mar Suites excelente atención, la forma facíl de encontrar hospedaje en navicu.com, te invita a disfrutar este paraíso en Higuerote'
+    rosita-apartamento-i:
+        title: 'Rosita Apartamento I, ubicado en el estado Trujillo'
+        description: 'Rosita Apartamento I, descubre un lugar especialmente con excelente clima de montaña, cómodo apartamento ideal para su descanso.'
+    rosita-apartamento-ii:
+        title: 'Hospedaje que se adapta a tus necesidades Rosita Apartamento II'
+        description: 'Descubre la mejor forma de reservar online en navicu.com y disfruta de excelente clima de montaña en Rosita Apartamento II ubicado en Valera, Trujillo'
+    samiana:
+        title: 'Posada Samiana, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Samiana!'
+    venetur-morrocoy:
+        title: 'Venetur Morrocoy, ubicado en Colina, Falcón, Venezuela.'
+        description: 'Venetur Morrocoy ubicado en Tucacas, costa Oriental de Falcón, a orillas del Parque Nacional Morrocoy preferencia en navicu.com ! Reserva ya ¡'
+    villa-la-blanquilla:
+        title: 'Reserva apartamento acá en la Villa La Blanquilla.'
+        description: 'El confort y la buena atención nos representa, en la Villa La Blanquilla, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    villas-de-akurima:
+        title: 'La mejor villa, a buen precio, Reserva ya en la Villas de Akurima'
+        description: 'En navicu.com, puedes reservar ya mismo en las Villas de Akurima, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    villasol-de-adicora:
+        title: 'Villasol de Adicora, le permitirá disfrutar la estadía en Falcón.'
+        description: 'Conoce el destino perfecto y las mejores playas en el estado Falcón, Venezuela, reserva facilmente en navicu.com'
+    waldorf-hotel-boutique:
+        title: 'Hospedaje económico en Caracas. ¡Waldorf Hotel Boutique!'
+        description: 'Encuentra el mejor hospedaje en el Distrito Capital, Venezuela, de fácil acceso disfruta tus vacaciones al mejor precio, Waldorf Hotel Boutique.'
+    yagrumo-tours:
+        title: 'Realiza tu hospedaje en la posada Yagrumo Tours, de forma rápida'
+        description: 'Conoce un lugar para disfrutar unas vacaciones ubicado en el centro de la ciudad de Merida, Venezuela, Reserva en navicu.com y obten el mejor precio'
+    hotel-aventino:
+        title: 'Hotel Aventino, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Aventino!'
+    hotel-casa-y-campo:
+        title: 'Reserva acá en el Hotel Casa y Campo.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Casa y Campo, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    hotel-la-vineta:
+        title: 'El mejor hotel, a un gran precio, Reserva ya en Hotel La Viñeta'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel La Viñeta, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    lidotel-valencia:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en el Hotel Lidotel Valencia!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Lidotel Valencia, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    pestana-caracaspremium-city-conference-hotel:
+        title: 'Realiza tu hospedaje en Pestana CaracasPremium City & Conference Hotel, de forma rápida y segura.'
+        description: 'Te ofrecemos un ambiente cálido, familiar y con mucho confort,  siempre podrás reservar con el mejor precio posible en navicu.com'
+    posada-arimacoa:
+        title: 'Posada Arimacoa, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Arimacoa!'
+    villas-de-akurima:
+        title: 'Reserva acá en Villas de Akurima.'
+        description: 'El confort y la buena atención nos representa, en Villas de Akurima, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    residencias-canta-claro:
+        title: 'Reserva acá en residencias canta claro'
+        description: 'El confort y la buena atención nos representa, en Residencias Canta Claro, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    posada-sonho-meu:
+        title: 'Posada Sonho Meu, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Sonho Meu!'
+    inversiones-leche-y-miel:
+        title: 'Posada Inversiones Leche y Miel, hospedaje a buen precio'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Inversiones Leche y Miel!'
+    el-solaz-del-vinedo:
+        title: 'Posada El Solaz del Vinedo, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada El Solaz del Vinedo!'
+    posada-shibumi:
+        title: 'Posada shibumi, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada shibumi!'
+    residencias-el-tablon:
+        title: 'Reserva apartamento acá en Residencias El Tablon'
+        description: 'El confort y la buena atención nos representa, en Residencias El Tablon, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    residencias-gutt:
+        title: 'Realiza tu hospedaje en Residencias Gutt, de forma rápida.'
+        description: 'El confort y la buena atención nos representa, en Residencias Gutt, ponemos a tu disposición los mejores servicios para una gran experiencia. '
+    apart-hotel-bruselas-suites:
+        title: 'Apart Hotel Bruselas Suites excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio… ¡Te esperamos en Apart Hotel Bruselas Suites!'
+    cabanas-buenos-aires:
+        title: 'La mejor villa, a un gran precio en Cabañas Buenos Aires!'
+        description: 'En navicu.com, puedes reservar ya mismo en Cabañas Buenos Aires, tendrás el mejor precio posible garantizado. ¡Esperamos por ti! '
+    cabanas-de-eneida:
+        title: 'La mejor posada ¡Reserva ya en Cabañas de Eneida!'
+        description: 'Conoce un lugar ideal posada muy acogedora, ubicanos en Galipán estado Vargas y disfruta vacaciones al mejor precio,  Cabañas de Eneida.'
+    club-montana-magica:
+        title: 'Club montaña magica, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Club montaña magica!'
+    costa-blanca:
+        title: 'Reserva acá en la Posada Costa Blanca.'
+        description: 'El confort y la buena atención nos representa, en la Posada Costa Blanca, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hospedaje-la-casita:
+        title: 'Posada Hospedaje la Casita, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Hospedaje la Casita!'
+    hotel-alex:
+        title: 'Reserva acá en el Hotel Alex.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Alex, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-cabimbu:
+        title: 'Hotel Cabimbu, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Cabimbu!'
+    hotel-caribay:
+        title: 'Realiza tu hospedaje en Hotel Caribay, de forma rápida y segura'
+        description: 'Hotel Caribay ofrece un agradable ambiente familiar para hospedarse en un lugar estratégico, reserva ya en navicu.com y conoce los Andes Venezolanos'
+    hotel-caribean-suites:
+        title: 'El mejor apartamento ¡Reserva ya en Hotel Caribean Suites!'
+        description: 'En navicu.com, puedes reservar ya mismo en Hotel Caribean Suites, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-catimar:
+        title: 'Hotel Catimar, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en el Hotel Catimar!'
+    hotel-cima-barinas:
+        title: 'Realiza tu hospedaje en el Hotel Cima Barinas, de forma segura'
+        description: 'navicu.com ofrece hospedaje económico en bolivares, Hotel Cima Barinas ubicado dentro de centro comercial en barinas, con amplias y modernas habitaciones.'
+    hotel-la-estancia-meridena:
+        title: 'El mejor precio ¡Reserva ya en el Hotel la Estancia Merideña C.A!'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel la Estancia Merideña C.A., tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-pazcifico:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en Hotel Pazcifico!'
+        description: 'En navicu.com, puedes reservar ya mismo en Hotel Pazcifico, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-villa-playa-grande:
+        title: 'Realiza tu hospedaje en Hotel villa playa grande, de forma rápida'
+        description: 'Conoce el destino perfecto comodo y lujoso, ubicado en playa grande Vargas, Venezuela, reserva facilmente en navicu.com'
+    instituto-autonomo-circulo-de-las-fuerzas-armadas:
+        title: 'Reserva acá en Instituto Autonomo Circulo de las Fuerzas Armadas.'
+        description: 'El confort y la buena atención nos representa, en el Instituto Autonomo Circulo de las Fuerzas Armadas, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    la-hosteria-de-alvaro:
+        title: 'Realiza tu hospedaje en la posada La Hosteria de Alvaro'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en La Hosteria de Alvaro'
+    la-pequena-venecia:
+        title: 'El mejor precio ¡Reserva ya en La Pequeña Venecia!'
+        description: 'En navicu.com, puedes reservar ya mismo en La Pequeña Venecia, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    la-posada-de-teresa:
+        title: 'La mejor posada, a un gran precio, Reserva en La posada de Teresa'
+        description: 'En navicu.com, puedes reservar ya mismo en La posada de Teresa, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-brisas-del-caribe:
+        title: 'Realiza fácilmente tu hospedaje en la Posada Brisas del Caribe'
+        description: 'Hermosa y confortable Posada Brisas del Caribe ubicada cerca de las encantadoras playas de la costa Aragüeña, confortables habitaciones'
+    posada-cafe-del-mar:
+        title: 'Posada café del Mar, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en café del Mar!'
+    posada-del-sol:
+        title: 'Reserva acá en la Posada Del Sol C.A.'
+        description: 'El confort y la buena atención nos representa, en la Posada Del Sol C.A, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    posada-dona-pumpa:
+        title: 'El mejor precio ¡Reserva ya en Posada Doña Pumpa C.A!'
+        description: 'En navicu.com, puedes reservar ya mismo en Posada Doña Pumpa C.A, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-el-ensueno:
+        title: 'Posada el Ensueño, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada el Ensueño!'
+    posada-las-victorias:
+        title: 'Reserva acá en Posada Las Victorias.'
+        description: 'El confort y la buena atención nos representa, en Posada Las Victorias, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    posada-loma-verde:
+        title: 'posada loma verde, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en posada loma verde!'
+    posada-los-mangos-isla-de-margarita:
+        title: 'El mejor precio, Reserva en Posada Los Mangos - Isla De Margarita'
+        description: 'En navicu.com, puedes reservar ya mismo en Posada Los Mangos - Isla De Margarita, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-shibumi:
+        title: 'Posada Shibumi, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Shibumi!'
+    posada-sonho-meu:
+        title: 'La mejor posada, a un gran precio ¡Reserva ya en Posada Sonho Meu!'
+        description: 'En navicu.com, puedes reservar ya mismo en Posada Sonho Meu, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-suiza:
+        title: 'posada suiza, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en posada suiza!'
+    puerto-molino:
+        title: 'El mejor apartamento ¡Reserva ya en Puerto Molino!'
+        description: 'En navicu.com, puedes reservar ya mismo en Puerto Molino, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    tibisay-hotel-boutique:
+        title: 'Hospedajes en Tibisay Hotel Boutique al mejor precio.'
+        description: 'Realiza reservas en Tibisay Hotel Boutique, con el mejor precio'
+    townhouse-de-caro:
+        title: 'Townhouse de Caro, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Townhouse de Caro!'
+    apartohotel-las-coronas:
+        title: 'Hotel Apartahotel las Coronas, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Apartahotel las Coronas!'
+    bakhos-suites-hotel:
+        title: 'El mejor hotel ¡Reserva ya en Bakhos Suites Hotel!'
+        description: 'En navicu.com, puedes reservar ya mismo en Bakhos Suites Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-acuario:
+        title: 'Reserva acá en el Hotel Acuario.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Acuario, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    apartamentos-y-cabanas-sol-radiante:
+        title: 'La mejor posada ¡Reserva en Apartamentos y Cabañas Sol Radiante!'
+        description: 'En navicu.com, puedes reservar ya mismo en Apartamentos y Cabañas Sol Radiante, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-turistica-lida-guadalupe:
+        title: 'Realiza tu hospedaje en la Posada Turistica Lida Guadalupe.'
+        description: 'Encuentra al mejor precio posadas para el destino que deseas reservar en Venezuela, Posada Turistica Lida Guadalupe ubicada Los Taques Estado Falcón'
+    hotel-chama:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en Hotel Chama!'
+        description: 'En navicu.com, puedes reservar ya mismo en Hotel Chama, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-blue-lion:
+        title: 'El mejor hotel, a un gran precio Reserva ya en Hotel Blue Lion.'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Blue Lion, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-catimar:
+        title: 'Reserva acá en el Hotel Catimar.'
+        description: 'El confort y la buena atención nos representa, en el Hotel Catimar, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    club-de-montana-aguamiel:
+        title: 'Reserva acá en el Club de Montaña Aguamiel C.A.'
+        description: 'El confort y la buena atención nos representa, en el Club de Montaña Aguamiel C.A, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    bakhos-suites-hotel:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en Hotel Atenas Park C.A.!'
+        description: 'En navicu.com, puedes reservar ya mismo en Hotel Atenas Park C.A., tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-camino-real:
+        title: 'El mejor hotel, a un gran precio, Hotel Camino Real ¡Reserva ya!'
+        description: 'En navicu.com, puedes reservar ya mismo en el hotel Hotel Camino Real, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-princesa-plaza:
+        title: 'El mejor hotel ¡Reserva ya en Hotel Princesa Plaza!'
+        description: 'En navicu.com, puedes reservar ya mismo en Hotel Princesa Plaza, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-calle-real:
+        title: 'Posada Calle Real, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Posada Calle Real!'
+    posada-turistica-na-ramona:
+        title: 'Realiza tu hospedaje en la Posada Turistica Ña Ramona.'
+        description: 'Posada Turistica Ña Ramona te ofrece amplios y cómodos espacios para su cálido disfrute, ubicado en Falcón, Venezuela. Reserva ya en navicu.com'
+    posada-villaven:
+        title: 'La mejor posada, a un gran precio ¡Reserva en la Posada Villaven!'
+        description: 'En navicu.com, puedes reservar ya mismo en la Posada Villaven, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    restaurant-marisqueria-y-posada-humberto:
+        title: 'Restaurant Marisqueria y Posada Humberto, Excelente hospedaje.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Restaurant Marisqueria y Posada Humberto!'
+    tapuy-lodge:
+        title: 'Tapuy Lodge, Excelente hospedaje a buen precio.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Tapuy Lodge!'
+    hotel-atenas-park:
+        title: 'El mejor hotel, a un gran precio en el Hotel Atenas Park C.A.'
+        description: 'En navicu.com, puedes reservar ya mismo en el Hotel Atenas Park C.A., tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    sunsol-caribbean-beach:
+        title: 'Apartamento vacacional ideal ¡reserva en Sunsol Caribbean Beach!'
+        description: 'Un sin fin de apartamentos vacacionales esperan por ti, puedes reservar ya mismo en Sunsol Caribbean Beach, entra ya en navicu.com y disfruta de los mejores precios del mercado'
+    tu-hogar-en-la-puerta-1:
+        title: 'Reserve al mejor precio, Apartamentos Tu Hogar en la Puerta 1'
+        description: 'Reserva tu hospedaje en los mejores apartamentos vacacionales de Venezuela, de la manera más sencilla y económica reservar ya en Apartamentos Tu Hogar en la Puerta 1'
+    apartamentos-vacacionales:
+        title: 'Reserva en los hermosos apartamentos vacacionales al mejor precio'
+        description: 'Reserva tu hospedaje en los mejores apartamentos vacacionales de Venezuela, de la manera más sencilla y económica reservar ya en Apartamentos Vacacionales'
+    hotel-caribean-suites:
+        title: 'Encuentra tu apartamento vacacional ideal en el Hotel Caribean Suites'
+        description: 'Un sin fin de apartamentos vacacionales esperan por ti en el Hotel Caribean Suites, entra ya en navicu.com y disfruta de los mejores precios del mercado'
+    puerto-real:
+        title: 'Reserva apartamentos vacacionales en Apartamentos Puerto Real'
+        description: 'Reserva tu hospedaje en los mejores apartamentos vacacionales de Venezuela, de la manera más sencilla y económica reservar ya en Apartamentos Puerto Real'
+    puerto-molino:
+        title: 'Encuentra tu apartamento vacacional ideal en Apartamento Puerto Molino'
+        description: 'Un sin fin de apartamentos vacacionales esperan por ti en Apartamento Puerto Molino, entra ya en navicu.com y disfruta de los mejores precios del mercado'
+    apartamentos-vacacionales-las-goletas:
+        title: 'Realiza reserva en los Apartamentos Vacacionales Las Goletas'
+        description: 'Reserva tu hospedaje en los mejores apartamentos vacacionales de Venezuela, de la manera más sencilla y económica reservar ya en Apartamentos Vacacionales Las Goletas'
+    cabanas-buenos-aires:
+        title: 'Las mejores villas del país al mejor precio en Cabañas Buenos Aires'
+        description: 'Realiza reservas en tu villa ideal con el mejor precio posible en Cabañas Buenos Aires'
+    musipan-hotel-show:
+        title: 'Las mejores villas del país a buen precio en Musipan Hotel & Show'
+        description: 'Realiza reservas en tu villa ideal con el mejor precio posible en Musipan Hotel & Show'
+    residencia-parque-adonay:
+        title: 'Casa rural económica en Venezuela en Residencia Parque Adonay'
+        decription: 'Las mejores casas rurales para hospedarte en Venezuela, realiza tu reserva online sin ningun problema, fácil, rápido y seguro en Residencia Parque Adonay.'
+    casa-vacacional-la-marina:
+        title: 'Casa rural económica en Venezuela en Casa Vacacional La Marina'
+        description: 'Las mejores casas rurales para hospedarte en Venezuela, realiza tu reserva online sin ningun problema, fácil, rápido y seguro en Casa Vacacional La Marina.'
+    posada-loma-verde:
+        title: 'Reserva los mejores aparthotel del país al mejor precio en Posada Loma Verde'
+        description: 'Los apartholes son la opción ideal para ahorrar dinero y tener garantizado el confort, en Posada Loma Verde podras reserva el tuyo gracias a navicu.com'
+    apart-hotel-bruselas-suites:
+        title: 'Reserva los mejores aparthotel del país al mejor precio en Apart Hotel Bruselas Suites'
+        description: 'Los apartholes son la opción ideal para ahorrar dinero y tener garantizado el confort, en Apart Hotel Bruselas Suites podras reserva el tuyo gracias a navicu.com'
+    tu-hogar-en-la-puerta-2:
+        title: 'Reserva los mejores aparthotel del país, Tu Hogar en la Puerta 2'
+        description: 'Los apartholes son la opción ideal para ahorrar dinero y tener garantizado el confort, en Tu Hogar en la Puerta 2 podras reserva el tuyo gracias a navicu.com'
+    la-caracola-beach:
+        title: 'Reserva los mejores aparthotel del país en La Caracola Beach'
+        description: 'Los apartholes son la opción ideal para ahorrar dinero y tener garantizado el confort, en La Caracola Beach podras reserva el tuyo gracias a navicu.com'
+    caribbean-suites-marina-beach-club:
+        title: 'Resorts para la familia en Caribbean Suites Marina & Beach Club'
+        description: 'Encuentra tu hospedaje en uno de los mejores resorts de Venezuela... ven y disfruta de las más hermosa playas del país en Caribbean Suites Marina & Beach Club'
+    tu-hogar-en-la-puerta:
+        title: 'Casa de montaña ideal para tí y tu familia, Tu hogar en la puerta'
+        description: 'Disfruta de unas excelentes vacaciones en alguna de nuestras casas de montaña, buen ambiente para la familia y el mejor precio garantizado reserva ya en Tu hogar en la puerta'
+    tu-hogar-en-la-puerta-de-florencio-la-torre:
+        title: 'Reserva hospedaje en Tu Hogar en la Puerta de Florencio La Torre'
+        description: 'Disfruta de unas excelentes vacaciones en alguna de nuestras casas de montaña, buen ambiente para la familia y el mejor precio garantizado reserva ya en Tu Hogar en la Puerta de Florencio La Torre'
+    sunsol-punta-blanca:
+        title: 'Reserva tu hotel barato en Venezuela, en Sunsol Punta Blanca'
+        description: '¡Reserva ya en Sunsol Punta Blanca! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    hotel-villa-country-suite:
+        title: 'Reserva tu hospedaje en Venezuela, Hotel Villa Country Suite.'
+        description: 'Consigue tu hotel con el mejor precio garantizado, contamos con la mayor variedad de hoteles del país.'
+    hotel-albergue-turistico:
+        title: 'Encuentra tu hotel barato en Venezuela, Hotel Albergue Turistico'
+        description: 'La mayor cantidad de establecimientos y al mejor precio posible en Hotel Albergue Turistico, hotel en bolívares.'
+    hotel-casa-blanca-suite:
+        title: 'Reserva tu hotel barato en Venezuela, en Hotel Casa Blanca Suite'
+        description: '¡Reserva ya en Hotel Casa Blanca Suite! Tu hotel barato en Venezuela al mejor precio completamente en bolívares.'
+    unik-hotel-margarita:
+        title: 'Reserva fácil tu hospedaje en Unik Hotel Margarita Venezuela.'
+        description: 'Consigue tu hotel con el mejor precio garantizado en Unik Hotel Margarita, contamos con la mayor variedad de hoteles del país. '
+    hotel-mallorquina-suites:
+        title: 'Reserva tu hospedaje en Hotel Mallorquina Suites Venezuela'
+        description: 'Encuentra la mayor cantidad de hoteles en Venezuela de forma rápida y confiable, contamos con los mejores precios del mercado en Hotel Mallorquina Suites.'
+    hotel-gold-estrella:
+        title: 'El mejor hotel ¡Reserva ya en Hotel Gold Estrella!'
+        description: 'Encuentra la mayor cantidad de hoteles en Venezuela de forma rápida y confiable, contamos con los mejores precios del mercado en Hotel Gold Estrella.'
+    hotel-venetur-merida:
+        title: 'Encuentra tu hotel barato en Hotel Venetur Mérida Venezuela'
+        description: 'La mayor cantidad de establecimientos y al mejor precio posible en bolívares, en Hotel Venetur Mérida.'
+    hotel-venecia-suites:
+        title: 'Encuentra tu hotel barato en Hotel Venecia Suites Venezuela'
+        description: 'Encuentra la mayor cantidad de hoteles en Venezuela de forma rápida y confiable, contamos con los mejores precios del mercado en Hotel Venecia Suites.'
+    hotel-camino-real:
+        title: 'Reserva tu hospedaje en el Hotel Camino Real Venezuela, fácil y económico. '
+        description: 'Consigue tu hotel con el mejor precio garantizado en Hotel Camino Real, contamos con la mayor variedad de hoteles del país.  '
+    hotel-tamanaco:
+        title: 'Hotel Tamanaco, Excelente hospedaje a buen precio.'
+        description: 'Encuentra tu hotel ideal en Hotel Tamanaco al mejor precio de forma rápida y segura'
+    centro-turistico-hotel-chiquinquira:
+        title: 'Encuentra tu hotel barato en Centro Turístico Hotel Chiquinquira.'
+        description: '¡Reserva ya en Centro Turístico Hotel Chiquinquira! Tu hotel barato en Venezuela al mejor precio completamente en bolívares.'
+    hotel-aventura-suites:
+        title: 'Reserva fácil tu hospedaje en Hotel Aventura Suites Venezuela.'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Aventura Suites Venezuela!'
+    hotel-altamira-suites:
+        title: 'Encuentra tu hotel barato en Hotel Altamira Suites Venezuela'
+        description: 'La mayor cantidad de establecimientos y al mejor precio posible en bolívares, Hotel Altamira Suites Venezuela.'
+    hotel-cima-barinas:
+        title: 'El mejor Hotel de Venezuela a tu alcance Hotel Cima Barinas'
+        description: 'Hotel Cima Barinas el mejor precio garantizado'
+    hotel-terranova:
+        title: 'Reserva tu hotel barato en Hotel Terranova Venezuela'
+        description: '¡Reserva ya Hotel Terranova! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    portofino-plaza-hotel:
+        title: 'Reserva fácil tu hospedaje en Venezuela en Portofino Plaza Hotel'
+        description: 'El confort y la buena atención nos representa, en Portofino Plaza Hotel, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hostal-madrid:
+        title: 'Reserva tu hotel barato en Hostal Madrid Venezuela '
+        description: 'Hostal Madrid el mejor precio garantizado'
+    sunsol-isla-caribe:
+        title: 'Reserva tu hospedaje en Venezuela, en Sunsol Isla Caribe.'
+        description: '¡Reserva ya en Sunsol Isla Caribe! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    hotel-los-pinos:
+        title: 'Reserva tu hospedaje en Venezuela, Hotel Los Pinos.'
+        description: 'La mayor cantidad de establecimientos y al mejor precio posible en bolívares, en Hotel Los Pinos.'
+    posada-turistica-el-toreno:
+        title: 'Reserva tu hotel barato en Venezuela, Posada Turistica El Toreño'
+        description: 'Posada Turistica El Toreño el mejor precio garantizado'
+    hotel-playa-brisa:
+        title: 'Reserva fácil tu hospedaje en Venezuela, en Hotel Playa & Brisa.'
+        description: 'El confort y la buena atención nos representa, en Hotel Playa & Brisa, ponemos a tu disposición los mejores servicios para una gran experiencia.'
+    hotel-coche-paradise:
+        title: 'El mejor precio ¡Reserva ya en el Hotel Coche Paradise!'
+        description: 'En navicu.com, puedes reservar ya mismo en Hotel Coche Paradise, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    hotel-pueblos-y-rios:
+        title: ' Reserva tu hotel barato en Venezuela en Hotel Pueblos y Rios'
+        description: '¡Reserva ya en Hotel Pueblos y Rios! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    hotel-continental-altamira:
+        title: 'Reserva tu hotel en Venezuela en Hotel Continental Altamira'
+        description: '¡Reserva ya en Hotel Continental Altamira! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    hotel-le-blanc-suites:
+        title: 'El mejor precio ¡Reserva ya en Hotel Le Blanc Suites!'
+        description: '¡Reserva ya en Hotel Le Blanc Suites! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    gran-melia-caracas:
+        title: 'Reserva tu hospedaje en Gran Melia Caracas Venezuela'
+        description: 'En navicu.com, puedes reservar ya mismo en Gran Melia Caracas, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    posada-alexander:
+        title: 'Las mejor posada de Venezuela a tu alcance Posada Alexander'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Alexander'
+    las-chozas-del-indio-camoruco:
+        title: 'Encuentra tu posada Barata en Las Chozas del Indio Camoruco'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Las Chozas del Indio Camoruco tu hospedaje con el mejor precio garantizado'
+    posada-turistica-y-familiar-el-sol:
+        title: 'Tu posada al mejor precio en Posada Turistica y familiar El Sol'
+        description: 'En 4 sencillos pasos realiza la reserva de tu posada, en Posada Turistica y familiar El Sol en Venezuela y paga en bolivares con el mejor precio'
+    posada-la-estancia:
+        title: 'La mejor posada familiar Posada la Estancia'
+        description: 'Excelente posada para las vacaciones familiares al mejor precio del mercado, reserva ya en Posada la Estancia con navicu.com'
+    hostal-posada-casa-pueblo:
+        title: 'La mejor posada a tu alcance Hostal Posada Casa Pueblo'
+        description: 'Encuentra la posada ideal para tus vacaciones en Hostal Posada Casa Pueblo con el mejor precio de forma rápida y segura'
+    finca-san-jorge:
+        title: 'Encuentra tu posada Barata en Venezuela en Finca San Jorge'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Finca San Jorge tu hospedaje con el mejor precio garantizado'
+    villas-guayanamar:
+        title: 'Cuadra tu posada al mejor precio en Villas Guayanamar'
+        description: 'En 4 sencillos pasos realiza tu reserva en la posada Villas Guayanamar en Venezuela y paga en bolivares con el mejor precio'
+    casa-montserrat:
+        title: 'La mejor posada familiar Casa Montserrat'
+        description: 'Excelente posada para las vacaciones familiares al mejor precio del mercado, reserva ya en Casa Montserrat navicu.com'
+    posada-restaurant-luna-y-sol:
+        title: 'La mejor posada de Venezuela, Posada Restaurant Luna y Sol'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Restaurant Luna y Sol'
+    posada-tacarigua:
+        title: 'Encuentra tu posada Barata en Posada Tacarigua Venezuela'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Posada Tacarigua tu hospedaje con el mejor precio garantizado'
+    posada-rey-miguel:
+        title: 'Cuadra tu posada al mejor precio en Posada Rey Miguel'
+        posada: 'En 4 sencillos pasos realiza tu reserva en la Posada Rey Miguel en Venezuela y paga en bolivares con el mejor precio'
+    posada-las-victorias:
+        title: 'La mejor posada familiar en Posada Las Victorias'
+        description: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en Posada Las Victorias con navicu.com'
+    las-chozas-del-indio-lomas-del-este:
+        title: 'La mejor posada de Venezuela, Las Chozas del Indio Lomas del Este'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Las Chozas del Indio Lomas del Este'
+    posada-el-limon:
+        title: 'Encuentra tu posada Barata en Posada El Limon Venezuela'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Posada El Limon tu hospedaje con el mejor precio garantizado'
+    centro-de-orientacion-ecologica-aguasana:
+        title: 'Excelente posada en Centro de Orientación Ecologica Aguasana'
+        description: 'En 4 sencillos pasos realiza tu reserva en la Posada Centro de Orientación Ecologica Aguasana en Venezuela y paga en bolivares con el mejor precio'
+    posada-turistica-la-caranta:
+        title: 'Posada familiar a buen precio Posada Turistica La Caranta'
+        description: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en Posada Turistica La Caranta con navicu.com'
+    la-hosteria-de-alvaro:
+        title: 'La mejor posada de Venezuela a tu alcance en La Hosteria de Alvaro'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en La Hosteria de Alvaro'
+    posada-isla-mar:
+        title: 'La mejor posada de Venezuela a tu alcance Posada Isla Mar'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Isla Mar'
+    complejo-de-posadas-lomas-suites:
+        title: 'Posada Barata en Complejo de posadas Lomas Suites Venezuela'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela, reserva ya tu hospedaje con el mejor precio garantizado en Complejo de posadas Lomas Suites'
+    posada-de-antonita:
+        title: 'Cuadra tu posada al mejor precio en Posada de Antonita'
+        description: 'En 4 sencillos pasos realiza tu reserva en la Posada de Antonita en Venezuela y paga en bolivares con el mejor precio'
+    posada-amarama:
+        title: 'La mejor posada familiar Posada Amarama'
+        description: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en la Posada Amarama navicu.com'
+    posada-mocundo:
+        title: 'La mejor posada de Venezuela a tu alcance en Posada Mocundo'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Mocundo'
+    hato-casa-grande:
+        title: 'Encuentra tu posada Barata en Hato Casa Grande Venezuela'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Hato Casa Grande tu hospedaje con el mejor precio garantizado'
+    posada-el-acuario:
+        title: 'Cuadra tu posada al mejor precio en Posada el Acuario'
+        description: 'En 4 sencillos pasos realiza tu reserva en la Posada el Acuario en Venezuela y paga en bolivares con el mejor precio'
+    hospedaje-dona-rosalia:
+        title: 'La mejor posada familiar Hospedaje Doña Rosalia'
+        description: 'Excelente posada para las vacaciones familiares al mejor precio del mercado, reserva ya en Hospedaje Doña Rosalia con navicu.com'
+    posada-tramontana:
+        title: 'La mejor posada de Venezuela a tu alcance Posada Tramontana'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Tramontana'
+    posada-morokkue:
+        title: 'Encuentra tu posada Barata en Posada Tramontana Venezuela '
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Posada Tramontana tu hospedaje con el mejor precio garantizado'
+    posada-casa-sibana:
+        title: 'Cuadra tu posada al mejor precio en Posada Casa Sibana'
+        description: 'En 4 sencillos pasos realiza tu reserva en la Posada Casa Sibana Venezuela y paga en bolivares con el mejor precio'
+    posada-puerta-de-merida:
+        title: 'La mejor posada familiar Posada Puerta de Merida'
+        descripcion: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en Posada Puerta de Merida navicu.com'
+    la-posada-de-teresa:
+        title: 'La mejor posada de Venezuela a tu alcance Posada Villa del Carmen'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Villa del Carmen'
+    posada-villa-del-carmen:
+        title: 'Encuentra tu posada Barata en Posada Villa del Carmen Venezuela '
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Posada Villa del Carmen Venezuela tu hospedaje con el mejor precio garantizado'
+    posada-costa-cristal:
+        title: 'Cuadra tu posada al mejor precio en Posada Costa Cristal'
+        description: 'En 4 sencillos pasos realiza tu reserva en la Posada Costa Cristal Venezuela y paga en bolivares con el mejor precio'
+    las-chozas-del-indio-chichiriviche:
+        title: 'La mejor posada familiar en Las chozas del indio chichiriviche '
+        description: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en Las chozas del indio chichiriviche con navicu.com'
+    posada-blas-de-los-andes:
+        title: 'La mejor posada de Venezuela, Posada Blas de Los Andes'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Blas de Los Andes'
+    hotel-posada-abuela-julia:
+        title: 'Encuentra tu posada Barata en Venezuela Hotel Posada Abuela Julia'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Hotel Posada Abuela Julia tu hospedaje con el mejor precio garantizado'
+    corporacion-turistica-aguasanta:
+        title: 'Cuadra tu posada al mejor precio, Corporacion Turistica Aguasanta'
+        description: 'En 4 sencillos pasos realiza tu reserva en la Corporacion Turistica Aguasanta Venezuela y paga en bolivares con el mejor precio'
+    posada-y-parador-turistico-la-potra-zaina:
+        title: 'La mejor Posada y Parador Turístico La Potra Zaina'
+        description: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en Posada y Parador Turístico La Potra Zaina con navicu.com'
+    posada-turistica-la-marucha:
+        title: 'La mejor posada a tu alcance en Posada Turística La Marucha'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Turística La Marucha'
+    posada-cafe-del-mar:
+        title: 'Encuentra tu posada Barata en Posada Café del Mar Venezuela'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Posada Café del Mar tu hospedaje con el mejor precio garantizado'
+    tapuy-lodge:
+        title: 'Cuadra tu posada al mejor precio en  Tapuy Lodge'
+        description: 'En 4 sencillos pasos realiza tu reserva en Tapuy Lodge Venezuela y paga en bolivares con el mejor precio'
+    posada-la-fuente:
+        title: 'La mejor posada familiar en Posada La Fuente'
+        description: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en  Posada La Fuente con navicu.com'
+    posada-hacienda-la-calceta:
+        title: 'La mejor posada a tu alcance en Posada Hacienda La Calceta'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada Hacienda La Calceta'
+    resturant-posada-max-paseo:
+        title: 'Encuentra posada Barata, Resturant Posada Max Paseo ca Venezuela'
+        description: 'En navicu.com contamos con posadas baratas en toda Venezuela , reserva ya en Resturant Posada Max Paseo ca tu hospedaje con el mejor precio garantizado'
+    posada-turistica-la-flor-serrana-de-cubiro:
+        title: 'Reserva a buen precio, Posada Turistica La Flor Serrana De Cubiro'
+        description: 'En 4 sencillos pasos realiza tu reserva en Posada Turistica La Flor Serrana De Cubiro Venezuela y paga en bolivares con el mejor precio'
+    posada-turistica-paseo-chiriri:
+        title: 'La mejor posada familiar en Posada Turistica Paseo Chiriri'
+        description: 'Excelentes posadas para las vacaciones familiares al mejor precio del mercado, reserva ya en Posada Turistica Paseo Chiriri con navicu.com'
+    cabanas-villa-mercedes:
+        title: 'La mejor villa del país al mejor precio Cabanas Villa Mercedes'
+        description: 'Realiza reservas en Cabañas Villa Mercedes tu villa ideal con el mejor precio posible'
+    hotel-atlantic:
+        title: 'Reserva tu hotel barato en hotel atlantic Venezuela'
+        description: '¡Reserva ya en hotel atlantic! Tu hotel barato en Venezuela al mejor precio completamente en bolívares   '
+    hotel-villa-luna-suites:
+        title: 'El mejor precio en hotel villa luna suites Venezuela'
+        description: 'En navicu.com contamos con hoteles baratos en toda Venezuela , reserva ya en hotel villa luna suites tu hospedaje con el mejor precio garantizado'
+    hotel-campomar:
+        title: 'RReserva fácil tu hospedaje en Venezuela en Hotel Campomar.'
+        description: '¡Reserva ya en Hotel Campomar! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    hotel-wisam:
+        title: 'Reserva hospedaje en Venezuela fácil y económico, Hotel Wisam'
+        description: '¡Reserva ya en Hotel Wisam! Tu hotel barato en Venezuela al mejor precio completamente en bolívares'
+    pestana-caracas-premium-city-conference-hotel:
+        title:  'Pestana Caracas Premium City & Conference Hotel Venezuela'
+        description: 'En navicu.com contamos con hoteles baratos en toda Venezuela, reserva ya en Pestana Caracas Premium City & Conference Hotel tu hospedaje con el mejor precio garantizado'
+    posada-casa-de-playa-verde:
+        title: 'La mejor posada de Venezuela en Posada casa de playa verde'
+        description: 'Encuentra la posada ideal para tus vacaciones con el mejor precio de forma rápida y segura en Posada casa de playa verde'
+    posada-san-francisco:
+        title: 'Cuadra tu posada al mejor precio en Posada San Francisco'
+        description: 'En 4 sencillos pasos realiza tu reserva en la Posada San Francisco Venezuela y paga en bolivares con el mejor precio'
+    latitud-10-hotel:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en Latitud 10 Hotel'
+        description: 'En navicu.com, puedes reservar ya mismo en Latitud 10 Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    agua-dorada-beach-hotel:
+        title: 'Realiza tu hospedaje en Agua Dorada Beach Hotel, de forma segura'
+        description: 'En navicu.com, puedes reservar ya mismo en Agua Dorada Beach Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    lidotel-hotel-boutique-margarita:
+        title: 'Realiza tu hospedaje en el Lidotel Hotel Boutique Margarita'
+        description: 'En 4 sencillos pasos realiza tu reserva en Lidotel Hotel Boutique Margarita Venezuela y paga en bolivares con el mejor precio'
+    lidotel-hotel-boutique-paraguana:
+        title: 'Lidotel Hotel Boutique Paraguaná, hospedaje a buen precio.'
+        description: 'En navicu.com, puedes reservar ya mismo en Lidotel Hotel Boutique Paraguaná, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    lidotel-hotel-boutique-san-cristobal:
+        title: 'Realiza tu hospedaje en el Lidotel Hotel Boutique San Cristobal'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Hotel Boutique San Cristobal!'
+    lidotel-hotel-boutique-valencia:
+        title: 'El mejor hotel ¡Reserva ya en Lidotel Hotel Boutique Valencia!'
+        description: 'Disfruta de una excelente atención, comodidad y un ambiente familiar, todo esto acompañado con un buen precio…  ¡Te esperamos en Lidotel Hotel Boutique Valencia'
+    hotel-tibisay-boutique-merida:
+        title: 'Hotel Tibisay Boutique Merida, Excelente hospedaje a buen precio.'
+        description: 'En navicu.com, puedes reservar ya mismo en Hotel Tibisay Boutique Merida, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    latitud-10-hotel:
+        title: 'El mejor hotel, a un gran precio ¡Reserva ya en Latitud 10 Hotel'
+        description: 'En navicu.com, puedes reservar ya mismo en Latitud 10 Hotel, tendrás el mejor precio posible garantizado. ¡Esperamos por ti!'
+    nino-mar-ca:
+        title: 'Hospedaje económico en Valera ¡Apartamento nino mar'
+        description: 'Encuentra tu lugar ideal en apartamentos familiares al mejor precio, nino mar'
+    mochima-hotel-resort:
+        title: 'Reserva en Mochima Hotel Resort, ubicado en Puerto la Cruz'
+        description: 'Reserva ya en navicu.com y conoce la ciudad turística mas importante del oriente del país ubicado a solo 5 minutos de los mas importantes centros comerciales'
+    posada-ninos-mar:
+        title: 'Posada Ninos Mar en Valera, hospedaje barato para ti'
+        description: 'Apartamentos ubicado en un ambiente único clima de montaña ideal para tu descanso'
+    posada-santa-margarita:
+        title: 'Consigue hospedaje economico, Posada Santa Margarita.'
+        description: 'Reserva en navicu.com y encuentra atracciones turisticas de la zona como playas, islas y ensenadas'
+    posada-los-laureles:
+        title: 'Posada Los Laureles hospedaje barato, reserva en navicu.com'
+        description: 'Posada en un ambiente único con paisajes inolvidables rodeado de verdes montañas llenas de paz y tranquilidad ideal para vacaciones familiares en San Cristobal'
+    posada-la-cabana:
+        title: 'Posada La Cabaña hospedaje económico ubicado en Higuerote'
+        description: 'Hermosa y confortable posada La Cabaña ubicada a pocos minutos de la playa y en el centro de Higuerote, contamos con un cálido restaurante'
+    posada-turistica-la-fuente-de-socopo:
+        title: 'Alojamiento económico,  Posada Turistica La Fuente de Socopo'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, la mayor cantidad de establecimientos y al mejor precio posible, posadas en bolívares'
+    posada-paso-real-de-isnotu:
+        title: 'El  mejor precio, Posada Paso Real de Isnotu'
+        description: 'Posada familiar con excelente atencion, la forma mas facil de encontrar tu hospedaje en navicu.com'
+    posada-kaciquiari-inn:
+        title: 'Posada Kaciquiari Inn hospedaje económico, disfruta de Venezuela'
+        description: 'Encuentra el mejor precio en posadas para el destino que deseas reservar en Venezuela, Posada Kaciquiari Inn un refugio a la orilla del mar'
+    posada-el-marino-beach:
+        title: 'Consigue hospedaje economico, Posada El Marino Beach'
+        description: 'Bella posada con habitaciones economicas reserva facilmente en navicu.com y conoce las mejores playas en Venezuela'
+    posada-casa-de-campo:
+        title: 'Hospedaje barato para tus vacaciones, Posada Casa de Campo'
+        description: 'Hermosa y confortable Posada Casa de Campo ubicada a pocos metros de la playa en el estado Vargas, te ofrecemos un ambiente cálido'
+    posada-ger:
+        title: 'Hospedaje economico Posada Ger, en la Isla de Margarita'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, la mayor cantidad de establecimientos y al mejor precio posible, posadas en bolívares.'
+    la-casona-de-margot:
+        title: 'La Casona de Margot, hospedaje económico, disfruta de Venezuela'
+        description: 'Encuentra el mejor precio en posadas para el destino que deseas reservar en Venezuela en  La Casona de Margot ubicada a pocas cuadras de la Plaza Bolívar al igual del Teleférico de Mérida Mukumbari'
+    kokoland:
+        title: 'Posada Kokoland viaja con nosotros, reserva en navicu.com'
+        description: 'Bella Posada Kokoland también llamada “la tierra de los cocos”, esto gracias a la abundancia de estas plantas, cuenta con habitaciones economicas reserva facilmente en navicu.com y conoce los mejores lugares en Venezuela'
+    los-taques-beach-hotel-resort:
+        title: 'Los Taques Beach Hotel Resort te espera reserva en navicu.com'
+        description: 'Conoce un lugar exquisito para el descanso realiza tu reserva en la villa ideal para ti'
+    casa-alto-viento:
+        title: 'Casa Alto Viento, turismo rural económico en Venezuela'
+        description: 'Descubre un lugar especialmente acondicionado para recibir y hospedar viajeros y turistas'
+    alojamiento-nellymar:
+        title: 'Hospedaje que se adapta a tus necesidades, Alojamiento Nellymar'
+        description: 'Descubre la mejor forma de reservar online en navicu.com, la mayor cantidad de establecimientos y al mejor precio posible'
+    oceany-apartamentos-turisticos:
+        title: 'Reserva los mejores aparthotel del país al mejor precio'
+        description: 'Los aparthoteles tienen preferencia, disponibilidad y excelentes precios en navicu.com ¡Reserva ya!'
+    hotel-colibri-suites:
+        title: 'Hotel Colibri Suites, disfruta la estadía en Nueva Esparta'
+        description: 'Hotel especialmente para el ejecutivo de negocios que desee hospedarse en un lugar estratégico, reserva ya en navicu.com'
+    hotel-maracaibo-cumberland:
+        title: 'Hotel Maracaibo Cumberland, excelente hospedaje, conoce Venezuela'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, La mayor cantidad de establecimientos y al mejor precio posible, hotel en bolívares'
+    hotel-margarita-dynasty:
+        title: 'El mejor precio en hoteles, Hotel Margarita Dynasty'
+        description: 'Conoce el destino perfecto y las mejores playas en Venezuela, reserva facilmente en navicu.com'
+    hotel-miranda-cumberland:
+        title: 'El mejor precio en hoteles en Venezuela Hotel Miranda Cumberland '
+        description: 'Disfruta del Hotel Miranda Cumberland al mejor precio garantizado reservando en navicu.com'
+    hotel-jupiter:
+        title: 'Conoce y viaja con nosotros, reserva en navicu.com, Hotel Jupiter'
+        description: 'Cómodas habitaciones ubicanos en Lecheria, Estado Anzoategui, reserva tu hospedaje en navicu.com'
+    h2otel-boutique-by-ld-hoteles:
+        title: 'Los mejores hoteles en Venezuela, H2otel Boutique By LD Hoteles '
+        description: 'Disfruta del mejor Hotel de Margarita al mejor precio posible, nuevas instalaciones y excelente atención. ¡Te esperamos!'
+    ld-le-flamboyant:
+        title: 'El mejor precio en hoteles en Venezuela, LD Le Flamboyant'
+        description: 'Disfruta en familia de LD Le Famboyant la mejor opción para ese viaje que tanto has esperado. ¡Reserva ya con navicu.com! '
+    ld-palm-beach:
+        title: 'Hospedaje economico, disfruta y conoce venezuela en LD Palm Beach'
+        description: 'Conoce un lugar ideal para disfrutar de unas vacaciones inolvidables las mejores playas en Venezuela'
+    jw-marriott-caracas:
+        title: 'JW Marriott Caracas le permitirá disfrutar su estadía'
+        description: 'Excelente Hotel para el ejecutivo de negocios que desee hospedarse en un lugar estratégico y con la mejor atención. Disponible al mejor precio en navicu.com'
+    hotel-leparc:
+        title: 'Conoce y viaja con nosotros, reserva en navicu.com, Hotel Leparc'
+        description: 'Encuentra habitaciones económicas reserva tu hospedaje en navicu.com, La mayor cantidad de establecimientos y al mejor precio posible, hotel en bolívares.'
+    hotel-piritu-inn:
+        title: 'Hotel Barato para tu comodidad y descanso, Hotel Piritu Inn'
+        description: 'Busca el mejor precio en navicu.com te brinda servicios de alojamiento online'
+    hotel-jirahara:
+        title: 'Hotel Jirahara, disfruta la estadía en la ciudad de Barquisimeto.'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, La mayor cantidad de establecimientos y al mejor precio posible, hotel en bolívares.'
+    la-gran-posada-de-chirimena:
+        title: 'La Gran Posada de Chirimena hospedaje barato para tus vacaciones'
+        description: 'Hermosa y confortable La Gran Posada de Chirimena ubicada en Higuerote, con acceso directo a la playa, confortables habitaciones y comida típica a su gusto'
+    posada-colina-de-cerro-norte:
+        title: 'Encuentra hospedaje economico, Posada Colina de Cerro Norte'
+        description: 'Reserva en navicu.com y encuentra el mayor atractivo representado en sus hermosas playas'
+    hotel-la-casona:
+        title: 'Hotel La Casona, hospedaje barato para ti reserva en navicu.com'
+        description: 'Hotel La Casona ubicado en un ambiente único con paisajes inolvidables zona segura y tranquila ideal para vacaciones familiares en Ciudad Guayana, los Altos de Chilemex.'
+    posada-tona:
+        title: 'Posada Toña, hospedaje barato ubicado en Cuyagua  Costa de Aragua'
+        description: 'Hermosa y confortable Posada Toña ubicada a pocos minutos de la playa disponemos de comodas habitaciones'
+    posada-casa-sol:
+        title: 'Alojamiento economico con el mejor precio, Posada Casa Sol'
+        description: 'navicu.com ofrece la forma mas fácil de encontrar tu hospedaje, la mayor cantidad de establecimientos al mejor precio posible, posadas en bolívares'
+    posada-del-angel:
+        title: 'El mejor precio en alojamiento, Posada Del  Angel'
+        description: ' La forma mas facil de encontrar tu hospedaje en navicu.com, Te invita a conocer la confortable posada en el Edo. Sucre con una hermosa vista y playa paradisíacas donde el relax será tu mayor disfrute.'
+    oceany-posada-turistica:
+        title: 'Oceany Posada Turistica hospedaje economico y disfruta Venezuela'
+        description: 'Encuentra el mejor precio en posadas para el destino que deseas reservar en Venezuela, Posada Oceany Posada Turistica ubicada a pocos metros de la Avenida principal de la ciudad mas arquitectónica del Estado Anzoategui'
+    posada-la-maraquita-suite:
+        title: 'Encuentra hospedaje economico, Posada La Maraquita Suite'
+        description: 'Posada ubicada en un ambiente único clima de montaña ideal para tu descanso, ubicado en Valera, Trujillo'
+    el-portal-de-los-suenos:
+        title: 'Posada El Portal De Los Suenos, hospedaje barato para ti en Sucre'
+        description: 'Bella posada con habitaciones tematicas reserva facilmente en navicu.com y conoce el mejor ambiente campestre y acogedor, donde prevalece la tranquilidad para su descanso'
+    posada-lecheria:
+        title: 'Hospedaje barato para disfrutar tus vacaciones, Posada Lecheria'
+        description: 'Hermosa Posada Lecheria, a pocos minutos de los balnearios, centros comerciales y contigua al Complejo Turístico El Morro y sus variados restaurantes de montaña ubicada en Lecheria estado Anzoategui'
+    posada-emilia:
+        title: 'Alojamiento con el mejor precio Posada Emilia en Valera, Trujillo'
+        description: 'Posada familiar con excelente atencion, la forma mas facil de encontrar tu hospedaje en navicu.com'
+    posada-turistica-cordillera-andina:
+        title: 'Posada Turística Cordillera Andina, hospedaje economico para ti.'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, la mayor cantidad de establecimientos al mejor precio posible, posadas en bolívares'
+    residencia-ninos-mar:
+        title: 'Residencia Ninos Mar, hospedaje económico, disfruta de Venezuela'
+        description: 'Encuentra el mejor precio en posadas para el destino que deseas reservar en Venezuela en Residencia Ninos Mar ubicada a media cuadra de la Plaza Bolívar en la Puerta, Valera'
+    posada-doral:
+        title: 'Hospedaje barato para disfrutar tus vacaciones, Posada Doral'
+        description: 'Hermosa y confortable Posada Doral ubicada con vista a la playa en el estado Vargas, te ofrecemos un ambiente cálido'
+    hotel-chacao-cumberland:
+        title: 'Hotel Chacao Cumberland, ubicado en la ciudad de Caracas.'
+        description: 'Hotel especialmente para el ejecutivo de negocios que desee hospedarse en un lugar estratégico, reserva ya en navicu.com'
+    centro-termal-las-trincheras:
+        title: 'Centro Termal las Trincheras, excelente hospedaje en Venezuela'
+        description: 'Reserva en navicu.com y conoce el complejo construido alrededor de la fuente de aguas termales más grande e importante de Venezuela'
+    hotel-tropical-refuge:
+        title: 'Hotel Tropical Refuge ubicado en playa el agua, Nueva Esparta'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, La mayor cantidad de establecimientos al mejor precio posible, hotel en bolívares'
+    hotel-la-cascada-de-trujillo:
+        title: 'Reserva en navicu.com, Hotel la Cascada de Trujillo'
+        description: 'Comodas habitaciones y cabañas para el descanso en familia, ubicanos en Pampanito Estado Trujillo, reserva tu hospedaje en navicu.com'
+    hotel-caracas-cumberland:
+        title: 'Hotel Caracas Cumberland, ubicado en el Distrito Capital'
+        description: 'Encuentra el lugar especialmente acondicionado para recibir y hospedar  ejecutivos de negocios, viajeros y turistas, navicu.com te brinda servicios de alojamiento online.'
+    renaissance-hotel-caracas: 
+        title: 'Renaissance Hotel ubicado en la Castellana, Caracas, Venezuela'
+        description: 'Hotel ideal para el ejecutivo de negocios que desee hospedarse en un lugar estratégico, reserva ya en navicu.com y conoce uno de los sectores más exclusivos de la ciudad de Caracas'
+    hotel-bermudez:
+        title: 'Hotel Bermudez, hospedaje economico, disfruta y conoce Venezuela'
+        description: 'Conoce un lugar ideal para disfrutar de unas vacaciones ubicado en una zona privilegiada y de fácil acceso cerca del centro de la ciudad de Maracay estado Aragua'
+    hotel-la-carreta:
+        title: 'Hotel la carreta, ubicado cerca de la ciudad de Valera.'
+        description: 'Encuentra habitaciones economicas reserva tu hospedaje en navicu.com, La mayor cantidad de establecimientos y al mejor precio posible, hotel en bolívares'
+    hotel-buddha-beach-lounge:
+        title: 'Hotel Buddha Beach & Lounge, ubicado en la Isla de Margarita'
+        description: 'Reserva en  navicu.com donde encontraras los mejores precios en servicios de alojamiento online'
+    hotel-klein-dorf: 
+        title: 'Reserva en navicu.com y viaja con nosotros, Hotel Klein Dorf'
+        description: 'Comodas habitaciones ubicanos en la Colonia Tovar, Estado Aragua, reserva tu hospedaje en navicu.com'
+    marriott-venezuela-playa-grande-maiquetia:
+        title: 'Marriott Venezuela Playa Grande, ubicado en el estado Vargas'
+        description: 'Hotel ideal para el ejecutivo de negocios, viajeros y turistas que deseen hospedarse en un lugar estratégico, reserva ya en navicu.com'
+    hotel-riviera: 
+        title: 'Conoce y viaja con nosotros, reserva en navicu.com,  Hotel Riviera'
+        description: 'Encuentra habitaciones economicas reserva tu hospedaje en navicu.com, La mayor cantidad de establecimientos y al mejor precio posible, hotel en bolívares.'
+    poza-cristal:
+        title: 'Hotel Barato para tu comodidad y descanso, Poza Cristal'
+        description: 'Reserva en navicu.com y estaras rodeados de un privilegiado paisaje natural en donde disfrutaras en familia conectarte con la naturaleza'
+    santa-irenes-hotel:
+        title: 'Santa Irene`s Hotel, permitirá disfrutar la estadía en Punto Fijo'
+        description: 'Busca el mejor precio en navicu.com te brindaremos el mejor servicio de alojamiento online'
+    hotel-barlovento:
+        title: 'Hotel Barlovento, disfruta de tu hospedaje y conoce Venezuela'
+        description: 'navicu.com ofrece la forma mas facil de encontrar tu hospedaje, La mayor cantidad de establecimientos y al mejor precio posible, hotel en bolívares.'
+    hotel-el-fuerte:
+        title: 'Hotel el Fuerte, ubicado en la ciudad de San Felipe Yaracuy'
+        description: 'Conoce el destino perfecto sitios de interés histórico, reserva facilmente en navicu.com y disfruta de tu estadía'
+    cabanas-bougainvillea:
+        title: 'Cabañas Bougainvillea, ubicado en los Taques, Falcón, Venezuela.'
+        description: 'Busca el mejor precio en navicu.com te brindaremos el mejor servicio de alojamiento online, ven y disfruta de Complejo de cabañas familiares con vista al mar'
+    cabanas-chelita:
+        title: 'Cabanas Chelita, le permitirá disfrutar del estado Nueva Esparta'
+        description: 'Reserva en navicu.com y estaras rodeados de una hermosa vista sobre una colina en donde disfrutaras en familia de cabañas full equipadas en Cabanas Chelita'
+    hotel-montecarlo:
+        title: 'Hotel Monte Carlo, hospedaje economico en Porlamar, Nueva Esparta'
+        description: 'Reserva en navicu.com y encuentra El Hotel Monte Carlo ubicación privilegiada en Nueva Esparta, Venezuela de fácil acceso a centros comerciales y playas'
+    residencias-avila-caribe:
+        title: 'Residencias Avila Caribe, hospedaje barato en Vargas, Venezuela'
+        description: 'La forma fácil de encontrar tu hospedaje en navicu.com, Te invita a conocer las confortables Residencias Avila Caribe en Los Taques, Falcón, Venezuela'
+
+
+

@@ -1,0 +1,52 @@
+Navicu\Core\Domain\Model\Entity\Flight:
+    type: entity
+    table: flight
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbFlightRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        number:
+            type: integer
+            nullable: false
+        airline_code:
+            type: string
+            nullable: false
+        origin:
+            type: string
+            nullable: false
+        destination:
+            type: string
+            nullable: false
+        departure_time:
+            type: datetime
+            nullable: false
+        duration:
+            type: string
+            nullable: false
+        return_flight:
+            type: boolean
+            nullable: false
+            options:
+              default: 'false'
+        price:
+            type: float
+            nullable: false
+        currency:
+            type: string
+            nullable: false
+
+    manyToOne:
+        reservation:
+            targetEntity: FlightReservation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                flight_reservation:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false

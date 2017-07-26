@@ -1,0 +1,52 @@
+Navicu\Core\Domain\Model\Entity\FlightReservation:
+    type: entity
+    table: flight_reservation
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbFlightReservationRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        public_id:
+            type: string
+            nullable: false
+        code:
+            type: string
+            nullable: true
+        reservation_date:
+            type: date
+            nullable: false
+        state:
+            type: integer
+            nullable: true
+        total_to_pay:
+            type: float
+            nullable: true
+        tax:
+            type: float
+            nullable: true
+        child_number:
+            type: integer
+            nullable: true
+        adult_number:
+            type: integer
+            nullable: true
+        currency:
+            type: string
+            nullable: true
+
+    oneToMany:
+        passengers:
+            targetEntity: Passenger
+            mappedBy: flight_reservation
+            cascade: ["persist"]
+        Flights:
+            targetEntity: Flight
+            mappedBy: flight_reservation
+            cascade: ["persist"]
+        payments:
+            targetEntity: FlightPayment
+            mappedBy: flight_reservation
+            cascade: ["persist"]

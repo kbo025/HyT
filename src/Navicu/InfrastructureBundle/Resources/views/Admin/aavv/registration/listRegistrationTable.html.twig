@@ -1,0 +1,132 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'beginDate')">
+                    {{ 'message.signup_start_date'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'beginDate'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'beginDate'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'idAgency')">
+                    {{ 'word.id'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'idAgency'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'idAgency'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'city')">
+                    {{ 'word.city'|transchoice(1) }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'city'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'city'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'nameAgency')">
+                    {{ 'word.name'|transchoice(1) }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'nameAgency'"
+                        class="fa fn-arrow-down"
+                    ></i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'nameAgency'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'percentComplete')">
+                    {{ 'word.progress'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'percentComplete'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'percentComplete'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th data-title="''">
+            </th>
+                <th data-title="''">
+                </th>
+                <th data-title="''">
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="value in agencies">
+            <td>
+                {[{value.beginDate}]}
+            </td>
+            <td>
+                {[{value.idAgency}]}
+            </td>
+            <td>
+                {[{value.city}]}
+            </td>
+            <td>
+                {[{value.nameAgency}]}
+            </td>
+            <td>
+                {[{value.percentComplete}]}%
+            </td>
+            <td ng-show="{{ hasPermission('admin_aavv_temporals', 'update') }}">
+                <button
+                    class="nvc-button__admin"
+                    ng-click="editAgency(value.slug);"
+                    formtarget="_blank"
+                >
+                    Editar
+                </button>
+            </td>
+            <td ng-show="{{ hasPermission('admin_aavv_temporals', 'release') }}">
+                    <button
+                        class="nvc-button__admin"
+                        ng-click="selectedAgency = value; showModalConfirmActivate(value.slug, $index);"
+                        ng-disabled="value.percentComplete<100"
+                        ng-class="{'nvc-disabled': value.percentComplete<100}"
+                    >
+                        Alta
+                    </button>
+                </td>
+                <td ng-show="{{ hasPermission('admin_aavv_temporals', 'delete') }}">
+                    <button
+                        class="nvc-button__admin"
+                        ng-click="selectedAgency = value; showModalConfirmDelete(value.slug, $index);"
+                    >
+                        Borrar
+                    </button>
+                </td>
+        </tr>
+    </tbody>
+</table>

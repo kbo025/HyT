@@ -1,0 +1,588 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+<main
+    class="nvc-aavvEditNow"
+    ng-app="editUserPermissionsModule"
+    ng-controller="editUserPermissionsController"
+>
+    {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+
+    <header class="clearfix nvc-header--aavv nvc-header--users">
+        <div class="clearfix nvc-container-fluid">
+            <div>
+                <h1 class="nvc-aavv-customize__title--primary">
+                    {{ 'aavv.edit.users.headings.main' | trans }}
+                </h1>
+                <span class="nvc-aavv-customize__title--primary">·</span>
+                <h2 class="nvc-aavv-customize__title--primary">
+                    {{ 'aavv.edit.users.headings.secondary' | trans }}
+                </h2>
+            </div>
+        </div>
+    </header>
+
+    <form ng-submit="handleSubmit()">
+        <div
+            ng-class="{odd: $odd, even: $even, last: $last}"
+            ng-repeat="user in usersForm"
+            ng-cloak
+        >
+            <div class="nvc-container-fluid">
+                <article>
+                    <header>
+                        <span
+                            class="nvc-badge"
+                            ng-if="$first"
+                        >
+                            Administrador
+                        </span>
+
+                        <h1>
+                            <i class="fn-users nvc-aavv-customize__icon"></i>
+
+                            <i
+                                class="fn-info info nvc-tooltips nvc-tooltips__top"
+                                ng-if="$first"
+                            >
+                                <span>
+                                    {{
+                                        'aavv.edit.users.form.tooltips.user_pricing' | trans({
+                                            '%currency%': 'Bs',
+                                            '%amount%': '20.000',
+                                        })
+                                    }}
+                                </span>
+                            </i>
+
+                            <span ng-if="user.id" class="nvc-aavv-customize__title--primary">
+                                {[{
+                                    'aavv.edit.users.form.headings.user' | translate: {
+                                        i: $index + 1,
+                                    }
+                                }]}
+                            </span>
+
+                            <span ng-if="!user.id" class="nvc-aavv-customize__title--primary">
+                                {{ 'aavv.edit.users.form.headings.new_user' | trans }}
+                            </span>
+                        </h1>
+                    </header>
+
+                    <div class="row">
+                        <div class="container-fluid">
+
+                            <div class="form-group nvc-form__fullName">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].fullName}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__fullName-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.fullname' | trans }}
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        id="form__fullName-{[{ $index }]}"
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.fullName"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.fullname' | trans }}"
+                                        type="text"
+                                    />
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].fullName"
+                                    >
+                                        {[{ errors[$index].fullName | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__identification">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].identification}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__identification-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.identification' | trans }}
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        id="form__identification-{[{ $index }]}"
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.identification"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.identification' | trans }}"
+                                        type="text"
+                                    />
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].identification"
+                                    >
+                                        {[{ errors[$index].identification | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__phone">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].phone}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__phone-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.phone' | trans }}
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        id="form__phone-{[{ $index }]}"
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.phone"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.phone' | trans }}"
+                                        type="text"
+                                    />
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].phone"
+                                    >
+                                        {[{ errors[$index].phone | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__email">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].email}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__email-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.email' | trans }}
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        id="form__email-{[{ $index }]}"
+                                        ng-change="clear($index, 'email')"
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.email"
+                                        ng-blur="validateEmail(user, $index)"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.email' | trans }}"
+                                        type="text"
+                                    />
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].email"
+                                    >
+                                        {[{ errors[$index].email | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__position">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].position}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__position-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.position' | trans }}
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        id="form__position-{[{ $index }]}"
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.position"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.position' | trans }}"
+                                        type="text"
+                                    />
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].position"
+                                    >
+                                        {[{ errors[$index].position | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="form-group nvc-form__country_id">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].country_id}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__country_id-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.country' | trans }}
+                                    </label>
+
+                                    <nvc-select
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.country_id"
+                                        on-change="onChangeCountry(user.id)"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.country_id' | trans }}"
+                                    >
+                                        <nvc-option
+                                            ng-repeat="country in countries track by country.id"
+                                            value="country.id"
+                                        >
+                                            {[{ country.name }]}
+                                        </nvc-option>
+                                    </nvc-select>
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].country_id"
+                                    >
+                                        {[{ errors[$index].country_id | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__state_id">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].state_id}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__state_id-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.state' | trans }}
+                                    </label>
+
+                                    <nvc-select
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.state_id"
+                                        on-change="onChangeState(user.id)"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.state_id' | trans }}"
+                                    >
+                                        <nvc-option
+                                            ng-repeat="state in states[user.id] track by state.id"
+                                            value="state.id"
+                                        >
+                                            {[{ state.name }]}
+                                        </nvc-option>
+                                    </nvc-select>
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].state_id"
+                                    >
+                                        {[{ errors[$index].state_id | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__city_id">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].city_id}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__city_id-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.city' | trans }}
+                                    </label>
+
+                                    <nvc-select
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.city_id"
+                                        on-change="onChangeCity(user.id)"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.city_id' | trans }}"
+                                    >
+                                        <nvc-option
+                                            ng-repeat="city in cities[user.id] track by city.id"
+                                            value="city.id"
+                                        >
+                                            {[{ city.name }]}
+                                        </nvc-option>
+                                    </nvc-select>
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].city_id"
+                                    >
+                                        {[{ errors[$index].city_id | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__password">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].password}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__password-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.password' | trans }}
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        id="form__password-{[{ $index }]}"
+                                        ng-change="clear($index, 'password'); clear($index, 'confirmPassword')"
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.password"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.password' | trans }}"
+                                        type="password"
+                                    />
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].password"
+                                    >
+                                        {[{ errors[$index].password | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group nvc-form__confirmPassword">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].confirmPassword}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__confirmPassword-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.password_repeat' | trans }}
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        id="form__confirmPassword-{[{ $index }]}"
+                                        ng-change="clear($index, 'password'); clear($index, 'confirmPassword')"
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="user.confirmPassword"
+                                        placeholder="{{ 'aavv.edit.users.form.placeholders.password_confirmation' | trans }}"
+                                        type="password"
+                                    />
+
+                                    <div
+                                        class="nvc-error"
+                                        ng-if="errors[$index].confirmPassword"
+                                    >
+                                        {[{ errors[$index].confirmPassword | translate }]}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="form-group nvc-form__roles">
+                                <div
+                                    class="nvc-input-group--aavv"
+                                    ng-class="{'nvc-input-group--error': errors[$index].roles}"
+                                >
+                                    <label
+                                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                                        for="form__roles-{[{ $index }]}"
+                                    >
+                                        {{ 'aavv.edit.users.form.labels.role' | trans }}
+                                    </label>
+
+                                    <div>
+
+                                        <input
+                                            class="form-control"
+                                            disabled
+                                            ng-if="$first"
+                                            ng-model="user.roles[0].role"
+                                            type="text"
+                                        />
+
+                                        <ui-select
+                                            multiple
+                                            ng-click="handleClickRoleSelect($event)"
+                                            ng-if="!$first"
+                                            ng-model="user.roles"
+                                            sortable="true"
+                                            theme="bootstrap"
+                                        >
+                                            <ui-select-match>
+                                                {[{ $item.role }]}
+                                            </ui-select-match>
+
+                                            <ui-select-choices
+                                                repeat="role in roles | filter: $select.search"
+                                            >
+                                                <div ng-bind-html="role.role | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+
+                                        <div
+                                            class="nvc-error"
+                                            ng-if="errors[$index].roles"
+                                        >
+                                            {[{ errors[$index].roles | translate }]}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nvc-checkboxGroup">
+                        <nvc-checkbox
+                            ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                            ng-model="user.reservation_email_receiver"
+                        >
+                            {{ 'aavv.edit.users.form.labels.reservation_email' | trans }}
+                        </nvc-checkbox>
+
+                        <nvc-checkbox
+                            ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                            ng-model="user.cancellation_email_receiver"
+                        >
+                            {{ 'aavv.edit.users.form.labels.cancellation_email' | trans }}
+                        </nvc-checkbox>
+
+                        <nvc-checkbox
+                            ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                            ng-model="user.news_email_receiver"
+                        >
+                            {{ 'aavv.edit.users.form.labels.news_email' | trans }}
+                        </nvc-checkbox>
+                    </div>
+                </article>
+            </div>
+
+            <div class="container" ng-if="$last">
+                <div class="container-fluid clearfix">
+                    <button
+                        class="nvc-aavvEditNow__addUser nvc-aavv-customize__button--primary"
+                        ng-click="handleAddUser()"
+                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                    >
+                        {{ 'aavv.edit.users.form.labels.add_user' | trans }}
+                    </button>
+                </div>
+
+                <div class="container-fluid clearfix nvc__submitContainer">
+                    <button
+                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                        type="submit"
+                    >
+                        {{ 'aavv.edit.users.form.labels.submit' | trans }}
+                    </button>
+                </div>
+
+                <div class="container-fluid clearfix">
+                    <hr />
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="nvc-bottomImages clearfix"
+            ng-cloak
+            ng-if="usersForm.length > 0"
+        >
+            <article class="nvc-bottomImages__emails">
+                <div>
+                    <img src="/images/aavv/edit-users/customize-icon.png" />
+                </div>
+
+                <div class="nvc-bottomImages__checkboxContainer">
+                    <div class="nvc-bottomImages__checkboxContainer--inner">
+                        <div class="nvc__tooltip">
+                            <i class="fn-info info nvc-tooltips nvc-tooltips__top nvc-aavv-customize__icon">
+                                <span>
+                                    {{
+                                        'aavv.edit.users.form.additional_monthly_cost' | trans({
+                                            '%currency%': 'Bs',
+                                            '%amount%': '5.000',
+                                        })
+                                    }}
+                                </span>
+                            </i>
+                        </div>
+                        <div class="nvc__checkbox">
+                            <nvc-checkbox
+                                ng-model="settings.personalized_mail"
+                                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                            ></nvc-checkbox>
+                        </div>
+                        <div class="nvc__label">
+                            {{ 'aavv.edit.users.form.labels.personalized_emails' | trans }}
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="nvc-bottomImages__gui">
+                <div>
+                    <img src="/images/aavv/edit-users/gui-icon.png" />
+                </div>
+
+                <div class="nvc-bottomImages__checkboxContainer">
+                    <div class="nvc-bottomImages__checkboxContainer--inner">
+                        <div class="nvc__tooltip">
+                            <i class="fn-info info nvc-tooltips nvc-tooltips__top nvc-aavv-customize__icon">
+                                <span>
+                                    {{
+                                        'aavv.edit.users.form.additional_monthly_cost' | trans({
+                                            '%currency%': 'Bs',
+                                            '%amount%': '15.000',
+                                        })
+                                    }}
+                                </span>
+                            </i>
+                        </div>
+                        <div class="nvc__checkbox">
+                            <nvc-checkbox
+                                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                ng-model="settings.personalized_interface"
+                            ></nvc-checkbox>
+                        </div>
+                        <div class="nvc__label">
+                            {{ 'aavv.edit.users.form.labels.personalized_interface' | trans }}
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </form>
+</main>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        angular.module('editUserPermissionsModule').value('viewData', (function() {
+            return {{ data | raw }};
+        })());
+    </script>
+{% endblock %}

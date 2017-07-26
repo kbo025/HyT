@@ -1,0 +1,27 @@
+# Vista Roles y Permisos Admin
+roles_and_permissions_page:
+  path: /permissions
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/Permissions:rolesAndPermissionsPage}
+  options:
+    expose: true
+
+#Listado de Roles y Permisos
+admin_list_permissions:
+  path: /permissions/list
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/Permissions:listRolesAndPermissions}
+  options:
+    expose: true
+
+#Peticion para editar los permisos
+admin_edit_permissions:
+  path: /permissions/edit
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/Permissions:editRolesAndPermissions}
+  options:
+    expose: true
+
+#Peticion para crear permiso
+admin_permissions_create:
+  path: /permissions/create
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/Permissions:permissionsCreate}
+  options:
+    expose: true

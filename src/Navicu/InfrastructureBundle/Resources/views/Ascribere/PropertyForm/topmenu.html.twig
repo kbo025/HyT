@@ -1,0 +1,310 @@
+{% block topmenu%}
+
+<nav class="navbar navbar-default navbar-default-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-main">
+            <ul class="nav navbar-nav topmenu">
+                <div class="container form-font">
+                    {% if module_title == "1"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-informacion" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Información General</h3>
+                            <h5>Datos básicos del establecimiento</h5>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "2"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-servicios" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Servicios</h3>
+                            <h5>Lista detallada de los servicios ofrecidos</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "3"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-habitaciones" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Registro de habitaciones</h3>
+                            <h5>¡Agrega todas tus habitaciones!</h5>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "4"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-galeria" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Fotos del establecimiento</h3>
+                            <h5>¡Agrega imagenes de tu establecimiento!</h4>
+                            </div>
+                    {% endif %}
+                    {% if module_title == "5"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-pago" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Registro de pago</h3>
+                            <h5>Ingresa tus datos bancarios para tu pago</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "6"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-acuerdo" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Acuerdo de colaboración</h3>
+                            <h5>Acepta nuestras condiciones</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "7"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-vistaprevia" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Vista Previa</h3>
+                            <h5>¡Así se verá tu propiedad en Navicu!</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "8"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-check" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Estado del formulario</h3>
+                            <h5>Campos pendientes por completar</h4>
+                        </div>
+                    {% endif %}
+                    <div class="col-md-1 col-lg-2"></div>
+                    <div class="col-md-9 col-lg-8" style="margin-top:20px; font-size: 37px; " ng-if="progress[6]==true">
+                        <!-- Información General -->
+                        <button type="button" class="btn button-menu-form" ng-disabled="progress[6]==true">
+                            <a  ng-href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'property', 'extension': app.request.attributes.get('extension')}) }}">
+                            {% if module_title == "1"%}
+                                <span class="fn-informacion" style="color:#FFF !important"
+                                ng-class="{'color-icon-off': progress[0]==false, 'color-icon-on': progress[0]==true}"></span>
+                                {% else %}
+                                <span class="fn-informacion"
+                                ng-class="{'color-icon-off': progress[0]==false, 'color-icon-on': progress[0]==true}"></span>
+                            {% endif %}
+                            </a>
+                        </button>
+                        <span style="color:#43254A">|</span>
+                        <!-- Servicios -->
+                        <button type="button" class="btn button-menu-form" ng-disabled="progress[6]==true"> 
+                            <a ng-href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'services', 'extension': app.request.attributes.get('extension')}) }}" >
+                               {% if module_title == "2"%}
+                               <span class="fn-servicios" style="color:#FFF !important"
+                               ng-class="{'color-icon-off': progress[1]==false, 'color-icon-on': progress[1]==true}"></span>
+                               {% else %}
+                               <span class="fn-servicios"
+                               ng-class="{'color-icon-off': progress[1]==false, 'color-icon-on': progress[1]==true}"></span>
+                               {% endif %}
+                           </a>
+                        </button>
+                        <span style="color:#43254A">|</span>
+                        <!-- Habitaciones -->
+                        <button type="button" class="btn button-menu-form" ng-disabled="progress[6]==true">
+                            <a  href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'rooms', 'extension': app.request.attributes.get('extension')}) }}" >
+                                {% if module_title == "3"%}
+                                    <span class="fn-habitaciones" style="color:#FFF !important"
+                                    ng-class="{'color-icon-off': progress[2]==false, 'color-icon-on': progress[2]==true}"></span>
+                                {% else %}
+                                    <span class="fn-habitaciones"
+                                    ng-class="{'color-icon-off': progress[2]==false, 'color-icon-on': progress[2]==true}"></span>
+                                {% endif %}
+                            </a>
+                        </button>
+                        <span style="color:#43254A">|</span>
+                        <!-- Galería -->
+                        <button type="button" class="btn button-menu-form" ng-disabled="progress[6]==true">
+                            <a ng-href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'gallery', 'extension': app.request.attributes.get('extension')}) }}">
+                                {% if module_title == "4"%}
+                                    <span class="fn-galeria" style="color:#FFF !important"
+                                    ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false, 
+                                    'color-icon-off': progress[3]==false, 
+                                    'color-icon-on': progress[3]==true}"></span>
+                                {% else %}
+                                    <span class="fn-galeria"
+                                    ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false, 
+                                    'color-icon-off': progress[3]==false, 
+                                    'color-icon-on': progress[3]==true}"></span>
+                                {% endif %}
+                            </a>
+                        </button>      
+                        <span style="color:#43254A">|</span>
+                        <!-- Registro de pago -->
+                        <button type="button" class="btn button-menu-form" ng-disabled="progress[6]==true">
+                            <a ng-href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'payment', 'extension' : app.request.attributes.get('extension')}) }}">
+                                {% if module_title == "5"%}
+                                    <span class="fn-pago"  style="color:#FFF !important"
+                                    ng-class="{'color-icon-off': progress[4]==false, 'color-icon-on': progress[4]==true}"></span>
+                                {% else %}
+                                    <span class="fn-pago"
+                                    ng-class="{'color-icon-off': progress[4]==false, 'color-icon-on': progress[4]==true}"></span>
+                                {% endif %}
+                            </a>
+                        </button>
+                        <span style="color:#43254A">|</span>
+                        <!-- Términos y Condiciones -->
+                        <button type="button" class="btn button-menu-form" ng-disabled="progress[6]==true">
+                            <a ng-href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'agreement', 'extension' : app.request.attributes.get('extension')}) }}">
+                                {% if module_title == "6"%}
+                                    <span class="fn-acuerdo" style="color:#FFF !important"
+                                    ng-class="{'color-icon-off': progress[5]==false, 'color-icon-on': progress[5]==true}"></span>
+                                {% else %}
+                                    <span class="fn-acuerdo"
+                                    ng-class="{'color-icon-off': progress[5]==false, 'color-icon-on': progress[5]==true}"></span>
+                                {% endif %}
+                            </a>
+                        </button>
+                        <span style="color:#43254A">|</span>
+                        <!-- Vista previa -->
+                        <button class="button-menu-form">
+                            <a ng-href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'preview', 'extension' : app.request.attributes.get('extension')}) }}">
+                                {% if module_title == "7"%}
+                                   <span class="fn-vistaprevia" style="color:#FFF !important"
+                                   ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false,
+                                   'color-icon-off': progress[6]==false, 
+                                   'color-icon-on': progress[6]==true}"></span>
+                                {% else %}
+                                   <span class="fn-vistaprevia"
+                                   ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false,
+                                   'color-icon-off': progress[6]==false, 
+                                   'color-icon-on': progress[6]==true}"></span>
+                                {% endif %}
+                            </a>
+                        </button> 
+                        <span style="color:#43254A">|</span>
+                        <!-- Estado del formulario -->
+                        <button type="button" class="btn button-menu-form" ng-disabled="progress[6]==true">
+                            <a ng-href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'status', 'extension' : app.request.attributes.get('extension')}) }}">
+                                {% if module_title == "8"%}
+                                    <span class="fn-check" style="color:#FFF !important"
+                                    ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false,
+                                    'color-icon-off': progress[6]==false, 
+                                    'color-icon-on': progress[6]==true}"></span>
+                                {% else %}
+                                    <span class="fn-check"
+                                    ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false,
+                                    'color-icon-off': progress[6]==false, 
+                                    'color-icon-on': progress[6]==true}"></span>
+                                {% endif %}
+                            </a>
+                        </button> 
+                    </div>
+                    <div class="col-md-9 col-lg-8" style="margin-top:20px; font-size: 37px;" ng-if="progress[6]==false">
+                        <!-- Información General -->
+                        <a style="cursor:pointer;" ng-click="changeSection('property')">
+                            {% if module_title == "1"%}
+                                <span class="fn-informacion" style="color:#FFF !important"
+                                ng-class="{'color-icon-off': progress[0]==false, 'color-icon-on': progress[0]==true}"></span>
+                            {% else %}
+                                <span class="fn-informacion"
+                                ng-class="{'color-icon-off': progress[0]==false, 'color-icon-on': progress[0]==true}"></span>
+                            {% endif %}
+                        <a>
+                        <span style="color:#43254A">|</span>
+                        <!-- Servicios -->
+                        <a style="cursor:pointer;" ng-click="changeSection('services')">
+                            {% if module_title == "2"%}
+                                <span class="fn-servicios" style="color:#FFF !important"
+                                ng-class="{'color-icon-off': progress[1]==false, 'color-icon-on': progress[1]==true}"></span>
+                            {% else %}
+                                <span class="fn-servicios"
+                                ng-class="{'color-icon-off': progress[1]==false, 'color-icon-on': progress[1]==true}"></span>
+                            {% endif %}
+                        </a>
+                        <span style="color:#43254A">|</span>
+                        <!-- Habitaciones -->
+                        <a style="cursor:pointer;" ng-click="changeSection('rooms')">
+                            {% if module_title == "3"%}
+                                <span class="fn-habitaciones" style="color:#FFF !important"
+                                ng-class="{'color-icon-off': progress[2]==false, 'color-icon-on': progress[2]==true}"></span>
+                            {% else %}
+                                <span class="fn-habitaciones"
+                                ng-class="{'color-icon-off': progress[2]==false, 'color-icon-on': progress[2]==true}"></span>
+                            {% endif %}
+                        </a>
+                        <span style="color:#43254A">|</span>
+                        <!-- Galería -->
+                        <a style="cursor:pointer;" ng-click="changeSection('gallery')">
+                            {% if module_title == "4"%}
+                                <span class="fn-galeria" style="color:#FFF !important"
+                                ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false, 
+                                'color-icon-off': progress[3]==false, 
+                                'color-icon-on': progress[3]==true}"></span>
+                            {% else %}
+                                <span class="fn-galeria"
+                                ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false, 
+                                'color-icon-off': progress[3]==false, 
+                                'color-icon-on': progress[3]==true}"></span>
+                            {% endif %}
+                        </a>
+                        <span style="color:#43254A">|</span>
+                        <!-- Registro de pago -->
+                        <a style="cursor:pointer;" ng-click="changeSection('payment')">
+                            {% if module_title == "5"%}
+                                <span class="fn-pago"  style="color:#FFF !important"
+                                ng-class="{'color-icon-off': progress[4]==false, 'color-icon-on': progress[4]==true}"></span>
+                            {% else %}
+                                <span class="fn-pago"
+                                ng-class="{'color-icon-off': progress[4]==false, 'color-icon-on': progress[4]==true}"></span>
+                            {% endif %}
+                        </a>
+                        <span style="color:#43254A">|</span>
+                        <!-- Términos y Condiciones -->
+                        <a style="cursor:pointer;" ng-click="changeSection('agreement')">
+                            {% if module_title == "6"%}
+                                <span class="fn-acuerdo" style="color:#FFF !important"
+                                ng-class="{'color-icon-off': progress[5]==false, 'color-icon-on': progress[5]==true}"></span>
+                            {% else %}
+                                <span class="fn-acuerdo"
+                                ng-class="{'color-icon-off': progress[5]==false, 'color-icon-on': progress[5]==true}"></span>
+                            {% endif %}
+                        </a>
+                        <span style="color:#43254A">|</span>
+                        <!-- Vista previa -->
+                        <a style="cursor:pointer;" ng-click="changeSection('preview')">
+                            {% if module_title == "7"%}
+                                <span class="fn-vistaprevia" style="color:#FFF !important"
+                                ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false,
+                                'color-icon-off': progress[6]==false, 
+                                'color-icon-on': progress[6]==true}"></span>
+                            {% else %}
+                                <span class="fn-vistaprevia"
+                                ng-class="{'color-icon-disable': progress[1]==false && progress[2]==false,
+                                'color-icon-off': progress[6]==false, 
+                                'color-icon-on': progress[6]==true}"></span>
+                            {% endif %}
+                        </a>
+                        <span style="color:#43254A">|</span>
+                        <!-- Estado del formulario -->
+                        <a style="cursor:pointer;" ng-click="changeSection('status')">
+                            {% if module_title == "8"%}
+                                <span class="fn-check" style="color:#FFF !important"
+                                ng-class="{'color-icon-off': progress[7]==false, 'color-icon-on': progress[7]==true}"></span>
+                            {% else %}
+                                <span class="fn-check"
+                                ng-class="{'color-icon-off': progress[7]==false, 'color-icon-on': progress[7]==true}"></span>
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% endblock topmenu %} 

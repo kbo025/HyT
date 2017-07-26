@@ -1,0 +1,26 @@
+# Ruta de la lista de facturas de una aavv
+navicu_aavv_billing_list:
+    path: /billing/list/{page}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Billing:listBillingByAAVV, page: 1 }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json) }
+
+# cambia el estado de una factura de 'no pagada' a 'por aprobación'
+navicu_aavv_billing_change_status:
+    path: /billing/change/{idInvoice}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Billing:changeStatusInvoice }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST }
+
+# Generar una factura en un pdf
+navicu_aavv_billing_generate_bill_pdf:
+    path: /billing/{idInvoice}/Invoice.pdf
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Billing:generateInvoicePdf }
+    options:
+        expose: true
+
+

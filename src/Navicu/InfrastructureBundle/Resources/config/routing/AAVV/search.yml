@@ -1,0 +1,51 @@
+# Ruta para el manejo de la lista de los destinos en al cliente.
+navicu_aavv_asinc_search_destiny_of_location:
+    path:   /async/search/destiny
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:asyncDestinyOfLocation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Ruta para el manejo de una lista de destinos por medio de autocompletado.
+navicu_aavv_asinc_search_destiny_by_autocompleted:
+    path:   /async/aavv/search/autocompleted
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:asyncAutoCompletedDestiny }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+# Ruta para el home de aavv.
+navicu_aavv_home:
+    path:   /home
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Search:home}
+    options:
+        expose: true
+
+navicu_aavv_dataReservation:
+    path: /dataReservation
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Reservation:GetDataReservation}
+
+# Ruta para el manejo asincrono de la lista de establecimientos para agencias de viaje.
+navicu_asinc_search_destiny_of_aavv:
+    path:   /async/property
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Search:asyncListSearch }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Ruta para el manejo de la vista de lista de establecimientos para agencias de viaje.
+navicu_aavv_get_list_Properties:
+    path:   /{countryCode}/{type}/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Search:getListProperties }
+    options:
+        expose: true
+    requirements:
+        { countryCode:  "[a-zA-Z]{2}", _method: GET|POST }
+
+navicu_aavv_get_top_destination:
+    path: /topDestination
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Search:getTopDestination }
+    options:
+        expose: true

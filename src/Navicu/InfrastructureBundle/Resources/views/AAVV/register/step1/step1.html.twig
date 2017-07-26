@@ -1,0 +1,63 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+    <main
+            class='nvc-aavv__register nvc-aavv__step1 visible-md visible-lg'
+            ng-app='step1Module'
+            ng-controller='step1Controllers'
+            ng-cloak
+    >
+
+        {{ include("NavicuInfrastructureBundle:AAVV:register/topmenu.html.twig") }}
+
+        {% include "NavicuInfrastructureBundle:AAVV:register/step1/step1Alert.html.twig" %}
+
+        <form class='nvc-form-inline' name='formStep1'>
+            <div class='col-md-16 nvc-padding'>
+                {% include "NavicuInfrastructureBundle:AAVV:register/step1/step1Data.html.twig" %}
+            </div>
+            <div class='col-md-16 nvc-padding'>
+                {% include "NavicuInfrastructureBundle:AAVV:register/step1/step1Location.html.twig" %}
+            </div>
+            <div class='col-md-16 nvc-padding'>
+                {% include "NavicuInfrastructureBundle:AAVV:register/step1/step1Users.html.twig" %}
+            </div>
+            <div>
+                <br />
+                <button
+                    class='nvc-button nvc-button__search'
+                    type='button'
+                    ng-click="sendData('payment');"
+                    {#ng-disabled="formStep1.$invalid"#}
+                >
+                    Continuar
+                </button>
+            </div>
+        </form>
+
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = {{ data | raw }};
+        console.log("response", response);
+        var route = "{{ app.request.get('extension') }}"
+        console.log("route",route);
+    </script>
+
+    {% if app.environment == "dev" %}
+        <script
+            type="text/javascript"
+            src="//maps.googleapis.com/maps/api/js?key=AIzaSyCkteypABffSV5FUMesiG0O-G0qngQ1Yhg"
+        >
+        </script>
+    {% else %}
+    {% endif %}
+
+{% endblock %}

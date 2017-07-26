@@ -1,0 +1,38 @@
+Navicu\Core\Domain\Model\Entity\ExchangeRateHistory:
+    type: entity
+    table: exchange_rate_history
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbExchangeRateHistoryRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        date:
+            type: date
+            nullable: false
+        rate_api:
+            type: float
+            nullable: true
+        percentage_navicu:
+            type: integer
+            nullable: true
+        rate_navicu:
+            type: float
+            nullable: true
+        dicom:
+            type: float
+            nullable: true
+    manyToOne:
+        currency_type:
+            targetEntity: CurrencyType
+            cascade: {  }
+            mappedBy: exchange_rate_history
+            joinColumns:
+                currency_type:
+                    referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [prePersist]

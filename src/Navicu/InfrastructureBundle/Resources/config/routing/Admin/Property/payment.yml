@@ -1,0 +1,6 @@
+# Información general de un establecimento afiliado
+navicu_admin_property_payment:
+    pattern: /propertyPayment/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Payment:payment }
+    options:
+        expose: true

@@ -1,0 +1,31 @@
+Navicu\Core\Domain\Model\Entity\Document:
+    type: entity
+    table: document
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbDocumentRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        fileName:
+            type: string
+
+    oneToOne:
+        room_images_gallery:
+            targetEntity: RoomImagesGallery
+            mappedBy: image
+            cascade: ["persist"]
+        property_favorite_images:
+            targetEntity: PropertyFavoriteImages
+            mappedBy: image
+            cascade: ["persist"]
+        property_images_gallery:
+            targetEntity: PropertyImagesGallery
+            mappedBy: image
+            cascade: ["persist"]
+
+    lifecycleCallbacks: {  }

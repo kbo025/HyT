@@ -1,0 +1,29 @@
+<div class="nvc-home-map__container-exterior" style="white-space:nowrap">
+    <div ng-click="$parent.$parent.selectedDestiny=parameter.model; $parent.$parent.getProperties($parent.$parent.selectedDestiny)">
+        <span class="fn-nvc-hotel"></span>
+            <span class="nvc-home-map__description" ng-if="parameter.isLocation && parameter.description.countProperty == 1">
+                Un establecimiento en {[{parameter.description.name}]}
+            </span>
+
+            <span class="nvc-home-map__description" ng-if="parameter.isLocation && parameter.description.countProperty > 1">
+                {[{parameter.description.countProperty}]} Establecimientos en {[{parameter.description.name}]}
+            </span>
+
+            <span class="nvc-home-map__description-for-non-location" ng-if="!parameter.isLocation">
+                {[{parameter.description.countProperty}]} {[{parameter.description.name}]}
+            </span>
+        <div class="nvc-home-map__details">
+            <div id="listContainer" >
+                <ul >
+                    <li ng-repeat = "property in parameter.description.countType">
+                        {[{property.count}]} &nbsp {[{property.name}]}
+                        <span ng-if="($index < parameter.description.countType.length - 1) && ($index != 3)">·</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="nvc-home-map__price">
+            <span type="integer">Desde {[{parameter.description.minSellRate | currency : ''}]} {[{$parent.$parent.symbolCurrency}]} </span>
+        </div>
+    </div>
+</div>

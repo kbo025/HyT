@@ -1,0 +1,21 @@
+Navicu\Core\Domain\Model\Entity\DropDaily:
+    type: entity
+    table: drop_daily
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbDropDailyRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        daily_id:
+            type: integer
+            nullable: false
+        type:
+            type: string
+            nullable: false
+            length: 50
+        parent_id:
+            type: integer
+            nullable: false

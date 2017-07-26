@@ -1,0 +1,33 @@
+Navicu\Core\Domain\Model\Entity\Departament:
+    type: entity
+    table: departament
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbDepartamentRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+        role:
+            type: integer
+            nullable: true
+
+    oneToMany:
+        nvc_profile:
+            targetEntity: NvcProfile
+            mappedBy: departament
+            cascade: ["persist"]
+        children:
+            targetEntity: Departament
+            mappedBy: parent
+            cascade: ["persist"]
+    manyToOne:
+        parent:
+            targetEntity: Departament
+            inversedBy: children
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+            orphanRemoval: false

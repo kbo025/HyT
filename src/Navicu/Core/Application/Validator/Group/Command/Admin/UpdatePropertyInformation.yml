@@ -1,0 +1,62 @@
+Navicu\Core\Application\UseCases\Admin\UpdateGeneralInformationProperty\UpdateGeneralInformationPropertyCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        name:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        star:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        phone:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        location:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        address:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        longitude:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        latitude:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        accommodation_id:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        opening_year:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        amount_room:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        number_floor:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        check_in:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        check_out:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        languages:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        check_in_age:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        currency_id:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        rate_type:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        quota_basis:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        description:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

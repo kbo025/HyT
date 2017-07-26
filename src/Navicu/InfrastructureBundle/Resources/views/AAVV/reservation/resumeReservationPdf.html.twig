@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <style type="text/css">
+            @page {
+                margin: 150px 0px 100px 80px;
+                color: #0a568c;
+                background-color: #0a0199;
+            }
+            #footer { position: fixed; left: -80px;
+                bottom: -110px; right: 0px; height: 70px;
+                width: 1250px;overflow: hidden;
+            }
+            #header { position: fixed; left: -80px; top: -150px; right: 0px; height: 150px; width: 1250px;}
+            #margin-body-content {margin: -30px 0px 0px -80px;}
+            .text-footer{font-family:lato-italic;font-size:11pt;color:#561855;text-align: center;}
+            @font-face
+            {
+                font-family: 'lato-semibold';
+                src: url('{{ fonts }}Lato-Semibold.ttf');
+                format('ttf');
+            }
+            @font-face
+            {
+                font-family: 'lato-bold';
+                src: url('{{ fonts }}Lato-Bold.ttf');
+                format('ttf');
+            }
+            @font-face
+            {
+                font-family: 'lato-regular';
+                src: url('{{ fonts }}Lato-Regular.ttf');
+                format('ttf');
+            }
+            @font-face
+            {
+                font-family: 'lato-italic';
+                src: url('{{ fonts }}Lato-Italic.ttf');
+                format('ttf');
+            }
+            @font-face
+            {
+                font-family: 'lato-medium';
+                src: url('{{ fonts }}Lato-Medium.ttf');
+                format('ttf');
+            }
+        </style>
+        <meta charset="UTF-8">
+    </head>
+
+    <body >
+        {# Header #}
+        <div id="header">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" id="pdfHeader"
+                {% if isCustomize == true  %}
+                    style = "background-color:{{ customize['navbarPrimary'] }}"
+                {% else %}
+                    style = "background-color:{{ customize['navbarMenu'] }}"
+                {% endif %}
+                >
+                <!-- HEADER ROW // -->
+                <tr >
+                    <!-- CONTENT HEADER // -->
+                    <td style="width: 40%; padding-left: 8%; line-height: 0px;">
+                        <img src="{{ logo }}" >
+                    </td>
+                    <td style="text-align: right; width: 60%;">
+                        <img src="{{ logoVicander }}" alt="trip-vicander" style="max-width: 600px; width: 590px">
+                    </td>
+                </tr>
+                <!-- // END -->
+            </table>
+        </div>
+        {# Footer #}
+        <div class="col100 text-footer" id="footer">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                   style="color:white; background-color: {{ grayFooter }};">
+                <tr>
+                    <td style="text-align: center; padding-bottom: 20px; padding-top: 20px">
+                        <span style="font-size: 20px;
+                        font-weight: bold;color:#7C7C7C;">
+                            preguntas@navicu.com · 08008 - NAVICU (628428)
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        {# Contenido #}
+        <div id="margin-body-content">
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border-spacing: 0px 0px;">
+                <!-- Row monto de la reserva -->
+                <tr style="text-align: right;" align="right">
+                    <td style="text-align: left; padding-bottom: 20px;
+                    padding-right: 50px; padding-left: 50px; padding-top: 30px;" >
+                        <span style="font-size: 24px; font-weight: bold; color: #5FC031; font-family: Tahoma">
+                            {% if reservation_type == 2 %}
+                                 Reserva realizada exitosamente por
+                            {% else %}
+                                Bloqueo de reserva por 24h efectuado por
+                            {% endif %}
+                        </span>
+                        <span style="font-size: 24px; font-weight: bold;
+                                color: {{ grayColor1 }};">
+                            Bs {{ total_to_pay }}
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border-spacing: 0px 0px;">
+                <!-- Separador -->
+                <tr>
+                    <td>
+                        <table style="width: 100%; padding-right: 50px;
+                            padding-left: 50px;">
+                            <tr>
+                                <td style="border:dotted 1px #999999;
+                            border-width:1px 0 0 0; height:1px; width:100%;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="border-spacing: 0px 0px;">
+                <!-- Cabecera de la reserva -->
+                <tr>
+                    <td style="padding-top: 10px">
+                        <table width="100%" cellpadding="0" cellspacing="0"
+                               style="padding-right: 50px; padding-left: 50px">
+                            <tr>
+                                <td width="50%" style="text-align: left; ">
+                                    <span style="font-size: 24px; font-weight: bold;
+                                            color:{{ grayColor1 }};
+                                            ">
+                                        {{ location }}
+                                    </span>
+                                </td>
+                                <td width="50%" style="text-align: right">
+                                    <span style="color: {{ grayColor1 }}; font-weight: bold">
+                                        ID Grupo {{ group_reservation_id }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <!-- Fecha de la reserva -->
+                            <tr>
+                                <td width="50%" style="text-align: left; padding-top: 5px;
+                                padding-bottom: 15px; padding-top: 10px">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td width="49%">
+                                                <span style="color: {{ grayColor2 }}; font-weight: bold">
+                                                    Check-in
+                                                </span>
+                                                <span style="color: {{ grayColor2 }};">
+                                                    {{ check_in_reservation }}
+                                                </span>
+                                                </td>
+                                                <td width="1%">
+                                                    <span> · </span>
+                                                </td>
+                                                <td width="50%">
+                                                <span style="color: {{ grayColor2 }}; font-weight: bold">
+                                                    Check-out
+                                                </span>
+                                                <span style="color: {{ grayColor2 }};">
+                                                    {{ check_out_reservation }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Detalles de la reserva -->
+                {% for property in array_of_reservations %}
+                    <tr>
+                        <!-- Establecimiento al que pertenece -->
+                        <td style="padding-top: 15px; padding-bottom: 15px" bgcolor="#ebebeb">
+                            <table width="100%" cellpadding="0" cellspacing="0"
+                                   style="padding-right: 50px; padding-left: 50px">
+                                <tr>
+                                    <td width="50%">
+                                        <span style="font-weight: bold !important;
+                                                color: {{ grayColor1 }}; font-size: 24px">
+                                            ID Establecimiento
+                                        </span>
+                                        <span style="font-weight: bold !important; font-size: 24px;
+                                                color: {{ grayColor1 }};
+                                                ">
+                                            {{ property.property_public_id }}
+                                        </span>
+                                    </td>
+                                    <td width="50%" {#style="text-align: right"#}>
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="80%" style="text-align: right">
+                                                    <span style="font-weight: bold !important;
+                                                            color: {{ grayColor1 }}; font-size: 24px">
+                                                        {{ property.property_name }}
+                                                    </span>
+                                                </td>
+                                                <td width="20%" >
+                                                    <table style="padding-left: 15px" width="100%" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            {% for star in 1..property.property_star %}
+                                                                <td>
+                                                                    <img src="{{ stars }}{#https://www.navicu.com/images/navicu/star.png#}" style="width: 12px;padding-left: 4px">
+                                                                </td>
+                                                            {% endfor %}
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    {% for packageDetail in property.reservation %}
+                        <tr >
+                            <!-- detalles del pack -->
+                            <td style="padding-top: 10px; padding-bottom: 10px; background-color: #c7c6c7">
+                                <table style="padding-right: 50px; padding-left: 50px"
+                                       width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td width="33.3%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor1 }}; font-size: 22px">
+                                                ID
+                                                {% if reservation_type == 2 %}
+                                                    reserva
+                                                {% else %}
+                                                    pre-reserva
+                                                {% endif %}
+                                            </span>
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor1 }}; font-size: 22px">
+                                                {{ packageDetail.reservation_public_id }}
+                                            </span>
+                                                    </td>
+                                                    <td width="33.3%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor1 }}; font-size: 22px">
+                                                {{ packageDetail.room_name }}
+                                            </span>
+                                                    </td>
+                                                    <td width="33.3%" style="text-align: right">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor1 }}; font-size: 22px">
+                                                {{ packageDetail.package.pack_name }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Separador -->
+                        <tr>
+                            <td>
+                                <table style="width: 100%; padding-right: 50px; background-color: #c7c6c7;
+                            padding-left: 50px; margin: 0px 0 0 0">
+                                    <tr>
+                                        <td style="border:dotted 1px #eeeded;
+                            border-width:1px 0 0 0; height:1px; width:100%;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- cantidad de personas a alojarse -->
+                            <td style="padding-top: 10px; padding-bottom: 10px; background-color: #c7c6c7">
+                                <table style="padding-right: 50px; padding-left: 50px"
+                                       width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td width="33.3%" style="text-align: left">
+                                            <table width="100%" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td width="50%" style="text-align: left">
+                                                        <span style="font-weight: bold !important;
+                                                                color: {{ grayColor1 }}; font-size: 22px">
+                                                            {% if packageDetail.number_adults > 1 %}
+                                                                {{ packageDetail.number_adults }} adultos
+                                                            {% else %}
+                                                                {{ packageDetail.number_adults }} adulto
+                                                            {% endif %}
+                                                        </span>
+                                                                </td>
+                                                                <td width="50%" style="text-align: left">
+                                                        <span style="font-weight: bold !important;
+                                                                color: {{ grayColor1 }}; font-size: 22px">
+                                                            {% if packageDetail.number_adults > 1 %}
+                                                                {{ packageDetail.number_children }} niños
+                                                            {% else %}
+                                                                {{ packageDetail.number_children }} niño
+                                                            {% endif %}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td width="33.3%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor1 }}; font-size: 22px">
+                                                {% if packageDetail.number_adults > 1 %}
+                                                    {{ packageDetail.number_rooms }} habitaciones
+                                                {% else %}
+                                                    {{ packageDetail.number_rooms }} habitación
+                                                {% endif %}
+                                            </span>
+                                                    </td>
+                                                    <td width="33.3%" style="text-align: right">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor1 }}; font-size: 22px">
+                                                {{ packageDetail.package.policy_cancellation_name }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- detalle del usuario que se aloja -->
+                            <td style="padding-top: 10px; background-color: #f5f4f4; padding-bottom: 28px">
+                                <table style="padding-right: 50px; padding-left: 50px;
+                        padding-top: 10px;"
+                                       width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <!-- cabeceras de los datos del cliente -->
+                                        <td width="30%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 24px">
+                                                Nombre y apellido
+                                            </span>
+                                                    </td>
+                                                    <td width="20%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 24px">
+                                                Cédula
+                                            </span>
+                                                    </td>
+                                                    <td width="30%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 24px">
+                                                Correo electrónico
+                                            </span>
+                                                    </td>
+                                                    <td width="10%" style="text-align: right">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 24px">
+                                                Teléfono
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="padding-right: 50px; padding-left: 50px;
+                        padding-top: 5px; padding-bottom: 18px"
+                                       width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <!-- datos del cliente -->
+                                        <td width="30%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 22px">
+                                                {{ packageDetail.client_names }}
+                                            </span>
+                                                    </td>
+                                                    <td width="20%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 22px">
+                                                {{ packageDetail.client_document_id }}
+                                            </span>
+                                                    </td>
+                                                    <td width="30%" style="text-align: left">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 22px">
+                                                {{ packageDetail.client_email }}
+                                            </span>
+                                                    </td>
+                                                    <td width="10%" style="text-align: right">
+                                            <span style="font-weight: bold !important;
+                                                    color: {{ grayColor2 }}; font-size: 22px">
+                                                {{ packageDetail.client_phone }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="padding-right: 50px; padding-left: 50px;
+                        " width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <!-- total a pagar -->
+                                        <td style="padding-top: 5px; padding-bottom: 5px;
+                                        text-align: right">
+                                            <span style="color: {{ grayColor1 }};
+                                            font-weight: bold !important; font-size: 25px;">
+                                                TOTAL Bs {{ property.total_amount_per_property }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <!-- Separador -->
+                    <tr>
+                        <td>
+                            <table style="width: 100%; padding-right: 50px;
+                        padding-left: 50px; padding-bottom: 25px; padding-top: 25px">
+                                <tr>
+                                    <td style="border:dotted 1px #999999;
+                        border-width:1px 0 0 0; height:1px; width:100%;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+    </body>
+</html>

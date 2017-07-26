@@ -1,0 +1,156 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+    <main
+        class="nvc-aavv__okreservation clearfix hidden-xs hidden-sm"
+        ng-app="searchAAVVModule"
+        ng-controller="confirmController"
+        ng-cloak
+    >
+        {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+        <section class="nvc-aavv__okreservation--header col-md-16">
+            <div class="nvc-container">
+                <div class="col-md-10 col-lg-8" ng-if="reservationType == 2">
+                    <h2>    Reserva realizada exitosamente por <span>Bs {[{data.total_to_pay}]}</span>
+                            <img src="{{ asset('images/preciogarantizadomin.png') }}" >
+                    </h2>
+                </div>
+
+                <div class="col-md-10 col-lg-8" ng-if="reservationType == 0">
+                    <h2>    Bloqueo de reserva por 24H efectuado <span>Bs {[{data.total_to_pay}]}</span>
+                        <img src="{{ asset('images/preciogarantizadomin.png') }}" >
+                    </h2>
+                </div>
+
+                <div class="col-md-6 col-lg-8" style="text-align:right;">
+                    <h3 class="nvc-aavv-customize__title--primary" ng-if="data.show_reservation_group">ID Grupo {[{data.group_reservation_id}]}</h3>
+                </div>
+                <div class="col-md-16">
+                    <hr>
+                    <ul class="nvc-breadcrumbs">
+                        <li class="nvc-aavv-customize__text">Check-in <span>{[{data.check_in_reservation}]}</span></li>
+                        <li class="nvc-aavv-customize__text">Check-out <span>{[{data.check_out_reservation}]}</span></li>
+                        <li class="nvc-aavv-customize__text">{[{data.location}]}</li>
+                    </ul>
+                    <button
+                        class="nvc-button nvc-button__default"
+                        type="button"
+                        ng-click = "resumeReservationPdf(data.locationSlug, data.group_reservation_id, data.hash_url)"
+                    >
+                        Guardar PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section
+            class="nvc-aavv__okreservation--content col-md-16"
+            ng-repeat="reservation in reservations"
+        >
+            <div class="col-md-16 reserve">
+                <div class="nvc-container nvc-aavv-customize__title--primary">
+                    <div class="col-md-6 col-lg-6">
+                        <span>ID Establecimiento</span> {[{reservation.property_public_id}]}
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        {[{reservation.property_name}]}
+                    </div>
+                </div>
+            </div>
+            <div ng-repeat="reserv in reservation.reservation">
+                <div class="col-md-16 packs">
+                    <div class="nvc-container">
+                       <div class="col-md-3">
+                        <h3><span class="id nvc-aavv-customize__title--primary">{[{ reservationType == 0 ? "ID pre-reserva" : "ID reserva" }]} {[{reserv.reservation_public_id}]}</span></h3>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="nvc-aavv-customize__title--primary">{[{reserv.room_name}]}</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <h3 class="nvc-aavv-customize__title--primary">{[{reserv.package.pack_name}]}</h3>
+                        </div>
+                        <div class="col-md-1">
+                            <h3 class="nvc-aavv-customize__title--primary" style="float:right">{[{reserv.number_adults}]} {[{reserv.adults}]}</h3>
+                        </div>
+                        <div class="col-md-1">
+                            <h3 class="nvc-aavv-customize__title--primary">{[{reserv.number_children}]} {[{reserv.children}]}</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <h3 class="nvc-aavv-customize__title--primary">{[{reserv.package.policy_cancellation_name}]}</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <h3 class="nvc-aavv-customize__title--primary">{[{reserv.number_rooms}]} {[{reserv.rooms}]}</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <h3><span class="total nvc-aavv-customize__title--primary">Total Bs {[{reserv.client_payment}]}</span></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-16 data">
+                    <div class="nvc-container">
+                        <div class="col-md-4 col-lg-3">
+                            <h3>Nombre y apellido</h3>
+                            <h4>{[{reserv.client_names}]}</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>Cédula </h3>
+                            <h4>{[{reserv.client_document_id}]}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Correo electrónico</h3>
+                            <h4>{[{reserv.client_email}]}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Teléfono</h3>
+                            <h4>{[{reserv.client_phone}]}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div ng-if="data.deactivateMsg===true" class="alert nvc-alert-expyre nvc-affix__alert">
+            <div class="nvc-container">
+                <div class="col-md-16">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <h1>¡Hey! Crédito insuficiente</h1>
+                </div>
+            </div>
+            <div class="nvc-container">
+                <div class="col-md-16">
+                    <h2>{[{data.agencyName}]} esta cuenta no tiene saldo para generar más reservas y ha sido desactivada temporalmente. Esperamos que puedas recargar próximante y así poder seguir disfrutando de Vicander.</h2>
+                </div>
+            </div>
+        </div>
+        <div ng-if="data.creditLessThan===true" class="alert nvc-alert-expyre nvc-affix__alert">
+            <div class="nvc-container">
+                <div class="col-md-16">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <h1>¡Hey! El crédito disponible para reservas se ha agotado</h1>
+                </div>
+            </div>
+            <div class="nvc-container">
+                <div class="col-md-16">
+                    <h2>Hemos aumentado tu crédito en Bsf {[{ data.creditIncrement | number }]} para que
+                        puedas seguir disfrutando de nuestro servicio
+                    </h2>
+                </div>
+            </div>
+        </div>
+        {{ include("NavicuInfrastructureBundle:AAVV:partials/loading.html.twig") }}
+
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+        var response = {{ data | raw }};
+        console.log(response);
+    </script>
+
+
+{% endblock %}

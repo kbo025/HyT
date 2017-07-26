@@ -1,0 +1,18 @@
+aavv_get_logs:
+    path:   /getlogs/{page}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:getLogs, page: 1}
+    options:
+            expose: true
+
+aavv_get_log_details:
+    path:   /getlogdetails
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:getLogDetails}
+    options:
+            expose: true
+
+aavv_logs_index:
+    path:   /logs
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:logsIndex}
+    options:
+            expose: true
+

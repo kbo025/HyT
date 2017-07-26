@@ -1,0 +1,398 @@
+Navicu\Core\Domain\Model\Entity\Property:
+    type: entity
+    table: property
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPropertyRepository
+
+    uniqueConstraints:
+        unique_slug_property:
+            columns:
+                - slug
+        unique_public_id:
+            columns:
+                - public_id
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        slug:
+            type: string
+            length: 255
+            nullable: false
+        public_id:
+            type: string
+            nullable: false
+        name:
+            type: string
+            nullable: false
+        active:
+            type: boolean
+            nullable: false
+        hotel_chain_name:
+            type: string
+            length: 255
+            nullable: true
+        address:
+            type: string
+            length: 255
+            nullable: false
+        star:
+            type: integer
+            nullable: false
+        url_web:
+            type: string
+            length: 255
+            nullable: true
+        amount_room:
+            type: integer
+            nullable: false
+        number_floor:
+            type: integer
+            nullable: false
+        check_in:
+            type: time
+            nullable: false
+        check_out:
+            type: time
+            nullable: false
+        description:
+            type: text
+            nullable: false
+        phones:
+            type: array
+            length: null
+            nullable: false
+        fax:
+            type: string
+            length: 15
+            nullable: true
+        emails:
+            type: string
+            length: 255
+            nullable: true
+        rating:
+            type: float
+            precision: 10
+            scale: 0
+            nullable: true
+        discount_rate:
+            type: float
+            nullable: true
+        opening_year:
+            type: integer
+            nullable: false
+        renewal_year:
+            type: integer
+            nullable: true
+        public_areas_renewal_year:
+            type: integer
+            nullable: true
+        check_in_age:
+            type: integer
+            nullable: false
+#       Eliminado tras reestructurar politicas de edad
+        child_max_age:
+            type: integer
+            nullable: true
+        tax:
+            type: boolean
+            nullable: true
+        tax_rate:
+            type: float
+            nullable: true
+        additional_info:
+            type: text
+            nullable: true
+        coordinates:
+            type: json_array
+            nullable: false
+        beds:
+            type: boolean
+            nullable: true
+        beds_additional_cost:
+            type: boolean
+            nullable: true
+        beds_prior_notice:
+            type: boolean
+            nullable: true
+        cribs_prior_notice:
+            type: boolean
+            nullable: true
+        child:
+            type: boolean
+            nullable: true
+#Eliminado tras reestructurar politicas de edad
+#        child_additional_cost:
+#           type: boolean
+#           nullable: true
+        cribs_additional_cost:
+            type: boolean
+            nullable: true
+        cribs_max:
+            type: integer
+            nullable: true
+        cribs:
+            type: boolean
+            nullable: true
+        pets:
+            type: boolean
+            nullable: true
+        pets_additional_cost:
+            type: boolean
+            nullable: true
+        cash:
+            type: boolean
+            nullable: true
+        max_cash:
+            type: float
+            nullable: true
+        city_tax:
+            type: float
+            nullable: true
+        city_tax_type:
+            type: integer
+            nullable: true
+        city_tax_max_nights:
+            type: integer
+            nullable: true
+        credit_card:
+            type: boolean
+            nullable: true
+        credit_card_amex:
+            type: boolean
+            nullable: true
+        credit_card_mc:
+            type: boolean
+            nullable: true
+        credit_card_visa:
+            type: boolean
+            nullable: true
+        all_included:
+            type: boolean
+            nullable: true
+        debit:
+            type: boolean
+            nullable: true
+        comercial_rooms:
+            type: integer
+            nullable: true
+        prominent:
+            type: boolean
+            nullable: true
+        rate_type:
+            type: integer
+            nullable: false
+            options:
+                default: 2 # 1. Tarifa neta, 2. Tarifa Venta
+        basic_quota:
+            type: integer
+            nullable: false
+            options:
+                default: 1
+#Eliminado tras reestructurar politicas de edad
+        adult_age:
+            type: integer
+            nullable: true
+        join_date:
+            type: datetime
+            nullable: true
+        registration_date:
+            type: datetime
+            nullable: true
+        design_view_property:
+            type: integer
+            nullable: true
+            options:
+                default: 1
+        age_policy:
+            type: json_array
+            nullable: true
+        featured_home:
+            type: boolean
+            nullable: false
+            options:
+                default: 'false'
+        promo_home:
+            type: boolean
+            nullable: false
+            options:
+                default: 'false'
+        featured_location:
+            type: string
+            nullable: true
+        #Fecha de ultima despublicacion del establecimiento
+        unpublished_date:
+            type: datetime
+            nullable: true
+    oneToOne:
+        profile_image:
+            targetEntity: PropertyFavoriteImages
+            joinColumn:
+                name: profile_image
+                referencedColumnName: id
+                onDelete: CASCADE
+        base_policy:
+            targetEntity: PropertyCancellationPolicy
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                base_policy:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+        profile_image:
+            targetEntity: PropertyFavoriteImages
+            joinColumn:
+                name: profile_image
+                referencedColumnName: id
+                onDelete: CASCADE
+        payment_info:
+            targetEntity: PaymentInfoProperty
+            mappedBy: property
+            cascade: ["persist"]
+        agreement:
+            targetEntity: Agreement
+            mappedBy: property
+            cascade: ["persist"]
+    oneToMany:
+        services:
+            targetEntity: PropertyService
+            mappedBy: property
+            cascade: ["persist"]
+            cascade: ["persist"]
+        contacts:
+            targetEntity: ContactPerson
+            mappedBy: property
+            cascade: ["persist"]
+        rooms:
+            targetEntity: Room
+            mappedBy: property
+            cascade: ["persist"]
+        logs_owners:
+            targetEntity: LogsOwner
+            mappedBy: property
+        logs_users:
+            targetEntity: LogsUser
+            mappedBy: property
+        property_cancellation_policies:
+            targetEntity: PropertyCancellationPolicy
+            mappedBy: property
+            cascade: ["persist"]
+        property_gallery:
+            targetEntity: PropertyGallery
+            mappedBy: property
+            cascade: ["persist"]
+        property_favorite_images:
+            targetEntity: PropertyFavoriteImages
+            mappedBy: property
+            cascade: ["persist"]
+        reservations:
+            targetEntity: Reservation
+            mappedBy: property_id
+            cascade: ["persist"]
+
+
+    manyToOne:
+        location:
+            targetEntity: Location
+            cascade: {  }
+            mappedBy: null
+            inversedBy: location_property
+            joinColumns:
+                location:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false
+        accommodation:
+            targetEntity: Accommodation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: accommodation_property
+            joinColumns:
+                accommodation:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false
+        currency:
+            targetEntity: CurrencyType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: currencies_property
+            joinColumns:
+                currency_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        city_tax_currency:
+            targetEntity: CurrencyType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: city_tax_currencys_property
+            joinColumns:
+                city_tax_currency_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: true
+
+        commercial_profile:
+            targetEntity: CommercialProfile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: properties
+            joinColumns:
+                commercial_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        nvc_profile:
+            targetEntity: NvcProfile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: properties
+            joinColumns:
+                nvc_profile_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        recruit:
+            targetEntity: NvcProfile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: properties
+            joinColumns:
+                recruit_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+    manyToMany:
+        owners_profiles:
+            targetEntity: OwnerProfile
+            cascade: {  }
+            mappedBy: properties
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+        languages:
+            targetEntity: Language
+            cascade: {  }
+            mappedBy: null
+            inversedBy: property
+            orderBy: null
+            joinTable:
+                name: property_language
+                joinColumns:
+                    -
+                        name: property_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: language_id
+                        referencedColumnName: id
+
+    lifecycleCallbacks:
+        prePersist: [ prePersist ]
+        postPersist: [ generatePublicId ]
+        preUpdate: [ prePersist ]

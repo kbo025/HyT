@@ -1,0 +1,144 @@
+<table class='nvc-table--admin'>
+    <thead>
+        <tr>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.hotel' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.city' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.reservation_id' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.date_creation' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.date_checkin' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.date_checkout' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.fullname' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.price' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.status' | trans }}</th>
+            <th class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.table.detail' | trans }}</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="row in searchResults" ng-class="{disabled: isLoadingResults}" ng-init="number = countInit()">
+        <tr ng-style="{ background: (number%2 == 0) ? '#f6f6f6' : '#ebebeb' }">
+            <td class="nvc-aavv-customize__text">{[{ row.property }]}</td>
+            <td class="nvc-aavv-customize__text">{[{ row.city }]}</td>
+            <td class="nvc-aavv-customize__text">{[{ row.publicid }]}</td>
+            <td class="nvc-aavv-customize__text">{[{ row.createdate }]}</td>
+            <td class="nvc-aavv-customize__text">{[{ row.checkin }]}</td>
+            <td class="nvc-aavv-customize__text">{[{ row.checkout }]}</td>
+            <td class="nvc-aavv-customize__text">{[{ row.fullname }]}</td>
+            <td class="nvc-aavv-customize__text">{[{ row.price | number : 2 }]}</td>
+            <td class="nvc-aavv-customize__text">
+                <i ng-if="row.status == 1" class="nvc-table__legend--pending fn-enproceso"></i>
+                <i ng-if="row.status == 0" class="nvc-table__legend--pre fn-pendientedepago"></i>
+                <i ng-if="row.status == 2" class="nvc-table__legend--accepted fn-confirmado"></i>
+                <i ng-if="row.status == 3" class="nvc-table__legend--cancelled fn-cancelado"></i>
+
+            </td>
+            <td>
+                <button
+                    class="nvc-button__detail fn-detalle"
+                    ng-click="redirectDetailsReservation(row.publicid)"
+                    ng-disabled="!{{ hasPermission('aavv_reservation_details', 'VIEW') | json_encode | raw }}"
+                >
+{#                        {{ 'aavv.reservations.list.table.buttons.details' | trans }}#}
+                </button>
+            </td>
+        </tr>
+        <tr ng-if="selectedTab === 'status_pre'">
+            <td colspan="99">
+                <table>
+                    <thead>
+                        <div ng-if="$first">
+                            <img src="/images/aavv/reservations/pay.png" class="img-responsive">
+                            <p><strong>Por favor,&nbsp&nbspselecciona con qué banco deseas realizar tu pago y añade el número de confirmación</strong></p>
+                            <p>Para realizar el pago con varias transferencias, deberás indicar con precisión el monto de cada una</p>
+                            <hr>
+                        </div>
+                    </thead>
+                    <tbody>
+                        <tr ng-style="{ background: (number%2 == 0) ? '#FAEBFF' : '' }"  ng-repeat="pay in row.payments">
+                            <!--Banco Emisor-->
+                            <td style="padding-left: 99px; width: 22%;">
+                                <select 
+                                    name="bank"
+                                    ng-options="option.title for option in bankList.local track by option.id"
+                                    ng-model="pay.bank"
+                                    class="colorPlaceholder"
+                                    ng-disabled="row.payments.length-1 != $index"
+                                    ng-change = "changeColorSelect(pay.bank, 'bank-'+$index+number)"
+                                    id = "{[{ 'bank-' + $index + number}]}">
+                                    <option value="">
+                                            {{ 'aavv.payments.bank.issuing bank' | trans }}
+                                    </option>
+                                </select>
+                            </td>
+                            <!--Banco Receptor-->
+                            <td style="padding-left: 10px;">
+                                <select name="bank"
+                                    ng-options="option.title for option in bankList.localReceiver track by option.id"
+                                    ng-model="pay.receivingBank"
+                                    class="colorPlaceholder"
+                                    ng-disabled="row.payments.length-1 != $index"
+                                    ng-change = "changeColorSelect(pay.receivingBank, 'receivingBank-'+$index+number)"
+                                    id ="{[{ 'receivingBank-' + $index + number}]}"
+                                    >
+                                    <option value="">
+                                            {{ 'aavv.payments.bank.receiving bank' | trans }}
+                                    </option>
+                                </select>
+                            </td>
+                            <!-- N de referencia -->
+                            <td style="padding-left: 10px;">
+                                <input type="text"
+                                required="required"
+                                ng-disabled="row.payments.length-1 != $index"
+                                ng-model="pay.confirmationId"
+                                placeholder="{{ 'aavv.payments.bank.reference' | trans }}"
+                                class="refClass"
+                                style="margin: 0">
+                            </td>
+                            <!-- Concepto -->
+                            <td>
+                                <input type="text"
+                                required="required"
+                                ng-disabled="row.payments.length-1 != $index"
+                                ng-model="pay.description" placeholder="{{ 'aavv.payments.bank.concept' | trans }}"
+                                class="conceptoClass"
+                                style="margin: 0">
+
+                            </td>
+                            <!-- Monto -->
+                            <td>
+                                <input type="number"
+                                required="required"
+                                ng-disabled="row.payments.length-1 != $index"
+                                ng-model="pay.amount" placeholder="{{ 'aavv.payments.bank.money' | trans }}"
+                                class="montoClass"
+                                style= "margin: 0">
+                            </td>
+                            <!-- boton Confirmar -->
+                            <td class="text-center visible-lg" colspan="2">
+                                <button
+                                    class="nvc-button__confirmarPago"
+                                    ng-disabled ="
+                                        !pay.bank ||
+                                        !pay.receivingBank ||
+                                        !pay.confirmationId ||
+                                        !pay.description ||
+                                        !pay.amount"
+                                    ng-hide ="row.payments.length-1 != $index"
+                                    style= "margin: 0; margin-left: -126%;"
+                                    ng-click="amountReached(row,0)">
+                                    {{"web.client.list_pre_peservation.button.payment"|trans }}
+                                </button>
+                                <button
+                                    class="nvc-button__delete fn-papelera"
+                                    ng-click="amountReached(row,1,$index)"
+                                    ng-show ="row.payments.length-1 != $index"
+                                    style ="margin: 0; margin-left: -176%"
+                                >
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

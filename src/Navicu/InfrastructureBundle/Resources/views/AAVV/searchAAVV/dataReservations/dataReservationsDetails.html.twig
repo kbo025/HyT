@@ -1,0 +1,183 @@
+<div ng-repeat="property in dataReservations.properties">
+    <div
+        class="topDetails"
+        ng-init="current = $index"
+        ng-class="{'colorTopOne': current % 2 == 0, 'colorTopTwo': current % 2 != 0}"
+    >
+        <div class="nvc-container container-aling-logo">
+            <div class="col-md-5 col-lg-5">
+                <h3 class="nvc-aavv-customize__title--primary">
+                    ID Establecimiento
+                    <strong>{[{property.publicId}]}</strong>
+                </h3>
+            </div>
+            <div class="col-md-7 col-lg-5">
+                <h3 class="nvc-aavv-customize__title--primary">
+                    {[{property.name}]}
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div
+        class="contentDetails"
+        ng-repeat="reservation in property.reservations"
+    >
+            <div class="topContent">
+                <div class="nvc-container container--search">
+                    <div class="col-md-4 col-lg-4">
+                        <h2 style="margin-left: -52px;" class="nvc-aavv-customize__title--primary">
+                            {[{reservation.roomName}]}
+                        </h2>
+                    </div>
+                    <div class="col-md-2 col-lg-2">
+                        <h2 class="nvc-aavv-customize__title--primary">
+                            {[{reservation.packName}]}
+                        </h2>
+                    </div>
+                    <div class="col-md-2 col-lg-2">
+                        <h2 class="nvc-aavv-customize__title--primary">
+                            {[{reservation.numAdults}]} <strong class="nvc-aavv-customize__title--primary">adulto<etiqueta ng-if="reservation.numAdults>1">s</etiqueta></strong>
+                        </h2>
+                    </div>
+                    <div class="col-md-1 col-lg-1">
+                        <h2 class="nvc-aavv-customize__title--primary" style="padding-left: 0%;">
+                            {[{reservation.numChildren}]} <strong class="nvc-aavv-customize__title--primary">niño<etiqueta ng-if="reservation.numChildren>1 || reservation.numChildren === 0">s</etiqueta></strong>
+                        </h2>
+                    </div>
+                    <div class="col-md-2 col-lg-2">
+                        <i class='fa fn-info nvc-tooltips nvc-tooltips--search nvc-tooltips__top' >
+                            <span>
+                                Costo adicional mensual de Bs5.000
+                            </span>
+                        </i>
+                        <h2 class="nvc-aavv-customize__title--primary">
+                            {[{reservation.cancellationPolicyName}]}
+                        </h2>
+                    </div>
+                    <div class="col-md-2 col-lg-2">
+                        <h2 class="nvc-aavv-customize__title--primary">
+                            {[{reservation.numRooms}]} habitaci<etiqueta ng-if="reservation.numRooms<=1">ón</etiqueta><etiqueta ng-if="reservation.numRooms>1">ones</etiqueta>
+                        </h2>
+                    </div>
+                    <div class="col-md-3 col-lg-3 total">
+                        <h1 class="nvc-aavv-customize__title--primary">
+                            Total Bs {[{reservation.price | number}]}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="nvc-container container-aling-logo">
+                    <div class="col-md-5 col-lg-4">
+                        <div class='nvc-input-group--aavv form-group-datail' ng-class="{'nvc-input-group--error': formGeneral['guest_full_name-'+current+'-'+$index].$error.required && formGeneral.$submitted}" style="margin-left: -12px;">
+                            <label class="nvc-input-group-addon">Nombre y apellido</label>
+                            <input
+                                class="form-control nvc-input__register"
+                                name="guest_full_name-{[{current}]}-{[{$index}]}"
+                                ng-model = "reservation.guestFullName"
+                                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                required
+                                type='text'
+                            />
+                            <div
+                                class="nvc-error"
+                                ng-if="formGeneral['guest_full_name-'+current+'-'+$index].$error.required && formGeneral.$submitted">
+                                    {{ "share.validation.input_required"|trans }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-4">
+                         <div class='nvc-input-group--aavv form-group-datail' ng-class="{'nvc-input-group--error': formGeneral['guest_document_id-'+current+'-'+$index].$error.required && formGeneral.$submitted}">
+                            <label class="nvc-input-group-addon">Cédula</label>
+                            <input
+                                class='nvc-input__register inputData'
+                                type='text'
+                                name="guest_document_id-{[{current}]}-{[{$index}]}"
+                                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                ng-model = "reservation.guestDocumentId"
+                                class="form-control"
+                                ng-pattern="/^\+?\d{7,12}$/"
+                                required
+                            />
+                            <div
+                                class="nvc-error"
+                                ng-show="formGeneral['guest_document_id-'+current+'-'+$index].$error.required && formGeneral.$submitted">
+                                    {{ "share.validation.input_required"|trans }}
+                             </div>
+                            <div
+                                class="nvc-error"
+                                ng-show="formGeneral['guest_document_id-'+current+'-'+$index].$error.pattern && formGeneral.$submitted">
+                                    {{ "share.validation.error_identity"|trans }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-4">
+                        <div class='nvc-input-group--aavv form-group-datail' ng-class="{'nvc-input-group--error': (formGeneral['guest_email-'+current+'-'+$index].$error.required && formGeneral.$submitted && !formGeneral['guest_email-'+current+'-'+$index].$error.email) || (formGeneral['guest_email-'+current+'-'+$index].$error.email
+                                          && formGeneral.$submitted)}">
+                            <label class="nvc-input-group-addon">Correo del cliente</label>
+                            <input
+                                class='nvc-input__register'
+                                type="email"
+                                name="guest_email-{[{current}]}-{[{$index}]}"
+                                ng-model = "reservation.guestEmail"
+                                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                class="form-control"
+                                required
+                            />
+                            <div
+                                class="nvc-error"
+                                ng-show="formGeneral['guest_email-'+current+'-'+$index].$error.required && formGeneral.$submitted && !formGeneral['guest_email-'+current+'-'+$index].$error.email">
+                                    {{ "share.validation.input_required"|trans }}
+                            </div>
+                            <div
+                                  class="nvc-error"
+                                  ng-show="formGeneral['guest_email-'+current+'-'+$index].$error.email
+                                          && formGeneral.$submitted">
+                                    {{ "share.validation.error_email"|trans }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-4">
+                        <div class='nvc-input-group--aavv form-group-datail'
+                        ng-class="{'nvc-input-group--error': (formGeneral['guest_phone-'+current+'-'+$index].$error.required && formGeneral.$submitted && !formGeneral['guest_phone-'+current+'-'+$index].pattern) || (formGeneral['guest_phone-'+current+'-'+$index].$error.pattern && formGeneral.$submitted)}"
+                        >
+                            <label class="nvc-input-group-addon">Teléfono</label>
+                            <input
+                                class='nvc-input__register inputData'
+                                type='text'
+                                name="guest_phone-{[{current}]}-{[{$index}]}"
+                                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                ng-model = "reservation.guestPhone"
+                                class="form-control"
+                                ng-pattern="/^\+?\d{7,20}$/"
+                                required
+                            />
+                            <div
+                                class="nvc-error"
+                                ng-show="formGeneral['guest_phone-'+current+'-'+$index].$error.required && formGeneral.$submitted && !formGeneral['guest_phone-'+current+'-'+$index].pattern">
+                                    {{ "share.validation.input_required"|trans }}
+                            </div>
+                            <div
+                                class="nvc-error"
+                                ng-show="formGeneral['guest_phone-'+current+'-'+$index].$error.pattern && formGeneral.$submitted">
+                                    {{ "share.validation.error_phone_lg"|trans }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-container container-aling-logo" ng-if="$index <= 0 && property.reservations.length > 1">
+                    <div class="col-md-16">
+                        <div class="checkbox">
+                            <span>
+                                <input ng-model="reservation.sameData" type="checkbox" ng-change="copySameData(current, reservation.sameData)">
+                                Copiar los mismos datos en todas las reservas
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+<br>
+</div>
+

@@ -1,0 +1,156 @@
+
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'publicid')">
+                    {{ 'message.id_reservation'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'publicid'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'publicid'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'createdate')">
+                    {{ 'message.create_date'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'createdate'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'createdate'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'checkin')">
+                    {{ 'word.checkin'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'checkin'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'checkin'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'checkout')">
+                    {{ 'word.checkout'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'checkout'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'checkout'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'city')">
+                    {{ 'word.city'|transchoice(1) }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'city'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'city'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'property')">
+                    {{ 'word.accommodation'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'property'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'property'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'fullname')">
+                    {{ 'word.fullname'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'fullname'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'fullname'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'price')">
+                    {{ 'word.price'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'price'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'price'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListReservation(search, 1, 'status')">
+                    {{ 'word.state'|transchoice(1) }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'status'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'status'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="value in reserves">
+            <td>{[{value.publicid}]}</td>
+            <td>{[{value.createdate}]}</td>
+            <td>{[{value.checkin}]}</td>
+            <td>{[{value.checkout}]}</td>
+            <td>{[{value.city}]}</td>
+            <td>{[{value.property}]}</td>
+            <td>{[{value.fullname}]}</td>
+            <td>Bs. {[{value.price | number }]}</td>
+            <td>{[{value.status}]}</td>
+        </tr>
+    </tbody>
+</table>

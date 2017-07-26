@@ -1,0 +1,349 @@
+aavv:
+  edit:
+    users:
+      headings:
+        main: 'Edición de usuarios'
+        secondary: >
+          Puedes modificar constantemente tu información para que tu perfil
+          cuente con información actualizada
+
+      form:
+        additional_monthly_cost: 'Costo adicional mensual de %currency%%amount%'
+
+        tooltips:
+          user_pricing: 'Cada usuario tiene un costo adicional de %currency%%amount% al mes'
+
+        labels:
+          add_user: '+ añadir usuario'
+          cancellation_email: 'Recibir correo de cancelación de reservas'
+          city: 'Ciudad'
+          country: 'País'
+          email: 'E-mail de contacto'
+          fullname: 'Nombre y apellido'
+          identification: 'C.I'
+          news_email: 'Recibir comunicados de empresa con novedades de producto'
+          password: 'Contraseña'
+          password_repeat: 'Repetir contraseña'
+          personalized_emails: 'Quiero personalizar mis correos de confirmación, cancelación y PDFs'
+          personalized_interface: 'Interfaz gráfica personalizada para cliente'
+          phone: 'Teléfono'
+          position: 'Cargo'
+          reservation_email: 'Recibir correo de confirmación de reservas'
+          role: 'Tipo de rol'
+          state: 'Estado'
+          submit: 'Guardar'
+
+        placeholders:
+          city_id: ''
+          country_id: ''
+          email: ''
+          fullname: ''
+          identification: ''
+          password: ''
+          password_confirmation: ''
+          phone: ''
+          position: ''
+          state_id: ''
+
+        headings:
+          new_user: 'Nuevo usuario'
+          user: 'Usuario %i%'
+
+        errors:
+          empty_field: 'Este campo no puede estar vacío'
+          invalid_password_confirmation: 'Las contraseñas no coinciden'
+
+    roles:
+      aavv_module: 'Módulo AAVV'
+
+      headings:
+        main: 'Administrador de roles'
+        secondary: >
+          Configura el perfil de cada usuario para controlar su acceso y edición
+          en las secciones
+        table:
+          main: 'Administrar tipo de rol'
+          role_type: 'Tipo de rol'
+
+      labels:
+        module_add: '+ añadir'
+        module_delete: 'Borrar'
+        module_edit: 'Editar'
+        module_permissions: 'Permisos'
+        module_save: 'Guardar'
+        permission_edit: 'Editar'
+        permission_hide: 'Ocultar'
+        permission_view: 'Ver'
+        role_add: '+ añadir'
+
+      errors:
+        empty_field: 'Este campo no puede estar vacío'
+        name_already_in_use: 'Este nombre ya se encuentra en uso'
+
+      roles:
+        aavv_reservation_list: 'Lista de reservas'
+        aavv_reservation_details: 'Detalle de reservas'
+        aavv_material: 'Material'
+        aavv_logs: 'Historial'
+        aavv_permissions: 'Permisos'
+        aavv_customize: 'Personalizar'
+
+  reservations:
+    list:
+      headings:
+        main: 'Reservas'
+        secondary: 'Aquí podrás visualizar el historial de todas las reservas'
+
+      form:
+        labels:
+          search: 'Búsqueda'
+        buttons:
+          download_excel: 'Descargar en Excel'
+          search: 'Buscar'
+          search_clear: 'Limpiar búsqueda'
+        date_type:
+          checkin: 'Check-in'
+          checkout: 'Check-out'
+          creation: 'Creación'
+
+      tabs:
+        accepted: 'Aceptadas'
+        all: 'Todas'
+        cancelled: 'Canceladas'
+        pending: 'En proceso'
+        status_pre: Pendientes de pago
+
+      table:
+        city: 'Ciudad'
+        date_checkin: 'Check-in'
+        date_checkout: 'Check-out'
+        date_creation: 'Fecha creación'
+        fullname: 'Nombre y apellido'
+        hotel: 'Hotel'
+        price: 'Importe'
+        reservation_id: 'ID Reserva'
+        status: 'Estado'
+        detail: 'Detalle'
+
+        buttons:
+          details: 'Detalle'
+    status:
+      0: Pendiente de pago
+      1: En proceso
+      2: Aceptada
+      3: Cancelado
+
+    error:
+      price_mismatch: ¡Oops! Hubo una actualizacion de precios
+
+  additionalQuota:
+    maintenance: 'Cuota de mantenimiento'
+    licence:  '{0} Licencia | {1} Licencias'
+    licence:  '2 Licencias de uso'
+    email: Correos electrónicos personalizados
+  tooltips:
+    maintenance: Garantiza el buen funcionamiento de la plataforma y asistencia técnica |
+    licence: Cantidad de usuarios que creó la agencia para el uso de la plataforma'
+    email:
+  licence: '{0} Licencia | {1} Licencias'
+  mail: Correos electrónicos personalizados
+
+  register:
+    step1:
+      welcome_alert:
+        headings:
+          main: '¡Bienvenido a Vicander!'
+          secondary: 'Recuerda que para darte de alta deberás cumplir con'
+
+        items:
+          business: >
+            Ser una empresa constituida, con el objeto orientado a turismo y/o
+            actividades recreativas
+            <em>*Anexar registro mercantil</em>
+
+          rtn: >
+            Estar inscrita en el Registro Turístico Nacional
+            <em>*Adjuntar RTN</em>
+
+          photos: 'Adjuntar foto de tus oficinas'
+
+  landing:
+    login_subdomain:
+      form:
+        title: '¿Ya eres parte de navicu.com?'
+        subtitle: 'Ingresa con tu usuario y contraseña'
+        forgot_password: '¿Olvidaste tu contraseña?'
+        submit: 'Ingresar'
+
+        errors:
+          invalid_user: '¡Hey! El usuario que indicaste no existe'
+          invalid_password: 'Ooops, contraseña incorrecta'
+
+        labels:
+          user: 'Usuario'
+          password: 'Contraseña'
+
+        placeholders:
+          user: 'usuario'
+          password: 'contraseña'
+    login:
+      form:
+        title: '¿Ya eres parte de navicu.com?'
+        subtitle: 'Ingresa con tu usuario y contraseña'
+        title_subdomain: 'Recuerda que puedes completar tu registro iniciando sesión nuevamente'
+        subtitle: 'Ingresa con tu usuario y contraseña'
+        forgot_password: '¿Olvidaste tu contraseña?'
+        submit: 'Ingresar'
+
+        errors:
+          invalid_user: '¡Hey! El usuario que indicaste no existe'
+          invalid_password: 'Ooops, contraseña incorrecta'
+
+        labels:
+          user: 'Usuario'
+          password: 'Contraseña'
+
+        placeholders:
+          user: 'usuario'
+          password: 'contraseña'
+
+    register:
+      main_title: |
+        ¡La plataforma de viajes más integral!
+        Prepárate para obtener los mejores
+        <em>alojamientos de Venezuela al mejor precio</em>
+
+      perks:
+        title: 'Ventajas de afiliarte a <em>Vicander</em>'
+
+        lodging: 'Tendrás a tu disposición más de 600 alojamientos en toda Venezuela'
+        verified: 'Alojamientos completamente verificados'
+        pricing: 'En navicu.com tenemos el mejor precio garantizado'
+        availability: 'Tarifas y disponibilidad los 365 días del año'
+
+      form:
+        confirm_password: 'Confirmar contraseña'
+        fullname: 'Nombre y apellido'
+        password: 'Indica tu nueva contraseña*'
+        phone: 'Teléfono'
+        title: '¡Bienvenido! <em>Empieza a usar Vicander</em>'
+        username: 'Indica el correo electrónico que deseas utilizar'
+        submit: 'Empezar a registrarme'
+
+        placeholders:
+          fullname: 'Juan Pérez'
+          email: 'ejemplo@gmail.com'
+          password: '••••••••'
+          phone: '+58 241 4452342'
+
+      email:
+        sent_title: '¡Hey %name%, tienes un nuevo correo!'
+        sent_body: >
+          Ya puedes revisar tu correo <em>%email%</em>, hemos enviado un enlace
+          de activación de registro. Por favor, dirígete a tu bandeja de entrada
+          ¡estás un paso más cerca!
+
+      requirements:
+        text: |
+          ¿Qué necesito para afiliarme
+          con <em>Vicander</em>?
+        button: Descargar requerimientos
+
+      errors:
+        email_already_in_use: 'El email ya está siendo usado'
+        empty_name: 'El nombre no puede estar vacío'
+        empty_password: 'La contraseña no puede estar vacía'
+        invalid_email: 'Email no válido'
+        invalid_password: '{1} Contraseña inválida | {2} Las contraseñas no coinciden'
+
+  user_preferences:
+    title: 'Personaliza tu módulo'
+    description: 'Selecciona los colores adecuados para personalizar la apariencia de tu agencia según su imagen'
+    logo: 'Logotipo'
+    customizable_features:
+      main_bar: 'Barra principal'
+      menu_bar: 'Barra menú'
+      general_buttons: 'Botones generales'
+      active_button_menu: 'Botón activo menú'
+      main_titles: 'Títulos principales'
+      texts: 'Textos'
+      icons: 'Iconos'
+      footer: 'Pie de página'
+    placeholders:
+      input_image: '*Resolución máxima 310px x 70px'
+    save_changes: 'Guardar cambios'
+    upload: 'Subir'
+    error:
+      size_image: '{0} | {1}'
+      larger_image: '{0} ¡Hey! Tu logo es muy grande ( | {1} ), la dimensión máxima permitida es de 310px x 70px'
+      small_image: '{0} ¡Hey! Tu logo es muy pequeño ( | {1} ), la dimensión mínima permitida es de 210px x 40px'
+
+  reservations:
+    list:
+      headings:
+        main: 'Reservas'
+        secondary: 'Aquí podrás visualizar el historial de todas las reservas'
+
+      form:
+        labels:
+          search: 'Búsqueda'
+        buttons:
+          download_excel: 'Descargar en Excel'
+          search: 'Buscar'
+          search_clear: 'Limpiar búsqueda'
+        date_type:
+          checkin: 'Check-in'
+          checkout: 'Check-out'
+          creation: 'Creación'
+
+      tabs:
+        accepted: 'Aceptadas'
+        all: 'Todas'
+        cancelled: 'Canceladas'
+
+      table:
+        city: 'Ciudad'
+        date_checkin: 'Check-in'
+        date_checkout: 'Check-out'
+        date_creation: 'Fecha creación'
+        fullname: 'Nombre y apellido'
+        hotel: 'Hotel'
+        price: 'Importe'
+        reservation_id: 'ID Reserva'
+        status: 'Estado'
+
+        buttons:
+          details: 'Detalle'
+  logs:
+    fields:
+      rif: 'Rif'
+      company_email: 'Email'
+      social_reason: 'Razon Social'
+      merchant_id: 'Nro. Registro Mercantil'
+      phone: 'Telefono'
+      commercial_name: 'Nombre Comercial'
+      opening_year: 'Año de Apertura'
+      address: 'Direccion'
+      bank_account: 'Cuenta Bancaria'
+      email: 'Email'
+      swift: 'Codigo Swift'
+      zip_code: 'Codigo Postal'
+      location: 'Locacion'
+      document_id: 'Documento de Identidad'
+    modules:
+      AAVV: 'Agencia de Viajes'
+      Address: 'Direccion'
+      User: 'Usuario'
+      Agencia de Viajes: 'AAVV'
+      Direccion: 'Address'
+      Usuario: 'User'
+  payments:
+    bank:
+      issuing bank: 'Banco emisor'
+      receiving bank: 'Banco receptor'
+      reference: 'N° de referencia'
+      concept: 'Concepto'
+      money: 'Monto'
+  confirm_pay:
+      button: 'Confirmar'
+    

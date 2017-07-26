@@ -1,0 +1,65 @@
+<div ng-repeat="payment in payments">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-8 separatorTitle">
+            <h2>
+                {[{ payment.aavvId }]}
+            </h2>
+        </div>
+        <div class="col-xs-8">
+            <h2>
+                {[{ payment.name }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    Referencia
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    Importe
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                 <input ng-model="payment.reference" class="form-control" type="text" ng-blur="changeData(0, payment.reference, payment.paymentId, payment.type )">
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    Bs. {[{ payment.amount | number }]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-8 separatorTwo">
+                <h2>Tipo</h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    Factura
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorOne">
+                <h2 ng-if="payment.type ==0">Servicio</h2>
+                <h2 ng-if="payment.type ==1">Reserva</h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ payment.InvoiceNumber }]}
+                </h2>
+            </div>
+        </div>
+        <div >
+            <select class="form-control" ng-model="payment.status" ng-change="changeData(1, payment.status, payment.paymentId, payment.type )">
+                <option value="0">Pendiente por confirmar</option>
+                <option value="1">Pagada</option>
+            </select>
+        </div>  
+    </div>
+</div>

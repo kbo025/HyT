@@ -1,0 +1,68 @@
+<div ng-repeat="billing in billings">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-8 separatorTitle">
+            <h2>
+                {[{ billing.aavvPublicId }]}
+            </h2>
+        </div>
+        <div class="col-xs-8">
+            <h2>
+                {[{ billing.agencyName }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    Cantidad
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    Importe
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                    {[{ billing.numberServiceOrReservation }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    Bs. {[{ billing.total}]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>Tipo</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+            <h2 ng-if="billing.type ==0">Servicio</h2>
+            <h2 ng-if="billing.type ==1">Reserva</h2>
+            </div>
+        </div>
+        <div class="mainInfo">
+            <div class="col-xs-16">
+                <h2>
+                    Fecha próximo pago
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>
+                    {[{ billing.dueDate }]}
+                </h2>
+            </div>
+        </div>
+        <div class="buttonDetails">
+            <button class="form-control nvc-admin nvc-button__login">Ver detalle</button>
+        </div>
+    </div>
+</div>

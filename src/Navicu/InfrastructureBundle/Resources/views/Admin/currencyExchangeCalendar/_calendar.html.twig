@@ -1,0 +1,115 @@
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Lato:400,700,300italic,300,100italic,400italic,700italic,900,900italic,100:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+<div class="calendar" ng-cloak>
+  <p id="rate-popup">
+    Recuerda que el monto debe ser superior<br>
+    a la tasa de cambio Dicom, por favor haga<br>
+    los ajustes necesarios en el mismo.
+  </p>
+
+  <div class="col-xs-6 table-responsive month" ng-repeat="month in calendar.months" id="month-wrapper-{[{ $index+1 }]}" class="month-wrapper">
+    <table class="table">
+      <thead>
+        <tr class="months-heading">
+          <th><span ng-if="$index === 0 && !disablePreviousMonth" ng-click="prevMonth()">◀</span></th>
+          <th colspan="5">{[{ month.name | capitalize }]}</th>
+          <th><span ng-if="$index === 1" ng-click="nextMonth()">▶</span></th>
+        </tr>
+        <tr class="days-heading">
+          <th>
+            <div class="col-xs-6" style="text-align: center; font-size: 16px;">
+              <span style="width: 1.5em; text-align: center;">
+                Lu
+              </span>
+            </div>
+          </th>
+          <th>
+            <div class="col-xs-6" style="text-align: center; font-size: 16px;">
+              <span style="width: 1.5em; text-align: center;">
+                Ma
+              </span>
+            </div>
+          </th>
+          <th>
+            <div class="col-xs-6" style="text-align: center; font-size: 16px;">
+              <span style="width: 1.5em; text-align: center;">
+                Mi
+              </span>
+            </div>
+          </th>
+          <th>
+            <div class="col-xs-6" style="text-align: center; font-size: 16px;">
+              <span style="width: 1.5em; text-align: center;">
+                Ju
+              </span>
+            </div>
+          </th>
+          <th>
+            <div class="col-xs-6" style="text-align: center; font-size: 16px;">
+              <span style="width: 1.5em; text-align: center;">
+                Vi
+              </span>
+            </div>
+          </th>
+          <th>
+            <div class="col-xs-6" style="text-align: center; font-size: 16px;">
+              <span style="width: 1.5em; text-align: center;">
+                Sa
+              </span>
+            </div>
+          </th>
+          <th>
+            <div class="col-xs-6" style="text-align: center; font-size: 16px;">
+              <span style="width: 1.5em; text-align: center;">
+                Do
+              </span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="week in month.weeks">
+          <td class="day-cell" ng-repeat="day in week track by $index" id="day-cell-{[{ day.date }]}" ng-class="{selected: selection[day.date], disabled: isDisabled[day.date]}">
+            <div class="col-xs-6">
+              <span class="day" ng-click="focus(day.date)">
+                {[{ day.day }]}
+              </span>
+            </div>
+            <div class="col-xs-6">
+              <form ng-if="day" onsubmit="document.querySelector(':focus').blur()">
+                <span ng-style="{left: !isFocused[day.date] && !day.data.percentageNavicu ? '-99999em' : '0', position: 'relative', bottom: '1px'}" ng-click="focus(day.date)"><input id="{[{ day.date }]}" type="text" maxlength="3" ng-model="day.data.percentageNavicu" ng-blur="blur(day.date)" ng-focus="focus(day.date)" ng-keydown="unsaved[day.date] = true" onkeyup="angular.element(this).scope().checkPercentage(this)" style="margin-bottom: 0;">%</span>
+                <input type="submit" style="display:none">
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr ng-if="calendar.months[($index+1)%calendar.months.length].weeks.length > month.weeks.length">
+          <td class="day-cell">
+            <!-- Necesario para que la fila agarre la altura necesaria. -->
+            <span class="day empty">
+              &nbsp;
+            </span>
+          </td>
+          <td class="day-cell"></td>
+          <td class="day-cell"></td>
+          <td class="day-cell"></td>
+          <td class="day-cell"></td>
+          <td class="day-cell"></td>
+          <td class="day-cell"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

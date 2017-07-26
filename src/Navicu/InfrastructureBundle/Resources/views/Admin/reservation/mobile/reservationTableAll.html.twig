@@ -1,0 +1,133 @@
+<div class="type">
+    <div class="col-xs-16">
+        <h2>Alojamiento</h2>
+    </div>
+</div>
+
+<div class="info">
+    <div class="col-xs-16">
+        <h2>{[{ reservation.name_property }]}</h2>
+    </div>
+</div>
+
+<div class="mainInfo">
+    <div class="col-xs-8 separatorOne">
+        <h2>
+            CeCo
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            Tipo
+        </h2>
+    </div>
+</div>
+
+<div class="info">
+    <div class="col-xs-8 separatorTwo">
+        <h2>
+            {[{ reservation.ceco }]}
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            {[{ reservation.type }]}
+        </h2>
+    </div>
+</div>
+
+<div class="mainInfo">
+    <div class="col-xs-8 separatorOne">
+        <h2>
+            Ciudad
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            Fecha creación
+        </h2>
+    </div>
+</div>
+
+<div class="info">
+    <div class="col-xs-8 separatorTwo">
+        <h2>
+            {[{ reservation.city }]}
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            {[{ reservation.create_date }]}
+        </h2>
+    </div>
+</div>
+
+<div class="mainInfo">
+    <div class="col-xs-8 separatorOne">
+        <h2>
+            Check-in
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            Importe
+        </h2>
+    </div>
+</div>
+
+<div class="info">
+    <div class="col-xs-8 separatorTwo">
+        <h2>
+            {[{ reservation.check_in }]}
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            {[{ reservation.total_to_pay | money }]}
+        </h2>
+    </div>
+</div>
+
+<div class="mainInfo">
+    <div class="col-xs-8 separatorOne">
+        <h2>
+            MP
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            $
+        </h2>
+    </div>
+</div>
+
+<div class="info">
+    <div class="col-xs-8 separatorTwo">
+        <h2>
+            {[{ reservation.mp }]}
+        </h2>
+    </div>
+    <div class="col-xs-8">
+        <h2>
+            {[{ reservation.currency }]}
+        </h2>
+    </div>
+</div>
+
+<div class="type">
+    <div class="col-xs-16">
+        <h2>Estado</h2>
+    </div>
+</div>
+
+<div class="info">
+    <div
+        class="col-xs-16"
+        ng-style="getRowStyles(reservation)"
+    >
+        <h2 ng-if="reservation.status === STATUS_PRE">Pre-reserva</h2>
+        <h2 ng-if="reservation.status === STATUS_PENDING">En proceso de confirmación</h2>
+        <h2 ng-if="reservation.status === STATUS_ACCEPTED">Aceptada</h2>
+        <h2 ng-if="reservation.status === STATUS_CANCELLED">Cancelada</h2>
+    </div>
+</div>

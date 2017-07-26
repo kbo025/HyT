@@ -1,0 +1,14 @@
+Navicu\Rest\ApiBundle\Entity\OAuthClient:
+    type: entity
+    table: oauth_client
+
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: true

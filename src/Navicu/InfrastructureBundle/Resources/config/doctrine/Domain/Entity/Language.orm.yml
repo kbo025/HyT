@@ -1,0 +1,22 @@
+Navicu\Core\Domain\Model\Entity\Language:
+    type: entity
+    table: language
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbLanguageRepository
+
+    id:
+        id:
+            type: string
+            length: 3
+            generator:
+                strategy: NONE
+    fields:
+        native:
+            type: string
+            length: 255
+            nullable: false
+
+    manyToMany:
+        property_language:
+            targetEntity: Property
+            cascade: {  }
+            mappedBy: languages

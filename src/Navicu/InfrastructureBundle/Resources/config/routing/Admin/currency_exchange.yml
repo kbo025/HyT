@@ -1,0 +1,51 @@
+#Enlace para renderizar la vista del calendario
+navicu_admin_properties_render_calendar_currency_exchange:
+  path: /calendar
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/CurrencyExchange:getViewCurrencyExchangeCalendar}
+  options:
+      expose: true
+
+#Enlace para devolver informacion sobre el calendario con respecto a las divisas
+navicu_admin_properties_get_calendar_currency_exchange:
+  path: /getCurrencyExchange
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/CurrencyExchange:getCurrencyExchangeCalendar}
+  options:
+      expose: true
+  requirements:
+      {_format: (json)}
+
+#Enlace para actualizar informacion sobre el calendario con respecto a las divisas
+navicu_admin_properties_update_calendar_currency_exchange:
+  path: /updateCurrencyExchange
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/CurrencyExchange:updateCurrencyExchangeCalendar}
+  options:
+      expose: true
+  requirements:
+      {_format: (json)}
+
+#Enlace para devolver la grafica de las divisas almacenadas
+navicu_admin_properties_get_graphic_currency_exchange:
+  path: /getCurrencyExchangeGraphic
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/CurrencyExchange:getCurrencyExchangeGraphic}
+  options:
+      expose: true
+  requirements:
+      {_format: (json)}
+
+#Enlace para devolver la tabla de las divisas almacenadas con cambio en bolivares
+navicu_admin_properties_get_historic_locale_currency_exchange:
+  path: /getCurrencyExchangeHistoricLocale
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/CurrencyExchange:getCurrencyExchangeHistoricLocale}
+  options:
+      expose: true
+  requirements:
+      {_format: (json)}
+
+#Enlace para devolver la tabla de las divisas almacenadas con equivalencia en dolares
+navicu_admin_properties_get_historic_dollar_currency_exchange:
+  path: /getCurrencyExchangeDollarHistoric
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/CurrencyExchange:getCurrencyExchangeDollarHistoric}
+  options:
+      expose: true
+  requirements:
+      {_format: (json)}

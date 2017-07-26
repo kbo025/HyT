@@ -1,0 +1,55 @@
+Navicu\Core\Domain\Model\Entity\Bar:
+    type: entity
+    table: bar
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbBarRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false
+        min_age:
+            type: integer
+            nullable: false
+        food:
+            type: boolean
+            nullable: false
+        description:
+            type: text
+            nullable: true
+        schedule:
+            type: json_array
+            nullable: false
+        status:
+            type: boolean
+            nullable: false
+        type:
+            type: integer
+            nullable: false
+    manyToOne:
+        service:
+            targetEntity: PropertyService
+            cascade: ["persist"]
+            mappedBy: null
+            inversedBy: bars
+            joinColumn:
+                service_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        food_type:
+            targetEntity: FoodType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumn:
+                type_food_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [prePersist]

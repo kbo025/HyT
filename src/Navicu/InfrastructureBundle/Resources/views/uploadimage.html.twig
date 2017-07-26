@@ -1,0 +1,68 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layoutRegister.html.twig" %}
+
+{% block body %}
+    <div class="container" >
+        <div class="photos" ng-app="PhotosModule" ng-controller="PhotosController">
+            <br>
+            <div ng-repeat="room in rooms track by $index">
+                <div class="row" id="div_room_{[{room.idRoom}]}">
+                    <div class="col-xs-16">
+                        {[{room.nameRoom}]}
+                        <div class="row" >
+                            <div class="col-xs-4">
+                                 <div class="button" name="room" ngf-select ng-model="files[$index]">Select File</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" style="margin-top:5px;margin-bottom:5px">
+                    <div class="col-xs-16">
+                        <a href="#" class="add_tag_link btn btn-primary">Add a tag</a>
+                        <button  id="btn-submit" ng-click="upload(files)" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            <br>
+
+            </div>
+            <div class="button" ngf-select ng-model="files[1]" ngf-multiple="multiple">Select File</div>
+             Upload Log:
+            <pre>{[{log}]}</pre>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = "{{ rooms }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+
+        jQuery(document).ready(function($) {
+            var $addTagLink = $('.add_tag_link');
+            var $div_rooms = $('#rooms');
+
+            $addTagLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+                $div_rooms.append("<div class='col-xs-4'><input type='file' name='rooms[]' id='input' class='form-control'></div> ");
+            });
+        });
+    </script>
+
+    {% if app.environment == "dev" %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/navicuinfrastructure/assets/navicu/angular/ascribere/photosForm/propertyForm.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/navicuinfrastructure/assets/navicu/angular/ascribere/photosForm/photosController.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/navicuinfrastructure/assets/vendor/js/ng-file-upload/ng-file-upload.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/navicuinfrastructure/assets/vendor/js/ng-file-upload/ng-file-upload-shim.js') }}"></script>
+    {% else %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% endif %}
+{% endblock %}

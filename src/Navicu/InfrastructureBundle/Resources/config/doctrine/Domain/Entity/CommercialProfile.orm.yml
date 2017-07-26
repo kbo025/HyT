@@ -1,0 +1,35 @@
+Navicu\Core\Domain\Model\Entity\CommercialProfile:
+    type: entity
+    table: commercial_profile
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbCommercialProfileRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        full_name:
+            type: string
+        identity_card:
+            type: string
+
+    oneToMany:
+        properties:
+            targetEntity: Property
+            mappedBy: commercial_profile
+            cascade: ["persist"]
+        temp_owners:
+            targetEntity: Navicu\Core\Domain\Model\Entity\TempOwner
+            mappedBy: commercial_profile
+            cascade: ["persist"]
+
+    oneToOne:
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: commercial_profile
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            cascade: ["persist"]
+

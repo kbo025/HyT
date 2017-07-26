@@ -1,0 +1,40 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block seoMetadata %}
+    <meta name="prerender-status-code" content="401">
+{% endblock seoMetadata %}
+
+{% block body %}
+
+{{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+
+<div class="nvc-errors nvc-errors--aavv col-sm-16" style="padding:0px;">
+    <div
+        class="nvc-carousel__fill"
+        style="background-image:url({{ asset('images/aavv/errors/500.jpg') }});"
+        src="http://dummyimage.com/600x400.png/fff/fff"
+    >
+        <div class="container nvc-errors__text">
+            <h1>Oh oh <span class="fa fn-500"></span></h1>
+            <h1><strong style="color:#E42D5D;">500</strong></h1>
+            <h2>{{ "share.error.500"|trans }}</h2>
+            <h2><span>{{ "share.error.500_span"|trans }}</span></h2>
+        </div>
+    </div>
+</div>
+
+<!--- No borrar -->
+<div class='container nvc-errors--after-slider hidden-xs'>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment == "dev" %}
+
+    {% else %}
+
+    {% endif %}
+{% endblock %}

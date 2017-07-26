@@ -1,0 +1,65 @@
+{% extends "NavicuInfrastructureBundle:Resetting:layoutResetting.html.twig" %}
+
+{% block body %}
+
+    <main class="nvc-resetting">
+        {% include "NavicuInfrastructureBundle:Resetting:top-menu.html.twig" %}
+        <style>
+            @media (min-width: 992px) {
+                .responsive-bg {
+                    background-image: url({{ assets.img['images/reset-password-desktop.jpg'] }});
+                }
+            }
+            @media (min-width: 480px) and (max-width: 991px) {
+                .responsive-bg {
+                    background-image: url({{ assets.img['images/reset-password-tablet.jpg'] }});
+                }
+            }
+            @media (max-width: 479px) {
+                .responsive-bg {
+                    background-image: url({{ assets.img['images/reset-password-phone.jpg'] }});
+                }
+            }
+        </style>
+        <div
+            class="responsive-bg nvc-resetting__content"
+            ng-app="resetPasswordModule"
+            ng-controller="resetPasswordController"
+            ng-style="backgroundImageStyle">
+            <div class="nvc-container">
+    		    <div class="nvc-row nvc-row__instructions">
+                    <div class="col-xs-14 col-md-8 col-lg-6 ">
+                        <p>
+                            {{ 'share.message.check_email'|trans }}<br>
+                            {{ 'share.message.email_send_to_email'|trans }}<br>
+                            <span>{{email }}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="nvc-row">
+                    <div class="col-xs-14 col-md-7 col-lg-5 inputs">
+                        <div class="input1">
+                            <button
+                                type="button"
+                                class="nvc-button nvc-button__reroute"
+                                ng-click="goBack()">
+                                {{"share.action.go_back"|trans}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

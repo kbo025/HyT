@@ -1,0 +1,32 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    session:
+        save_path: "%kernel.root_dir%/sessions/"
+#    validation:
+#        cache: apc
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        main:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            max_files: 5
+            level: info
+#        main:
+#            type:         fingers_crossed
+#            action_level: error
+#            handler:      nested
+#        nested:
+#            type:  stream
+#            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+#            level: debug
+        console:
+            type:  console

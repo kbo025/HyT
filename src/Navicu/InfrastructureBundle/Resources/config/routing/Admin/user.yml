@@ -1,0 +1,81 @@
+# Vista principal de los usuarios
+navicu_users_homepage:
+  path: /rolN/{role}/{page}
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:index,role: 'all' ,page: 1  }
+  options:
+    expose: true
+
+# Vista de crear un usuario
+navicu_users_new:
+  path: /newUser/{role}
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:infoNewEdit, role: 'all'}
+
+# Registro de un usuario
+navicu_users_new_register:
+  path: /newRegister
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:newRegister }
+  requirements:
+    { _method: POST}
+
+# Crear usuarios y Editar
+navicu_new_edit_user:
+  path: /asinc/newEdit
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:newUserEdits }
+  options:
+      expose: true
+
+#Inactivar o Activar  Registro por Perfil
+navicu_StatusChange_users:
+  path: /StatusChangeUser
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:statusChangeUsers }
+  options:
+      expose: true
+
+# Ruta obtiene los datos necesarios para editar o crear un usuario en el sistema
+navicu_users_info_new_edit:
+  path: /newEdit/{role}/{userId}
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:infoNewEdit , userId: null }
+  options:
+    expose: true
+
+# Ruta para cambiar el estado de la antelación por transferencia de un usuario
+navicu_users_change_status_advance:
+  path: /changeStatusAdvance
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:changeStatusAdvanceForUser }
+  options:
+    expose: true
+
+# Listado de usuario dado un role
+navicu_asinc_list_users:
+  path: /asinc/list
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:getListUser }
+  options:
+      expose: true
+
+
+# Listado de usuario dado un role
+navicu_asinc_users_get_data:
+  path: /asinc/getData
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:getData }
+  options:
+      expose: true
+
+# Crear usuario
+navicu_asinc_create_user:
+  path: /asinc/create
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:createUser }
+  options:
+      expose: true
+
+# Editar usuario
+navicu_asinc_edit_user:
+  path: /asinc/edit
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:editUser }
+  options:
+      expose: true
+
+navicu_users_edit:
+  path: /{action}/{type}/{user_id}
+  defaults: { _controller: NavicuInfrastructureBundle:Admin/User/Default:usersEdit, user_id: null}
+  options:
+    expose: true

@@ -1,0 +1,34 @@
+IMAGES:
+  home:
+    monte_roraima_en_venezuela:
+      alt: 'Vista del punto mas alto de la cadena de mesetas Monte Roraima Venezuela'
+    picos_nieve_merida_venezuela:
+      alt: 'Vista de hermosas montañas con picos de nieve en la cordillera de Mérida Venezuela'
+    playa_palmeras_arenas_blancas:
+      alt: 'Hermosa playa con palmeras de arenas blancas y aguas cristalinas'
+    verdes_montanas_cielo_nublado:
+      alt: 'Persona sentada en roca con excelente vista a las verdes montañas y cielo nublado'
+    amigos_vehiculo_carretera_arida:
+      alt: 'Grupo de amigos en vehículo por la carretera en una zona arida con montañas de poca vegetación'
+  destinations:
+    principal:
+      alt: 'Cascada o caída de agua'
+    urbano:
+      alt: 'Autobus de dos pisos'
+    montaña:
+      alt: 'Montaña con pinos cubierta de nieve'
+    romantica:
+      alt: 'Brindis dos copas'
+    playa:
+      alt: 'Sombrilla de playa'
+  listSearch:
+  property:
+    american:
+      alt: 'Tarjeta de Credito American'
+    master:
+      alt: 'Tarjeta de Credito Master'
+    visa:
+      alt: 'Tarjeta de Credito Visa'
+  footer:
+    copyright:
+      alt: 'Derecho de Autor'

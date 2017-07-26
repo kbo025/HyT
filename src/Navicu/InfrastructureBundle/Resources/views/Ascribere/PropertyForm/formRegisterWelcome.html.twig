@@ -1,0 +1,65 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% set header_title = {'module_title': '6'} %}
+
+{% block body %}
+    <div class="container welcome">
+        <div class="col-md-9 col-md-offset-1" >
+
+            <div class="row">
+                <div class="col-md-16"><h2>Estás a 8 pasos de ser parte de navicu</h2></div>
+            </div>
+            <div class="row">
+                <div class="col-md-16"><p>Necesitas brindarnos información referente
+                    a tu establecimiento y nosotros nos encargaremos
+                    de que sea publicado en nuestra pagina.</p>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-16"><h2>Validación en menos de 48 horas</h2></div>
+            </div>
+             <div class="row">
+
+                <div class="col-md-16"><p>Al enviarnos esta información nos comprometemos
+                    en revisar que todo este correcto y ponernos
+                    en contacto contigo en 48 horas.</p>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-16"><h2>Condiciones de afiliación</h2></div>
+            </div>
+             <div class="row">
+
+                <div class="col-md-16"><p>Se parte de nuestra gran familia por tan solo
+                    un 30% de las reservas que te generemos
+                    sin comisiones ocultas ni cargos de gestion.</p>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-16"><h2>Contenido exclusivo</h2></div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-16"><p>El contenido de tu establecimiento se integrará en nuestra página de reservas, no obstante, para un mejor posicionamiento te ayudaremos a perfeccionar tu contenido.</p></div>
+            </div>
+            <br>
+
+        </div>
+        <div class="col-md-6">
+             <img style="" src="{{ asset('images/welcome.jpg') }}">
+        </div>
+
+        <div class="col-md-10 col-md-offset-1">
+            <a href="{{ path('navicu_register',{'slug': slugTemp, 'level': 'property'})}}">
+                <button type="button" class="btn btn-primary btn-home">¡empezar a registrarme!</button>
+            </a>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block javascripts%}
+    {{parent()}}
+{% endblock %}

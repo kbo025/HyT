@@ -1,0 +1,36 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% set header_title = {'module_title': '6'} %}
+{% block body %}
+    <br>
+    <div class="container end">
+        <div class="row">
+            <div align="center" class="col lg-16">
+                <img style="" src="{{ asset('images/end.gif') }}">
+            </div>
+        </div>
+        <div class="row">
+            <div align="center" style="margin-bottom: 3%;" class="col-lg-16">
+                <h1>¡Gracias por completar el registro!</h1>
+                <h2>Pronto serás parte de la gran familia NAVICU</h2>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br><br><br><br>
+{% endblock body %}
+
+
+{% block javascripts%}
+    {{parent()}}
+    <script type="text/javascript">
+        function redirect(){
+            var url = Routing.generate('extranet_logout');
+            location.href = url;
+        }
+        function end(){
+            setTimeout(function(){redirect()},5000);
+        }
+        end();
+    </script>
+{% endblock %}

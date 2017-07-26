@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <title>Login Extranet</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/web{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+
+</head>
+<body>
+    <header>
+        <nav class="nvc-navbar nvc-navbar__default" role="navigation">
+            <div class="nvc-container">
+                <div class='nvc-navbar__header post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+                    <a class="nvc-navbar__brand" href="{{ pathSubdomain('navicu_homepage_temporal') }}">
+                        navicu.com
+                    </a>
+                </div>
+        	</div>
+        </nav>
+    </header>
+
+    <div class="nvc-ribbon" style="height:10px;">
+        <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+    </div>
+	{% set destinationsFooter = destinationsFooter() %}
+
+    {% block body %}
+    {% endblock body %}
+
+    {% block footer%}
+		{% include "NavicuInfrastructureBundle:Web:footer.html.twig" %}
+    {% endblock footer%}
+
+{% block javascripts %}
+
+        {% if app.environment == "dev" %}
+            <script src="/builds/vendor.bundle.js"></script>
+            <script src="/builds/client.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.vendor }}"></script>
+            <script src="{{ assets.js.client }}"></script>
+        {% endif %}
+
+{% endblock %}
+
+</body>
+</html>

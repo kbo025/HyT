@@ -1,0 +1,75 @@
+<div
+    class="secondaryInnerTable"
+    ng-repeat="payment in reservation.payment"
+>
+    <div class="mainInfo">
+        <div class="col-xs-8">
+            <h2>
+                Banco emisor
+            </h2>
+        </div>
+        <div class="col-xs-8">
+            <h2>
+                Banco receptor
+            </h2>
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="col-xs-8">
+            <input
+                disabled
+                ng-model="payment.sender_bank"
+            >
+        </div>
+        <div class="col-xs-8">
+            <input
+                disabled
+                ng-model="payment.receiver_bank"
+            >
+        </div>
+    </div>
+
+    <div class="mainInfo">
+        <div class="col-xs-8">
+            <h2>
+                Nº referencia
+            </h2>
+        </div>
+        <div class="col-xs-8">
+            <h2>
+                Monto parcial
+            </h2>
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="col-xs-8">
+            <input
+                disabled
+                ng-model="payment.paymentId"
+            >
+        </div>
+        <div class="col-xs-8">
+            <input
+                disabled
+                ng-model="payment.amount_client"
+            >
+        </div>
+    </div>
+
+    <div class="type">
+        <div class="col-xs-16">
+            <h2>Monto transferido</h2>
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="col-xs-16">
+            <input
+                ng-blur="onBlurInput(reservation.public_id)"
+                ng-model="payment.amountTransferred"
+            >
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="nvc-container top">
+    <h1>Historial de reserva</h1>
+</div>
+<div class="nvc-table--admin nvc-container">
+    <table>
+        <thead>
+            <tr>
+                <th class="nvc-aavv-customize__title--primary">Fecha
+                </th>
+                <th class="nvc-aavv-customize__title--primary">Modalidad de pago
+                </th>
+                <th class="nvc-aavv-customize__title--primary">Mensaje
+                </th>
+                <th class="nvc-aavv-customize__title--primary">Moneda
+                </th>
+                <th class="nvc-aavv-customize__title--primary">IP País
+                </th>
+                <th class="nvc-aavv-customize__title--primary">Ciudad
+                </th>
+                <th class="nvc-aavv-customize__title--primary">Nacionalidad</i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="payment in detailsReservation.payments">
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text">{[{ payment.date }]}</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text" ng-if="payment.type === 1">TDC Instapago</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text" ng-if="payment.type === 2">Transferencia Nacional</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text" ng-if="payment.type === 3">TDC Stripe</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text" ng-if="payment.type === 4">Transferencia Internacional</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text" ng-if="payment.type === 5">AAVV</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text" ng-if="payment.type === 6">TDC payeezy</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text">{[{ payment.message }]}</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text">{[{ payment.currency}]}</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text">{[{ payment.IpCountry }]}</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text">{[{ payment.city }]}</td>
+                <td ng-class="{'pending': payment.state === 0, 'accepted': payment.state === 1, 'cancel': payment.state === 2 }" class="nvc-aavv-customize__text">{[{ payment.holder }]}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

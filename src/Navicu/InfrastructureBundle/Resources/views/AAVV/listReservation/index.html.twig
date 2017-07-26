@@ -1,0 +1,143 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+
+<main
+    class="nvc-listReservation"
+    ng-app="listReservationModule"
+    ng-cloak
+    ng-controller="listReservationController"
+>
+    {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+    <div class="clearfix">
+        <header class="clearfix">
+            <div class="container">
+                <div style="margin-left: -8%">
+                    <h1 class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.headings.main' | trans }}</h1>
+                    <span class="nvc-aavv-customize__title--primary">·</span>
+                    <h2 class="nvc-aavv-customize__title--primary">{{ 'aavv.reservations.list.headings.secondary' | trans }}</h2>
+                </div>
+                <aside>
+                    <button class="nvc-button">
+                        {{ 'aavv.reservations.list.form.buttons.download_excel' | trans }}
+                    </button>
+                </aside>
+            </div>
+        </header>
+    </div>
+
+    <form class="nvc-form--aavv container">
+        <div class="nvc-form__left">
+            <div class="input-group">
+                <span class="input-group-addon nvc-aavv-customize__text">
+                    {{ 'aavv.reservations.list.form.labels.search' | trans }}
+                </span>
+                <input
+                    class="form-control"
+                    id="nvc-form__search"
+                    ng-model="search"
+                    role="search"
+                    tabindex="1"
+                    type="text"
+                />
+                <span class="input-group-addon">
+                    <button
+                        class="nvc-aavv-customize__button--primary colorPink"
+                        type="submit"
+                        ng-click="handleSearch()"
+                    >
+                        {{ 'aavv.reservations.list.form.buttons.search' | trans }}
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <div class="nvc-form__right">
+                <button
+                    class="nvc-button--clear"
+                    ng-click="handleSearchClear()"
+                    type="button"
+                >
+                    <i class="fn-trash"></i>
+{#                    {{ 'aavv.reservations.list.form.buttons.search_clear' | trans }} //Limpiar búsqueda #} 
+                </button>
+
+                <button
+                    class="nvc-aavv-customize__button--primary"
+                    ng-click="handleSearch()"
+                    type="button"
+                >
+                    {{ 'aavv.reservations.list.form.buttons.search' | trans }}
+                </button>
+
+                <div class="nvc-form__dateType">
+                    <nvc-select ng-model="dateType">
+                        <nvc-option value="1">
+                            {{ 'aavv.reservations.list.form.date_type.creation' | trans }}
+                        </nvc-option>
+                        <nvc-option value="2">
+                            {{ 'aavv.reservations.list.form.date_type.checkin' | trans }}
+                        </nvc-option>
+                        <nvc-option value="3">
+                            {{ 'aavv.reservations.list.form.date_type.checkout' | trans }}
+                        </nvc-option>
+                    </nvc-select>
+                </div>
+
+                <nvc-rangepicker
+                    ng-model-end="endDate"
+                    ng-model-start="startDate"
+                >
+                </nvc-rangepicker>
+        </div>
+    </form>
+    <div class="nvc-table_verticalRule"></div>
+    <ul
+    class="nvc-table__legend container"
+    >
+        <li class="nvc-table__legend--accepted fn-confirmado">
+            Aceptada
+        </li>
+        <li class="nvc-table__legend--pending fn-enproceso">
+            En proceso
+        </li>
+        <li class="nvc-table__legend--pre fn-pendientedepago">
+            Pendientes de pago
+        </li>
+        <li class="nvc-table__legend--cancelled fn-cancelado">
+            Cancelada
+        </li>
+    </ul>
+    
+    <div class="nvc-topmenuTable--admin">
+        {% include "NavicuInfrastructureBundle:AAVV:listReservation/aavvReservationTopTable.html.twig" %}
+    </div>
+    
+    <div class="nvc-table--admin nvc-table--admin--reservation nvc-container">
+        {% include "NavicuInfrastructureBundle:AAVV:listReservation/aavvReservationTable.html.twig" %}
+    </div>
+
+    <div class="container">
+        <div class="nvc-pagination">
+            <div
+                class="nvc-pagination__previous"
+                ng-class="{disabled: previousPageIsDisabled}"
+                ng-click="!previousPageIsDisabled && handleLoadPreviousPage()"
+            >
+                <i class="fa fa-angle-left"></i>
+            </div>
+            <div
+                class="nvc-pagination__next"
+                ng-class="{disabled: nextPageIsDisabled}"
+                ng-click="!nextPageIsDisabled && handleLoadNextPage()"
+            >
+                <i class="fa fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
+{#    ModalView #}
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+{# End ModalView #}
+</main>
+{% endblock body %}

@@ -1,0 +1,38 @@
+Navicu\Core\Domain\Model\Entity\RoomImagesGallery:
+    type: entity
+    table: room_images_gallery
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRoomImagesGalleryRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+
+    fields:
+        order_gallery:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+
+    oneToOne:
+        image:
+            targetEntity: Document
+            inversedBy: room_images_gallery
+            joinColumn:
+                name: image_document_id
+                referencedColumnName: id
+                onDelete: CASCADE
+            cascade: ["persist"]
+
+    manyToOne:
+        room:
+              targetEntity: Room
+              cascade: {  }
+              mappedBy: null
+              inversedBy: images_gallery
+              joinColumn:
+                  name: room_id
+                  referencedColumnName: id
+              orphanRemoval: false

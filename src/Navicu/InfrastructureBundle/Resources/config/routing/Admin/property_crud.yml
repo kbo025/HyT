@@ -1,0 +1,19 @@
+#Routing del módulo de los establecimientos afiliados
+navicu_admin_module_property_crud:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/Property/informationGeneral.yml"
+
+#Routing del módulo de edición de servicios.
+navicu_admin_module_property_services_crud:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/Property/UpdateServices.yml"
+
+#Routing del módulo de pago
+navicu_admin_module_property_crud_payment:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/Property/payment.yml"
+
+#Routing del módulo de edición de habitación
+navicu_admin_module_property_crud_room:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/Property/room.yml"
+
+#Routing del módulo de la galerias de imagenes de un establecimiento
+navicu_admin_module_property_gallery:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/Property/galleries.yml"

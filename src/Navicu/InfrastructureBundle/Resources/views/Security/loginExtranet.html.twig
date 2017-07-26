@@ -1,0 +1,67 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% block body %}
+<div ng-app="loginExtranetModule" ng-controller="loginExtranetController">
+    <div class="body-extranet-login text-regular" style="background-image: url({{ assets.img['images/images_original/navicu/homepage/home-page-extranet.jpg'] }})" ng-style="lazyStyles.bg">
+        <div class="container">
+            {% if is_granted("ROLE_TEMPOWNER") %}
+                Menu administrativo<br>
+                <a href="{{ path('extranet_logout') }}"><i class="fa fa-sign-out">{{ "word.sign_out"|trans }}</i></a>
+                {% else %}
+                <div class="col-xs-16">
+                    <div class="row" style="color:white;text-align:right;margin-top:10%">
+                        <div class="col-xs-16" >
+                            <h1 class="font-bold" style="font-family:LatoRegular">
+                                {{ "extranet.title.welcome_login"|trans|upper }}
+                            </h1>
+
+                            <h3 style="font-family:LatoBoldItalic; font-size:22px; color:#783CBD"> {{ "extranet.title.sub_welcome_login"|trans }}</h3>
+
+                            <h4><b>{{ "share.message.slogan"|trans }}</b></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-11">
+                            <form action="{{ path("extranet_check") }}" role="form" method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger  ">
+                                        <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        <span>{{ 'extranet.message.login_error'|trans }}</span>
+                                    </div>
+                                {% endif %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control my-imput" placeholder="{{ 'share.message.username_email'|trans }}" required="required" autofocus="autofocus">
+                                <input type="password" id="password" name="_password" required="required" class="form-control my-imput" placeholder="{{ 'share.message.password'|trans }}" >
+
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <a href="{{ path('navicu_register_owner') }}" class="btn btn-primary btn-block font-bold">
+                                            {{ 'extranet.message.sign_up'|trans }}
+                                        </a>
+                                        <!--<button type="submit" id="_submit" name="_submit" class="btn btn-primary btn-block font-bold" style="margin-left:-6%; padding-left:7%; width:150%;" >{{ 'extranet.message.sign_up'|trans }}</button>-->
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button onclick=" location.href='{{ path('navicu_register_owner') }}' "class="btn btn-primary btn-block font-bold">{{ 'word.sign_in'|trans }}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-11" >
+                            <a href="{{ path('navicu_extranet_resetting_register') }}" class="font-regular" style="color:#B42371;">
+                                {{ 'message.forgot_your_password'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% include "NavicuInfrastructureBundle:Ascribere/PropertyForm:formContentHomePage.html.twig" %}
+
+    {% endif %}
+</div>
+{% endblock %}

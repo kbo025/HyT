@@ -1,0 +1,43 @@
+Navicu\Core\Domain\Model\Entity\AAVVImage:
+    type: entity
+    table: aavv_image
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVImageRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+    manyToOne:
+        aavv:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVV
+            cascade: {  }
+            mappedBy: null
+            inversedBy: aavv
+            joinColumns:
+                aavv:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+    oneToOne:
+        image_document:
+            targetEntity: Document
+            inversedBy: aavv_image
+            joinColumn:
+                image_document_id:
+                    referencedColumnName: id
+            cascade: ["persist"]

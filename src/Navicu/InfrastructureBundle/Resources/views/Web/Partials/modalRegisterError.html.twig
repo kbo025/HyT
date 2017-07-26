@@ -1,0 +1,31 @@
+<script id="modal-errorRegister.tpl" type="text/ng-template">
+	<div class="nvc-modal" tabindex="-1" role="dialog" style="overflow-x:hidden;  overflow-y:hidden;">
+	    <div class="nvc-modal__error center-block clearfix" ng-if="!resetPassword.showOrHide">
+
+	        <div class="nvc-modal__header">	       
+	            <button type="button" class="close" ng-click="hideErrorModal()" data-dismiss="modal" aria-hidden="true">×</button>
+	            <h3 class="nvc-modal__header--title">¡Oh! ¡oh! La rapidez es una virtud</h3>
+	        </div>
+
+	        <div class="nvc-modal__content">
+	        	<div class="nvc-row">
+	        		<div class="col-xs-16">
+	        			<div class="nvc-row">
+	        				<div class="col-sm-12">
+				            	<div class="nvc-modal__content--error" >
+				            		<span>Parece que tienes un error en tu registro</span>
+				            	</div>
+				            	<div class="nvc-modal__content--message">
+				            		<span>{[{ message_error }]}</span>
+				            	</div>
+	        				</div>
+	        				<div class="col-sm-3 nvc-modal__content--margin">
+								<img src="/images/errordecomunicacion.png" class="img-responsive center-block" alt="image">
+	        				</div>
+	        			</div>	
+	        		</div>
+		       	</div>         	
+		    </div>
+	    </div>
+	</div>
+</script>

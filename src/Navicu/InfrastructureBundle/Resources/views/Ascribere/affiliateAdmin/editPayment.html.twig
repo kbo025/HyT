@@ -1,0 +1,299 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/layout.html.twig" %}
+
+{% set header_title = {'module_title': '5'} %}
+
+{% block body %}
+<div  ng-app="paymentAdmin" ng-controller="paymentAdminController" novalidate ng-cloak>
+    {% include "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/topmenu.html.twig" with header_title %}
+    <!--Top del formualario -->
+    <div class="container" style="font-family:LatoRegular" >
+        <div class="col-md-16" style="color:#572A85; font-size:18px;">
+            <p align="justify">{{"extranet.formPayment.top_message"|trans }}</p>
+        </div>
+    </div>
+    <br>
+<!--Ubicación del establecimiento -->
+    <form name="infoPayment">
+        <div class="container form-font">
+            <div class="jumbotron form-font-top form-group ">
+                <div class="container form-font">
+                    <div class="col-md-8 right">
+                        <h3>{{"extranet.formPayment.data_collection"|trans }}</h3>
+                        <label>
+                            <input ng-model="response.payment.same_data_property" ng-click="getInfoProperty()"type="checkbox" value="">
+                            {{"extranet.formPayment.same_data"|trans }}
+                        </label>
+                    </div>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2"></div>
+                </div>
+                <br>
+                <div class="container" style="color:#808080">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4">
+                            <label ng-class="{'label-error' : infoPayment.fiscal_name.$error.required && infoPayment.fiscal_name.$touched}">
+                                {{"extranet.formServices.name"|trans }}*
+                            </label>
+
+                            <input
+                                ng-disabled="response.payment.same_data_property"
+                                ng-class="{'input-error' : infoPayment.fiscal_name.$error.required && infoPayment.fiscal_name.$touched}"
+                                name="propertyInfo.fiscal_name"
+                                ng-model="propertyInfo.name"
+                                style="width:100%"
+                                class="form-control my-imput"
+                                type="text">
+                            <span class="error" ng-show="infoPayment.fiscal_name.$error.required && infoPayment.fiscal_name.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <label ng-class="{'label-error' : infoPayment.country.$error.required && infoPayment.country.$touched}">{{"extranet.formProperty.country"|trans }}*</label>
+                            <select
+                                ng-disabled="response.payment.same_data_property"
+                                ng-class="{'input-error' : infoPayment.country.$error.required && infoPayment.country.$touched}"
+                                name="country"
+                                ng-model="propertyInfo.country"
+                                class="form-control my-select "
+                                style="width:100%"
+                                ng-options="val.name as val.name for (pais, val) in paises"
+                                >
+                                <option value="">Seleccione </option>
+                            </select>
+                            <span class="error" ng-show="infoPayment.country.$error.required && infoPayment.country.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <label ng-class="{'label-error' : infoPayment.state.$error.required && infoPayment.state.$touched}">{{"extranet.formProperty.state"|trans }}*</label>
+                            <select
+                                ng-disabled="response.payment.same_data_property || !propertyInfo.country"
+                                ng-class="{'input-error' : infoPayment.state.$error.required && infoPayment.state.$touched}"
+                                name="state" ng-model="propertyInfo.state"
+                                class="form-control my-select"
+                                style="width:100%"
+                                ng-options="valEstado.name as valEstado.name for (estado, valEstado) in states"
+                                >
+                                <option value="">Seleccione </option>
+                            </select>
+                            <span class="error" ng-show="infoPayment.state.$error.required && infoPayment.state.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <label  ng-class="{'label-error' : infoPayment.city.$error.required && infoPayment.city.$touched}">{{"extranet.formProperty.town"|trans }}*</label>
+                            <select
+                                ng-disabled="response.payment.same_data_property || !propertyInfo.state"
+                                ng-class="{'input-error' : infoPayment.city.$error.required && infoPayment.city.$touched}"
+                                name="city"
+                                ng-model="propertyInfo.town"
+                                class="form-control my-select "
+                                style="width:100%"
+                                ng-options="idCiudad.name as idCiudad.name for (ciudad, idCiudad) in towns">
+                                <option value="">Seleccione </option>
+                            </select>
+                            <span class="error" ng-show="infoPayment.city.$error.required && infoPayment.city.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4">
+                            <label  ng-class="{'label-error' : infoPayment.city.$error.required && infoPayment.city.$touched}">{{"extranet.formProperty.parish"|trans }}*</label>
+                            <select
+                                ng-disabled="response.payment.same_data_property || !propertyInfo.town"
+                                ng-class="{'input-error' : infoPayment.city.$error.required && infoPayment.city.$touched}"
+                                name="city"
+                                ng-model="propertyInfo.parish"
+                                class="form-control my-select "
+                                style="width:100%"
+                                ng-options="idCiudad.name as idCiudad.name for (ciudad, idCiudad) in parishs">
+                                <option value="">Seleccione </option>
+                            </select>
+                            <span class="error" ng-show="infoPayment.city.$error.required && infoPayment.city.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                        <div class="col-md-7 col-lg-7">
+                            <label ng-class="{'label-error' : infoPayment.address.$error.required && infoPayment.address.$touched}">{{"extranet.formPayment.address"|trans }}*</label>
+                            <input ng-disabled="response.payment.same_data_property" ng-class="{'input-error' : infoPayment.address.$error.required && infoPayment.address.$touched}" name="address" ng-model="propertyInfo.address" style="width:100%" class="form-control my-imput" type="text">
+                            <span class="error" ng-show="infoPayment.address.$error.required && infoPayment.address.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <label class="tooltips tooltips-right" ng-class="{'label-error' : infoPayment.tax_id.$error.required && infoPayment.tax_id.$touched}">
+                                {{"extranet.formPayment.fiscal_code"|trans }}
+                                <i class="fa fn-info fa-x">
+                                </i>
+                                <strong>*</strong>
+                                <span style="width: 160% !important;margin-left: 0px !important;margin-top: -35%; !important">
+                                    {{"extranet.formPayment.message_fiscal_code"|trans }}
+                                </span>
+                            </label>
+                            <input ng-class="{'input-error' : infoPayment.tax_id.$error.required && infoPayment.tax_id.$touched}" name="tax_id" ng-model="response.payment.fiscal_code"style="width:100%" class="form-control my-imput" type="text">
+                            <span class="error" ng-show="infoPayment.tax_id.$error.required && infoPayment.tax_id.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--datos de Contrato-->
+            <div class="jumbotron form-font-top form-group ">
+                <div class="container form-font">
+                    <div class="col-md-8 right">
+                        <h3>{{"extranet.formPayment.data_collection_contract"|trans }}</h3>
+                    </div>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2"></div>
+                </div>
+                <br>
+                <div class="container" style="color:#808080">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4 rate-type-select-wrapper">
+                            <label ng-class="{'label-error' : infoPayment.discount_rate.$error.required && infoPayment.discount_rate.$touched}">{{"extranet.formProperty.commission_percentage"|trans }}*</label>
+                            <select
+                                    ng-class="{'input-error' : infoPayment.discount_rate.$error.required && infoPayment.country.$touched}"
+                                    name="discount_rate"
+                                    ng-model="propertyInfo.discountRate"
+                                    class="form-control my-select "
+                                    style="width:100%"
+                                    ng-options="n for n in [] | range : 1 : 100 "
+                                    rate-converter
+                                    >
+                                <option value="">Seleccione </option>
+                            </select>
+                            <span class="error" ng-show="infoPayment.discount_rate.$error.required && infoPayment.discount_rate.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12">
+                            <p class="nvc-align-description">
+                                Porcentaje que cobra navicu.com para la comercialización de tu alojamiento
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4 rate-type-select-wrapper">
+                            <label ng-class="{'label-error' : infoPayment.credit_days.$error.required && infoPayment.credit_days.$touched}">{{"extranet.formProperty.credit_days"|trans }}*</label>
+                            <select
+                                    ng-class="{'input-error' : infoPayment.credit_days.$error.required && infoPayment.credit_days.$touched}"
+                                    name="credit_days"
+                                    ng-model="propertyInfo.creditDays"
+                                    type="number"
+                                    class="form-control my-select "
+                                    style="width:100%"
+                                    ng-options="n for n in [] | range : 1 : 30 "
+                                    >
+                                <option value="">Seleccione </option>
+                            </select>
+                            <span class="error" ng-show="infoPayment.credit_days.$error.required && infoPayment.credit_days.$touched">{{ "share.validation.input_required"|trans }}</span>
+                        </div>
+                        <div class="col-md-12 col-lg-12">
+                            <p class="nvc-align-description">
+                                Cantidad de dias que tardara navicu.com en pagar una vez recibida la factura de tu alojamiento
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="jumbotron form-font-top form-group ">
+                <div class="container form-font">
+                    <div class="col-md-16 right">
+                        <h3>{{"extranet.formPayment.form_of_payment"|trans }}</h3>
+                        <h5>{{"extranet.formPayment.message_form_payment"|trans }}</h5>
+                    </div>
+                </div>
+                <br>
+                <div class="container">
+                    <div class="row" style="color:#808080">
+                        <div class="col-md-4">
+                            <div>
+                                <label  ng-class="{'label-error' : infoPayment.charging_system.$error.required && infoPayment.charging_system.$touched}" for="">{{"extranet.formPayment.system_payment"|trans }}*</label>
+                                <select ng-class="{'input-error' : infoPayment.charging_system.$error.required && infoPayment.charging_system.$touched}"name="charging_system" ng-model="response.payment.charging_system" class="form-control my-select " style="width:70%" number-converter>
+                                    <option value="">Seleccione</option>
+                                    <option value="1">Transferencia bancaria</option>
+                                </select>
+                                <span class="error" ng-show="infoPayment.charging_system.$error.required && infoPayment.charging_system.$touched">{{ "share.validation.input_required"|trans }}</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-3 col-lg-2" style="margin-left: -7%;">
+                            <label for="">{{"extranet.formPayment.account_number"|trans }}* </label>
+                            <input style="width:60%" name="account_number_part1" ng-model="response.payment.account_number_part1" maxlength="4"
+                                   id=""style="width:100%" class="form-control my-imput" type="text" ng-pattern="/^([0-9])*$/" ng-minlength="4">
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-2" style="margin-left: -5%;" >
+                            <label for=""> &nbsp;</label>
+                            <input style="width:60%"  name="account_number_part2" ng-model="response.payment.account_number_part2"
+                                   maxlength="4"id=""style="width:100%" class="form-control my-imput" type="text" ng-pattern="/^([0-9])*$/" ng-minlength="4">
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-1" style="margin-left: -5%;">
+                            <label for=""> &nbsp;</label>
+                            <input name="account_number_part3" ng-model="response.payment.account_number_part3" maxlength="2"
+                                   style="width:100%" class="form-control my-imput" type="text" ng-pattern="/^([0-9])*$/" ng-minlength="2">
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3" style="margin-left: -1%;">
+                            <label for=""> &nbsp;</label>
+                            <input style="width:70%"  name="account_number_part4" ng-model="response.payment.account_number_part4"
+                            maxlength="10" id=""style="width:100%" class="form-control my-imput" type="text" ng-pattern="/^([0-9])*$/" ng-minlength="10">
+                        </div>
+                        <div class="col-md-3 col-lg-4" style="margin-left: -5%;">
+                            <div>
+                                <label ng-class="{'label-error' : infoPayment.currency_payment.$error.required && infoPayment.currency_payment.$touched}">
+                                    {{"extranet.formProperty.currency"|trans }}*
+                                </label>
+                                <select ng-class="{'input-error' : infoPayment.currency_payment.$error.required && infoPayment.currency_payment.$touched}"
+                                        name="currency_payment" ng-model="response.payment.currency_payment_name"class="form-control my-select" style="width:100%"
+                                        ng-options="id.name as id.name for (currency, id) in response.currency | orderBy:'name'">
+                                        <option value="">Seleccione</option>
+                                </select>
+                                <span class="error" ng-show="infoPayment.currency_payment.$error.required && infoPayment.currency_payment.$touched">
+                                      {{ "share.validation.input_required"|trans }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label>
+                                SWIFT
+                            </label>
+                            <input name="swift" ng-model="response.payment.swift"style="width:100%" class="form-control my-imput" type="text">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-3" style="  margin-left: -7%;">
+                            <span class="error" style="position: absolute"
+                            ng-show="(infoPayment.account_number_part1.$error.minlength || infoPayment.account_number_part1.$pristin&& infoPayment.account_number_part1.$touched)
+                                     || (infoPayment.account_number_part2.$error.minlength || infoPayment.account_number_part2.$pristine && infoPayment.account_number_part2.$touched)
+                                     || (infoPayment.account_number_part3.$error.minlength || infoPayment.account_number_part3.$pristine && infoPayment.account_number_part3.$touched)
+                                     || (infoPayment.account_number_part4.$error.minlength || infoPayment.account_number_part4.$pristine && infoPayment.account_number_part4.$touched)">
+                                     {{ "share.validation.input_required"|trans }}
+                            </span>
+                            <br>
+                            <span class="error" ng-show="
+                                  infoPayment.account_number_part1.$error.pattern ||
+                                  infoPayment.account_number_part2.$error.pattern ||
+                                  infoPayment.account_number_part3.$error.pattern ||
+                                  infoPayment.account_number_part4.$error.pattern">
+                                {{ "share.validation.only_number"|trans }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-md-16"><hr></div>
+            </div>
+            <div align="center">
+                <button ng-click="changeSection('agreement')" type="button" class="btn btn-primary btn-search-list">
+                    {{"share.register.save"|trans }}</button>
+            </div>
+            <br>
+        </div>
+    </form>
+    {{ include("NavicuInfrastructureBundle:Ascribere:Partials/modalExito.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Ascribere:Partials/modalError.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Ascribere:Partials/modalLoading.html.twig") }}
+</div>
+{% endblock body %}
+
+ {% block javascripts%}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+ {{parent()}}
+    <script type="text/javascript">
+        var extension = "{{ app.request.attributes.get('extension') }}";
+        var response = {{ data | raw }};
+        var slug = response.slug;
+        var progress = response.progress;
+    </script>
+
+{% endblock %}

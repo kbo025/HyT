@@ -1,0 +1,180 @@
+{% extends "NavicuInfrastructureBundle:Web:Client/layout.html.twig" %}
+
+{% set header_title = {'module_title': ''} %}
+
+{% block body %}
+
+<main class="nvc-reservationDetails" ng-app="reservationDetailsModule" ng-controller="reservationDetailsController" ng-cloak>
+	<div class="nvc-reservationDetails__header">
+		<div class="nvc-container">
+			<h1>{{"extranet.reservations.booking_detail"|trans}}</h1>
+		</div>
+	</div>
+	<div class="nvc-reservationDetails__mainData">
+		<div class="nvc-container">
+			<div class="col-xs-11 col-sm-9 col-md-11 nvc-reservationDetails__mainData--left">
+				<div class="nvc-row item">
+					<i class="fa fn-calendar" aria-hidden="true"></i>
+					<h1>{{"word.creation_of_the_reserve"|trans}}</h1>
+					<h2>{[{response.reserveCreationDate}]}</h2>
+				</div>
+				<div class="nvc-row item">
+					<i class="fa fa-clock-o" aria-hidden="true"></i>
+					<h1>{[{response.reserveCreationTime}]}</h1>
+				</div>
+			</div>
+			<div class="col-xs-5 col-sm-7 col-md-5 nvc-reservationDetails__mainData--right">
+				<div class="nvc-row item">
+					<div class="col-xs-4 col-sm-4 col-md-5">
+						<h2 class="state">{{"web.shared_client.table_header.state"|trans}}</h2>
+					</div>
+					<div class="col-xs-12 col-md-11">
+						<h3 ng-class="{'pre-reserve':response.status==0, 'pending':response.status==1, 'confirmate':response.status==2, 'cancel':response.status==3}">{[{nameStatus}]}</h3>
+					</div>
+				</div>
+				<div class="nvc-row item2">
+					<div class="col-xs-16 sub-item">
+						<h1>{{"extranet.home.id_reservation"|trans}}</h1>
+						<h2>{[{response.idReserve}]}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="nvc-reservationDetails__userData">
+		<div class="nvc-container">
+			<div class="nvc-row">
+				<div class="col-xs-8 col-sm-9 col-md-6">
+					<h1>Check-in</h1>
+					<h2>{[{response.checkin}]}</h2>
+				</div>
+				<div class="col-xs-8 col-sm-7 col-md-4">
+					<h1>Check-out</h1>
+					<h2>{[{response.checkout}]}</h2>
+				</div>
+			</div>
+			<hr class="visible-xs">
+			<div class="nvc-row">
+				<div class="col-xs-16 col-sm-9 col-md-6">
+					<h1>{{"word.last_name"|trans}}</h1>
+					<h2>{[{response.detailsPerson.nameClient}]}</h2>
+				</div>
+				<hr class="visible-xs">
+				<div class="col-xs-16 col-sm-7 col-md-4">
+					<h1>e-mail</h1>
+					<h2>{[{response.detailsPerson.email}]}</h2>
+				</div>
+				<hr class="visible-xs">
+			</div>
+			<hr class="visible-xs">
+			<div class="nvc-row">
+				<div class="col-xs-16 col-sm-9 col-md-6">
+					<h1>{{"web.reservation.phone"|trans}}</h1>
+					<h2>{[{response.detailsPerson.phone}]}</h2>
+				</div>
+				<div class="col-xs-16 col-sm-7 col-md-6">
+					<h1>{{"word.payment_method"|trans}}</h1>
+					<h2 ng-if="response.paymentType==1">{{"word.credit_card"|trans}}</h2>
+					<h2 ng-if="response.paymentType==2">{{"word.wire_transfer"|trans}}</h2>
+				</div>
+			</div>
+			<hr class="visible-xs">
+			<div class="nvc-row">
+				<div class="col-xs-8 col-sm-9 col-md-6">
+					<h1>{{"word.adult"|transchoice(2)}}</h1>
+					<h2>{[{response.detailsPerson.numberAdults}]}</h2>
+				</div>
+				<div class="col-xs-8 col-sm-7">
+					<h1>{{"word.children"|transchoice(2)}}</h1>
+					<h2>{[{response.detailsPerson.numberChildren}]}</h2>
+				</div>
+				<hr class="visible-xs">
+				<div class="col-xs-16 col-sm-7 col-md-4 col-lg-3 import">
+					<h3>{{"web.shared_client.table_header.amount"|trans}}</h3>
+					<h5>({{"word.tax_included"|trans}})</h5>
+					<h4>{{ "web.reservation.money" | trans}} {[{response.subTotal + response.tax | number}]}</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="nvc-reservationDetails__titleReserve">
+		<div class="nvc-container">
+			<i class="fa fa-home" aria-hidden="true"></i>
+			<h1>{{"extranet.reservations.reservation_data"|trans}}</h1>
+			<h2>{[{response.propertyName}]}</h2>{#traer este dato de backend#}
+		</div>
+	</div>
+	<div class="nvc-container" ng-repeat="pack in response.packages">
+		<div  ng-class="{'nvc-reservationDetails__userData nvc-reservationDetails__ReserveDataOne':({[{$index}]}+1)%2!=0, 'nvc-reservationDetails__userData nvc-reservationDetails__ReserveDatatwo': ({[{$index}]}+1)%2==0}" class="nvc-reservationDetails__userData nvc-reservationDetails__ReserveDataOne">
+			<div class="nvc-container">
+				<div class="nvc-row">
+					<div class="nvc-container">
+						<h3>{{"web.reservation.number_room"|trans}} {[{pack.numberRoom}]}</h3>
+					</div>
+				</div>
+				<div class="nvc-row">
+					<div class="col-xs-16 col-sm-9 col-md-8">
+						<h1>{{"extranet.home.room_type"|trans}}</h1>
+						<h2>{[{pack.roomName}]}</h2>
+					</div>
+					<div class="col-xs-16 col-sm-7 col-md-8">
+						<h1>{{"web.reservation.type_pack"|trans}}</h1>
+						<h2>{[{pack.namePack}]}</h2>
+					</div>
+				</div>
+				<div class="nvc-row">
+					<div class="col-xs-16 col-sm-8">
+						<h1>{{"extranet.reservations.type_bed"|trans}}</h1>
+						<h2>{[{pack.bedsType}]}</h2>
+					</div>
+					<div class="col-xs-16 col-sm-8">
+						<h1>{{"web.reservation.cancellation_policies"|trans}}</h1>
+						<h2>{[{pack.nameCancellationPolicy}]}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="nvc-reservationDetails__titleReserve">
+		<div class="nvc-container">
+			<h1>{{"extranet.reservations.observations"|trans}}</h1> 
+		</div>
+	</div>
+	<div class="nvc-reservationDetails__observations">
+		<div class="nvc-container">
+			<div class="col-xs-16 col-md-11 block">
+				<div class="block--content" ng-model="response.observations">
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="nvc-container">
+		<div class="col-md-16" align="center">
+			<a href="javascript:history.back()">
+				<button type="button" class="nvc-button nvc-button__reroute--border">{{"share.action.go_back"|trans}}</button>
+			</a>
+		</div>
+	</div>
+	<br>
+</main>
+
+{% endblock %}
+
+{% block javascripts%}
+    {{parent()}}
+        <script type="text/javascript">
+        var response = "{{ data }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}
+

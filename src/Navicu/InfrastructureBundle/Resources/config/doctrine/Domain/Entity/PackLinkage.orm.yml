@@ -1,0 +1,71 @@
+Navicu\Core\Domain\Model\Entity\PackLinkage:
+    type: entity
+    table: pack_linkage
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPackLinkageRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        start_date:
+            type: date
+            nullable: false
+        end_date:
+            type: date
+            nullable: false
+        variation_type_pack:
+            type: integer
+            nullable: false
+        is_linked_sell_rate:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        is_linked_availability:
+            type: integer
+            nullable: true
+        is_linked_close_out:
+            type: boolean
+            nullable: false
+        is_linked_cta:
+            type: boolean
+            nullable: false
+        is_linked_ctd:
+            type: boolean
+            nullable: false
+        is_linked_max_night:
+            type: integer
+            nullable: true
+        is_linked_min_night:
+            type: integer
+            nullable: true
+    manyToOne:
+        room:
+            targetEntity: Room
+            cascade: {  }
+            mappedBy: null
+            inversedBy: packages_linkage
+            joinColumn:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        parent:
+            targetEntity: Pack
+            cascade: {  }
+            mappedBy: null
+            inversedBy: i_am_parent
+            joinColumn:
+                parent_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        child:
+            targetEntity: Pack
+            cascade: {  }
+            mappedBy: null
+            inversedBy: i_am_child
+            joinColumn:
+                child_id:
+                    referencedColumnName: id
+            orphanRemoval: false

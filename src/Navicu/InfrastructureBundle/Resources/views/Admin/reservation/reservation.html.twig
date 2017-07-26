@@ -1,0 +1,44 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block title %}
+    Reservas | {{ parent() }}
+{% endblock title %}
+
+{% block content %}
+    <main
+        class="admin nvc-admin__ReservationList"
+        ng-controller="ReservationListCtrl"
+    >
+        {# Desktop #}
+        <section class="visible-md visible-lg">
+            <div class="nvc-secondaryTableHeader--admin">
+                {% include "NavicuInfrastructureBundle:Admin:reservation/reservationHeader.html.twig" %}
+            </div>
+
+            <div class="nvc-topmenuTable--admin">
+                {% include "NavicuInfrastructureBundle:Admin:reservation/reservationTopMenu.html.twig" %}
+            </div>
+
+            <div class="nvc-table--admin nvc-table--admin--reservation nvc-container">
+                {% include "NavicuInfrastructureBundle:Admin:reservation/reservationTable.html.twig" %}
+            </div>
+        </section>
+
+        {# Mobile #}
+        <section class="visible-sm visible-xs">
+            <div class="nvc-secondaryTableHeader--admin--movil">
+                <div class="col-xs-16 col-sm-16">
+                    {% include "NavicuInfrastructureBundle:Admin:reservation/mobile/reservationHeader.html.twig" %}
+                </div>
+            </div>
+
+            <div class="col-xs-16 col-sm-16 nvc-table--admin--movil nvc-table--admin--reservation--movil">
+                {% include "NavicuInfrastructureBundle:Admin:reservation/mobile/reservationTable.html.twig" %}
+            </div>
+        </section>
+
+        <aside ng-if="pagination.pages > 1">
+            {% include "NavicuInfrastructureBundle:Admin:reservation/reservationPagination.html.twig" %}
+        </aside>
+    </main>
+{% endblock content %}

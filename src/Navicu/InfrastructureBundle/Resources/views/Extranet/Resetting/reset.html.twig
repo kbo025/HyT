@@ -1,0 +1,50 @@
+{% extends "NavicuInfrastructureBundle:Extranet/Resetting:layoutResetting.html.twig" %}
+
+{% block content_title %}
+
+{% endblock content_title %}
+
+{% block content_form %}
+
+    <div id="carousel" class="carousel carousel-extranet carousel-fade" data-ride="carousel">
+        <div class="carousel-inner carousel-inner-hotel">
+            <div class="item active">
+                <div class="carousel-fill" style="background-image:url('/images/images_original/navicu/homepage/login1.jpg');"></div>
+                <h1 style="margin-left:12%; margin-top:-63px; color:#fff; font-size:15px;">
+                    <span style="font-family:Lato-Regular; font-style:italic;">Parque Nacional Laguna de Tacarigua, Estado Miranda, Venezuela</span>
+                <h1>
+            </div>
+            <div class="item">
+                <div class="carousel-fill" style="background-image:url('/images/images_original/navicu/homepage/login2.jpg');"></div>
+                <h1 style="margin-left:12%; margin-top:-63px; color:#fff; font-size:15px;">
+                    <span style="font-family:Lato-Regular; font-style:italic;">Cerro Wichuj, Estado Amazonas, Venezuela</span>
+                <h1>
+            </div>
+            <div class="item">
+                <div class="carousel-fill" style="background-image:url('/images/images_original/navicu/homepage/login3.jpg');"></div>
+                <h1 style="margin-left:12%; margin-top:-63px; color:#fff; font-size:15px;">
+                    <span style="font-family:Lato-Regular; font-style:italic;">Medanos de Coro, Estado Falcón, Venezuela</span>
+                <h1>
+            </div>
+        </div>
+        <div class="container">
+            <form action="{{ path('navicu_extranet_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="form-out" style="width:350px;">
+                <p class="form-extranet-heading"> {{ "share.message.password_update"|trans}}</p>
+                <p class="form-extranet-heading"> {{ "share.message.password_insert_new"|trans}}</p>
+                {% for errorItem in form.plainPassword.first.vars.errors %}
+                    <div class="alert alert-danger">
+                        <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <span>  {{ errorItem.message|trans }}</span>
+                    </div>
+                {% endfor %}
+
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control my-input', 'placeholder': 'Contraseña nueva'}}) }}
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control my-input', 'placeholder': 'Repetir contraseña'}}) }}
+                <button type="submit"  class="btn btn-md btn-primary btn-reset" > Actualizar </button>
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+
+{% endblock content_form %}

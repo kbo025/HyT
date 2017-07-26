@@ -1,0 +1,158 @@
+{% block topmenu%}
+
+<nav class="navbar navbar-default navbar-default-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-main">
+            <ul class="nav navbar-nav topmenu">
+                <div class="container form-font">
+                    {% if module_title == "1"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-informacion" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Información General</h3>
+                            <h5>Datos básicos del establecimiento</h5>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "2"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-servicios" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Servicios</h3>
+                            <h5>Lista detallada de los servicios ofrecidos</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "3"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-habitaciones" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Registro de habitaciones</h3>
+                            <h5>¡Agrega todas tus habitaciones!</h5>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "4"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-galeria" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Fotos del establecimiento</h3>
+                            <h5>¡Agrega imagenes de tu establecimiento!</h4>
+                            </div>
+                    {% endif %}
+                    {% if module_title == "5"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-pago" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Registro de pago</h3>
+                            <h5>Ingresa tus datos bancarios para tu pago</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "6"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-acuerdo" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Acuerdo de colaboración</h3>
+                            <h5>Acepta nuestras condiciones</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "7"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-vistaprevia" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Vista Previa</h3>
+                            <h5>¡Así se verá tu propiedad en Navicu!</h4>
+                        </div>
+                    {% endif %}
+                    {% if module_title == "8"%}
+                        <div class="col-sm-2 col-md-1" style="color:#FFF; margin-top:20px; font-size: 40px;">
+                            <span class="fn-check" style="color:#FFF !important"></span>
+                        </div>
+                        <div class="col-md-5" style="color:#FFF">
+                            <h3>Estado del formulario</h3>
+                            <h5>Campos pendientes por completar</h4>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="col-md-9 col-md-offset-1 col-lg-8 col-lg-offset-2" style="margin-top:20px; font-size: 37px;">
+                        
+                        <!-- Información General -->
+                        
+                        <a style="cursor:pointer;" ng-href="{{ path('navicu_admin_property_general_information', {'slug': slugTemp}) }}">
+                            {% if module_title == "1"%}
+                                <span class="fn-informacion" style="color:#FFF !important"></span>
+                            {% else %}
+                                <span class="fn-informacion color-icon-off"></span>
+                            {% endif %}
+                        </a>
+                        
+                        <span style="color:#43254A">|</span>
+
+                        <!-- Servicios -->
+                        <a style="cursor:pointer;" ng-href="{{ path('admin_update_property_services', {'slug': slugTemp}) }}">
+                            {% if module_title == "2"%}
+                                <span class="fn-servicios" style="color:#FFF !important"></span>
+                            {% else %}
+                                <span class="fn-servicios color-icon-off"></span>
+                            {% endif %}
+                        </a>
+                
+                        <span style="color:#43254A">|</span>
+
+                        <!-- Habitaciones -->
+                        <a style="cursor:pointer;" href="{{ path('navicu_admin_property_rooms', {'slug': slugTemp}) }}" >
+                            {% if module_title == "3"%}
+                                <span class="fn-habitaciones" style="color:#FFF !important"></span>
+                            {% else %}
+                                <span class="fn-habitaciones color-icon-off"></span>
+                            {% endif %}
+                        </a> 
+                       
+                        <span style="color:#43254A">|</span> 
+                        
+                        <!-- Galería -->
+                        <a style="cursor:pointer;" ng-href="{{ path('navicu_admin_property_galleries', {'slug': slugTemp}) }}">
+                            {% if module_title == "4"%}
+                                <span class="fn-galeria" style="color:#FFF !important"></span>
+                            {% else %}
+                                <span class="fn-galeria color-icon-off"></span>
+                            {% endif %}
+                        </a>
+
+                        <span style="color:#43254A">|</span> 
+
+                        <!-- Registro de pago -->
+                        
+                        <a style="cursor:pointer;" ng-href="{{ path('navicu_admin_property_payment', {'slug': slugTemp}) }}">
+                            {% if module_title == "5"%}
+                                <span class="fn-pago"  style="color:#FFF !important"
+                                ></span>
+                            {% else %}
+                                <span class="fn-pago color-icon-off"
+                                ></span>
+                            {% endif %}
+                        </a> 
+
+                        <span style="color:#43254A">|</span>
+                       
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% endblock topmenu %} 

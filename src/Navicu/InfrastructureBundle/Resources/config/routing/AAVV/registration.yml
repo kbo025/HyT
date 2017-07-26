@@ -1,0 +1,123 @@
+# Manejo de todas las rutas referente a la seguridad de la extranet
+navicu_aavv_register_module_security:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/security.yml"
+
+# ===========Rutas del registro de la AAVV===========
+# Rutas de registro de usuario aavv temporal y formulario de registro
+
+navicu_aavv_landing:
+    path: /landing
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:landing}
+
+registration_requirements:
+    path:   /registrationRequirements.pdf
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:registrationRequirementsPdf}
+
+aavv_login_page:
+    path:   /register
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:showRegister}
+    requirements:
+        { _method: GET}
+
+register_disabled_user:
+    path:   /register
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:userRegister}    
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+aavv_valid_email:
+    path:   /validemail
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:validEmail }
+    options:
+        expose: true
+
+# Funcion para obtener los datos almacenados del lugar de cobro para la aavv
+aavv_register_set_billing_module:
+    path: /register/step3
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:aavvSetBillingData }
+    options:
+        expose: true
+
+aavv_register:
+    path:   /register/{step}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:aavvRegistration, step: null}
+    options:
+        expose: true
+
+aavv_register_upload_image:
+    path: /registerAjax_/uploadImage
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:uploadDocument}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+aavv_register_delete_image:
+    path: /registerAjax_/deleteImage
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:deleteDocument}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+aavv_company_register:
+    path:   /companyregister
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:RegisterCompany }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+aavv_company_data:
+    path:   /companydata
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:CompanyData }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+confirm_registration:
+    path:   confirm/{userName}/{token}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:userConfirmRegistration }
+
+registration_testing:
+    path:   /testing
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:testing }
+
+
+# Petición para el envio de la información necesaria para el paso 2.
+aavv_registration_async_info_step2:
+    path:   /async/info/step2
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:getInfoStep2 }
+    options:
+        expose: true
+
+# Petición para el guardar de la información para el paso 2.
+aavv_registration_async_save_step2:
+    path:   /async/save/step2
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:setInfoStep2 }
+    options:
+        expose: true
+
+aavv_register_agreement:
+    path:   /register/{slug}/agreement
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:AgreementAAVV}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json)}
+
+aavv_register_agreement_generate_pdf:
+    path: /register/{slug}/generateAgreementPdf
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:GenerateAgreementPdfAAVV }
+    options:
+        expose: true
+
+aavv_register_finish:
+    path:   /register/{slug}/finish
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Registration:finishRegistration}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+

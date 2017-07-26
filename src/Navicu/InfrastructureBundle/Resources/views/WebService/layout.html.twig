@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <title>{% block title %}Web Service Navicu{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/extranet{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+</head>
+<body>
+    {% set publicId = app.session.get('publicId') %}
+    {% set currency = app.session.get('currency') %}
+    {% set rateType = app.session.get('rateType') %}
+    {% set slug = app.session.get('slug') %}
+    {% set name = app.session.get('name') %}
+    {% set count = app.session.get('count') %}
+    {% set properties = app.session.get('properties') %}
+    {% set destinationsFooter = destinationsFooter() %}
+
+    <header>
+        <nav class="nvc-navbar nvc-navbar__default" role="navigation">
+            <div class="nvc-container">
+                <div class="nvc-navbar__header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-header">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    {% if is_granted('ROLE_ADMIN') %}
+                       <a class="nvc-navbar__brand" href="">
+                            navicu.com
+                        </a>
+                    {% endif %}
+
+                    {% if not is_granted('ROLE_ADMIN') %}
+                        <a class="nvc-navbar__brand" href="{{ path('navicu_extranet_homepage', {'slug':slug}) }}">
+                            navicu.com
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-header">
+                    <ul class="nvc-layout__extranet nav navbar-nav navbar-right">
+                        <li class="dropdown dropdown-hover">
+                            <a href="#" class="dropdown-toggle property-pad" data-toggle="dropdown">
+                                <span class="top-menu-font1">{{ name }} - {{ app.user.username }}</span>
+                                <img src="{{asset('images/iconuser.png')}}" class="user-photo">
+                                <span class="caret"></span>
+                                <br>
+                                {#<span class="top-menu-font4">ID-{{ publicId }}</span>#}
+                            </a>
+                            <ul class="nvc-layout__extranet--menu dropdown-menu" role="menu">
+                                <li> <a href="{{ path('nvc_web_service_logout', {'extension' : app.request.attributes.get('extension')}) }}"><i class="fa fa-sign-out"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="nvc-ribbon" style="height:10px;">
+            <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+            <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+            <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+            <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+        </div>
+
+        {% include "NavicuInfrastructureBundle:WebService:top-menu.html.twig" with header_title %}
+
+    </header>
+
+<div id="content">
+    {% block body %}{% endblock %}
+</div>
+
+{% block footer%}
+    {% include "NavicuInfrastructureBundle:WebService:footer.html.twig" %}
+{% endblock footer%}
+
+{% block javascripts %}
+
+    <!-- Routing -->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <!-- Arreglo de `Routing.generate` para detectar subdominios automáticamente. -->
+    <script>
+        (function(Routing) {
+            var generate = Routing.generate;
+
+            Routing.generate = function() {
+                var args = Array.prototype.slice.call(arguments);
+
+                var route = args[0];
+                var options = args[1];
+                var trailing = args.slice(2);
+
+                if (options === undefined || options === null) {
+                    options = {};
+                }
+
+                if (typeof options.subdomain !== 'string') {
+                    options.subdomain = window.location.hostname.split('.')[0];
+                }
+
+                return generate.apply(Routing, [route, options].concat(trailing));
+            };
+        })(window.Routing);
+    </script>
+
+    {% if app.environment == "dev" %}
+        <script src="/builds/vendor.bundle.js"></script>
+        <script src="/builds/extranet.bundle.js"></script>
+    {% else %}
+        <script src="{{ assets.js.vendor }}"></script>
+        <script src="{{ assets.js.extranet }}"></script>
+    {% endif %}
+
+
+    <script type="text/javascript">
+        var __dcid = __dcid || [];
+        __dcid.push(["DigiCertClickID_RSxHdSRb", "11", "s", "white", "RSxHdSRb"]);
+    </script>
+    <script type="text/javascript" src="//seal.digicert.com/seals/cascade/seal.min.js" async></script>
+
+    <script type="text/javascript">
+         jQuery(function($) {
+
+            $('.nvc-up').click(function(){
+                $('body, html').animate({
+                    scrollTop: '0px'
+                }, 300);
+            });
+
+            $(window).scroll(function(){
+                if( $(this).scrollTop() > 0 ){
+                    $('.nvc-up').slideDown(300);
+                } else {
+                    $('.nvc-up').slideUp(300);
+                }
+            });
+
+        });
+    </script>
+
+{% endblock %}
+</body>
+</html>

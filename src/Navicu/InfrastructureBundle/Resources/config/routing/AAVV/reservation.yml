@@ -1,0 +1,80 @@
+#Todas las rutas referentes al proceso
+#de reserva para el usuario AAVV
+
+
+
+#Ruta de peticiones para guardar reservas
+aavv_create_reservations:
+    path: /create
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:CreateReservation}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json)}
+
+navicu_aavv_renew_locked_reservation:
+    path: /renewReservation
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:renewReservation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_aavv_bank_list:
+    path: /bankList
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:getBankList}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+#Ruta de confirmacion de reserva
+navicu_aavv_confirm_reservation:
+    path: /confirmReservation/{location}/{public_group_id}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:GetReservationConfirmData}
+    options:
+        expose: true
+
+# La ruta se encarga de validar el inventario
+# y mostrar vista del formulario de huéspedes de las reservas
+navicu_aavv_set_data_reservation:
+    path: /check
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:SetDataReservation }
+
+# La ruta es usada para devolver de forma async el listado de reservas
+# asignada a una Agencia de Viaje.
+navicu_aavv_async_list_reservation:
+    path: /async/list/reservations
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:asyncListReservation }
+    options:
+        expose: true
+
+navicu_aavv_get_list_reservation:
+    path: /get/list/reservation
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:getListReservation }
+
+navicu_aavv_details_reservation:
+    path: /get/list/detailsReservation
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:detailsReservation }
+
+# Ruta asignada para solcitar el detalle de una reserva
+navicu_aavv_detail_reservation:
+    path: /get/detailReservation/{idReservation}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:getDetailReservation }
+    options:
+        expose: true
+
+# Ruta para la peticion de la visualizacion del pdf con el resumen de la reserva
+navicu_aavv_download_pdf_reservation:
+    path: /downloadPdf/{location}/{public_group_id}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:generateResumeReservationPdfAAVV }
+    options:
+        expose: true
+
+navicu_aavv_confirm_prereservation:
+    path: /reservation/confirmation
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:confirmReservationAAVV }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST }

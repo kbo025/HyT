@@ -1,0 +1,20 @@
+# Buscar información de todas las habitación de un establecimiento.
+navicu_admin_property_rooms:
+    pattern: /propertyRoom/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Room:roomView }
+    options:
+        expose: true
+
+# Crear o Editar una habitación de un establecimiento.
+navicu_admin_save_property_room:
+    pattern: /room/save/{slug}/{id}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Room:roomSave, slug:null, id:null }
+    options:
+        expose: true
+
+#Eliminando una habitación de un establecimiento.
+navicu_admin_delete_property_room:
+    pattern: /room/delete
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Room:roomDelete }
+    options:
+        expose: true

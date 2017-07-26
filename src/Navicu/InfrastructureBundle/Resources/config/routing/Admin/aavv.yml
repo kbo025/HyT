@@ -1,0 +1,155 @@
+
+
+# Conjunto de parametros de cobros configurables de las AAVV
+navicu_admin_aavv_list_parameters:
+    path: /parameters/list
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:listParameters }
+    options:
+          expose: true
+
+# Conjunto de parametros de cobros configurables de las AAVV
+navicu_admin_aavv_edit_parameters:
+    path: /parameters/edit
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:editParameters }
+    options:
+          expose: true
+
+navicu_admin_aavv_get_parameterlogs:
+    path: /parameters/getlogs
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:getParameterLogs }
+    options:
+          expose: true
+
+# Conjunto de parametros de cobros configurables de las AAVV
+navicu_admin_aavv_delete_parameters:
+    path: /parameters/delete
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:deleteParameters }
+    options:
+          expose: true
+
+# Listado de Agencias de viajes afiliadas
+navicu_admin_affiliates_list_aavv:
+    path: /affiliated/list
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:getAffiliatedList }
+    options:
+        expose: true
+
+# Ver Detalle de Agencias de viajes afiliadas
+# VerInformación de forma asyncrona de los detalle de agencia de viaje
+navicu_admin_affiliates_detail_aavv:
+    path: /affiliate/detail/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:getAffiliatesDetail, slug: null }
+    options:
+        expose: true
+
+# Listado de reservas de Agencias de viajes afiliadas
+navicu_admin_affiliates_list_reservation_aavv_async:
+    path: /async/affiliate/reservation/list
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:asyncGetAffiliatesReservationList }
+    options:
+        expose: true
+
+#listado con filtros de agencias de viajes en proceso de registro
+navicu_admin_aavv_list:
+    path:   /list/{page}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:listAAVV, page: 1 }
+    requirements:
+        { _format: (xml | json) }
+    options:
+        expose: true
+
+# Dar de alta agencias de vaije en proceso de registro
+navicu_admin_aavv_register:
+    path:   /{slug}/register
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:registerAAVV }
+    requirements:
+        { _format: (xml | json) }
+    options:
+        expose: true
+
+# cambiar de estado una agencia de viaje registrada a activa / inactiva
+navicu_admin_aavv_change_status:
+    path:   /changeStatus
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:changeStatusAAVV }
+    requirements:
+        { _format: (xml | json) }
+    options:
+        expose: true
+
+# Eliminar Agencias de viaje en proceso de registro
+navicu_admin_aavv_delete:
+    path:   /{slug}/delete
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:deleteAAVV }
+    requirements:
+        { _format: (xml | json) }
+    options:
+        expose: true
+
+# genera el archivo excel de las agencias de viaje registradas en la app
+navicu_admin_aavv_generate_excel:
+    path:   /generateexcel/{status}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AAVVModule\AAVVModule:downloadExcelAavv }
+    options:
+      expose: true
+
+#rutas para editar una agencia de viajes
+aavv_admin_edit:
+    path:   /edit/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:adminEdit}
+    options:
+            expose: true
+
+aavv_admin_register:
+    path:   /register/{step}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:aavvRegistration, step: null}
+    options:
+        expose: true
+
+navicu_aavv_payments_edit:
+    path: /billing/payments/edit
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AAVVModule/AAVVModule:editPayment}
+    options:
+        expose: true
+
+navcu_avvv_direct_payment:
+    path: /directPayments
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AAVVModule/AAVVModule:directPayments}
+    options:
+        expose: true
+
+# Ruta de la lista de pagos domiciliados
+navicu_aavv_payments_list:
+    path: /billing/payments/{page}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AAVVModule/AAVVModule:listPayments, page: 1 }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json) }
+
+# ===========Rutas para el acceso a las vistas de las facturas de la AAVV===========
+# Despliegue de la vista de las facturas
+navicu_aavv_view_invoice_list:
+    path: /invoicesView
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AAVVModule/Invoice:getViewListInvoicesOfAAVV }
+    options:
+        expose: true
+
+# Peticion de las facturas por vencer y vencidas de todas las aavv
+navicu_aavv_invoice_list:
+    path: /invoicesListView/{page}/{invoiceType}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AAVVModule/Invoice:invoicesListOfAAVV }
+    options:
+        expose: true
+
+# Generar una factura en un pdf
+navicu_admin_billing_generate_bill_pdf:
+    path: /billing/{slug}/{idInvoice}/Invoice.pdf
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AAVVModule/Invoice:generateInvoicePdf }
+    options:
+        expose: true
+
+navicu_admin_redirect_aavv:
+    path: /redirectAAVV/{subdomainRequest}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/AAVVModule/AAVVModule:redirectAAVV}
+    options:
+        expose: true

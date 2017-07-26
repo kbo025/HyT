@@ -1,0 +1,33 @@
+#Todas las rutas referentes al proceso
+#de login para el usuario Admin
+navicu_admin_login:
+    pattern:  /login
+    defaults: { _controller:  NavicuInfrastructureBundle:Security\Security:login }
+
+#Ruta de redireccionamiento hacia login
+navicu_admin_login_redirect:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: navicu_admin_login
+        permanent: true
+
+# Verificacion de inicio de sesion
+navicu_admin_check:
+    pattern:  /login_check
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:check }
+    options:
+      expose: true
+
+# Cerrar sesion
+navicu_admin_logout:
+    pattern:  /logout
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:logout }
+    options:
+      expose: true
+
+navicu_admin_async_login:
+    path:   /async/login
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:apiLogin, config : 'navicu_admin'}
+    options:
+        expose: true

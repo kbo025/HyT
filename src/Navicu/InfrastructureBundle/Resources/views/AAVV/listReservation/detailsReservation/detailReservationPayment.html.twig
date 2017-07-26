@@ -1,0 +1,95 @@
+<table class='nvc-table--admin'>
+    <thead>
+        <div>
+            <img src="/images/aavv/reservations/pay.png" class="img-responsive">
+            <p><strong>Por favor,&nbsp&nbspselecciona con qué banco deseas realizar tu pago y añade el número de confirmación</strong></p>
+            <p>Para realizar el pago con varias transferencias, deberás indicar con precisión el monto de cada una</p>
+            <hr>
+        </div>
+    </thead>
+    <tbody ng-repeat="pay in detailsReservation.payments" class="container">
+        <tr {#ng-style="{ background: ($even && $first) ? '#faebff' : ($even && !$first) ? '#f6f6f6' : ($odd) ? '#ebebeb' : '' }"#} style="background: #faebff">
+            {[{ number }]}
+            <!--Banco Emisor-->
+            <td style="padding-left: 118px; width: 22%;">
+                <select name="bank"
+                    ng-model="pay.bank"
+                    ng-options="option.title for option in bankList.local track by option.id"
+                    class="colorPlaceholder"
+                    ng-change = "changeColorSelect(pay.bank, 'bank-'+$index)"
+                    id = "{[{ 'bank-' + $index }]}">
+                    >
+                    <option value="">
+                        {{ 'aavv.payments.bank.issuing bank' | trans }}
+                    </option>
+                </select>
+            </td>
+            <!--Banco Receptor-->
+            <td style="padding-left: 10px;">
+                <select name="bank"
+                    ng-model="pay.receivingBank"
+                    ng-options="option.title for option in bankList.localReceiver track by option.id"
+                    class="colorPlaceholder"
+                    ng-change = "changeColorSelect(pay.receivingBank, 'receivingBank-'+$index)"
+                    id ="{[{ 'receivingBank-' + $index }]}"
+                    >
+                    <option value="">
+                            {{ 'aavv.payments.bank.receiving bank' | trans }}
+                    </option>
+                </select>
+            </td>
+            <!-- N de referencia -->
+            <td style="padding-left: 10px;">
+                <input type="text"
+                required="required"
+                ng-model="pay.confirmationId"
+                placeholder="{{ 'aavv.payments.bank.reference' | trans }}"
+                class="refClass"
+                style="margin: 0">
+            </td>
+            <!-- Concepto -->
+            <td>
+                <input type="text"
+                required="required"
+                ng-model="pay.description"
+                placeholder="{{ 'aavv.payments.bank.concept' | trans }}"
+                class="conceptoClass"
+                style="margin: 0"
+                >
+            </td>
+            <!-- Monto -->
+            <td>
+                <input type= "number"
+                required= "required"
+                ng-model= "pay.amount"
+                placeholder= "{{ 'aavv.payments.bank.money' | trans }}"
+                class= "montoClass"
+                style= "margin: 0"
+                >
+            </td>
+            <!-- boton Confirmar -->
+            <td class="text-center visible-lg" colspan="2">
+                <button
+                    class="nvc-button__confirmarPago"
+                    ng-disabled ="
+                        !pay.bank ||
+                        !pay.receivingBank ||
+                        !pay.confirmationId ||
+                        !pay.description ||
+                        !pay.amount"
+                    ng-hide ="detailsReservation.payments.length-1 != $index"
+                    style= "margin: 0; margin-left: -136%;"
+                    ng-click="amountReached(detailsReservation, 0, $index)">
+                    {{ 'aavv.confirm_pay.button' | trans }}
+                </button>
+                <button
+                    class="nvc-button__delete fn-papelera"
+                    ng-click="amountReached(detailsReservation, 1, $index)"
+                    ng-show ="detailsReservation.payments.length-1 != $index"
+                    style ="margin: 0; margin-left: -175%">
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>

@@ -1,0 +1,274 @@
+{% extends "NavicuInfrastructureBundle:Web:Client/layout.html.twig" %}
+
+{% set header_title = {'module_title': 'upcomingReservation'} %}
+
+{% block body %}
+
+
+<main ng-app="listUpcomingReservationModule" ng-controller="listUpcomingReservationController" ng-cloak>
+	<div style="background:#f4f4f4" ng-if="upComingReservations.reservations.length>0">
+		<div class="nvc-container nvc-list-upcoming-reservation">
+			
+			<!-- Mensaje de Bienvenida -->
+			<div class="nvc-row">
+				<div class="col-xs-16 col-sm-6">
+					<p ng-if="response.user.gender==0" class="nvc-list__content__welcome--font-title">¡{{"web.client.list_pre_peservation.welcome_message.welcome"|transchoice(0) }} {[{response.user.fullName}]}!</p>
+					<p ng-if="response.user.gender==1" class="nvc-list__content__welcome--font-title">¡{{"web.client.list_pre_peservation.welcome_message.welcome"|transchoice(1) }} {[{response.user.fullName}]}!</p>
+					<p ng-if="response.user.gender==null" class="nvc-list__content__welcome--font-title">¡{{"web.client.list_pre_peservation.welcome_message.welcome"|transchoice(2) }} {[{response.user.fullName}]}!</p>
+				</div>
+			</div>
+			<!-- End de mensaje de bienvenida -->
+
+
+			<!-- Jumbotron de bienvenida-->
+			<div class="nvc-jumbotron">
+				<div class="nvc-container">
+					<div class="col-xs-16">
+						<p class="nvc-list__content__welcome--alpha">{{"web.client.list_up_coming_reservations.welcome_message.paragraph_one"|trans }}</p>
+						<p class="nvc-list__content__welcome--beta">{{"web.client.list_up_coming_reservations.welcome_message.paragraph_two"|trans }}</p> 		
+					</div>
+				</div>
+			</div>
+			<!-- End Jumbotron -->
+
+			<!-- Tabla de Datos -->
+			<table class="nvc-table">
+				<thead>
+					<tr>
+						<!-- Establecimiento -->
+						<th class="text-center nvc-table--border-radius-l"><b>{{"web.shared_client.table_header.property"|trans }}</b></th>
+						<!-- End Establecimiento-->
+
+						<!-- ID Reserva -->
+						<th class="text-center visible-lg"><b>{{"web.shared_client.table_header.id_reservation"|trans}}</th>
+						<!-- End ID Pre-reserva -->
+
+						<!-- Check-in -->
+						<th class="text-center visible-lg"><b>{{"web.shared_client.table_header.check_in"|trans}}</b></th>
+						<!-- End Check-in -->
+
+						<!-- Check-out -->
+						<th class="text-center visible-lg"><b>{{"web.shared_client.table_header.check_out"|trans}}</b></th>
+						<!-- End Check-out -->
+
+						<!-- Nombre y apellido -->
+						<th class="text-center"><b>{{"extranet.home.name_lastname"|trans}}</b></th>
+						<!-- End Nombre y apellido -->
+
+						<!-- Importe -->
+						<th class="text-center visible-lg"><b>{{"web.shared_client.table_header.amount"|trans}}</b></th>
+						<!-- End Importe -->
+
+						<!-- Espacio de Ver detalles -->
+						<th class="text-center"><b></b></th>
+						<!-- End Espacio de Ver detalles -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat-start="reservation in upComingReservations.reservations" ng-class="{'nvc-table--color-even':({[{$index}]}+1)%2!=0, 'nvc-table--color-odd': ({[{$index}]}+1)%2==0}">
+						<!-- Establecimiento -->
+						<td class="text-center"><b>{[{ reservation.propertyName }]}</b></td>
+						<!-- ID Pre-reserva -->
+						<td class="text-center visible-lg"><b>{[{ reservation.idReserve }]}</b></td>
+						<!-- Check-in -->
+						<td class="text-center visible-lg"><b>{[{ reservation.checkIn }]}</b></td>
+						<!-- Check-out -->
+						<td class="text-center visible-lg"><b>{[{ reservation.checkOut }]}</b></td>
+						<!-- Nombre y apellido -->
+						<td class="text-center"><b>{[{ reservation.names }]}</b></td>
+						<!-- Importe -->
+						<td class="text-center visible-lg"><b>{{ "web.reservation.money" | trans}} {[{ reservation.amount | number }]}</b></td>
+						<!-- Icono del Estado -->
+
+						<!-- Button ver detalles -->
+						<td class="text-center visible-lg">
+								<button type="button" class="nvc-button nvc-button__default" ng-click="redirect(reservation.idReserve)">{{"web.shared_client.view_detail"|trans }}</button>
+						</td>
+						<!-- End Button ver detalles -->
+
+						<!-- Boton Detalles -->
+						<td class="text-center hidden-lg">
+								<button type="button" 
+									class="nvc-button nvc-button__default" 
+									ng-click="reservation.details=!reservation.details">
+									Detalles
+								</button>
+						</td>
+						<!-- End de Boton Detalles -->
+					</tr>
+
+					<tr class="hidden-lg" ng-show="reservation.details" ng-repeat-end>
+						<td class="text-left">
+							<!-- Check-in -->
+							<label for="checkIn">{{"web.shared_client.table_header.check_in"|trans}}</label>
+							<br>
+							<b>{[{ reservation.checkIn }]}</b>
+							<br>
+							<!-- End de Check-in -->
+
+							<!-- ID Pre-reserva -->
+							<label for="checkIn">{{"web.shared_client.table_header.id_pre_reservation"|trans}}</label>
+							<br>
+							<b>{[{ reservation.idReserve }]}</b>
+							<br>
+							<!-- End de ID Pre-reserva -->
+						</td>
+						<td class="text-left">
+							<!-- Check-Out -->
+							<label for="checkout">{{"web.shared_client.table_header.check_out"|trans}}</label>
+							<br>
+							<b>{[{ reservation.checkOut }]}</b>
+							<br>
+							<!-- End de Check-Out -->
+
+							<!-- Importe -->
+							<label for="amount">{{"web.shared_client.table_header.amount"|trans}}</label>
+							<br>
+							<b>{{ "web.reservation.money" | trans}} {[{ reservation.amount | number}]}</b>
+							<br>
+							<!-- End de Importe -->
+						</td>
+						<!-- Button ver detalles -->
+						<td class="text-center">
+								<button type="button" class="nvc-button nvc-button__default" ng-click="redirect(reservation.idReserve)">{{"web.shared_client.view_detail"|trans }}</button>
+						</td>
+						<!-- End Button ver detalles -->
+					</tr>
+				</tbody>
+			</table>
+			<!-- End Tablas de Datos -->
+		</div>
+	</div>
+
+	<!-- Vista alternas de cuando no existen reservas-->
+	<div class="nvc-null-reservations" ng-if="upComingReservations.reservations.length==0">
+    	<div class="nvc-container">
+        	<section>	
+	            <h2>{{ "web.client.reservation_null.make_your_first_booking"|trans}}</h2>
+	            <h3>{{ "web.client.reservation_null.great_advantages_we_offer"|trans}}</h3>
+	            <br>
+				<ul class="fa-ul hidden-xs">
+		            <li><i class="fa-li fn-oink"></i>{{ "web.client.reservation_null.save_time_and_money"|trans}}</li>
+		            <li><i class="fa-li fn-reserva"></i>{{ "web.client.reservation_null.find_the_perfect_choice"|trans}}</li>
+		            <li><i class="fa-li fn-secure"></i>
+		            	{{ "web.client.reservation_null.reserves_will_be_secure"|trans}} <br>
+		            	{{ "web.client.reservation_null.hotels_throughout_the_national_territory"|trans}}
+		            </li>
+		        </ul>
+		        <ul class="visible-xs">
+		            <li><i class="fa fn-oink"></i></li>
+		            <li><span>{{ "web.client.reservation_null.save_time_and_money"|trans}}</span></li>
+		            <br>
+		            <li><i class="fa fn-reserva"></i></li>
+		            <li><span>{{ "web.client.reservation_null.find_the_perfect_choice"|trans}}</span></li>
+		            <br>
+		            <li><i class="fa fn-secure"></i></li>
+		             <li><span>
+		            	{{ "web.client.reservation_null.reserves_will_be_secure"|trans}} <br>
+		            	{{ "web.client.reservation_null.hotels_throughout_the_national_territory"|trans}}
+		            </span>
+		            </li>
+		        </ul>
+        	</section>
+        	<section class="col-xs-16 block-search hidden-xs hidden-sm">
+	        	<div class="col-sm-10 hidden-xs">
+	        		<h1>¿A dónde quieres viajar esta vez?</h1>
+	        		<h2>Conoce, recorre, vive Venezuela como nunca lo habías hecho ¡reserva a través de la plataforma líder!</h2>
+	        	</div>
+	        	<div class="col-xs-16 col-sm-6 form-inline" align="right">
+	        		<form action="{[{url}]}" method="get" class="form-inline" role="form">
+		        		<input type="hidden" name="adult" value="{[{ adults }]}" ng-if="adults != 2"/>
+	                    <input type="hidden" name="kid" value="{[{ kids }]}" ng-if="kids != 0"/>
+	                    <input type="hidden" name="room" value="{[{rooms}]}" ng-if="rooms != 1"/>
+	                    <h1 class="hidden-xs"><i class="fa fn-map-02"></i></h1>
+		        		<br class="hidden-xs">
+		        		<h1 class="hidden-xs"><span>Encuentra hoteles en toda Venezuela</span></h1>
+		        		<h1 class="visible-xs">
+		        			<i class="fa fn-map-02"></i>
+		        			<br><br>
+		        			<span style="margin-bottom:10px;">Encuentra hoteles en toda Venezuela</span>
+		        		</h1>
+		        		<br class="visible-xs">
+		        		<select 
+	                        class="nvc-form-control"
+	                        ng-model="selectedDestiny"
+	                        ng-options="location as location.name for location in locations">
+	                        <option disabled value="">{{ "share.message.search_textfield_legend_min"|trans }}</option>
+	                        {#<option ng-repeat="location in locations" value="{[{ $index }]}">{[{ location.name }]}</option>#}
+	                    </select>
+	                    <button  class="nvc-button nvc-button__search"  
+	                              ng-click="redirectUrl(selectedDestiny)" 
+	                              ng-disabled="selectedDestiny==null"> 
+	                                {{ "word.search"|trans }}
+	                    </button>
+	                </form>
+	        	</div>
+			</section>
+        </div>
+    </div>
+	<div class="nvc-null-reservations block-search--xs visible-xs visible-sm" ng-if="upComingReservations.reservations.length==0">
+    	<div class="nvc-container">
+				<section class="col-xs-16 block-search">
+		        	<div class="col-xs-16">
+		        		<h1>¿A dónde quieres viajar esta vez?</h1>
+		        		<h2>Conoce, recorre, vive Venezuela como nunca lo habías hecho ¡reserva a través de la plataforma líder!</h2>
+		        	</div>
+		        	<div class="col-xs-16 form-inline" align="right">
+		        		<form action="{[{url}]}" method="get" class="form-inline" role="form">
+			        		<input type="hidden" name="adult" value="{[{ adults }]}" ng-if="adults != 2"/>
+		                    <input type="hidden" name="kid" value="{[{ kids }]}" ng-if="kids != 0"/>
+		                    <input type="hidden" name="room" value="{[{rooms}]}" ng-if="rooms != 1"/>
+		                    <h1 class="hidden-xs"><i class="fa fn-map-02"></i></h1>
+			        		<br class="hidden-xs">
+			        		<h1 class="hidden-xs"><span>Encuentra hoteles en toda Venezuela</span></h1>
+			        		<h1 class="visible-xs">
+			        			<i class="fa fn-map-02"></i>
+			        			<br><br>
+			        			<span style="margin-bottom:10px;">Encuentra hoteles en toda Venezuela</span>
+			        		</h1>
+			        		<br class="visible-xs">
+			        		<select 
+		                        class="nvc-form-control"
+		                        ng-model="selectedDestiny"
+		                        ng-options="location as location.name for location in locations">
+		                        <option disabled value="">{{ "share.message.search_textfield_legend_min"|trans }}</option>
+		                        {#<option ng-repeat="location in locations" value="{[{ $index }]}">{[{ location.name }]}</option>#}
+		                    </select>
+		                    <button  class="nvc-button nvc-button__search"  
+		                              ng-click="redirectUrl(selectedDestiny)" 
+		                              ng-disabled="selectedDestiny==null"> 
+		                                {{ "word.search"|trans }}
+		                    </button>
+		                </form>
+		        	</div>
+				</section>
+    	</div>
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block javascripts%}
+    {{parent()}}
+
+    <script type="text/javascript">
+        var response = "{{ data }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+
+
+        var locations = "{{ locations }}";
+        var div = document.createElement('div');
+        div.innerHTML = locations;
+        locations = div.firstChild.nodeValue;
+        locations = JSON.parse(locations);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}
+

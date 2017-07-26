@@ -1,0 +1,153 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/layout.html.twig" %}
+
+{% set header_title = {'module_title': '4'} %}
+
+{% block body %}
+    <!--Iconos del formulario -->
+    <div class="photos" ng-app="GalleryAdminModule" ng-controller="GalleryAdminController" novalidate ng-cloak>
+        {% include "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/topmenu.html.twig" with header_title %}
+        <!--Top del formualario -->
+        <div class="container" style="font-family:LatoRegular" >
+            <div class="col-md-16" style="color:#572A85; font-size:18px;">
+                <p align="justify">{{ "extranet.formGallery.top_message"|trans }}
+                    <span class="text-danger">{{ "extranet.formGallery.valid_images"|trans }}</span>
+                </p>
+            </div>
+        </div>
+        <br>
+        <form action="">
+            <div class='container form-font post-body entry-content' oncontextmenu='return false'
+                 ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+
+                <!-- Favoritos -->
+                <div class="gallery-panel gallery-panel-default form-font-top form-group favorites">
+                    <div class="gallery-panel-body form-font">
+                        <!-- Titulo del panel -->
+                        <div class="row" style="padding-bottom:20px;">
+                            <div class="col-md-8" style="color: white;">
+                                <span class="h3"> {{ "extranet.formGallery.favorites"|transchoice(0) }}
+                                    {[{ favorites.length }]}/8
+                                </span>
+                            </div>
+                            <div class="col-md-8 text-right" ng-show="errorFavorite == 0">
+                                <span class="h4" style="color: white;">
+                                    {{ "extranet.formGallery.favorites"|transchoice(1) }}
+                                </span>
+                            </div>
+                            <div class="col-md-8 text-right" ng-show="errorFavorite != 0">
+                                <span style="color: white;">
+                                Debes agregar {[{ errorFavorite }]} imágenes más a esta sección<br></span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;"></div>
+                        <!-- Thumbnails -->
+                        <div class="row">
+                            <div class="col-md-3 photos-view" style="height:250px;" ng-if="favorites.length!=0"
+                                 ng-repeat="favorite in favorites track by $index" ng-drop="true"
+                                 ng-drop-success="onDropGallery(favorites, type, 'favorites', $index, $data, $event)">
+                                <div ng-drag="true" ng-drag-data="favorite" ng-drag-success="onDragGalleries('favorites')">
+                                    <div class="frame" ng-class="favorite.name">
+                                        <div class="delete">
+                                            <a href="" ng-click="deleteFavorite(favorite)">
+                                                <i class="fa fa-times fa-2x" id="deletePhoto"></i>
+                                            </a>
+                                        </div>
+                                        <img ng-src="/uploads/images/images_sm/{[{ favorite.path }]}" class="img-rounded img-photos">
+                                        <p ng-if="$index==0" align="left" class="banner-gallery">{{ "extranet.formGallery.profile_image"|trans}}<p>
+                                    </div>
+                                    <div class="text-center h5" style="height:35px;">{[{ favorite.nameGallery }]}</div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+                <!-- Galerias -->
+                <div ng-repeat="gallery in galleries track by $index" ng-init="indexGallery=$index">
+                    <div class="gallery-panel gallery-panel-default form-font">
+                        <div class="gallery-panel-body form-font-top form-group">
+                            <!-- Titulo panel -->
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <span class="h3">{[{ gallery.nameGallery }]}</span>
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px;"></div>
+                            <!-- thumbnails -->
+                            <div class="row">
+                                <div class="col-md-3 photos-view" style="height:250px;" ng-class="{'favorite': file.favorite}"
+                                    ng-repeat="file in gallery.loadedImages track by $index" ng-drop="true"
+                                    ng-drop-success="onDropGallery(gallery.loadedImages, type, gallery.nameGallery, $index, $data, $event)">
+                                    <div class="frame" ng-drag="true" ng-drag-data="file" ng-drag-success="onDragGalleries(gallery.nameGallery)" >
+                                        <div class="delete">
+                                            <a href="" ng-click="deletePhoto(file, gallery, $index)">
+                                                <i class="fa fa-times fa-2x" id="deletePhoto"></i>
+                                            </a>
+                                        </div>
+                                        <div class="addFavorite">
+                                            <a href="" ng-click="addFavorite(file, gallery)">
+                                                <i ng-class="{'add-favorite': !file.favorite, 'delete-favorite': file.favorite}"
+                                                   class="fa fa-star" data-toggle="tooltip" data-placement="top"
+                                                   data-title="{{ 'extranet.tooltip.click_to_fav'|trans }}"></i>
+                                            </a>
+                                        </div>
+                                        <img ng-src="/uploads/images/images_sm/{[{ file.path }]}" class="img-rounded img-photos">
+                                    </div>
+                                    <md-select ng-model="file.feature" placeholder="Seleccione ubicación"
+                                        ng-change="editImage(file, gallery)" ng-if="file.progress==null">
+                                        <md-option ng-repeat="name in gallery.features track by $index"
+                                            value="{[{ name }]}"> {[{ name }]}
+                                        </md-option>
+                                    </md-select>
+                                    <div class="progress" ng-if="file.progress!=null">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                                             aria-valuenow="{[{file.progress}]}" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {[{file.progress}]}%">
+                                            {{ "extranet.formGallery.loading"|trans}} {[{file.progress}]}%
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label class="col-md-3 button img-rounded img-default drop-box" style="text-align:center;">
+                                    <i class="fa fa-camera fa-3x camera button" style="color:#DDD; text-align:center;"></i>
+                                    <input type="file" img-cropper-fileread image="cropper.sourceImage" style="display:none;"
+                                            onchange="angular.element(this).scope().showCropImageModal(this)"
+                                            ngf-select ng-model="cropper.sourceImage" name="file" ngf-pattern="'image/*'"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="container"><div class="col-md-16"><hr></div></div>
+        <div align="center"><button type="button" ng-click="changeSection('payment')"
+            class="btn btn-primary btn-search-list">{{"share.register.save"|trans }}</button>
+        </div>
+        <br>
+        {{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalError.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalLoading.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalCropImage.html.twig") }}
+    </div>
+{% endblock body %}
+
+{% block javascripts%}
+    {{ parent() }}
+
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <script type="text/javascript">
+        var extension = "{{ app.request.attributes.get('extension') }}";
+        var response = "{{ galleries }}";
+        var slug = "{{slugTemp}}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}

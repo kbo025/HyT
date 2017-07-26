@@ -1,0 +1,29 @@
+# Entidad que representa traducciones de los roles en diferentes idiomas
+Navicu\InfrastructureBundle\Entity\ModuleTranslation:
+    type: entity
+    table: module_trl
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbModuleTranslationRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Nombre del rol en el idioma dado
+        name:
+            type: string
+            unique: false
+        locale:
+            type: string
+    manyToOne:
+        module:
+            targetEntity: Navicu\InfrastructureBundle\Entity\ModuleAccess
+            cascade: {  }
+            mappedBy: null
+            inversedBy: module
+            joinColumns:
+                role:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

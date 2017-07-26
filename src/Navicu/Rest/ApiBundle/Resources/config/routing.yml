@@ -1,0 +1,33 @@
+# ===========Rutas Generales ===========
+# Rutas de uso general
+navicu_api_default_rountig:
+    resource: "@NavicuRestApiBundle/Resources/config/routing/default.yml"
+    host:   "www.%domain%"
+    prefix:   api/
+
+# ===========Rutas del Extranet ===========
+# Rutas de módulos del Hotelero (Extranet)
+navicu_api_extranet_rountig:
+    resource: "@NavicuRestApiBundle/Resources/config/routing/Extranet/Inventory.yml"
+    host:   "www.%domain%"
+    prefix:   api/%extranet_subdomain%
+
+# Ruta para las peticion del token
+navicu_rest_api_request_token_from_credentials:
+    path:   /credentialsRequestToken/{client_id}/{client_secret}
+    defaults: { _controller: NavicuRestApiBundle:Default:credentialsRequestToken }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: GET}
+
+# Rutas requeridas para la visualizacion de la documentacion
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+navicu_api_doc_index:
+    path: /api/doc/{view}
+    defaults: { _controller: NelmioApiDocBundle:ApiDoc:index, view: 'default' }
+    options:
+        expose: true

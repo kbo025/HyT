@@ -1,0 +1,54 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    {# Versión desktop #}
+    <main
+        class="admin nvc-admin__AAVVDirectPayment visible-md visible-lg"
+        ng-controller="RegistrationProcessCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/registrationProcessHeader.html.twig" %}
+            </div>
+            <div class="nvc-table--admin nvc-container">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/registrationProcessTable.html.twig" %}
+            </div>
+            <div  ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/registrationProcessPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+    {# Versión movil #}
+    <main
+        class="admin nvc-admin__AAVVDirectPayment visible-sm visible-xs"
+        ng-controller="RegistrationProcessCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin--movil">
+                <div class="col-xs-16 col-sm-16">
+                    {% include "NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/movil/registrationProcessHeaderMovil.html.twig" %}
+                </div>
+            </div>
+            <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/movil/registrationProcessTableMovil.html.twig" %}
+            </div>
+            <div  ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/registrationProcessPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+    {{ include("NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/modalDeleteProperty.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Admin:accommodations/registrationProcess/modalReleaseProperty.html.twig") }}
+{% endblock content %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var extension = "{{ app.request.get('extension') }}"
+    </script>
+    {{ parent() }}
+
+{% endblock %}

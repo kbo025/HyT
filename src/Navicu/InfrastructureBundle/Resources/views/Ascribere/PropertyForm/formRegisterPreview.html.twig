@@ -1,0 +1,1535 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% set header_title = {'module_title': '7'} %}
+
+{% block body %}
+<!--Iconos del formulario -->
+<div ng-app="previewModule" ng-controller="previewController" novalidate ng-cloak>
+	{% include "NavicuInfrastructureBundle:Ascribere:PropertyForm/topmenu.html.twig" with header_title %}
+
+	<div class="container" style="font-family:Lato-Regular" >
+		<div class="col-md-16" style="color:#572A85; font-size:18px;">
+			<p align="justify">{{"share.preview.message_inf"|trans }}
+			</p>
+		</div>
+
+	</div>
+
+	<div class="container property-view">
+		<div class="row">
+			<div class="col-xs-16 col-sm-16 col-md-16 col-lg-16" >
+				<div class="row">
+					<div class="col-xs-16 col-sm-16 col-md-16 col-lg-16 hotel-margin ">
+						<!--- Hotel -->
+						<br>
+						<div class="col-xs-16">
+		                    <h2 ng-if="infoProperty.name">{[{infoProperty.name}]}</h2>
+		                     <h2 ng-if="!infoProperty.name">{{"share.preview.name_property"|trans }}</h2>
+		                    <p class="margin-star">
+		                        <span class="fa-stars fa fa-star" ng-if="infoProperty.star>=1"></span>
+		                        <span class="fa-stars fa fa-star" ng-if="infoProperty.star>=2" style="padding-left: 5px;"></span>
+		                        <span class="fa-stars fa fa-star" ng-if="infoProperty.star>=3"style="padding-left: 5px;"></span>
+		                        <span class="fa-stars fa fa-star" ng-if="infoProperty.star>=4"style="padding-left: 5px;"></span>
+		                        <span class="fa-stars fa fa-star" ng-if="infoProperty.star==5"style="padding-left: 5px;"></span>
+		                        <span class="font-numRoom" ng-if="infoProperty.amount_room" style="padding-left: 5px;">
+		                        	{[{infoProperty.amount_room}]} {{"share.register.room"|transchoice(2) }}</span>
+		                        <span class="font-numRoom" ng-if="!infoProperty.amount_room" style="padding-left: 5px;">
+		                        	{{"share.preview.number_room"|trans }}</span>
+		                    </p>
+		                    <p>
+		                    	<span class="font-address" ng-if="infoProperty.address">{[{infoProperty.address}]},{[{infoProperty.city}]}</span>
+		                    	<span class=" font-address hidden-xs hidden-sm" ng-if="infoProperty.state">{[{infoProperty.state}]}, {[{infoProperty.country}]}</span>
+							</p>
+							<p>
+								<span class="font-address" ng-if="!infoProperty.address">{{"share.preview.address"|trans }}, {{"share.preview.city"|trans }}</span>
+		                    	<span class=" font-address hidden-xs hidden-sm" ng-if="!infoProperty.state">{{"share.preview.state"|trans }}, {{"share.preview.country"|trans }}</span>
+		                    </p>
+		                    <p class="font-opening-year hidden-xs hidden-sm"> {{"share.preview.opening_year"|trans }}: {[{infoProperty.opening_year}]},
+		                       <span ng-if="infoProperty.renewal_year && infoProperty.renewal_year!=infoProperty.opening_year">{{"share.preview.last_reform"|trans }}: {[{infoProperty.renewal_year}]}</span>
+		                   	</p>
+		                   	<div class="col-xs-16 hidden-xs" style="margin-top:-35px;" ng-if="infoProperty.design_view_property==1">
+					            <span style="float:right;" class="font-inf-tab">¡Mejor precio garantizado!</span>
+					            <span style="float:right;" class="fa-checks fa fn-check-02"></span>
+				            </div>
+		                </div>
+		                <div ng-if="infoProperty.design_view_property==1" class="col-xs-16 padding-xs">
+							<!-- Carrousel hotel (Imagen en grande)-->
+					        <div id="carousel" class="carousel carousel-hotel carousel-fade" data-ride="carousel">
+					            <div class="carousel-inner carousel-inner-hotel">
+					            	<div class="item" ng-class="{active: $first}" ng-if="infoImages.favorites && infoImages.favorites.length!=0"
+					            		ng-repeat="image in infoImages.favorites">
+					                    <img ng-src="/uploads/images/images_original/{[{ image.path }]}" class="img-responsive">
+					                    {#<div class="carousel-fill" style="background-image:url('/uploads/images/images_original/{[{image.path }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>#}
+					                    <p align="left" class="banner-hotel">{[{image.subGallery}]}<p>
+					                </div>
+					                <div class="item active" ng-repeat-n="8" ng-if="!infoImages.favorites || infoImages.favorites.length==0">
+		                               	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-hotel">
+		                            </div>
+					            </div>
+					        </div>
+					        <!-- Carrousel pequeño hotel LG MD SM -->
+					        <div class="clearfix hidden-xs">
+					            <div id="thumbcarousel" class="carousel carousel-hotel-thumbnail slide" data-interval="false">
+					                <div class="carousel-inner carousel-inner-hotel">
+					                    <div class="item active">
+											<div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 pad-carusel-hotel" data-target="#carousel"
+												data-slide-to="{[{id}]}"ng-if="infoImages.favorites" ng-repeat="(id, favorite) in infoImages.favorites"
+												ng-if="infoImages.favorites && infoImages.favorites.length!=0">
+				                                {#<img  src="/uploads/images/images_sm/{[{favorite.path  }]}" class="img-responsive img-carusel-hotel">#}
+				                                <div class="carousel-fill img-carusel-hotel" style="background-image:url('/uploads/images/images_sm/{[{favorite.path  }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+				                            </div>
+				                            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 pad-carusel-hotel" data-target="#carousel" ng-repeat-n="8"
+												data-slide-to="{[{$index}]}" ng-if="!infoImages.favorites || infoImages.favorites.length==0">
+				                               	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-hotel">
+				                            </div>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					        <!-- Carrousel pequeño hotel XS-->
+				            <div id="thumbcarousel2" class="carousel carousel-hotel-thumbnail slide visible-xs" data-interval="false">
+				                <div class="carousel-inner carousel-inner-hotel" style="margin-top:-59px;">
+				                    <div class="item active">
+										<div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel" ng-repeat-n="4"
+											data-slide-to="{[{$index}]}" ng-if="infoImages.favorites && infoImages.favorites.length>0">
+			                                {#<img ng-if="infoImages.favorites[$index]" class="img-responsive img-carusel-hotel"
+			                                	src="/uploads/images/images_sm/{[{infoImages.favorites[$index].path  }]}">#}
+			                                <div ng-if="infoImages.favorites[$index]" class="carousel-fill img-carusel-hotel" style="background-image:url('/uploads/images/images_sm/{[{infoImages.favorites[$index].path  }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+			                            </div>
+			                            <div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel" ng-repeat-n="4"
+											data-slide-to="{[{$index}]}" ng-if="!infoImages.favorites || infoImages.favorites.length==0">
+			                                <img class="img-responsive img-carusel-hotel" src="http://placehold.it/800x800&text={[{$index}]}">
+			                            </div>
+				                    </div>
+				                </div>
+				            </div>
+		                </div>
+		                <div ng-if="infoProperty.design_view_property==2" class="col-xs-16 col-sm-10 padding-xs">
+							<!-- Carrousel hotel (Imagen en grande)-->
+					        <div id="carousel" class="carousel carousel-hotel carousel-fade" data-ride="carousel" style="height:390px !important;">
+					            <div class="carousel-inner carousel-inner-hotel">
+					            	<div class="item" ng-class="{active: $first}" ng-if="infoImages.favorites && infoImages.favorites.length!=0"
+					            		ng-repeat="image in infoImages.favorites">
+					                    <img ng-src="/uploads/images/images_original/{[{ image.path }]}" class="img-responsive">
+					                    {#<div class="carousel-fill" style="background-image:url('/uploads/images/images_original/{[{image.path }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>#}
+					                    <p align="left" class="banner-hotel" style="margin-top:-199px;">{[{image.subGallery}]}<p>
+					                </div>
+					                <div class="item active" ng-repeat-n="8" ng-if="!infoImages.favorites || infoImages.favorites.length==0">
+		                               	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-hotel">
+		                            </div>
+					            </div>
+					        </div>
+					        <!-- Carrousel pequeño hotel LG MD SM -->
+					        <div class="clearfix hidden-xs">
+					            <div id="thumbcarousel" class="carousel carousel-hotel-thumbnail slide" data-interval="false">
+					                <div class="carousel-inner carousel-inner-hotel">
+					                    <div class="item active">
+											<div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 pad-carusel-hotel" data-target="#carousel"
+												data-slide-to="{[{id}]}"ng-if="infoImages.favorites" ng-repeat="(id, favorite) in infoImages.favorites"
+												ng-if="infoImages.favorites && infoImages.favorites.length!=0">
+				                                {#<img  src="/uploads/images/images_sm/{[{favorite.path  }]}" class="img-responsive img-carusel-hotel">#}
+				                                <div class="carousel-fill img-carusel-hotel" style="background-image:url('/uploads/images/images_sm/{[{favorite.path  }]}'); height:70px !important;" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+				                            </div>
+				                            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 pad-carusel-hotel" data-target="#carousel" ng-repeat-n="8"
+												data-slide-to="{[{$index}]}" ng-if="!infoImages.favorites || infoImages.favorites.length==0">
+				                               	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-hotel">
+				                            </div>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					        <!-- Carrousel pequeño hotel XS-->
+				            <div id="thumbcarousel2" class="carousel carousel-hotel-thumbnail slide visible-xs" data-interval="false">
+				                <div class="carousel-inner carousel-inner-hotel" style="margin-top:-59px;">
+				                    <div class="item active">
+										<div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel" ng-repeat-n="4"
+											data-slide-to="{[{$index}]}" ng-if="infoImages.favorites && infoImages.favorites.length>0">
+			                                {#<img ng-if="infoImages.favorites[$index]" class="img-responsive img-carusel-hotel"
+			                                	src="/uploads/images/images_sm/{[{infoImages.favorites[$index].path  }]}">#}
+			                                <div ng-if="infoImages.favorites[$index]" class="carousel-fill img-carusel-hotel" style="background-image:url('/uploads/images/images_sm/{[{infoImages.favorites[$index].path  }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+			                            </div>
+			                            <div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel" ng-repeat-n="4"
+											data-slide-to="{[{$index}]}" ng-if="!infoImages.favorites || infoImages.favorites.length==0">
+			                                <img class="img-responsive img-carusel-hotel" src="http://placehold.it/800x800&text={[{$index}]}">
+			                            </div>
+				                    </div>
+				                </div>
+				            </div>
+		                </div>
+		                <!-- Servicios Destacados-->
+			           	<div ng-if="infoProperty.design_view_property==1" class="col-xs-16 col-sm-10 col-md-8 col-lg-8 padding-md row hidden-xs" style="height:215px; overflow-y:hidden; margin-bottom:25px; margin-left:10px; margin-top:20px;">
+			                <h3 style="margin-top:0px; margin-bottom:20px;"> {{"share.preview.service_featured"|trans }}</h3>
+			                <hr>
+			                <div class="col-sm-8 col-md-8 col-lg-8"
+				                ng-repeat="service in services_priority | orderBy: 'priority' "
+				                ng-if="services_priority.length>0 && service.service" >
+			                    <p><i class="fa-services fa fn-{[{service.icon}]}"></i> <span class="font-services">{[{service.service}]} </span></span> </p>
+		                	</div>
+			        	</div>
+			        	<div ng-if="infoProperty.design_view_property==2" class="col-xs-16 col-sm-6 padding-md row hidden-xs" style="height:215px; overflow-y:hidden; margin-bottom:5px; margin-left:10px;">
+			                <h3 style="margin-top:0px; margin-bottom:-15px;"> {{"share.preview.service_featured"|trans }}</h3>
+			                <hr>
+			                <div class="col-sm-8 col-md-8 col-lg-8"
+				                ng-repeat="service in services_priority | orderBy: 'priority' "
+				                ng-if="services_priority.length>0 && service.service" >
+			                    <p><i class="fa-services fa fn-{[{service.icon}]}"></i> <span class="font-services">{[{service.service}]} </span></span> </p>
+		                	</div>
+			        	</div>
+			        	<!-- Mapa -->
+			        	<div ng-if="infoProperty.design_view_property==1" class="col-xs-16 col-sm-6 col-md-8 col-lg-8 row hidden-xs" style="margin-top:20px;">
+		                	<div class="row" width="auto" height="auto" frameborder="0" style="border:5px solid #fff; margin-left:40px;">
+								<div id="map_canvas">
+								    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="map.control" ng-click="options.scrollwheel=true">
+								      <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id" control="marker.control">
+								      </ui-gmap-marker>
+								    </ui-gmap-google-map>
+								</div>
+							</div>
+			        	</div>
+			        	<div ng-if="infoProperty.design_view_property==2" class="col-xs-16 col-sm-6 row hidden-xs" style="margin-top:20px;">
+		                	<div class="row" width="auto" height="auto" frameborder="0" style="border:5px solid #fff; margin-left:10px;">
+								<div id="map_canvas">
+								    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" control="map.control" ng-click="options.scrollwheel=true">
+								      <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id" control="marker.control">
+								      </ui-gmap-marker>
+								    </ui-gmap-google-map>
+								</div>
+							</div>
+			        	</div>
+						<!--- Nav-Tab MD LG -->
+						<div class="col-xs-16 col-sm-16 col-md-16 col-lg-16 margin-nav-hotel hidden-xs hidden-sm">
+							<div id="content">
+							    <ul id="tabs" class="nav nav-pills nav-justified tab-hotel nav-hotel nav-pills-hotel" data-tabs="tabs">
+							        <li class="active"><a href="#hab" data-toggle="tab">{{"share.register.room"|transchoice(2) }}</a></li>
+							        <li><a href="#service" data-toggle="tab">{{"share.preview.services"|trans }}</a></li>
+							        <li><a href="#inf" data-toggle="tab">{{"share.preview.relevant_information"|trans }}</a></li>
+							        <li><a href="#gal" data-toggle="tab">{{"share.preview.gallery"|trans }}</a></li>
+							    </ul>
+							    <div id="my-tab-content" class="tab-content">
+							    	<!--- Habitaciones -->
+							        <div class="tab-pane active" id="hab">
+						            	<!--- Barra de Busqueda MD LG-->
+							            <div class="col-sm-16 col-md-16 padding-md">
+							            	<div class="col-sm-16 col-md-16 nav-search-hotel" id="table-room-nav">
+								        		<div class="col-md-4 col-lg-3 form-inline">
+								        			<label>{{"share.preview.arrival"|trans }}</label>
+									        		<select type="text" class="form-control form-control-tab select-control select-room select-control-tab  nav-pad-hotel" disabled="true">
+														<option>-/-/-</option>
+													</select>
+												</div>
+												<div class="col-md-4 col-lg-3 form-inline margin-bar-hotel">
+								        			<label>{{"share.preview.output"|trans }}</label>
+									        		<select type="text" class="form-control form-control-tab select-control select-room select-control-tab  nav-pad-hotel" disabled="true">
+														<option>-/-/-</option>
+													</select>
+												</div>
+												<div class="col-md-1 col-lg-2 form-inline margin-bar-hotel">
+								        			<li style="margin-left:2%;"></li>
+												</div>
+												<div class="col-md-3 col-lg-3 form-inline margin-bar-hotel">
+								        			<label>{{"share.preview.adults"|trans }}</label>
+									        		<input style="width:33% !important" type="text" class="form-control form-nav my-input2  nav-pad-hotel" disabled="true"/>
+												</div>
+												<div class="col-md-3 col-lg-2 form-inline margin-bar-hotel3" style="margin-left:-4%;">
+								        			<label>{{"share.preview.children"|trans }}</label>
+									        		<input style="width:45% !important" type="text" class="form-control form-nav my-input2  nav-pad-hotel" disabled="true"/>
+												</div>
+												<div class="col-md-4 col-lg-3 form-inline margin-bar-hotel2">
+								        			<label>{{"share.register.room"|transchoice(2) }}</label>
+									        		<input style="width:33% !important" type="text" class="form-control form-nav my-input2  nav-pad-hotel" disabled="true"/>
+												</div>
+											</div>
+										</div>
+										<!--- Tabla Habitaciones si viene vacía-->
+							            <div class="col-sm-16 col-md-16 padding-md" ng-if="roomProperty.length==0">
+								            <div class="table-responsive">
+									            <table class="table">
+									            	<thead>
+						  								<tr  id="table-room">
+														    <th style="width: 30%;">{{"share.preview.type_room"|trans }}</th>
+														    <th style="width: 4%; line-height: 1.1;" class="tab-center">{{"share.preview.max"|trans }}.</th>
+														    <th style="width: 23%;" class="tab-center">{{"share.preview.conditions"|trans }}</th>
+														    <th style="width: 15%; line-height: 1.1;" class="tab-center">{{"share.preview.total_price"|trans }}</th>
+														    <th style="width: 15%;" class="tab-center">{{"share.preview.num_room"|trans }}.</th>
+														    <th class="tab-center">{{"share.preview.reservation"|trans }}</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat-start-n="1">
+															<!--- Columna Habitación -->
+														    <td rowspan="4">
+														    	<div class="col-xs-16 col-sm-8 col-md-7 col-lg-6 img-table-pad">
+														    		<div class="">
+												                        <div class="room-zoom">
+												                        	<a href="">
+												                        		<i class="fa-plus-img fa fa-plus-circle"></i>
+												                        	</a>
+												                        </div>
+												                    </div>
+														    		<img src="http://placehold.it/800x800&text=-" class="img-table">
+														    	</div>
+				               				                    <div class="col-xs-16 table-p-pad">
+										    						<h4 class="table-p">{{"share.preview.name_room"|trans }}</h4>
+																	<select class="select-bed form-control form-control-tab select-control  select-control-tab"
+																			ng-model="bed"
+																			ng-options="bedselected as val.nameBeds for (bedselected, val) in room.combinationsBeds">
+																		<option value=''>{{"share.preview.beds"|trans }}</option>
+																	</select>
+												                    <p class="table-p font-condition" style="margin-top:-5px;">{{"share.preview.price_politic"|trans }}</p>
+												                    <p class="table-p font-condition">{{"share.preview.tax"|trans }}</p>
+											                    </div>
+														    </td>
+														    <!--- Columna N° Personas -->
+														    <tr>
+														    	<div>
+																    <td rowspan="4" class="tab-center table-align">
+																    	<span class="fa-table-room fa fa-user"></span>
+																    	<span class="font-condition"></span>
+																    </td>
+																  	<!--- Columnas Condición 1 -->
+																	<tr>
+																	    <td>
+																	    	<li class="font-politic" style="padding-top:5px; margin-left:5px;">Servicios Incluidos</li>
+																	    	<li class="font-politic" style="margin-left: 5px;">{{"share.preview.politic_cancel"|trans }}</li>
+																		</td>
+																		<td  class="tab-center table-align">
+																			{#<span class="font-ofert"> Mejor oferta</span><br>#}
+																			<span class="font-price-lg"> {{"share.preview.price"|trans }}</span>
+																		</td>
+																		<td class="tab-center" style="line-height: 1.0;">
+																			<select type="text" class="form-control form-control-tab select-control my-select-tab select-control-tab">
+																				<option>0</option>
+																				<option>1 ({{"share.preview.price"|trans }})</option>
+																				<option>2 ({{"share.preview.price"|trans }})</option>
+																				<option>3 ({{"share.preview.price"|trans }})</option>
+																				<option>4 ({{"share.preview.price"|trans }})</option>																			</select>
+																			{#<span class="font-last-room"> ¡Nos quedan 3 habitaciones!</span>#}
+																		</td>
+																		<!--- Columna Reserva (Solo se repite la primera vez)-->
+																		<td rowspan="4" style="line-height: 1.0;">
+																			<br>
+																			<button class="form-control-tab-btn  btn btn-primary btn-tab active"> {{"share.preview.reserve_now"|trans }}</button>
+																		</td>
+																	</tr>
+																</div>
+															</tr>
+															<tr >
+														<tr>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<!--- Tabla Habitaciones -->
+							            <div class="col-sm-16 col-md-16 padding-md">
+								            <div class="table-responsive">
+									            <table class="table">
+									            	<thead ng-if="roomProperty.length>0">
+						  								<tr  id="table-room">
+														    <th style="width: 30%;">{{"share.preview.type_room"|trans }}</th>
+														    <th style="width: 9%; line-height: 1.1;" class="tab-center">{{"share.preview.max"|trans }}.</th>
+														    <th style="width: 18%;" class="tab-center">{{"share.preview.conditions"|trans }}</th>
+														    <th style="width: 15%; line-height: 1.1;" class="tab-center">{{"share.preview.total_price"|trans }}</th>
+														    <th style="width: 15%;" class="tab-center">{{"share.preview.num_room"|trans }}.</th>
+														    <th class="tab-center">{{"share.preview.reservation"|trans }}</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat-start="room in roomProperty" ng-init="indexReservation = room.index">
+															<tr>
+																<!--- Columna Habitación -->
+															    <td rowspan="2">
+															    	<div class="col-xs-16 col-sm-8 col-md-7 col-lg-6 img-table-pad" ng-click="showRoomModal(room)">
+															    		<div class="">
+													                        <div class="room-zoom">
+													                        	<a href="" >
+													                        		<i class="fa-plus-img fa fa-plus-circle"></i>
+													                        	</a>
+													                        </div>
+													                    </div>
+													                    {#<img  class="img-table" ng-if="room.gallery[0]" src="/uploads/images/images_xs/{[{room.gallery[0].path }]}" class="img-responsive">#}
+													                    <div ng-if="room.gallery[0]" class="carousel-fill img-table" style="background-image:url('/uploads/images/images_xs/{[{room.gallery[0].path }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+															    		<img  class="img-table" ng-if="!room.gallery[0]" src="http://placehold.it/800x800&text=-">
+															    	</div>
+					               				                    <div class="col-xs-16 table-p-pad">
+											    						<h4 class="table-p">{[{room.name}]}</h4>
+																		<select class="select-bed form-control form-control-tab select-control  select-control-tab select-bed-color"
+																				ng-model="bed"
+																				ng-options="bedselected as val.nameBeds for (bedselected, val) in room.combinationsBeds">
+																			<option value=''>{{"share.register.select"|trans }}</option>
+																		</select>
+													                    <p class="table-p font-condition" style="margin-top:-5px;">{{"share.preview.price_for_room"|trans }}.</p>
+													                    <p class="table-p font-condition" ng-if="infoProperty.tax_rate=='no' && infoProperty.tax>0">{{"share.preview.not_include"|trans }}: {[{infoProperty.tax}]}% {{"share.preview.tax"|trans }}.</p>
+													                    <p class="table-p font-condition" ng-if="infoProperty.tax_rate=='si' && infoProperty.tax>0">{{"share.preview.include"|trans }}: {[{infoProperty.tax}]}% {{"share.preview.tax"|trans }}.</p>
+												                    </div>
+															    </td>
+																<!--- Columnas Condición 1 -->
+																<div>
+																    <td class="tab-center table-align">
+																    	<span class="fa-table-room fa fa-user"></span>
+																    	<span class="font-condition">x</span>
+																    	<select class="select-bed form-control form-control-tab select-control  select-control-tab style" style="display:inherit;"
+																			ng-model="numperson1"
+																			ng-options="n for n in [] | range:1:room.numPeople" >
+																		</select>
+																    </td>
+																    <td>
+																    	<li class="font-politic" style="padding-top:5px; margin-left:5px; padding-bottom:0px;">{{"share.preview.only_room"|trans }}</li>
+																    	<h4 style="font-size:13px;">Políticas de cancelación:</h4>
+																    	<select type="text" class="form-control form-control-tab select-control my-select-tab select-control-tab">
+																			<option>{{"share.preview.non_refundable"|trans }}</option>
+																		</select>
+																	</td>
+																	<td  class="tab-center table-align">
+																		{#<span class="font-ofert"> Mejor oferta</span><br>#}
+																		<span class="font-price-lg"> {{"share.preview.price"|trans }}</span>
+																	</td>
+																	<td class="tab-center" style="line-height: 1.0;">
+																		<select type="text" class="form-control form-control-tab select-control my-select-tab select-control-tab">
+																			<option>0</option>
+																			<option>1 ({{"share.preview.price"|trans }})</option>
+																			<option>2 ({{"share.preview.price"|trans }})</option>
+																			<option>3 ({{"share.preview.price"|trans }})</option>
+																			<option>4 ({{"share.preview.price"|trans }})</option>
+																		</select>
+																		{#<span class="font-last-room"> ¡Nos quedan 3 habitaciones!</span>#}
+																	</td>
+																	<!--- Columna Reserva (Solo se repite la primera vez)-->
+																	<td rowspan="{[{room.numPeople*3*infoProperty.amount_room}]}" style="line-height: 1.0;" ng-show="indexReservation==0">
+																		{#<span class="font-select"> Has seleccionado</span>
+																		<div class="font-select-strong"> 9 habitaciones</div>
+																		<br>
+																		<span class="font-select"> 3 x Hab Doble</span>
+																		<div class="font-select-strong"> Bs 6.000</div>
+																		<br>
+																		<span class="font-select"> 3 x Hab Premium</span>
+																		<div class="font-select-strong"> Bs 6.000</div>
+																		<br>
+																		<span class="font-select"> 3 x Hab Super</span>
+																		<div class="font-select-strong"> Bs 6.000</div>
+																		<br>
+																		<span class="font-select-strong"> TOTAL</span>
+																		<h4> Bs 23.000</h4>#}
+																		<br>
+																		<button class="form-control-tab-btn  btn btn-primary btn-tab active"> {{"share.preview.reserve_now"|trans }}</button>
+																	</td>
+																</div>
+															</tr>
+															<tr>
+																<!--- Columnas Condición 2 -->
+																<div>
+																    <td class="tab-center table-align">
+																    	<span class="fa-table-room fa fa-user"></span>
+																    	<span class="font-condition">x</span>
+																    	<select class="select-bed form-control form-control-tab select-control  select-control-tab style" style="display:inherit;"
+																			ng-model="numperson2"
+																			ng-options="n for n in [] | range:1:room.numPeople" >
+																		</select>
+																    </td>
+																    <td>
+																    	<li class="font-politic" style="padding-top:5px; margin-left:5px; padding-bottom:0px;">{{"share.preview.breakfast_included"|trans }}</li>
+																    	<h4 style="font-size:13px;">Políticas de cancelación:</h4>
+																    	<select type="text" class="form-control form-control-tab select-control my-select-tab select-control-tab">
+																			<option>{{"share.preview.non_refundable"|trans }}</option>
+																		</select>
+																	</td>
+																	<td  class="tab-center table-align">
+																		{#<span class="font-ofert"> Mejor oferta</span><br>#}
+																		<span class="font-price-lg"> {{"share.preview.price"|trans }}</span>
+																	</td>
+																	<td class="tab-center" style="line-height: 1.0;">
+																		<select type="text" class="form-control form-control-tab select-control my-select-tab select-control-tab">
+																			<option>0</option>
+																			<option>1 ({{"share.preview.price"|trans }})</option>
+																			<option>2 ({{"share.preview.price"|trans }})</option>
+																			<option>3 ({{"share.preview.price"|trans }})</option>
+																			<option>4 ({{"share.preview.price"|trans }})</option>
+																		</select>
+																		{#<span class="font-last-room"> ¡Nos quedan 3 habitaciones!</span>#}
+																	</td>
+																</div>
+															</tr>
+
+														<tr ng-repeat-end>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+							        </div>
+							        <!--- Servicios -->
+							        <div class="tab-pane" id="service">
+							            <div class="col-md-7">
+								            <h1>{{"share.preview.services"|trans }}</h1>
+							            </div>
+							            <div class="col-md-9" style="margin-top:20px; margin-bottom:30px;">
+								            <span style="float:right;" class="font-inf-tab">{{"share.preview.without_charge"|trans }}</span>
+								            <span style="float:right;" class="fa-checks fa fn-check"></span>
+							            </div>
+							            <!--- Recepción - Transporte  -->
+							            <div  class="col-md-4">
+								            <div ng-repeat="service in services track by $index" ng-if="service.status==true && (service.id==1 || service.id==81)">
+								            	<div  class="service-hotel" >
+									            	<h3>{[{service.name}]}</h3>
+									            	<div class="font-service2" ng-repeat="subservice in service.subservices"  ng-if="subservice.status==true">
+									            		<li ng-if="subservice.id==2" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			<span ng-if="subservice.data.Horario.Full_time==false">Desde {[{subservice.data.Horario.Apertura}]} hasta {[{subservice.data.Horario.Cierre}]}.</span>
+									            			<span ng-if="subservice.data.Horario.Full_time==true"> Recepción 24 horas</span>
+									            		</li>
+									            		<li ng-if="subservice.id==3" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			<span ng-if="subservice.data.Horario.Full_time==false">Conserjería desde {[{subservice.data.Horario.Apertura}]} hasta {[{subservice.data.Horario.Cierre}]}.</span>
+									            			<span ng-if="subservice.data.Horario.Full_time==true"> Conserjería 24 horas</span>
+									            		</li>
+									            		<li  ng-if="subservice.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<br>
+									            	</div>
+								            	</div>
+								            </div>
+							        	</div>
+							        	<!---  Servicio a la habitación - Spa - Gimnasio -->
+							        	<div  class="col-md-4">
+								            <div ng-repeat="service in services track by $index" ng-if="service.status==true && (service.id==25 || service.id==35 || service.id==34)">
+								            	<div  class="service-hotel" >
+									            	<h3>{[{service.name}]}</h3>
+									            	<!--- Si es un Gimnasio -->
+									            	<div class="font-service2" ng-if="service.id==34">
+									            		<li  ng-if="service.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			Con {{"share.preview.additional_cost"|trans }}
+									            		</li>
+									            		<li  ng-if="service.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			Sin {{"share.preview.additional_cost"|trans }}
+									            		</li>
+									            		<br>
+								            		</div>
+									            	<div class="font-service2" ng-repeat="subservice in service.subservices"  ng-if="subservice.status==true">
+														<li ng-if="subservice.id==26" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			<span ng-if="subservice.data.Horario.Full_time==false">Room Service desde {[{subservice.data.Horario.Apertura}]} hasta {[{subservice.data.Horario.Cierre}]}.</span>
+									            			<span ng-if="subservice.data.Horario.Full_time==true"> Room Service 24 horas</span>
+									            		</li>
+									            		<li  ng-if="subservice.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<br>
+									            	</div>
+								            	</div>
+								            </div>
+							        	</div>
+							        	<!--- Deporte y recreación -Internet -->
+							        	<div class="col-md-4">
+								            <div ng-repeat="service in services track by $index" ng-if="service.status==true && (service.id==92 || service.id==14)">
+								            	<div  class="service-hotel" >
+									            	<h3>{[{service.name}]}</h3>
+									            	<div class="font-service2" ng-repeat="subservice in service.subservices"  ng-if="subservice.status==true && service.id==14">
+									            		<li  ng-if="subservice.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<br>
+									            	</div>
+									            	<div class="font-service2" ng-repeat="subservice in service.subservices"  ng-if="subservice.status==true && service.id==92">
+														<div ng-repeat="indoor in subservice.subservices" ng-if="indoor.status==true">
+															<h3>{[{subservice.name}]} - {[{indoor.name}]}</h3>
+															<div ng-repeat="indoorservice in indoor.subservices" ng-if="indoorservice.status==true">
+
+																<li  ng-if="indoorservice.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+											            			{[{indoorservice.name}]} ({{"share.preview.free"|trans }})
+											            		</li>
+											            		<li  ng-if="indoorservice.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+											            			{[{indoorservice.name}]} ({{"share.preview.additional_cost"|trans }})
+											            		</li>
+											            		<li  ng-if="indoorservice.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+											            			{[{indoorservice.name}]} ({{"share.preview.free"|trans }})
+											            		</li>
+										            		</div>
+									            		</div>
+									            		<br>
+									            	</div>
+								            	</div>
+								            </div>
+								        </div>
+								        <!--- Zonas Comunes - Aparcamiento -->
+							            <div class="col-md-4">
+							            	<div ng-repeat="service in services track by $index" ng-if="service.status==true && (service.id==51 || service.id==18)">
+								            	<div  class="service-hotel" >
+									            	<h3>{[{service.name}]}</h3>
+													<div class="font-service2" ng-repeat="subservice in service.subservices"  ng-if="subservice.status==true && service.id==18">
+									            		<li  ng-if="subservice.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+									            		</li>
+									            		<li  ng-if="subservice.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+									            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+									            		</li>
+									            		<br>
+									            	</div>
+									            	<div class="font-service2" ng-repeat="subservice in service.subservices"  ng-if="subservice.status==true && service.id==51">
+									            		<h3>{[{subservice.name}]}</h3>
+														<div ng-repeat="indoor in subservice.subservices" ng-if="indoor.status==true">
+															<li  ng-if="indoor.data.costo==0 && indoor.id!=73" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+										            			{[{indoor.name}]} ({{"share.preview.free"|trans }})
+										            		</li>
+										            		<li  ng-if="indoor.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+										            			{[{indoor.name}]} ({{"share.preview.additional_cost"|trans }})
+										            		</li>
+										            		<li  ng-if="indoor.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+										            			{[{indoor.name}]} ({{"share.preview.free"|trans }})
+										            		</li>
+															<li  ng-if="indoor.id==73" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel"></i>
+										            			{[{indoor.name}]} ({[{indoor.type}]})
+										            		</li>
+
+									            		</div>
+									            		<br>
+									            	</div>
+								            	</div>
+							            	</div>
+							            </div>
+							            <!--- Restaurantes -->
+							            <div class="col-md-16"  ng-repeat="service in services track by $index" ng-if="service.status==true && service.id==23">
+								            <h1>Restaurantes</h1>
+											<div class="col-md-8 restaurant-border"  ng-repeat="restaurants in service.data">
+									            <h1 class="hotel-font-restaurant">{[{restaurants.Nombre}]}</h1>
+									            <h3>Comida {[{restaurants.TipoCocina}]} <span ng-if="restaurants.BuffetoCarta">- {[{restaurants.BuffetoCarta}]}</span></h3>
+									            <h3 ng-if="restaurants.MenuDietetico==true" style="margin-top:-5px;">Menú Dietético</h3>
+									            <div class="col-sm-16 col-md-5" style="margin-top:10px; border-right:1px solid #391860;">
+									            	<li class="font-service-restaurant">Horario desayuno</li>
+									            	<li ng-if="restaurants.Desayuno.status!=true" class="font-service-restaurant" style="margin-top:10px;">Apertura <span class="font-service-restaurant2">-</span></li>
+									            	<li ng-if="restaurants.Desayuno.status!=true" class="font-service-restaurant" style="margin-top:5px;">Cierre <span class="font-service-restaurant2">-</span></li>
+									            	<li ng-if="restaurants.Desayuno.status==true" class="font-service-restaurant" style="margin-top:10px;">Apertura <span class="font-service-restaurant2">{[{restaurants.Desayuno.Apertura}]}</span></li>
+									            	<li ng-if="restaurants.Desayuno.status==true" class="font-service-restaurant" style="margin-top:5px;">Cierre <span class="font-service-restaurant2">{[{restaurants.Desayuno.Cierre}]}</span></li>
+									            </div>
+									            <div class="col-sm-16 col-md-6" style="margin-top:10px; border-right:1px solid #391860;">
+									            	<li class="font-service-restaurant">Horario almuerzo</li>
+									            	<li ng-if="restaurants.Almuerzo.status!=true" class="font-service-restaurant" style="margin-top:10px;">Apertura <span class="font-service-restaurant2">-</span></li>
+									            	<li ng-if="restaurants.Almuerzo.status!=true" class="font-service-restaurant" style="margin-top:5px;">Cierre <span class="font-service-restaurant2">-</span></li>
+									            	<li ng-if="restaurants.Almuerzo.status==true" class="font-service-restaurant" style="margin-top:10px;">Apertura <span class="font-service-restaurant2">{[{restaurants.Almuerzo.Apertura}]}</span></li>
+									            	<li ng-if="restaurants.Almuerzo.status==true" class="font-service-restaurant" style="margin-top:5px;">Cierre <span class="font-service-restaurant2">{[{restaurants.Almuerzo.Cierre}]}</span></li>
+									            </div>
+									            <div class="col-sm-16 col-md-5" style="margin-top:10px;">
+									            	<li class="font-service-restaurant">Horario cena</li>
+									            	<li ng-if="restaurants.Cena.status!=true" class="font-service-restaurant" style="margin-top:10px;">Apertura <span class="font-service-restaurant2">-</span></li>
+									            	<li ng-if="restaurants.Cena.status!=true" class="font-service-restaurant" style="margin-top:5px;">Cierre <span class="font-service-restaurant2">-</span></li>
+									            	<li ng-if="restaurants.Cena.status==true" class="font-service-restaurant" style="margin-top:10px;">Apertura <span class="font-service-restaurant2">{[{restaurants.Cena.Apertura}]}</span></li>
+									            	<li ng-if="restaurants.Cena.status==true" class="font-service-restaurant" style="margin-top:5px;">Cierre <span class="font-service-restaurant2">{[{restaurants.Cena.Cierre}]}</span></li>
+									            </div>
+									            <div class="col-sm-16 col-md-16" style="margin-top:20px;">
+
+									            	<h3>Descripción</h3>
+									            	<p class="font-service2">{[{restaurants.Descripcion}]}</p>
+									            	<br><br>
+									            </div>
+									        </div>
+							            </div>
+							            <!--- Bares -->
+							            <div class="col-md-16"  ng-repeat="service in services track by $index" ng-if="service.status==true && service.id==24">
+								            <h1>Bares / Discotecas</h1>
+											<div class="col-md-8 restaurant-border"  ng-repeat="bars in service.data">
+									            <h1 class="hotel-font-restaurant">{[{bars.Nombre}]}</h1>
+									            <h3 >{[{bars.Tipo}]} <span ng-if="bars.Comida==true">- Comida {[{bars.tipo_comida}]}</span> </h3>
+									            <h3 style="margin-top:-5px;"> A partir de {[{bars.Edad_Min}]} años</h3>
+									            <li class="font-service-restaurant">Horario: <span class="font-service-restaurant2" style="float:none;">Desde {[{bars.Horario.Apertura}]} hasta {[{bars.Horario.Cierre}]}.</span></li>
+								            	<h3>Descripción</h3>
+								            	<p class="font-service2">{[{bars.Descripcion}]}</p>
+								            	<br><br>
+									        </div>
+							            </div>
+							            <!--- Salones -->
+							            <div class="col-md-16"  ng-repeat="service in services track by $index" ng-if="service.status==true && service.id==50">
+								            <h1>Salones</h1>
+											<div class="col-md-8 restaurant-border"  ng-repeat="living in service.data">
+									            <h1 class="hotel-font-restaurant">{[{living.Nombre}]}</h1>
+									            <h3 >{[{living.Tipo}]} <span ng-if="living.LuzNatural==true"> - Con luz natural</span> </h3>
+									            <li class="font-service-restaurant">Metraje: <span class="font-service-restaurant2" style="float:none;">{[{living.Tamano}]} metros <span><sup>2</sup></span></span></li>
+								            	<li class="font-service-restaurant">Capacidad máxima de personas: <span class="font-service-restaurant2" style="float:none;">{[{living.Capacidad_Max}]}</span></li>
+								            	<br><br>
+									        </div>
+							            </div>
+							        </div>
+							        <!--- Información relevante -->
+							        <div class="tab-pane" id="inf">
+							           <div class="col-md-7">
+								            <h1>Información relevante</h1>
+							            </div>
+							            <div class="col-md-9" style="margin-top:20px; margin-bottom:30px;">
+								            <span style="float:right;" class="font-inf-tab">{{"share.preview.without_charge"|trans }}</span>
+								            <span style="float:right;" class="fa-checks fa fn-check"></span>
+							            </div>
+							            <div class="col-sm-16 col-md-8">
+							            	<h3 ng-if="infoProperty.all_included!=false" style="font-family:Lato-Bold; font-size:22px;">Todo Incluido</h3>
+							            	<h3>Tipo de establecimiento</h3>
+							            	<h5>{[{infoProperty.accommodation_name}]}</h5>
+							            	<div class="col-sm-8 col-md-8" style="padding:0px; margin-top:-20px;">
+							            		<h3 ng-if="infoProperty.check_in!=null">Check in</h3>
+								            	<h5 ng-if="infoProperty.check_in!=null">A partir de las {[{infoProperty.check_in}]}</h5>
+							            	</div>
+							            	<div class="col-sm-8 col-md-8" style="padding:0px;">
+							            		<h3 ng-if="infoProperty.check_out!=null">Check out</h3>
+								            	<h5 ng-if="infoProperty.check_out!=null">Hasta las {[{infoProperty.check_out}]}</h5>
+							            	</div>
+							            	<h3 ng-if="infoProperty.check_in_age!=null">Edad mínima para hacer check in</h3>
+								            <h5 ng-if="infoProperty.check_in_age!=null">{[{infoProperty.check_in_age}]} años.</h5>
+								            <h3>Condiciones de pago</h3>
+								            <h5 ng-if="infoProperty.cash.cash==true">No se puede cancelar en efectivo más de Bs {[{infoProperty.cash.to}]}.</h5>
+								            <h5 ng-if="infoProperty.cash.cash==false">No se puede cancelar en efectivo.</h5>
+								            <h5 ng-if="infoProperty.debit==false">No aceptan tarjetas de débito.</h5>
+								            <h5 ng-if="infoProperty.debit==true">Se aceptan tarjetas de débito.</h5>
+								            <h5 ng-if="infoProperty.credit_card.credit_card==false">No aceptan tarjetas de crédito.</h5>
+								            <h5 ng-if="infoProperty.credit_card.credit_card==true">Se aceptan tarjetas de crédito:</h5>
+								            <h5>
+								            	<label ng-if="infoProperty.credit_card.credit_card_american==true">
+													<img style="margin-top: -15%;" src="{{ asset('images/american.png') }}"alt="">
+												</label>
+												<label ng-if="infoProperty.credit_card.credit_card_master==true">
+													<img style="margin-top: -15%;" src="{{ asset('images/master.png') }}"alt="">
+												</label>
+												<label ng-if="infoProperty.credit_card.credit_card_visa==true">
+													<img style="margin-top: -15%;" src="{{ asset('images/visa.png') }}"alt="">
+												</label>
+											</h5>
+								            <h3 style="padding-top:7px;">Camas suplementarias</h3>
+				        					<h5 ng-if="infoProperty.beds.beds==true">Sí.</h5>
+				        					<h5 ng-if="infoProperty.beds.beds==false">No.</h5>
+				        					<h5 ng-if="infoProperty.beds.value_beds_extra==false">Sin cargo adicional.</h5>
+				        					<h5 ng-if="infoProperty.beds.value_beds_extra==true">Cor cargo adicional.</h5>
+				        					<h3 style="padding-top:7px;">Mascotas</h3>
+				        					<h5 ng-if="infoProperty.pets.pets==true">Sí se admiten.</h5>
+				        					<h5 ng-if="infoProperty.pets.beds==false">No se admiten.</h5>
+				        					<h5 ng-if="infoProperty.pets.pets_additional_cost==false">Sin cargo adicional.</h5>
+				        					<h5 ng-if="infoProperty.pets.pets_additional_cost==true">Cor cargo adicional.</h5>
+								            <h3>Impuestos</h3>
+								            <h5 ng-if="infoProperty.tax_rate=='si'">IVA {[{infoProperty.tax}]}% incluido en los precios.</h5>
+								            <h5 ng-if="infoProperty.tax_rate=='no'">IVA {[{infoProperty.tax}]}% no incluido en los precios.</h5>
+								            <h3>Condiciones sobre niños</h3>
+				        					<h5 ng-if="infoProperty.child.child==false">No pueden alojarse niños en el hotel.</h5>
+				        					<h5 ng-if="infoProperty.child.child==true">Pueden alojarse niños en el hotel.
+				        						<span ng-if="infoProperty.child.value_accommodation_child==false">Sin cargo adicional.</span>
+				        						<span ng-if="infoProperty.child.value_accommodation_child==true">Con cargo adicional.</span>
+				        					</h5>
+				        					<h5 ng-if="infoProperty.child.child==true">Bebés hasta {[{infoProperty.child.child_max_age}]} años.</h5>
+				        					<h5 ng-if="infoProperty.cribs.cribs==false">Los bebés no pueden alojarse en cunas.</h5>
+				        					<h5 ng-if="infoProperty.cribs.cribs==true">Los bebés se pueden alojar en cunas.
+				        						<span ng-if="infoProperty.cribs.value_cribs==false">Sin cargo adicional.</span>
+				        						<span ng-if="infoProperty.cribs.value_cribs==true">Con cargo adicional.</span>
+				        					</h5>
+				        					<h5 ng-if="infoProperty.cribs.cribs==true">Número máximo de cunas en la habitación: {[{infoProperty.cribs.max_cribs}]}.</h5>
+								            <h3 ng-if="infoProperty.languages.length>0">Idiomas hablados por el personal</h3>
+							            	<h5><span style="display:inline-block;" ng-repeat="(id, lang) in infoProperty.languages">
+							            		{[{lang  | capitalize}]}
+							            		<span ng-if="id+1!=infoProperty.languages.length">, &nbsp</span>
+												<span ng-if="id+1==infoProperty.languages.length">. </span>
+	                  							</span>
+	                  						</h5>
+							            </div>
+							            <div class="col-sm-16 col-md-8">
+								            <h1 class="hotel-font-restaurant" ng-if="infoProperty.name">{[{infoProperty.name}]}</h1>
+		                     				<h1 class="hotel-font-restaurant" ng-if="!infoProperty.name">Nombre del establecimiento</h1>
+		                     				<br>
+								            <p class="font-inf-hotel" align="justify" ng-if="infoProperty.description">
+								            	{[{infoProperty.description}]}
+											</p>
+											<p class="font-inf-hotel" align="justify" ng-if="!infoProperty.description">
+								            	Descripción de tu establecimiento.
+											</p>
+								            <p class="font-inf-hotel" align="justify" ng-if="infoProperty.additional_info">
+								            	{[{infoProperty.additional_info}]}
+											</p>
+											<p class="font-inf-hotel" align="justify" ng-if="!infoProperty.additional_info">
+								            	Información adicional...
+											</p>
+							            </div>
+							        </div>
+							        <!--- Galería -->
+							        <div class="tab-pane" id="gal" ng-init="gallery=infoImages.rooms[0].images">
+							            <div class="col-md-7">
+								            <h1>{{"share.preview.gallery"|trans }}</h1>
+							            </div>
+							            <div class="col-md-9"  style="margin-top:20px; margin-bottom:30px;">
+								            <span style="float:right;" class="font-inf-tab">{{"share.preview.without_charge"|trans }}</span>
+								            <span style="float:right;" class="fa-checks fa fn-check"></span>
+							            </div>
+							            <div class="col-sm-5 col-md-5">
+							            		<ul id="tabs" class="nav li-hotel-galery" data-tabs="tabs">
+											        <li ng-repeat="room in infoImages.rooms"><a href="" data-toggle="tab" class="font-hotel-galery"  ng-click="showGallery(room.images);"> {[{room.subGallery}]}</a></li>
+											        <li ng-repeat="otherGallery in infoImages.otherGalleries"><a href="" data-toggle="tab" class="font-hotel-galery"  ng-click="showGallery(otherGallery.images);">{[{otherGallery.subGallery}]}</a></li>
+											    </ul>
+								            </div>
+							            <div class="col-sm-11 col-md-11 galery-hotel-padding">
+							            	<li class="li-img-galery" ng-repeat="(id, image) in gallery">
+							            		<a href="" ng-click="showGalleryModal(id, image, gallery)">
+							            			<div class="carousel-fill hotel-galery-img" style="background-image:url('/uploads/images/images_xs/{[{image.path}]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+							            			{#<img ng-src="/uploads/images/images_original/{[{image.path}]}" class="img-responsive hotel-galery-img">#}
+							            		</a>
+							            	</li>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+						</div>
+						<!--- Barra de Busqueda XS -->
+						<div class="container padding-xs">
+							<div class="col-xs-16 col-sm-16 navtab-hotel-xs hidden-sm hidden-md hidden-lg">
+								<div class="col-xs-8 col-sm-8" style="margin-top:7px; margin-bottom:7px;">
+									<span>Check in -</span><br>
+									<span>Check out -</span>
+								</div>
+								<div class="col-xs-8 col-sm-8">
+									<button class="form-control-tab-btn-xs btn btn-primary active"> Cambiar fechas</button>
+								</div>
+							</div>
+						</div>
+						<!--- Nav-Tab XS SM -->
+						<div class="container hidden-md hidden-lg padding-xs">
+							<div class="col-xs-4 col-sm-4 navtab-room-xs-active" style="background-color:#5C215F"
+								 ng-class="{'navtab-room-xs-active': section == 'room', 'navtab-room-xs-1': section != 'room'}"
+								 ng-click="section='room'">
+								 <span class="faa-hotel-xs-active fa fn-property-habitacion"
+								 ng-class="{'faa-hotel-xs-active': section == 'room', 'faa-hotel-xs-1': section != 'room'}"></span><br>
+								<span>{{"share.preview.room"|transchoice(2) }}</span>
+							</div>
+							<div class="col-xs-4 col-sm-4 navtab-room-xs" style="background-color:#AA1A73"
+								ng-click="section='service'"
+								ng-class="{'navtab-room-xs-active': section == 'service', 'navtab-room-xs-2': section != 'service'}">
+								<span class="faa-hotel-xs fa fn-property-servicios"
+								ng-class="{'faa-hotel-xs-active': section == 'service', 'faa-hotel-xs-2': section != 'service'}"></span><br>
+								<span>{{"share.preview.services"|trans }}</span>
+							</div>
+							<div class="col-xs-4 col-sm-4 navtab-room-xs" style="background-color:#E72A5E;"
+								ng-click="section='info'"
+								ng-class="{'navtab-room-xs-active': section == 'info', 'navtab-room-xs-3': section != 'info'}">
+								<span class="faa-hotel-xs fa fn-property-info"
+								ng-class="{'faa-hotel-xs-active': section == 'info', 'faa-hotel-xs-3': section != 'info'}"></span><br>
+								<span>Info</span>
+							</div>
+							<div class="col-xs-4 col-sm-4 navtab-room-xs" style="background-color:#FCC010"
+								ng-click="section='gallery'"
+								ng-class="{'navtab-room-xs-active': section == 'gallery', 'navtab-room-xs-4': section != 'gallery'}">
+								<span class="faa-hotel-xs fa fn-property-galeria"
+								ng-class="{'faa-hotel-xs-active': section == 'gallery', 'faa-hotel-xs-4': section != 'gallery'}"></span><br>
+								<span>{{"share.preview.gallery"|trans }}</span>
+							</div>
+							<div ng-if="section=='room';">
+								<div class="col-xs-16 col-sm-16 bar-room" style="border-bottom: 7px solid #5C215F;"></div>
+							</div>
+							<div ng-if="section=='service';">
+								<div class="col-xs-16 col-sm-16 bar-room" style="border-bottom: 7px solid #AA1A73;"></div>
+							</div>
+							<div ng-if="section=='info';">
+								<div class="col-xs-16 col-sm-16 bar-room" style="border-bottom: 7px solid #E72A5E;"></div>
+							</div>
+							<div ng-if="section=='gallery';">
+								<div class="col-xs-16 col-sm-16 bar-room" style="border-bottom: 7px solid #FCC010;"></div>
+							</div>
+						</div>
+						<!--- Habitaciones XS SM -->
+						<div class="container" ng-if="section=='room';">
+							<div class="row">
+								<div class="col-sm-7 hidden-sm">
+						            <h1 class="hidden-md hidden-lg">{{"share.preview.availability"|trans }} </h1>
+					            </div>
+					            <!--- Barra de Busqueda SM -->
+								<div class="container padding-xs visible-sm">
+									<div class="col-xs-16 col-sm-16 navtab-hotel-xs hidden-md hidden-lg">
+										<div class="col-xs-8 col-sm-8" style="margin-top:7px; margin-bottom:7px;">
+											<span>Check in -</span><br>
+											<span>Check out -</span>
+										</div>
+										<div class="col-xs-8 col-sm-8">
+											<button class="form-control-tab-btn-xs btn btn-primary active"> {{"share.preview.change_dates"|trans }}</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-16 col-sm-16 hidden-md hidden-lg padding-xs">
+									<div class="toggle-container filters-container">
+										<div ng-repeat="room in roomProperty">
+						                    <div class="panel style1" >
+						                      	<div class="panel-title-room">
+						                      		<div class="row">
+						                      			<a data-toggle="collapse" href="#" aria-expanded="true" ng-init="person.roomOnlyExpanded=false" ng-click="person.roomOnlyExpanded = !person.roomOnlyExpanded" ng-class="{'collapsed': !person.roomOnlyExpanded}"></a>
+						                      			<div class="" style="margin-top:-30px; float:left; float: left; margin-bottom: -10px;" ng-init="person.roomOnlyGallery=false" ng-click="person.roomOnlyGallery = !person.roomOnlyGallery">
+						                      				<img src="http://placehold.it/800x800&text=-" class="img-table-xs">
+						                      			</div>
+						                      			<div class="" style="margin-top:-25px; margin-bottom:-8px;">
+						                      				<h4 >{[{room.name}]}</h4>
+						                      				<li class="font-politic2" style="display: block;">{{"share.preview.only_room"|trans }}</li>
+						                      				<span class="font-last-room"> ¡{{"share.preview.stay"|transchoice(0)  }} n {{"share.preview.rooms"|transchoice(0) }}!</span><br>
+								                        	<span class="font-price-xs">{{"share.preview.price_for"|trans }} n {{"share.preview.night"|trans }}</span><br>
+								                        	<span class="font-price">{{"share.preview.price"|trans }}</span>
+								                        	<span>
+								                        		<button style="width:auto; margin-right:5px; margin-top:-8px !important;" class="form-control-tab-btn  btn btn-primary btn-tab active pull-right"> Reservar</button>
+								                        	</span>
+						                      			</div>
+						                      			<br>
+						                      			<div ng-if="person.roomOnlyGallery">
+							                      			<div id="carousel-gallery" class="carousel carousel-hotel slide" data-ride="carousel"
+							                      				style="margin-top:-3px; margin-bottom:59px;">
+													            <div class="carousel-inner carousel-inner-hotel">
+													                <div class="item" ng-class="{active: $first}" ng-repeat="image in room.gallery">
+													                    {#<img ng-src="/uploads/images/images_md/{[{ image.path}]}" class="img-responsive" class="img-responsive">#}
+													                    <div class="carousel-fill" style="background-image:url('/uploads/images/images_md/{[{ image.path}]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+													                    <p align="left" class="banner-hotel">{[{image.name}]}<p>
+													                </div>
+													                <div class="item active" ng-if="!room.gallery || room.gallery.length==0" ng-repeat-n="8">
+													                    <img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive">
+													                    <p align="left" class="banner-hotel">{{"share.preview.image_name"|trans }}<p>
+													                </div>
+													            </div>
+													        </div>
+							                      			<div id="thumbcarousel-gallery" class="carousel carousel-hotel-thumbnail slide" data-interval="false">
+												                <div class="carousel-inner carousel-inner-hotel" style="margin-top:-59px;">
+												                    <div class="item active" ng-init="first=0; last=7">
+																		<div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel-gallery" data-slide-to="{[{$index}]}"
+																			ng-repeat="(id, image) in room.gallery" ng-if="id>=first && id<=last">
+											                              	{#<img ng-src="/uploads/images/images_sm/{[{ image.path}]}"  class="img-responsive img-carusel-hotel">#}
+											                              	<div class="carousel-fill img-carusel-hotel" style="background-image:url('/uploads/images/images_sm/{[{ image.path}]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+											                            </div>
+											                            <div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel-gallery" data-slide-to="{[{$index}]}"
+																			ng-repeat-n="8" ng-if="(!room.gallery || room.gallery.length==0)" >
+											                              	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-hotel">
+											                            </div>
+												                    </div>
+														            <a ng-if="room.gallery.length>4" class="left carousel-control" href="#carousel-gallery"
+													                	ng-click="first = (first==0 ? 0 : first-1); last = first+7" data-slide="prev">
+													                	<span class="famodal-xs fa fa-caret-left fa-2x"></span>
+													                </a>
+									        						<a ng-if="room.gallery.length>4" class="right carousel-control" href="#carousel-gallery" data-slide="next"
+									        							ng-click="last = (last>=room.gallery.length-1 ? last : last+1); first = last-7">
+									        							<span class="famodal-xs fa fa-caret-right fa-2x"></span>
+									        						</a>
+												                </div>
+												            </div>
+												        </div>
+						                      		</div>
+						                      	</div>
+							                    <div ng-if="person.roomOnlyExpanded" class="panel-collapse" style="height: auto;">
+							                        <div class="panel-content list-font-hotel" style="padding-left:11px;">
+														<div class="row">
+															<div class="col-xs-8 col-sm-8" style="float:left; padding-top:10px;">
+																<span class="table-p font-room">{{"share.preview.features"|trans }}</span>
+															    <li class="font-politic" style="margin-left:5px;">{{"share.preview.price_for_room"|trans }}.</li>
+											                    <li class="font-politic" style="margin-left:5px;" ng-if="infoProperty.tax_rate=='no' && infoProperty.tax>0">{{"share.preview.not_include"|trans }}: {[{infoProperty.tax}]}% {{"share.preview.tax"|trans }}.</li>
+											                    <li class="font-politic" style="margin-left:5px;" ng-if="infoProperty.tax_rate=='si' && infoProperty.tax>0">{{"share.preview.include"|trans }}: {[{infoProperty.tax}]}% {{"share.preview.tax"|trans }}.</li>
+						                      				</div>
+															<div class="col-xs-8 col-sm-8" style="padding-top:10px; padding-bottom:15px;">
+							                      				<span class="table-p font-room">N° de personas</span>
+																<select class="select-bed form-control form-control-tab select-control select-control-tab"
+																	ng-model="numperson1"
+																	ng-options="n for n in [] | range:1:room.numPeople" >
+																</select>
+						                      				</div>
+						                      				<div class="col-xs-8 col-sm-8">
+					                      						<span class="table-p font-room">{{"share.preview.beds"|trans }}</span>
+									                        	<select class="select-bed form-control form-control-tab select-control  select-control-tab"
+																			ng-model="bed"
+																			ng-options="bedselected as val.nameBeds for (bedselected, val) in room.combinationsBeds">
+																		<option value=''>{{"share.preview.select"|trans }}</option>
+																	</select>
+											                </div>
+						                      				<div class="col-xs-8 col-sm-8">
+							                      				<span class="table-p font-room">{{"share.preview.number_room"|trans }}</span>
+									                        	<select type="text" class="select-bed form-control form-control-tab select-control select-control-tab">
+									                        			<option>0</option>
+																		<option>1 x ({{"share.preview.price"|trans }})</option>
+																		<option>2 x ({{"share.preview.price"|trans }})</option>
+																		<option>3 x ({{"share.preview.price"|trans }})</option>
+																		<option>4 x ({{"share.preview.price"|trans }})</option>
+																</select>
+												                <p class="table-p font-condition" style="margin-top:-5px;">{{"share.preview.availability_hotel"|trans }}</p>
+						                      				</div>
+						                      				<div class="col-xs-16 col-sm-16" style="padding:0px;">
+					                      						<div class="col-xs-8 col-sm-8" style="padding-right:0px;">
+						                      						<span class="table-p font-room">{{"share.preview.politic_cancel"|trans }}</span>
+					                      							<li class="font-politic" style="padding-top:-5px;">{{"share.preview.non_refundable"|trans }}</li>
+						                      					</div>
+						                      					<div class="col-xs-16 col-sm-16">
+					                      							<span class="table-p font-room">{{"share.preview.services_room"|trans }}</span>
+						                      						<p><span class="font-services" ng-repeat="(id, feature) in room.featuresRoom track by $index"> {[{feature.name}]}
+						                      							<span ng-if="id+1!=room.featuresRoom.length">,</span>
+																		<span ng-if="id+1==room.featuresRoom.length">.</span>
+						                      							</span>
+						                      						</p>
+						                      					</div>
+
+						                      				</div>
+
+														</div>
+							                        </div>
+							                    </div>
+						                    </div>
+						                    <div class="panel style1" >
+						                      	<div class="panel-title-room">
+						                      		<div class="row">
+						                      			<a data-toggle="collapse" href="#" ng-class="{'collapsed': !person.breakfastIncludeExpanded}" aria-expanded="true" ng-init="person.breakfastIncludeExpanded=false" ng-click="person.breakfastIncludeExpanded = !person.breakfastIncludeExpanded"> </a>
+						                      			<div class="" style="margin-top:-30px; float:left;" ng-init="person.breakfastIncludeGallery=false" ng-click="person.breakfastIncludeGallery = !person.breakfastIncludeGallery">
+						                      				<img src="http://placehold.it/800x800&text=-" class="img-table-xs">
+						                      				{#<p align="left" class="banner-hotel-room">
+						                      					<span class=" fa fa-user"></span> x {[{person.numberPeople}]}
+						                      				</p>#}
+						                      			</div>
+						                      			<div class="" style="margin-top:-25px;">
+						                      				<h4 >{[{room.name}]}</h4>
+						                      				<li class="font-politic2" style="display: block;">{{"share.preview.breakfast_included"|trans }}</li>
+						                      				<span class="font-last-room"> ¡{{"share.preview.stay"|transchoice(0)  }} n {{"share.preview.rooms"|transchoice(0) }}!</span><br>
+								                        	<span class="font-price-xs">{{"share.preview.price_for"|trans }} n {{"share.preview.night"|trans }}</span><br>
+								                        	<span class="font-price">{{"share.preview.price"|trans }}</span>
+								                        	<span>
+								                        		<button style="width:auto; margin-right:5px;" class="form-control-tab-btn  btn btn-primary btn-tab active pull-right"> Reservar</button>
+								                        	</span>
+						                      			</div>
+						                      			<br>
+						                      			<div ng-if="person.breakfastIncludeGallery">
+							                      			<div id="carousel-gallery" class="carousel carousel-hotel slide" data-ride="carousel"
+							                      				style="margin-top:-3px; margin-bottom:59px;">
+													            <div class="carousel-inner carousel-inner-hotel">
+													                <div class="item" ng-class="{active: $first}" ng-repeat="image in room.gallery">
+													                    {#<img ng-src="/uploads/images/images_md/{[{ image.path}]}"  class="img-responsive">#}
+													                    <div class="carousel-fill" style="background-image:url('/uploads/images/images_md/{[{ image.path}]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+													                    <p align="left" class="banner-hotel">{[{image.name}]}<p>
+													                </div>
+													                <div class="item active" ng-if="!room.gallery || room.gallery.length==0" ng-repeat-n="8">
+													                    <img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive">
+													                    <p align="left" class="banner-hotel">{{"share.preview.image_name"|trans }}<p>
+													                </div>
+													            </div>
+													        </div>
+							                      			<div id="thumbcarousel-gallery" class="carousel carousel-hotel-thumbnail slide" data-interval="false">
+												                <div class="carousel-inner carousel-inner-hotel" style="margin-top:-59px;">
+												                    <div class="item active" ng-init="first=0; last=7">
+																		<div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel-gallery" data-slide-to="{[{$index}]}"
+																			ng-repeat="(id, image) in room.gallery" ng-if="id>=first && id<=last">
+											                              	{#<img ng-src="/uploads/images/images_sm/{[{ image.path}]}"  class="img-responsive img-carusel-hotel">#}
+											                              	<div class="carousel-fill img-carusel-hotel" style="background-image:url('/uploads/images/images_sm/{[{ image.path}]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+											                            </div>
+											                            <div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel-gallery" data-slide-to="{[{$index}]}"
+																			ng-repeat-n="8" ng-if="(!room.gallery || room.gallery.length==0)" >
+											                              	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-hotel">
+											                            </div>
+												                    </div>
+												                </div>
+													            <a ng-if="room.gallery.length>4" class="left carousel-control" href="#carousel-gallery"
+												                	ng-click="first = (first==0 ? 0 : first-1); last = first+7" data-slide="prev">
+												                	<span class="famodal-xs fa fa-caret-left fa-2x"></span>
+												                </a>
+								        						<a ng-if="room.gallery.length>4" class="right carousel-control" href="#carousel-gallery" data-slide="next"
+								        							ng-click="last = (last>=room.gallery.length-1 ? last : last+1); first = last-7">
+								        							<span class="famodal-xs fa fa-caret-right fa-2x"></span>
+								        						</a>
+												            </div>
+												        </div>
+						                      		</div>
+						                      	</div>
+							                    <div ng-if="person.breakfastIncludeExpanded" class="panel-collapse" style="height: auto;">
+							                        <div class="panel-content list-font-hotel" style="padding-left:11px;">
+														<div class="row">
+															<div class="col-xs-8 col-sm-8" style="float:left; padding-top:10px;">
+																<span class="table-p font-room">{{"share.preview.features"|trans }}</span>
+															    <li class="font-politic" style="margin-left:5px;">{{"share.preview.price_for_room"|trans }}.</li>
+											                    <li class="font-politic" style="margin-left:5px;" ng-if="infoProperty.tax_rate=='no'">{{"share.preview.not_include"|trans }}: {[{infoProperty.tax}]}% {{"share.preview.tax"|trans }}.</li>
+											                    <li class="font-politic" style="margin-left:5px;" ng-if="infoProperty.tax_rate=='si'">{{"share.preview.include"|trans }}: {[{infoProperty.tax}]}% {{"share.preview.tax"|trans }}.</li>
+						                      				</div>
+															<div class="col-xs-8 col-sm-8" style="padding-top:10px; padding-bottom:15px;">
+							                      				<span class="table-p font-room">N° de personas</span>
+																<select class="select-bed form-control form-control-tab select-control select-control-tab"
+																	ng-model="numperson1"
+																	ng-options="n for n in [] | range:1:room.numPeople" >
+																</select>
+						                      				</div>
+						                      				<div class="col-xs-8 col-sm-8">
+					                      						<span class="table-p font-room">{{"share.preview.beds"|trans }}</span>
+									                        	<select class="select-bed form-control form-control-tab select-control  select-control-tab"
+																			ng-model="bed"
+																			ng-options="bedselected as val.nameBeds for (bedselected, val) in room.combinationsBeds">
+																		<option value=''>{{"share.preview.select"|trans }}</option>
+																	</select>
+											                </div>
+						                      				<div class="col-xs-8 col-sm-8">
+							                      				<span class="table-p font-room">{{"share.preview.number_room"|trans }}</span>
+									                        	<select type="text" class="select-bed form-control form-control-tab select-control select-control-tab">
+									                        			<option>0</option>
+																		<option>1 x ({{"share.preview.price"|trans }})</option>
+																		<option>2 x ({{"share.preview.price"|trans }})</option>
+																		<option>3 x ({{"share.preview.price"|trans }})</option>
+																		<option>4 x ({{"share.preview.price"|trans }})</option>
+																</select>
+												                <p class="table-p font-condition" style="margin-top:-5px;">{{"share.preview.availability_hotel"|trans }}</p>
+						                      				</div>
+						                      				<div class="col-xs-16 col-sm-16" style="padding:0px;">
+					                      						<div class="col-xs-8 col-sm-8" style="padding-right:0px;">
+						                      						<span class="table-p font-room">{{"share.preview.politic_cancel"|trans }}</span>
+					                      							<li class="font-politic" style="padding-top:-5px;">{{"share.preview.non_refundable"|trans }}</li>
+						                      					</div>
+						                      					<div class="col-xs-16 col-sm-16">
+					                      							<span class="table-p font-room">{{"share.preview.services_room"|trans }}</span>
+						                      						<p><span class="font-services" ng-repeat="(id, feature) in room.featuresRoom track by $index"> {[{feature.name}]}
+						                      							<span ng-if="id+1!=room.featuresRoom.length">,</span>
+																		<span ng-if="id+1==room.featuresRoom.length">.</span>
+						                      							</span>
+						                      						</p>
+						                      					</div>
+
+						                      				</div>
+
+														</div>
+							                        </div>
+							                    </div>
+						                    </div>
+					                    </div>
+			                  		</div>
+								</div>
+								<!-- Habitación si viene vacía -->
+								<div class="col-xs-16 col-sm-16 hidden-md hidden-lg padding-xs" ng-if="roomProperty.length==0">
+									<div class="toggle-container filters-container">
+										<div>
+						                    <div class="panel style1">
+						                      	<div class="panel-title panel-title-room">
+						                      		<div class="row">
+						                      			<a data-toggle="collapse" href="#" aria-expanded="true" ng-init="person.roomOnlyExpanded=false" ng-click="person.roomOnlyExpanded = !person.roomOnlyExpanded"> </a>
+						                      			<div class="" style="margin-top:-30px; float:left; float: left; margin-bottom: -10px;" ng-init="person.roomOnlyGallery=false" ng-class="{'collapsed': !person.roomOnlyExpanded}" ng-click="person.roomOnlyGallery = !person.roomOnlyGallery">
+						                      				<img src="http://placehold.it/800x800&text=-" class="img-table-xs">
+						                      				<p align="left" class="banner-hotel-room">
+						                      					<span class=" fa fa-user"></span>
+						                      				</p>
+						                      			</div>
+						                      			<div class="" style="margin-top:-25px; margin-bottom:-8px;">
+						                      				<h4 >{{"share.preview.name_room"|trans }}</h4>
+						                      				<li class="font-politic2" style="display: block;">{{"share.preview.services"|trans }}</li>
+						                      				{#<span class="font-last-room"> ¡Quedan 3 habitaciones!</span><br>#}
+								                        	<span class="font-price-xs">{{"share.preview.price_for"|trans }} n {{"share.preview.night"|trans }}</span><br>
+								                        	<span class="font-price">{{"share.preview.price"|trans }}</span>
+								                        	<span>
+								                        		<button style="width:auto; margin-right:5px; margin-top:-8px !important;" class="form-control-tab-btn  btn btn-primary btn-tab active pull-right"> Reservar</button>
+								                        	</span>
+						                      			</div>
+						                      			<br>
+						                      			<div ng-if="person.roomOnlyGallery">
+							                      			<div id="carousel-gallery" class="carousel carousel-hotel slide" data-ride="carousel" style="margin-top:-3px; margin-bottom:59px;">
+													            <div class="carousel-inner carousel-inner-hotel">
+													                <div class="item active">
+													                    <img src="http://placehold.it/800x800&text=00" class="img-responsive">
+													                    <p align="left" class="banner-hotel">-<p>
+													                </div>
+													            </div>
+													        </div>
+							                      			<div id="thumbcarousel-gallery" class="carousel carousel-hotel-thumbnail slide" data-interval="false">
+												                <div class="carousel-inner carousel-inner-hotel" style="margin-top:-59px;">
+												                    <div class="item active">
+																		<div class="col-xs-4 col-sm-4 pad-carusel-hotel-xs" data-target="#carousel-gallery"
+																			data-slide-to="0" ng-repeat-n="8">
+											                              	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-hotel">
+											                            </div>
+												                    </div>
+												                </div>
+												            </div>
+												        </div>
+						                      		</div>
+						                      	</div>
+							                    <div ng-if="person.roomOnlyExpanded" class="panel-collapse" style="height: auto;">
+							                        <div class="panel-content list-font-hotel" style="padding-left:11px;">
+														<div class="row">
+															<div class="col-xs-8 col-sm-8" style="float:left; padding-top:10px;">
+																<span class="table-p font-room">Características</span>
+							                      				<li class="font-politic" style="padding-top:5px; margin-left:5px;">{{"share.preview.services"|trans }}</li>
+															    <li class="font-politic" style="margin-left:5px;">{{"share.preview.price_politic"|trans }}</li>
+															    {#<li class="font-politic" style="margin-left:5px;" ng-if=""> {[{person.numberPeople}]} personas.</li>#}
+											                    <li class="font-politic" style="margin-left:5px;" > {{"share.preview.tax"|trans }}.</li>
+						                      				</div>
+						                      				<div class="col-xs-8 col-sm-8" style="padding-top:10px;">
+							                      				<span class="table-p font-room">{{"share.preview.number_room"|trans }}</span>
+									                        	<select type="text" class="select-bed form-control form-control-tab select-control select-control-tab">
+									                        			<option>0</option>
+																		<option>1 x ({{"share.preview.price"|trans }})</option>
+																		<option>2 x ({{"share.preview.price"|trans }})</option>
+																		<option>3 x ({{"share.preview.price"|trans }})</option>
+																		<option>4 x ({{"share.preview.price"|trans }})</option>
+																</select>
+												                <p class="table-p font-condition" style="margin-top:-5px;">{{"share.preview.availability_hotel"|trans }}</p>
+						                      				</div>
+						                      				<div class="col-xs-16 col-sm-16" style="padding:0px;">
+					                      						<div class="col-xs-8 col-sm-8" style="padding-right:0px; padding-top:10px;">
+						                      						<span class="table-p font-room">{{"share.preview.politic_cancel"|trans }}</span>
+					                      							<li class="font-politic" style="padding-top:-5px;">-</li>
+						                      					</div>
+						                      					<div class="col-xs-8 col-sm-8">
+						                      						<span class="table-p font-room">{{"share.preview.beds"|trans }}</span>
+										                        	<select class="select-bed form-control form-control-tab select-control  select-control-tab">
+																			<option value=''>{{"share.preview.select"|trans }}</option>
+																		</select>
+													                <p class="table-p font-condition" style="margin-top:-5px;">{{"share.preview.availability_hotel"|trans }}</p>
+						                      					</div>
+						                      					<div class="col-xs-16 col-sm-16">
+					                      							<span class="table-p font-room">{{"share.preview.services_room"|trans }}</span>
+						                      						<p><span class="font-services"> -,</span>
+						                      							<span class="font-services"> -,</span>
+						                      							<span class="font-services"> -</span>
+						                      						</p>
+						                      					</div>
+
+						                      				</div>
+
+														</div>
+							                        </div>
+							                    </div>
+						                    </div>
+					                    </div>
+			                  		</div>
+								</div>
+							</div>
+						</div>
+						<!--- Servicios XS SM -->
+						<div class="container hidden-md hidden-lg" ng-if="section=='service';">
+							<div class="row">
+								<div class="col-sm-7">
+						            <h1 class="hidden-md hidden-lg">{{"share.preview.services"|trans }}</h1>
+					            </div>
+								<div class="col-xs-16 col-sm-16 hidden-md hidden-lg padding-xs">
+									<div class="toggle-container filters-container">
+					                    <div class="panel style1" ng-repeat="service in services track by $index" ng-if="service.status==true" style="margin-bottom:0px; margin-top:0px;"
+					                    	ng-init="service.expanded=false">
+					                      	<div class="panel-title panel-title-service" ng-class="service.colorGallery"
+					                      		ng-click="service.expanded=!service.expanded">
+					                      		<div class="row">
+					                      			<a data-toggle="collapse" aria-expanded="true" ng-class="{'collapsed': !service.expanded}"> </a>
+					                      			<div class="" style="margin-top:-25px; margin-left:20px;">
+					                      				<span class="service-hotel-font1">{[{service.name}]}</span>
+					                      			</div>
+
+					                      		</div>
+					                      	</div>
+						                    <div class="panel-collapse" style="height: auto;" ng-if="service.expanded">
+						                        <div class="panel-content panel-content2 list-font-hotel" ng-if="service.status==true"
+						                        	style="padding-left:11px; padding-top:10px;">
+													<div class="row">
+														<div class="col-xs-16 col-sm-16" ng-if="service.id==34">
+										            		<li  class="service-hotel-font2" ng-if="service.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+										            			Con {{"share.preview.additional_cost"|trans }}
+										            		</li>
+										            		<li  class="service-hotel-font2" ng-if="service.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+										            			Sin {{"share.preview.additional_cost"|trans }}
+										            		</li>
+										            		<br>
+									            		</div>
+					                      				<div class="col-xs-16 col-sm-16" ng-repeat="subservice in service.subservices" ng-if="subservice.status==true">
+															<div ng-if="service.id!=92 && service.id!=51">
+											            		<li class="service-hotel-font2" ng-if="subservice.id==2" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+											            			<span ng-if="subservice.data.Horario.Full_time==false">Desde {[{subservice.data.Horario.Apertura}]} hasta {[{subservice.data.Horario.Cierre}]}.</span>
+									            					<span ng-if="subservice.data.Horario.Full_time==true"> Recepción 24 horas</span>
+											            		</li>
+											            		<li class="service-hotel-font2" ng-if="subservice.id==3" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+											            			<span ng-if="subservice.data.Horario.Full_time==false">Conserjería desde {[{subservice.data.Horario.Apertura}]} hasta {[{subservice.data.Horario.Cierre}]}.</span>
+									            					<span ng-if="subservice.data.Horario.Full_time==true"> Conserjería 24 horas</span>
+											            		</li>
+																<li class="service-hotel-font2" ng-if="subservice.id==26" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+											            			<span ng-if="subservice.data.Horario.Full_time==false">Room Service desde {[{subservice.data.Horario.Apertura}]} hasta {[{subservice.data.Horario.Cierre}]}.</span>
+									            					<span ng-if="subservice.data.Horario.Full_time==true"> Room Service 24 horas</span>
+											            		</li>
+											            		<li  class="service-hotel-font2" ng-if="subservice.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+											            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+											            		</li>
+											            		<li  class="service-hotel-font2" ng-if="subservice.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+											            			{[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+											            		</li>
+											            		<li  class="service-hotel-font2" ng-if="subservice.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+											            			{[{subservice.name}]} ({{"share.preview.free"|trans }})
+											            		</li>
+											            		<br>
+											            	</div>
+										            		<div ng-if="service.id==92">
+																<div ng-repeat="indoor in subservice.subservices" ng-if="indoor.status==true">
+																	<h3>{[{subservice.name}]} - {[{indoor.name}]}</h3>
+																	<div ng-repeat="indoorservice in indoor.subservices" ng-if="indoorservice.status==true">
+																		<li  class="service-hotel-font2-service" ng-if="indoorservice.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+													            			{[{indoorservice.name}]} ({{"share.preview.free"|trans }})
+													            		</li>
+													            		<li  class="service-hotel-font2-service" ng-if="indoorservice.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+													            			{[{indoorservice.name}]} ({{"share.preview.additional_cost"|trans }})
+													            		</li>
+													            		<li  class="service-hotel-font2-service" ng-if="indoorservice.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+													            			{[{indoorservice.name}]} ({{"share.preview.free"|trans }})
+													            		</li>
+												            		</div>
+											            		</div>
+											            		<br>
+											            	</div>
+											            	<div ng-if="service.id==51">
+											            		<h3>{[{subservice.name}]}</h3>
+																<div ng-repeat="indoor in subservice.subservices" ng-if="indoor.status==true">
+																	<li  class="service-hotel-font2-service" ng-if="indoor.data.costo==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+												            			{[{indoor.name}]} ({{"share.preview.free"|trans }})
+												            		</li>
+												            		<li  class="service-hotel-font2-service" ng-if="indoor.data.costo==1" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+												            			{[{indoor.name}]} ({{"share.preview.additional_cost"|trans }})
+												            		</li>
+												            		<li  class="service-hotel-font2-service" ng-if="indoor.data.length==0" style="padding-bottom:5px;"><i class="fa fa-check icon-service-hotel-xs"></i>
+												            			{[{indoor.name}]} ({{"share.preview.free"|trans }})
+												            		</li>
+											            		</div>
+											            		<br>
+											            	</div>
+				                      					</div>
+				                      					{# Restaurantes #}
+				                      					<div class="col-xs-16 col-sm-16" ng-if="service.status==true && service.id==23">
+										            		<div ng-repeat="restaurants in service.data">
+													            <h1 class="hotel-font-restaurant">{[{restaurants.Nombre}]}</h1>
+													            <h3>Comida {[{restaurants.TipoCocina}]} <span ng-if="restaurants.BuffetoCarta">- {[{restaurants.BuffetoCarta}]}</span></h3>
+													            <h3 ng-if="restaurants.MenuDietetico==true" style="margin-top:-5px;">Menú Dietético</h3>
+													            <div class="col-sm-16 col-md-5">
+													            	<li ng-if="restaurants.Desayuno.status!=true" class="font-service-restaurant" style="margin-top:0px;">Desayuno: <span class="font-service-restaurant2">-</span></li>
+													            	<li ng-if="restaurants.Desayuno.status==true" class="font-service-restaurant" style="margin-top:0px;">Desayuno: <span class="font-service-restaurant2">{[{restaurants.Desayuno.Apertura}]} - {[{restaurants.Desayuno.Cierre}]} </span></li>
+													            </div>
+													            <div class="col-sm-16 col-md-6">
+													            	<li ng-if="restaurants.Almuerzo.status!=true" class="font-service-restaurant" style="margin-top:0px;">Almuerzo: <span class="font-service-restaurant2">-</span></li>
+													            	<li ng-if="restaurants.Almuerzo.status==true" class="font-service-restaurant" style="margin-top:0px;">Almuerzo: <span class="font-service-restaurant2">{[{restaurants.Almuerzo.Apertura}]} - {[{restaurants.Almuerzo.Cierre}]} </span></li>
+													            </div>
+													            <div class="col-sm-16 col-md-5">
+													            	<li ng-if="restaurants.Cena.status!=true" class="font-service-restaurant" style="margin-top:0px;">Cena: <span class="font-service-restaurant2">-</span></li>
+													            	<li ng-if="restaurants.Cena.status==true" class="font-service-restaurant" style="margin-top:0px;">Cena: <span class="font-service-restaurant2">{[{restaurants.Cena.Apertura}]} - {[{restaurants.Cena.Cierre}]}</span></li>
+													            </div>
+													            <div class="col-sm-16 col-md-16" style="margin-top:20px;">
+													            	<h3>Descripción</h3>
+													            	<p class="font-service2">{[{restaurants.Descripcion}]}</p>
+													            	<br>
+													            	<hr style="border-style:dashed; border-color:#A38DC7;">
+													            	<br>
+													            </div>
+													        </div>
+										            	</div>
+										            	{# Bares #}
+										            	<div class="col-xs-16" ng-if="service.status==true && service.id==24">
+															<div ng-repeat="bars in service.data">
+													            <h1 class="hotel-font-restaurant">{[{bars.Nombre}]}</h1>
+													            <h3 >{[{bars.Tipo}]} <span ng-if="bars.Comida==true">- Comida {[{bars.tipo_comida}]}</span> </h3>
+													            <h3 style="margin-top:-5px;"> A partir de {[{bars.Edad_Min}]} años</h3>
+													            <li class="font-service-restaurant">Horario: <span class="font-service-restaurant2" style="float:none;">Desde {[{bars.Horario.Apertura}]} hasta {[{bars.Horario.Cierre}]}.</span></li>
+												            	<h3>Descripción</h3>
+												            	<p class="font-service2">{[{bars.Descripcion}]}</p>
+												            	<br>
+																<hr style="border-style:dashed; border-color:#A38DC7;">
+												            	<br>
+													        </div>
+											            </div>
+											            {# Salones #}
+											            <div class="col-md-16" ng-if="service.status==true && service.id==50">
+												            <div ng-repeat="living in service.data">
+													            <h1 class="hotel-font-restaurant">{[{living.Nombre}]}</h1>
+													            <h3 >{[{living.Tipo}]} <span ng-if="living.LuzNatural==true"> - Con luz natural</span> </h3>
+													            <li class="font-service-restaurant">Metraje: <span class="font-service-restaurant2" style="float:none;">{[{living.Tamano}]} metros <span><sup>2</sup></span></span></li>
+												            	<li class="font-service-restaurant">Capacidad máxima de personas: <span class="font-service-restaurant2" style="float:none;">{[{living.Capacidad_Max}]}</span></li>
+												            	<br>
+												            	<hr style="border-style:dashed; border-color:#A38DC7;">
+												            	<br>
+													        </div>
+											            </div>
+													</div>
+						                        </div>
+						                    </div>
+					                    </div>
+					                    <br><br>
+			                  		</div>
+								</div>
+							</div>
+						</div>
+						<!--- Información XS SM -->
+						<div class="container hidden-md hidden-lg" ng-if="section=='info';">
+							<div class="col-xs-16 col-sm-7 hidden-md hidden-lg">
+								<h1 class="hidden-md hidden-lg">Información relevante </h1>
+							</div>
+							<div class="row">
+		          				<div class="col-xs-16 col-sm-16">
+		          					<h3 ng-if="infoProperty.all_included!=false" style="font-family:Lato-Bold; font-size:22px;">Todo Incluido</h3>
+							        <h3>Tipo de establecimiento</h3>
+							        <h5>{[{infoProperty.accommodation_name}]}</h5>
+		      						<h1 ng-if="infoProperty.check_in!=null" class="service-hotel-font3">Check in: <span class="service-hotel-font4" style="float:right;">A partir de las {[{infoProperty.check_in}]}</span></h1>
+		            				<h1  ng-if="infoProperty.check_out!=null"class="service-hotel-font3">Check out:  <span class="service-hotel-font4" style="float:right;">A partir de las {[{infoProperty.check_out}]}</span></h1>
+		            				<h3  ng-if="infoProperty.check_in_age!=null">Edad mínima para hacer check in</h3>
+						            <h5  ng-if="infoProperty.check_in_age!=null">{[{infoProperty.check_in_age}]} años.</h5>
+		        					<h3 style="padding-top:7px;">Condiciones de pago</h3>
+		        					<h5 ng-if="infoProperty.cash.cash==true">No se puede cancelar en efectivo más de Bs {[{infoProperty.cash.to}]}.</h5>
+						            <h5 ng-if="infoProperty.cash.cash==false">No se puede cancelar en efectivo.</h5>
+						            <h5 ng-if="infoProperty.debit==false">No aceptan tarjetas de débito.</h5>
+						            <h5 ng-if="infoProperty.debit==true">Se aceptan tarjetas de débito.</h5>
+						            <h5 ng-if="infoProperty.credit_card.credit_card==false">No aceptan tarjetas de crédito.</h5>
+						            <h5 ng-if="infoProperty.credit_card.credit_card==true">Se aceptan tarjetas de crédito:</h5>
+						            <h5>
+						            	<label ng-if="infoProperty.credit_card.credit_card_american==true">
+											<img style="margin-top: -15%;" src="{{ asset('images/american.png') }}"alt="">
+										</label>
+										<label ng-if="infoProperty.credit_card.credit_card_master==true">
+											<img style="margin-top: -15%;" src="{{ asset('images/master.png') }}"alt="">
+										</label>
+										<label ng-if="infoProperty.credit_card.credit_card_visa==true">
+											<img style="margin-top: -15%;" src="{{ asset('images/visa.png') }}"alt="">
+										</label>
+									</h5>
+		        					<h3 style="padding-top:7px;">Camas suplementarias</h3>
+		        					<h5 ng-if="infoProperty.beds.beds==true">Sí.</h5>
+		        					<h5 ng-if="infoProperty.beds.beds==false">No.</h5>
+		        					<h5 ng-if="infoProperty.beds.value_beds_extra==false">Sin cargo adicional.</h5>
+		        					<h5 ng-if="infoProperty.beds.value_beds_extra==true">Cor cargo adicional.</h5>
+		        					<h3 style="padding-top:7px;">Mascotas</h3>
+		        					<h5 ng-if="infoProperty.pets.pets==true">Sí se admiten.</h5>
+		        					<h5 ng-if="infoProperty.pets.beds==false">No se admiten.</h5>
+		        					<h5 ng-if="infoProperty.pets.pets_additional_cost==false">Sin cargo adicional.</h5>
+		        					<h5 ng-if="infoProperty.pets.pets_additional_cost==true">Cor cargo adicional.</h5>
+		        					<h3 style="padding-top:7px;">Impuestos</h3>
+		        					 <h5 ng-if="infoProperty.tax_rate=='si'">IVA {[{infoProperty.tax}]}% incluido en los precios.</h5>
+						            <h5 ng-if="infoProperty.tax_rate=='no'">IVA {[{infoProperty.tax}]}% no incluido en los precios.</h5>
+		        					<h3 style="padding-top:7px;">Condiciones sobre niños</h3>
+		        					<h5 ng-if="infoProperty.child.child==false">No pueden alojarse niños en el hotel.</h5>
+		        					<h5 ng-if="infoProperty.child.child==true">Pueden alojarse niños en el hotel.
+		        						<span ng-if="infoProperty.child.value_accommodation_child==false">Sin cargo adicional.</span>
+		        						<span ng-if="infoProperty.child.value_accommodation_child==true">Con cargo adicional.</span>
+		        					</h5>
+		        					<h5 ng-if="infoProperty.child.child==true">Bebés hasta {[{infoProperty.child.child_max_age}]} años.</h5>
+		        					<h5 ng-if="infoProperty.cribs.cribs==false">Los bebés no pueden alojarse en cunas.</h5>
+		        					<h5 ng-if="infoProperty.cribs.cribs==true">Los bebés se pueden alojar en cunas.
+		        						<span ng-if="infoProperty.cribs.value_cribs==false">Sin cargo adicional.</span>
+		        						<span ng-if="infoProperty.cribs.value_cribs==true">Con cargo adicional.</span>
+		        					</h5>
+		        					<h5 ng-if="infoProperty.cribs.cribs==true">Número máximo de cunas en la habitación: {[{infoProperty.cribs.max_cribs}]}.</h5>
+		        					<h3 ng-if="infoProperty.languages.length>0" style="padding-top:7px;">Idiomas hablados por el personal</h3>
+		        					<h5 ng-repeat="lang in infoProperty.languages">{[{lang | uppercase}]}</h5>
+		        					<hr>
+		        					<h1 class="hotel-font-restaurant" ng-if="infoProperty.name">{[{infoProperty.name}]}</h1>
+                     				<h1 class="hotel-font-restaurant" ng-if="!infoProperty.name">Nombre del establecimiento</h1>
+                     				<br>
+						            <p class="font-inf-hotel" align="justify" ng-if="infoProperty.description">
+						            	{[{infoProperty.description}]}
+									</p>
+									<p class="font-inf-hotel" align="justify" ng-if="!infoProperty.description">
+						            	Descripción de tu establecimiento.
+									</p>
+						            <p class="font-inf-hotel" align="justify" ng-if="infoProperty.additional_info">
+						            	{[{infoProperty.additional_info}]}
+									</p>
+									<p class="font-inf-hotel" align="justify" ng-if="!infoProperty.additional_info">
+						            	Información adicional...
+									</p>
+		      					</div>
+							</div>
+						</div>
+						<!--- Galería XS SM -->
+						<div class="container hidden-md hidden-lg" ng-if="section=='gallery';">
+							<div class="row">
+								<div class="col-sm-7">
+						            <h1 class="hidden-md hidden-lg">{{"share.preview.gallery"|trans }}</h1>
+					            </div>
+								<div class="col-xs-16 col-sm-16 hidden-md hidden-lg padding-xs">
+									<div class="toggle-container filters-container">
+					                    <div class="panel style1" style="margin-bottom:0px; margin-top:0px;" ng-repeat="(idRoom, room) in infoImages.rooms" ng-init="room.expanded=false">
+					                      	<div class="panel-title panel-title-gallery" ng-class="room.colorGallery" ng-click="room.expanded=!room.expanded" style="padding-top:15px; padding-bottom:15px;">
+					                      		<div class="row">
+					                      			<a data-toggle="collapse" ng-class="{'collapsed': !room.expanded}" aria-expanded="true"> </a>
+					                      			<div class="" style="margin-top:-25px; margin-left:20px;">
+					                      				<span class="service-hotel-font5-1">{[{room.subGallery}]}</span><br>
+					                      				<span class="service-hotel-font6-1">{[{room.images.length}]}&nbsp imágenes</span>
+					                      			</div>
+					                      		</div>
+					                      	</div>
+						                    <div class="panel-collapse" style="height: auto;" ng-if="room.expanded">
+						                        <div class="panel-content panel-content2 list-font-hotel">
+													<div class="row">
+					                      				<div class="col-xs-16 col-sm-16">
+					                      					<div class="col-xs-4" ng-repeat= "(id, image) in room.images" style="padding: 0;">
+					                      						{#<img ng-src="/uploads/images/images_sm/{[{ image.path}]}"  class="img-table-gallery-xs">#}
+					                      						<a href="" ng-click="showGalleryModal(id, image, gallery)">
+					                      							<div class="carousel-fill img-table-gallery-xs" style="background-image:url('/uploads/images/images_sm/{[{ image.path}]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+					                      						</a>
+				                      						</div>
+				                      						<div class="col-xs-16 col-sm-16" ng-if="room.images.length==0" style="padding: 0;">
+				                      							<img src="http://placehold.it/800x800&text=-" class="img-table-gallery-xs">
+				                      						</div>
+				                      					</div>
+													</div>
+						                        </div>
+						                    </div>
+					                    </div>
+					                    <div class="panel style1" style="margin-bottom:0px; margin-top:0px;"
+					                    	ng-repeat="(idGallery, gallery) in infoImages.otherGalleries"
+					                    	ng-init="gallery.expanded=false">
+					                      	<div class="panel-title panel-title-gallery" ng-class="gallery.colorGallery" ng-click="gallery.expanded=!gallery.expanded" style="padding-top:15px; padding-bottom:15px;">
+					                      		<div class="row">
+					                      			<a data-toggle="collapse" ng-class="{'collapsed': !gallery.expanded}" aria-expanded="true"> </a>
+					                      			<div class="" style="margin-top:-25px; margin-left:20px;">
+					                      				<span class="service-hotel-font5-2">{[{gallery.subGallery}]}</span><br>
+					                      				<span class="service-hotel-font6-2">{[{gallery.images.length}]}&nbsp imágenes</span>
+					                      			</div>
+					                      		</div>
+					                      	</div>
+						                    <div class="panel-collapse" style="height: auto;" ng-if="gallery.expanded">
+						                        <div class="panel-content panel-content2 list-font-hotel">
+													<div class="row">
+														<div class="col-xs-16 col-sm-16">
+					                      					<div class="col-xs-4" ng-repeat= "(id, image) in gallery.images" style="padding: 0;">
+					                      						{#<img ng-src="/uploads/images/images_sm/{[{ image.path}]}"  class="img-table-gallery-xs">#}
+					                      						<a href="" ng-click="showGalleryModal(id, image, gallery)">
+					                      							<div class="carousel-fill img-table-gallery-xs" style="background-image:url('/uploads/images/images_sm/{[{ image.path}]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+					                      						</a>
+				                      						</div>
+				                      					</div>
+					                      				<div class="col-xs-16 col-sm-16" ng-if="gallery.images.length==0" style="padding: 0;">
+				                      						<img src="http://placehold.it/800x800&text=-" class="img-table-gallery-xs">
+				                      					</div>
+													</div>
+						                        </div>
+						                    </div>
+					                    </div>
+					                    <br><br>
+			                  		</div>
+								</div>
+							</div>
+						</div>
+		            </div>
+		        </div>
+		    </div>
+	    </div>
+		<div class="container"><div class="col-md-16"><hr class="hr-style"></div></div>
+        <div align="center">
+	        <a href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'status', subdomain: app.request.attributes.get('subdomain')}) }}"><button type="button" class="btn btn-primary btn-search-list" >Continuar</button></a>
+	    </div>
+	    <br>
+
+	     {{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalGallery.html.twig") }}
+	     {{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalRoom.html.twig") }}
+	</div>
+
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalLoading.html.twig") }}
+</div>
+{% endblock body %}
+{% block javascripts %}
+	{{ parent() }}
+
+	<script>
+        jQuery(function($) {
+            $('#carousel').carousel({
+                interval: 10000
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        var extension = "{{ app.request.attributes.get('extension') }}";
+        var response = {{ response | raw }};
+        var slug = response.slug;
+        var progress = response.progress;
+    </script>
+{% endblock %}

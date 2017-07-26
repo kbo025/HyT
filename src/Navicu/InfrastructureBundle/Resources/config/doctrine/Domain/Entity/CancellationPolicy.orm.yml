@@ -1,0 +1,42 @@
+Navicu\Core\Domain\Model\Entity\CancellationPolicy:
+    type: entity
+    table: cancellation_policy
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbCancellationPolicyRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        variation_type:
+            type: integer
+            nullable: false
+        variation_amount:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        variation_type_rule:
+            type: integer
+            nullable: false
+
+    oneToMany:
+        rules:
+            targetEntity: CancellationPolicyRule
+            mappedBy: cancellation_policy
+        properties_cancellations_policies:
+            targetEntity: PropertyCancellationPolicy
+            mappedBy: cancellation_policy
+            cascade: ["persist"]
+    manyToOne:
+        type:
+            targetEntity: Category
+            cascade: {  }
+            mappedBy: null
+            inversedBy: types_cancellation_policy
+            joinColumns:
+                type_id:
+                    referencedColumnName: id
+            orphanRemoval: false

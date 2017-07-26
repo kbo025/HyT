@@ -1,0 +1,52 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %}
+
+{% block body %}
+
+<table>
+    <tr><td>id de reserva:</td><td>{{ publicId }}</td></tr>
+    <tr><td>Nombre del establecimiento:</td><td>{{ propertyName }}</td></tr>
+    <tr><td>Nombre del cliente:</td><td>{{ clientNames }}</td></tr>
+    <tr><td>Email del cliente:</td><td>{{ clientEmail }}</td></tr>
+    <tr><td>Teléfono del cliente:</td><td>{{ clientPhone }}</td></tr>
+    <tr><td>Fecha de reservación:</td><td>{{ reservationDate }}</td></tr>
+    <tr><td>Fecha de checkin:</td><td>{{ checkInReservation }}</td></tr>
+    <tr><td>Fecha de checkout:</td><td>{{ checkOutReservation }}</td></tr>
+    <tr><td>Total Adultos:</td><td>{{ numberAdult }}</td></tr>
+    <tr><td>Total Niños:</td><td>{{ numberChild }}</td></tr>
+    <tr><td>Cantidad de Habitaciones:</td><td>{{ totalRooms }}</td></tr>
+    <tr>
+        <td>Habitaciones:</td>
+        <td>
+            {% for currentPack in packages %}
+                <table>
+                    <tr><td>Habitación:</td><td>{{ currentPack.roomName }}</td></tr>
+                    <tr><td>Pack:</td><td>{{ currentPack.namePack }}</td></tr>
+                    <tr><td>Cantidad:</td><td>{{ currentPack.numberPack }}</td></tr>
+                    <tr><td>N° Adultos:</td><td>{{ currentPack.numberAdults }}</td></tr>
+                    <tr><td>N° Niños:</td><td>{{ currentPack.numberChildren }}</td></tr>
+                    <tr><td>Costo:</td><td>{{ currentPack.pricePack }}</td></tr>
+                </table>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td>Pagos:</td>
+        <td>
+            {% for currentPayment in payments %}
+                <table>
+                    <tr><td>Monto:</td><td>{{ currentPayment.amount }}</td></tr>
+                    <tr><td>Estado:</td><td>{{ currentPayment.status }}</td></tr>
+                    <tr><td>Titular:</td><td>{{ currentPayment.holder }}</td></tr>
+                    <tr><td>ID Titular:</td><td>{{ currentPayment.holderId }}</td></tr>
+                    <tr><td>Type:</td><td>{{ currentPayment.type }}</td></tr>
+                    <tr><td>Response:</td><td>{{ currentPayment.response }}</td></tr>
+                </table>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr><td>subtotal:</td><td>{{ subTotal }}</td></tr>
+    <tr><td>IVA:</td><td>{{ tax }}</td></tr>
+    <tr><td>Total:</td><td>{{ tax + subTotal }}</td></tr>
+</table>
+
+{% endblock body %}

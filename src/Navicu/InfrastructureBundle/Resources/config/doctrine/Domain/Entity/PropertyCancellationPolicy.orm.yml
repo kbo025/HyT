@@ -1,0 +1,54 @@
+Navicu\Core\Domain\Model\Entity\PropertyCancellationPolicy:
+    type: entity
+    table: property_cancellation_policy
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPropertyCancellationPolicyRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    oneToMany:
+        #reserva (Eliminar)
+        reservation_packages:
+            targetEntity: ReservationPack
+            mappedBy: property_cancellation_policy_id
+            cascade: ["persist"]
+    manyToOne:
+        property:
+            targetEntity: Property
+            mappedBy: null
+            inversedBy: property_cancellation_policies
+            joinColumn:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        cancellation_policy:
+            targetEntity: CancellationPolicy
+            mappedBy: null
+            inversedBy: properties_cancellations_policies
+            joinColumn:
+                cancellation_policy_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+
+    manyToMany:
+        packages:
+            targetEntity: Pack
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pack_cancellation_policies
+            joinTable:
+                name: pack_cancellation_policy
+                joinColumns:
+                    -
+                        name: propertycancellationpolicy_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: pack_id
+                        referencedColumnName: id
+            orderBy: null

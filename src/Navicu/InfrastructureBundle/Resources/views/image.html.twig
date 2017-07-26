@@ -1,0 +1,28 @@
+<div class="container">
+	Volver a Cargar una imagen
+	<a href="{{path('navicu_test_images')}}"> _ Pulsa Aquí _</a>
+	<br><br>
+	{% if hasAccessAdmin('affiliate_properties','grid') %}
+	<div class="col-xs-12">
+		IMAGEN XS
+		<br>
+		<img src="{{ path | imagine_filter('images_xs') }}" />
+	</div>
+	{% endif %}
+	<div class="col-xs-12">
+		IMAGEN SM
+		<br>
+		<img src="{{ path | imagine_filter('images_sm') }}" />
+	</div>
+	<div class="col-xs-12">
+		IMAGEN MD
+		<br>
+		<img src="{{ path | imagine_filter('images_md') }}" />
+	</div>
+	<div class="col-xs-12">
+		IMAGEN ORIGINAL
+		<br>
+		<img src="{{ path | imagine_filter('images_original') }}" />
+	</div>
+</div>
+

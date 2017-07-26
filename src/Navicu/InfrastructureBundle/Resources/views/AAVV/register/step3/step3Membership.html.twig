@@ -1,0 +1,45 @@
+<div class="col-md-17">
+    <div class='weightInfMembership'>
+        <h5>
+            Costo mensual de afiliación
+        </h5>
+        <p>
+            Al finalizar cada mes se realizará un cargo por cuota de mantenimiento y por licencias de uso,
+            el monto varía dependiendo de la cantidad de licencias de usuario activas
+        </p>
+    </div>
+    
+    <div class='row toolsPrincipalRow' style="margin-left: 0px">
+        <div class='col-md-7 nvc-jumbotron__registerAAVV'>
+             <i class='fa fn-info nvc-tooltips nvc-tooltips__top' >
+                <span>
+                    Garantiza el buen funcionamiento de la plataforma y asistencia técnica
+                </span>
+            </i>
+            <h6>
+                Cuota de mantenimiento
+            </h6>
+            <h6 class='toolsPrice'>
+                {[{ quota.maintenance_amount }]}
+            </h6>
+        </div>
+        <div class='col-md-7 nvc-jumbotron__registerAAVV toolsDivRight'>
+            <i class='fa fn-info nvc-tooltips nvc-tooltips__top' >
+                <span>
+                    Cantidad de usuarios que creó la agencia para el uso de la plataforma
+                </span>
+            </i>
+             <h6 ng-if='quota.licence_number == 1'>
+                {[{ quota.licence_number}]} Licencia de uso
+            </h6>
+
+            <h6 ng-if='quota.licence_number >= 2'>
+                {[{ quota.licence_number}]} Licencias de uso
+            </h6>
+            <h6 class='toolsPrice'>
+                {[{ quota.licence_amount }]}
+            </h6>
+        </div>
+    </div>
+</div>
+<hr>

@@ -1,0 +1,5 @@
+Navicu\Core\Application\UseCases\Extranet\GetReservationsForProperty\GetReservationsForPropertyCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

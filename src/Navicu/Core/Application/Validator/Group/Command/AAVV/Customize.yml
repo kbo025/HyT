@@ -1,0 +1,12 @@
+# Caso de uso carga de imagenes
+Navicu\Core\Application\UseCases\AAVV\Customize\UploadLogo\UploadLogoCommand:
+    properties:
+        file:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+#        checkIn:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+#        checkOut:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}

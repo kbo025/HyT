@@ -1,0 +1,170 @@
+Navicu\Core\Domain\Model\Entity\Location:
+    type: entity
+    table: location
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbLocationRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+        lvl:
+            type: integer
+            nullable: true
+        alfa2:
+            type: string
+            length: 2
+            nullable: true
+        alfa3:
+            type: string
+            length: 3
+            nullable: true
+        number:
+            type: integer
+            nullable: true
+        url_flag_icon:
+            type: string
+            nullable: true
+        phone_prefix:
+            type: string
+            length: 3
+            nullable: true
+        type:
+            type: integer
+            nullable: false
+            options:
+                default: 0 # 1 : indica que es una isla, 0 : indica que no es una isla
+        slug:
+            type: string
+            nullable: true
+
+        visible:
+            type: boolean
+            nullable: false
+            options:
+                default: true # 1 : indica que es una isla, 0 : indica que no es una isla
+
+    oneToMany:
+        children:
+            targetEntity: Location
+            mappedBy: parent
+            orderBy:
+                title: ASC
+
+        airports:
+            targetEntity: Airport
+            mappedBy: location
+
+        ip_collections:
+            targetEntity: IpCollection
+            mappedBy: location
+
+        integrations_city:
+            targetEntity: Location
+            mappedBy: city_id
+            orderBy:
+                title: ASC
+
+    manyToOne:
+        parent:
+            targetEntity: Location
+            inversedBy: children
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+        destination_type:
+            targetEntity: Location
+            inversedBy: locations
+            joinColumns:
+                destination_type:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+        native_language:
+            targetEntity: Language
+            joinColumns:
+                language_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+        official_currency:
+            targetEntity: CurrencyType
+            joinColumns:
+                currency_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+        root:
+            targetEntity: Location
+            joinColumn:
+            name: parent_id
+            referencedColumnName: id
+            onDelete: CASCADE
+
+        city_id:
+            targetEntity: Location
+            inversedBy: integrations_city
+            joinColumns:
+                city_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        location_type:
+            targetEntity: LocationType
+            joinColumn:
+                type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    manyToMany:
+        languages_used:
+            targetEntity: Language
+            joinTable:
+                name: location_language
+                joinColumns:
+                    location_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    language_id:
+                        referencedColumnName: id
+            orderBy: 
+                title: ASC
+
+        currencies_used:
+            targetEntity: CurrencyType
+            joinTable:
+                name: location_currency
+                joinColumns:
+                    location_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    currency_id:
+                        referencedColumnName: id
+            orderBy: 
+                title: ASC
+
+        dependentOnMe:
+            targetEntity: Location
+            mappedBy: dependency
+
+        dependency:
+            targetEntity: Location
+            inverseBy: dependentOnMe
+            joinTable:
+                name: dependency_location
+                joinColumns:
+                    joinColumn:
+                        name: location_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    joinColum:
+                        name: dependency_id
+                        referencedColumn: id
+
+    lifecycleCallbacks: {  }

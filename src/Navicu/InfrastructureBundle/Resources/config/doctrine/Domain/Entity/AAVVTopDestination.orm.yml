@@ -1,0 +1,30 @@
+Navicu\Core\Domain\Model\Entity\AAVVTopDestination:
+    type: entity
+    table: aavv_top_destination
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVTopDestinationRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        number_visits:
+            type: integer
+            nullable: true
+
+    manyToOne:
+        aavv:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVV
+            inversedBy: aavv_address
+            joinColumn:
+                name: aavv_id
+                referencedColumnName: id
+            cascade: ["persist"]
+        location:
+            targetEntity: Location
+            inversedBy: aavv_address
+            joinColumn:
+                name: location_id
+                referencedColumnName: id
+            cascade: ["persist"]

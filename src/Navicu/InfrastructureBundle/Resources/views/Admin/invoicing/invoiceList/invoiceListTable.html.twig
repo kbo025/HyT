@@ -1,0 +1,156 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'aavvPublicId')">
+                    ID agencia
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'aavvPublicId'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'aavvPublicId'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'agencyName')">
+                    Nombre
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'agencyName'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'agencyName'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'invoiceNumber')">
+                    N° de factura
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'invoiceNumber'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'invoiceNumber'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'numberServiceOrReservation')">
+                    Cantidad
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'numberServiceOrReservation'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'numberServiceOrReservation'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'total')">
+                    Importe
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'total'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'total'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'type')">
+                    Tipo
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'type'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'type'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getListFilter(search, 1, 'dueDate')">
+                    Fecha próximo pago
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'dueDate'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'dueDate'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th class="nvc-aavv-customize__title--primary"></i>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="billing in billings">
+            <td class="nvc-aavv-customize__text">
+                {[{ billing.aavvPublicId }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ billing.agencyName }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ billing.numberInvoice }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ billing.numberServiceOrReservation }]}
+            </td>
+            <td class="nvc-aavv-customize__text">
+                Bs. {[{ billing.total}]}
+            </td>
+            <td
+                class="nvc-aavv-customize__text"
+                ng-if="billing.type ==0"
+            >
+                Servicio
+            </td>
+            <td
+                class="nvc-aavv-customize__text"
+                ng-if="billing.type ==1"
+            >
+                Reserva
+            </td>
+            <td class="nvc-aavv-customize__text">
+                {[{ billing.dueDate }]}
+            </td>
+            <td>
+                <button
+                    class="nvc-aavv-customize__button--primary"
+                    ng-click="redirectInvoicePdf(billing.aavvSlug, billing.numberInvoice)"
+                    ng-disabled="!{{ hasPermission('aavv_reservation_details', 'VIEW') | json_encode | raw }}"
+                >
+                    {{ 'aavv.reservations.list.table.buttons.details' | trans }}
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

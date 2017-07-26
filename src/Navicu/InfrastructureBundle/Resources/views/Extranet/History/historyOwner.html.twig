@@ -1,0 +1,123 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'historyOwner'} %}
+
+{% block title %} {{ "extranet.title.generic"|trans }} {% endblock %}
+
+
+{% block body %}
+    <div class="historic" ng-app="historyModule" ng-controller="historyController" ng-cloak>
+        <div ng-if="log.length!=0" class="container">
+            <div class="col-xs-16">
+                <h1>{{ "extranet.home.log"|trans }}</h1>
+                <br>
+                <div class="col-xs-16 table-responsive" style="padding:0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="text-center">{{ "share.message.date"|trans }}</th>
+                                <th class="text-center">{{ "share.message.hour"|trans  }} </th>
+                                <th class="text-center">{{ "share.message.user"|trans  }}</th>
+                                <th class="text-center">{{ "share.message.description"|trans  }}</th>
+                                <th class="text-center">{{ "share.message.detail"|trans  }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr ng-repeat="log in logs" >
+                                <td class="text-center" ng-bind="log.date|date:'dd/MM/yyyy'"></td>
+                                <td class="text-center" ng-bind="log.time"></td>
+                                <td class="text-center" ng-bind="log.ownerProfile"></td>
+                                <td class="text-center" ng-if="log.action == 'Update' && log.resource == 'dailyRoom'">
+                                    {{ "share.message.update"|trans  }}
+                                    {{ "share.message.room"|transchoice(1)  }}
+                                </td>
+                                <td class="text-center" ng-if="log.action == 'Update' && log.resource == 'dailyPack'">
+                                    {{ "share.message.update"|trans  }}
+                                    {{ "extranet.message.services"|trans  }}
+                                </td>
+                                <td class="text-center" ng-if="log.action == 'Created' && log.resource == 'dailyRoom'">
+                                    {{ "share.message.activation"|trans  }}
+                                    {{ "share.message.room"|transchoice(1)  }}
+                                </td>
+                                <td class="text-center" ng-if="log.action == 'Created' && log.resource == 'dailyPack'">
+                                    {{ "share.message.activation"|trans  }}
+                                    {{ "extranet.message.services"|trans  }}
+                                </td>
+                                <td class="text-center" ng-if="log.action == 'Update' && log.resource == 'massLoad'">
+                                    {{ "share.message.update"|trans  }}
+                                    {{ "share.message.massload"|trans  }}
+                                </td>
+                                <td class="text-center" ng-if="log.resource != 'massLoad'">
+                                    <a  href="{{ path('Extranet_logs_inventory', {'logFile': '', 'slug': slug,'extension' : app.request.attributes.get('extension')}) }}/{[{log.fileName}]}">
+                                        <span class="btn">{{ "share.message.read"|trans  }}</span>
+                                    </a>
+                                </td>
+                                <td class="text-center" ng-if="log.resource == 'massLoad'">
+                                    <a  href="{{ path('Extranet_logs_load', {'logFile': '', 'slug': slug,'extension' : app.request.attributes.get('extension')}) }}/{[{log.fileName}]}">
+                                        <span class="btn">{{ "share.message.read"|trans  }}</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {#-- Paginación--#}
+                <div class="col-xs-16 col-sm-16 col-md-16 text-center">
+                    <ul class="pagination">
+                        <li ng-if="page.pre != null">
+                            <a href=# ng-click="loadLogs(page.pre)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="pagination" ng-repeat="(id, pag) in getPages(page.pageCount) track by $index" ng-if="id>=page.min && id<=page.max" >
+                        <li ng-if="page.current == id" >
+                            <a href="#" ><strong ng-bind="{[{ id }]}"></strong></a>
+                        </li>
+                        <li ng-if="page.current != id">
+                            <a href=# ng-click="loadLogs(id)">{[{id}]}</a>
+                        </li>
+                    </ul>
+                    <ul class="pagination">
+                        <li ng-if="page.post != null">
+                            <a href=# ng-click="loadLogs(page.post)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {#-- Vista de cuando no existen log de cambios--#}
+        <div ng-if="log.length==0" class="historic-null">
+            <div class="container">
+                <h4>Hey! <span class="fa fn-404"></span></h4>
+                <h1>{{ "extranet.home.dont_have_reservations"|trans }}</h1>
+                <h2>¡{{ "extranet.home.your_content_important"|trans}}!</h2>
+                <br>
+                <h2 class="hidden-xs hidden-sm"><i class="fa fn-calendar"></i><span>{{ "extranet.home.rates_and_availability_date"|trans}}</span></h2>
+                <h2 class="hidden-xs hidden-sm"><i class="fa fn-gallery"></i><span>{{ "extranet.home.review_your_content"|trans}}</span></h2>
+                <h2 class="hidden-xs hidden-sm"><i class="fa fn-nvc"></i><span>{{ "extranet.home.be_navicu"|trans}}</span></h2>
+            </div>
+        </div>
+
+        {{ include("NavicuInfrastructureBundle:Extranet/History:modalLogOwner.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var extension ="{{ app.request.attributes.get('extension') }}";
+        var slug = "{{ slug }}";
+        var url = "prueba";
+    </script>
+
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

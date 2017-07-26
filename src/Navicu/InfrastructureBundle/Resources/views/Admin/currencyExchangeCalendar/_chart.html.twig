@@ -1,0 +1,25 @@
+<section id="history-chart" class="container" ng-controller="ChartCtrl">
+  <header>
+    <h3>
+      Evolución
+      <small>
+          Tipos de cambio
+          <span ng-if="today && currentExchangeRate">({[{ today }]} / {[{ currentExchangeRate }]})</span>
+      </small>
+    </h3>
+
+    <form ng-submit="update(fromDate, toDate)" class="form-inline">
+      <div class="form-group date-range">
+        <i class="fa fn-calendar"></i>
+        <input type="text" class="form-control" ng-model="fromDate" placeholder="Desde">
+        <input type="text" class="form-control" value="-" disabled>
+        <input type="text" class="form-control" ng-model="toDate" placeholder="Hasta">
+      </div>
+      <div class="form-group">
+        <button type="submit">Mostrar</button>
+      </div>
+    </form>
+  </header>
+
+  <highchart id="history-chart-chart" config="config"></highchart>
+</section>

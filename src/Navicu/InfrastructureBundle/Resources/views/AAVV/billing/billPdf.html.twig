@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <style type="text/css">
+        @font-face
+        {
+            font-family: 'lato-semibold';
+            src: url('{{ fonts }}Lato-Semibold.ttf');
+        format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-bold';
+            src: url('{{ fonts }}Lato-Bold.ttf');
+        format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-regular';
+            src: url('{{ fonts }}Lato-Regular.ttf');
+        format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-italic';
+            src: url('{{ fonts }}Lato-Italic.ttf');
+        format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-medium';
+            src: url('{{ fonts }}Lato-Medium.ttf');
+        format('ttf');
+        }
+        @page {
+            margin-top: 5mm;
+            margin-left: 0;
+        }
+        table,tr,.large{width: 100%;}
+        .xsmall{font-family:'Lato-Italic';color:#808080; font-size: x-small; font-weight: normal; font-style: italic}
+        .text{font-family:'Lato-Regular';font-size: x-small;color:#606060;}
+        .small{font-size: small; font-weight: normal;}
+        .left-aling{text-align: left;}
+        .center-aling{text-align: center;}
+        .right-aling{text-align: right;}
+        .label{font-weight: bold;font-family:'Lato-Medium';font-size:small;color:#808080;}
+        .box{padding: 0px 55px 10px;}
+        .border{ border: 1px solid #000;}
+        .col20{width: 20%;}
+        .pair{background: #F6F6F6;}
+        .odd{background: #EDEDED;}
+        .top{background: #D0D0D0;}
+        .title{font-family:'Lato-Semibold';color:#404040;}
+        .field{font-family:'Lato-Regular';font-size:small;}
+
+        .field2{font-family:'Lato-Medium';font-size:12pt;color:#808080;}
+        .field3{font-family:'Lato-Italic';font-size:10pt;color:#808080;}
+        .field4{font-family:'Lato-Regular';font-size:12pt;color:#706F6F;}
+        .title1{font-family:'Lato-Bold';font-size:12pt;color:#AA196E;padding-bottom: 10px;}
+        .title2{font-family:'Lato-Bold';font-size:12pt;color:#561855;}
+        .bold{font-family:'Lato-Bold';}
+        .align-right{text-align: right;}
+        .room{padding-top: 5px;padding-bottom: 5px;}
+        .specialRequest{background: #EDEDED;border: 1px solid #DBDBDB;padding: 3px 20px;border-radius: 10px;}
+        .text-footer{font-family:lato-italic;font-size:11pt;color:#561855;text-align: center;}
+        .col100{width: 1250px;}
+        .col50{width: 50%;}
+        .col15{width: 15%;}
+        .col66{width: 59%;}
+
+        #footer { position: fixed; left: 0px; bottom: -90px; right: 0px; height: 100px; }
+    </style>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body  class="col100" >
+    <div class="col100 text-footer" id="footer">
+        <b>¡Contáctanos! llámanos al 08008-NAVICU o escríbenos al correo electrónico preguntas@navicu.com</b>
+    </div>
+    <table class="box">
+        <tr>
+            <th>
+                <div><img src="{{ logo }}"  style="padding-top: 6px;width:220px" ></div>
+                <div><p class="xsmall">RIF: J-402647514</p></div>
+            </th>
+            <th>
+                <div>
+                    <p class="xsmall">Av. Salvador Feo La Cruz<br/>
+                        Torre WTC - Piso 7<br/>
+                        Naguanagua, Carabobo Venezuela<br/>
+                        preguntas@navicu.com <br/>
+                        08008 NAVICU <br/>
+                    </p>
+                </div>
+            </th>
+        </tr>
+    </table>
+    <div class="center-aling title large" ><h2>FACTURA</h2></div>
+    <table class="box">
+        <tr>
+            <td class="label left-aling col20">Factura N°:</td>
+            <td class="field left-aling" colspan="4"> {{ number_invoice }} </td>
+        </tr>
+        <tr>
+            <td class="label left-aling col20">Fecha:</td>
+            <td class="field left-aling" colspan="4"> {{ date_invoice }} </td>
+        </tr>
+        <tr>
+            <td class="label left-aling col20">Razon Social:</td>
+            <td class="field left-aling" colspan="4">{{ social_reason }}</td>
+        </tr>
+        <tr>
+            <td class="label left-aling col20">RIF:</td>
+            <td class="field left-aling" colspan="4">{{ rif }}</td>
+        </tr>
+        <tr>
+            <td class="label left-aling col20">Domicilio Fiscal:</td>
+            <td class="field left-aling">{{ address }}</td>
+        </tr>
+        <tr>
+            <td class="label left-aling col20">Teléfono:</td>
+            <td class="field left-aling" colspan="4"> {{ phone }} </td>
+        </tr>
+    </table>
+    <br/>
+
+    {% if not groups is empty %}
+        <table class="box text top">
+            <tr>
+                <th class="col15">Código</th>
+                <th class="col15">Checkin</th>
+                <th class="col15">Checkout</th>
+                <th class="col50"><table><tr><th>Detalle</th><th>Total</th></tr></table></th>
+            </tr>
+        </table>
+        {% for group in groups  %}
+            <table class="box text {{ loop.index is odd ? 'odd' : 'pair' }}">
+                <tr>
+                    <td class="small left-aling col15">{{ group.public_id }}</td>
+                    <td class="small left-aling col15">{{ group.date_check_in }}</td>
+                    <td class="small left-aling col15">{{ group.date_check_out }}</td>
+                    <td class="small left-aling col50">
+                        <table>
+                            {% for reservation in group.reservations  %}
+                                <tr>
+                                    <td>
+                                        <div>ID: {{ reservation.public_id }}</div>
+                                        <div>{{ reservation.property }}</div>
+                                        <div>
+                                            {{ reservation.number_rooms }}
+                                            {% if reservation.number_rooms>1 %}
+                                                Habitaciones
+                                            {% else %}
+                                                Habitación
+                                            {% endif %}
+                                            {{ reservation.name_room }}
+                                            - {{ reservation.name_pack }}
+                                            - {{ reservation.cancellation_policy }}
+                                        </div>
+                                        <div>{{ reservation.adult_number }} Adultos
+                                            {% if reservation.child_number>0 %}
+                                                - {{ reservation.child_number }} Niños
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td> Bs. {{ reservation.total_to_pay | round(2) }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    {% else %}
+        {% if not services is empty %}
+                <table class="box text top">
+                    <tr>
+                        <th class="col15">Fecha</th>
+                        <th class="col50">Descripción</th>
+                        <th class="col15">Cantidad</th>
+                        <th class="col15">Costo</th>
+                        <th class="col15">Total</th>
+                    </tr>
+                </table>                
+                {% for service in services  %}
+                    <table class="box text {{ loop.index is odd ? 'odd' : 'pair' }}">
+                        <tr>
+                            <td class="col15">{{ service.date }}</td>
+                            <td class="col50">{{ service.description }}</td>
+                            <td class="col15">{{ service.quantity }}</td>
+                            <td class="col15">{{ service.price }}</td>
+                            <td class="col15">{{ service.total }}</td>
+                        </tr>
+                    </table>
+                {% endfor %}                
+        {% endif %}
+    {% endif %}
+    <br/>
+    <table class="box">
+        <tr>
+            <td class="small left-aling"><div class="label">Observaciones:</div> <div class="field">{{ description }}</div></td>
+            <td>
+                <table>
+                    <tr>
+                        <td class="right-aling label" >SUBTOTAL:</td><td class="field">Bs. {{ (total_amount/(1 + tax_rate)) | round(2) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="right-aling label" >IVA ({{ tax_rate * 100 }}%):</td><td class="field">Bs. {{ total_amount - (total_amount/(1 + tax_rate)) | round(2) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="right-aling label" >TOTAL:</td><td class="field">Bs. {{ total_amount | round(2) }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+Navicu\Core\Domain\Model\Entity\AAVVGlobal:
+    type: entity
+    table: aavv_globals
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVGlobalRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: true
+        description:
+            type: string
+            length: 255
+            nullable: true
+        value:
+            type: string
+            nullable: true

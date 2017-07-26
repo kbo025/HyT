@@ -1,0 +1,21 @@
+<html>
+		<frameset rows=’100%, *’ 
+			frameborder=no 
+			framespacing=0 
+			border=0
+		> 
+			<frame 
+				src="{% if app.request.get('_route')  == 'navicu_mountain_promotion' %}https://promociones.navicu.com/hoteles-en-la-montana{% elseif app.request.get('_route') == 'navicu_beach_promotion' %}https://promociones.navicu.com/hoteles-en-la-playa{% elseif app.request.get('_route') == 'navicu_all_in_promotion' %}https://promociones.navicu.com{% endif %}"
+				name=mainwindow 
+				frameborder=no 
+				framespacing=0 
+				marginheight=0 
+				marginwidth=0>	
+			</frame>
+
+			
+		</frameset>
+		<noframes>
+			Su navegador no soporta frames. Le recomendamos actualizar su navegador.
+		</noframes>
+</html>

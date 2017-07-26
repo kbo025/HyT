@@ -1,0 +1,62 @@
+Navicu\Core\Domain\Model\Entity\PropertyService:
+    type: entity
+    table: property_service
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPropertyServiceRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        cost_service:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        free:
+            type: boolean
+            nullable: false
+        schedule:
+            type: json_array
+            nullable: true
+        quantity:
+            type: integer
+            nullable: true
+
+    manyToOne:
+        property:
+            targetEntity: Property
+            cascade: ["persist"]
+            mappedBy: null
+            inversedBy: services
+            joinColumn:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        type: 
+            targetEntity: ServiceType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    oneToMany:
+        restaurants:
+            targetEntity: Restaurant
+            mappedBy: service
+            cascade: ["persist"]
+        bars:
+            targetEntity: Bar
+            mappedBy: service
+            cascade: ["persist"]
+        salons:
+            targetEntity: Salon
+            mappedBy: service
+            cascade: ["persist"]
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [prePersist]

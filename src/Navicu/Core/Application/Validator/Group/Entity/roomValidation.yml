@@ -1,0 +1,54 @@
+#Validación Room
+Navicu\Core\Domain\Model\Entity\Room:
+
+    properties:
+        max_people:
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        base_availability:
+            - GreaterThan:
+                value: 0
+                message: no_positive,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        increment:
+            - Type:
+                type: bool
+                message: is_not_bool,{{ value }},{{ type }}
+            - NotNull: 
+                message: is_null,{{ value }},{{ type }}
+        variation_type_people:
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        amount_rooms:
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+    
+    constraints:
+        # Validar maxNight > minNight
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsRoom, validMaxPeopleHighesrMinPeople]
+
+        # Validar si no existe otra habitación con las misma caracteristicas.
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsRoom, validRoomUnique]
+
+        # Validar si el numero de habitaciones no supera el total de
+        # numero de habitaciones ofrecidas por el establecimiento.
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsRoom, validAmountRoom]

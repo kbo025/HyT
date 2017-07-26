@@ -1,0 +1,11 @@
+Navicu\Core\Application\UseCases\PropertyInventory\InventoryLogs\SearchLogsFile\SearchLogsFileCommand:
+    properties:
+        logFile:
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+
+        session:
+            - NotNull:
+                message: is_not_login,{{ null }},{{ type }}
+            - "True":
+                message: is_not_access,{{ value }},{{ type }}

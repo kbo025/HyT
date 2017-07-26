@@ -1,0 +1,62 @@
+<div ng-repeat="user in users">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-16">
+            <h2>
+                {[{ user.username }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-16">
+                <h2>
+                    E-mail
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>
+                    {[{ user.email }]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-8 separatorOne">
+                <h2>Teléfono</h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>Ciudad</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>{[{ user.phone }]}</h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>{[{ user.city }]}</h2>
+            </div>
+        </div>
+        <div class="mainInfo">
+            <div class="col-xs-16">
+                <h2>
+                    Estado
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2 ng-if="user.enabled">Activo</h2>
+                <h2 ng-if="!user.enabled">Desactivado</h2>
+            </div>
+        </div>
+        <div class="buttonDetails">
+            <button
+                class="form-control nvc-admin nvc-button__login buttonEdit"
+                ng-click="redirectDetailsReservation(row.publicid)"
+            >
+                Desactivar
+            </button>
+        </div>
+    </div>
+</div>

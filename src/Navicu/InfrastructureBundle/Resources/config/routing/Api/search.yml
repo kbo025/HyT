@@ -1,0 +1,8 @@
+# Ruta para el manejo de la lista de los destinos Rest Api.
+navicu_api_asinc_search_destiny_of_location:
+    path:   /async/search/destiny
+    defaults: { _controller: NavicuInfrastructureBundle:Api\Search:asyncDestinyOfLocation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json)}

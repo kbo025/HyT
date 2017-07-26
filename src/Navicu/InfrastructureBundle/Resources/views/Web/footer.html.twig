@@ -1,0 +1,224 @@
+ <footer class="nvc-footer">
+
+    <!--- Desktop -->
+    <section class="nvc-footer__top visible-md visible-lg">
+        <div class="nvc-container">
+           {#  <h2>{{"web.footer.wanderlust"|trans}}<span> {{"web.footer.destinations"|trans}}</span></h2>#}
+            {% for destinations in destinationsFooter %}
+                <div class="col-md-5">
+                    <h4><i class="fa fn-{{destinations.service}}"></i> {{destinations.type}}</h4>
+                    <!--- Tags -->
+                    <div class="nvc-tags">
+                        <ul>
+                            {% for location in destinations.locations %}
+                                <li>
+                                    <a href="{{ path('navicu_search_property_by_location',
+                                            {countryCode: location.countryCode,
+                                            type: location.type,
+                                            slug: location.slug}) }}"
+                                        type="submit">
+                                            {{location.name}}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="nvc-footer__bottom visible-md visible-lg">
+        <div class="nvc-container">
+            <div class="col-md-4">
+                <!--- About-Us -->
+                <h2><i class="fa fn-conocenos"></i> <a href="{{ path('navicu_about_us') }}"><span>{{"web.footer.know_us"|trans}}<span></a></h2>
+                <p class="nvc-footer__bottom--about-us">
+                    {{"web.footer.about_us_extend"|trans}}
+                    {{"web.footer.tourists"|trans}}
+                </p>
+
+                <!--- Ascribere -->
+                <div class="nvc-footer__bottom--ascribere">
+                    <h3>Forma parte de navicu.com {#{{"web.footer.follow_us"|trans}}#}</h3>
+                    <a href="{{ path('extranet_login') }}">
+                        <button type="submit"  class="nvc-button nvc-button__search">
+                            {{ "extranet.message.register_your_property"|trans }}
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!--- Blog -->
+                <h2><i class="fa fn-momentosnavicu" style="margin-right: 14px;margin-left: -6px;"></i> <span>{{"web.footer.moments"|trans}} <span class="italic">navicu</span></span></h2>
+                <ul>
+                    <li>
+                        <span style="position: absolute;left: 4%;">+</span>
+                        <a href="http://www.analitica.com/vida-con-estilo/navicu-com-la-gran-apuesta-en-turismo-nacional/" target="_blank">
+                            <span>{{"web.footer.thirst"|trans}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <span style="position: absolute;left: 4%;">+</span>
+                        <a href="http://www.elimpulso.com/noticias/actualidad/tecnologia/navicu-forma-parte-de-la-ciudad-tecnologica" target="_blank">
+                            <strong>navicu</strong> <span>{{"web.footer.technological_city"|trans}}</span>
+                        </a>
+                    </li>
+                </ul>
+                <br>
+
+            </div>
+            <div class="col-md-4 nvc-footer__bottom--left">
+                <!--- Destinations -->
+                <h2><i class="fa fn-ganasdeviajar"></i> <a href="{{ path('navicu_destinations') }}"><span>{{"web.footer.wanderlust"|trans}}<span></a></h2>
+                <p class="nvc-footer__bottom--destinations">
+                    navicu.com
+                    {{"web.footer.variety_styles_destinations"|trans}}
+                </p>
+                <br>
+                <!--- Security -->
+                <div class="nvc-footer__bottom--security">
+                    <!-- Begin DigiCert site seal HTML -->
+                    {% if app.environment == "prod" %}
+                        <div class="col-md-8 col-lg-5" style="margin-right:-13px; margin-left:-4px; margin-top:2%" id="DigiCertClickID_Tkokhmkl" data-language="en">
+                            <a href="https://www.digicert.com/wildcard-ssl-certificates.htm" target="_blank">
+                                <em>SSL Certificate</em>
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if app.environment != "prod" %}
+                        {#<div class="col-md-8 col-lg-4"
+                            style="margin-right:-13px; margin-left:-4px; margin-top:2%"
+                            id="DigiCertClickID_Tkokhmkl" data-language="en">
+                            <a href="https://www.digicert.com/wildcard-ssl-certificates.htm" target="_blank">
+                                <img src="{{ asset('images/digicert.png') }}" style="margin-left: -7%;">
+                            </a>
+                        </div>#}
+                        <div
+                            class="col-md-8 col-lg-4"
+                            style="margin-right:-13px; margin-left:-4px; margin-top:2%"
+                            id="DigiCertClickID_Tkokhmkl" data-language="en">
+                            <div
+                                id="DigiCertClickID_TkokhmklSeal"
+                                style="text-decoration: none; text-align: center; display: block; vertical-align: baseline; font-size: 100%; font-style: normal; text-indent: 0px; line-height: 1; width: auto; margin: 0px auto; padding: 0px; border: 0px; position: relative; top: 0px; right: 0px; bottom: 0px; left: 0px; clear: both; float: none; cursor: default; background: transparent;">
+                                <img
+                                    src="{{ asset('images/digicert.png') }}"
+                                    alt="DigiCert Seal"
+                                    tabindex="0"
+                                    style="text-decoration: none; text-align: center; display: block; vertical-align: baseline; font-size: 100%; font-style: normal; text-indent: 0px; line-height: 1; width: auto; margin: 0px auto; padding: 0px; border: 0px; position: relative; top: 0px; right: 0px; bottom: 0px; left: 0px; clear: both; float: none; cursor: pointer; background: transparent;">
+                            </div>
+
+                        </div>
+                    {% endif %}
+                    <!-- End DigiCert site seal HTML -->
+                    <div class="col-md-8 col-lg-12" style="margin-left: 2%; margin-top: 0%;">
+                        <h5>{{"web.footer.security"|trans}} SLL Certificated Digicert</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 nvc-footer__bottom--right">
+                <!--- Address -->
+                <h2><i class="fa fn-ubicacion" style="font-size: 24px;"></i><i class="fa fn-correo"></i></h2>
+                <address>Av. Salvador Feo La Cruz</address>
+                <address>Torre WTC - {{"web.footer.floor"|trans}} 7</address>
+                <address>Naguanagua, Carabobo, VE</address>
+                <hr>
+                <!--- Contact -->
+                <div class="nvc-footer__bottom--contact">
+                    <p><a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a></p>
+                    <p>08008 navicu (628428)</p>
+                </div>
+            </div>
+            <div class="col-md-8 nvc-footer__bottom--right">
+                <i class="nvc-up fa fn-arrow"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="nvc-footer__bottom-ribbon visible-md visible-lg">
+        <div class="nvc-container" style="height: 38px;">
+            <!--- Copyright -->
+            <div class="col-md-6 nvc-footer__bottom--copyright">
+                <h5>
+                    <a href="{{ path('navicu_terms') }}">{{"web.footer.terms"|trans}}</a>
+                </h5>
+            </div>
+            <div class="col-md-6 nvc-footer__bottom--copyright">
+                <h5>2014 <span class="fa fa-circle"></span>  {{ "now"|date("Y") }}  navicu.com &trade; Todos los derechos reservados</h5>
+            </div>
+            <!--- Contact -->
+            <div class="col-md-4 nvc-footer__bottom--social">
+                <a href="https://www.facebook.com/navicu.reservas" target="_blank"><i class="fa fn-facebook"></i></a>
+                <a href="https://twitter.com/_navicu" target="_blank"><i class="fa fn-twitter"></i></a>
+                <a href="https://instagram.com/_navicu" target="_blank"><i class="fa fn-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCgusN-AvP1nas0qnPji7cLA" target="_blank"><i class="fa fn-youtube"></i></a>
+                <a href="https://plus.google.com/+NavicuAlojamiento" target="_blank"><i class="fa fn-googleplus"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!--- Mobile / Tablet -->
+    <section class="nvc-footer__bottom visible-xs visible-sm">
+        <div class="nvc-container">
+            <!--- About-Us -->
+            <div class="col-xs-16 text-center nvc-footer__bottom--about-us">
+                <a href="{{ path('navicu_about_us') }}">
+                    <h2><i class="fa fn-conocenos"></i> </h2>
+                    <p>
+                        Somos la plataforma líder en reservas online
+                        <br>desarollada en Venezuela, invita a sus usuarios
+                        <br>a ser ¡turistas de su propio país!
+                    </p>
+                </a>
+                <hr>
+            </div>
+            <!--- Contact -->
+            <div class="col-xs-8 nvc-footer__bottom--contact">
+                <h2><i class="fa fn-marker-footer"></i></h2>
+                <address>Av. Salvador Feo La Cruz</address>
+                <address>Torre WTC - {{"web.footer.floor"|trans}} 7</address>
+                <address>Naguanagua, Carabobo, VE</address>
+                <p style="margin-top: 10px;"><a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a></p>
+                <p style="line-height: 10px;">08008 navicu (628428)</p>
+            </div>
+            <!--- Security -->
+            <div class="col-xs-8 nvc-footer__bottom--security">
+                <!-- Begin DigiCert site seal HTML -->
+                {% if app.environment == "prod" %}
+                    <div id="DigiCertClickID2_Tkokhmkl" data-language="en">
+                        <a href="https://www.digicert.com/wildcard-ssl-certificates.htm" target="_blank"></a>
+                    </div>
+                {% endif %}
+                {% if app.environment != "prod" %}
+                    <a href="https://www.digicert.com/wildcard-ssl-certificates.htm" target="_blank">
+                        <img src="{{ asset('images/digicert.png') }}" style="margin-left: -7%;margin-top: -7%;">
+                    </a>
+                {% endif %}
+                <h5>{{"web.footer.security"|trans}} SLL</h5>
+                <h5>Certificated Digicert</h5>
+                <!-- End DigiCert site seal HTML -->
+                <p style="margin-top: 10px;"><a href="{{ path('navicu_terms') }}">{{"web.footer.terms"|trans}}</a></p>
+                <p><a href="{{ path('navicu_faq') }}">{{"web.footer.faq"|trans}}</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="nvc-footer__bottom-ribbon visible-xs visible-sm">
+        <div class="nvc-container" style="height: auto;">
+            <!--- Contact -->
+            <div class="col-md-4 nvc-footer__bottom--social">
+                <a href="https://www.facebook.com/navicu.reservas" target="_blank"><i class="fa fn-facebook"></i></a>
+                <a href="https://twitter.com/_navicu" target="_blank"><i class="fa fn-twitter"></i></a>
+                <a href="https://instagram.com/_navicu" target="_blank"><i class="fa fn-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCgusN-AvP1nas0qnPji7cLA" target="_blank"><i class="fa fn-youtube"></i></a>
+                <a href="https://plus.google.com/+NavicuAlojamiento" target="_blank"><i class="fa fn-googleplus"></i></a>
+            </div>
+            <!--- Copyright -->
+            <div class="col-md-6 nvc-footer__bottom--copyright">
+                <h5>2014 <span class="fa fa-circle"></span>  {{ "now"|date("Y") }}  navicu.com &trade;</h5>
+            </div>
+
+        </div>
+    </section>
+
+</footer>

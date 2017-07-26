@@ -1,0 +1,34 @@
+Navicu\Core\Domain\Model\Entity\AAVVAdditionalQuota:
+    type: entity
+    table: aavv_additional_quota
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVAdditionalQuotaRepository
+
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        description:
+            type: string
+            length: 255
+            nullable: false
+        amount:
+            type: float
+            nullable: false
+
+    manyToMany:
+        # Conjunto de agencias de viajes a las que se le asignan un conjunto de costo adicionales
+        aavvs:
+            targetEntity: AAVV
+            inversedBy: additional_quota
+            joinTable:
+                name: avvv_quota_monthly
+                joinColumns:
+                    additional_quota_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    aavv_id:
+                        referencedColumnName: id

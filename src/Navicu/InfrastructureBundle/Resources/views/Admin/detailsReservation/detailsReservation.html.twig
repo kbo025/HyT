@@ -1,0 +1,68 @@
+ {% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+    <div
+        ng-controller = "DetailsReservationCtrl"
+        ng-cloak
+    >
+        {# Versión desktop #}
+       <main class="nvc-detailReservation visible-md visible-lg">
+            <div>
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/detailsReservationGeneral.html.twig" %}
+            </div>
+            <div class='nvc-detailReservation--specificDetails'>
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/detailsReservationSpecific.html.twig" %}
+            </div>
+            <br>
+            <div class='nvc-detailReservation--dataDetails'>
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/detailsReservationData.html.twig" %}
+            </div>
+            <div>
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/detailsReservationTable.html.twig" %}
+            </div>
+            <div align="center">
+                <a href="javascript:history.back()">
+                    <button
+                        class='nvc-button nvc-button__back_simple'
+                        type='button'
+                    >
+                        Volver
+                    </button>
+                </a>
+            </div>
+            <br>
+        </main>
+        {# Versión movil #}
+        <main class="nvc-detailReservation--movil visible-xs visible-sm">
+            <div>
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/movil/detailsReservationGeneralMovil.html.twig" %}
+            </div>
+            <div class='nvc-detailReservation--movil--specificDetails'>
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/movil/detailsReservationSpecificMovil.html.twig" %}
+            </div>
+            <br>
+            <div class='nvc-detailReservation--movil--dataDetails'>
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/movil/detailsReservationData.htmlMovil.twig" %}
+            </div>
+            <div class="nvc-table--admin--movil">
+                {% include "NavicuInfrastructureBundle:Admin:detailsReservation/movil/detailsReservationTableMovil.html.twig" %}
+            </div>
+            <div align="center">
+                <a href="javascript:history.back()">
+                    <button
+                        class='nvc-button nvc-button__back_simple'
+                        type='button'
+                    >
+                        Volver
+                    </button>
+                </a>
+            </div>
+            <br>
+        </main>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

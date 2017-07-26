@@ -1,0 +1,97 @@
+# Ruta para el manejo de las peticiones de la grilla, para
+# la solicitud de los dailys.
+
+# === Rutas del Módulo de Logs ===
+
+# Ruta para el manejo de las peticiones de los Logs de usuario.
+Extranet_api_search_logs:
+    path:    /logs_owner/search/{slug}/{page}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:apiSearchLogs, page : 1 }
+    options: 
+        expose: true
+
+# Ruta para el manejo de las peticiones para la vista de los Logs de usuario.
+Extranet_logs:
+    path:    /{slug}/logs
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:logsViews }
+
+# Ruta para el manejo de las peticiones de información sobre
+# un logs de un establecimiento.
+Extranet_api_search_file:
+    path:    /logs_owner/{slug}/file/{logFile}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:apiLogsFile, logFile : null }
+    options: 
+        expose: true
+
+# Ruta para el manejo de las peticiones para la vista de los Logs de usuario en la grilla.
+Extranet_logs_inventory:
+    path:    /{slug}/logs/inventory/{logFile}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:logsInventory, logFile: null }
+    options: 
+        expose: true
+
+# Ruta para el manejo de las peticiones para la vista de los Logs de usuario en la carga masiva.
+Extranet_logs_load:
+    path:    /{slug}/logs/load/{logFile}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:logsLoad, logFile: null }
+    options: 
+        expose: true
+
+# === Rutas del Módulo de Grilla ===
+
+# Ruta para el manejo de las peticiones de la grilla,
+# manejo de la plantilla.
+Extranet_indexProperties:
+    path:    /{slug}/rooms/inventory/{date}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:gridIndex, date: null }
+    options: 
+        expose: true
+
+# Ruta para el manejo de las peticiones de la grilla, para
+# solicitar información de l establecimiento y sus habitaciones
+# y servicios
+navicu_api_inventory_daily:
+    path:   /properties/{slug}/inventory/daily
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:apiInventoryDaily }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Ruta para el manejo de las peticiones de la grilla, para
+# ingresar o actualizar tanto dailyPack como dailyRoom.
+navicu_api_daily_update:
+    path:   /daily/update/{id}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:apiDailyUpdate, id : null }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+
+# === Rutas del Módulo de Carga Másiva ===
+
+#Vista principal de la carga masiva
+navicu_extranet_inventory_massload_get_data:
+    path:   /mass_load/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:getDataMassLoad }
+    options:
+        expose: true
+
+#Carga de datos en la carga masiva vía Ajax
+navicu_extranet_inventory_massload_set_data:
+    path:   /mass_load/async/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:setDataMassLoad }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+#Redireccionamiento al eliminar dailys desde la carga masiva via ajax
+navicu_extranet_drop_inventory:
+    path:   /mass_load/select_inventory/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Inventory:dropInventoryMassLoad }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json)}

@@ -1,0 +1,28 @@
+Navicu\Core\Domain\Model\Entity\IpCollection:
+    type: entity
+    table: ip_collection
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbIpCollectionRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+
+    fields:
+        ip_start:
+            type: float
+        ip_end:
+            type: float
+        type:
+            type: integer
+
+    manyToOne:
+        location:
+            targetEntity: Location
+            inversedBy: ip_colletions
+            joinColumns:
+                location:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

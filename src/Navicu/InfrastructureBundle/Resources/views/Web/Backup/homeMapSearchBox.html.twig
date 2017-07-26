@@ -1,0 +1,182 @@
+<section class="nvc-home-map hidden-xs">
+    <div id="nvc-wrapper" class="nvc-row" style="display:flex;">
+        <!-- Manual search -->
+        <div id="mapHomeDestiny" class="{#col-sm-6 col-md-4#} nvc-wrapper__nav">
+            <div id="nvc-wrapper__sidebar">
+                <div class="nvc-home-map__search">
+                    <div class="nvc-row">
+                        <!-- Logo -->
+                        <div class="col-md-16">
+                            <a  href="#menu-toggle" class="nvc-button nvc-button__toggle visible-sm" id="menu-toggle">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <h1><i class="fa fn-map-02"></i></h1>
+                        </div>
+                    </div>
+
+                    <!-- inputs -->
+                    <div class="nvc-row">
+                        <!-- Titulo -->
+                        <div class="col-md-16">
+                            <div class="text-left">
+                                <h3>¿A dónde quieres ir?</h3>
+                                <h4>Hoteles en toda Venezuela</h4>
+                            </div>
+                        </div>
+                        <form class="nvc-form-inline search-panel-body" role="form">
+                            <input type="hidden" name="adult" value="{[{ adults }]}" data-ng-if="adults != 2"/>
+                            <input type="hidden" name="kid" value="{[{ kids }]}" data-ng-if="kids != 0"/>
+                            <input type="hidden" name="room" value="{[{rooms}]}" data-ng-if="rooms != 1"/>
+                            <!-- País -->
+                            <div class="col-md-16 center-block">
+                                <select
+                                        name=""
+                                        id="input"
+                                        class="nvc-select__home"
+                                        data-ng-model="selectedDestination"
+                                        data-ng-options="city as city.name for city in navicuMap"
+                                        data-ng-init="selectedDestination=navicuMap[0]">
+                                </select>
+                            </div>
+                            <div id="date-range">
+                                <div class="nvc-form-group col-sm-8">
+                                    <i class="fa fn-calendar pull-left"></i>
+                                    <input type="text" autocomplete="off" data-ng-model="startDate"
+                                           class="nvc-input__home nvc-input__home--checkin js-range-check-in"
+                                           name="startDate" placeholder="{{ 'share.message.start_date'|trans }}"
+                                           data-ng-disabled="inputStartDate"/>
+                                </div>
+                                <div class="nvc-form-group col-sm-8">
+                                    <i class="fa fn-calendar pull-left"></i>
+                                    <input type="text" autocomplete="off" data-ng-model="endDate"
+                                           class="nvc-input__home js-range-check-out"
+                                           name="endDate" placeholder="{{ 'share.message.end_date'|trans }}"
+                                           data-ng-disabled="inputEndDate"/>
+                                </div>
+                            </div>
+
+                            <!-- Select Adultos -->
+                            <div class="col-sm-8">
+                                <select
+                                        class="nvc-select__home"
+                                        data-ng-model="adults">
+                                    <option value="1"> 1 {{ "share.message.adult"|transchoice(1) }}</option>
+                                    <option data-ng-repeat="n in [] | range:2:9" value="{[{n}]}">
+                                        {[{n}]} {{ "share.message.adult"|transchoice(2) }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Select Niños -->
+                            <div class="col-sm-8">
+                                <select
+                                        class="nvc-select__home"
+                                        data-ng-model="kids">
+                                    <option value="0"> 0 {{ "share.message.child"|transchoice(2) }}</option>
+                                    <option value="1"> 1 {{ "share.message.child"|transchoice(1) }}</option>
+                                    <option data-ng-repeat="n in [] | range:2:8" value="{[{n}]}">
+                                        {[{n}]} {{ "share.message.child"|transchoice(2) }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Boton Buscar -->
+                            <button
+                                    class="nvc-button nvc-button__search center-block"
+                                    data-ng-click="getProperties(selectedDestination)">
+                                <b>Buscar</b>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="nvc-home-map__suggestion">
+                    <div class="nvc-row" >
+                        <div class="col-md-16">
+                            <h2>Venezuela Top</h2>
+                            <hr>
+                        </div>
+
+                        <div class="col-md-16 nvc-home-map__suggestion.margin-top-3-navicu">
+                            <div data-ng-click="selectedDestination=navicuMap[indexDestinityTop('isla-de-margarita')];getProperties(selectedDestination);">
+                                <h3> <b> Isla Margarita </b></h3>
+                                <h4>La Perla del Caribe espera por ti</h4>
+                                <input type="hidden" name="destiny" value="Isla de Margarita"/>
+                                <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                                <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                                <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                <input type="hidden" name="type" value="isla"/>
+                                <input type="hidden" name="slug" value="isla-de-margarita"/>
+                                <input type="hidden" name="countryCode" value="VE"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-16">
+                            <div data-ng-click="selectedDestination=navicuMap[indexDestinityTop('colonia-tovar')];getProperties(selectedDestination);">
+                                <h3> <b> La Colonia Tovar </b> </h3>
+                                <h4>El pedacito de Alemania en Venezuela</h4>
+                                <input type="hidden" name="destiny" value="Colonia Tovar"/>
+                                <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                                <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                                <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                <input type="hidden" name="type" value="parroquia"/>
+                                <input type="hidden" name="slug" value="colonia-tovar"/>
+                                <input type="hidden" name="countryCode" value="VE"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-16">
+                            <div data-ng-click="selectedDestination=navicuMap[indexDestinityTop('los-roques')];getProperties(selectedDestination);">
+                                <h3> <b> Los Roques </b></h3>
+                                <h4>Un paraíso de playas cristalinas</h4>
+                                <input type="hidden" name="destiny" value="Los Roques"/>
+                                <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                                <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                                <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                <input type="hidden" name="type" value="archipielago"/>
+                                <input type="hidden" name="slug" value="los-roques"/>
+                                <input type="hidden" name="countryCode" value="VE"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search the map -->
+        <div id="mapHomeDestiny" class="{#col-sm-10 col-md-11#} nvc-home-map__location">
+            <div id="nvc-wrapper__content">
+                <a  href="#menu-toggle2" class="nvc-button nvc-button__wrapper visible-sm" id="menu-toggle2">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <div class="loading-map-gif" data-ng-show="isRequesting">
+                    <img src="{{ asset('images/gifmap.gif') }}"/>
+                </div>
+                <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.optionsMap" events="map.eventsMap"  control="map.control">
+                    <ui-gmap-marker data-ng-repeat="marker in map.markers track by $index"
+                                    model="marker"
+                                    coords="marker.coords"
+                                    options="map.optionsMarker"
+                                    events="map.eventsMarker"
+                                    idkey="$index">
+                        <ui-gmap-window
+                                show="marker.show"
+                                options="map.windowOptions"
+                                templateUrl="map.templatedInfoWindow.templateUrl"
+                                templateParameter="map.templatedInfoWindow.templateParameter"
+                                data-ng-cloak>
+                        </ui-gmap-window>
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+

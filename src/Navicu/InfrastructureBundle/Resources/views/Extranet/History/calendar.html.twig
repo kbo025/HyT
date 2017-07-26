@@ -1,0 +1,61 @@
+{% macro display_month_calendar(dates_for_month) %}
+    <div class="col-md-2 md-calendar">
+        <table class="table-striped calendar">
+            <thead>
+            <tr>
+                {# Se busca el primer elemento no nulo del array de fechas #}
+                {% set header_date = null %}
+                {% for index in dates_for_month if header_date is null %}
+                    {% if index is not null %}
+                        {% set header_date = index|date("Y-m-20")|localizeddate("none", "none", app.request.locale, null, "MMMM Y")|capitalize %}
+                    {% endif %}
+                {% endfor %}
+                <th colspan="7" class="th-calendar">
+                    <a class="btn">{{ header_date }}</a>
+                </th>
+            </tr>
+            <tr class="tr-calendar">
+                <th>{{ "share.calendar.days.mon"|transchoice(0) }}</th>
+                <th>{{ "share.calendar.days.tue"|transchoice(0) }}</th>
+                <th>{{ "share.calendar.days.wen"|transchoice(0) }}</th>
+                <th>{{ "share.calendar.days.thu"|transchoice(0) }}</th>
+                <th>{{ "share.calendar.days.fri"|transchoice(0) }}</th>
+                <th>{{ "share.calendar.days.sat"|transchoice(0) }}</th>
+                <th>{{ "share.calendar.days.sun"|transchoice(0) }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for week in 0..5 %}
+                {% set base_index = week * 7 %}
+                <tr>
+                    {% for day in dates_for_month|slice(base_index, 7) %}
+                        {% if day is empty %}
+                            <td></td>
+                        {% else %}
+                            {% if day starts with "+" %}
+                                <td class="selected-date">{{ day|date("d") }}</td>
+                            {% else %}
+                                <td>{{ day|date("d") }}</td>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endmacro %}
+
+{#-- ********************************************************************** --#}
+{% import _self as calendar_macro %}
+{% set calendar_length = calendar|length %}
+{% set month_amount = (calendar_length / cells_per_month) - 1 %}
+
+<div class="container">
+    <div class="row">
+        {% for month in 0..month_amount %}
+            {% set base_index = month * cells_per_month %}
+            {{ calendar_macro.display_month_calendar(calendar|slice(base_index, cells_per_month)) }}
+        {% endfor %}
+    </div>
+</div>

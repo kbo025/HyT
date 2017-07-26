@@ -1,0 +1,31 @@
+Navicu\Core\Domain\Model\Entity\RateByPeople:
+    type: entity
+    table: rate_by_people
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\RateByPeopleRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        amount_rate:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        number_people:
+            type: integer
+            nullable: false
+
+    manyToOne:
+        room:
+            targetEntity: Room
+            cascade: ["persist"]
+            mappedBy: null
+            inversedBy: rates_by_peoples
+            joinColumns:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false

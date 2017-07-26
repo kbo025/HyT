@@ -1,0 +1,63 @@
+# Manejo de todas las rutas referente a la seguridad de la extranet
+navicu_extranet_module_security:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/security.yml"
+
+# Manejo de todas las rutas referente a la seguridad de la extranet
+navicu_aavv_module_resetting:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/resetting.yml"
+    prefix: %aavv_subdomain%
+
+
+# ===========Rutas del registro de la AAVV===========
+# Rutas de registro de usuario aavv temporal y formulario de registro
+navicu_aavv_module_registration:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/registration.yml"
+
+# ===========Rutas del registro de la AAVV===========
+# Rutas de registro de usuario aavv temporal y formulario de registro
+navicu_aavv_module_reservation:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/reservation.yml"
+    prefix: reservation
+
+# Rutas del proceso de perzonalización de colores y logo
+# en la AAVV
+navicu_aavv_module_customize:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/customize.yml"
+    prefix: customize
+
+# Rutas para llegar al home de aavv
+navicu_aavv_module_search:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/search.yml"
+    prefix: search
+
+# Obtener la url los datos de una localidad
+register_get_locations:
+    path:   /getLocations
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:getLocation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST }
+
+navicu_aavv_module_users:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/users.yml"
+
+# ===========Rutas del registro de la AAVV===========
+# Rutas de registro de usuario aavv temporal y formulario de registro
+navicu_aavv_module_main:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/main.yml"
+
+# ===========Rutas para el acceso a material adicional disponible para la aavv===========
+navicu_aavv_module_material:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/material.yml"
+
+# ===========Rutas para el acceso a las funciones de facturacion dispónibles para AAVV===========
+navicu_aavv_module_billing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/billing.yml"
+
+# Ruta para la peticion de la visualizacion del pdf con el resumen de la reserva
+navicu_aavv_download_pdf_reservation:
+    path: /downloadPdf/{location}/{public_group_id}/{hashUrl}/{owner}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Reservation:generateResumeReservationPdfAAVV }
+    options:
+        expose: true

@@ -1,0 +1,87 @@
+<h2>
+    <i class='fa fn-bag' ></i>
+    Pago
+</h2>
+<div class='row nvc-aavv__step2--amount'>
+    <div class="hidden-md" ng-if="creditNVC(dataStep2.creditId) == 0" ng-class="creditNVC(dataStep2.creditId) == 0 ? 'cutDivInfPay' : ''"></div>
+    <div class="nvc-row" ng-if="creditNVC(dataStep2.creditId) != 0">
+        <div class="col-lg-16">
+            <div class="col-lg-11">
+                <p>
+                    Para formar parte del programa Vicander de navicu.com, tendrás<br> que enviarnos un depósito en garantía.
+                </p>
+
+                <p class="second-paragraph">
+                    Dicho depósito te otorgará un monto de crédito determinado para<br> poder
+                    realizar tus reservas en nuestra plataforma.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nvc-row" ng-if="creditNVC(dataStep2.creditId) == 0">
+        <div class="col-lg-16">
+            <div class="col-lg-11">
+                <p>
+                    Al seleccionar esta modalidad de crédito, tendrás que prepagar tu reserva de esta manera <strong style="">Vicander</strong> podrá confirmarla
+                </p>
+                <ul class="listBs0">
+                    <li>Contarás con <strong>24 horas</strong> para realizar el pago de la pre-reserva</li>
+                    <li>No podrás realizar tu reserva, si no cuentas con un mínimo de <strong>7 días de antelación</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="nvc-row">
+        <div class="col-lg-16">
+            <h4 ng-if="creditNVC(dataStep2.creditId) != 0"><hr>El importe se deberá abonar íntegro para que el contrato inicie</h4>
+            <div class="contentBs0" ng-if="creditNVC(dataStep2.creditId) == 0">
+                <img src="/images/aavv/paymentStep2/clock.png" class="img-responsive">
+                <p>Una vez que nos envíes el número de referencia la transferencia efectuada,</p>
+                <p><strong><i>Vicander</i></strong> tendrá <strong>48 horas</strong> para confirmar tu reserva</p>
+            </div>
+            
+            <div class="col-lg-8" ng-class="creditNVC(dataStep2.creditId) == 0 ? 'selectCredit0' : 'selectCredit'">
+               <div class="col-md-8 col-lg-8" ng-class="creditNVC(dataStep2.creditId) == 0 ? 'contentSelectCredit0' : 'contentSelectCredit'">
+                    <div class="space">
+                        <div class='nvc-form-group nvc-form-group--step2'>
+                            <i class='fa fn-info nvc-tooltips nvc-tooltips__top' >
+                                <span style='width: 466px;left: -10px;'>
+                                    Monto enviado como garantía de crédito a navicu.com para abrir la línea de crédito
+                                </span>
+                            </i>
+                            <label style="padding-left: 22px;">Selecciona tu monto</label>
+                            <select
+                                class='nvc-select__register'
+                                placeholder=''
+                                type='text'
+                                ng-model = "dataStep2.creditId"
+                                name = "creditId"
+                            >
+                                <option value="">Seleccione</option>
+                                <option
+                                    ng-repeat="credit in data.credit | orderBy:'-credit'"
+                                    value="{[{credit.id}]}">Bs {[{credit.credit | number}]}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="space-error">
+                            <span class="error" ng-show="data.validation && !dataStep2.creditId">
+                                Este campo es obligatorio
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-8">
+                    <h3 ng-if="dataStep2.creditId && creditNVC(dataStep2.creditId) != 0">
+                        Bs {[{creditNVC(dataStep2.creditId) | number}]}
+                    </h3>
+                    <h3 ng-if="!dataStep2.creditId">
+                        Crédito comercial en importe
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

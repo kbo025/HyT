@@ -1,0 +1,15 @@
+<div class="mainBlock">
+    <div class="col-md-16">
+        <h1 class="nvc-aavv-customize__title--primary">Destinos incomparables</h1>
+        <h2 class="nvc-aavv-customize__text" ng-repeat="destinity in destinies" 
+                ng-click="searchRedirect(destinity.countryCode,destinity.type, destinity.slug)">
+                {[{destinity.title}]}
+                <i ng-if="$index != 4">-</i>
+        </h2>
+    </div>
+    <div class="col-md-5">
+        <h1 class="nvc-aavv-customize__title--primary">
+            Tendrás a tu disposición más de 600 alojamientos en toda Venezuela
+        </h1>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'reservations'} %}
+
+{% block title %} {{ "extranet.title.generic"|trans }} {% endblock %}
+
+{% block body %}
+
+    <div class="reservations" ng-app="reservationsModule" ng-controller="reservationsController" novalidate ng-cloak>
+        <div ng-if="hasReservation==1" class="container">
+            <h1>{{ "extranet.home.reservations"|trans }}</h1>
+            <div class="col-xs-16 col-sm-8 col-md-6 search input-group">
+                <h1>{{ "extranet.home.search_reservation"|trans }}:</h1>
+                <button class=" btn btn-primary btn-clear" ng-click="clearSearch();">Limpiar Búsqueda</button>
+                <div id="js-range-picker">
+                    <label>
+                        <span id="js-date-range">
+                            Desde:
+                            <input
+                                type="text"
+                                name="searchForm.checkIn"
+                                ng-model="searchForm.checkIn"
+                                ng-change="searchPetition();"
+                                class="js-range-check-in ">
+                            <i class="fa fn-calendar2"></i>
+                        </span>
+                        <span style="padding-left:5%" id="js-date-range">
+                            Hasta:
+                            <input
+                                type="text"
+                                name="searchForm.checkOut"
+                                ng-model="searchForm.checkOut"
+                                ng-change="searchPetition();"
+                                class="js-range-check-out ">
+                            <i class="fa fn-calendar2"></i>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div ng-if="reservations.length!=0" class="col-xs-16 table-responsive" style="padding:0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center">{{"extranet.home.id_reservation"|trans }}</th>
+                            <th class="text-center">{{ "extranet.home.creating_reserve"|trans }}</th>
+                            <th class="text-center">{{ "extranet.home.check_in"|trans }}</th>
+                            <th class="text-center">{{ "extranet.home.check_out"|trans }}</th>
+                            <th class="text-center">{{ "extranet.home.name_lastname"|trans }}</th>
+                            <th class="text-center">{{"extranet.home.state"|trans }}</th>
+                            <th class="text-center">{{"extranet.home.amount"|trans }}</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         <tr ng-repeat="item in reservations" >
+                            <td class="text-center"> {[{ item.id }]}</td>
+                            <td class="text-center"> {[{ item.date }]}</td>
+                            <td class="text-center"> {[{ item.checkIn }]}</td>
+                            <td class="text-center"> {[{ item.checkOut }]}</td>
+                            <td class="text-center"> {[{ item.names }]}</td>
+                            <td
+                                class="text-center"
+                                ng-style="{'color':item.state==2 ? '#06CC2B' : item.state==3 ? '#ED1E79' : '#F2AF00'}">
+                                <i
+                                    class="fa"
+                                    ng-class="{
+                                        'fn-confirmado' : item.state==2,
+                                        'fn-cancelado' : item.state==3,
+                                        'fn-pendientedepago' : item.state==0 || item.state==1
+                                        }">
+                                </i>
+                                {[{ getState(item.state) }]}
+                            </td>
+                            <td class="text-center"> {[{ item.amount | number }]} Bs.</td>
+                            <td class="text-center" ng-click="getDetails(item.id);"> <span class="btn">Ver detalles</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-xs-16 col-sm-16 col-md-16 text-center">
+                    <ul class="pagination">
+                        <li ng-if="page.previous != null">
+                            <a href=# ng-click="loadReservations(page.previous)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="pagination" ng-repeat="t in getPages(page.pageCount) track by $index">
+                        <li ng-if="page.current == $index+1" class="active">
+                            <a href="#" ><strong ng-bind="$index+1"></strong></a>
+                        </li>
+                        <li ng-if="page.current != $index+1">
+                            <a href=# ng-click="loadReservations($index+1)">{[{$index+1}]}</a>
+                        </li>
+                    </ul>
+                    <ul class="pagination">
+                        <li ng-if="page.next != null">
+                            <a href=# ng-click="loadReservations(page.next)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-if="reservations.length==0" class="col-xs-16 col-sm-8 reservations-not-found">
+                <img src="{{ asset('images/no-date.png') }}" >
+                <div>
+                    <h1>{{ "extranet.home.no_dates"|trans}}</h1>
+                    <h2>{{ "extranet.home.try_another_date"|trans}}</h2>
+                </div>
+            </div>
+        </div>
+        <div ng-if="hasReservation==0" class="reservation-null">
+
+            <div class="container">
+                <h4>Hey! <span class="fa fn-404"></span></h4>
+                <h1>{{ "extranet.home.dont_have_reservations"|trans }}</h1>
+                <h2>¡{{ "extranet.home.your_content_important"|trans}}!</h2>
+                <br>
+                <h2 class="hidden-xs hidden-sm"><i class="fa fn-calendar"></i><span>{{ "extranet.home.rates_and_availability_date"|trans}}</span></h2>
+                <h2 class="hidden-xs hidden-sm"><i class="fa fn-gallery"></i><span>{{ "extranet.home.review_your_content"|trans}}</span></h2>
+                <h2 class="hidden-xs hidden-sm"><i class="fa fn-nvc"></i><span>{{ "extranet.home.be_navicu"|trans}}</span></h2>
+            </div>
+        </div>
+        {{ include("NavicuInfrastructureBundle:Extranet:Reservations/modalDetails.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+    </div>
+
+    <br/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = "{{ data }}";
+        var div = document.createElement('div');
+        var extension = "{{ app.request.attributes.get('extension') }}";
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+        console.log("data", response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            //*** DON´T TOUCH
+            $( ".js-range-check" ).keypress(function (evt) {  return false; });
+            //////////
+            $('#js-date-range').rangePicker({ startDate: null });
+        });
+    </script>
+
+{% endblock %}

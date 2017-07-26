@@ -1,0 +1,226 @@
+<div class='nvc-container nvc-aavv__step1--location'>
+    <h2>
+        <i class='fa fn-marker' ></i>
+        {{"aavv.step1.location"|trans }}
+        <span class='map'>
+            {{"aavv.step1.exact_location"|trans }}
+        </span>
+    </h2>
+    <br />
+    <div class='col-md-16'>
+        <div style='width:100%'>
+            <div class="nvc-register__map" id="map_canvas">
+                <ui-gmap-google-map
+                    center="map.center"
+                    zoom="map.zoom"
+                    draggable="true"
+                    options="options"
+                    control="map.control"
+                    ng-click="options.scrollwheel=true">
+                    <ui-gmap-marker
+                        coords="marker.coords"
+                        options="marker.options"
+                        events="marker.events"
+                        idkey="marker.id"
+                        control="marker.control">
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <br />
+    <div class='col-md-8'>
+        <div class='nvc-form-group'>
+            <label for='file-rtn'>{{"aavv.step1.rtn"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='file-rtn'
+                placeholder=''
+                type="file"
+                ngf-select
+                name="tourism_document"
+                ng-model="files.tourism_document"
+                ng-change="loadFile('file-rtn')"
+            />
+            <input
+                class='nvc-input__register'
+                id='file-rtnText'
+                placeholder=''
+                type="text"
+                name="tourism_documentForm"
+                ng-model="tourism_document"
+                disabled
+            />
+            <button
+                class='nvc-button nvc-button__default'
+                ng-click="onClick('file-rtn')"
+            >
+                {{"aavv.step1.attach"|trans }}
+            </button>
+        </div>
+        <span ng-if="files.tourism_document === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-8'>
+        <div class='nvc-form-group'>
+             <i class='fa fn-info nvc-tooltips nvc-tooltips__top' >
+                <span style='width: 460px; left:-10px; margin-bottom:15px;' >
+                    {{"aavv.step1.agency_contract_tooltip"|trans }}
+                </span>
+            </i>
+            <label for='l2' style="padding-left:25px;">{{"aavv.step1.agency_contract"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='file-lease'
+                placeholder=''
+                type="file"
+                ngf-select
+                ngf-accept="'application/*'"
+                name="lease_document"
+                ng-model="files.lease_document"
+                ng-change="loadFile('file-lease')"
+            />
+            <input
+                class='nvc-input__register'
+                id='file-leaseText'
+                placeholder=''
+                type="text"
+                name="lease_documentForm"
+                ngf-accept="'application/*'"
+                ng-model="lease_document"
+                disabled
+            />
+            <button
+                class='nvc-button nvc-button__default'
+                ng-click="onClick('file-lease')"
+            >
+                {{"aavv.step1.attach"|trans }}
+            </button>
+        </div>
+        <span ng-if="files.lease_document === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-10'>
+        <div class='nvc-form-group'>
+            <label for='l3'>{{"aavv.step1.office_photos"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='file-images'
+                placeholder=''
+                type="file"
+                ngf-select
+                name="images"
+                ng-model="imagesLoad"
+                ngf-resize="{width:300, height:300, centerCrop:true}"
+                ng-change="handleChangeImages('file-images')"
+            />
+            <button
+                class='nvc-button nvc-button__default'
+                ng-click="onClick('file-images')"
+            >
+                {{"aavv.step1.attach"|trans }}
+            </button>
+        </div>
+    </div>
+    <div class='col-md-6'>
+        <div class='nvc-form-group'>
+            <i
+                class='fa fn-info nvc-tooltips nvc-tooltips__top'
+                style='margin-left:7px;'
+            >
+                <span style='width: 280px; left:30px; margin-bottom:15px;'>
+                    {{"aavv.step1.logo_tooltip"|trans }}
+                </span>
+            </i>
+            <label for='l4' style="padding-left:25px;">{{"aavv.step1.logo"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='file-logo'
+                placeholder=''
+                type="file"
+                ngf-select
+                name="logo"
+                ng-model="logo"
+                ng-change="handleChangeLogo()"
+            />
+            <button
+                class='nvc-button nvc-button__default'
+                ng-click="onClick('file-logo')"
+            >
+                {{"aavv.step1.attach"|trans }}
+            </button>
+            <ul>
+                <li>
+                    El archivo <strong>no</strong> puede ser menor a
+                    <span>100px x 30px</span> o superar los <span>500px x 70px</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class='col-md-10'>
+        <div class='nvc-gallery'>
+            <div class='nvc-row'>
+                <div class="col-md-4" ng-repeat-n="4">
+                    <div class="nvc-gallery--img">
+                        <a href="" ng-click="deleteFile($index)">
+                            <i
+                                class='fa fn-dismiss'
+                                ng-if='images[$index]!=null'
+                            >
+                            </i>
+                        </a>
+                        <img ng-if="edit === false" ngf-thumbnail="images[$index]">
+                        <img ng-if="form === null" ngf-thumbnail="images[$index]">
+                        <img ng-if="form.images === null" ngf-thumbnail="images[$index]">
+                        <img ng-if="form.images[$index] === null && form.images !== null" ngf-thumbnail="images[$index]">
+                        <img ng-if="edit ===true && form !== null && form.images[$index] !== null && form.images !== null" ng-src="/uploads/images/images_original/{[{ images[$index] }]}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span ng-if="images[0] === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+
+    <div class='col-md-6'>
+        <div class='nvc-gallery'>
+            <div class='nvc-row'>
+                <div class="col-md-7">
+                    <div class="nvc-gallery--img">
+                        <a href="" ng-click="deleteFile('file-logo')">
+                            <i
+                                class='fa fn-dismiss'
+                                ng-if='logo!=null'
+                            >
+                            </i>
+                        </a>
+                        <img ng-if="errorLoad === true">
+                        <img ng-if="edit === false" ngf-thumbnail="logo">
+                        <img ng-if="form.logo === null" ngf-thumbnail="logo">
+                        <img ng-if="form.logo !== null" ng-src="/uploads/images/images_original/{[{ logo }]}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span ng-if="form.logo === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+        <span ng-if="errorLoad === true" style="color:red;">
+            <strong class="error">Dimensiones no permitidas, intenta de nuevo!</strong>
+            <br>
+        </span>
+    </div>
+
+    <div class='col-md-16'>
+        <hr />
+    </div>
+</div>

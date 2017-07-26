@@ -1,0 +1,18 @@
+Navicu\Core\Domain\Model\Entity\Profession:
+    type: entity
+    table: profession
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbProfessionRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+    manyToMany:
+        clients:
+            targetEntity: ClientProfile
+            cascade: {  }
+            mappedBy: professions

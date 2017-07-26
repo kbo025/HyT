@@ -1,0 +1,55 @@
+Navicu\Core\Domain\Model\Entity\RoomFeatureType:
+    type: entity
+    table: room_feature_type
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRoomFeatureTypeRepository
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: NONE
+    fields:
+        title:
+          type: string
+          length: 64
+        type:
+          type: integer
+          nullable: false
+        type_val:
+          type: integer
+          nullable: false
+        priority:
+          type: integer
+          nullable: true
+        url_icon:
+          type: string
+          nullable: true
+    manyToMany:
+        room_types:
+            targetEntity: RoomType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: roomfeaturetype
+            joinTable:
+                name: feature_type
+                joinColumns:
+                    roomfeaturetype_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    roomtype_id:
+                        referencedColumnName: id
+            orderBy:
+                title: ASC
+    manyToOne:
+        parent:
+          targetEntity: RoomFeatureType
+          inversedBy: children
+          joinColumn:
+            name: parent_id
+            referencedColumnName: id
+            onDelete: CASCADE
+    oneToMany:
+      children:
+        targetEntity: RoomFeatureType
+        mappedBy: parent
+        orderBy: 
+            title: ASC

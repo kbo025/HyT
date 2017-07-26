@@ -1,0 +1,22 @@
+#Validación RateByKid
+Navicu\Core\Domain\Model\Entity\RateByKid:
+
+    properties:
+        amount_rate:
+            - Type:
+                type: numeric
+                message: is_Integer,{{ value }},{{ type }}
+            - GreaterThan:
+                value: -1
+                message: no_positive,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        number_kid:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+            - GreaterThan:
+                value: 0
+                message: no_positive,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

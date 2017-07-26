@@ -1,0 +1,114 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    <main
+        class="nvc-adminRoles"
+        ng-controller="PermissionsCtrl"
+        ng-cloak
+    >
+        <section class="nvc-container nvc-adminRoles">
+
+            <form name="newRoleForm"class="nvc-form-inline"novalidate>
+                <div class="clearfix nvc-adminRoles__selectRol">
+                        <div class='nvc-input-group--admin'>
+                            <input
+                                    name="newRole"
+                                    class="form-control nvc-input__register"
+                                    type='text'
+                                    ng-model="newRole"
+                                    required
+                            />
+                            <div
+                                    class="nvc-error"
+                                    ng-show="newRoleForm.newRole.$error.required && newRoleForm.$submitted"
+                            >
+                                {{ "share.validation.input_required"|trans }}
+                            </div>
+                            <button
+                                class="nvc-button"
+                                type="submit"
+                                ng-click="createRole()"
+                                ng-disabled="newRole === null"
+                            >
+                                Crear rol
+                            </button>
+                        </div>
+
+                </div>
+            </form>
+
+
+            <div class="nvc-adminRoles__mainHeader">
+                <i class="fn-icon-roles"></i>
+                {{ 'aavv.edit.roles.headings.table.main' | trans }}
+            </div>
+
+            <div
+                class="nvc-adminRoles__rolesHeader"
+                ng-repeat-start="(indexRol, rol) in roles track by $index"
+                ng-class="{ 'odd' : $index%2===0, 'even' : $index%2!==0 }"
+                ng-init="rol.showModules=false"
+                ng-click="rol.showModules = !rol.showModules">
+                {[{rol.name}]}
+                <i class="fn-arrow"></i>
+            </div>
+
+            <div
+                class="nvc-adminRoles__moduleHeader"
+                ng-repeat-start="(nameModule, module) in rol.modules track by $index"
+                ng-class="{ 'odd' : $index%2===0, 'even' : $index%2!==0 }"
+                ng-init="module.showSections=false"
+                ng-click="module.showSections = !module.showSections"
+                ng-if="rol.showModules">
+                {[{nameModule}]}
+                <i class="fn-arrow"></i>
+            </div>
+
+            <div
+                class="nvc-adminRoles__section"
+                ng-repeat-start="(indexSection, section) in module track by $index"
+                ng-class="{ 'odd' : $index%2===0, 'even' : $index%2!==0 }"
+                ng-init="section.showPermissions=false"
+                ng-click="section.showPermissions = !section.showPermissions"
+                ng-if="rol.showModules && module.showSections">
+                {[{section.name}]}
+                <i class="fn-arrow"></i>
+            </div>
+
+            <div
+                class="nvc-adminRoles__permissions clearfix"
+                ng-if="rol.showModules && module.showSections && section.showPermissions">
+                <ul class="col-xs-16 nvc-adminRoles__checkboxGroup">
+                    <li
+                        class="col-xs-16 col-sm-3"
+                        ng-repeat="(index, permission) in section.permissions track by $index">
+                        <span ng-click="updatePermission(rol.id, section.id, permission)">
+                            <span
+                            class="nvc-adminRoles__checkbox"
+                            ng-class="{'active': permission.value}"></span>
+                            {[{permission.name}]}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div ng-repeat-end></div>
+            <div ng-repeat-end></div>
+            <div ng-repeat-end></div>
+        </section>
+    </main>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+
+    </script>
+
+    {{ parent() }}
+
+{% endblock %}

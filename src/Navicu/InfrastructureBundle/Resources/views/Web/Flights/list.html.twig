@@ -1,0 +1,444 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+
+{% block body %}
+
+    <main
+        class="nvc-flight-list visible-md visible-lg"
+        data-ng-app="listFlightsModule"
+        data-ng-controller="listFlightsController"
+    >
+
+        <div
+            class="nvc-backdrop__flight nvc-loading"
+            ng-class="{'nvc-backdrop--invisible': data===true}"
+            {# ng-show="isBusy" #}
+        >
+            <img src="/images/flight-loader.gif">
+        </div>
+
+        <!--- Barra de Busqueda -->
+        <section
+            class="nvc-navbar__search nvc-affix__width"
+            data-offset-top="0"
+            data-spy="affix"
+            id="nav"
+            data-ng-cloak
+        >
+            <div class="nvc-container">
+
+                <form
+                    action="{[{ url }]}"
+                    class="nvc-form-inline col-xs-14"
+                    method="{[{ method }]}"
+                    data-ng-submit="createUrlLocation()"
+                    role="form"
+                >
+                    <input type="hidden" name="adult" value="{[{ adult }]}" data-ng-if="adult != 2"/>
+                    <input type="hidden" name="kid" value="{[{ kid }]}" data-ng-if="kid != 0"/>
+                    <input type="hidden" name="startDate" value="{[{ startDate }]}" data-ng-if="startDate"/>
+                    <input type="hidden" name="endDate" value="{[{ endDate }]}" data-ng-if="endDate && roundTrip===true"/>
+                    <input type="hidden" name="roundTrip" value="{[{ 1 }]}" data-ng-if="roundTrip===true"/>
+                    <input type="hidden" name="roundTrip" value="{[{ 0 }]}" data-ng-if="roundTrip===false"/>
+
+                    <div class="nvc-form-group">
+                        <nvc-search-flight
+                            route="navicu_flight_search_autocompleted"
+                            selected-origin="selectedFrom"
+                            selected-destiny="selectedTo"
+                            callback="redirectFlight"
+
+                            adults="adult"
+                            children="kid"
+                            end-date="endDate"
+                            start-date="startDate"
+                            calendar-image-url="{{ asset('images/calendar.png') }}"
+                            trip="roundTrip"
+                        ></nvc-search-flight>
+                    </div>
+                </form>
+
+                <div class="col-xs-16" ng-if="sheduled">
+                    <h5>
+                        <strong>¡Hey!</strong>
+                        Parece que no encontramos resultados para la fecha que estás solicitando,
+                        <span>selecciona nuevamente tu fecha de ida</span>
+                    </h5>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="nvc-container" data-ng-cloak>
+            <!--- Calendario -->
+            <h3 class="bold" ng-if="oneWay" style="margin-top: 20px;">
+                <img ng-if="direction===false" src="{{ asset('images/ida.png') }}">
+                <img ng-if="direction===true" src="{{ asset('images/vuelta.png') }}">
+                <span ng-if="direction===false">{[{oneWay[0].fromCityName}]} - {[{oneWay[0].toCityName}]}</span>
+                <span ng-if="direction===true">{[{return[0].fromCityName}]} - {[{return[0].toCityName}]}</span>
+            </h3>
+            <h3 class="bold" ng-if="sheduled">
+                <img ng-if="direction===false" src="{{ asset('images/ida.png') }}">
+                <img ng-if="direction===true" src="{{ asset('images/vuelta.png') }}">
+                <span ng-if="direction===false">{[{from}]} - {[{to}]}</span>
+                <span ng-if="direction===true">{[{to}]} - {[{from}]}</span>
+            </h3>
+            <table class="nvc-table--flights text-center" ng-if="sheduled">
+                <tr class="head-calendar">
+                    <th
+                        class="buttons"
+                        style="background: #9E74CE;"
+                        ng-click="calendar(sheduled[0].date, 0)"
+                        style="cursor: pointer;"
+                    >
+                        <a href=""><i class="fa fn-arrow-left"></i> - 1 sem</a>
+                    </th>
+                    <th
+                        class="buttons"
+                        style="background: #925DC9;"
+                        ng-click="calendar(sheduled[0].date, 1)"
+                        tyle="cursor: pointer;"
+                    >
+                        <a href="">+ 1 sem <i class="fa fn-arrow-right"></i></a>
+                    </th>
+                    <th
+                        ng-repeat="date in sheduled"
+                        ng-class="{'active': date.lowestPrice !== null}"
+                        ng-style="{'cursor': ['pointer', 'auto'][+(date.lowestPrice !== null)]}"
+                        ng-click="calendarReload(date.flights);"
+                    >
+                        {[{date.day}]} <span>{[{date.month}]}</span>
+                    </th>
+
+                </tr>
+                <tr class="body-calendar">
+                    <td colspan="2">  </td>
+                    <td
+                        ng-repeat="date in sheduled"
+                        ng-class="{'active': date.lowestPrice !== null}"
+                        ng-style="{'cursor': ['pointer', 'auto'][+(date.lowestPrice !== null)]}"
+                        ng-click="calendarReload(date.flights);"
+                    >
+                        <span ng-if="date.lowestPrice !== null"> Desde</span>
+                        <strong ng-if="date.lowestPrice !== null">
+                            {[{isoCurrency}]} {[{date.lowestPrice}]}
+                        </strong>
+                    </td>
+                </tr>
+            </table>
+
+            <!--- Tabla de Vuelos -->
+            <h3 ng-if="oneWay || return">
+                Encontramos
+                <span ng-if="oneWay.length + return.length > 1">
+                    {[{oneWay.length + return.length}]} vuelos
+                </span>
+                <span ng-if="oneWay.length + return.length === 1">
+                    {[{oneWay.length + return.length}]} vuelo
+                </span>
+                disponibles que coincide con tu búsqueda
+            </h3>
+            <section class="nvc-table--flights">
+                <form
+                    action="{{ path('navicu_flight_reservation') }}"
+                    method="post"
+                    name="form"
+                >
+                    <input type="hidden" name="adult" value="{[{ adult }]}" data-ng-if="adult != 2"/>
+                    <input type="hidden" name="kid" value="{[{ kid }]}" data-ng-if="kid != 0"/>
+                    <input type="hidden" name="startDate" value="{[{ startDate }]}" data-ng-if="startDate"/>
+                    <input type="hidden" name="endDate" value="{[{ endDate }]}" data-ng-if="endDate && roundTrip===true"/>
+                    <input type="hidden" name="roundTrip" value="{[{ 1 }]}" data-ng-if="roundTrip===true"/>
+                    <input type="hidden" name="roundTrip" value="{[{ 0 }]}" data-ng-if="roundTrip===false"/>
+
+                    <input type="hidden" name="direction" value="{[{ 1 }]}" data-ng-if="direction===true"/>
+                    <input type="hidden" name="direction" value="{[{ 0 }]}" data-ng-if="direction===false"/>
+                    <input type="hidden" name="flights" value="{[{ flights }]}"/>
+
+                    <!--- Tabla Ida -->
+                    <table ng-if="oneWay">
+                        <tr class="head">
+                            <th rowspan="{[{oneWay.length + 1}]}" class="airplane">
+                               <img src="{{ asset('images/ida.png') }}">
+                            </th>
+                            <th colspan="5" class="oneway">
+                                Ida
+                            </th>
+                        </tr>
+                        <tr
+                            ng-repeat="item in oneWay"
+                            class="body"
+                            ng-class="{'border': $index !== oneWay.length-1}"
+                        >
+                            <td class="choice">
+                                <span
+                                    class="checkbox"
+                                    ng-class="{'active': radioOneWay[$index]===1}"
+                                    ng-click="updatePrice($index, 0);"
+                                >
+                                </span>
+                            </td>
+                            <td class="date">
+                                <h3>{[{item.departureTime}]}</h3>
+                                <h4>{[{item.from}]} {[{item.fromCityName}]} - <span>{[{item.fromName}]}</span></h4>
+                            </td>
+                            <td class="date">
+                                <h3>{[{item.arrivalTime}]}</h3>
+                                <h4>{[{item.to}]} {[{item.toCityName}]} - <span>{[{item.toName}]}</span></h4>
+                            </td>
+                            <td>
+                                <h3>
+                                    <img src="{{ asset('images/flight_time.png') }}">
+                                    {[{item.duration}]}
+                                </h3>
+                                <h6><span ng-if="item.stops>'0'"> {[{item.stops}]} </span></h6>
+                                <h6><span ng-if="item.stops==='0'"> Vuelo directo </span></h6>
+                            </td>
+                            <td class="airline">
+                                <div class="legend dropdown">
+                                    <button
+                                        class="btn btn-default dropdown-toggle"
+                                        type="button"
+                                        id="dropdownlegend"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                    >
+                                         <img src="{{ asset('images/itinerary.png') }}">
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownlegend" id="dropdown-legend">
+                                        <li class="header">
+                                            Itinierario
+                                            <strong>
+                                                Duración del viaje <span>{[{item.duration}]}</span>
+                                                {#<a href="" class="closeLegend">x</a>#}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            Salida
+                                            <span style="padding-left:20px;">
+                                                {[{item.departureTime}]} {[{item.departureDate}]}
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                {[{item.fromName}]}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                <span>{[{item.fromCityName}]}</span>
+                                            </strong>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            Llegada
+                                            <span style="padding-left:10px;">
+                                                {[{item.arrivalTime}]} {[{item.arrivalDate}]}
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                {[{item.toName}]}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                <span>{[{item.toCityName}]}</span>
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                <img src="{{ asset('images/airlines/{[{item.airline}]}.png') }}">
+                                            </strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <img src="{{ asset('images/airlines/{[{item.airline}]}.png') }}">
+                                <h5>{[{item.airlineName}]}</h5>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--- Tabla Vuelta -->
+                    <table ng-if="return">
+                        <tr class="head head-return">
+                            <th rowspan="{[{return.length + 1}]}" class="airplane airplane-return">
+                               <img src="{{ asset('images/vuelta.png') }}">
+                            </th>
+                            <th colspan="5" class="return">
+                                Vuelta
+                            </th>
+                        </tr>
+                        <tr
+                            ng-repeat="item in return"
+                            class="body"
+                            ng-class="{'border': $index !== return.length-1}"
+                        >
+                            <td class="choice">
+                                <span
+                                    class="checkbox"
+                                    ng-class="{'active': radioReturn[$index]===1}"
+                                    ng-click="updatePrice($index, 1);"
+                                >
+                                </span>
+                            </td>
+                            <td class="date">
+                                <h3>{[{item.departureTime}]}</h3>
+                                <h4>{[{item.from}]} {[{item.fromCityName}]} - <span>{[{item.fromName}]}</span></h4>
+                            </td>
+                            <td class="date">
+                                <h3>{[{item.arrivalTime}]}</h3>
+                                <h4>{[{item.to}]} {[{item.toCityName}]} - <span>{[{item.toName}]}</span></h4>
+                            </td>
+                            <td>
+                                <h3>
+                                    <img src="{{ asset('images/flight_time.png') }}">
+                                    {[{item.duration}]}
+                                </h3>
+                                <h6><span ng-if="item.stops>'0'"> {[{item.stops}]} </span></h6>
+                                <h6><span ng-if="item.stops==='0'"> Vuelo directo </span></h6>
+                            </td>
+                            <td class="airline">
+                                <div class="legend dropdown">
+                                    <button
+                                        class="btn btn-default dropdown-toggle"
+                                        type="button"
+                                        id="dropdownlegend"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                    >
+                                         <img src="{{ asset('images/itinerary.png') }}">
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownlegend" id="dropdown-legend">
+                                        <li class="header">
+                                            Itinierario
+                                            <strong>
+                                                Duración del viaje <span>{[{item.duration}]}</span>
+                                                {#<a href="" class="closeLegend">x</a>#}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            Salida
+                                            <span style="padding-left:20px;">
+                                                {[{item.departureTime}]} {[{item.departureDate}]}
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                {[{item.fromName}]}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                <span>{[{item.fromCityName}]}</span>
+                                            </strong>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            Llegada
+                                            <span style="padding-left:10px;">
+                                                {[{item.arrivalTime}]} {[{item.arrivalDate}]}
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                {[{item.toName}]}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                <span>{[{item.toCityName}]}</span>
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                <img src="{{ asset('images/airlines/{[{item.airline}]}.png') }}">
+                                            </strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <img src="{{ asset('images/airlines/{[{item.airline}]}.png') }}">
+                                <h5>{[{item.airlineName}]}</h5>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--- Tabla Precios -->
+                    <table ng-if="oneWay || return">
+                        <tr class="payment">
+                            <td style="float:right;">
+                                <h3>{[{isoCurrency}]}<strike> {[{subtotal | number:2 }]} </strike></h3>
+                            </td>
+                            <td class="price">
+                                <h4> {[{isoCurrency}]} {[{total | number:2}]} <span> - *El costo incluye impuestos y gastos de gestión</span></h4>
+                            </td>
+                            <td class="button">
+                                <button type="submit">
+                                    Comprar
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </section>
+
+        </section>
+
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = {{ data | raw }};
+        console.log("response", response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            //*** DON´T TOUCH
+            $( ".js-range-check" ).keypress(function (evt) {  return false; });
+            //////////
+
+            $('#js-rangepicker').rangePicker();
+            $('#js-mobile-rangepicker').rangePicker({
+                checkInSelector: '.js-datepicker-check-in',
+                checkOutSelector: '.js-datepicker-check-out'
+            });
+
+            $('#nav').affix({
+                offset: {
+                    top: 80,
+                    bottom: function () {
+                        return (this.bottom = $('.footer').outerHeight(true))
+                    }
+                }
+            });
+
+            /*$(".closeLegend").click(function() {
+                $(this).closest(".dropdown-menu").prev().dropdown("toggle");
+                $(this).closest(".dropdown-menu").css({
+                    "display": "none"
+                });
+            });
+
+            $("#dropdownlegend").mouseover(function(){
+                 $(".dropdown-menu").css("display": "block");
+            });
+
+            $("#closeLegend").click(function(){
+                $("#dropdownlegend").attr('aria-hidden', 'false');
+            });*/
+
+        });
+
+
+    </script>
+
+    <script> window.prerenderReady = false; </script>
+{% endblock %}

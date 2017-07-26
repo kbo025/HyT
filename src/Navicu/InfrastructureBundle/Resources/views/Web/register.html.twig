@@ -1,0 +1,293 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+        <title>Registro del Cliente.</title>
+    {% endif %}
+{% endblock seoMetadata %}
+
+{% block body %}
+
+    <main ng-app="registerModule" ng-controller="registerController" ng-init="modal=false" ng-cloak>
+        <div
+            class="nvc-register"
+            style="background-image: url({{ assets.img['images/images_original/navicu/homepage/register-client.jpg'] }})" ng-style="lazyStyles.bg">
+            <div class="nvc-container">
+                <!-- Items Informativos -->
+                <section class="col-xs-16 col-md-9 nvc-register__items">
+                    <h1>{{ "web.register.welcome"|transchoice(1) }}</h1>
+                    <div class="hidden-xs hidden-sm">
+                        <br>
+                        <h2>{{ "web.register.leading_platform"|trans}}</h2>
+                        <br>
+                        <h3>¡{{ "web.register.confirmation_reservation"|trans}}!</h3>
+                        <h3>{{ "web.register.advantages_we_offer"|trans}}
+                            <span>navicu.com</span>
+                        </h3>
+                    </div>
+                    <div class="hidden-xs hidden-sm">
+                        <br>
+                        <h2><i class="fa fn-reserva" style="margin-left:7px; margin-right:8px;"></i><span>{{ "web.register.manage_your_reservations"|trans}}</span></h2>
+                        <h2><i class="fa fn-star"></i><span>{{ "web.register.exclusive_offers"|trans}}</span></h2>
+                        <h2><i class="fa fn-historial"></i><span>{{ "web.register.check_history"|trans}}</h2>
+                        <h2><i class="fa fn-trophy"></i><span>¡{{ "web.register.free_hosting"|trans}}!</span></h2>
+                    </div>
+                </section>
+                <!-- Formulario de registro -->
+                <section class="col-xs-16 col-md-7 nvc-register__form">
+                    <h2>¿{{ "web.register.new_in_navicu"|trans}}? <strong>¡{{ "web.register.sign_up"|trans}}!</strong></h2>
+                    <form name="formRegister" class="nvc-form">
+                        <div class="nvc-row" ng-hide="isLoggedIn">
+                            <div class="col-xs-8">
+                                <a class="nvc-button nvc-button__facebook" ng-click="login()">
+                                    <span class="fa fa-facebook"></span>
+                                    <strong class="visible-lg">Ingresar con Facebook</strong>
+                                    <strong class="hidden-lg">Facebook</strong>
+                                </a>
+                            </div>
+                            <div class="col-xs-8">
+                                <div ng-app="directive.g+signin" ng-if="modal==false">
+                                    <google-plus-signin autorender="false" clientid="533158999432-p2qg5qoqjimnm1i34r7k3isnb3o020rj.apps.googleusercontent.com">
+                                    </google-plus-signin>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{ "word.last_name"|trans}} *</label>
+                                <input
+                                    type="text"
+                                    name="clientNames"
+                                    ng-model="form.fullName"
+                                    {#ng-change="form.card.holder = form.fullName"#}
+                                    required/>
+                                <span
+                                    class="error"
+                                    ng-show="formRegister.clientNames.$error.required
+                                    && formRegister.clientNames.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+
+                            </div>
+
+                            {% if (userLocation == 'VEN') or (userCurrency == 'VEF') %}
+                                <div class="col-xs-3" ng-init="form.typeIdentity = 'V'">
+                                  <label>{{ "word.identity_card"|trans}} *</label>
+                                  <select
+                                      ng-model="form.typeIdentity">
+                                      <option value="V">V</option>
+                                      <option value="E">E</option>
+                                      <option value="J">J</option>
+                                  </select>
+                                </div>
+                                <div class="col-xs-5" style="margin-top: 5px;">
+                                    <label for=""></label>
+                                    <input
+                                        type="text"
+                                        name="identityCard"
+                                        ng-model="form.identityCard"
+                                        {#ng-pattern="/^\d+$/"#}
+                                        {#ng-change="form.card.holder = form.identityCard"#}
+                                        required/>
+                                    <span
+                                        class="error"
+                                        ng-show="formRegister.identityCard.$error.required
+                                        && formRegister.identityCard.$touched">
+                                        {{ "share.validation.input_required"|trans }}
+                                    </span>
+                                </div>
+                            {% else %}
+                                <div class="col-xs-8">
+                                      <label>{{ "word.identity_card"|trans}} *</label>
+                                    <input
+                                        type="text"
+                                        name="identityCard"
+                                        ng-model="form.identityCard"
+                                        {#ng-pattern="/^\d+$/"#}
+                                        {#ng-change="form.card.holder = form.identityCard"#}
+                                        required/>
+                                    <span
+                                        class="error"
+                                        ng-show="formRegister.identityCard.$error.required
+                                        && formRegister.identityCard.$touched">
+                                        {{ "share.validation.input_required"|trans }}
+                                    </span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{"word.country"|trans }}</label>
+                                <select
+                                    name="country"
+                                    ng-model="form.country"
+                                    ng-options="val.id as val.title for (country, val) in countries" >
+                                    <option value="">Seleccione</option>
+                                </select>
+                                <span
+                                    class="error"
+                                    ng-show="formRegister.country.$error.required && formRegister.country.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                            <div class="col-xs-8">
+                                <label>{{ "word.state"|transchoice(1)}}</label>
+                                <select
+                                    name="state"
+                                    ng-disabled="form.country!=1 "
+                                    ng-model="form.state"
+                                    ng-options="valEstado.id as valEstado.title for (state, valEstado) in states | orderBy:'title'" >
+                                    <option value="">Seleccione</option>
+                                </select>
+                                <span
+                                    class="error"
+                                    ng-show="infoProperty.state.$error.required && infoProperty.state.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{ "word.mail"|trans}} *</label>
+                                <i
+                                    class="fa fn-denied logo-right-denied fa-1x"
+                                    ng-if="checkingEmail == 3 && form.email">
+                                </i>
+                                <i
+                                    class="fa fn-checkEmail logo-right-checked"
+                                    ng-if="checkingEmail == 2 && form.email">
+                                </i>
+                                <input
+                                    type="email"
+                                    name="clientEmail"
+                                    ng-model="form.email"
+                                    ng-disabled="!registered && socialNetwork"
+                                    required/>
+                                <span
+                                    class="logo-right"
+                                    ng-if="checkingEmail == 1">
+                                    <img
+                                        alt="Logo"
+                                        width="20"
+                                        height="20"
+                                        src="{{ asset('images/mini-loaderinput2.gif') }}" />
+                                </span>
+                                <span
+                                    class="error"
+                                    ng-show="formRegister.clientEmail.$error.required
+                                    && formRegister.clientEmail.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                                <span
+                                    class="error"
+                                    ng-show="formRegister.clientEmail.$error.email
+                                    && formRegister.clientEmail.$touched">
+                                    {{ "share.validation.error_email"|trans }}
+                                </span>
+                            </div>
+                            <div class="col-xs-8">
+                                <label>{{ "word.phone"|transchoice(1)}} *</label>
+                                <input
+                                    type="text"
+                                    name="clientPhone"
+                                    ng-model="form.phone"
+                                    required/>
+                                <span
+                                    class="error"
+                                    ng-show="formRegister.clientPhone.$error.required
+                                    && formRegister.clientPhone.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="nvc-row" ng-hide="isLoggedIn">
+                            <div class="col-xs-8">
+                                <label>{{ "word.password"|trans}} *</label>
+                                <input
+                                    type="password"
+                                    name="pass1"
+                                    ng-model="form.password"
+                                    ng-change="validatePass(form.password, form.pass2)"/>
+                                    <span
+                                        class="error"
+                                        ng-if="notMarge && formRegister.pass2.$touched">
+                                        {{ "share.validation.password_error"|trans }}
+                                    </span>
+                            </div>
+                            <div class="col-xs-8">
+                                <label>{{ "word.confirm_password"|trans}} *</label>
+                                <input
+                                    type="password"
+                                    name="pass2"
+                                    ng-model="form.pass2"
+                                    ng-change="validatePass(form.password, form.pass2)"/>
+                            </div>
+                        </div>
+                        <div class="nvc-row" style="margin-top:15px;">
+                            <div class="col-sm-8 hidden-xs">
+                                <label class="label-mail">
+                                    <input type="checkbox" value="" checked>{{ "web.register.information_mail"|trans}}
+                                </label>
+                            </div>
+                            <div class="col-xs-16 col-sm-8">
+                                <button
+                                    class="btn btn-primary"
+                                    type="submit"
+                                    ng-disabled="formRegister.$invalid || notMarge || checkingEmail==3"
+                                    ng-click="registerClient()"
+                                    >
+                                    {{ "word.book_in"|trans}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <!-- Items Informativos SM - XS -->
+        <div class="nvc-register nvc-register--min visible-xs visible-sm">
+            <div class="nvc-container">
+                <section class="col-xs-16 col-md-9 nvc-register__items">
+                    <h2>{{ "web.register.leading_platform"|trans}}</h2>
+                    <h3>¡{{ "web.register.confirmation_reservation"|trans}}!
+                        <br>{{ "web.register.advantages_we_offer"|trans}}
+                        <span>navicu.com</span>
+                    </h3>
+                    <h2><i class="fa fn-reserva" style="margin-left:7px; margin-right:8px;"></i><span>{{ "web.register.manage_your_reservations"|trans}}</span></h2>
+                    <h2><i class="fa fn-star"></i><span>{{ "web.register.exclusive_offers"|trans}}</span></h2>
+                    <h2><i class="fa fn-historial"></i><span>{{ "web.register.check_history"|trans}}</h2>
+                    <h2><i class="fa fn-trophy"></i><span>¡{{ "web.register.free_hosting"|trans}}!</span></h2>
+                </section>
+            </div>
+        </div>
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalDataLoading.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLogin.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalRegisterError.html.twig") }}
+    </main>
+
+
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var referer = "{{ referer }}";
+        var response = "{{ response }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% if app.environment == "dev" %}
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCkteypABffSV5FUMesiG0O-G0qngQ1Yhg"></script>
+    {% else %}
+    {% endif %}
+
+{% endblock %}

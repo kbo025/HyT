@@ -1,0 +1,102 @@
+Navicu\Core\Domain\Model\Entity\DeniedReservation:
+    type: entity
+    table: denied_reservation
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbDeniedReservationRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        public_id:
+            type: string
+            nullable: false
+        date_check_in:
+            type: date
+            nullable: false
+        date_check_out:
+            type: date
+            nullable: false
+        child_number:
+            type: integer
+        adult_number:
+            type: integer
+        special_request:
+            type: string
+            nullable: true
+        total_to_pay:
+            type: float
+#        net_rate:
+#            type: float
+#            options:
+#                default: 0
+        discount_rate:
+            type: float
+            options:
+                default: 0
+        tax:
+            type: float
+            options:
+                default: 0
+        reservation_date:
+            type: datetime
+            nullable: true
+        guest:
+            type: json_array
+            nullable: true
+        # representa el estado de una reserva donde:
+        # 0: prereserva: reserva en espera de pago por parte del cliente
+        # 1: por confirmar: pago a la espera de confirmación por parte de navicu
+        # 2: pago confirmado: reserva con pago confirmado
+        # 3: Reserva Cancelada: reserva que no procede por diferentes razones
+        status:
+            type: integer
+            options:
+                default: 0
+        # medio de pago, valor proveido por el paymentgateway utilizado
+        # 1: TDC
+        # 2: transferencia
+        payment_type:
+            type: integer
+        #utilizada para especificar detalles importantes de la reserva como por ejemplo motivos de cancelacion por parte de admin
+        #observations:
+            #type: string
+            #nullable: true
+        reservation_packages:
+            type: json_array
+            nullable: true
+        payments:
+            type: json_array
+            nullable: true
+        description:
+            type: text
+            nullable: false
+
+#    oneToOne:
+#        current_state:
+#            targetEntity: ReservationChangeHistory
+#            joinColumn:
+#                name: current_state
+#                referencedColumnName: id
+
+    manyToOne:
+        client_id:
+            targetEntity: ClientProfile
+            inversedBy: reservations
+            mappedBy: null
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        property_id:
+            targetEntity: Property
+            inversedBy: reservations
+            mappedBy: null
+            joinColumns:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+#    lifecycleCallbacks:
+#        prePersist: [publicIdToString, generateNetRate]

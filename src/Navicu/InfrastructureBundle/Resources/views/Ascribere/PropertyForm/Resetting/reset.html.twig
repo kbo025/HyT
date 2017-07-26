@@ -1,0 +1,33 @@
+{% extends "NavicuInfrastructureBundle:Ascribere/PropertyForm/Resetting:layoutResetting.html.twig" %}
+
+{% block content_title %}
+    <div class="col-xs-16" >
+        <h1 style="font-size:-webkit-xxx-large">
+            <b>
+                {% filter upper %}
+                    {{ "share.message.password_update"|trans}}
+                {% endfilter %}
+            </b>
+        </h1>
+        <h4><b>{{ "share.message.password_insert_new"|trans}}</b></h4>
+    </div>
+{% endblock content_title %}
+
+{% block content_form %}
+    <div class="col-xs-5 col-xs-offset-11">
+        <form action="{{ path('navicu_extranet_resetting_register_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+            {% for errorItem in form.plainPassword.first.vars.errors %}
+                <div class="alert alert-danger">
+                    <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <span>  {{ errorItem.message|trans }}</span>
+                </div>
+            {% endfor %}
+
+            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control my-imput', 'placeholder': 'contraseña nueva'}}) }}
+            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control my-imput', 'placeholder': 'repetir contraseña'}}) }}
+            <button type="submit"  class="btn btn-md btn-primary btn-home btn-block" > Actualizar </button>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+{% endblock content_form %}

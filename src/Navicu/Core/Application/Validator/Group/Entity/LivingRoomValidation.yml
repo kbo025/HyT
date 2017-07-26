@@ -1,0 +1,22 @@
+#Validación Bed
+Navicu\Core\Domain\Model\Entity\Livingroom:
+
+    properties:
+        amount_couch:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+            - GreaterThan:
+                value: 2
+                message: no_positive,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        amount_people:
+            - Type:
+                type: 2
+                message: is_Integer,{{ value }},{{ type }}
+            - GreaterThan:
+                value: 0
+                message: no_positive,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}

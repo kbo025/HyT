@@ -1,0 +1,85 @@
+<!DOCTYPE html "-//w3c//dtd xhtml 1.0 transitional //en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd"><html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <!--[if gte mso 9]><xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml><![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+
+    <title>Template Base</title>
+
+</head>
+<body style="width: 100% !important;min-width: 100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100% !important;margin: 0;padding: 0;background-color: #FFFFFF">
+<table width="300" style="padding-top: 20px;font-family: Arial;">
+    <tbody>
+    <tr>
+        <td>
+            <table width="100%" style="padding-bottom: 20px;">
+                <tbody>
+                <tr ALIGN="center"><td style="font-size: 12;padding-bottom: 5px;" >COPIA-CLIENTE</td></tr>
+                <tr ALIGN="center"><td style="padding-bottom: 5px"><strong>B  A  N  E  S  C  O</strong></td></tr>
+                <tr ALIGN="center"><td style="padding-bottom: 5px">COMPRA</td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                <tbody>
+                <tr><td style="font-size: 14;padding-bottom: 5px">NAVICU</td></tr>
+                <tr><td style="font-size: 14;padding-bottom: 5px">Av. Salvador Feo La Cruz Torre WTC piso 3 Oficina 3A Naguanagua Valencia</td></tr>
+                <tr><td style="font-size: 14;padding-bottom: 5px">J-18060085-2</td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table  style="padding: 10px 0px;">
+                <tbody>
+                <tr><td style="font-size: 14;padding-bottom: 5px">Fecha:</td><td style="font-size: 14;padding-bottom: 5px">{{ date }}</td></tr>
+                <tr><td style="font-size: 14;padding-bottom: 5px">Nro Ref:</td><td style="font-size: 14;padding-bottom: 5px">{{ reference }}</td></tr>
+                <tr><td style="font-size: 14;padding-bottom: 5px">Aprobación:</td><td style="font-size: 14;padding-bottom: 5px">{{ id }}</td></tr>
+                <tr><td style="font-size: 14;padding-bottom: 5px">Nro Orden:</td><td style="font-size: 14;padding-bottom: 5px">{{ order }}</td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%">
+                <tbody>
+                <tr ALIGN="center" ><td style="padding-bottom: 5px"><strong>Monto: Bs. {{ amount }}</strong></td></tr>
+                <tr ALIGN="center" ><td style="padding-bottom: 5px"><strong>{{ client }}</strong></td></tr>
+                <tr ALIGN="center" ><td style="padding-bottom: 5px"><strong>{{ clientId }}</strong></td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table style="padding: 10px 0px;">
+                <tbody>
+                <tr><td style="font-size: 12;padding-bottom: 5px">Aprobado</td></tr>
+                <tr><td style="font-size: 12;padding-bottom: 5px">credito</td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                <tbody>
+                <tr><td style="font-size: 12;padding-bottom: 5px">id</td><td style="font-size: 12;padding-bottom: 5px">{{ hash }}</td></tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

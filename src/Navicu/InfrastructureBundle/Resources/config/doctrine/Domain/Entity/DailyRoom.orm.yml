@@ -1,0 +1,59 @@
+Navicu\Core\Domain\Model\Entity\DailyRoom:
+    type: entity
+    table: daily_room
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbDailyRoomRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+            nullable: false
+        is_completed:
+            type: boolean
+            nullable: false
+        availability:
+            type: integer
+            nullable: true
+        cut_off:
+            type: integer
+            nullable: true
+        stop_sell:
+            type: boolean
+            nullable: true
+            options:
+                default: null
+        min_night:
+            type: integer
+            nullable: true
+        max_night:
+            type: integer
+            nullable: true
+        last_modified:
+            type: datetime
+            nullable: true
+
+
+    manyToOne:
+        room:
+            targetEntity: Room
+            cascade: {  }
+            mappedBy: null
+            inversedBy: daily_rooms
+            joinColumn:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    oneToMany:
+        #bloqueos de disponibilidad
+        lockeds:
+            targetEntity: LockedAvailability
+            mappedBy: blocked_dr
+
+    lifecycleCallbacks:
+        preUpdate: [ isCompleted , setLastModified ]
+        prePersist: [ isCompleted, setLastModified ]

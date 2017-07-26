@@ -1,0 +1,40 @@
+Navicu\Core\Domain\Model\Entity\Notification:
+    type: entity
+    table: notification
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbNotificationRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: datetime
+            nullable: false
+        view:
+            type: boolean
+            nullable: false
+        type:
+            type: integer
+        message:
+            type: string
+        data:
+            type: json_array
+            nullable: true
+
+    manyToOne:
+        sender:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: notification_output
+            joinColumn:
+                name: sender_id
+                referencedColumnName: id
+            cascade: ["persist"]
+        reciver:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: notification_input
+            joinColumn:
+                name: reciver_id
+                referencedColumnName: id
+            cascade: ["persist"]

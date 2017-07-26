@@ -1,0 +1,352 @@
+{% extends 'NavicuInfrastructureBundle:AAVV:layout.html.twig' %}
+
+{% block body %}
+	<div
+		ng-app='searchAAVVModule'
+        ng-controller='listPropertiesController'>
+		{{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+		<main
+			class='nvc-aavv__listProperties clearfix'
+	        ng-cloak>
+
+	        <form ng-submit="handleSearch()">
+	            <aside
+	                class="nvc-topsearch--aavv nvc-aavv-customize__navbar-menu"
+	                ng-cloak
+	            >
+	                <div class="nvc-container nvc-topsearch__fields">
+	                    <i class="fn-lens"></i>
+
+	                    <nvc-search-destinations
+	                        data-size="small"
+	                        selected-option="destination"
+
+	                        adults="adults"
+	                        children="children"
+	                        end-date="checkOut"
+	                        rooms="rooms"
+	                        start-date="checkIn"
+	                    ></nvc-search-destinations>
+	                </div>
+	            </aside>
+	        </form>
+
+            <section class="loader-properties col-md-offset-6" ng-show="isRequesting">
+                <img src="{{ asset('images/aavv/home/aavv-loader.gif') }}"/>
+            </section>
+
+		    <form
+				action="{{ pathSubdomain('navicu_aavv_set_data_reservation') }}"
+				class='col-xs-16'
+				method='post'
+				role='form'
+				style='padding-top: calc(70px + 2%);'
+				ng-class="{'loader-font':isRequesting}"
+				ng-hide="isRequesting || !listProperties"
+				id="mainForm">
+	            <section class="nvc-aavv__listProperties--header">
+	                <div class="col-md-10">
+		                <h1>Disfruta del inventario total de alojamientos disponibles</h1>
+		                <h2>Realiza la reserva que más se adapte a tu necesidad, puedes hacer reservas en distintos establecimientos</h2>
+	                </div>
+	            	<!--- Alerta -->
+	                <div
+	                	class="col-md-5 nvc-alert nvc-alert__creditAAVV nvc-affix hidden-xs"
+	                	ng-if="!dateAvailable">
+	                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	                    <span>¡Hey!</span>
+	                    <p>Selecciona un rango de fechas para poder continuar el proceso de reserva</p>
+	                </div>
+	            </section>
+				<table
+					class='nvc-table__aavv_properties col-md-16'>
+					<thead
+						ng-repeat-start='property in listProperties track by $index'
+						ng-init='posProperty=$index; property.showRooms=false'
+						ng-click='property.showRooms=!property.showRooms'
+						ng-class="{'odd': $odd, 'even': $even}">
+				        <tr style='height:3px;background-color:#fff;line-height: 0.8;'>
+				        	<th style='height:3px;background-color:#fff;padding:0;'></th>
+				        </tr>
+				        <tr>
+				        	<th> Id Alojamiento {[{property.publicId}]}</th>
+				        	<th ng-bind='property.name'> </th>
+				        	<th ng-bind='property.city'> </th>
+				        </tr>
+				    </thead>
+			        <tbody
+			        	ng-repeat-end
+			        	ng-hide='!property.showRooms && listProperties.length > 2'
+			        	ng-class="{active: property.showRooms}">
+			        	<tr class='title'>
+			        		<th class="first">Habitación</th>
+							<th>Servicio</th>
+							<th class='adults'>Adultos</th>
+							<th ng-if='property.acceptsChildren'>Niños</th>
+							<th>Política</th>
+							<th
+								class='adults'
+								ng-class="{'no-children': !property.acceptsChildren}">Precio por hab.</th>
+							<th class='min'>Cantidad</th>
+							<th class='min' ng-if='dateAvailable'>Total</th>
+						</tr>
+
+						{# Habitación agregada #}
+						<tr ng-repeat='(id, selectedRoom) in property.selectedRooms track by $index'>
+				        	<td class="first">
+						        <div class='nvc-form-group'>
+						            <select
+						                class='nvc-select__search'
+						                ng-model='selectedRoom.posRoom'
+						                ng-options='idRoom as room.name for (idRoom, room) in getAvailablesPosition(property.availableRooms, selectedRoom.posRoom)'
+						                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+	                                    ng-change='initRoom(property, selectedRoom, "{[{selectedRoom.posRoom}]}")'>
+		                         	</select>
+						        </div>
+				        	</td>
+				        	<td>
+						        <div class='nvc-form-group'>
+						            <select
+						                class='nvc-select__search'
+	                                    ng-disabled="!VIEW_PERMISSIONS.EDIT"
+						                ng-model='selectedRoom.posPack'
+						                ng-options='idPack as pack.name for (idPack, pack) in getAvailablesPosition(property.availableRooms[selectedRoom.posRoom].packages, selectedRoom.posPack)'
+						                ng-change='changePack(property, selectedRoom, "{[{selectedRoom.posPack}]}")'>
+		                         	</select>
+						        </div>
+				        	</td>
+				        	<td class="adults">
+						        <div class='nvc-form-group'>
+						            <select
+						                class='nvc-select__search'
+	                                    ng-disabled="!VIEW_PERMISSIONS.EDIT"
+						                ng-model='selectedRoom.numAdults'
+						                ng-options='n for n in [] | range:property.availableRooms[selectedRoom.posRoom].minPeople:property.availableRooms[selectedRoom.posRoom].maxPeople'
+						                ng-change='asignPrice(property, selectedRoom, property.availableRooms[selectedRoom.posRoom])'>
+		                         	</select>
+						        </div>
+				        	</td>
+				          	<td ng-if='property.acceptsChildren'>
+						        <div class='nvc-form-group  col-md-8'>
+						            <select
+						                class='nvc-select__search'
+	                                    ng-disabled="!VIEW_PERMISSIONS.EDIT"
+						                ng-model='selectedRoom.numChildren'
+						                ng-options='n for n in [] | range:0:property.availableRooms[selectedRoom.posRoom].maxPeople-selectedRoom.numAdults'
+						                ng-change='asignPrice(property, selectedRoom, property.availableRooms[selectedRoom.posRoom])'>
+		                         	</select>
+						        </div>
+						        <div class='col-md-8' ng-repeat-n='selectedRoom.numChildren'>
+						        	<select
+						                class='nvc-select__search'
+	                                    ng-disabled="!VIEW_PERMISSIONS.EDIT"
+						                ng-model='selectedRoom.ageChildren[$index]'
+						                ng-options='n for n in [] | range: property.agePolicy.child[0]:property.agePolicy.child[1]'>
+	                                    <option value='' disabled> Edad </option>
+		                         	</select>
+						        </div>
+						        <div class='col-md-8' ng-if='!selectedRoom.numChildren'>
+						        	<select
+						                class='nvc-select__search'
+						                disabled>
+	                                    <option value='' disabled> Edad </option>
+		                         	</select>
+						        </div>
+				        	</td>
+				        	<td>
+						        <div class='nvc-form-group'>
+									<select
+						                class='nvc-select__search'
+	                                    ng-disabled="!VIEW_PERMISSIONS.EDIT"
+						                ng-model='selectedRoom.posPolicy'
+						                ng-options='idPolicy as policy.name for (idPolicy, policy) in property.availableRooms[selectedRoom.posRoom].packages[selectedRoom.posPack].cancellationPolicies'>
+		                         	</select>
+						        </div>
+				        	</td>
+				        	<td
+				        		class="adults"
+				        		ng-class="{'no-children': !property.acceptsChildren}">
+						        <div class='nvc-form-group rate'>
+						        	<span ng-if='!dateAvailable && selectedRoom.rate'>Desde</span>
+						            <span ng-if='selectedRoom.rate'> Bs {[{selectedRoom.rate | number}]}</span>
+						        </div>
+				        	</td>
+				        	<td class='min'>
+						        <div class='nvc-form-group'>
+						            <select
+						                class='nvc-select__search'
+	                                    ng-disabled="!VIEW_PERMISSIONS.EDIT || !dateAvailable"
+						                ng-model='selectedRoom.numRooms'
+						                ng-change="updateAvailability(property, selectedRoom, selectedRoom.numRooms, {[{selectedRoom.numRooms}]})"
+						                {#ng-options='n for n in [] | range:1:getAvailability(selectedRoom.numRooms, selectedRoom.room, selectedRoom.pack, property);'>#}
+						                ng-options='n for n in [] | range:1:getTotalAvailability(property, selectedRoom)'>
+		                         	</select>
+						        </div>
+				        	</td>
+				        	<td class='min' ng-if='dateAvailable'>
+				        		<div class='rate' ng-if='selectedRoom.totalRate'> Bs {[{selectedRoom.totalRate | number}]} </div>
+				        	</td>
+				        	<td
+				        		class='remove'
+				        		ng-click='deleteRoom(property, selectedRoom, id);'>
+				        		<i class="fn-papelera"></i>
+				        	</td>
+				        	<td
+				        		class='remove'
+				        		ng-click='addRoom(property);'
+				        		ng-if='dateAvailable && id == property.selectedRooms.length-1 && selectedRoom.posRoom && getAvailablesPosition(property.availableRooms) != null'>
+				        		<i class="fn-add"></i>
+				        	</td>
+				        	<input
+				        		ng-if='selectedRoom.numPack!=null'
+								type='hidden'
+								value='{[{selectedRoom.posPack}]}'
+								name='properties[{[{ posProperty }]}][packages][{[{selectedRoom.numPack}]}][id]'/>
+							<input
+								ng-if='selectedRoom.numPack!=null'
+								type='hidden'
+								value='{[{property.availableRooms[selectedRoom.posRoom].packages[selectedRoom.posPack].cancellationPolicies[selectedRoom.posPolicy].id}]}'
+								name='properties[{[{posProperty}]}][packages][{[{selectedRoom.numPack}]}][cancellationPolicies][{[{selectedRoom.numPolicy}]}][id]'/>
+							<input
+								ng-if='selectedRoom.numPack!=null'
+								type='hidden'
+								value='{[{selectedRoom.numRooms}]}'
+								name='properties[{[{posProperty}]}][packages][{[{selectedRoom.numPack}]}][cancellationPolicies][{[{selectedRoom.numPolicy}]}][numRooms]'/>
+							<input
+								ng-if='selectedRoom.numPack!=null'
+								type='hidden'
+								value='{[{selectedRoom.numAdults}]}'
+								name='properties[{[{posProperty}]}][packages][{[{selectedRoom.numPack}]}][cancellationPolicies][{[{selectedRoom.numPolicy}]}][numAdults]'/>
+				        	<input
+				        		ng-if='selectedRoom.numPack!=null'
+								type='hidden'
+								value='{[{selectedRoom.numChildren}]}'
+								name='properties[{[{posProperty}]}][packages][{[{selectedRoom.numPack}]}][cancellationPolicies][{[{selectedRoom.numPolicy}]}][numChildren]'/>
+							<td ng-repeat='num in selectedRoom.ageChildren track by $index' style='display: none;'>
+								<input
+									type='hidden'
+									value='{[{num}]}'
+									name='properties[{[{posProperty}]}][packages][{[{selectedRoom.numPack}]}][cancellationPolicies][{[{selectedRoom.numPolicy}]}][ageOfChildren][{[{$index}]}]'>
+							</td>
+				        </tr>
+						<input
+							ng-if='property.numPackages>0'
+							type='hidden'
+							value='{[{property.id}]}'
+							name='properties[{[{posProperty}]}][id]'/>
+				    </tbody>
+			    </table>
+	            <div
+	            	class="total-reservation col-md-16"
+	            	ng-show="dateAvailable && rate.total && rate.total>0">
+	                <div class="col-md-10 total-reservation-left">
+						<div class="bestPrice">
+							<h4>¡Mejor precio garantizado!</h4>
+							<img src="{{ asset('images/preciogarantizado.png') }}" >
+						</div>
+	                </div>
+	                <div class="col-md-6 total-reservation-right">
+						<div class="totalGlobal col-md-7">
+							<h1>Subtotal Bs {[{rate.subTotal}]}</h1>
+							<h1>IVA Bs {[{rate.tax | number}]} </h1>
+							<h1>Total Bs {[{rate.total | number}]}</h1>
+						</div>
+						<div class="buttons col-md-9">
+							<button
+									class='nvc-button nvc-button__search--aavv nvc-aavv-customize__button--primary lock-button'
+									type="button"
+									ng-if="rate.total && rate.total>0 && !showModalAnteriority"
+									ng-click="lock()">
+								Bloquear 24h
+							</button>
+							<button
+									class='nvc-button nvc-button__search--aavv nvc-aavv-customize__button--primary reserve-button'
+									ng-disabled="!VIEW_PERMISSIONS.EDIT || rate.accepted == false"
+									type="button"
+									ng-if="rate.total && rate.total>0 && showReservationButton"
+									ng-click="reserve()">
+								Reservar
+							</button>
+						</div>
+	                </div>
+	            </div>
+	            <div
+	            	class="col-md-16 confirmation"
+	            	align="center"
+	            	ng-if="dateAvailable">
+	                <!--- Alerta -->
+	                <div
+	                	class="alert nvc-alert__creditAAVV"
+	                	ng-if="rate.accepted == false && totalCredit > 0">
+	                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	                    <span>¡Hey!</span>
+	                    <p>No dispones de crédito suficiente para realizar
+	                    la reserva, consulta tu estado financiero para continuar</p>
+	                </div>
+
+	            </div>
+				<div
+						class="col-md-16 confirmation"
+						align="center"
+						ng-if="dateAvailable">
+					<!--- Alerta -->
+					<div
+							class="alert nvc-alert__creditAAVV nvc-affix hidden-xs"
+							ng-if="showModalAnteriority && totalCredit == 0">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<span>¡Hey!</span>
+						<p>No podrás realizar tu reserva, si no cuentas con un mínimo de 7 dias de antelación</p>
+					</div>
+				</div>
+
+			   	<input
+	                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+					type='hidden'
+					value='{[{checkIn}]}'
+					name='checkIn'/>
+				<input
+	                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+					type='hidden'
+					value='{[{checkOut}]}'
+					name='checkOut'/>
+				<input
+	                ng-disabled="!VIEW_PERMISSIONS.EDIT"
+					type='hidden'
+					value='{[{slug}]}'
+					name='location'/>
+				<input
+						ng-disabled="!VIEW_PERMISSIONS.EDIT"
+						type='hidden'
+						value='{[{reservationType}]}'
+						id="reservationType"
+						name='reservation_type'/>
+		    </form>
+
+		    <section
+		    	class="unavailable"
+		    	ng-show="noAvailable">
+
+		    	<div class="col-md-6 col-md-offset-1">
+				    <div class="nvc-jumbotron">
+				        <img src="/images/aavv/home/alert-home.png"/>
+				        <p>¡Hey!</p>
+				        <h4>No hay disponibilidad para las fechas que solicitaste</h4>
+				        <h5>Por favor intenta nuevamente tu búsqueda entre nuestras amplias opciones</h5>
+				    </div>
+				</div>
+	    	</section>
+
+		</main>
+	</div>
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+	<script type="text/javascript">
+    var data = {{ data | raw }};
+    console.log("Data", data);
+	</script>
+{% endblock javascripts %}
+

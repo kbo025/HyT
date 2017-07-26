@@ -1,0 +1,125 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'historyMassload'} %}
+
+{% block title %} {{ "extranet.title.generic"|trans }} {% endblock %}
+
+
+{% block body %}
+    <div ng-app="historyModule" ng-controller="logController">
+        <div class="historic container" ng-cloak>
+            <div class="row">
+                <div class="historic-load">
+                    <section class="col-sm-5">
+                        <h5><i class="fa fn-calendar2 "></i> {{ "extranet.message.date_modified"|trans }}:  <strong ng-bind="logs.date"></strong></h5>
+                        <h5><i class="fa fn-historial "></i> {{ "extranet.message.time_modified"|trans }}: <strong ng-bind="logs.time"></strong></h5>
+                    </section>
+                    <section class="col-sm-5">
+                        <h5>{{ "extranet.message.modified_by"|trans }}: <strong ng-bind="logs.ownerProfile"></strong> </h5>
+                        <h5>{{ "extranet.message.massload"|trans }}</h5>
+                    </section>
+                </div>
+            </div>
+
+            {{ include("NavicuInfrastructureBundle:Extranet/History:calendar.html.twig", {"calendar": calendar_marked_days.calendar}) }}
+
+            <!-- Habitaciones -->
+            <div ng-repeat="room in logs.rooms">
+                <div class="col-xs-16 " style="margin-top:30px">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="text-center">{{ "extranet.message.room_type"|trans }}</th>
+                                <th class="text-center">{{ "extranet.message.availability"|trans  }} </th>
+                                <th class="text-center">{{ "extranet.message.min_nights"|trans  }}</th>
+                                <th class="text-center">{{ "extranet.message.max_nights"|trans  }}</th>
+                                <th class="text-center">{{ "extranet.message.advance"|trans  }}</th>
+                                <th class="text-center">{{ "extranet.message.stop_sell"|trans  }} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center" ng-bind="room.name"></td>
+                                <td class="text-center" ng-if="room.data.availability" ng-bind="room.data.availability"></td>
+                                <td class="text-center" ng-if="!room.data.availability">-</td>
+                                <td class="text-center" ng-if="room.data.minNight" ng-bind="room.data.minNight"></td>
+                                <td class="text-center" ng-if="!room.data.minNight">-</td>
+                                <td class="text-center" ng-if="room.data.maxNight" ng-bind="room.data.maxNight"></td>
+                                <td class="text-center" ng-if="!room.data.maxNight">-</td>
+                                <td class="text-center" ng-if="room.data.cutOff" ng-bind="room.data.cutOff"></td>
+                                <td class="text-center" ng-if="!room.data.cutOff">-</td>
+                                <td class="text-center" ng-if="room.data.stopSell && room.data.stopSell==true">{{ "share.message.yes"|trans }}</td>
+                                <td class="text-center" ng-if="room.data.stopSell && room.data.stopSell!=true">{{ "share.message.no"|trans }}</td>
+                                <td class="text-center" ng-if="!room.data.stopSell">-</td>
+                                <br>
+                            <tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Servicios -->
+                <div ng-if="room.packages[0]">
+                    <div class="col-xs-16">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">{{ "extranet.message.services"|trans }}</th>
+                                    <th class="text-center">{{ "extranet.message.availability"|trans  }} </th>
+                                    <th class="text-center">{{ "extranet.message.min_nights"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.max_nights"|trans  }}</th>
+                                    <th class="text-center">{{ "extranet.message.sell_rate"|transchoice(0) }}</th>
+                                    <th class="text-center">{{ "extranet.message.co"|trans  }} </th>
+                                    <th class="text-center">{{ "extranet.message.ctd"|trans  }} </th>
+                                    <th class="text-center">{{ "extranet.message.cta"|trans  }} </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="services in room.packages">
+                                    <td class="text-center" ng-if="services.name" ng-bind="services.name"></td>
+                                    <td class="text-center" ng-if="!services.name">-</td>
+                                    <td class="text-center" ng-if="services.specificAvailability" ng-bind="services.specificAvailability"></td>
+                                    <td class="text-center" ng-if="!services.specificAvailability">-</td>
+                                    <td class="text-center" ng-if="services.minNight" ng-bind="services.minNight"></td>
+                                    <td class="text-center" ng-if="!services.minNight">-</td>
+                                    <td class="text-center" ng-if="services.maxNight" ng-bind="services.maxNight"></td>
+                                    <td class="text-center" ng-if="!services.maxNight">-</td>
+                                    <td class="text-center" ng-if="services.price" ng-bind="services.price"></td>
+                                    <td class="text-center" ng-if="!services.price">-</td>
+                                    <td class="text-center" ng-if="services.closeOut && services.closeOut==true">{{ "share.message.yes"|trans }}</td>
+                                    <td class="text-center" ng-if="services.closeOut && services.closeOut!=true">{{ "share.message.no"|trans }}</td>
+                                    <td class="text-center" ng-if="!services.closeOut">-</td>
+                                    <td class="text-center" ng-if="services.closedToDeparture && services.closedToDeparture==true">{{ "share.message.yes"|trans }}</td>
+                                    <td class="text-center" ng-if="services.closedToDeparture && services.closedToDeparture!=true">{{ "share.message.no"|trans }}</td>
+                                    <td class="text-center" ng-if="!services.closedToDeparture">-</td>
+                                    <td class="text-center" ng-if="services.closedToArrival && services.closedToArrival==true">{{ "share.message.yes"|trans }}</td>
+                                    <td class="text-center" ng-if="services.closedToArrival && services.closedToArrival!=true">{{ "share.message.no"|trans }}</td>
+                                    <td class="text-center" ng-if="!services.closedToArrival">-</td>
+                                    <br>
+                                <tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {#-- Ventana modal para indicar que se está cargando una petición--#}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var extension ="{{ app.request.attributes.get('extension') }}";
+        var slug = "{{ slug }}";
+        var log = "{{logFile}}";
+    </script>
+
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

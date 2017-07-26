@@ -1,0 +1,53 @@
+<script id="modal-aavv-register.tpl" type="text/ng-template">
+    <div class="nvc-modal" tabindex="-1" role="dialog" style="overflow-x:hidden;  overflow-y:hidden;">
+
+        <div class="nvc-modal__register center-block clearfix">
+
+            <div class="nvc-modal__header">
+                <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="hidden-xs">Hey!</h3>
+                <h3 class="visible-xs">Hey!</h3>
+            </div>
+
+            <div class="nvc-modal__content">
+                <div class="nvc-row">
+                    <div class="col-xs-16">
+                        <div class="nvc-modal__content--error" >
+                            <span>
+                                Aun no completas los pasos necesarios para culminar
+                                el registro
+                            </span>
+                        </div>
+
+                        <div class="nvc-modal__content--message">
+                            <span class="hidden-xs">Dirígete a los siguientes enlaces para completarlos:</span>
+                            <span class="visible-xs">Enlaces para completarlos:</span>
+                        </div>
+                    </div>
+
+                    <!-- Imagen dentro del mensaje de Error -->
+
+                    <div class="nvc-row">
+                        <div class="col-xs-16 nvc-modal__content--steps">
+                            <div class="col-xs-5">
+                                <div ng-repeat='step in stepsInvalid'>
+                                    <a href="{[{ step.routing }]}">
+                                        <span>Paso {[{ step.numberStep }]}</span>
+                                    </a>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 nvc-modal__content--margin">
+                                <img src="/images/registroincompleto.png" class="img-responsive" alt="image">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Contenido del Modal -->
+        </div>
+        <!-- End Modal Error -->
+    </div>
+</script>
+

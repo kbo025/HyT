@@ -1,0 +1,75 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    <main   class="nvc-admin__details visible-md visible-lg"
+            ng-controller="TravelAgencyDetailsCtrl"
+            ng-cloak
+    >
+
+        <div class="nvc-secondaryTableHeader--admin">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/detailsAAVVHeader.html.twig" %}
+        </div>
+        <div class="nvc-container">
+            <div class="nvc-admin__details--header">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/detailsAAVVContentTop.html.twig" %}
+            </div>
+            <div class="nvc-admin__details--content">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/detailsAAVVContent.html.twig" %}
+            </div>
+            <div class="nvc-admin__details--content" ng-show="reserves.length > 0">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/detailsAAVVSearch.html.twig" %}
+            </div>
+        </div>
+        <div class="nvc-table--admin nvc-container" ng-show="reserves.length > 0">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/detailsAAVVTable.html.twig" %}
+        </div>
+        <div class="nvc-container" ng-if="page.pageCount > 1">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/detailsAAVVPagination.html.twig" %}
+        </div>
+
+        <br />
+        <br />
+        <br />
+
+    </main>
+
+    <main
+        class="visible-sm visible-xs"
+        ng-controller="TravelAgencyDetailsCtrl"
+        ng-cloak
+    >
+        <div class="nvc-secondaryTableHeader--admin--movil">
+            <div class="col-xs-16 col-sm-16">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/mobile/detailsAAVVHeader.html.twig" %}
+            </div>
+        </div>
+        <div class="nvc-admin__details--content">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/mobile/detailsAAVVContent.html.twig" %}
+        </div>
+        <div  ng-if="reserves.length > 0" class="nvc-secondaryTableHeader--admin--movil">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/mobile/detailsAAVVSearch.html.twig" %}
+        </div>
+        <div  ng-if="reserves.length > 0" class="nvc-table--admin--movil">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/mobile/detailsAAVVTable.html.twig" %}
+        </div>
+        <div class="nvc-container" ng-if="page.pageCount > 1">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/details/detailsAAVVPagination.html.twig" %}
+        </div>
+    </main>
+
+{% endblock content %}
+
+{% block scripts  %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        var response = {{ data | raw }};
+        console.log("response", response);
+    </script>
+
+    {{ parent() }}
+
+{% endblock %}

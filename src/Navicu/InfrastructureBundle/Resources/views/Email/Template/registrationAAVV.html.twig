@@ -1,0 +1,80 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %} {% block body %}
+
+<!-- header -->
+<table border="0" cellpadding="0" cellspacing="0" width="600" align="left">
+    <!-- HEADER ROW // -->
+    <tr>
+        <td align="center" valign="top">
+            <!-- CENTERING TABLE // -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+                <td style="padding-left:10px;padding-top: 18px;padding-bottom: 18px">
+                    <img src="http://navicu.com/images/logo-correo-contrasena.png" style="width:200px;">
+                </td>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #F2F2F2">
+                <tr>
+                    <td style="padding-left: 20px;padding-top: 12px">
+                        <span style="font-size: 18px;font-weight: bold;color: #391860">¡La afiliación está completa! Bienvenido a Vicander</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 20px;padding-top: 12px;padding-right: 10px;">
+                        <span style="font-weight: bold;color:#808080">Ahora podrás acceder al inventario de alojamientos disponibles y disfrutar de los beneficios que Vicander tiene para tu agencia</span>
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="background-color: #F2F2F2">
+                <tr>
+                    <td></td>
+                    <td style="border-bottom: 1px solid #E6E6E6;width: 564px !important;text-align: left !important;" align="left">&nbsp;</td>
+                    <td></td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #F2F2F2">
+                <tr>
+                    <td style="padding-left: 15px;padding-top: 5px">
+                        <ul style="margin: 10px 0 0 0;font-weight: bold;color:#B42371;font-style: italic;font-size: .8em;">
+                            <li style="padding-bottom: 10px;"><span style="font-weight: bold;">Accede sin importar el momento o la ubicación</span></li>
+                            <li style="padding-bottom: 10px;"><span style="font-weight: bold;">Personaliza el módulo de tu agencia acorde a su imagen corporativa</span></li>
+                            <li><span style="font-weight: bold;">Contarás con soporte en línea cuando lo necesites</span></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #F2F2F2">
+                <tr>
+                    <td style="padding-right: 15px;padding-bottom: 10px;text-align: right;">
+                        <a href="http://www.navicu.dev/app_dev.php/aavv/login" style="border-bottom:none;display: inline-block;"><img src="http://navicu.dev/images/navicu/vicander-button-08.png"></a>
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: white">
+                <tr>
+                    <td style="text-align: right;padding-right: 10px;padding-top: 10px !important;">
+                        <span style="font-size: 12px !important;color:#572A85;font-weight: bold;">¿Tienes alguna duda?</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;padding-right: 10px;padding-bottom: 10px !important;">
+                        <span style="font-size: 12px !important;color: #4D4D4D">preguntas@navicu.com</span>
+                    </td>
+                </tr>
+                <tr style="line-height: 0px">
+                    <td align="left" valign="top">
+                        <img src="http://navicu.com/images/navicu/corporate_line.png" style="width: 600px !important;" width="600px">
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{% endblock body %}

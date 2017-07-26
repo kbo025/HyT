@@ -1,0 +1,74 @@
+
+Navicu\Core\Domain\Model\Entity\AAVVProfile:
+
+    properties:
+
+        full_name:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        managerName:
+            - Type:
+                type: string
+                message: is_string,{{value}},{{type}}
+            - NotBlank:
+                message: is_string,{{ value }},{{ type }}
+        manager_birth_date:
+            - Date:
+                message: is_not_date,{{ value }},{{ type }}
+        rif:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        company_email:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        manager_email:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        cell_phone:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            #- NotBlank:
+             #   message: is_null,{{ value }},{{ type }}
+        local_phone:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        manager_cell:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            #- NotBlank:
+             #   message: is_null,{{ value }},{{ type }}
+        corporate_phone:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+           # - NotBlank:
+            #    message: is_null,{{ value }},{{ type }}
+        zip_code:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        address:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

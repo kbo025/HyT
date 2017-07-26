@@ -1,0 +1,156 @@
+Navicu\Core\Domain\Model\Entity\Room:
+    type: entity
+    table: room
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRoomRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        low_rate:
+            type: float
+            precision: 10
+            scale: 0
+            nullable: true
+        base_availability:
+            type: integer
+            nullable: true
+        min_people:
+            type: integer
+            nullable: false
+        max_people:
+            type: integer
+            nullable: false
+        #tipo de incremento para los adultos 1:porcentaje 2:monto fijo
+        variation_type_people:
+            type: integer
+            nullable: false
+        #tipo de incremento para cada rango de edad de niños 1:porcentaje 2:monto fijo
+        variation_type_kids:
+            type: json_array
+            nullable: true
+        amount_rooms:
+            type: integer
+            nullable: false
+        smoking_policy:
+            type: boolean
+            nullable: true
+        is_active:
+            type: boolean
+            nullable: false
+            options:
+                default: true
+        name:
+            type: string
+            nullable: false
+        size:
+            type: float
+            nullable: true
+        increment:
+            type: boolean
+            nullable: true
+        increment_kid:
+            type: boolean
+            nullable: true
+            options:
+                default: false
+        #indica si las politicas de aumneto por niño son iguales a las politicas de aumento por adultos
+        kid_pay_as_adult:
+            type: boolean
+            options:
+                default: true
+        #indica si será el mismo incremento para todas las cantidades de personas permitidas en la habitacion
+        same_increment_adult:
+            type: boolean
+            options:
+                default: true
+        #indica si será el mismo incremento para todas las cantidades de niñor permitidos en la habitación
+        same_increment_kid:
+            type: boolean
+            options:
+                default: true
+        slug:
+            type: string
+            length: 255
+            nullable: true
+            unique: true
+
+    oneToOne:
+        profile_image:
+            targetEntity: RoomImagesGallery
+            joinColumn:
+                name: profile_image
+                referencedColumnName: id
+            cascade: ["persist"]
+
+    oneToMany:
+        livingrooms:
+            targetEntity: Livingroom
+            mappedBy: room
+            cascade: ["persist"]
+        bedrooms:
+            targetEntity: Bedroom
+            mappedBy: room
+            cascade: ["persist"]
+        features:
+            targetEntity: RoomFeature
+            mappedBy: room
+            cascade: ["persist"]
+        i_am_child:
+            targetEntity: RoomLinkage
+            mappedBy: child
+        i_am_parent:
+            targetEntity: RoomLinkage
+            mappedBy: parent
+        parent_room_pack:
+            targetEntity: RoomPackLinkage
+            mappedBy: parent
+        daily_rooms:
+            targetEntity: DailyRoom
+            mappedBy: room
+        rates_by_peoples:
+            targetEntity: RateByPeople
+            mappedBy: room
+            orderBy: { 'number_people': 'ASC' }
+            cascade: ["persist"]
+        rates_by_kids:
+            targetEntity: RateByKid
+            mappedBy: room
+            cascade: ["persist"]
+        packages:
+            targetEntity: Pack
+            mappedBy: room
+            cascade: ["persist"]
+        packages_linkage:
+            targetEntity: PackLinkage
+            mappedBy: room
+        images_gallery:
+            targetEntity: RoomImagesGallery
+            mappedBy: room
+            cascade: ["persist"]
+
+    manyToOne:
+        property:
+            targetEntity: Property
+            mappedBy: null
+            inversedBy: rooms
+            joinColumns:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        type:
+            targetEntity: RoomType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: types_room
+            joinColumns:
+                type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks:
+        prePersist: [prePersist,setSlug]
+        preUpdate: [setSlug]

@@ -1,0 +1,184 @@
+<script id="modal-daily-room.tpl" type="text/ng-template">
+    <div class="modal modal-daily" tabindex="-1" role="dialog">
+        <div class="modal-dialog-daily modal-dialog-dailyroom">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span ng-bind="pack.date"></span>
+                    <span class="close" ng-click="$hide()">&times;</span>
+                    -
+                    <span ng-bind="pack.name"></span>
+                    -{{ "share.message.detail"|trans }}
+                </div>
+                <div class="title">
+                    <div class="col-xs-8 title-section">&nbsp;</div>
+                    <div class="col-xs-4 title-section"><strong>{{ "extranet.message.current_value"|trans }}</strong></div>
+                    <div class="col-xs-4 col-sm-4 text-center title-section"><strong>{{ "extranet.message.new_value"|trans }}</strong></div>
+                </div>
+                <form name="form">
+                    <div class="modal-body">
+                        
+                        <!--- Fila de disponibilidad -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.total_availability"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div ng-if="pack.dailyRoom && pack.dailyRoom.availability>0">
+                                    <span ng-bind="pack.dailyRoom.availability"></span>
+                                </div>
+                                <div ng-if="!pack.dailyRoom || pack.dailyRoom.availability==0">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 control-group" ng-class="{'has-error' : form.availability.$invalid && form.availability.$touched}">
+                                <input type="number" name="availability" id="input" class="form-control form-control-load input-sm" 
+                                ng-model="newPack.availability" ng-min="baseAvailability" ng-pattern="/^\d+$/"/>
+                            </div>
+                        </div>
+                        <div class="row alert alert-danger modal-alert" role="alert" ng-show="form.availability.$invalid  && form.availability.$touched">
+                            <span ng-show="form.availability.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.availability.$error.min">
+                                {{ "share.validation.availability_higher_base"|trans }} 
+                                <strong>({[{baseAvailability}]})</strong>
+                            </span>
+                            <span ng-show="form.availability.$error.pattern">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de mínimo de Noches -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.min_night"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div ng-if="pack.dailyRoom">
+                                    <span ng-bind="pack.dailyRoom.minNight"></span>
+                                </div>
+                                <div ng-if="!pack.dailyRoom || !pack.dailyRoom.minNight">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 control-group" ng-class="{'has-error':form.minNight.$invalid && form.minNight.$touched}">
+                                <input type="number" name="minNight" id="input" class="form-control form-control-load input-sm" 
+                                       ng-model="newPack.minNight" ng-pattern="/^\d+$/" min="1" ng-max="newPack.maxNight"/>
+                            </div>
+                        </div>
+                        <div class="row alert alert-danger modal-alert" role="alert" ng-show="form.minNight.$invalid && form.minNight.$touched">
+                            <span ng-show="form.minNight.$error.max">
+                                {{ "share.validation.maxNight_is_lower"|trans }}
+                                <strong>{{ "share.validation.minNight"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.minNight.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.minNight.$error.min">
+                                <strong>{{ "share.validation.enter_more"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.minNight.$error.pattern">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de máximo de Noches -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.max_night"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div ng-if="pack.dailyRoom && pack.dailyRoom.maxNight!=365">
+                                    <span ng-bind="pack.dailyRoom.maxNight"></span>
+                                </div>
+                                <div ng-if="!pack.dailyRoom || !pack.dailyRoom.maxNight || pack.dailyRoom.maxNight==365">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 control-group" ng-class="{'has-error' : form.maxNight.$invalid && form.maxNight.$touched}">
+                                <input type="number" name="maxNight" id="input" ng-min="newPack.minNight" ng-pattern="/^\d+$/"
+                                    class="form-control form-control-load input-sm" ng-model="newPack.maxNight"/>
+                            </div>
+                        </div>
+                        <div class="row alert alert-danger modal-alert" role="alert" ng-show="form.maxNight.$invalid && form.maxNight.$touched">
+                            <span ng-show="form.maxNight.$error.min">
+                                {{ "share.validation.maxNight_is_lower"|trans }}
+                                <strong>{{ "share.validation.minNight"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.maxNight.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.maxNight.$error.pattern">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de Antelación -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.cut_off"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div ng-if="pack.dailyRoom">
+                                    <span ng-bind="pack.dailyRoom.cutOff"></span>
+                                </div>
+                                <div ng-if="!pack.dailyRoom">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 control-group" ng-class="{'has-error' : form.cutOff.$invalid && form.cutOff.$touched}">
+                                <input type="number" name="cutOff" id="input" class="form-control form-control-load input-sm"
+                                ng-model="newPack.cutOff" min="0" ng-pattern="/^\d+$/"/>
+                            </div>
+                        </div>
+                        <div class="row alert alert-danger modal-alert" role="alert"  ng-show="form.cutOff.$invalid && form.cutOff.$touched">
+                            <span ng-show="form.cutOff.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.cutOff.$error.min">
+                                <strong>{{ "share.validation.enter_more"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.cutOff.$error.pattern">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de Cerrar Ventas -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.stop_sell"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div ng-if="pack.dailyRoom.stopSell == false">
+                                    <span>{{ "share.message.no"|trans }}</span>
+                                </div>
+                                <div ng-if="pack.dailyRoom.stopSell == true">
+                                    <span>{{ "share.message.yes"|trans }}</span>
+                                </div> 
+                                <div ng-if="!pack.dailyRoom">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4" style="margin-left:-10px;">
+                                <md-switch ng-model="newPack.stopSell" aria-label="ctd" class="md-warn no-margin-top-bottom">
+                                    <span ng-if="newPack.stopSell == true">&nbsp;{{ "share.message.yes"|trans }}</span>
+                                    <span ng-if="newPack.stopSell == false">&nbsp;{{ "share.message.no"|trans }}</span>
+                                    <span ng-if="newPack.stopSell == null">&nbsp;{{ "share.message.no"|trans }}</span>
+                                </md-switch>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row modal-footer">
+                        <button type="button" class="nvc-button nvc-button--default" ng-click="modalRoom.editPack(newPack)" ng-disabled="form.$invalid || form.$pristine">
+                            <strong>{{ "share.action.submit"|trans }}</strong>
+                        </button>
+                        <button type="button" class="nvc-button nvc-button--cancel" style="margin-right:20px;" ng-click="$hide()">
+                            <strong>{{ "share.action.cancel"|trans }}</strong>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>

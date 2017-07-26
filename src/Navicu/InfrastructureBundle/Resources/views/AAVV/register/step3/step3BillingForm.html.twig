@@ -1,0 +1,253 @@
+<div class='nvc-row'>
+    <div class='col-md-16 col-xs-16 nvc-padding'>
+        <div class='col-md-6 col-xs-16'>
+            <div class='nvc-form-group'>
+                <label for='razon social'>Razón social</label>
+                <input
+                    class='nvc-input__register'
+                    type='text'
+                    ng-model='socialReason'
+                    disabled/>
+            </div>
+        </div>
+
+        <div class='col-md-2 col-xs-8'>
+            <div class='nvc-form-group'>
+                <label for='rif'>RIF</label>
+                <input
+                    class='nvc-input__register'
+                    type='text'
+                    ng-model='registrationDataStep3.rif'/>
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.rif == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+
+        <div class='col-md-4 col-xs-8'>
+            <div class='nvc-form-group'>
+                <label for='telefono'>Teléfono</label>
+                <input
+                    class='nvc-input__register'
+                    type='tel'
+                    name='phone'
+                    ng-focus="formStep3.phone.$setUntouched()"
+                    ng-model='registrationDataStep3.phone'
+                    pattern="^[0-9]{11}$|^(\+|00)(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"/>
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="formStep3.phone.$error.pattern
+                && formStep3.phone.$touched">
+                {{ "share.validation.error_phone_lg"|trans }}
+            </span>
+             <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.phone == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+
+        <div class='col-md-4 col-xs-16'>
+            <div class='nvc-form-group'>
+                <label for='email'>E-mail de contacto</label>
+                <input
+                    class='nvc-input__register'
+                    type='email'
+                    name='email'
+                    ng-focus="formStep3.email.$setUntouched()"
+                    ng-model='registrationDataStep3.email'
+                    pattern='^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$'/>
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="formStep3.email.$error.pattern
+                && formStep3.email.$touched">
+                {{ "share.validation.error_email"|trans }}
+            </span>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.email == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class='nvc-row'>
+    <div class='col-md-16 col-xs-16 nvc-padding'>
+        <div class='col-md-3 col-xs-8'>
+            <div class='nvc-form-group'>
+                <label for='pais'>País</label>
+                <select
+                    class='nvc-select__register'
+                    ng-options='country.name for country in countries'
+                    ng-model='registrationDataStep3.country'
+                    ng-change='getState(registrationDataStep3.country)'>
+                </select>
+            </div>
+        </div>
+
+        <div class='col-md-3 col-xs-8 '>
+            <div class='nvc-form-group'>
+                <label for='ciudad'>Estado</label>
+                <select
+                    class='nvc-select__register'
+                    ng-options='state.name for state in states'
+                    ng-model='registrationDataStep3.state'
+                    ng-change='getMunicipality(registrationDataStep3.state)'>
+                </select>
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.state == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+
+        <div class='col-md-3 col-xs-8'>
+            <div class='nvc-form-group'>
+                <label for='pais'>Municipio</label>
+                <select
+                    class='nvc-select__register'
+                    ng-options='municipality.name for municipality in municipalities'
+                    ng-model='registrationDataStep3.municipality'
+                    ng-change='getParish(registrationDataStep3.municipality)'>
+                </select>
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.municipality == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+
+        <div class='col-md-3 col-xs-8 '>
+            <div class='nvc-form-group'>
+                <label for='pais'>Parroquia</label>
+                <select
+                    class='nvc-select__register'
+                    ng-options='parish.name for parish in parishes'
+                    ng-model='registrationDataStep3.parish'>
+                </select>
+            </div>
+             <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.parish == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+
+        <div class='col-md-4 col-xs-16'>
+            <div class='nvc-form-group'>
+                <label for='codigo postal'>Código Postal</label>
+                <input
+                    class='nvc-input__register'
+                    type='text'
+                    name='postalCode'
+                    ng-focus="formStep3.postalCode.$setUntouched()"
+                    ng-model='registrationDataStep3.zip_code'
+                />
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="formStep3.postalCode.$error.pattern
+                && formStep3.postalCode.$touched">
+                {{ "share.validation.error_postal_code"|trans }}
+            </span>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.zip_code == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class='nvc-row'>
+    <div class='col-md-16 col-xs-16 nvc-padding'>
+        <div class='col-md-6 col-xs-16'>
+            <div class='nvc-form-group'>
+                <label for='direccion'>Dirección</label>
+                <input
+                    class='nvc-input__register'
+                    type='text'
+                    ng-model='registrationDataStep3.address'/>
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.address == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+        <!-- Eliminado por historia NAVICU-3572 
+        <div class='col-md-4 col-xs-16 '>
+            <div class='nvc-form-group'>
+                <label for='codigo swift'>Código SWIFT</label>
+                <input
+                    class='nvc-input__register'
+                    type='text'
+                    name='swift'
+                    ng-focus="formStep3.swift.$setUntouched()"
+                    ng-model='registrationDataStep3.swift'
+                    pattern='([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)'/>
+            </div>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="formStep3.swift.$error.pattern
+                && formStep3.swift.$touched">
+                {{ "share.validation.error_code_swift"|trans }}
+            </span>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.swift == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+        -->
+        <div class='col-md-6 col-xs-16'>
+            <div class='nvc-form-group'>
+                <label for='cuenta bancaria'>Cuenta bancaria</label>
+                <input
+                    class='nvc-input__register'
+                    type='text'
+                    name='bank_account'
+                    ng-focus="formStep3.bank_account.$setUntouched()"
+                    ng-model='registrationDataStep3.bank_account'
+                    minLength="20"
+                    maxlength="20"
+                    pattern="(\d){20}"/>
+            </div>
+             <span
+                ng-cloak
+                class="error"
+                ng-show="formStep3.bank_account.$error.pattern &&
+                formStep3.bank_account.$touched">
+                {{ "share.validation.error_bank_account"|trans }}
+            </span>
+            <span
+                ng-cloak
+                class="error"
+                ng-show="validations && registrationDataStep3.bank_account == null">
+                {{ "aavv.register.error_required_field"|trans }}
+            </span>
+        </div>
+    </div>
+</div>
+
+<hr>

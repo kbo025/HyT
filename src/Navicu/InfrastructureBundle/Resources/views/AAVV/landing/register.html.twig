@@ -1,0 +1,225 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+<main
+    class="clearfix nvc-aavv-register"
+    ng-app="landingModule"
+    ng-controller="landingRegisterController"
+>
+    <section class="clearfix nvc-aavv-register__jumbotron">
+        <h1>{{ 'aavv.landing.register.main_title' | trans | raw }}</h1>
+    </section>
+
+    <section class="clearfix nvc-aavv-register__row nvc-aavv-register__row--perks">
+        <h1>
+            {{ 'aavv.landing.register.perks.title' | trans | raw }}
+        </h1>
+
+        <div class="nvc-aavv-register__perk col-xs-4">
+            <img role="presentation" src="/images/aavv/landing/register/buildings.png" />
+            {{ 'aavv.landing.register.perks.lodging' | trans }}
+        </div>
+
+        <div class="nvc-aavv-register__perk col-xs-4">
+            <img role="presentation" src="/images/aavv/landing/register/check.png" />
+            {{ 'aavv.landing.register.perks.verified' | trans }}
+        </div>
+
+        <div class="nvc-aavv-register__perk col-xs-4">
+            <img role="presentation" src="/images/aavv/landing/register/badge.png" />
+            {{ 'aavv.landing.register.perks.pricing' | trans }}
+        </div>
+
+        <div class="nvc-aavv-register__perk col-xs-4">
+            <img role="presentation" src="/images/aavv/landing/register/calendar-check.png" />
+            {{ 'aavv.landing.register.perks.availability' | trans }}
+        </div>
+    </section>
+
+    <section
+        class="clearfix nvc-aavv-register__row nvc-aavv-register__row--cta"
+        ng-cloak
+    >
+        <h1>
+            {{ 'aavv.landing.register.form.title' | trans | raw }}
+        </h1>
+
+        <form
+            class="col-xs-10"
+            ng-submit="handleSubmit()"
+        >
+            <div class="row">
+                <div class="col-xs-8">
+                    <i class="fn-usercontra-04"></i>
+                    <label>{{ 'aavv.landing.register.form.fullname' | trans }}</label>
+                    <input
+                        name="fullname"
+                        ng-model="fullname"
+                        placeholder="{{ 'aavv.landing.register.form.placeholders.fullname' | trans }}"
+                        type="text"
+                    />
+
+                    <span class="nvc-form__error">
+                        &nbsp;
+                        <span
+                            ng-cloak
+                            ng-if="fullname !== null && !fullname"
+                        >
+                            {[{ 'aavv.landing.register.errors.empty_name' | translate }]}
+                        </span>
+                    </span>
+                </div>
+
+                <div class="col-xs-8">
+                    <i class="fn-usercontra-04"></i>
+                    <label>{{ 'aavv.landing.register.form.username' | trans }}</label>
+                    <input
+                        name="email"
+                        ng-model="email"
+                        ng-change="validateEmail()"
+                        placeholder="{{ 'aavv.landing.register.form.placeholders.email' | trans }}"
+                        type="text"
+                    />
+                    <span
+                        class="nvc-input__loading"
+                    >
+                        <img
+                            height="20"
+                            ng-if="email && isValidatingEmail"
+                            role="presentation"
+                            src="{{ asset('images/mini-loaderinput2.gif') }}"
+                            width="20"
+                        />
+                    </span>
+
+                    <span class="nvc-form__error">
+                        &nbsp;
+                        <span
+                            ng-cloak
+                            ng-if="email && !isValidatingEmail && emailErrorMessage"
+                        >
+                            {[{ emailErrorMessage | translate }]}
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <i class="fn-usercontra-05"></i>
+                    <label>{{ 'aavv.landing.register.form.password' | trans }}</label>
+                    <input
+                        name="password"
+                        ng-model="password"
+                        placeholder="{{ 'aavv.landing.register.form.placeholders.password' | trans }}"
+                        type="password"
+                    />
+
+                    <span class="nvc-form__error">
+                        &nbsp;
+                        <span
+                            ng-cloak
+                            ng-if="password !== null && !password"
+                        >
+                            {{ 'aavv.landing.register.errors.invalid_password' | transchoice(1) }}
+                        </span>
+                    </span>
+                </div>
+
+                <div class="col-xs-8">
+                    <i class="fn-usercontra-05"></i>
+                    <label>{{ 'aavv.landing.register.form.confirm_password' | trans }}</label>
+                    <input
+                        name="confirmpassword"
+                        ng-model="confirmpassword"
+                        placeholder="{{ 'aavv.landing.register.form.placeholders.password' | trans }}"
+                        type="password"
+                    />
+
+                    <span class="nvc-form__error">
+                        &nbsp;
+                        <span
+                            ng-cloak
+                            ng-if="password !== null && confirmpassword !== null && password !== confirmpassword"
+                        >
+                            {{ 'aavv.landing.register.errors.invalid_password' | transchoice(2) }}
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <i class="fn-phone"></i>
+                    <label>{{ 'aavv.landing.register.form.phone' | trans }}</label>
+                    <input
+                        name="phone"
+                        ng-model="phone"
+                        placeholder="{{ 'aavv.landing.register.form.placeholders.phone' | trans }}"
+                        type="text"
+                    />
+
+                    <span class="nvc-form__error">
+                        &nbsp;
+                        <span
+                            ng-cloak
+                            ng-show="phone && !isValidPhone"
+                        >
+                            {{ "share.validation.error_phone_lg"|trans }}
+                        </span>
+                    </span>
+                </div>
+
+                <div class="col-xs-8">
+                    <button
+                        class="btn btn-block"
+                        ng-disabled="!email || !phone || isValidatingEmail || emailErrorMessage || isSubmitting ||
+                        !isValidPhone"
+                        type="submit"
+                    >
+                        {{ 'aavv.landing.register.form.submit' | trans }}
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div
+            class="col-xs-10 nvc-aavv-register__email-sent"
+        >
+            <img src="/images/aavv/landing/register/envelope.png" />
+
+            <h3>
+                {[{
+                    'aavv.landing.register.email.sent_title' | translate:{
+                        'name': fullname,
+                    }
+                }]}
+            </h3>
+
+            <p ng-bind-html="emailSentMessage"></p>
+        </div>
+
+        <div class="col-xs-5 col-xs-offset-11 nvc-aavv-register__requirements">
+            <p>
+                <img
+                    role="presentation"
+                    src="/images/aavv/landing/register/folder.png"
+                />
+            </p>
+
+            <!-- Esta línea es sensible a espacios. No modificar su contenido. -->
+            <p class="nvc-aavv-register__line">{{ 'aavv.landing.register.requirements.text' | trans | raw }}</p>
+
+            <button
+                class="btn btn-block"
+                ng-click="handleDownloadPDF()"
+                type="button"
+            >
+                {{ 'aavv.landing.register.requirements.button' | trans | raw }}
+            </button>
+        </div>
+    </section>
+
+    <div class="clearfix nvc-aavv-register__bottom-line"></div>
+</main>
+{% endblock body %}

@@ -1,0 +1,210 @@
+<div class="nvc-row separator nvc__requiredMessage">
+    <span>Los campos marcados con (*) son obligatorios</span>
+</div>
+<div class="nvc-row separator">
+    <div class="col-md-2 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'>
+            <label class="nvc-input-group-addon">Trato</label>
+            <select
+                name="treatment"  
+                class="form-control nvc-input__register"
+                ng-model="data.user.treatment"
+            >
+                <option value="1">Sra.</option>
+                <option value="2">Srta.</option>
+                <option value="3">Sr.</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-2 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'>
+            <label class="nvc-input-group-addon">Sexo</label>
+            <select
+                name="gender"
+                class="form-control nvc-input__register"
+                ng-model="data.user.gender"
+            >
+                <option value="0">Femenino</option>
+                <option value="1">Masculino</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-5 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'
+             ng-class="{'nvc-input-group--error': userNavicuForm.full_name.$error.required && userNavicuForm.$submitted}">
+            <label class="nvc-input-group-addon">*Nombre y apellido</label>
+            <input
+                name="full_name"
+                class="form-control nvc-input__register"
+                type='text'
+                ng-model="data.user.full_name"
+                required
+            />
+        </div>
+    </div>
+    <div class="col-md-3 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'
+             ng-class="{'nvc-input-group--error': userNavicuForm.identity_card.$error.required && userNavicuForm.$submitted}">
+            <label class="nvc-input-group-addon">*Cédula</label>
+            <input
+                name="identity_card"
+                class="form-control nvc-input__register"
+                type='text'
+                ng-model="data.user.identity_card"
+                required
+            />
+        </div>
+    </div>
+    <div class="col-md-4 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'
+             ng-class="{'nvc-input-group--error': userNavicuForm.birth_date.$invalid && userNavicuForm.birth_date.$touched}">
+            <label class="nvc-input-group-addon">Fecha de nacimiento</label>
+            <input
+                name="birth_date"
+                class="form-control nvc-input__register"
+                type='text'
+                ng-model="data.user.birth_date"
+                placeholder="dd-mm-aaaa"
+                ng-pattern="/^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/"
+            />
+        </div>
+    </div>
+</div>
+<div class="nvc-row separator">
+    <div class="col-md-3 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'
+             ng-class="{'nvc-input-group--error': userNavicuForm.username.$error.required && userNavicuForm.$submitted}">
+            <label class="nvc-input-group-addon">*Username</label>
+            <input
+                name="username"
+                class="form-control nvc-input__register"
+                type='text'
+                ng-model="data.user.username"
+                required
+            />
+        </div>
+    </div>
+
+    <div class="col-md-3 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'
+             ng-class="{'nvc-input-group--error': userNavicuForm.password.$error.required && userNavicuForm.$submitted}">
+            <label class="nvc-input-group-addon">*Contraseña</label>
+            <input
+                    name="password"
+                    class="form-control nvc-input__register"
+                    type='password'
+                    ng-model="data.user.password"
+                    ng-required="userId === null"
+            />
+        </div>
+    </div>
+
+    <div class="col-md-4 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'
+             ng-class="{'nvc-input-group--error': userNavicuForm.passwordConfirm.$error.required && userNavicuForm.$submitted}">
+            <label class="nvc-input-group-addon">*Confirmar contraseña</label>
+            <input
+                    name="passwordConfirm"
+                    class="form-control nvc-input__register"
+                    type='password'
+                    ng-model="data.user.passwordConfirm"
+                    ng-required="userId === null"
+            />
+        </div>
+    </div>
+
+    <div class="col-md-3 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'
+             ng-class="{'nvc-input-group--error': (userNavicuForm.email.$error.required && userNavicuForm.$submitted) ||
+                (userNavicuForm.email.$error.email && userNavicuForm.$submitted)}">
+            <label class="nvc-input-group-addon">*E-mail</label>
+            <input
+                name="email"
+                class="form-control nvc-input__register"
+                type='email'
+                ng-model="data.user.email"
+                ng-blur="validateEmail(data)"
+                required
+            />
+            {#<div#}
+                {#class="nvc-error"#}
+                {#ng-show="(userNavicuForm.email.$error.email && userNavicuForm.$submitted)"#}
+            {#>#}
+                {#Formato inválido#}
+            {#</div>#}
+        </div>
+    </div>
+    <div class="col-md-3 nvc-input__wrapper">
+        <div class='nvc-input-group--aavv form-group-datail'>
+            <label class="nvc-input-group-addon">Télefono</label>
+            <input
+                name="cell_phone"
+                class="form-control nvc-input__register"
+                type='text'
+                ng-model="data.user.cell_phone"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="nvc-row separator">
+    <div class="container-fluid">
+        <div class="form-group nvc-form__roles">
+            <div
+                    class="nvc-input-group--aavv"
+                    ng-class="{'nvc-input-group--error': errors[$index].roles}"
+            >
+                <label
+                        class="nvc-input-group-addon nvc-aavv-customize__text"
+                        for="form__roles-{[{ $index }]}"
+                >
+                    {{ 'aavv.edit.users.form.labels.role' | trans }}
+                </label>
+
+                <div>
+
+                    <input
+                            class="form-control"
+                            disabled
+                            ng-if="$first"
+                            ng-model="data.user.roles[0].role"
+                            type="text"
+                    />
+
+                    <ui-select
+                            multiple
+                            ng-click="handleClickRoleSelect($event)"
+                            ng-model="data.user.roles"
+                            sortable="true"
+                            theme="bootstrap"
+                    >
+                        <ui-select-match>
+                            {[{ $item.role }]}
+                        </ui-select-match>
+
+                        <ui-select-choices
+                                repeat="role in roles | filter: $select.search"
+                        >
+                            <div ng-bind-html="role.role | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <div
+                            class="nvc-error"
+                            ng-if="errors[$index].roles"
+                    >
+                        {[{ errors[$index].roles | translate }]}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+                class="nvc-errorMessage"
+                ng-show="!isValid"
+        >
+            {[{ errors[0] }]}
+        </div>
+    </div>
+</div>
+<hr>

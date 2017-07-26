@@ -1,0 +1,23 @@
+<form>
+    <h2 >Histórico de reservas</h2>
+
+    <div class="nvc-admin__search">
+        <div class='nvc-form-group'>
+            <input
+                id='search'
+                placeholder=''
+                type="text"
+                name="search"
+                ng-model="search"
+            />
+            <button
+                class='nvc-button nvc-button__search'
+                type="submit"
+                ng-click="getListReservation(search, 1, null)"
+            >
+                Buscar
+            </button>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,43 @@
+<script id="modal-client-success.tpl" type="text/ng-template">
+	<div class="nvc-modal" tabindex="-1" role="dialog" style="overflow-x:hidden;  overflow-y:hidden;">
+
+	    <div class="nvc-modal__success center-block clearfix ">
+	        
+	        <div class="nvc-modal__header">
+				<h3>{{ "web.client.list_pre_peservation.modal_success.head"|trans }}</h3>
+	            <button type="button" class="close" ng-click="$hide()" aria-hidden="true">×</button>
+	        </div>
+
+	        <div class="nvc-modal__content">
+	        	<div class="nvc-row">
+	        		<div class="col-xs-16">
+	        			<div class="nvc-row">
+	        				<div class="col-sm-12" >
+	        					<!-- mensaje de accion tomada por navicu-->
+				            	<div class="nvc-modal__content--action hidden-xs" >
+				            		<span>{{ "web.client.list_pre_peservation.modal_success.content.action"|trans }}</span>
+				            	</div>
+				            	<div class="nvc-modal__content--action visible-xs" >
+				            		<span>{{ "web.client.list_pre_peservation.modal_success.content.action_xs"|trans }}</span>
+				            	</div>
+
+								<!-- mensaje al usuario -->
+				            	<div class="nvc-modal__content--message hidden-xs">
+				            		<span>{{ "web.client.list_pre_peservation.modal_success.content.message_to_the_user"|trans }}</span>
+				            	</div>
+				            	<div class="nvc-modal__content--message visible-xs">
+				            		<span>{{ "web.client.list_pre_peservation.modal_success.content.message_to_the_user_xs"|trans }}</span>
+				            	</div>
+	        				</div>
+
+							<!-- Imagen dentro del mensaje -->
+	        				<div class="col-sm-3 nvc-modal__content--margin">
+								<img src="/images/icono-check-02.png" class="img-responsive center-block" alt="image">
+							</div>
+	        		</div>
+		       	</div>
+		    </div>
+
+	    </div>
+	</div>
+</script>

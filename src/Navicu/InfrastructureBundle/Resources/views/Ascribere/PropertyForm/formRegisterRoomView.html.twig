@@ -1,0 +1,76 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% set header_title = {'module_title': '3'} %}
+
+{% block body %}
+<!--Iconos del formulario -->
+<div class="room-service-view" ng-app="roomModule" ng-controller="loadedRoomsController" novalidate ng-cloak>
+    {% include "NavicuInfrastructureBundle:Ascribere:PropertyForm/topmenu.html.twig" with header_title %}
+    <!--Top del formualario -->
+	<div class="container" style="font-family:LatoRegular" >
+		<div class="col-md-16" style="color:#572A85">
+		</div>
+	</div>
+	<br>
+	<div class="container">
+        <div class="col-md-16 right" style="color:#220a44;">
+            <h3>{{"share.register.loaded_room"|trans }}
+                <span ng-if="amount_rooms_added<=amount_rooms">{[{amount_rooms_added}]}</span>
+                <span ng-if="amount_rooms_added>amount_rooms" style="color:#E70628;">{[{amount_rooms_added}]}</span>
+                /{[{amount_rooms}]}
+            </h3><br>
+        </div>
+        <div class="col-xs-16 col-sm-8 col-md-4 col-lg-4 pad-history" ng-repeat="(id, load) in loadedRooms" ng-init="idPrueba=id" style="margin-bottom:20px;">
+            <div class="image"><div class="delete"><a href="" ng-click="CallModal(id);"><i class="fa fa-times fa-2x"></i></a></div></div>
+            <img ng-if="load.image==null" src="{{ asset('images/navicu/camera.png') }}" class="img-responsive img-history"/>
+            <img ng-if="load.image!=null" src="/uploads/images/images_md/{[{load.image }]}" class="img-responsive img-history"/>
+            <div class=" jumbotron-history2">
+                <h3 class="font-history" style="height:40px;"><strong ng-bind="load.typeroom"></strong> <strong ng-bind="load.subroom"></strong></h3>
+                {#<h5 class="font-site">Precio standar: Bs <strong ng-bind="load.priceMin"></strong></h5>#}<br>
+                <h5 class="font-site2">{{"share.register.number_type_room"|trans }}: <strong ng-bind="load.numRooms"></strong></h5>
+                <h5 class="font-site2">{{"share.register.number_people_type_room"|trans }}: <strong ng-bind="load.numPeople"></strong></h5>
+                <br>
+                <div align="center">
+                    <a href="{{ path('save_temp_room_form', {'slug': null, 'index': null, extension:app.request.attributes.get('extension')}) }}/{[{slug}]}/{[{id}]}"><button type="button" ng-click="editroom(id);" class="btn btn-primary button2">{{"share.register.edit"|trans }}</button></a>
+                </div>
+            </div>
+        </div>
+         <div class="col-xs-16 col-sm-8 col-md-4 col-lg-4 pad-history">
+            <div class="">
+                <a href="{{ path('save_temp_room_form', {'slug': null, extension: app.request.attributes.get('extension')}) }}/{[{slug}]}">
+                    <div class=" jumbotron-default">
+                        <div class="default-img"><i class="fa fa-plus-circle fa-5x"></i></div>
+                        <h4 align="center">{{"share.register.add_room"|trans }}</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+	</div>
+	<br><br><br>
+    <div class="container"><div class="col-md-16"><hr class="hr-style"></div></div>
+    <div align="center">
+        <a href="{{ path('navicu_register', {'slug': slugTemp, 'level': 'gallery', extension: app.request.attributes.get('extension')}) }}"><button type="button" class="btn btn-primary btn-search-list" >{{"share.register.save"|trans }}</button></a>
+    </div>
+    <br>
+
+    {{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalDeleteRoom.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalLoading.html.twig") }}
+
+</div>
+
+
+{% endblock body %}
+
+
+{% block javascripts%}
+    {{parent()}}
+
+        <script type="text/javascript">
+            var extension = "{{ app.request.attributes.get('extension') }}";
+            var response =  {{ rooms | raw }};
+            var slug = response.slug;
+            var progress = response.progress;
+            var amount_rooms_added = response.amount_rooms_added;
+            var amount_rooms = response.amount_rooms;
+        </script>
+{% endblock %}

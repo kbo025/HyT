@@ -1,0 +1,919 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+
+        <title> {{ "SEO.home.title" | trans ({},'seo') }} </title>
+        <meta property="og:title" content="{{ "SEO.home.title" | trans ({},'seo') }}">
+        <meta property="og:description" content="{{ ("SEO.home.description" | trans ({},'seo')) }}">
+        <meta property="og:image:secure_url" content="{{ 'https://navicu.com' ~ asset('images/home/carousel/reserva-de-alojamiento-online.jpg') }}"/>
+
+        <meta name="title" content="{{ "SEO.home.title" | trans ({},'seo') }}">
+        <meta name="description" content="{{ ("SEO.home.description" | trans ({},'seo')) }}">
+        <link rel="canonical" href="https://www.navicu.com"/>
+        <link href="https://plus.google.com/114959843493154308425" rel="publisher">
+    {% endif %}
+{% endblock seoMetadata %}
+
+
+{% block seoTagsBodyOpen %}
+    {% if app.environment == "prod" %}
+        <script type='application/ld+json'>
+            {
+              "@context": "http://www.schema.org",
+              "@type": "WebSite",
+              "name": "navicu.com",
+              "alternateName": "navicu",
+              "url": "https://www.navicu.com",
+              "sameAs": [
+                "https://www.facebook.com/navicu.reservas/",
+                "https://twitter.com/_navicu",
+                "https://www.instagram.com/_navicu/",
+                "https://plus.google.com/+NavicuAlojamiento"
+              ],
+              "image": "https://www.navicu.com/images/logo.png",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5",
+                "reviewCount": "794"
+              }
+            }
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    <body data-ng-app="mainSearchModule" data-ng-controller="mainSearchController">
+
+        <!--- Slider Index -->
+        <section    id="navicu-home-carousel"
+                    data-ride="carousel"
+                    class='nvc-carousel nvc-carousel__fade nvc-carousel--home'>
+            {# Campo de busqueda de establecimientos #}
+            <div class="nvc-home-destiny__absolute-center">
+                <div class="nvc-container">
+                    <div class="nvc-row">
+                        <div class="col-xs-16 col-md-12 col-md-offset-2 nvc-panel__search">
+                            <div class="col-xs-15 col-xs-offset-1" style="margin-left:3.25%;">
+                                <h3>{{ "share.message.where_to_go" | trans }}</h3>
+
+                                <!-- Barra de navegación entre hoteles y vuelos -->
+                                <nav class="hidden-xs hidden-sm" ng-cloak>
+                                    <ul>
+                                        <li
+                                            style="margin-left:8px;"
+                                            ng-class="{active: roundTrip===true}"
+                                            ng-click="travelType(true);"
+                                        >
+                                            <a
+                                                href=""
+                                                ng-if="flightSearch===true"
+                                                ng-class="{active: roundTrip===true}"
+                                                ng-click="travelType(true);"
+                                            >
+                                                Ida y vuelta
+                                            </a>
+                                        </li>
+                                        <li><a href="" class="separator" ng-if="flightSearch===true"> | </a></li>
+                                        <li
+                                            ng-class="{active: roundTrip===false}"
+                                            ng-click="travelType(false);"
+                                        >
+                                            <a
+                                                href=""
+                                                ng-if="flightSearch===true"
+                                                ng-class="{active: roundTrip===false}"
+                                                ng-click="travelType(false);"
+                                            >
+                                                Solo ida
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="buttons">
+                                        <li
+                                            ng-class="{active: flightSearch===false}"
+                                            ng-click="showFlight(false);"
+                                        >
+                                            <a
+                                                href=""
+                                                ng-class="{active: flightSearch===false}"
+                                                ng-click="showFlight(false);"
+                                            >
+                                                <img src="{{ asset('images/hotel.png') }}" class="pull-left">
+                                                Hoteles
+                                            </a>
+                                        </li>
+                                        <li
+                                            ng-class="{active: flightSearch===true}"
+                                            ng-click="showFlight(true);"
+                                        >
+                                            <a
+                                                href=""
+                                                ng-class="{active: flightSearch===true}"
+                                                ng-click="showFlight(true);"
+                                            >
+                                                <img src="{{ asset('images/flight.png') }}" class="pull-left">
+                                                Vuelos
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <!-- Barra de navegación que se muestra mientras carga angular -->
+                                <nav class="hidden-xs hidden-sm" ng-if="">
+                                    <ul>
+                                        <li style="margin-left:8px;">
+                                        </li>
+                                        <li>
+                                        </li>
+                                    </ul>
+                                    <ul class="buttons">
+                                        <li class="active">
+                                            <a
+                                                href=""
+                                                class="active"
+                                            >
+                                                <img src="{{ asset('images/hotel.png') }}" class="pull-left">
+                                                Hoteles
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href=""
+                                            >
+                                                <img src="{{ asset('images/flight.png') }}" class="pull-left">
+                                                Vuelos
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                                <form
+                                    action="{[{url}]}"
+                                    class="nvc-form-inline nvc-panel__content"
+                                    method="get"
+                                    role="form"
+                                >
+                                    <input type="hidden" name="adult" value="{[{ adults }]}" data-ng-if="adults != 2"/>
+                                    <input type="hidden" name="kid" value="{[{ kids }]}" data-ng-if="kids != 0"/>
+                                    <input type="hidden" name="room" value="{[{ rooms }]}" data-ng-if="rooms != 1"/>
+                                    <input type="hidden" name="startDate" value="{[{ checkIn }]}" data-ng-if="checkIn"/>
+                                    <input type="hidden" name="endDate" value="{[{ checkOut }]}" data-ng-if="checkOut && flightSearch===false"/>
+                                    <input type="hidden" name="endDate" value="{[{ checkOut }]}" data-ng-if="checkOut && flightSearch===true && roundTrip===true"/>
+                                    <input type="hidden" name="flightSearch" value="{[{ flightSearch }]}"/>
+                                    <input type="hidden" name="roundTrip" value="{[{ 1 }]}" data-ng-if="flightSearch===true && roundTrip===true"/>
+                                    <input type="hidden" name="roundTrip" value="{[{ 0 }]}" data-ng-if="flightSearch===true && roundTrip===false"/>
+                                    <!-- Barra de búsqueda que se muestra mientras carga angular -->
+                                    <div class="nvc-search--destinations" ng-if="false">
+                                        <div
+                                            class="nvc-search__input-container"
+                                            ng-class="{'nvc-loading': isBusy}"
+                                        >
+                                            <input
+                                                class="nvc-search__input--suggestion"
+                                                placeholder="Escoge tu destino, región o ciudad"
+                                                type="text"
+                                                id="suggestedValue"
+                                            >
+                                        </div>
+                                        <div
+                                            class="nvc-search__input--date-start"
+                                        >
+                                            <img src="{{ asset('images/calendar.png') }}" class="pull-left">
+                                            <input
+                                                autocomplete="off"
+                                                placeholder="Fecha inicio"
+                                                tabindex="2"
+                                                class="ng-pristine ng-untouched ng-valid"
+                                                type="text"
+                                                id="startDate"
+                                            >
+                                        </div>
+                                        <div
+                                            class="nvc-search__input--date-end"
+                                        >
+                                            <img src="{{ asset('images/calendar.png') }}" class="pull-left">
+                                            <input
+                                                autocomplete="off"
+                                                placeholder="Fecha final"
+                                                tabindex="3"
+                                                class="ng-pristine ng-untouched ng-valid"
+                                                type="text"
+                                                id="endDate"
+                                            >
+                                        </div>
+                                        <div
+                                            class="nvc-search__select--rooms"
+                                        >
+                                            <select
+                                                tabindex="4"
+                                                class="ng-pristine ng-untouched ng-valid"
+                                                id="rooms"
+                                            >
+                                            </select>
+                                        </div>
+                                        <div
+                                            class="nvc-search__select--adults"
+                                        >
+                                            <select
+                                                tabindex="5"
+                                                class="ng-pristine ng-valid ng-touched"
+                                                id="adults"
+                                            >
+                                            </select>
+                                        </div>
+                                        <div
+                                            class="nvc-search__select--children"
+                                        >
+                                            <select
+                                                tabindex="6"
+                                                class="ng-pristine ng-untouched ng-valid"
+                                                id="children"
+                                            >
+                                            </select>
+                                        </div>
+                                        <div
+                                            class="nvc-search__button-container--submit"
+                                        >
+                                            <button
+                                                class="nvc-button nvc-button__search ng-binding"
+                                                id="nvc-aavv-customize__button--primary"
+                                                tabindex="7"
+                                                type="submit"
+                                                disabled="disabled"> Buscar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- Directiva Búsqueda de Hoteles -->
+                                    <section ng-show="flightSearch===false">
+                                        <nvc-search-destinations
+                                            route="navicu_asinc_search_destiny_by_autocompleted"
+                                            selected-option="selectedDestiny"
+                                            callback="redirectUrl"
+
+                                            adults="adults"
+                                            children="kids"
+                                            end-date="checkOut"
+                                            rooms="rooms"
+                                            start-date="checkIn"
+                                            calendar-image-url="{{ asset('images/calendar.png') }}"
+                                        ></nvc-search-destinations>
+                                    </section>
+                                    <!-- Directiva Búsqueda de Vuelos -->
+                                    <section ng-show="flightSearch===true">
+                                        <nvc-search-flight
+                                            route="navicu_flight_search_autocompleted"
+                                            selected-origin="selectedFrom"
+                                            selected-destiny="selectedTo"
+                                            callback="redirectFlight"
+
+                                            adults="adults"
+                                            children="kids"
+                                            end-date="checkOut"
+                                            start-date="checkIn"
+                                            calendar-image-url="{{ asset('images/calendar.png') }}"
+                                            trip="roundTrip"
+                                        ></nvc-search-flight>
+                                    </section>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="youtube hidden-xs" ng-if="backgroundMode==0">
+                <a href="https://www.youtube.com/channel/UCgusN-AvP1nas0qnPji7cLA" target="_blank">
+                    Visita nuestro canal
+                    <i class="fa fn-youtube"></i>
+                </a>
+            </h3>
+            {#<div class="nvc-carousel__fill visible-xs" style="background-image: url({{ assets.img['images/home/carousel/movil/reserva-de-hoteles-venezuela.png'] }})" data-ng-style="slideStyles[slideStyles.length-1]"></div>#}
+            <div class="nvc-carousel__fill visible-xs" style="background-color: #783CBD;"></div>
+            <div class="nvc-carousel__fill hidden-xs"  ng-if="backgroundMode==1">
+                <div class="item active">
+                    <div class="nvc-carousel__fill" style="background-image:url({{ assets.img['images/home/carousel/monte-roraima-en-venezuela.jpg'] }});" data-ng-style="slideStyles[0]" alt="{{ "IMAGES.home.monte_roraima_en_venezuela.alt" | trans ({},'image') }}"></div>
+                </div>
+                <div class="item">
+                    <div class="nvc-carousel__fill" style="background-image:url({{ assets.img['images/home/carousel/picos-nieve-merida-venezuela.jpg'] }});" data-ng-style="slideStyles[1]" alt="{{ "IMAGES.home.picos_nieve_merida_venezuela.alt" | trans ({},'image') }}"></div>
+                </div>
+                <div class="item">
+                    <div class="nvc-carousel__fill" style="background-image:url({{ assets.img['images/home/carousel/playa-palmeras-arenas-blancas.jpg'] }});" data-ng-style="slideStyles[2]" alt="{{ "IMAGES.home.playa_palmeras_arenas_blancas.alt" | trans ({},'image') }}"></div>
+                </div>
+                <div class="item">
+                    <div class="nvc-carousel__fill" style="background-image:url({{ assets.img['images/home/carousel/verdes-montanas-cielo-nublado.jpg'] }});" data-ng-style="slideStyles[3]" alt="{{ "IMAGES.home.verdes_montanas_cielo_nublado.alt" | trans ({},'image') }}" ></div>
+                </div>
+                <div class="item">
+                    <div class="nvc-carousel__fill" style="background-image:url({{ assets.img['images/home/carousel/amigos-vehiculo-carretera-arida.jpg'] }});" data-ng-style="slideStyles[4]" alt="{{ "IMAGES.home.amigos_vehiculo_carretera_arida.alt" | trans ({},'image') }}" ></div>
+                </div>
+            </div>
+            <div class="nvc-home-destiny__video-background hidden-xs" ng-if="backgroundMode==0">
+                <video  id="videoBackgroundHome" preload loop muted autoplay>
+                    <source src="{{ asset('video/videoBackgroundHome.mp4') }}" type="video/mp4">
+                    <source src="{{ asset('video/videoBackgroundHome.mkv') }}" type="video/webm">
+                </video>
+            </div>
+            <!-- Controls -->
+            <!--<a class="left carousel-control hidden-xs" href="#navicu-home-carousel" data-slide="prev"><span class="fa fa-angle-left fa-4x"></span></a>
+            <a class="right carousel-control hidden-xs" href="#navicu-home-carousel" data-slide="next"><span class="fa fa-angle-right fa-4x"></span></a>-->
+        </section>
+
+        <!--- Ofertas -->
+        <section class="nvc-home-destiny__oferts" ng-cloak>
+            <div class="nvc-container">
+                <h2>Ofertas recomendadas para ti</h2>
+                <hr>
+                 <div
+                    class="col-xs-16 col-sm-8 col-md-4 nvc-home-destiny__oferts--box"
+                    ng-repeat="item in featured"
+                >
+                    <a href="{[{item.url}]}" target="_blank">
+                        <img
+                            ng-if="item.promotion===true"
+                            class="promotion"
+                            src="{{ asset('images/promo_logo.png') }}"
+                        >
+                        <img src="{{ asset('images/home/oferts/{[{item.slug}]}.jpg') }}">
+                        <div class="hidden-xs">
+                            <div style="padding-left:5px;">
+                                <i data-ng-if="item.stars>=1" class="fa fa-star"></i>
+                                <i data-ng-if="item.stars>=2" class="fa fa-star"></i>
+                                <i data-ng-if="item.stars>=3" class="fa fa-star"></i>
+                                <i data-ng-if="item.stars>=4" class="fa fa-star"></i>
+                                <i data-ng-if="item.stars==5" class="fa fa-star"></i>
+                            </div>
+                            <hr>
+                            <h3>{[{item.name}]} · {[{item.location}]} </h3>
+                            <h4 ng-if="item.price===null">Desde - </h4>
+                            <h4 ng-if="item.promotion===false && item.price!==null">Desde {[{item.currency}]} {[{item.price | number }]}</h4>
+                            <h4 ng-if="item.promotion===true">PROMOCIÓN ESPECIAL</h4>
+                            <i class="fa fn-arrow-right"></i>
+                        </div>
+                        <div class="visible-xs" style="background-color: #fff;">
+                            <h3>{[{item.name}]} · {[{item.location}]} </h3>
+                            <h4 ng-if="item.price===null">Desde - </h4>
+                            <h4 ng-if="item.promotion===false && item.price!==null">Desde {[{item.currency}]} {[{item.price | number }]}</h4>
+                            <h4 ng-if="item.promotion===true">PROMOCIÓN ESPECIAL</h4>
+                            <i class="fa fn-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!--- Destinos Encabezado -->
+        <section class="nvc-home-destiny__destinies--header hidden-xs">
+            <h2>Destinos populares</h2>
+            <hr>
+        </section>
+        <!--- Destinos Contenido -->
+        <section class="nvc-home-destiny__destinies hidden-xs">
+            <div id="destiniesSlider" class="carousel nvc-carousel nvc-carousel__fade" data-ride="carousel">
+                <div class="nvc-carousel__inner">
+                    <div class="item active">
+                        <a href="{{ path('navicu_destinations') }}#romantic">
+                            <div
+                                style="background-image:url({{ asset('images/home/destinies/romantico.jpg') }});"
+                                class="nvc-carousel__fill"
+                            >
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="{{ path('navicu_destinations') }}#mountain">
+                            <div
+                                style="background-image:url({{ asset('images/home/destinies/montaña.jpg') }});"
+                                class="nvc-carousel__fill"
+                            >
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="{{ path('navicu_destinations') }}#beach">
+                            <div
+                                style="background-image:url({{ asset('images/home/destinies/playa.jpg') }});"
+                                class="nvc-carousel__fill"
+                            >
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="{{ path('navicu_destinations') }}#urban">
+                            <div
+                                style="background-image:url({{ asset('images/home/destinies/urbano.jpg') }});"
+                                class="nvc-carousel__fill"
+                            >
+                            </div>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-5 nvc-home-destiny__destinies--legend mask-2">
+                <section>
+                    <h2>Escápate a los más</h2>
+                    <h2>increíbles destinos</h2>
+                    <hr>
+                    <br>
+                    <ul class="carousel">
+                        <li>
+                            <a href="" data-target="#destiniesSlider" data-slide-to="0">
+                                <img src="{{ asset('images/romantic.png') }}">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" data-target="#destiniesSlider" data-slide-to="1">
+                                <img src="{{ asset('images/mountain.png') }}">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" data-target="#destiniesSlider" data-slide-to="2">
+                                <img src="{{ asset('images/beach.png') }}">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" data-target="#destiniesSlider" data-slide-to="3">
+                                <img src="{{ asset('images/urbancity.png') }}">
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+        <!-- Map and destination Desktop-Tablet -->
+        <section class="nvc-home-map hidden-xs">
+            <div id="nvc-wrapper" class="nvc-row" style="display:flex;">
+                <!-- Manual search -->
+                <div id="mapHomeDestiny" class="col-sm-6 col-md-4 nvc-wrapper__nav">
+                    <div id="nvc-wrapper__sidebar">
+                        <div class="nvc-row nvc-panel__search" ng-class="{active: showMapDestinationSearch===true}">
+                            <!-- Logo -->
+                            <nav class="hidden-xs" ng-cloak>
+                                <ul class="buttons">
+                                    <li
+                                            ng-class="{active: showMapDestinationSearch===true}"
+                                            ng-click="showMapDestinationSearchBox();"
+                                    >
+                                        <a
+                                                href=""
+                                                ng-class="{active: showMapDestinationSearch===true}"
+                                                ng-click="showMapDestinationSearchBox();"
+                                        >
+                                            <img src="{{ asset('images/hotel.png') }}" class="pull-left">
+                                            Hoteles
+                                        </a>
+                                    </li>
+                                    {#
+                                    <li
+                                            ng-class="{active: showMapDestinationSearch===false}"
+                                            ng-click="showMapFlightSearchBox();"
+                                    >
+                                        <a
+                                                href=""
+                                                ng-class="{active: showMapDestinationSearch===false}"
+                                                ng-click="showMapFlightSearchBox();"
+                                        >
+                                            <img src="{{ asset('images/flight.png') }}" class="pull-left">
+                                            Vuelos
+                                        </a>
+                                    </li>
+                                    #}
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="nvc-home-map__search" ng-show="showMapDestinationSearch === true">
+
+
+                            <!-- inputs -->
+                            <div class="nvc-row">
+                                <!-- Titulo -->
+                                <div class="col-sm-16">
+                                    <div class="text-left">
+                                        <h3>¿A dónde quieres ir?</h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-16 input-wrapper">
+                                    <div class="nvc-row search-box-header">
+                                        <h5>Reserva en los mejores alojamientos</h5>
+                                    </div>
+                                    <form class="nvc-form-inline search-panel-body" role="form">
+                                    <input type="hidden" name="adult" value="{[{ adults }]}" data-ng-if="adults != 2"/>
+                                    <input type="hidden" name="kid" value="{[{ kids }]}" data-ng-if="kids != 0"/>
+                                    <input type="hidden" name="room" value="{[{rooms}]}" data-ng-if="rooms != 1"/>
+                                    <!-- País -->
+
+
+                                    <div class="nvc-form-group col-sm-16">
+                                        <input
+                                                class="nvc-input__main"
+                                                ng-blur="handleBlur()"
+                                                ng-change="updateSuggestions()"
+                                                ng-focus="handleFocus()"
+                                                ng-keydown="handleKeyDown($event)"
+                                                ng-model="destinationMapBoxInput"
+                                                placeholder="{[{ 'directives.search_destinations.placeholders.input' | translate }]}"
+                                                tabindex="1"
+                                                type="text"
+                                        />
+
+                                        <ul ng-if="mapSuggestions.items.length">
+                                            <li ng-repeat="suggestion in mapSuggestions.items">
+                                                <a class="clearfix" ng-click="selectOption(suggestion)">
+                                                    <i
+                                                            class="fn-{[{ suggestion.icon }]}"
+                                                    >
+                                                    </i>
+
+                                                    <span>
+                                                        {[{ suggestion.label }]}
+
+                                                        <strong ng-if="suggestion.type">
+                                                            - {[{ suggestion.type }]}
+                                                         </strong>
+                                                     </span>
+                                                </a>
+
+                                                <ul ng-if="$first && suggestion.children.length">
+                                                    <li
+                                                            ng-click="selectOption(child)"
+                                                            ng-repeat="child in suggestion.children"
+                                                    >
+                                                        <a>
+                                                            {[{ child.label }]}
+
+                                                            <strong ng-if="child.type">
+                                                                - {[{ child.type }]}
+                                                            </strong>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="date-range">
+                                        <div class="nvc-form-group col-sm-7" style="padding: 0 0 0 10px;">
+                                            <input type="text" autocomplete="off" data-ng-model="MapDestinationStartDate"
+                                                   class="nvc-input__home nvc-input__home--checkin js-range-check-in"
+                                                   name="startDate" placeholder="{{ 'share.message.start_date'|trans }}"
+                                                   data-ng-disabled="inputStartDate"/>
+                                        </div>
+                                        <div class="calendar-img col-sm-2">
+                                            <span class="input-group-addon">
+                                                <img src="{{ asset('images/calendar_new.png') }}"/>
+                                            </span>
+
+                                        </div>
+                                        <div class="nvc-form-group col-sm-7" style="padding: 0 10px 0 0; margin-left: -1px;">
+                                            <input type="text" autocomplete="off" data-ng-model="MapDestinationEndDate"
+                                                   class="nvc-input__home js-range-check-out"
+                                                   name="endDate" placeholder="{{ 'share.message.end_date'|trans }}"
+                                                   data-ng-disabled="inputEndDate" style="width: 100.5%;"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- Select Adultos -->
+                                    <div class="col-sm-8 select-wrapper" style="padding-right: 0px">
+                                        <select
+                                            class="nvc-select__home"
+                                            data-ng-model="MapDestinationAdults"
+                                            style="padding: 7px 6px !important;"
+                                        >
+                                            <option value="1"> 1 {{ "share.message.adult"|transchoice(1) }}</option>
+                                            <option data-ng-repeat="n in [] | range:2:9" value="{[{n}]}">
+                                                {[{n}]} {{ "share.message.adult"|transchoice(2) }}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Select Niños -->
+                                    <div class="col-sm-8 select-wrapper" style="padding-left: 0px">
+                                        <select
+                                            class="nvc-select__home"
+                                            data-ng-model="MapDestinationKids">
+                                            <option value="0"> 0 {{ "share.message.child"|transchoice(2) }}</option>
+                                            <option value="1"> 1 {{ "share.message.child"|transchoice(1) }}</option>
+                                            <option data-ng-repeat="n in [] | range:2:8" value="{[{n}]}">
+                                                {[{n}]} {{ "share.message.child"|transchoice(2) }}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Boton Buscar -->
+                                        <div class="col-sm-16 button-wrapper">
+                                            <button
+                                                class="nvc-button nvc-button__search center-block"
+                                                data-ng-click="getProperties(selectedMapOption)">
+                                                <b>Buscar</b>
+                                            </button>
+                                        </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nvc-home-map__searchflight" ng-show="showMapDestinationSearch === false">
+                            <!-- inputs -->
+                            <div class="nvc-row">
+                                <!-- Titulo -->
+                                <div class="col-sm-16">
+                                    <div class="text-left">
+                                        <h3>¿A dónde quieres ir?</h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-16 input-wrapper">
+                                    <div class="nvc-row search-box-header">
+                                        <h5>Reserva en los mejores alojamientos</h5>
+                                    </div>
+                                    <form class="nvc-form-inline search-panel-body" role="form">
+                                        <input type="hidden" name="adult" value="{[{ adults }]}" data-ng-if="adults != 2"/>
+                                        <input type="hidden" name="kid" value="{[{ kids }]}" data-ng-if="kids != 0"/>
+                                        <input type="hidden" name="room" value="{[{rooms}]}" data-ng-if="rooms != 1"/>
+                                        <!-- País -->
+                                        <div class="middle-icon">
+                                            <div class="nvc-form-group col-sm-7" style="padding: 0 0 0 10px;">
+                                                <input
+                                                        class="nvc-input__main"
+                                                        ng-blur="handleBlur()"
+                                                        ng-change="updateSuggestions()"
+                                                        ng-focus="handleFocus()"
+                                                        ng-keydown="handleKeyDown($event)"
+                                                        ng-model="origin"
+                                                        placeholder="Origen"
+                                                        tabindex="1"
+                                                        type="text"
+                                                />
+                                            </div>
+
+                                            <div class="calendar-img col-sm-2" style="margin-top: -11px;">
+                                            <span class="input-group-addon">
+                                                <a href="" style="color:#eda900">
+                                                    <i class="fn-revert"></i>
+                                                </a>
+                                            </span>
+
+                                            </div>
+
+                                            <div class="nvc-form-group col-sm-7" style=" padding: 0 10px 0 0; margin-left: -1px;">
+                                                <input
+                                                        class="nvc-search__input--main"
+                                                        ng-blur="handleBlur()"
+                                                        ng-change="updateSuggestions()"
+                                                        ng-focus="handleFocus()"
+                                                        ng-keydown="handleKeyDown($event)"
+                                                        ng-model="destination"
+                                                        placeholder="Destino"
+                                                        tabindex="1"
+                                                        type="text"
+                                                        style="width: 100.5%;"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="middle-icon">
+                                            <div class="nvc-form-group col-sm-7" style="padding: 0 0 0 10px;">
+                                                <input type="text" autocomplete="off" data-ng-model="startDate"
+                                                       class="nvc-input__home nvc-input__home--checkin js-range-check-in"
+                                                       name="startDate" placeholder="{{ 'share.message.start_date'|trans }}"
+                                                       data-ng-disabled="inputStartDate"/>
+                                            </div>
+                                            <div class="calendar-img col-sm-2">
+                                            <span class="input-group-addon">
+                                                <img src="{{ asset('images/calendar_new.png') }}"/>
+                                            </span>
+
+                                            </div>
+                                            <div class="nvc-form-group col-sm-7" style="padding: 0 10px 0 0; margin-left: -1px;">
+                                                <input type="text" autocomplete="off" data-ng-model="endDate"
+                                                       class="nvc-input__home js-range-check-out"
+                                                       name="endDate" placeholder="{{ 'share.message.end_date'|trans }}"
+                                                       data-ng-disabled="inputEndDate" style="width: 100.5%;"/>
+                                            </div>
+                                        </div>
+
+                                        <!-- Select Adultos -->
+                                        <div class="col-sm-8 select-wrapper" style="padding-right: 0px">
+                                            <select
+                                                    class="nvc-select__home"
+                                                    data-ng-model="adults">
+                                                <option value="1"> 1 {{ "share.message.adult"|transchoice(1) }}</option>
+                                                <option data-ng-repeat="n in [] | range:2:9" value="{[{n}]}">
+                                                    {[{n}]} {{ "share.message.adult"|transchoice(2) }}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Select Niños -->
+                                        <div class="col-sm-8 select-wrapper" style="padding-left: 0px">
+                                            <select
+                                                    class="nvc-select__home"
+                                                    data-ng-model="kids">
+                                                <option value="0"> 0 {{ "share.message.child"|transchoice(2) }}</option>
+                                                <option value="1"> 1 {{ "share.message.child"|transchoice(1) }}</option>
+                                                <option data-ng-repeat="n in [] | range:2:8" value="{[{n}]}">
+                                                    {[{n}]} {{ "share.message.child"|transchoice(2) }}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Boton Buscar -->
+                                        <div class="col-sm-16 button-wrapper">
+                                            <button
+                                                    class="nvc-button nvc-button__search center-block"
+                                                    data-ng-click="getProperties(selectedDestination)">
+                                                <b>Buscar</b>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="nvc-home-map__suggestion">
+                            <div class="nvc-row" >
+                                <div class="col-sm-16 title">
+                                    <h2>Venezuela Top</h2>
+                                    <img class="icon" src="{{ asset('images/flights/marker_map.png') }}" alt="">
+                                </div>
+
+                                <div class="col-sm-16 nvc-home-map__suggestion.margin-top-3-navicu">
+                                    <div data-ng-click="selectedDestination=navicuMap[indexDestinityTop('isla-de-margarita')];getProperties(selectedDestination);">
+                                        <h3>Isla Margarita</h3>
+                                        <h4>La Perla del Caribe espera por ti</h4>
+                                        <input type="hidden" name="destiny" value="Isla de Margarita"/>
+                                        <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                                        <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                                        <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                        <input type="hidden" name="type" value="isla"/>
+                                        <input type="hidden" name="slug" value="isla-de-margarita"/>
+                                        <input type="hidden" name="countryCode" value="VE"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-16">
+                                    <div data-ng-click="selectedDestination=navicuMap[indexDestinityTop('colonia-tovar')];getProperties(selectedDestination);">
+                                        <h3> La Colonia Tovar  </h3>
+                                        <h4>El pedacito de Alemania en Venezuela</h4>
+                                        <input type="hidden" name="destiny" value="Colonia Tovar"/>
+                                        <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                                        <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                                        <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                        <input type="hidden" name="type" value="parroquia"/>
+                                        <input type="hidden" name="slug" value="colonia-tovar"/>
+                                        <input type="hidden" name="countryCode" value="VE"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-16">
+                                    <div data-ng-click="selectedDestination=navicuMap[indexDestinityTop('los-roques')];getProperties(selectedDestination);">
+                                        <h3> Los Roques </h3>
+                                        <h4>Un paraíso de playas cristalinas</h4>
+                                        <input type="hidden" name="destiny" value="Los Roques"/>
+                                        <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                                        <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                                        <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                        <input type="hidden" name="type" value="archipielago"/>
+                                        <input type="hidden" name="slug" value="los-roques"/>
+                                        <input type="hidden" name="countryCode" value="VE"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Search the map -->
+                <div id="mapHomeDestiny" class="col-sm-11 nvc-home-map__location">
+                    <div id="nvc-wrapper__content">
+                        <a  href="#menu-toggle2" class="nvc-button nvc-button__wrapper visible-sm" id="menu-toggle2">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                        <div class="loading-map-gif" data-ng-show="isRequesting">
+                            <img src="{{ asset('images/gifmap.gif') }}"/>
+                        </div>
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.optionsMap" events="map.eventsMap"  control="map.control">
+                            <ui-gmap-marker data-ng-repeat="marker in map.markers track by $index"
+                                model="marker"
+                                coords="marker.coords"
+                                options="map.optionsMarker"
+                                events="map.eventsMarker"
+                                idkey="$index">
+                                <ui-gmap-window
+                                    show="marker.show"
+                                    options="map.windowOptions"
+                                    templateUrl="map.templatedInfoWindow.templateUrl"
+                                    templateParameter="map.templatedInfoWindow.templateParameter"
+                                    data-ng-cloak>
+                                </ui-gmap-window>
+                            </ui-gmap-marker>
+                        </ui-gmap-google-map>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--- Videos Encabezado -->
+        <section class="nvc-home-destiny__videos--header text-center">
+            <h2><i class="fa fn-youtube visible-xs"></i>Vivir la experiencia <span> navicu.com</span></h2>
+            <i class="fa fn-arrow-down-light hidden-xs"></i>
+        </section>
+        <!--- Videos Contenido -->
+        <section class="nvc-home-destiny__videos text-center">
+            <ul>
+                <li>
+                    <a href="" data-ng-click="showVideosModal(1)">
+                        <img src="{{ asset('images/home/videos/Margarita.jpg') }}">
+                        <img class="play" src="{{ asset('images/home/videos/icon_play.png') }}">
+                        <h2>Isla Margarita</h2>
+                        <h3 class="hidden-sm">Experiencia familiar en la increíble Isla de Margarita</h3>
+                        <h3 class="visible-sm">Experiencia familiar increíbles </h3>
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <a href="" data-ng-click="showVideosModal(2)">
+                        <img src="{{ asset('images/home/videos/Galipán.jpg') }}">
+                        <img class="play" src="{{ asset('images/home/videos/icon_play.png') }}">
+                        <h2>Galipán</h2>
+                        <h3 class="hidden-sm">Aventuras incomparables por vivir en Galipán</h3>
+                        <h3 class="visible-sm">Aventuras incomparables por vivir</h3>
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <a href="" data-ng-click="showVideosModal(3)">
+                        <img src="{{ asset('images/home/videos/Colonia.jpg') }}">
+                        <img class="play" src="{{ asset('images/home/videos/icon_play.png') }}">
+                        <h2>Colonia Tovar</h2>
+                        <h3 class="hidden-sm">Romance en cada esquina con el mejor clima en la Colonia Tovar</h3>
+                        <h3 class="visible-sm">Romance en cada esquina con el mejor clima</h3>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalVideos.html.twig") }}
+    </body>
+
+{% endblock body %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var symbolCurrency = "{{ symbolCurrency | raw }}";
+        var response = {{ locations | raw }};
+        var navicuMap = {{ destiniesMap | raw }};
+        var featured = {{ featured | raw }};
+        var airportsMap = {{ airports | raw }};
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#navicu-home-carousel').carousel({
+                interval: 10000
+            });
+            //*** DON´T TOUCH
+             $( ".js-range-check" ).keypress(function (evt) {  return false; });
+            //////////
+            $('#js-date-range').rangePicker();
+            $('#date-range').rangePicker({
+                checkInSelector: '#date-range .js-range-check-in',
+                checkOutSelector: '#date-range .js-range-check-out',
+            });
+
+            //**Barra de busqueda en mapa
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#nvc-wrapper").toggleClass("toggled");
+            });
+            $("#menu-toggle2").click(function(e) {
+                e.preventDefault();
+                $("#nvc-wrapper").toggleClass("toggled");
+            });
+            $('#suggestedValue').change(function() {
+                window.suggestedValue = this.value;
+            });
+            $('#startDate').change(function() {
+                window.startDate = this.value;
+                 console.log(window.startDate);
+            });
+            $('#endDate').change(function() {
+                window.endDate = this.value;
+            });
+            $('#rooms').change(function() {
+                window.rooms = this.value;
+            });
+            $('#adults').change(function() {
+                window.adults = this.value;
+            });
+            $('#children').change(function() {
+                window.children = this.value;
+            });
+        });
+    </script>
+
+
+
+{% endblock %}

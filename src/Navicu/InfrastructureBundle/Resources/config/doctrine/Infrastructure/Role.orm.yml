@@ -1,0 +1,86 @@
+# Entidad representa los roles asociados a los usuarios
+Navicu\InfrastructureBundle\Entity\Role:
+    type: entity
+    table: role
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRoleRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Nombre y Apellido del usuario
+        name:
+            type: string
+            unique: false
+        userReadableName:
+            type: string
+            nullable: true
+        admin:
+            type: boolean
+            options:
+              default: false
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+    
+    manyToMany:
+        # Conjunto de usuarios asociados al rol
+        users:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            cascade: ["persist"]
+            mappedBy: role
+        # Conjunto de modulos asociados al rol
+        modules:
+            targetEntity: Navicu\InfrastructureBundle\Entity\ModuleAccess
+            joinTable:
+                name: role_modules
+                joinColumns:
+                    role_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    module_id:
+                        referencedColumnName: id
+            cascade: ["persist"]
+        # Conjunto de permisos asociados al rol
+        permissions:
+            targetEntity: Navicu\InfrastructureBundle\Entity\Permission
+            joinTable:
+                name: role_permissions
+                joinColumns:
+                    role_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    permission_id:
+                        referencedColumnName: id
+            cascade: ["persist"]
+    manyToOne:
+        aavv:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVV
+            cascade: {  }
+            mappedBy: null
+            inversedBy: aavv
+            joinColumns:
+                aavv:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+    oneToMany:
+        translations:
+            targetEntity: Navicu\InfrastructureBundle\Entity\RoleTranslation
+            mappedBy: role
+            joinColumn:
+                name: translations
+                referencedColumnName: id
+            cascade: ["persist","remove"]
+    

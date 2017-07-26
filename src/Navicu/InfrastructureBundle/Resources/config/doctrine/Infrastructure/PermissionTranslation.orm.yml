@@ -1,0 +1,29 @@
+# Entidad que representa traducciones de los roles en diferentes idiomas
+Navicu\InfrastructureBundle\Entity\PermissionTranslation:
+    type: entity
+    table: permission_trl
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPermissionTranslationRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Nombre del rol en el idioma dado
+        name:
+            type: string
+            unique: false
+        locale:
+            type: string
+    manyToOne:
+        permission:
+            targetEntity: Navicu\InfrastructureBundle\Entity\Permission
+            cascade: {  }
+            mappedBy: null
+            inversedBy: permission
+            joinColumns:
+                permission:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

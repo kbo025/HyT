@@ -1,0 +1,221 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+        <title>Plataforma de alojamientos online líder en Venezuela.</title>
+    {% endif %}
+{% endblock seoMetadata %}
+
+{% block body %}
+
+<main   class='nvc-about_us post-body entry-content'
+        oncontextmenu='return false'
+        ondragstart='return false'
+        onmousedown='return false'
+        onselectstart='return false'
+        ng-app="aboutUsModule"
+        ng-controller="aboutUsController">
+    <!--- Header -->
+    <section class="nvc-about_us__header">
+        <img  class="nvc-carousel__fill" src="{{ assets.img['images/about_us/principal.jpg'] }}" ng-src="{[{ images.bg }]}"/>
+        <div class="nvc-container">
+            <h1>{{"web.about_us.know_your_country"|trans }}</h1>
+            <h2>{{"web.about_us.unforgettable_experience"|trans }}</h2>
+        </div>
+    </section>
+    <!--- Block Steps -->
+    <section class="nvc-about_us__steps ">
+        <div class="nvc-container text-center nvc-padding--xs">
+            <h1>{{"web.about_us.booking_platform"|trans }} Venezuela</h1>
+            <div class="col-xs-8 col-sm-4">
+                <center><img  class="img-responsive" style="width: 52%;" src="{{ asset('images/about_us/map.png') }}"/>
+                <p>{{"web.about_us.establishments"|trans }} Venezuela</p></center>
+            </div>
+            <div class="col-xs-8 col-sm-4 hidden-xs">
+                <center><img  class="img-responsive" src="{{ asset('images/about_us/palm.png') }}"/>
+                <p>{{"web.about_us.choose_your_destination"|trans }}</p></center>
+            </div>
+            <div class="col-xs-8 col-sm-4 visible-xs" style="margin-bottom:10px;">
+                <center><img  class="img-responsive" src="{{ asset('images/about_us/palm.png') }}"/>
+                <p>{{"web.about_us.choose_your_destination"|trans }}</p></center>
+            </div>
+            <div class="col-xs-8 col-sm-4">
+                <center><img  class="img-responsive" style="width: 46%;" src="{{ asset('images/about_us/coins.png') }}"/>
+                <p>{{"web.about_us.reserve_at_the_best_price"|trans }}</p></center>
+            </div>
+            <div class="col-xs-8 col-sm-4">
+                <center><img  class="img-responsive" src="{{ asset('images/about_us/pc.png') }}"/>
+                <p>{{"web.about_us.four_steps"|trans }}</p></center>
+            </div>
+        </div>
+    </section>
+    <!--- Block Destinations -->
+    <section class="nvc-about_us__destinations">
+        <div class="nvc-container nvc-padding--xs">
+            <div class="col-xs-16 col-md-11 ">
+                <h1>{{"web.about_us.wonderful_destinations"|trans }} </h1>
+                <h3>{{"web.about_us.leading_platform"|trans }}</h3>
+                <h4>{{"web.about_us.grind_salt"|trans }}</h4>
+            </div>
+            <div class="col-xs-16 col-md-1 ">
+            </div>
+            <div class="col-xs-16 col-sm-5 col-md-4 ">
+                <a href="{{ path('navicu_destinations') }}">
+                    <button class="nvc-button nvc-button__reroute">
+                        {{"web.about_us.variety_of_destinations"|trans }}
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!--- Block Reserve -->
+    <section class="nvc-about_us__reserve">
+        <div class="nvc-container">
+            <div class="col-xs-16 col-sm-10 ">
+                <h1 class="nvc-about_us__reserve--title">{{"web.about_us.reserve_mobile"|trans }}</h1>
+                <h3 style="padding-bottom:20px;">{{"web.about_us.favorite_destination"|trans }}</h3>
+                <center><img  class="img-responsive visible-xs" src="{{ asset('images/about_us/img_movil.png') }}"/></center>
+                <h1>{{"web.about_us.search_destination"|trans }}</h1>
+                <h4>{{"web.about_us.unrepeatable"|trans }}</h4>
+                <h1>{{"web.about_us.choose_the_place"|trans }}</h1>
+                <h4>{{"web.about_us.various_services"|trans }}</h4>
+                <h5>{{"web.about_us.choose_the_one"|trans }}</h5>
+            </div>
+            <div class="col-xs-16 col-sm-6 ">
+                <img  class="img-responsive hidden-xs" src="{{ asset('images/about_us/img_movil.png') }}"/>
+            </div>
+        </div>
+    </section>
+    <!--- Block Tips-->
+    <section class="nvc-about_us__tips hidden-md hidden-sm hidden-xs">
+        <div class="nvc-container">
+            <div class="col-xs-4 col-sm-2">
+                <img  class="img-responsive" src="{{ asset('images/about_us/pasos.png') }}"/>
+            </div>
+            <div class="col-xs-12 col-sm-6" style="margin-left:-6%;">
+                <h4>{{"web.about_us.reserve_in_four_steps"|trans }}</h4>
+                <p>{{"web.about_us.search_the_destination_you_prefer"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="margin-left:6%;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/montaña.png') }}"/>
+            </div>
+            <div class="col-xs-12 col-sm-6" style="margin-left:-4%;">
+                <h4>{{"web.about_us.alternatives"|trans }}</h4>
+                <p>{{"web.about_us.types_of_destinations_to_choose"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2">
+                <img  class="img-responsive" src="{{ asset('images/about_us/cama.png') }}"/>
+            </div>
+            <div class="col-xs-12 col-sm-6" style="margin-left:-6%;">
+                <h4>{{"web.about_us.room_that_you_need"|trans }}</h4>
+                <p> {{"web.about_us.specific_room_type"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="margin-left:6%;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/seguros.png') }}"/>
+            </div>
+            <div class="col-xs-12 col-sm-6" style="margin-left:-4%;">
+                <h4>{{"web.about_us.reliable_and_secure_payment"|trans }}</h4>
+                <p>{{"web.about_us.confirmed_reservation"|trans }}</p>
+            </div>
+        </div>
+    </section>
+    <section class="nvc-about_us__tips visible-sm">
+        <div class="nvc-container">
+            <div class="col-xs-4 col-sm-2" style="">
+                <img  class="img-responsive" src="{{ asset('images/about_us/pasos.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-5%;">
+                <h4>{{"web.about_us.reserve_in_four_steps"|trans }}</h4>
+                <p>{{"web.about_us.search_the_destination_you_prefer"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="margin-left:6%;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/montaña.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-2%;">
+                <h4>{{"web.about_us.alternatives"|trans }}</h4>
+                <p>{{"web.about_us.types_of_destinations_to_choose"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="">
+                <img  class="img-responsive" src="{{ asset('images/about_us/cama.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-5%;">
+                <h4>{{"web.about_us.room_that_you_need"|trans }}</h4>
+                <p> {{"web.about_us.specific_room_type"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="margin-left:6%;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/seguros.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-2%;">
+                <h4>{{"web.about_us.reliable_and_secure_payment"|trans }}</h4>
+                <p>{{"web.about_us.confirmed_reservation"|trans }}</p>
+            </div>
+        </div>
+    </section>
+    <section class="nvc-about_us__tips visible-md">
+        <div class="nvc-container">
+            <div class="col-xs-4 col-sm-2" style="margin-bottom:5%;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/pasos.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-5%; margin-bottom:5%;">
+                <h4>{{"web.about_us.reserve_in_four_steps"|trans }}</h4>
+                <p>{{"web.about_us.search_the_destination_you_prefer"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="margin-left:6%; margin-bottom:5%;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/montaña.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-2%; margin-bottom:10%;">
+                <h4>{{"web.about_us.alternatives"|trans }}</h4>
+                <p>{{"web.about_us.types_of_destinations_to_choose"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="">
+                <img  class="img-responsive" src="{{ asset('images/about_us/cama.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-5%;">
+                <h4>{{"web.about_us.room_that_you_need"|trans }}</h4>
+                <p> {{"web.about_us.specific_room_type"|trans }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-2" style="margin-left:6%;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/seguros.png') }}"/>
+            </div>
+            <div class="col-xs-4 col-sm-6" style="margin-left:-2%;">
+                <h4>{{"web.about_us.reliable_and_secure_payment"|trans }}</h4>
+                <p>{{"web.about_us.confirmed_reservation"|trans }}</p>
+            </div>
+        </div>
+    </section>
+    <section class="nvc-about_us__tips visible-xs">
+        <div class="nvc-container nvc-padding--xs">
+            <div class="col-xs-16" style="margin-bottom: 30px;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/pasos.png') }}"/>
+                <h4 style="margin-top:-50px; margin-left:20%;">{{"web.about_us.reserve_in_four_steps"|trans }}</h4>
+                <p style="margin-left:20%;">{{"web.about_us.search_the_destination_you_prefer"|trans }}</p>
+            </div>
+            <div class="col-xs-16" style="margin-bottom: 30px;">
+                <img  style="width:17%;" class="img-responsive" src="{{ asset('images/about_us/montaña.png') }}"/>
+                <h4 style="margin-top:-50px; margin-left:20%;">{{"web.about_us.alternatives"|trans }}</h4>
+                <p style="margin-left:20%;">{{"web.about_us.types_of_destinations_to_choose"|trans }}</p>
+            </div>
+            <div class="col-xs-16" style="margin-bottom: 30px;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/cama.png') }}"/>
+                <h4 style="margin-top:-50px; margin-left:20%;">{{"web.about_us.room_that_you_need"|trans }}</h4>
+                <p style="margin-left:20%;"> {{"web.about_us.specific_room_type"|trans }}</p>
+            </div>
+            <div class="col-xs-16" style="margin-bottom: 30px;">
+                <img  class="img-responsive" src="{{ asset('images/about_us/seguros.png') }}"/>
+                <h4 style="margin-top:-50px; margin-left:20%;">{{"web.about_us.reliable_and_secure_payment"|trans }}</h4>
+                <p style="margin-left:20%;">{{"web.about_us.confirmed_reservation"|trans }}</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+Navicu\Core\Domain\Model\Entity\LogsOwner:
+    type: entity
+    table: logs_owner
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbLogsOwnerRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        date:
+            type: date
+            nullable: false
+        time:
+            type: time
+            nullable: false
+        action:
+            type: string
+            nullable: false
+        resource:
+            type: string
+            nullable: true
+        file_name:
+            type: string
+            nullable: true
+
+    manyToOne:
+        owner_profile:
+            targetEntity: OwnerProfile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: logs_owners
+            joinColumn:
+                owner_profile:
+                    referencedColumnName: id
+
+        property:
+            targetEntity: Property
+            cascade: {  }
+            mappedBy: null
+            inversedBy: logs_owners
+            joinColumn:
+                property:
+                    referencedColumnName: id
+
+    lifecycleCallbacks:
+        prePersist: [ createLog ]

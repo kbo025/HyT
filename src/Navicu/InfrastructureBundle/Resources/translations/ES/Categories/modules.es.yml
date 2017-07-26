@@ -1,0 +1,9 @@
+#modulos de agencia de viajes
+aavv_reservation: Reservacion
+aavv_billing: Facturacion
+aavv_users: Usuarios
+
+#traducciones inversas
+Reservacion: aavv_reservation
+Facturacion: aavv_billing
+Usuarios: aavv_users

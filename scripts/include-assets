@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'yaml'
+
+OUTPUT_FILE = "app/config/assets.yml"
+
+DATA = JSON.parse File.read 'web/webpack-assets.json'
+
+IMAGES = JSON.load(File.read('assets-manifest.json')).to_a.select { |pair|
+  name = pair[0]
+  name.match /\.(jpe?g|png)$/
+}.map { |pair|
+  src = pair[0]
+  hash = pair[1].match(/\?(.+)$/)[1]
+
+  pub = "/builds/optimized-#{hash}.jpg"
+  dest = 'web' + pub
+
+  system(
+    "convert",
+    "-flatten",
+    "-strip",
+    "-interlace", "Plane",
+    "-quality", "60",
+    #"-quality", "35",
+    #"-quality", "5",
+    "-gaussian-blur", "0.5",
+    src,
+    dest,
+  )
+
+  pair[0] = pair[0].sub /^web\//, ''
+  pair[1] = pub
+  pair
+}.to_h
+
+ASSETS = {
+  "parameters" => {
+    "webpack" => DATA,
+  },
+  "twig" => {
+    "globals" => {
+      "assets" => {
+        "js" => {
+          "aavv" => DATA["aavv"]["js"],
+          "admin" => DATA["admin"]["js"],
+          "ascribere" => DATA["ascribere"]["js"],
+          "client" => DATA["client"]["js"],
+          "extranet" => DATA["extranet"]["js"],
+          "vendor" => DATA["vendor"]["js"],
+        },
+        "img" => IMAGES,
+      }
+    }
+  },
+}
+
+File.write(OUTPUT_FILE, YAML.dump(ASSETS))

@@ -1,0 +1,118 @@
+# La entidad contiene el conjunto de datos del perfil administrador
+# del sistema (NvcProfile)
+Navicu\Core\Domain\Model\Entity\NvcProfile:
+    type: entity
+    table: nvc_profile
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbNvcProfileRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Nombre y Apellido del usuario
+        full_name:
+            type: string
+        # Cedula de indentidad del usuario
+        identity_card:
+            type: string
+        # Genero del usuario
+        gender:
+            type: integer  # 1: mujer , 2: hombre
+            nullable: true
+        # Correo corporativo del usuario
+        company_email:
+            type: string
+            nullable: true
+        # Correo personal del usuario
+        personal_email:
+            type: string
+            nullable: true
+        # Celular
+        cell_phone:
+            type: string
+            nullable: true
+        # Fecha de nacimiento
+        birth_date:
+            type: date
+            nullable: true
+        # Fecha de creación del usuario
+        joined_date:
+            type: datetime
+            nullable: true
+        # Telefono personal
+        personal_phone:
+            type: string
+            nullable: true
+        # Fecha de incorporación en la empresa
+        incorporation_date:
+            type: date
+            nullable: true
+        # Trato del usuario (sr, sra, srta)
+        treatment:
+            type: integer
+            nullable: true
+            options:
+                default: 0
+        # Permisos que tiene el usuario en el sistema
+        permissions:
+            type: json_array
+            nullable: false
+            options:
+                default: '[]'
+        # Telefono corporativo
+        corporate_phone:
+            type: string
+            nullable: true
+
+    oneToOne:
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: nvc_profile
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            cascade: ["persist"]
+
+    oneToMany:
+        # Establecimientos afiliados asociados a un usuario admin (ROLE_SALES_EXEC)
+        properties:
+            targetEntity: Property
+            mappedBy: nvc_profile
+            cascade: ["persist"]
+        # Establecimientos que este vendedor afilio a navicu
+        properties_recruit:
+            targetEntity: Property
+            mappedBy: recruit
+            cascade: ["persist"]
+
+        # Establecimientos en proceso de registro asociados a un usuario admin (ROLE_SALES_EXEC)
+        temp_owners:
+            targetEntity: TempOwner
+            mappedBy: nvc_profile
+            cascade: ["persist"]
+        # Establecimientos que este vendedor afilio a navicu
+        temp_owner_recruit:
+            targetEntity: TempOwner
+            mappedBy: recruit
+            cascade: ["persist"]
+        # Localidad de donde es el usuario
+        location:
+            targetEntity: Location
+            mappedBy: nvc_profile
+            cascade: ["persist"]
+
+    manyToOne:
+        # Cual cargo y departamento  al cual pertenece el usuario
+        departament:
+            targetEntity: Departament
+            inversedBy: nvc_profile
+            joinColumn:
+                departament_id:
+                    referencedColumnName: id
+            cascade: ["persist"]
+
+    lifecycleCallbacks:
+        prePersist: [ updateDate, setDefaultsPermissions ]
+        preUpdate: [updateDate ]

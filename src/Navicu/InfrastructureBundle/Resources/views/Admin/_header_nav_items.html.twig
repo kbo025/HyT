@@ -1,0 +1,290 @@
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block"
+    ng-class =  "{
+                    'nvc-active' :
+                        route === 'navicu_admin_homepage' ||
+                        route === 'navicu_admin_homepage_affiliate_properties' ||
+                        route === 'navicu_admin_homepage_temp_properties' ||
+                        route === 'navicu_admin_homepage_properties_without_price' ||
+                        route === 'navicu_admin_data_property_details' ||
+                        route === 'navicu_admin_view_property_details' ||
+                        route === 'navicu_admin_homepage_view_properties_without_price'
+                }"
+>
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle"
+        data-toggle="dropdown"
+
+        role="button"
+    >
+        Alojamientos
+    </a>
+
+    <ul class="nvc-dropdown__menu--topmenu">
+        <li ng-class="{'nvc-active': route === 'navicu_admin_homepage_affiliate_properties'}">
+            <a href="{{ hasPermission('admin_affiliates', 'read') ?
+                path('navicu_admin_homepage_affiliate_properties') : '#' }}">
+                Afiliados
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_homepage_temp_properties'}">
+            <a href="{{ hasPermission('admin_temporals', 'read') ?
+                path('navicu_admin_homepage_temp_properties') : '#' }}">
+                En proceso de registro
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_homepage_view_properties_without_price'}">
+            <a href="{{ hasPermission('admin_availability', 'read') ?
+                path('navicu_admin_homepage_view_properties_without_price') : '#' }}">
+                Sin disponibilidad
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block"
+    ng-class =  "{
+                    'nvc-active' :
+                        route === 'navicu_admin_affiliates_list_aavv' ||
+                        route === 'navicu_admin_aavv_list' ||
+                        route === 'navicu_admin_aavv_list_parameters' ||
+                        route === 'navicu_admin_affiliates_detail_aavv'
+                }">
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle"
+        data-toggle="dropdown"
+        href="#"
+        role="button">
+        Agencias de viaje
+    </a>
+
+    <ul class="nvc-dropdown__menu--topmenu">
+        <li ng-class="{'nvc-active': route === 'navicu_admin_affiliates_list_aavv'}">
+            <a href="{{ hasPermission('admin_aavv_affiliates', 'read') ?
+                path('navicu_admin_affiliates_list_aavv') : '#' }}">
+                Afiliadas
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_aavv_list'}">
+            <a href="{{ hasPermission('admin_aavv_temporals', 'read') ?
+                path('navicu_admin_aavv_list') : '#' }}">
+                En proceso de registro
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_aavv_list_parameters'}">
+            <a href="{{ hasPermission('admin_aavv_parameters', 'read') ?
+                path('navicu_admin_aavv_list_parameters') : '#' }}">
+                Parámetros
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block"
+    ng-class =  "{
+                    'nvc-active' :
+                        route === 'navicu_admin_properties_render_calendar_currency_exchange'
+                }"
+>
+
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle"
+        data-toggle="dropdown"
+        href="{{ hasPermission('admin_foreign_exchange', 'read') ?
+        path('navicu_admin_properties_render_calendar_currency_exchange') : '#' }}"
+        role="button"
+    >
+        Divisas
+    </a>
+</li>
+
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block"
+    ng-class="{
+                'nvc-active' :
+                    route === 'navicu_users_homepage' ||
+                    route === 'navicu_users_edit'
+            }"
+>
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle hidden-xs hidden-sm"
+        data-toggle="dropdown"
+        href="{{ hasPermission('admin_users', 'read') ?
+                path('navicu_users_homepage', {'role': 0}) : '#'}}"
+        role="button"
+    >
+        Usuarios
+    </a>
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle visible-xs visible-sm"
+        data-toggle="dropdown"
+        role="button"
+    >
+        Usuarios
+    </a>
+    <ul class="nvc-dropdown__menu--topmenu visible-xs visible-sm">
+        <li ng-class="{'nvc-active': route === ''}">
+            <a href="{{ hasPermission('admin_users', 'read') ?
+                path('navicu_users_homepage', {'role': 0}) : '#' }}">
+                Todos los usuarios
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === ''}">
+            <a href="{{ hasPermission('admin_users_client', 'read') ?
+                path('navicu_users_homepage', {'role': 3}) : '#' }}">
+                Usuarios cliente
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === ''}">
+            <a href="{{ hasPermission('admin_users_extranet', 'read') ?
+                path('navicu_users_homepage', {'role': 1}) : '#' }}">
+                Usuarios hoteleros
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === ''}">
+            <a href="{{ hasPermission('admin_users_admin', 'read') ?
+                path('navicu_users_homepage', {'role': 2}) : '#' }}">
+                Usuarios admin
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === ''}">
+            <a href="{{ hasPermission('admin_users_aavv', 'read') ?
+                path('navicu_users_homepage', {'role': 4}) : '#' }}">
+                Usuarios AAVV
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block"
+    ng-class="{'nvc-active': route === 'navicu_admin_property_list_reservation_template'}"
+    ng-class =  "{
+                    'nvc-active' :
+                        route === 'navicu_admin_property_list_reservation_template' &&
+                        (
+                            routeParams.reservationStatus === '0' ||
+                            routeParams.reservationStatus === '1' ||
+                            routeParams.reservationStatus === '2' ||
+                            routeParams.reservationStatus === '3' ||
+                            routeParams.reservationStatus === '4'
+                        )
+                }"
+
+>
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+    >
+        Reservas
+    </a>
+
+    <ul class="nvc-dropdown__menu--topmenu">
+        <li
+            ng-class="{'nvc-active': route === 'navicu_admin_property_list_reservation_template' && routeParams.reservationStatus === '4'}">
+            <a href="{{ hasPermission('admin_reservation', 'read') ?
+                path('navicu_admin_property_list_reservation_template', {"reservationStatus": 4}) : '#' }}">
+                Todas
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_property_list_reservation_template' && routeParams.reservationStatus === '0'}">
+            <a href="{{ hasPermission('admin_reservation', 'read') ?
+                path('navicu_admin_property_list_reservation_template', {"reservationStatus": 0}) : '#' }}">
+                Pre-reservas
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_property_list_reservation_template' && routeParams.reservationStatus === '1'}">
+            <a href="{{ hasPermission('admin_reservation', 'read') ?
+                path('navicu_admin_property_list_reservation_template', {"reservationStatus": 1}) : '#' }}">
+                En proceso de confirmación
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_property_list_reservation_template' && routeParams.reservationStatus === '2'}">
+            <a href="{{ hasPermission('admin_reservation', 'read') ?
+                path('navicu_admin_property_list_reservation_template', {"reservationStatus": 2}) : '#'}}">
+                Aceptadas
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navicu_admin_property_list_reservation_template' && routeParams.reservationStatus === '3'}">
+            <a href="{{ hasPermission('admin_reservation', 'read') ?
+                path('navicu_admin_property_list_reservation_template', {"reservationStatus": 3}) : '#' }}">
+                Canceladas
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block"
+    ng-class =  "{
+                    'nvc-active' :
+                        route === 'navicu_aavv_view_invoice_list' ||
+                        route === 'navcu_avvv_direct_payment'
+                }"
+>
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+    >
+        Facturación
+    </a>
+
+    <ul class="nvc-dropdown__menu--topmenu">
+        <li ng-class="{'nvc-active': route === 'navicu_aavv_view_invoice_list'}">
+            <a href="{{ hasPermission('admin_aavv_invoices', 'read') ?
+                path('navicu_aavv_view_invoice_list') : '#' }}">
+                Agencias de viaje
+            </a>
+        </li>
+        <li ng-class="{'nvc-active': route === 'navcu_avvv_direct_payment'}">
+            <a href="{{  hasPermission('admin_aavv_payments', 'read') ?
+                path('navcu_avvv_direct_payment') : '#' }}">
+                Pagos domiciliados
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block visible-xs"
+    ng-class="{'nvc-active' : route === 'roles_and_permissions_page'}"
+>
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle visible-xs"
+        data-toggle="dropdown"
+        href="{{ hasPermission('admin_roles_and_permissions', 'read') ?
+                path('roles_and_permissions_page') : '#' }}"
+        role="button"
+    >
+        Roles y Permisos
+    </a>
+</li>
+
+<li
+    class="nvc-dropdown--topmenu nvc-dropdown__block visible-xs"
+    ng-class="{'nvc-active' : route === 'navicu_admin_logout'}"
+>
+    <a
+        aria-has-popup="true"
+        class="nvc-dropdown__toggle visible-xs"
+        data-toggle="dropdown"
+        href="{{ path('navicu_admin_logout') }}"
+        role="button"
+    >
+        Salir
+    </a>
+</li>

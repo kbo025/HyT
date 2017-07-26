@@ -1,0 +1,6 @@
+# Información general de un establecimento afiliado
+navicu_admin_property_general_information:
+    pattern: /propertyGeneralInformation/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\GeneralInformation:generalInformation }
+    options:
+        expose: true

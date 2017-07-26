@@ -1,0 +1,552 @@
+{% extends "NavicuInfrastructureBundle:Web:Client/layout.html.twig" %}
+
+{% set header_title = {'module_title': 'preReservation'} %}
+
+{% block body %}
+
+
+<main ng-app="listPreReservationModule" ng-controller="listPreReservationController" ng-cloak>
+	<div style="background:#f4f4f4"  ng-if="PreReservations.reservations.length>0">
+		<div class="nvc-container nvc-list-pre-reservation">
+			<!-- Jumbotron de bienvenida-->
+			<div class="nvc-jumbotron">
+				<div class="nvc-container">
+					<div class="col-xs-16">
+						<p class="nvc-list__content__welcome--alpha">{{"web.client.list_pre_peservation.welcome_message.paragraph_one"|trans }}</p>
+						<p class="nvc-list__content__welcome--beta visible-lg">{{"web.client.list_pre_peservation.welcome_message.paragraph_two"|trans }}</p>
+						<p class="nvc-list__content__welcome--margin-beta visible-lg">{{"web.client.list_pre_peservation.welcome_message.paragraph_three"|trans }}</p>
+
+						<p class="nvc-list__content__welcome--beta hidden-lg"> {{"web.client.list_pre_peservation.welcome_message.paragraph_two"|trans }}  {{"web.client.list_pre_peservation.welcome_message.paragraph_three"|trans }}</p>
+					</div>
+				</div>
+			</div>
+			<!-- End Jumbotron -->
+
+			<!-- Tabla de Datos -->
+			<div class="nvc-table__responsive">
+				<table class="nvc-table" ng-clock>
+					<thead>
+						<tr>
+							<!-- Establecimiento -->
+							<th class="text-center nvc-table--border-radius-l"><b>{{"web.shared_client.table_header.property"|trans }}</b></th>
+							<!-- End Establecimiento-->
+
+							<!-- ID Pre-reserva -->
+							<th class="text-center visible-lg"><b>{{"web.shared_client.table_header.id_pre_reservation"|trans}}</th>
+							<!-- End ID Pre-reserva -->
+
+							<!-- Check-in -->
+							<th class="text-center visible-lg"><b>{{"web.shared_client.table_header.check_in"|trans}}</b></th>
+							<!-- End Check-in -->
+
+							<!-- Check-out -->
+							<th class="text-center visible-lg"><b>{{"web.shared_client.table_header.check_out"|trans}}</b></th>
+							<!-- End Check-out -->
+
+							<!-- Nombre y apellido -->
+							<th class="text-center"><b>{{"extranet.home.name_lastname"|trans}}</b></th>
+							<!-- End Nombre y apellido -->
+
+							<!-- Importe -->
+							<th class="text-center nvc-table--border-radius-r visible-lg"><b>{{"web.shared_client.table_header.amount"|trans}}</b></th>
+							<!-- End Importe -->
+							<th class="text-center hidden-lg nvc-table--border-radius-r"></th>
+						</tr>
+					</thead>
+					<tbody
+						ng-repeat="reservation in PreReservations.reservations">
+						<tr ng-class="{
+							'nvc-table--color-even': reservation.class === 'nvc-table--color-even',
+							'nvc-table--color-odd' : reservation.class === 'nvc-table--color-odd'}"
+
+							ng-click="reservation.showTransferData = !reservation.showTransferData"
+							>
+							<!-- Establecimiento -->
+							<td class="text-center"><b>{[{ reservation.propertyName }]}</b></td>
+							<!-- ID Pre-reserva -->
+							<td class="text-center visible-lg"><b>{[{ reservation.idReserve }]}</b></td>
+							<!-- Check-in -->
+							<td class="text-center visible-lg"><b>{[{ reservation.checkIn }]}</b></td>
+							<!-- Check-out -->
+							<td class="text-center visible-lg"><b>{[{ reservation.checkOut }]}</b></td>
+							<!-- Nombre y apellido -->
+							<td class="text-center"><b>{[{ reservation.names }]}</b></td>
+							<!-- Monto -->
+							<td class="text-center visible-lg">
+								<b ng-if="!reservation.foreignCurrency">
+									{{ "web.reservation.money" | trans}}
+								</b>
+
+								<b ng-if="reservation.foreignCurrency">
+									 {[{ reservation.alphaCurrency }]}
+								</b>
+
+								<b>
+									{[{ reservation.amount | number }]}
+								</b>
+							</td>
+
+							<!-- Boton Detalles -->
+							<td class="text-center hidden-lg">
+								<button type="button"
+									class="nvc-button nvc-button__default"
+									ng-click="reservation.details=!reservation.details">
+									Detalles
+								</button>
+							</td>
+							<!-- End de Boton Detalles -->
+						</tr>
+
+						<!-- Datos de Pagos con varias transacciones Lg-->
+						<tr ng-if="reservation.showTransferData" class="nvc-multiple-payments visible-lg">
+							<td colspan="99">
+								<table>
+									<thead>
+										<tr>
+											<!-- Banco Emisor -->
+											<th class="text-center">
+												<i class='fa fa-info-circle nvc-tooltips nvc-tooltips__top' >
+						                            <span>
+						                               Entidad bancaria donde usted realizó su transferencia
+						                            </span>
+						                        </i>
+												{{ "web.client.list_pre_peservation.payments.issuingBank" | trans}}
+											</th>
+
+											<!-- Banco Receptor -->
+											<th class="text-center">
+												<i class='fa fa-info-circle nvc-tooltips nvc-tooltips__top' >
+						                            <span>
+						                               Entidades bancarias donde navicu.com recibe transferencias
+						                            </span>
+						                        </i>
+												{{ "web.client.list_pre_peservation.payments.receivingBank" | trans}}
+											</th >
+
+											<!-- N de referencia -->
+											<th class="text-center">
+												{{ "web.client.list_pre_peservation.payments.referenceCode" | trans}}
+											</th>
+
+											<!-- Monto -->
+											<th class="text-center">
+												{{ "web.client.list_pre_peservation.payments.amount" | trans}}
+											</th>
+											<th></th>
+										</tr>
+									</thead>
+
+									<tbody
+										ng-class="{
+										'nvc-table--color-even': reservation.class === 'nvc-table--color-even',
+										'nvc-table--color-odd' : reservation.class === 'nvc-table--color-odd'}">
+
+										<tr ng-repeat="transfer in reservation.payments">
+											<!--Banco Emisor-->
+											<td ng-if="!reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.bankList track by option.id"
+													ng-model="transfer.issuingBank">
+													<option value="">
+														{{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+
+											<!--Banco Receptor-->
+											<td ng-if="!reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.bankList track by option.id"
+													ng-model="transfer.receivingBank">
+													<option value="">
+														{{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+
+											<!--Banco Emisor Internacional-->
+											<td ng-if="reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.internationalBankList track by option.id"
+													ng-model="transfer.issuingBank">
+													<option value="">
+														{{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+
+											<!--Banco Receptor Internacional-->
+											<td ng-if="reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.internationalBankList track by option.id"
+													ng-model="transfer.receivingBank">
+													<option value="">
+														{{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+
+											<!-- N de referencia -->
+											<td>
+												<input type="text"
+												required="required"
+												ng-model="transfer.referenceCode">
+											</td>
+
+											<!-- Monto -->
+											<td>
+												<input type="number"
+												required="required"
+												ng-model="transfer.transferredAmount">
+											</td>
+
+											<!-- boton Confirmar -->
+											<td class="text-center visible-lg" colspan="2">
+												<button
+													type="button"
+													ng-if="reservation.payments.length-1 == $index"
+													class="nvc-button nvc-button__default"
+													ng-disabled="
+													!transfer.issuingBank ||
+													!transfer.receivingBank ||
+													!transfer.referenceCode ||
+													!transfer.transferredAmount"
+													ng-click="sendData(reservation)">
+													<!-- {{ "share.action.submit" | trans }} -->
+
+													{{"web.client.list_pre_peservation.button.payment"|trans }}
+			 									</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<!-- Fin datos de Pagos con varias transacciones Lg-->
+
+						<!-- Informacion de la PreReserva visible en md, sm, xs-->
+						<tr class="hidden-lg" ng-if="reservation.details">
+							<td class="text-left">
+								<!-- Check-in -->
+								<label for="checkIn">{{"web.shared_client.table_header.check_in"|trans}}</label>
+								<br>
+								<b> {[{  reservation.checkIn }]}</b>
+								<br>
+								<!-- End de Check-in -->
+
+								<!-- Establecimiento -->
+								<label for="property">{{"web.shared_client.table_header.property"|trans }}</label>
+								<br>
+								<b>{[{ reservation.propertyName }]}</b>
+								<br>
+								<!-- End de Establecimiento -->
+							</td>
+
+							<td class="text-left">
+								<!-- Check-Out -->
+								<label for="checkout">{{"web.shared_client.table_header.check_out"|trans}}</label>
+								<br>
+								<b>{[{ reservation.checkOut }]}</b>
+								<br>
+								<!-- End de Check-Out -->
+
+								<!-- Monto -->
+								<label for="amount">{{"web.shared_client.table_header.amount"|trans}}</label>
+								<br>
+								<b ng-if="!reservation.foreignCurrency">
+									{{ "web.reservation.money" | trans}}
+								</b>
+
+								<b ng-if="reservation.foreignCurrency">
+									 {[{ reservation.alphaCurrency }]}
+								</b>
+
+								<b>
+									{[{ reservation.amount | number }]}
+								</b>
+
+								<br>
+								<!-- End de Importe -->
+							</td>
+						</tr>
+						<!-- Fin Informacion de la PreReserva-->
+
+						<!-- Datos de Pagos con varias transacciones Md hasta Xs-->
+						<tr
+							class="hidden-lg nvc-multiple-payments"
+							ng-if="reservation.details"
+							>
+							<td colspan="99">
+								<table ng-repeat = "transfer in reservation.payments">
+									<thead>
+										<tr>
+											<!-- Banco Emisor -->
+											<th class="text-center">
+												<i class='fa fa-info-circle nvc-tooltips nvc-tooltips__top' >
+						                            <span>
+						                               Entidad bancaria donde usted realizó su transferencia
+						                            </span>
+						                        </i>
+												{{ "web.client.list_pre_peservation.payments.issuingBank" | trans}}
+											</th>
+
+											<!-- Banco Receptor -->
+											<th class="text-center">
+												<i class='fa fa-info-circle nvc-tooltips nvc-tooltips__top' >
+						                            <span>
+						                              Entidades bancarias donde navicu.com recibe transferencias
+						                            </span>
+						                        </i>
+												{{ "web.client.list_pre_peservation.payments.receivingBank" | trans}}
+											</th>
+										</tr>
+									</thead>
+
+									<tbody
+										ng-class="{
+										'nvc-table--color-even': reservation.class === 'nvc-table--color-even',
+										'nvc-table--color-odd' : reservation.class === 'nvc-table--color-odd'}">
+										<tr>
+											<!-- informacion Banco Emisor-->
+											<td ng-if="!reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.bankList track by option.id"
+													ng-model="transfer.issuingBank"
+													ng-disabled="reservation.payments.length-1 != $index">
+													<option value="">
+                                                                                                            {{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+
+											<!-- informacion Banco Receptor-->
+											<td ng-if="!reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.banksList track by option.id"
+													ng-model="transfer.receivingBank"
+													ng-disabled="reservation.payments.length-1 != $index">
+													<option value="">
+														{{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+
+											<!-- informacion Banco Emisor Internacional-->
+											<td ng-if="reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.internationalBankList track by option.id"
+													ng-model="transfer.issuingBank"
+													ng-disabled="reservation.payments.length-1 != $index">
+													<option value="">
+														{{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+
+											<!-- informacion Banco Receptor internacional-->
+											<td ng-if="reservation.foreignCurrency">
+												<select name="bank"
+													ng-options="option.title for option in PreReservations.internationalBankList track by option.id"
+													ng-model="transfer.receivingBank"
+													ng-disabled="reservation.payments.length-1 != $index">
+													<option value="">
+														{{ "web.shared_client.table_header.banking_entity_select" | trans}}
+													</option>
+												</select>
+											</td>
+										</tr>
+									</tbody>
+
+									<thead>
+										<tr>
+											<!-- N de referecia -->
+											<th class="text-center">
+												{{ "web.client.list_pre_peservation.payments.referenceCode" | trans}}
+											</th>
+
+											<!-- Monto -->
+											<th class="text-center">
+												{{ "web.client.list_pre_peservation.payments.amount" | trans}}
+											</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr
+											ng-class="{
+											'nvc-table--color-even': reservation.class === 'nvc-table--color-even',
+											'nvc-table--color-odd' : reservation.class === 'nvc-table--color-odd'}"
+											<!-- Informacion N de referencia -->
+											<td>
+												<input type = "text"
+												required = "required"
+												ng-model = "transfer.referenceCode"
+												ng-disabled="reservation.payments.length-1 != $index">
+											</td>
+
+											<!-- Informacion Monto -->
+											<td>
+												<input type="number"
+												required = "required"
+												ng-model = "transfer.transferredAmount"
+												ng-disabled="reservation.payments.length-1 != $index">
+											</td>
+										</tr>
+										<tr
+											ng-if = "reservation.payments.length-1 == $index">
+											<!-- Boton Enviar -->
+											<td class = "nvc-center-button-confirm">
+												<button
+													type = "button"
+													class="nvc-button nvc-button__default"
+													ng-disabled="
+													!transfer.issuingBank ||
+													!transfer.receivingBank ||
+													!transfer.referenceCode ||
+													!transfer.transferredAmount"
+													ng-click="sendData(reservation)">
+													{{"web.client.list_pre_peservation.button.payment"|trans }}
+												</button>
+											</td>
+											<!-- End de Boton Enviar -->
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<!-- Fin datos de Pagos con varias transacciones Md hasta Xs-->
+					</tbody>
+				</table>
+			</div>
+
+			<!-- End Tablas de Datos -->
+			{{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+			{{ include("NavicuInfrastructureBundle:Web:Partials/modalError.html.twig") }}
+			{{ include("NavicuInfrastructureBundle:Web:Partials/modalClientSuccess.html.twig") }}
+		</div>
+	</div>
+
+	<!-- Vista alternas de cuando no existen reservas-->
+	<div class="nvc-null-reservations" ng-if="PreReservations.reservations.length==0">
+    	<div class="nvc-container">
+        	<section>
+	            <h2>{{ "web.client.reservation_null.make_your_first_booking"|trans}}</h2>
+	            <h3>{{ "web.client.reservation_null.great_advantages_we_offer"|trans}}</h3>
+	            <br>
+				<ul class="fa-ul hidden-xs">
+		            <li><i class="fa-li fn-oink"></i>{{ "web.client.reservation_null.save_time_and_money"|trans}}</li>
+		            <li><i class="fa-li fn-reserva"></i>{{ "web.client.reservation_null.find_the_perfect_choice"|trans}}</li>
+		            <li><i class="fa-li fn-secure"></i>
+		            	{{ "web.client.reservation_null.reserves_will_be_secure"|trans}} <br>
+		            	{{ "web.client.reservation_null.hotels_throughout_the_national_territory"|trans}}
+		            </li>
+		        </ul>
+		        <ul class="visible-xs">
+		            <li><i class="fa fn-oink"></i></li>
+		            <li><span>{{ "web.client.reservation_null.save_time_and_money"|trans}}</span></li>
+		            <br>
+		            <li><i class="fa fn-reserva"></i></li>
+		            <li><span>{{ "web.client.reservation_null.find_the_perfect_choice"|trans}}</span></li>
+		            <br>
+		            <li><i class="fa fn-secure"></i></li>
+		             <li><span>
+		            	{{ "web.client.reservation_null.reserves_will_be_secure"|trans}} <br>
+		            	{{ "web.client.reservation_null.hotels_throughout_the_national_territory"|trans}}
+		            </span>
+		            </li>
+		        </ul>
+        	</section>
+        	<section class="col-xs-16 block-search hidden-xs hidden-sm">
+	        	<div class="col-sm-10 hidden-xs">
+	        		<h1>¿A dónde quieres viajar esta vez?</h1>
+	        		<h2>Conoce, recorre, vive Venezuela como nunca lo habías hecho ¡reserva a través de la plataforma líder!</h2>
+	        	</div>
+	        	<div class="col-xs-16 col-sm-6 form-inline" align="right">
+	        		<form action="{[{url}]}" method="get" class="form-inline" role="form">
+		        		<input type="hidden" name="adult" value="{[{ adults }]}" ng-if="adults != 2"/>
+	                    <input type="hidden" name="kid" value="{[{ kids }]}" ng-if="kids != 0"/>
+	                    <input type="hidden" name="room" value="{[{rooms}]}" ng-if="rooms != 1"/>
+	                    <h1 class="hidden-xs"><i class="fa fn-map-02"></i></h1>
+		        		<br class="hidden-xs">
+		        		<h1 class="hidden-xs"><span>Encuentra hoteles en toda Venezuela</span></h1>
+		        		<h1 class="visible-xs">
+		        			<i class="fa fn-map-02"></i>
+		        			<br><br>
+		        			<span style="margin-bottom:10px;">Encuentra hoteles en toda Venezuela</span>
+		        		</h1>
+		        		<br class="visible-xs">
+		        		<select
+	                        ng-model="selectedDestiny"
+	                        ng-options="location as location.name for location in locations">
+	                        <option disabled value="">{{ "share.message.search_textfield_legend_min"|trans }}</option>
+	                        {#<option ng-repeat="location in locations" value="{[{ $index }]}">{[{ location.name }]}</option>#}
+	                    </select>
+	                    <button  class="nvc-button nvc-button__search"
+	                              ng-click="redirectUrl(selectedDestiny)"
+	                              ng-disabled="selectedDestiny==null">
+	                                {{ "word.search"|trans }}
+	                    </button>
+	                </form>
+	        	</div>
+			</section>
+        </div>
+    </div>
+	<div class="nvc-null-reservations block-search--xs visible-xs visible-sm" ng-if="PreReservations.reservations.length==0">
+    	<div class="nvc-container">
+				<section class="col-xs-16 block-search">
+		        	<div class="col-xs-16">
+		        		<h1>¿A dónde quieres viajar esta vez?</h1>
+		        		<h2>Conoce, recorre, vive Venezuela como nunca lo habías hecho ¡reserva a través de la plataforma líder!</h2>
+		        	</div>
+		        	<div class="col-xs-16 form-inline" align="right">
+		        		<form action="{[{url}]}" method="get" class="form-inline" role="form">
+			        		<input type="hidden" name="adult" value="{[{ adults }]}" ng-if="adults != 2"/>
+		                    <input type="hidden" name="kid" value="{[{ kids }]}" ng-if="kids != 0"/>
+		                    <input type="hidden" name="room" value="{[{rooms}]}" ng-if="rooms != 1"/>
+		                    <h1 class="hidden-xs"><i class="fa fn-map-02"></i></h1>
+			        		<br class="hidden-xs">
+			        		<h1 class="hidden-xs"><span>Encuentra hoteles en toda Venezuela</span></h1>
+			        		<h1 class="visible-xs">
+			        			<i class="fa fn-map-02"></i>
+			        			<br><br>
+			        			<span style="margin-bottom:10px;">Encuentra hoteles en toda Venezuela</span>
+			        		</h1>
+			        		<br class="visible-xs">
+			        		<select
+		                        ng-model="selectedDestiny"
+		                        ng-options="location as location.name for location in locations">
+		                        <option disabled value="">{{ "share.message.search_textfield_legend_min"|trans }}</option>
+		                        {#<option ng-repeat="location in locations" value="{[{ $index }]}">{[{ location.name }]}</option>#}
+		                    </select>
+		                    <button  class="nvc-button nvc-button__search"
+		                              ng-click="redirectUrl(selectedDestiny)"
+		                              ng-disabled="selectedDestiny==null">
+		                                {{ "word.search"|trans }}
+		                    </button>
+		                </form>
+		        	</div>
+				</section>
+    	</div>
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block javascripts%}
+    {{parent()}}
+    <script type="text/javascript">
+        var response = "{{ data }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+        var locations = "{{ locations }}";
+        var div = document.createElement('div');
+        div.innerHTML = locations;
+        locations = div.firstChild.nodeValue;
+        locations = JSON.parse(locations);
+    </script>
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}

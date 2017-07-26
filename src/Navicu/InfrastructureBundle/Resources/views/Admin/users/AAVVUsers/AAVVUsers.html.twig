@@ -1,0 +1,52 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+    <div
+        ng-controller="UsersCtrl"
+        ng-cloak
+    >
+        {# Versión desktop #}
+        <main
+            class="admin nvc-admin__AAVVInvoiceList visible-md visible-lg"
+            ng-controller="UsersCtrl"
+            ng-cloak
+        >
+            <div>
+                {% include "NavicuInfrastructureBundle:Admin:users/topMenuUsers.html.twig" %}
+                <div class="nvc-secondaryTableHeader--admin">
+                    {% include "NavicuInfrastructureBundle:Admin:users/AAVVUsers/AAVVUsersHeader.html.twig" %}
+                </div>
+                <div class="nvc-table--admin nvc-container">
+                    {% include "NavicuInfrastructureBundle:Admin:users/AAVVUsers/AAVVUsersTable.html.twig" %}
+                </div>
+                <div ng-if="pagination.pages > 1">
+                    {% include "NavicuInfrastructureBundle:Admin:users/AAVVUsers/AAVVUsersPagination.html.twig" %}
+                </div>
+            </div>
+        </main>
+
+        {# Versión movil #}
+        <main
+            class="admin nvc-admin__AAVVInvoiceList visible-sm visible-xs"
+            ng-controller="UsersCtrl"
+            ng-cloak
+        >
+            <div class="nvc-secondaryTableHeader--admin--movil">
+                <div class="col-xs-16 col-sm-16">
+                    {% include "NavicuInfrastructureBundle:Admin:users/AAVVUsers/movil/AAVVUsersHeaderMovil.html.twig" %}
+                </div>
+            </div>
+            <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+                {% include "NavicuInfrastructureBundle:Admin:users/AAVVUsers/movil/AAVVUsersTableMovil.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:users/AAVVUsers/AAVVUsersPagination.html.twig" %}
+            </div>
+        </main>
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+    {{ parent() }}
+{% endblock %}

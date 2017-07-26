@@ -1,0 +1,20 @@
+#Resetting extranet register
+navicu_aavv_resetting:
+    pattern:  /resetting
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:request }
+
+navicu_aavv_resetting_send_email:
+    pattern:  /resetting/sendEmail
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:sendEmail}
+
+navicu_aavv_resetting_check_email:
+    pattern:  /resetting/checkEmail
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:checkEmail}
+
+navicu_aavv_resetting_reset:
+    pattern:  /resetting/rest/{token}
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:reset}
+
+navicu_aavv_resetting_update_password_success:
+    pattern: /resetting/updatePasswordSuccess
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:passwordUpdateSuccess}

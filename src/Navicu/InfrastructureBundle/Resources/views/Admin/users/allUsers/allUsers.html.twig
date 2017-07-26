@@ -1,0 +1,52 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+    <div
+        ng-controller="UsersCtrl"
+        ng-cloak
+    >
+        {# Versión desktop #}
+        <main
+            class="admin nvc-admin__AAVVInvoiceList visible-md visible-lg"
+        >
+            <div>
+                {% include "NavicuInfrastructureBundle:Admin:users/topMenuUsers.html.twig" %}
+                <div class="nvc-secondaryTableHeader--admin">
+                    {% include "NavicuInfrastructureBundle:Admin:users/allUsers/allUsersHeader.html.twig" %}
+                </div>
+                <div class="nvc-table--admin nvc-container">
+                    {% include "NavicuInfrastructureBundle:Admin:users/allUsers/allUsersTable.html.twig" %}
+                </div>
+                <div ng-if="pagination.pages > 1">
+                    {% include "NavicuInfrastructureBundle:Admin:users/allUsers/allUsersPagination.html.twig" %}
+                </div>
+            </div>
+        </main>
+
+        {# Versión movil #}
+        <main
+            class="admin nvc-admin__AAVVInvoiceList visible-sm visible-xs"
+        >
+            <div class="nvc-secondaryTableHeader--admin--movil">
+                <div class="col-xs-16 col-sm-16">
+                    {% include "NavicuInfrastructureBundle:Admin:users/allUsers/movil/allUsersHeaderMovil.html.twig" %}
+                </div>
+            </div>
+            <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+                {% include "NavicuInfrastructureBundle:Admin:users/allUsers/movil/allUsersTableMovil.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:users/allUsers/allUsersPagination.html.twig" %}
+            </div>
+        </main>
+        {{ include("NavicuInfrastructureBundle:Admin:users/modalActivation.html.twig") }}
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var extension = "{{ app.request.get('extension') }}"
+    </script>
+    {{ parent() }}
+{% endblock %}

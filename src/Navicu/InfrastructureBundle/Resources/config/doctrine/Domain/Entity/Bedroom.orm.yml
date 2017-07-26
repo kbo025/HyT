@@ -1,0 +1,37 @@
+Navicu\Core\Domain\Model\Entity\Bedroom:
+    type: entity
+    table: bedroom
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbBedroomRepository
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        amount_people:
+            type: integer
+            nulleble: true
+        bath:
+            type: integer
+            nulleble: true
+    manyToOne:
+        room:
+            targetEntity: Room
+            mappedBy: null
+            inversedBy: bedrooms
+            joinColumns:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+    oneToMany:
+        beds:
+            targetEntity: Bed
+            mappedBy: bedroom
+            cascade: ["persist", "remove"]
+# No se seguira utilizando (actualizado 05/04/2017)
+#        #reserva (Eliminar)
+        reservation_packages:
+            targetEntity: ReservationPack
+            mappedBy: bedroom
+            cascade: ["persist"]

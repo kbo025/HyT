@@ -1,0 +1,54 @@
+Navicu\Core\Domain\Model\Entity\ContactPerson:
+    type: entity
+    table: contact_person
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbContactPersonRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+        charge:
+            type: string
+            nullable: false
+            length: 255
+        type:
+            type: integer
+            nullable: false
+        phone:
+            type: string
+            length: 20
+            nullable: false
+        fax:
+            type: string
+            length: 20
+            nullable: true
+        email:
+            type: string
+            length: 255
+            nullable: true
+        email_reservation_receiver:
+            type: boolean
+            nullable: false
+            options:
+                default: false
+    manyToOne:
+        property:
+            targetEntity: Property
+            cascade: {  }
+            mappedBy: null
+            inversedBy: services
+            joinColumns:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [prePersist]

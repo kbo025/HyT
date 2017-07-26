@@ -1,0 +1,57 @@
+Navicu\Core\Domain\Model\Entity\RoomType:
+    type: entity
+    table: room_type
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbRoomTypeRepository
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: NONE
+    fields:
+        title:
+          type: string
+          length: 64
+        lft:
+          type: integer
+          nullable: true
+        rgt:
+          type: integer
+          nullable: true
+        root:
+          type: integer
+          nullable: true
+        lvl:
+          type: integer
+          nullable: true
+        category:
+          type: integer
+          nullable: true
+          options:
+            default: 0
+        code:
+          type: string
+          nullable: true
+    oneToMany:
+        children:
+            targetEntity: RoomType
+            mappedBy: parent
+            orderBy:
+                title: ASC
+    manyToOne:
+        parent:
+            targetEntity: RoomType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: children
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        features:
+            targetEntity: RoomFeatureType
+            cascade: {  }
+            mappedBy: room_types
+            inversedBy: null
+            joinTable: null
+            orderBy: null

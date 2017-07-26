@@ -1,0 +1,35 @@
+Navicu\InfrastructureBundle\Entity\DisableAdvance:
+    type: entity
+    table: disable_advance
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbDisableAdvanceRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: datetime
+        reason:
+            type: text
+
+    manyToOne:
+        user_id:
+            targetEntity: User
+            inversedBy: advance_deactivations
+            mappedBy: null
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+
+        deactiveBy:
+            targetEntity: User
+            inversedBy: deactivations_applied
+            joinColumn:
+                name: deactive_id
+                referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

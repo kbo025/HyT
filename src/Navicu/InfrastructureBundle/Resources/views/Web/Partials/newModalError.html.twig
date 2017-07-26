@@ -1,0 +1,101 @@
+<script id="new-modal-error.tpl" type="text/ng-template">
+    <div class="nvc-modal" tabindex="-1" role="dialog" style="overflow-x:hidden;  overflow-y:hidden;">
+
+
+        <div class="nvc-modal--payment center-block clearfix">
+
+            <div class="nvc-modal__content">
+                <div class="nvc-row">
+                    <div class="col-md-4 col-xs-16 nvc-modal__content--left text-center">
+                        <button type="button" class="close visible-sm visible-xs" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+                        <div class="nvc-row">
+                            <h3 class="hidden-sm hidden-xs">{[{ errorModal.title }]}</h3>
+                            <!-- Imagen dentro del mensaje de Error -->
+
+                            <img src="/images/{[{ imagesError[errorModal.indexImage] }]}" class="img-responsive center-block" alt="image">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xs-16 nvc-modal__content--right">
+                        <button type="button" class="close hidden-sm hidden-xs" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+
+
+                                <div class="nvc-row nvc-modal__content--wrapper">
+                                    <h3 class="visible-sm visible-xs">{[{ errorModal.title }]}</h3>
+                                    <div class="nvc-modal__content--error hidden-sm hidden-xs" >
+                                        <span>{[{ errorModal.contentLine1 }]}</span>
+                                    </div>
+                                    <div class="nvc-modal__content--error hidden-sm hidden-xs" >
+                                        <span>{[{ errorModal.contentLine2 }]}</span>
+                                    </div>
+                                    <div class="nvc-modal__content--error visible-sm visible-xs" >
+                                        <span>{[{ errorModal.contentLineMobile1 }]}</span>
+                                    </div>
+                                    <div class="nvc-modal__content--error visible-sm visible-xs" >
+                                        <span>{[{ errorModal.contentLineMobile2 }]}</span>
+                                    </div>
+
+                                </div>
+                                <hr class="hidden-sm hidden-xs"/>
+                                <div class="nvc-row">
+                                    <!-- mensaje de sugerencia -->
+                                    <div class="nvc-modal__content--message hidden-sm hidden-xs">
+                                        <span>{[{ errorModal.suggestionLine1 }]}</span>
+                                    </div>
+                                    <div class="nvc-modal__content--message hidden-sm hidden-xs">
+                                        <span>{[{ errorModal.suggestionLine2 }]}</span>
+                                    </div>
+                                    <!-- mensaje de sugerencia en vista Movil-->
+                                    <div class="nvc-modal__content--message visible-sm visible-xs">
+                                        <span>{[{ errorModal.suggestionLine1Movil }]}</span>
+                                        <br>
+                                        <span>{[{ errorModal.suggestionLine2Movil }]}</span>
+                                    </div>
+                                </div>
+
+                                <div class="nvc-row nvc-modal__content--button hidden-sm hidden-xs" align="center">
+                                    <button
+                                            class="nvc-button nvc-button__default"
+                                            type="submit">
+                                        {[{ errorModal.buttonMessage }]}
+                                    </button>
+                                </div>
+
+                                <div ng-if="!splitButton" class="nvc-row nvc-modal__content--button visible-sm visible-xs" align="center">
+                                    <button
+                                            class="nvc-button nvc-button__default"
+                                            type="submit">
+                                        {[{ errorModal.buttonMessage }]}
+                                    </button>
+                                </div>
+
+                                <div ng-if="splitButton" class="nvc-row nvc-modal__content--splitButton visible-sm visible-xs" align="center">
+                                    <button
+                                            class="nvc-button nvc-button__default"
+                                            id="leftButton"
+                                            type="submit">
+                                        {[{ errorModal.buttonMessageMobile1 }]}
+                                    </button>
+
+                                    <button
+                                            class="nvc-button nvc-button__default"
+                                            id="rightButton"
+                                            type="submit">
+                                        {[{ errorModal.buttonMessageMobile2 }]}
+                                    </button>
+                                </div>
+
+
+
+                            <!-- 	 {[{imagesError[1}]}  -->
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Contenido del Modal -->
+        </div>
+        <!-- End Modal Error -->
+    </div>
+</script>

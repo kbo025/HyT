@@ -1,0 +1,19 @@
+<script id="modal-confirmation.tpl" type="text/ng-template">
+    <div class="modal" tabindex="-1" role="dialog">
+	    <div class="modal-dialog modal-pad centered-modal">
+	        <div class="modal-header modal-">
+	            <button type="button" class="close close2" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+	             <h3 class="font-sidebar-tittle" style="color: white;">
+	             	<i class="fa fa-exclamation-triangle"></i> <span style="padding-left: 10px;">Confimarción</span>
+	             </h3>
+	        </div>
+	        <div class="modal-content" style="text-align:center;">
+	        	¿Estás seguro que deseas <label>{[{actionMessage}]}</label> el usuario {[{user}]}?
+          		<div align="center" style="margin-top:20px;">
+					<a href="" ng-click="OnOff(userId);"><button type="button" class="btn btn-primary btn-search-list btn-modal-form">Aceptar</button></a>
+					<a href="" ng-click="$hide()"><button type="button" style="margin-left:20px;" class="btn btn-primary btn-search-list btn-modal-form">Cancelar	</button></a>
+				</div>
+	        </div>
+	    </div>
+    </div>
+</script>    

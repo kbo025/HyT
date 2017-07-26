@@ -1,0 +1,38 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    <meta name="prerender-status-code" content="401">
+{% endblock seoMetadata %}
+
+{% block body %}
+
+
+<div class="nvc-errors col-sm-16" style="padding:0px;">
+    <div class="nvc-carousel__fill" style="background-image:url({{ asset('images/navicu/404.jpeg') }});" src="http://dummyimage.com/600x400.png/fff/fff">
+        <div class="container nvc-errors__text">
+        	<h1>Ooops <span class="fa fn-404"></span></h1>
+            <h1><strong>404</strong></h1>
+            <h2>{{ "share.error.404"|trans }}</h2>
+            <a href="{{ path('navicu_homepage_temporal') }}">
+                <button class="nvc-button nvc-button__reroute">
+                    {{"share.action.go_back"|trans }}
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+<!--- No borrar -->
+<div class='container nvc-errors--after-slider hidden-xs'>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment == "dev" %}
+
+    {% else %}
+
+    {% endif %}
+{% endblock %}

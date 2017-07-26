@@ -1,0 +1,52 @@
+# ===========Rutas del Admin===========
+# Rutas del Administrador
+
+#Routing homepage del administrador
+navicu_admin_homepage:
+    path: /
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\AffiliateProperties:affiliateProperties }
+    options:
+      expose: true
+
+#Routing del módulo de Login
+navicu_admin_module_security:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/security.yml"
+
+#Routing del módulo de los establecimientos temporales
+navicu_admin_module_temp_properties:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/tempProperties.yml"
+    prefix: tempProperties
+
+#Routing del módulo de los establecimientos afiliados
+navicu_admin_module_affiliate_properties:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/affiliateProperties.yml"
+    prefix: affiliateProperties
+
+#Routing del módulo de editar establecimiento
+navicu_admin_module_property_crud:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/property_crud.yml"
+    prefix: crudProperties
+
+# Routing del módulo de los usuarios
+navicu_admin_module_users:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/user.yml"
+    prefix: users
+
+# Routing del módulo de las reservas
+navicu_admin_module_reservations:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/reservation.yml"
+    prefix: reservation
+
+# Routing del módulo de la divisas
+navicu_admin_module_currency_exchange:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/currency_exchange.yml"
+    prefix: currencyExchange
+
+# Routing del módulo de Agencia de viaje
+navicu_admin_module_aavv:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/aavv.yml"
+    prefix: aavv
+
+navicu_admin_roles_and_permissions:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Admin/rolesAndPermissions.yml"
+

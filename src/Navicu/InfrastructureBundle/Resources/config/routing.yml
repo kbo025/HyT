@@ -1,0 +1,100 @@
+# ===========Rutas de cliente===========
+# Rutas de módulos del cliente
+navicu_web_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/web.yml"
+    host:     "{subdomain}.%domain%"
+    defaults:
+        subdomain: www
+    requirements:
+        subdomain: www
+
+# ===========Rutas de  Rest Api ===========
+# Rutas de módulos del Rest Api
+navicu_api_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/api.yml"
+    host:     "{subdomain}.%domain%"
+    defaults:
+        subdomain: www
+    requirements:
+        subdomain: www
+
+# ===========Rutas del Administrador ===========
+# Rutas de módulos del administrador
+navicu_admin_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/admin.yml"
+    host:   "{subdomain}.%domain%"
+    prefix: "{extension}"
+    defaults:
+        extension: %admin_subdomain%
+        subdomain: www
+    requirements:
+        extension: %admin_subdomain%
+        subdomain: www
+
+# ===========Rutas del Extranet ===========
+# Rutas de módulos del Hotelero (Extranet)
+navicu_extranet_rountig:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/extranet.yml"
+    host:   "{subdomain}.%domain%"
+    prefix:   "{extension}"
+    defaults:
+        extension: "%extranet_subdomain%"
+        subdomain: www
+    requirements:
+        extension: %extranet_subdomain%|%admin_subdomain%
+        subdomain: www
+
+
+# ===========Rutas del Ascribere ===========
+# Rutas módulos del establecimientos temporales
+navicu_temp_property_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/temp_property.yml"
+    host:   "{subdomain}.%domain%"
+    prefix: "{extension}"
+    defaults:
+        extension: "%registration_subdomain%"
+        subdomain: www
+    requirements:
+        extension: %registration_subdomain%|%admin_subdomain%
+        subdomain: www
+
+# Ruta para el manejo de logout sin redireccionamiento.
+navicu_no_redirect_logout:
+    path:   /logouts
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:noRedirect}
+
+# Ruta para el manejo de logout sin redireccionamiento.
+navicu_sitemap:
+    path:   /sitemap.{_format}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:sitemap, _format: xml}
+    host:     "www.%domain%"
+
+# La interfaz de los subdominios
+navicu_subdomain:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/subdomain.yml"
+    host: "{subdomain}.%domain%"
+
+
+# ===========Rutas de AAVV ===========
+# Rutas módulos del modelo Agencia de viajes
+navicu_aavv_register_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/AAVV/registration.yml"
+    host:   "{subdomain}.%domain%"
+    prefix: "{extension}"
+    defaults:
+        extension: "%aavv_subdomain%"
+        subdomain: www
+    requirements:
+        extension: %aavv_subdomain%
+        subdomain: www
+
+# ===========Rutas web service ===========
+# Rutas módulos del establecimientos temporales
+navicu_web_service_routing:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/web_service.yml"
+    host:   "www.%domain%"
+    prefix: "{extension}"
+    defaults:
+        extension: "%web_service_subdomain%"
+    requirements:
+        extension: %web_service_subdomain%|%admin_subdomain%

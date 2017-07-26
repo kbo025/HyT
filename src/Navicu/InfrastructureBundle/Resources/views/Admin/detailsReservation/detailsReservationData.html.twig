@@ -1,0 +1,45 @@
+<div class="nvc-container">
+    <div class="col-md-16 top" >
+        <i class='fa fn-hotel'></i>
+        <h1>Datos de la reserva</h1>
+        <h2>{[{detailsReservation.propertyName}]}</h2>
+    </div>
+    <div class="col-md-16 col-lg-16 content" ng-repeat="(key, value) in detailsReservation.packages">
+        <div class="nvc-row">
+            <div class="col-md-16">
+                <h2>Nº de habitaciones {[{value.numberRoom}]}</h2>
+            </div>
+        </div>
+        <div class="nvc-row">
+            <div class="col-md-5 col-lg-5">
+                <h3>Tipo de habitación</h3>
+                <h4>{[{value.roomName}]}</h4>
+            </div>
+            <div class="col-md-5 col-lg-5">
+                <h3>Tipo de pack</h3>
+                <h4>{[{value.namePack}]}</h4>
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <h3>Política de cancelación</h3>
+                <h4>{[{value.nameCancellationPolicy}]}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nvc-reservationDetails__titleReserve">
+    <div class="nvc-container top">
+        <h1>{{"extranet.reservations.observations"|trans}}</h1> 
+    </div>
+</div>
+<div class="nvc-container">
+    <div class="observations">
+        <div>
+            <h2 ng-if="detailsReservation.observations != null">
+               {[{detailsReservation.observations}]}
+            </h2>
+            <h2 ng-if="detailsReservation.observations === null">
+               No hay observaciones
+            </h2>
+        </div>
+    </div>
+</div>

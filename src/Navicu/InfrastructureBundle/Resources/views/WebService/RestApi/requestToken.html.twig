@@ -1,0 +1,43 @@
+{% extends "NavicuInfrastructureBundle:WebService:layout.html.twig" %}
+{% set header_title = {'module_title': 'restapi'} %}
+
+{% block title %} {{ "extranet.title.generic"|trans }} {% endblock %}
+
+{% block body %}
+<div class="form" data-ng-app="restapiModule" data-ng-controller="restapiController">
+
+    <div class="form_title row">
+        <h4>API - Integraciones con otros sistemas</h4>
+        <p>Solicita en esta sección tus credenciales para establecer comunicación entre tu sistema y Navicu.com</p>
+    </div>
+    <div class="row">
+        <pre>
+            <div><label>Clave Publica:</label><span>{[{ token.publicId }]}</span></div>
+            <div><label>Clave Secreta:</label><span>{[{ token.secret }]}</span></div>
+        </pre>
+        <div><button ng-click="createToken()">Solicitar Credenciales</button></div>
+    </div>
+    <div class="row">
+        <h4>¿Como uso mis credenciale?</h4>
+        <ul>
+            <li>
+                <p>Debes solicitar un token de acceso a nuestra API con el siguiente formato:</p>
+                <pre>https://www.navicu.com/credentialsRequestToken/{clave_publica}/{clave_privada}</pre>
+            </li>
+            <li>
+                <p>Las credenciales tienen vigencia de una hora, luego de su vencimiento debes solicitar una nueva para poder solicitar un token de acceso.</p>
+            </li>
+            <li>
+                <p>Has clic <a href="" ng-click="apiDocPage()">aqui</a> si deseas ver la documentación para disfrutar de los beneficios de usar el servicio web de navicu.com</p>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}

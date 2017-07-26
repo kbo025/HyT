@@ -1,0 +1,162 @@
+<table ng-show="{{ hasPermission('admin_property_details', 'reservation_details') }}">
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'public_id')">
+                    {{ 'message.id_reservation'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'public_id'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'public_id'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'status')">
+                    {{ 'word.state'|transchoice(1) }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'status'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'status'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'date_check_in')">
+                    {{ 'word.checkin'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'date_check_in'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'date_check_in'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'date_check_out')">
+                    {{ 'word.checkout'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'date_check_out'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'date_check_out'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'number_rooms')">
+                    {{ 'message.room_number'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'number_rooms'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'number_rooms'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'full_name')">
+                    {{ 'word.fullname'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'full_name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'full_name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'net_rate')">
+                    {{ 'word.billing'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'net_rate'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'net_rate'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th>
+                <a href="" ng-click="getData(search, 1, 'total_to_pay')">
+                    {{ 'message.net_billing'|trans }}
+                    <i
+                        ng-if="order == 'ASC' && parameter == 'total_to_pay'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="order == 'DESC' && parameter == 'total_to_pay'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="value in reservation">
+            <td>{[{value.public_id}]}</td>
+            <td
+                data-title="'Estado'"
+                filter="{ 'status': 'text' }"
+                ng-style="{'color':value.status == 'Confirmada' ? '#06CC2B': value.status == 'Cancelada' ? '#ED1E79': '#F2AF00'}"
+            >
+                <i
+                    class="fa"
+                    ng-class="{
+                        'fn-confirmado' : value.status == 'Confirmada',
+                        'fn-cancelado' : value.status == 'Cancelada',
+                        'fn-pendientedepago' : value.status == 'Prereserva' || value.status == 'Por confirmar'
+                        }">
+                </i>
+                {[{ value.status }]}
+            </td>
+
+            <td>{[{value.date_check_in}]}</td>
+            <td>{[{value.date_check_out}]}</td>
+            <td>{[{value.number_rooms}]}</td>
+            <td>{[{value.full_name}]}</td>
+            <td>Bs. {[{value.net_rate| number}]}</td>
+            <td>Bs. {[{value.total_to_pay| number}]}</td>
+            <td>
+                <button
+                    ng-click="redirectGoToDetailPage(value.public_id)"
+                    formtarget="_blank"
+                >
+                    Ver detalle
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

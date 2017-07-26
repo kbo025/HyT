@@ -1,0 +1,27 @@
+<script id="modal-gallery.tpl" type="text/ng-template">
+    <div class="modal" tabindex="-1" role="dialog">
+	    <div class="modal-dialog  modal-dialog-gallery">
+
+	        <div class=" modal-header-room">
+	            <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+	        </div>
+	        <div class="modal-content-room">
+	        	<div class="row">
+	        		<div class="col-xs-16 col-md-16">
+						<div id="carouselModal" class="carousel carousel-hotel slide" data-ride="carousel">
+				            <div class="carousel-inner carousel-inner-hotel">
+				            	<div class="item" ng-repeat="(position, imagen) in gallery" ng-class="{active: position==idimage}" >
+				                    {#<div class="carousel-fill" style="background-image:url('/uploads/images/images_original/{[{imagen.path }]}');"></div>#}
+				                    <img ng-src="/uploads/images/images_original/{[{ imagen.path }]}" class="img-responsive">
+				                    {#<p align="left" class="banner-hotel">{[{image.subGallery}]}<p>#}
+				                </div>
+				            </div>
+				            <a class="left carousel-control" href="#carouselModal" data-slide="prev"><span class="fa fa-angle-left fa-4x"></span></a>
+        					<a class="right carousel-control" href="#carouselModal" data-slide="next"><span class="fa fa-angle-right fa-4x"></span></a>
+				        </div>
+			   		</div>
+	        	</div>
+	        </div>
+	    </div>
+    </div>
+</script>

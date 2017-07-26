@@ -1,0 +1,22 @@
+#Validación Bed
+Navicu\Core\Domain\Model\Entity\Bed:
+
+    properties:
+        type:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+            - GreaterThan:
+                value: -1
+                message: no_positive,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        amount:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+            - GreaterThan:
+                value: 0
+                message: no_positive,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}

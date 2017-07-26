@@ -1,0 +1,12 @@
+service:
+  room_only: Solo habitación
+  no_refundable: reembolsable
+
+description:
+  all_included: 'Incluye desayuno, almuerzo, cena y bebidas.'
+  breakFast_included: ''
+  room_only: ''
+  full_meal_plan: 'Incluye desayuno, almuerzo y cena.'
+  half_meal_plan: 'Incluye desayuno y almuerzo.'
+  half_meal_plus_trip_plan: 'Incluye desayuno, almuerzo y una excursión.'
+  full_meal_plus_trip_plan: 'Incluye desayuno, almuerzo, cena y una excursión.'

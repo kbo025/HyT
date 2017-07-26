@@ -1,0 +1,301 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+
+    <main
+        class='nvc-aavv nvc-aavv__user-preferences visible-lg visible-md'
+        ng-app='userPreferencesModule'
+        ng-controller='userPreferencesController'
+        ng-cloak
+    >
+    {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+
+        <div class='nvc-container'>
+            <div class='nvc-row'>
+                <div class='col-lg-16' >
+                    <h2 class="nvc-aavv-customize__title--primary">
+                        <i class='fn-icon-colors'></i>
+                        <img
+                            src="/images/aavv/user-preferences/icon-colors.png"
+                            alt="personaliza los colores de tu agencia de viajes">
+                        {{ 'aavv.user_preferences.title' | trans }}
+                    </h2>
+                </div>
+            </div>
+
+            <div class='nvc-row hidden-xs'>
+                <div class='col-lg-16'>
+                    <p class="nvc-aavv-customize__text">
+                        {{ 'aavv.user_preferences.description' | trans }}
+                    </p>
+                </div>
+            </div>
+
+            <div class='nvc-jumbotron'>
+                <div class='nvc-row'>
+                    <!-- upload file -->
+                    <div class='col-lg-5 col-md-16 nvc-uploadLogo'>
+                        <div class='nvc-row nvc-drop-zone'>
+                            <div class='col-lg-16 col-md-8'>
+                                <img
+                                    class='center-block img-responsive'
+                                    ngf-thumbnail="fileImageThumbnail">
+                            </div>
+                        </div>
+
+                        <div class='nvc-row'>
+                            <form name="uploadImage" class='nvc-form-inline'>
+                                <label id="form-upload-file" for='logotipo'>{{ 'aavv.user_preferences.logo' | trans }}</label>
+                                <div class='form-group'>
+                                    <input
+                                        class='nvc-input'
+                                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                        ng-model="fileName"
+                                        placeholder='*Resolución máxima 500px x 70px'
+                                        type='text'
+                                    />
+                                </div>
+
+                                <button
+                                    accept="image/*"
+                                    class='nvc-button nvc-button__upload-file'
+                                    name="uploadFile"
+                                    ng-change="upload()"
+                                    ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                                    ng-model="fileImage"
+                                    ngf-max-height="70"
+                                    ngf-max-size="1MB"
+                                    ngf-max-width="500"
+                                    ngf-min-height="30"
+                                    ngf-min-width="100"
+                                    ngf-model-invalid="errorFile"
+                                    ngf-multiple="false"
+                                    ngf-select
+                                    type="file"
+                                >
+                                    <i class='fn-icon-camera'></i>{{ 'aavv.user_preferences.upload' | trans }}
+                                </button>
+
+                                <span
+                                    ng-cloak
+                                    class="error"
+                                    ng-show="uploadImage.uploadFile.$error.maxSize">
+                                    {[{ errorFile[0].$errorParam }]} | Max 1MB
+                                </span>
+
+                                <span
+                                    ng-cloak
+                                    class="error"
+                                    ng-show="
+                                        uploadImage.uploadFile.$error.maxHeight ||
+                                        uploadImage.uploadFile.$error.maxWidth">
+
+                                    {{ 'aavv.user_preferences.error.larger_image' | transchoice(0) }}
+                                    {[{ errorFile[0].$ngfWidth  }]}px x {[{errorFile[0].$ngfHeight}]}px
+                                    {{ 'aavv.user_preferences.error.larger_image' | transchoice(1) }}
+
+                                </span>
+
+                                <span
+                                    ng-cloak
+                                    class="error"
+                                    ng-show="
+                                        uploadImage.uploadFile.$error.minHeight ||
+                                        uploadImage.uploadFile.$error.minWidth">
+
+                                    {{ 'aavv.user_preferences.error.small_image' | transchoice(0) }}
+                                    {[{errorFile[0].$ngfWidth}]}px x {[{errorFile[0].$ngfHeight}]}px
+                                    {{ 'aavv.user_preferences.error.small_image' | transchoice(1) }}
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End upload file -->
+
+                    <!-- bar Main -->
+                    <div class='col-lg-5 col-md-8 nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.navbarPrimary.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.main_bar' | trans }}
+                        </label>
+
+                        <div id="mainBar">
+                        </div>
+
+                    </div>
+                    <!-- End bar Main -->
+
+                    <!-- Menu bar -->
+                    <div class='col-lg-5 col-md-8 nvc-feature'>
+                         <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.navbarMenu.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.menu_bar' | trans }}
+                        </label>
+
+                        <div id="menuBar">
+                        </div>
+                    </div>
+                    <!-- End Menu bar -->
+                </div>
+
+                <hr>
+
+                <div class='nvc-row'>
+                    <div class='col-lg-5 col-md-8  nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.buttonPrimary.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.general_buttons' | trans }}
+                        </label>
+                        <div id="generalButtons">
+                        </div>
+                    </div>
+
+                    <div class='col-lg-5 col-md-8  nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.activeButton.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.active_button_menu' | trans }}
+                        </label>
+
+                        <div id="activeButtonMenu">
+                        </div>
+                    </div>
+
+                    <div class='col-lg-5 hidden-md  nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.title.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.main_titles' | trans }}
+                        </label>
+
+                        <div id="mainTitle">
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class='nvc-row'>
+                    <div class='col-lg-5 col-md-8  nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.text.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.texts' | trans }}
+                        </label>
+
+                        <div id="Texts">
+                        </div>
+                    </div>
+
+                    <div class='col-lg-5 col-md-8  nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.icon.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.icons' | trans }}
+                        </label>
+
+                        <div id="icons">
+                        </div>
+                    </div>
+
+                    <div class='col-lg-5 hidden-md nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.footer.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.footer' | trans }}
+                        </label>
+
+                         <div id="footer">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="visible-md">
+
+                <div class="nvc-row visible-md">
+                    <div class='col-md-8 nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.titleMd.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.main_titles' | trans }}
+                        </label>
+
+                        <div id="mainTitleMd">
+                        </div>
+                    </div>
+
+                    <div class='col-md-8 nvc-feature'>
+                        <label for='barra lateral'>
+                            <span
+                                class="circle"
+                                ng-style="{background: colorPickers.footerMd.color}">
+                            </span>
+                            {{ 'aavv.user_preferences.customizable_features.footer' | trans }}
+                        </label>
+
+                         <div id="footerMd">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='nvc-row'>
+                <div class="col-lg-offset-6 col-md-offset-5">
+                    <div class='col-lg-3 col-md-5'>
+                        <button
+                            class='nvc-button nvc-button__restore'
+                            ng-click='sendData()'
+                            ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                            type='button'
+                        >
+                            Restablecer
+                        </button>
+                    </div>
+
+                    <div class='col-lg-3 col-md-5'>
+                        <button
+                            class='nvc-button nvc-button__search'
+                            ng-click='sendData()'
+                            ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                            type='button'
+                        >
+                            {{ 'aavv.user_preferences.save_changes' | trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ include("NavicuInfrastructureBundle:AAVV:editUserPreferences/colorPicker.html.twig") }}
+    </main>
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+        var data = {{ data | raw }};
+    </script>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+Navicu\Core\Domain\Model\Entity\FoodType:
+    type: entity
+    table: food_type
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbFoodTypeRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+            nullable: false

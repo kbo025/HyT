@@ -1,0 +1,54 @@
+# Ruta para el manejo de las acciones relacionadas con la reserva de boletos aereos"
+
+navicu_flight_reservation:
+    path:   /reservation
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:flightReservation }
+    options:
+        expose: true
+
+navicu_flight_prereservation:
+    path:  /prereservation
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:flightPreReservation }
+    options:
+        expose: true
+
+navicu_flight_payment:
+    path:  /reservationpayment
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:flightPayment }
+    options:
+        expose: true
+
+navicu_flight_resume:
+    path: /resume/{publicId}
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:flightResume }
+
+navicu_ota_test:
+    path:   /testOta
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:testOta }
+    options:
+        expose: true
+
+navicu_flight_search:
+    path:   /search/{from}/{to}
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:flightItineraryList }
+    options:
+        expose: true
+    requirements:
+        { _method: GET|POST }
+
+navicu_flight_schedule:
+    path:   /search/schedule
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:alternativeFlightSchedule }
+    options:
+        expose: true
+    requirements:
+        { _method: GET|POST }
+
+# autocompletado para la busqueda de itinerarios de vuelos
+navicu_flight_search_autocompleted:
+    path:   /search/autocompleted
+    defaults: { _controller: NavicuInfrastructureBundle:Web/FlightReservation:autocompleted }    
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}

@@ -1,0 +1,24 @@
+Navicu\Core\Application\UseCases\PropertyInventory\MassLoad\GetDataMassLoad\GetDataMassLoadCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        session:
+            - NotNull:
+                message: is_not_login,{{ null }},{{ type }}
+            - "True":
+                message: is_not_access,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\PropertyInventory\MassLoad\SetDataMassLoad\SetDataMassLoadCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        session:
+            - NotNull:
+                message: is_not_login,{{ null }},{{ type }}
+            - "True":
+                message: is_not_access,{{ value }},{{ type }}
+        data:
+            - NotBlank:
+                message: is_null, {{ value }}, {{ type }}

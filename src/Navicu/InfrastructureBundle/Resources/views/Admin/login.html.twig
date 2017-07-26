@@ -1,0 +1,50 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block title %}
+    Login | {{ parent() }}
+{% endblock title %}
+
+{% block content %}
+    <main
+        class="nvc-login"
+        ng-controller="LoginCtrl"
+    >
+        <div class="nvc-container">
+            <form
+                class="col-xs-5"
+                ng-submit="handleLogin()"
+            >
+                <h1>¡Bienvenido de vuelta!</h1>
+                <h2>
+                    <i class="fn-usercontra-04"></i>
+                    Ingresa con tu usuario y contraseña
+                </h2>
+
+                <input
+                    autofocus
+                    ng-disabled="isBusy"
+                    ng-model="user"
+                    placeholder="Usuario"
+                    tabindex="1"
+                    type="text"
+                >
+
+                <input
+                    ng-disabled="isBusy"
+                    ng-model="password"
+                    placeholder="Contraseña"
+                    tabindex="2"
+                    type="password"
+                >
+
+                <button
+                    ng-disabled="isBusy"
+                    tabindex="3"
+                    type="submit"
+                >
+                    Ingresar
+                </button>
+            </form>
+        </div>
+    </main>
+{% endblock content %}

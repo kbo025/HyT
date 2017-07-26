@@ -1,0 +1,36 @@
+Navicu\Core\Domain\Model\Entity\AAVVCreditNVC:
+    type: entity
+    table: aavv_credit_nvc
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVCreditNVCRepository
+
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        credit:
+            type: float
+            nullable: false
+        amount_rate:
+            type: float
+            nullable: false
+        delete:
+            type: boolean
+            nullable: false
+            options:
+              default: false
+
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true

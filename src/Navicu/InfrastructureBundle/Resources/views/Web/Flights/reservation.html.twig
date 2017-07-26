@@ -1,0 +1,491 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+        <title>Reserva los mejores hoteles y posadas en Bolivares.</title>
+    {% endif %}
+{% endblock seoMetadata %}
+
+
+{% block body %}
+
+<main
+    id="starting_block"
+    class='nvc-flightreservation nvc-container visible-md visible-lg'
+    ng-app="flightReservationModule"
+    ng-controller="flightReservationController" >
+
+
+    <section class="col-md-11" ng-cloak>
+        <div class="nvc-flightreservation__title">
+            <h1>
+                {{ "web.reservation.almost_ready"|trans }}
+                <e> {{ "web.reservation.purchase"|trans }}!</e>
+            </h1>
+            <h4 class="subtitle">
+                {{ "web.reservation.flight_booking_details"|trans }}
+            </h4>
+        </div>
+
+        <div class="nvc-flightreservation__passengers">
+            <div class="nvc-container social-buttons" ng-show="!isLoggedIn">
+                <div class="col-md-8" style="padding-right: 2px;">
+                    <a
+                            class="nvc-button nvc-button__facebook"
+                            ng-click="login()"
+                            ng-hide="isLoggedIn">
+                        <span class="fa fa-facebook"></span>
+                        <strong class="hidden-xs">{{ "word.login_with"|trans }} Facebook</strong>
+                        <strong class="visible-xs">Facebook</strong>
+                    </a>
+                </div>
+                <div class="col-md-8" style="padding-left: 2px;">
+                    <div ng-app="directive.g+signin">
+                        <google-plus-signin autorender="false" clientid="533158999432-p2qg5qoqjimnm1i34r7k3isnb3o020rj.apps.googleusercontent.com">
+                        </google-plus-signin>
+                    </div>
+                    {#<div>#}
+                        {#<a class="nvc-button nvc-button__google">#}
+                            {#<span class="fa fa-google-plus"></span>#}
+                            {#<strong >{{ "word.login_with"|trans }} Google</strong>#}
+                        {#</a>#}
+                    {#</div>#}
+                </div>
+                <hr>
+            </div>
+            <div class="nvc-container">
+                <form name="passengersForm" novalidate>
+                    <div class="row passenger-data"
+                         ng-repeat="passenger in passengers track by $index"
+                         ng-class="{oddpassenger: $odd}"
+                         ng-style="{'border-top-left-radius': ['4px', '0px'][+($index===0)],
+                                    'border-top-right-radius': ['4px', '0px'][+($index===0)]
+                          }"
+                    >
+                        <div class="col-md-5" style="padding-right: 2px;">
+                            <input
+                                    type="text"
+                                    name="fullName{[{ $index }]}"
+                                    ng-model="passengers[$index].fullName"
+                                    placeholder="{{ "web.reservation.name"|trans }}"
+                                    required/>
+                            <span
+                                    class="error"
+                                    ng-show="passengersForm.fullName{[{ $index }]}.$error.required
+                                    && passengersForm.$submitted">
+                                      {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+                        <div class="col-md-3" style="padding: 0px 2px;">
+                            <select
+                                    ng-model="passengers[$index].docType"
+                                    name="docType{[{ $index }]}"
+                                    required>
+                                {#<option value="">{{ "web.reservation.month"|trans }}</option>#}
+                                <option value="01">V</option>
+                                <option value="02">P</option>
+                            </select>
+                            <input
+                                    type="text"
+                                    name="documentNumber{[{ $index }]}"
+                                    ng-model="passengers[$index].documentNumber"
+                                    class="document-input"
+                                    placeholder="{{ "web.reservation.id"|trans }}"
+                                    required/>
+                            <span
+                                    class="error"
+                                    ng-show="(passengersForm.docType{[{ $index }]}.$error.required
+                                    && passengersForm.$submitted)
+                                    || (passengersForm.documentNumber{[{ $index }]}.$error.required
+                                    && passengersForm.$submitted)">
+                                      {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+
+                        <div class="col-md-5" style="padding: 0px 2px;">
+                            <input
+                                    type="email"
+                                    name="email{[{ $index }]}"
+                                    ng-model="passengers[$index].email"
+                                    placeholder="{{ "web.reservation.email"|trans }}"
+                                    required/>
+                            <span
+                                    class="error"
+                                    ng-show="passengersForm.email{[{ $index }]}.$error.required
+                                    && passengersForm.$submitted">
+                                      {{ "share.validation.input_required"|trans }}
+                            </span>
+                            <span
+                                    class="error"
+                                    ng-show="passengersForm.email{[{ $index }]}.$error.email
+                                    && passengersForm.$submitted">
+                                      {{ "share.validation.error_email"|trans }}
+                            </span>
+                        </div>
+
+                        <div class="col-md-3" style="padding: 0px 2px;">
+                            <input
+                                    type="text"
+                                    name="phone{[{ $index }]}"
+                                    ng-model="passengers[$index].phone"
+                                    placeholder="{{ "web.reservation.phone"|trans }}"
+                                    required/>
+                            <span
+                                    class="error"
+                                    ng-show="passengersForm.phone{[{ $index }]}.$error.required
+                                    && passengersForm.$submitted">
+                                      {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+        </div>
+
+        <div class="payment-title">
+            <h5>
+                <img style="margin-right: 5px;" src="{{ asset('images/flights/card.png') }}"/>
+                Informacion de tarjeta de credito
+            </h5>
+        </div>
+        <form name="formReservation" novalidate>
+            <div class="nvc-jumbotron__payment">
+            <div class="nvc-container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <input
+                            type="text"
+                            name="card_number"
+                            ng-model="form.card.number"
+                            placeholder="{{ "web.reservation.number_card"|trans }}"
+                            ng-class="{'nvc-form-control__error': (formReservation.card_number.$invalid &&
+                                  formReservation.$submitted  && !formReservation.card_number.$error.pattern) || (form.card.number.length<16) || (formReservation.card_number.$error.min) || (formReservation.card_number.$error.pattern) || (invalidCard) }"
+                            ng-pattern="/^([0-9])*$/"
+                            maxlength="16"
+                            class="card-number"
+                            required ng-change="validateCard(form.card.number)"
+                        />
+                        <img style="width: 15%;" src="{{ asset('images/flights/mc-visa.png') }}"alt="">
+                        <span
+                                class="error"
+                                ng-show="form.card.number.length<16">
+                                {{ "share.validation.error_card"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_number.$error.pattern">
+                                  {{ "share.validation.only_number"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_number.$error.min">
+                                  {{ "share.validation.only_number_positive"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_number.$invalid &&
+                                      formReservation.$submitted && !formReservation.card_number.$error.pattern && !invalidCard && !formReservation.card_number.$error.min && !formReservation.card_number.$error.pattern">
+                                  {{ "share.validation.input_required"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="invalidCard &&
+                                      formReservation.card_number.$touched">
+                                  {{ "web.reservation.validate_card"|trans }}
+                            </span>
+
+                    </div>
+
+                    <div class="col-md-8">
+                        <input
+                                type="text"
+                                name="card_holder"
+                                ng-model="form.card.holder"
+                                placeholder="{{ "web.reservation.name_card"|trans }}"
+                                ng-class="{'nvc-form-control__error': (formReservation.card_holder.$invalid
+                                      && formReservation.$submitted) || (formReservation.card_holder.$error.pattern
+                                      && formReservation.card_holder.$touched) }"
+                                ng-pattern="/^[A-Za-ñ0-9 ]+$/"
+                                required/>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_holder.$invalid
+                                      && formReservation.$submitted && !formReservation.card_holder.$error.pattern">
+                              {{ "share.validation.input_required"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_holder.$error.pattern
+                                      && formReservation.card_holder.$touched">
+                              {{ "share.validation.alfanumerico"|trans }}
+                            </span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:30px;">
+                    <div class="col-md-8">
+                        <input
+                                type="text"
+                                name="card_holderId"
+                                ng-model="form.card.holderId"
+                                placeholder="{{ "web.reservation.id_card"|trans }}"
+                                ng-class="{'nvc-form-control__error': (formReservation.card_holderId.$invalid
+                                      && formReservation.$submitted) || formReservation.card_holderId.$error.pattern
+                                      && formReservation.card_holderId.$touched}"
+                                ng-pattern="/^([0-9])*$/"
+                                minlength="6"
+                                maxlength="9"
+                                required/>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_holderId.$invalid
+                                      && formReservation.$submitted && !formReservation.card_holderId.$error.pattern">
+                                      {{ "share.validation.input_required"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_holderId.$error.pattern
+                                      && formReservation.card_holderId.$touched">
+                                      {{ "share.validation.only_number"|trans }}
+                            </span>
+                    </div>
+                    <div
+                        class=" col-md-3 cvc-code"
+                        style="padding: 0px 5px 0px 0px; margin-left: 10px; margin-right: -10px;"
+                    >
+                        <i class="fa fn-info fa-x nvc-tooltips nvc-tooltips__left">
+                            <span>Últimos 3 digitos en la parte trasera de tu tarjeta</span>
+                        </i>
+
+                        <input
+                                name="card_cvc"
+                                ng-model="form.card.cvc"
+                                placeholder="{{ "web.reservation.code_card"|trans }}"
+                                ng-class="{'nvc-form-control__error': (formReservation.card_cvc.$invalid
+                                      && formReservation.$submitted) || (formReservation.card_cvc.$error.pattern
+                                      && formReservation.card_cvc.$touched) || (form.card.cvc.length<3
+                                      && formReservation.card_cvc.$touched) }"
+                                ng-pattern="/^([0-9])*$/"
+                                maxlength="3"
+                                required/>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_cvc.$error.pattern
+                                      && formReservation.card_cvc.$touched">
+                              {{ "share.validation.only_number"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="formReservation.card_cvc.$invalid
+                                      && formReservation.$submitted && !form.card.cvc.length<3 && !formReservation.card_cvc.$error.pattern">
+                              {{ "share.validation.input_required"|trans }}
+                            </span>
+                        <span
+                                class="error"
+                                ng-show="form.card.cvc.length<3
+                                      && formReservation.card_cvc.$touched">
+                              {{ "share.validation.error_cvc"|trans }}
+                            </span>
+                    </div>
+                    <div class=" col-md-5 expiration-date">
+                        <label for="">{{ "web.reservation.date_card"|trans }}</label><br>
+                        <select
+                        ng-class="{'nvc-form-control__error': (formReservation.expirationMonth.$invalid &&
+                        formReservation.$submitted) ||
+                        (formReservation.expirationYear.$invalid &&
+                        formReservation.$submitted) || (invalidDates) }"
+                        name="expirationMonth"
+                        ng-model="form.card.expirationMonth"
+                        ng-change="validateDates(form.card.expirationMonth,form.card.expirationYear)"
+                        required>
+                        <option value="">{{ "web.reservation.month"|trans }}</option>
+                        <option value="01">1</option>
+                        <option value="02">2</option>
+                        <option value="03">3</option>
+                        <option value="04">4</option>
+                        <option value="05">5</option>
+                        <option value="06">6</option>
+                        <option value="07">7</option>
+                        <option value="08">8</option>
+                        <option value="09">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        </select>
+                        <select
+                        ng-class="{'nvc-form-control__error': (formReservation.expirationMonth.$invalid &&
+                        formReservation.$submitted) ||
+                        (formReservation.expirationYear.$invalid &&
+                        formReservation.$submitted) || (invalidDates) }"
+                        ng-options="n for n in [] | range:2016:2026"
+                        name="expirationYear"
+                        ng-model="form.card.expirationYear"
+                        ng-change="validateDates(form.card.expirationMonth,form.card.expirationYear)"
+                        required>
+                        <option value="">{{ "web.reservation.year"|trans }}</option>
+                        </select>
+                        <br>
+                        <span class="error"
+                        ng-show="(formReservation.expirationMonth.$invalid &&
+                        formReservation.$submitted) ||
+                        (formReservation.expirationYear.$invalid &&
+                        formReservation.$submitted)">
+                        {{ "share.validation.input_required"|trans }}
+                        </span>
+                        <span
+                        class="error"
+                        ng-show="invalidDates">
+                        {{ "web.reservation.validate_dates"|trans }}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </form>
+        <h4 class="special-message-title">{{ "web.reservation.special_message"|trans }} </h4>
+        <div class="nvc-jumbotron special-request">
+            <div class="nvc-container">
+                <div class="col-md-16">
+                    <textarea
+                        type="text"
+                        placeholder="{{ "web.reservation.liked"|trans }}"
+                        ng-model="form.clientLiked"
+                        rows="5"
+                        maxlength="250"
+                        class="nvc-form-control"
+                    >
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div align="center" style="margin: 30px 0;">
+            <img
+                    src="{{ asset('images/preciogarantizado.png') }}"
+            >
+            <button
+                    class="nvc-button nvc-button__default"
+                    type="submit"
+                    ng-click="sendData()">
+                <e>{{ "web.reservation.buy_button"|trans }}</e>
+                {{ "web.reservation.confirm_reservation"|trans }}
+                Bs {[{ response.totalToPay | number }]}
+            </button>
+        </div>
+    </section>
+    <section
+        class='col-md-5 post-body entry-content'
+        oncontextmenu='return false'
+        ondragstart='return false'
+        onmousedown='return false'
+        onselectstart='return false'
+        ng-cloak
+    >
+        <div class="col-md-16 nvc-flightreservation__data">
+            <h3>Tu vuelo</h3>
+            <div class="row flightheader">
+                <div class="col-md-16">
+
+                    <h5>
+                        <img src="{{ asset('images/flights/ida.png') }}"/> Ida - {[{ response.flight.date }]}
+                        <img style="float:right; margin-top:5px;" src="{{ asset('images/airlines/QL.png') }}">
+                    </h5>
+
+                </div>
+
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+            <div class="row flightinfo">
+                <div class="col-md-16">
+                    <div>
+                        <h5>{[{ response.flight.departureTime }]}</h5>
+                        <h4>{[{ response.flight.origin }]}</h4>
+                        <h3>{[{ response.flight.originName }]}</h3>
+                    </div>
+
+                    <div class="margintop">
+                        <h5>{[{ response.flight.arrivalTime }]}</h5>
+                        <h4>{[{ response.flight.destination }]}</h4>
+                        <h3>{[{ response.flight.destinationName }]}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row flightheader">
+                <div class="col-md-13">
+
+                    <h5><img src="{{ asset('images/flights/vuelta.png') }}"/> Vuelta - {[{ response.returnFlight.date }]}</h5>
+
+                </div>
+
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+            <div class="row flightinfo">
+                <div class="col-md-16">
+                    <div>
+                        <h5>{[{ response.returnFlight.departureTime }]}</h5>
+                        <h4>{[{ response.returnFlight.origin }]}</h4>
+                        <h3>{[{ response.returnFlight.originName }]}</h3>
+                    </div>
+
+                    <div class="margintop">
+                        <h5>{[{ response.returnFlight.arrivalTime }]}</h5>
+                        <h4>{[{ response.returnFlight.destination }]}</h4>
+                        <h3>{[{ response.returnFlight.destinationName }]}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row passengers separator">
+                <h5><img src="{{ asset('images/flights/num.png') }}"/>
+                    <span>{[{ response.passengers.adults }]} adulto</span>
+                    <span ng-if="response.passengers.children">{[{ response.passengers.children }]} niños</span>
+                </h5>
+            </div>
+
+            <div class="row policy separator">
+                <h5>Politica de cancelacion <span>{[{ response.cancelationPolicy }]}</span></h5>
+            </div>
+
+            <div class="row prices separator">
+                <h5> Subtotal {[{ response.subTotal | number }]}</h5>
+                <h5> Impuesto {[{ response.tax | number }]}</h5>
+            </div>
+
+            <div class="row grandtotal text-right">
+                <h2>TOTAL Bs {[{ response.totalToPay | number }]}</h2>
+            </div>
+        </div>
+    </section>
+
+    {#
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalPaymentLoading.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalError.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Web:Partials/newModalError.html.twig") }}
+    #}
+
+</main>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = {{ response | raw }}
+        console.log("response", response);
+    </script>
+
+    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

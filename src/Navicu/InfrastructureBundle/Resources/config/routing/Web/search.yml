@@ -1,0 +1,76 @@
+
+# Ruta para el manejo de las peticiones de Resultado de destinos + hoteles del motor de busqueda "Pagina de Resultado"
+# petición Sincrona.
+navicu_search_property_by_location:
+    path:   /{countryCode}/{type}/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:listSearch }
+    options:
+        expose: true
+    requirements:
+        { countryCode:  "[a-zA-Z]{2}", _method: GET|POST }
+
+# Ruta para el manejo de las peticiones de Resultado de destinos + hoteles del motor de busqueda "Pagina de Resultado".
+# petición Asincrona.
+navicu_asinc_search_property_by_location:
+    path:   /asinc/search
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:asincListSearch }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Ruta para el manejo de las peticiones de solicitud de información de las habitaciones del establecimiento
+navicu_asinc_search_rooms_by_property:
+    path:   /asinc/search/rooms/property
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:asincRoomsSearchOfProperty }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Ruta para el manejo de las peticiones de vista de ficha del establecimiento
+navicu_property_details:
+    path:   /VE/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Web/Search:propertySearchDetails}
+    options:
+        expose: true
+
+# Ruta para el manejo de las peticiones de Resultado de hoteles del motor de busqueda  dada
+# unas coordenadas.
+# petición Asincrona.
+navicu_asinc_search_map_properties:
+    path:   /asinc/search/map/properties
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:asincPropertiesMap }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+
+
+register_get_locations:
+    path:   /aavvRegister/getLocations
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:getLocation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST }
+
+# Ruta para el manejo de la lista de los destinos en al cliente.
+navicu_asinc_search_destiny_of_location:
+    path:   /async/search/destiny
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:asyncDestinyOfLocation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+
+# Ruta para el manejo de una lista de destinos por medio de autocompletado.
+navicu_asinc_search_destiny_by_autocompleted:
+    path:   /async/search/autocompleted
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Search:asyncAutoCompletedDestiny }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}

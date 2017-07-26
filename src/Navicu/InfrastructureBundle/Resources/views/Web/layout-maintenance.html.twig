@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8" />
+    <meta name="fragment" content="!" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-site-verification" content="0KzUyXw3vPb94qIl_1szAI7Jy8LcigoAe9JJYuEqp9U" />
+    <meta name="revisit-after" content="1 days" />
+    <meta name="distribution" content="global" />
+    <meta name="msvalidate.01" content="F1B5555FB12D48A8D688FB45279E49AE" />
+    <img src="//bat.bing.com/action/0?ti=5104974&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" />
+    <meta http-equiv=" content-Language" content="es_VE" />
+    <meta name="author" content="navicu.com" />
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="googlebot" content="noindex,nofollow">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/web{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="nvc-navbar nvc-navbar__default" role="navigation">
+            <div class="nvc-container">
+                <div class='nvc-navbar__header post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+                    <a class="nvc-navbar__brand" href="{{ path('navicu_homepage_temporal') }}">
+                        navicu.com
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="nvc-ribbon" style="height:10px;">
+        <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+    </div>
+
+    {% block body %}{% endblock %}
+
+
+    {% block javascripts %}
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+
+        {% if app.environment == "dev" %}
+            <script src="/builds/vendor.bundle.js"></script>
+            <script src="/builds/client.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.vendor }}"></script>
+            <script src="{{ assets.js.client }}"></script>
+        {% endif %}
+
+        {% if app.environment != "dev" %}
+            <script> document.oncontextmenu = function(){return false}</script>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>

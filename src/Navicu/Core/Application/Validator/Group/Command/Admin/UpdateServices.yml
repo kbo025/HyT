@@ -1,0 +1,32 @@
+Navicu\Core\Application\UseCases\Admin\UpdateServices\UpdateService\UpdateServiceCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idType:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Admin\UpdateServices\DeleteServiceInstance\DeleteServiceInstanceCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idType:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        id:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Admin\UpdateServices\UpdateServiceInstance\UpdateServiceInstanceCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idType:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        data:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

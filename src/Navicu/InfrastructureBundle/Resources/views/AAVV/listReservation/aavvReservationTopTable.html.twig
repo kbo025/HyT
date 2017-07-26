@@ -1,0 +1,34 @@
+<div class="nvc-container">
+    <ul class="nvc-tabs nvc-tabs--reservation" class="clearfix">
+        <li
+            ng-class="{active: selectedTab === 'all'}"
+            ng-click="handleTabChange('all')"
+        >
+            {{ 'aavv.reservations.list.tabs.all' | trans }}
+        </li>
+        <li
+            ng-class="{active: selectedTab === 'accepted'}"
+            ng-click="handleTabChange('accepted')"
+        >
+            {{ 'aavv.reservations.list.tabs.accepted' | trans }}
+        </li>
+        <li
+            ng-class="{active:  selectedTab  === 'pending'}"
+            ng-click="handleTabChange('pending')"
+        >
+            {{ 'aavv.reservations.list.tabs.pending' | trans }}
+        </li>
+        <li
+            ng-class="{active:  selectedTab  === 'status_pre'}"
+            ng-click="handleTabChange('status_pre')"
+        >
+            {{ 'aavv.reservations.list.tabs.status_pre' | trans }}
+        </li>
+        <li
+            ng-class="{active: selectedTab === 'cancelled'}"
+            ng-click="handleTabChange('cancelled')"
+        >
+            {{ 'aavv.reservations.list.tabs.cancelled' | trans }}
+        </li>
+    </ul>
+</div>

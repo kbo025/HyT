@@ -1,0 +1,87 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+<main
+    class="clearfix nvc-aavv-login-register"
+    ng-app="landingModule"
+>
+    <div class="nvc-gradient"></div>
+    <form
+        {% if app.request.get('_route') == 'navicu_subdomain_login' %}
+            action="{{ pathSubdomain('navicu_subdomain_check') }}"
+        {% else %}
+            action="{{ path("navicu_aavv_check") }}"
+        {% endif %}
+
+        class="col-sm-5 col-sm-offset-1"
+        method="post"
+        ng-controller="landingLoginController"
+        role="form"
+    >
+        <h1>{{ 'aavv.landing.login.form.title_subdomain' | trans }}</h1>
+
+        <div class="form__row">
+            <i class="fn-usercontra-04"></i>
+            <label>{{ 'aavv.landing.login.form.labels.user' | trans }}</label>
+
+            <span
+                class="form__error"
+                ng-cloak
+                ng-if="userIsInvalid"
+            >
+                {{ 'aavv.landing.login.form.errors.invalid_user' | trans }}
+            </span>
+
+            <input
+                autofocus
+                name="_username"
+                placeholder="{{ 'aavv.landing.login.form.placeholders.user' | trans }}"
+                tabindex="1"
+                type="text"
+            />
+        </div>
+
+        <div class="form__row">
+            <i class="fn-usercontra-05"></i>
+            <label>{{ 'aavv.landing.login.form.labels.password' | trans }}</label>
+
+            {% if error is not null %}
+                <span class="form__error">
+                    {{ 'aavv.landing.login.form.errors.invalid_password' | trans }}
+                </span>
+            {% endif %}
+
+            <input
+                name="_password"
+                placeholder="{{ 'aavv.landing.login.form.placeholders.password' | trans }}"
+                tabindex="2"
+                type="password"
+            />
+            <a
+                class="form__forgot-password"
+                href="{{pathSubdomain('navicu_aavv_resetting')}}"
+                id ="forgotPassword"
+            >
+                {{ 'aavv.landing.login.form.forgot_password' | trans }}
+            </a>
+        </div>
+
+        <div class="form__row">
+            <button
+                class="btn btn-block col-sm-8 col-sm-offset-8"
+                name="_submit"
+                tabindex="3"
+                type="submit"
+            >
+                {{ 'aavv.landing.login.form.submit' | trans }}
+            </button>
+        </div>
+
+        <input
+            name="_csrf_token"
+            type="hidden"
+            value="{{ csrf_token }}"
+        />
+    </form>
+</main>
+{% endblock body %}

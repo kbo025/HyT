@@ -1,0 +1,50 @@
+#Validación OwnerProfile
+Navicu\Core\Domain\Model\Entity\OwnerProfile:
+
+    properties:
+        full_name:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        identity_card:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            #- NotBlank:
+             #   message: is_null,{{ value }},{{ type }}
+        #names:
+         #   - Type:
+          #      type: string
+           #     message: is_string,{{ value }},{{ type }}
+           # - NotBlank:
+            #    message: is_null,{{ value }},{{ type }}
+        gender:
+            - Type:
+                type: integer
+                message: is_integer,{{ value }},{{ type }}
+        company:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            #- NotBlank:
+             #   message: is_null,{{ value }},{{ type }}
+        position:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            #- NotBlank:
+             #   message: is_null,{{ value }},{{ type }}
+        birth_date:
+            - Date:
+                message: is_not_date,{{ value }},{{ type }}
+        joined_date:
+            - DateTime:
+                message: is_not_date,{{ value }},{{ type }}
+        #phones:
+         #   - Type:
+          #      type: string
+           #     message: is_string,{{ value }},{{ type }}
+#            - NotBlank:
+ #               message: is_null,{{ value }},{{ type }}

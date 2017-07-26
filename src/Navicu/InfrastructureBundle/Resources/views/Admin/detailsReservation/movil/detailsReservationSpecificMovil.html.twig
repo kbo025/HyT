@@ -1,0 +1,83 @@
+<div class="blockOne">
+    <div class="nvc-container">
+        <div class="nvc-row">
+            <div class="col-xs-8">
+                <h1>
+                    Check-in
+                    <strong>{[{detailsReservation.checkin}]}</strong>
+                </h1>
+            </div>
+            <div class="col-xs-8">
+                <h1>
+                    Check-out
+                    <strong>{[{detailsReservation.checkout}]}</strong>
+                </h1>
+            </div>
+        </div>
+        <hr class="margin-hr">
+        <div>
+            <h1>
+                Nombre y apellido
+                <strong>{[{detailsReservation.detailsPerson.nameClient}]}</strong>
+            </h1>
+        </div>
+        <hr>
+        <div>
+            <h1>
+                Nacionalidad
+                <strong>Venezolano</strong>
+            </h1>
+        </div>
+        <hr>
+        <div>
+            <h1>
+                E-mail
+                <strong>{[{detailsReservation.detailsPerson.email}]}</strong>
+            </h1>
+        </div>
+        <hr>
+        <div>
+            <h1>
+                Teléfono 
+                <strong>{[{detailsReservation.detailsPerson.phone}]}</strong>
+            </h1>
+        </div>
+        <hr>
+        <div>
+            <h1>
+                Adultos  
+                <strong>{[{detailsReservation.numberAdults}]}</strong>
+                - Niños 
+                <strong>{[{detailsReservation.numberChildren}]}</strong>
+            </h1>
+        </div>
+    </div>
+</div>
+<div class="blockTwo">
+    <div class="nvc-container">
+        <div class="nvc-row">
+            <div class="col-xs-8">
+                <h2>Importe bruto</h2>
+                <h1>Bs. {[{detailsReservation.total | number}]}</h1>
+                <h2>Importe AAVV</h2>
+                <h1>Bs. {[{detailsReservation.totalAAVV | number}]}</h1>
+            </div>
+            <div class="col-xs-8">
+                <h2>Importe Hotelero</h2>
+                <h1>Bs. {[{detailsReservation.totalProperty | number}]}</h1>
+                <h2>Importe navicu.com</h2>
+                <h1> Bs. {[{detailsReservation.totalNavicu | number}]}</h1>
+            </div>
+        </div>
+        <div class="nvc-row">
+            <div class="col-xs-8">
+                <h2>Comisión neta navicu.com</h2>
+                <h1>{[{detailsReservation.discountRate}]}%</h1>
+            </div>
+            <div class="col-xs-8">
+                <h2>Modalidad de pago</h2>
+                <h3>{[{namePaymentType}]}</h3>
+            </div>
+        </div>
+    </div>
+</div>

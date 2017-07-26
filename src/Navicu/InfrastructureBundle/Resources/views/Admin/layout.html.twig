@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="nvc.admin">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Admin{% endblock title %}</title>
+
+    {# https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag #}
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+
+     {% block stylesheets %}
+        <link rel="stylesheet" href="/css/admin{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+
+</head>
+<body class="nvc-admin">
+    {% block header %}
+        {% include "NavicuInfrastructureBundle:Admin:_header.html.twig" %}
+    {% endblock header %}
+
+    <div
+        class="nvc-content clearfix"
+        ng-class="{'nvc-content--login': route === 'navicu_admin_login'}"
+        ng-controller="ContentCtrl"
+    >
+        <div
+            class="nvc-backdrop nvc-loading"
+            ng-class="{'nvc-backdrop--invisible': !isBusy}"
+            {# ng-show="isBusy" #}
+        >
+            <img src="/images/loading.gif">
+        </div>
+
+        <div
+            class="nvc-backdrop nvc-backdrop--animation"
+            ng-class="{'nvc-backdrop--visible': isVisible}"
+            ng-click="emitHide()"
+            ng-controller="BackdropCtrl"
+        ></div>
+
+        <div ng-cloak>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+
+    {% block footer %}
+        {% include "NavicuInfrastructureBundle:Admin:_footer.html.twig" %}
+    {% endblock footer %}
+
+    {% block scripts %}
+        <!-- Routing -->
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+        <!-- App -->
+        {% if app.environment == "dev" %}
+            <script src="/builds/admin.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.admin }}"></script>
+        {% endif %}
+
+        <!-- Traducciones -->
+        <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+
+        <script>
+          angular.module('nvc.admin').constant('currentRoute', {{
+            app.request.get('_route') | json_encode | raw
+          }}).constant('currentRouteParams', {{
+            app.request.attributes.get('_route_params') | json_encode | raw
+          }});
+        </script>
+
+        {% if data is defined %}
+            <script>
+                angular.module('nvc.admin').value('viewData', (function() {
+                    return {{ data | json_encode | raw }};
+                })());
+            </script>
+        {% endif %}
+    {% endblock scripts %}
+</body>
+</html>

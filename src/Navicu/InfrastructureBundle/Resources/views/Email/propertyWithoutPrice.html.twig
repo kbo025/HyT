@@ -1,0 +1,97 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %}
+
+{% block body %}
+    <style>
+        tr.description:nth-child(2n+1) {
+            background: rgb(206, 206, 206);
+            color: rgba(0, 0, 0, 0.63);
+        }
+    </style>
+    <!-- header -->
+    <table bgcolor="#391462" border="0" cellpadding="0" cellspacing="0" width="500" id="emailHeader">
+        <!-- HEADER ROW // -->
+        <tr>
+            <td align="center" valign="top">
+                <!-- CENTERING TABLE // -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600px">
+                    <tr>
+                        <td align="left" valign="top">
+                            <!-- FLEXIBLE CONTAINER // -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
+                                <tr>
+                                    <td valign="top"  class="flexibleContainerCell">
+
+                                        <!-- CONTENT TABLE // -->
+                                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="padding-left:25px;padding-top: 18px;padding-bottom: 18px">
+                                                    <img src="https://www.navicu.com/images/logo-correo.png" style="width:200px;" width="200px">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- // FLEXIBLE CONTAINER -->
+                        </td>
+                    </tr>
+                </table>
+                <!-- // CENTERING TABLE -->
+            </td>
+
+        </tr>
+        <!-- // END -->
+    </table>
+    <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #f9f9f9">
+        <tr>
+            <td style="padding-top: 16px; padding-left: 12px;text-align: right;padding-right: 40px; width: 600px">
+                <a href="{{ path('navicu_admin_properties_without_price_to_email', {"username": "supradmin"}) }}" style="font-size: 18px"> Descargar en Excel</a>
+            </td>
+        </tr>
+    </table>
+    <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #f9f9f9">
+        <caption style="text-align: justify; background-color: #f9f9f9; padding: 2%">Los siguientes establecimientos no poseen
+            disponibilidad/tarifas a partir de la fecha especificada </caption>
+        <tr style="text-align: justify">
+            <th style="padding-top: 2px; padding-left: 12px">
+                Establecimiento
+            </th>
+            <th style="padding-top: 2px; padding-left: 12px">
+                Responsable
+            </th>
+            <th style="padding-top: 2px; text-align: center">
+                Sin disponibilidad desde
+            </th>
+        </tr>
+        {% for data in dataEmail %}
+            {% if loop.index is divisibleby(2) %}
+                <tr class="description">
+            {% else %}
+                <tr class="description" style="background: rgb(206, 206, 206) !important; color: black;">
+            {% endif %}
+
+            <td style="padding-left: 12px; padding-top:10px; ; padding-bottom: 5px; text-align: justify">
+                {{ data.propertyName }}
+            </td>
+            <td style="padding-left: 12px; padding-top:10px; ; padding-bottom: 5px; text-align: justify">
+                {{ data.responsible }}
+            </td>
+            <td style="text-align: center; padding-top:10px; padding-bottom: 5px">
+                {{ data.date }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:white;height: 149px !important;background-color: #572A85;width: 600px !important;">
+        <tr>
+            <td style="padding-top: 10px;text-align: center;width: 600px">
+                <span style="font-style: italic;font-size:17.666667px;">Viajar abre tu mente y amplia tu cultura</span><br>
+                <span style="font-size: 17.666667px;">preguntas@navicu.com</span><br>
+                <span style="font-size: 23.333333px;color:#F2AE00;font-weight: bold">08008 - NAVICU</span><br>
+                <span style="font-size:14.666667px;">Lunes a viernes de 8:00AM a 5:00PM</span><br><br>
+                <span style="font-size: 14.666667px;color:#CCCCCC ">Todos los derechos reservados navicu&trade;</span>
+            </td>
+        </tr>
+    </table>
+
+{% endblock body %}

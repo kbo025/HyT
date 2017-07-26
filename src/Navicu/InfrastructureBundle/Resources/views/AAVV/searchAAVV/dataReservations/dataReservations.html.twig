@@ -1,0 +1,37 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+    {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+    <main
+        class="nvc-aavv__searchAAVV nvc-aavv__dataReservations nvc-aavv__register visible-md visible-lg"
+        ng-app="searchAAVVModule"
+        ng-controller="dataReservationsController"
+        ng-cloak
+    >
+    {[{isRequesting}]}
+        <form class="nvc-form-inline" name="formGeneral" novalidate>
+            <div class="nvc-aavv__dataReservations--infoReservations">
+                {% include "NavicuInfrastructureBundle:AAVV:searchAAVV/dataReservations/dataReservationsInfo.html.twig" %}
+            </div>
+            <div class="nvc-aavv__dataReservations--detailReservations">
+                {% include "NavicuInfrastructureBundle:AAVV:searchAAVV/dataReservations/dataReservationsDetails.html.twig" %}
+            </div>
+            <div class="nvc-aavv__dataReservations--emailGlobal">
+                {% include "NavicuInfrastructureBundle:AAVV:searchAAVV/dataReservations/dataReservationsEmailGlobal.html.twig" %}
+            </div>
+            <br>
+        </form>
+        {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/dataReservations/modalError.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:AAVV:partials/loading.html.twig") }}
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        var response = {{ data | raw }};
+        console.log(response);
+    </script>
+    {{ parent() }}
+{% endblock %}

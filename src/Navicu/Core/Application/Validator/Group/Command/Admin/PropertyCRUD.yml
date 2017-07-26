@@ -1,0 +1,50 @@
+Navicu\Core\Application\UseCases\Admin\PropertyCRUD\GetDataGalleries\GetDataGalleriesCommand:
+    properties:
+        slug:
+          - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Admin\PropertyCRUD\UploadImage\UploadImageCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idGallery:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        typeGallery:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        file:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Admin\PropertyCRUD\SetFavoriteImage\SetFavoriteImageCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idGallery:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        typeGallery:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idImage:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Admin\PropertyCRUD\DeleteImage\DeleteImageCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idGallery:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        typeGallery:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        idImage:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

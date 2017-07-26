@@ -1,0 +1,75 @@
+<script id="modal-room.tpl" type="text/ng-template">
+    <div class="modal" tabindex="-1" role="dialog">
+	    <div class="modal-dialog modal-dialog-room">
+	        <div class=" modal-header-room">
+	            <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+	             <h3 class="font-modal-room">{[{roomModal.name}]}</h3>
+	        </div>
+	        <div class="modal-content-room property-view">
+	        	<div class="row">
+	        		<div class="col-xs-16 col-md-11">
+	                   {#<img src="http://placehold.it/800x800&text=00" class="img-modal-hotel">
+	                   <p align="left" class="banner-hotel" style="width:500px;">Cine privado<p>#}
+		                <div id="carousel-modal" class="carousel slide" data-ride="carousel">
+				            <div class="carousel-inner">
+				                <div class="item" ng-class="{active: $first}" ng-repeat="image in roomModal.gallery">
+				                    <img ng-src="/uploads/images/images_original/{[{ image.path }]}" class="img-modal-hotel">
+				                    {#<div class="carousel-fill img-modal-hotel" style="background-image:url('/uploads/images/images_original/{[{image.path }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>#}
+				                    {#<p align="left" class="banner-hotel">{[{image.name}]}<p>#}
+				                </div>
+				                <div class="item active" ng-if="!roomModal.gallery || roomModal.gallery.length==0">
+				                    <img src="http://placehold.it/800x800&text=00" class="img-modal-hotel">
+				                    <p align="left" class="banner-hotel">Nombre de la sección<p>
+				                </div>
+				            </div>
+				        </div>
+				        <!-- Carousel pequeño hotel -->
+				        <div class="clearfix">
+				            <div id="thumbcarousel" class="carousel carousel-modal slide" data-interval="false">
+				                <div class="carousel-inner">
+				                    <div class="item active" ng-init="first=0; last=7">
+										<li class="pad-carusel-hotel-modal li-img-galery" data-target="#carousel-modal"
+											data-slide-to="{[{$index}]}" ng-repeat="(id, image) in roomModal.gallery"
+											ng-if="id>=first && id<=last">
+			                              	{#<img ng-src="/uploads/images/images_sm/{[{image.path }]}"
+			                              		class="img-responsive img-carusel-modal">#}
+			                              	<div class="carousel-fill img-carusel-modal" style="background-image:url('/uploads/images/images_sm/{[{image.path }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+			                            </li>
+			                            <li class="pad-carusel-hotel-modal li-img-galery" data-target="#carousel-modal"
+											ng-repeat-n="8" ng-if="!roomModal.gallery || roomModal.gallery.length==0">
+			                              	<img ng-src="http://placehold.it/800x800&text={[{$index}]}" class="img-responsive img-carusel-modal">
+			                            </li>
+				                    </div>
+				                </div>
+				                <a class="left carousel-control" href="#carousel-modal"
+				                	ng-click="first = (first==0 ? 0 : first-1); last = first+7" data-slide="prev">
+				                	<span class="famodal fa fa-caret-left fa-2x"></span>
+				                </a>
+        						<a class="right carousel-control" href="#carousel-modal" data-slide="next"
+        							ng-click="last = (last>=roomModal.gallery.length-1 ? last : last+1); first = last-7">
+        							<span class="famodal fa fa-caret-right fa-2x"></span>
+        						</a>
+				            </div>
+				        </div>
+			   		</div>
+			   		<div class="col-xs-16 col-md-5" style="padding-left:0px;">
+	                   	<li ng-if="roomModal.sizeRoom" class="font-modal-content">Tamaño de la habitación</li>
+	                   	<p  ng-if="roomModal.sizeRoom" class="font-service3">{[{roomModal.sizeRoom}]} mts2</p>
+	                   	<li class="font-modal-content">Servicios de la habitación</li>
+	                   	<div class="services-modal-room">
+	                   		<p class="font-service3" ng-repeat="(id, feature) in roomModal.featuresRoom track by $index">{[{feature.name}]}</p>
+	                   	</div>
+	                   	<li class="font-modal-content" style="margin-top:10px;">Tipos de camas disponibles</li>
+	                   	<select type="text" class="select-bed form-control form-control-tab select-control  select-control-tab"
+	                   		style="width: 80%;">
+							ng-model="bed"
+							ng-options="bedselected as val.nameBeds for (bedselected, val) in roomModal.combinationsBeds">
+							<option value=''>Seleccione</option>
+						</select>
+						<button class="form-control-tab-btn  btn btn-primary btn-tab active" style="width:80%; height:30px !important; margin-top: 5px !important;"> Reservar por Bs ------</button>
+			   		</div>
+	        	</div>
+	        </div>
+	    </div>
+    </div>
+</script>

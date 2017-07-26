@@ -1,0 +1,188 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% set header_title = {'module_title': '8'} %}
+
+{% block body %}
+
+<div ng-app="status" ng-controller="statusController" novalidate ng-cloak>
+	{% include "NavicuInfrastructureBundle:Ascribere:PropertyForm/topmenu.html.twig" with header_title %}
+	<div ng-if="ok==true" class="container ok" style="margin-bottom:3.1%">
+	 	<br><br><br>
+	    <div class="col-md-1"></div>
+	    <div class="col-md-8">
+	        <div class="row">
+	            <div class="col-md-16"><h1>¡Todos los datos completados!</h1></div>
+	        </div>
+	        <div class="row">
+	            <div class="col-md-16">
+	                <p>Estás a pocas horas de formar parte de nuestra gran familia.</p>
+	                <p>Te contactaremos en las próximas 48 horas para confirmar los datos que has introducido y proceder a darte de alta en nuestro sistema.</p>
+	                <p>Pulsa finalizar para terminar el proceso de registro.</p>
+	            </div>
+	        </div>
+	        <br>
+	        <div class="row">
+	            <div class="col-md-10">
+	            	<a href="{{path('navicu_register_end',{'subdomain': app.request.attributes.get('subdomain')}) }}" >
+	                <button ng-click="formsubmission();" type="button" class="btn btn-primary">Finalizar</button>
+	                </a>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="col-md-7">
+	         <br>
+	         <img style="" src="{{ asset('images/welcome.jpg') }}">
+	    </div>
+	</div>
+	<div ng-if="ok==false">
+		<!--Top del formualario -->
+		<div class="container" style="font-family:LatoRegular" >
+			<div class="col-md-16" style="color:#572A85">
+				<p align="justify">Ya casi está todo listo. Por favor verifica la información que has colocado en los pasos anteriores antes de enviarla.
+				A continuación te detallamos un listado con cosas que consideramos necesarias que completes antes de enviarnos el formulario</p>
+			</div>
+		</div>
+		<br>
+		<div>
+			<div class="container form-font formStatus">
+				<div ng-if="response.property!='OK'"class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-16 right">
+						  <div class="alert alert-danger" role="alert">
+						  	<span class="fn-informacion"></span> Información general
+						  </div>
+						</div>
+					</div>
+					<div class="container">
+						<div ng-if="!response.property.ubicacion && !response.property.establecimiento && !response.property.contacts && !response.property.informacion_adicional && !response.property.requisitos_reserva && !response.property.descripcion" class="row" style="color:#808080">
+							<p ng-repeat="(key, value) in response.property">{[{value}]}</p>
+						</div>
+						<div ng-if="response.property.ubicacion && response.property.ubicacion!='OK'" class="row" style="color:#808080">
+							<h4>Ubicación</h4>
+							<p ng-repeat="(key, value) in response.property.ubicacion">{[{value}]}</p>
+						</div>
+						<div ng-if="response.property.establecimiento && response.property.establecimiento!='OK'" class="row" style="color:#808080">
+							<h4>Datos del establecimiento</h4>
+							<p ng-repeat="(key, value) in response.property.establecimiento">{[{value}]}</p>
+						</div>
+						<div ng-if="response.property.contacts && response.property.contacts!='OK'" class="row" style="color:#808080">
+							<h4>Datos de contacto</h4>
+							<div ng-repeat="(key, values) in response.property.contacts">
+								<p ng-repeat="value2 in values track by $index">{[{value2}]}</p>
+							</div>
+						</div>
+						<div ng-if="response.property.informacion_adicional && response.property.informacion_adicional!='OK'" class="row" style="color:#808080">
+							<h4>Información adicional</h4>
+							<p ng-repeat="(key, value) in response.property.informacion_adicional">{[{value}]}</p>
+						</div>
+						<div ng-if="response.property.requisitos_reserva && response.property.requisitos_reserva!='OK'" class="row" style="color:#808080">
+							<h4>Requisitos de reserva</h4>
+							<p ng-repeat="(key, value) in response.property.requisitos_reserva">{[{value}]}</p>
+						</div>
+						<div ng-if="response.property.descripcion && response.property.descripcion!='OK'" class="row" style="color:#808080">
+							<h4>Descripciones</h4>
+							<p ng-repeat="(key, value) in response.property.descripcion">
+								{[{value}]}
+							</p>
+						</div>
+					</div>
+				</div>
+				<div ng-if="response.services!='OK'" class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-16 right">
+							<div class="alert alert-danger" role="alert">
+								<span class="fn-servicios"></span> Servicios
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="row" style="color:#808080">
+							<h4>Recepción</h4>
+							<p ng-repeat="(key, value) in response.services">{[{value}]}</p>
+						</div>
+					</div>
+				</div>
+				<div ng-if="response.rooms!='OK'" class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-16 right">
+							<div class="alert alert-danger" role="alert">
+								<span class="fn-habitaciones"></span> Habitaciones cargadas
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="row" style="color:#808080">
+							<h4>Tipologías</h4>
+							<p ng-repeat="(key, value) in response.rooms">{[{value}]}</p>
+						</div>
+					</div>
+				</div>
+				<div ng-if="response.galleries!='OK'" class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-16 right">
+							<div class="alert alert-danger" role="alert">
+								<span class="fn-galeria"></span> Fotos
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="row" style="color:#808080">
+							<p ng-repeat="(key, value) in response.galleries">{[{value}]}</p>
+						</div>
+					</div>
+				</div>
+				<div ng-if="response.paymentInfo!='OK'" class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-16 right">
+							<div class="alert alert-danger" role="alert">
+								<span class="fn-pago"></span> Registro de pago
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="row" style="color:#808080">
+							<p ng-repeat="(key, value) in response.paymentInfo">{[{value}]}</p>
+						</div>
+					</div>
+				</div>
+				<div ng-if="response.termsAndConditions!='OK'" class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-16 right">
+							<div class="alert alert-danger" role="alert">
+								<span class="fn-acuerdo"></span> Acuerdo
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="row" style="color:#808080">
+							<p ng-repeat="(key, value) in response.termsAndConditions">{[{value}]}</p>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-16"><hr></div>
+				</div>
+			{# 	<div align="center">
+					<button ng-click="formsubmission();" type="button" class="btn btn-primary">Continuar</button>
+				</div> #}
+				<br>
+			</div>
+		</div>
+
+	</div>
+
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalLoading.html.twig") }}
+</div>
+{% endblock body %}
+
+ {% block javascripts%}
+ {{parent()}}
+
+    <script type="text/javascript">
+        var extension = "{{ app.request.attributes.get('extension') }}";
+        var response = {{ response | raw }};
+        var slug = response.slug;
+		var progress = response.progress;
+    </script>
+
+{% endblock %}

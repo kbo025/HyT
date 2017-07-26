@@ -1,0 +1,511 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+        <title>Encuentra el destino perfecto para viajar.</title>
+    {% endif %}
+{% endblock seoMetadata %}
+
+{% block body %}
+
+<main class='nvc-destinations post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'
+ng-app="destinationsModule" ng-controller="destinationsController">
+    <!--- Header -->
+    <section class="nvc-destinations__header">
+        <img  class="nvc-carousel__fill"  src="{{ assets.img['images/destinations/principal.jpg'] }}" alt="{{"IMAGES.destinations.principal.alt" | trans ({},'image') }}" ng-src="{[{ images.main }]}"/>
+        <h1 class="hidden-xs">{{"web.destinations.styles_destinations"|trans }}</h1>
+        <h2 class="hidden-xs">{{"web.destinations.choice_style"|trans }}</h2>
+    </section>
+    <section class="nvc-container nvc-padding--xs visible-xs">
+        <div class="nvc-destinations__navtab col-xs-16 col-sm-16 hidden-sm hidden-md hidden-lg">
+            <div class="col-xs-14" style="margin-top:15px; margin-bottom:7px;">
+                <span>{{"web.destinations.choice_style"|trans }}</span><br>
+            </div>
+        </div>
+    </section>
+    <!--- Nav Tab -->
+    <section class="nvc-container nvc-destinations__tab text-center hidden-xs">
+        <h3 class="hidden-xs">{{"web.destinations.choice"|trans }}</h3>
+        <div class="col-xs-4 hidden-xs">
+            <a href="#urban" data-toggle="tab">
+                <center><img src="{{ asset('images/destinations/urbano.png') }}" alt="{{"IMAGES.destinations.urbano.alt" | trans ({},'image') }}" class="img-responsive"/></center>
+                <p>{{"web.destinations.urban"|transchoice(0) }}</p>
+            </a>
+        </div>
+        <div class="col-xs-4 hidden-xs">
+            <a href="#mountain" data-toggle="tab">
+                <center><img src="{{ asset('images/destinations/montaña.png') }}" alt="{{"IMAGES.destinations.montaña.alt" | trans ({},'image') }}" class="img-responsive"/></center>
+                <p>{{"web.destinations.mountain"|transchoice(0) }}</p>
+            </a>
+        </div>
+        <div class="col-xs-4 hidden-xs">
+            <a href="#romantic" data-toggle="tab">
+                <center><img src="{{ asset('images/destinations/romantica.png') }}" alt="{{"IMAGES.destinations.romantica.alt" | trans ({},'image') }}" class="img-responsive"/></center>
+                <p>{{"web.destinations.romantic"|transchoice(0) }}</p>
+            </a>
+        </div>
+        <div class="col-xs-4 hidden-xs">
+            <a href="#beach" data-toggle="tab">
+                <center><img src="{{ asset('images/destinations/playa.png') }}" alt="{{"IMAGES.destinations.playa.alt" | trans ({},'image') }}" class="img-responsive"/></center>
+                <p>{{"web.destinations.beach"|transchoice(0) }}</p>
+            </a>
+        </div>
+    </section>
+        <!--- Nav Tab XS-->
+    <section class="nvc-container nvc-destinations__tab text-center visible-xs" style="margin-top:0px; padding:0px;">
+        <div class="col-xs-4 visible-xs" style="background-color:#A51176">
+            <a href="#urban" data-toggle="tab">
+                <center style="padding-top:15px;"><img src="{{ asset('images/destinations/urbano_xs.png') }}" class="img-responsive"/></center>
+                <p class="font-light" style="color:#FFF; font-size:12px;">{{ "web.destinations.urban"|transchoice(0) }}</p>
+
+            </a>
+        </div>
+        <div class="col-xs-4 visible-xs" style="background-color:#601260">
+            <a href="#mountain" data-toggle="tab">
+                <center style="padding-top:20px;"><img src="{{ asset('images/destinations/montaña_xs.png') }}" class="img-responsive"/></center>
+                <p class="font-light" style="color:#FFF; font-size:12px;">{{"web.destinations.mountain"|transchoice(0) }}</p>
+            </a>
+        </div>
+        <div class="col-xs-4 visible-xs"  style="background-color:#CC245D;" >
+            <a href="#romantic" data-toggle="tab">
+                <center style="padding-top:16px;"><img src="{{ asset('images/destinations/romantico_xs.png') }}" class="img-responsive"/></center>
+                <p class="font-light" style="color:#FFF; font-size:12px;">{{"web.destinations.romantic"|transchoice(0) }}</p>
+            </a>
+        </div>
+        <div class="col-xs-4 visible-xs" style="background-color:#F2A100">
+            <a href="#beach" data-toggle="tab">
+                <center style="padding-top:16px;"><img src="{{ asset('images/destinations/playa_xs.png') }}" class="img-responsive"/></center>
+                <p class="font-light" style="color:#FFF; font-size:12px;">{{"web.destinations.beach"|transchoice(0) }}</p>
+            </a>
+        </div>
+    </section>
+    <!--- Tab Description-->
+    <section class="nvc-nav__content">
+        <div ng-class="{'active': path=='#urban'}" class="nvc-nav__pane"  id="urban">
+            <div class="nvc-destinations__description" style="background-color:#A51176">
+                <div class="nvc-container text-center">
+                    <h1>{{"web.destinations.getaways_urban"|trans }}</h1>
+                    <center class="hidden-xs">
+                        <h4>{{"web.destinations.message_urban"|trans }}</h4>
+                    </center>
+                </div>
+            </div>
+            <!--- Block Urban -->
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/ciudad/caracas" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/caracas.jpg'] }}"
+                        ng-src="{[{ images['caracas'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-23%;"> <a href="VE/ciudad/caracas" target="_blank">CARACAS</a> </h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-18%;">
+                        {{"web.destinations.description_caracas"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <a href="VE/ciudad/caracas" target="_blank">
+                    <img
+                         src="{{ assets.img['images/destinations/caracas.jpg'] }}"
+                         ng-src="{[{ images['caracas'] }]}"
+                    />
+                </a>
+                <h1 class="visible-xs"><a href="VE/ciudad/caracas" target="_blank">CARACAS</a></h1>
+                <h4 class="visible-xs"> {{"web.destinations.description_caracas"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/ciudad/valencia" target="_blank">
+                    <img
+                        style="background-color:#E5E5E5;"
+                        src="{{ assets.img['images/destinations/valencia.jpg'] }}"
+                        ng-src="{[{ images['valencia'] }]}"
+                    />
+                </a>
+                <h1 style="margin-left:5%; margin-top:-23%;"><a href="VE/ciudad/valencia" target="_blank">VALENCIA</a></h1>
+                <h4 style="margin-left:5%;">
+                        {{"web.destinations.description_valencia"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <a href="VE/ciudad/valencia" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/valencia.jpg'] }}"
+                        ng-src="{[{ images['valencia'] }]}"
+                    />
+                </a>
+                <h1 class="visible-xs"><a href="VE/ciudad/valencia" target="_blank">VALENCIA</a></h1>
+                <h4 class="visible-xs">{{"web.destinations.description_valencia"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:15%;">
+                <a href="VE/ciudad/barquisimeto" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/barquisimeto.jpg'] }}"
+                        ng-src="{[{ images['barquisimeto'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-28%;"><a href="VE/ciudad/barquisimeto" target="_blank">BARQUISIMETO</a></h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-23%;">
+                            {{"web.destinations.description_barquisimeto"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block  visible-xs">
+                <a href="VE/ciudad/barquisimeto" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/barquisimeto.jpg'] }}"
+                        ng-src="{[{ images['barquisimeto'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/ciudad/barquisimeto" target="_blank">BARQUISIMETO</a></h1>
+                <h4>{{"web.destinations.description_barquisimeto"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/ciudad/gran-sabana" target="_blank">
+                    <img style="background-color:#E5E5E5;"
+                        src="{{ assets.img['images/destinations/ciudad-bolivar.jpg'] }}"
+                        ng-src="{[{ images['ciudad-bolivar'] }]}"
+                    />
+                </a>
+                <h1 style="margin-left:5%; margin-top:-23%;"><a href="VE/ciudad/gran-sabana" target="_blank">CIUDAD BOLÍVAR</a></h1>
+                <h4 style="margin-left:5%;">
+                            {{"web.destinations.description_cd_bolivar"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs" >
+                <a href="VE/ciudad/gran-sabana" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/ciudad-bolivar.jpg'] }}"
+                        ng-src="{[{ images['ciudad-bolivar'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/ciudad/gran-sabana" target="_blank">CIUDAD BOLÍVAR</a></h1>
+                <h4>{{"web.destinations.description_cd_bolivar"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:13%;">
+                <a href="VE/ciudad/maracaibo" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/maracaibo.jpg'] }}"
+                        ng-src="{[{ images['maracaibo'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-25%;"><a href="VE/ciudad/maracaibo" target="_blank">MARACAIBO</a></h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-20%;">
+                            {{"web.destinations.description_maracaibo"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <a href="VE/ciudad/maracaibo" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/maracaibo.jpg'] }}"
+                        ng-src="{[{ images['maracaibo'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/ciudad/maracaibo" target="_blank">MARACAIBO</a></h1>
+                <h4>{{"web.destinations.description_maracaibo"|trans }}</h4>
+            </div>
+            {#<div class="nvc-block" style="margin-bottom:-40px;">
+            </div>#}
+        </div>
+        <div ng-class="{'active': path=='#mountain'}" class="nvc-nav__pane" id="mountain">
+            <div class="nvc-destinations__description" style="background-color:#601260">
+                <div class="nvc-container text-center">
+                    <h1>{{"web.destinations.getaways_mountain"|trans }}</h1>
+                    <center class="hidden-xs">
+                        <h4>{{"web.destinations.message_mountain"|trans }}</h4>
+                    </center>
+                </div>
+            </div>
+             <!--- Block Mountain -->
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/ciudad/merida" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/merida.jpg'] }}"
+                        ng-src="{[{ images['merida'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-23%;"><a href="VE/ciudad/merida" target="_blank">MÉRIDA</a></h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-18%;">
+                        {{"web.destinations.description_merida"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-block visible-xs">
+                <a href="VE/ciudad/merida" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/merida.jpg'] }}"
+                        ng-src="{[{ images['merida'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/ciudad/merida" target="_blank">MÉRIDA</a></h1>
+                <h4>{{"web.destinations.description_merida"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/ciudad/gran-sabana" target="_blank">
+                    <img
+                        style="background-color:#E5E5E5;"
+                        src="{{ assets.img['images/destinations/gran_sabana.jpg'] }}"
+                        ng-src="{[{ images['gran_sabana'] }]}"
+                    />
+                </a>
+                <h1 style="margin-left:5%; margin-top:-23%;"><a href="VE/ciudad/gran-sabana" target="_blank">LA GRAN SABANA</a></h1>
+                <h4 style="margin-left:5%;">
+                        {{"web.destinations.description_gran_sabana"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <a href="VE/ciudad/gran-sabana" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/gran_sabana.jpg'] }}"
+                        ng-src="{[{ images['gran_sabana'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/ciudad/gran-sabana" target="_blank">LA GRAN SABANA</a></h1>
+                <h4>{{"web.destinations.description_gran_sabana"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:15%;">
+                <a href="VE/parroquia/colonia-tovar" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/colonia_tovar.jpg'] }}"
+                        ng-src="{[{ images['colonia_tovar'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-28%;"><a href="VE/parroquia/colonia-tovar" target="_blank">COLONIA TOVAR</a></h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-23%;">
+                        {{"web.destinations.description_colonia_tovar"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+               <a href="VE/parroquia/colonia-tovar" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/colonia_tovar.jpg'] }}"
+                        ng-src="{[{ images['colonia_tovar'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/parroquia/colonia-tovar" target="_blank">COLONIA TOVAR</a></h1>
+                <h4>{{"web.destinations.description_colonia_tovar"|trans }}</h4>
+            </div>
+            {#<div class="nvc-block" style="margin-bottom:-40px;">
+            </div>#}
+        </div>
+        <div ng-class="{'active': path=='#romantic'}" class="nvc-nav__pane" id="romantic">
+            <div class="nvc-destinations__description" style="background-color:#CC245D">
+                <div class="nvc-container text-center">
+                    <h1>{{"web.destinations.getaways_romantic"|trans }}</h1>
+                   <center class="hidden-xs">
+                        <h4>
+                            {{"web.destinations.message_romantic"|trans }}
+                        </h4>
+                    </center>
+                </div>
+            </div>
+            <!--- Block Romantic -->
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <img src="{{ assets.img['images/destinations/galipan.jpg'] }}" ng-src="{[{ images['galipan'] }]}"/>
+                <h1 style="float:right; margin-right:5%; margin-top:-23%;">GALIPÁN</h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-18%;">
+                        {{"web.destinations.description_galipan"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <img src="{{ assets.img['images/destinations/galipan.jpg'] }}" ng-src="{[{ images['galipan'] }]}"/>
+                <h1>GALIPÁN</h1>
+                <h4>{{"web.destinations.description_galipan"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <img style="background-color:#E5E5E5;" src="{{ assets.img['images/destinations/sanare.jpg'] }}" ng-src="{[{ images['sanare'] }]}"/>
+                <h1 style="margin-left:5%; margin-top:-23%;">SANARE</h1>
+                <h4 style="margin-left:5%;">
+                        {{"web.destinations.description_sanare"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <img src="{{ assets.img['images/destinations/sanare.jpg'] }}" ng-src="{[{ images['sanare'] }]}"/>
+                <h1>SANARE</h1>
+                <h4>{{"web.destinations.description_sanare"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:15%;">
+                <img src="{{ assets.img['images/destinations/el_jarillo.jpg'] }}" ng-src="{[{ images['el_jarillo'] }]}"/>
+                <h1 style="float:right; margin-right:5%; margin-top:-28%;">EL JARILLO</h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-23%;">
+                        {{"web.destinations.description_jarillo"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <img src="{{ assets.img['images/destinations/el_jarillo.jpg'] }}" ng-src="{[{ images['el_jarillo'] }]}"/>
+                <h1>EL JARILLO</h1>
+                <h4>{{"web.destinations.description_jarillo"|trans }}</h4>
+            </div>
+            {#<div class="nvc-block" style="margin-bottom:-40px;">
+            </div>#}
+        </div>
+        <div ng-class="{'active': path=='#beach'}" class="nvc-nav__pane" id="beach">
+            <div class="nvc-destinations__description" style="background-color:#F2A100">
+                <div class="nvc-container text-center">
+                    <h1>{{"web.destinations.getaways_beach"|trans }}</h1>
+                    <center class="hidden-xs">
+                        <h4>{{"web.destinations.message_beach"|trans }}</h4>
+                    </center>
+                </div>
+            </div>
+            <!--- Block Beach -->
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/isla/isla-de-margarita" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/margarita.jpg'] }}"
+                        ng-src="{[{ images['margarita'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-23%;"><a href="VE/isla/isla-de-margarita" target="_blank">ISLA DE MARGARITA</a></h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-18%;">
+                        {{"web.destinations.description_margarita"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs" style="margin-top:0%">
+                <a href="VE/isla/isla-de-margarita" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/margarita.jpg'] }}"
+                        ng-src="{[{ images['margarita'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/isla/isla-de-margarita" target="_blank">ISLA DE MARGARITA</a></h1>
+                <h4>{{"web.destinations.description_margarita"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/archipielago/los-roques" target="_blank">
+                    <img
+                        style="background-color:#E5E5E5;"
+                        src="{{ assets.img['images/destinations/los_roques.jpg'] }}"
+                        ng-src="{[{ images['los_roques'] }]}"
+                    />
+                </a>
+                <h1 style="margin-left:5%; margin-top:-23%;"><a href="VE/archipielago/los-roques" target="_blank">LOS ROQUES</a></h1>
+                <h4 style="margin-left:5%;">
+                        {{"web.destinations.description_roques"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <a href="VE/archipielago/los-roques" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/los_roques.jpg'] }}"
+                        ng-src="{[{ images['los_roques'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/archipielago/los-roques" target="_blank">LOS ROQUES</a></h1>
+                <h4>{{"web.destinations.description_roques"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:15%;">
+                <a href="VE/estado/falcon" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/morrocoy.jpg'] }}"
+                        ng-src="{[{ images['morrocoy'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-28%;"><a href="VE/estado/falcon" target="_blank">PARQUE NACIONAL MORROCOY</a></h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-23%;">
+                        {{"web.destinations.description_morrocoy"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <a href="VE/estado/falcon" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/morrocoy.jpg'] }}"
+                        ng-src="{[{ images['morrocoy'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/estado/falcon" target="_blank">PARQUE NACIONAL MORROCOY</a></h1>
+                <h4>{{"web.destinations.description_morrocoy"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:0%;">
+                <a href="VE/estado/anzoategui" target="_blank">
+                    <img
+                        style="background-color:#E5E5E5;"
+                        src="{{ assets.img['images/destinations/mochima.jpg'] }}"
+                        ng-src="{[{ images['mochima'] }]}"
+                    />
+                </a>
+                <h1 style="margin-left:5%; margin-top:-23%;"><a href="VE/estado/anzoategui" target="_blank">MOCHIMA</a></h1>
+                <h4 style="margin-left:5%;">
+                        {{"web.destinations.description_mochima"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs">
+                <a href="VE/estado/anzoategui" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/mochima.jpg'] }}"
+                        ng-src="{[{ images['mochima'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/estado/anzoategui" target="_blank">MOCHIMA</a></h1>
+                <h4>{{"web.destinations.description_mochima"|trans }}</h4>
+                <hr style="margin-left:15%; margin-right:15%;">
+            </div>
+            <div class="nvc-destinations__block hidden-xs" style="margin-top:13%;">
+                <a href="VE/parroquia/choroni" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/choroni.jpg'] }}"
+                        ng-src="{[{ images['choroni'] }]}"
+                    />
+                </a>
+                <h1 style="float:right; margin-right:5%; margin-top:-25%;"><a href="VE/parroquia/choroni" target="_blank">CHORONI</a></h1>
+                <h4 style="float:right; text-align:right; margin-right:5%; margin-top:-20%;">
+                        {{"web.destinations.description_choroni"|trans }}
+                </h4>
+            </div>
+            <div class="nvc-destinations__block visible-xs" style="margin-top:13%;">
+               <a href="VE/parroquia/choroni" target="_blank">
+                    <img
+                        src="{{ assets.img['images/destinations/choroni.jpg'] }}"
+                        ng-src="{[{ images['choroni'] }]}"
+                    />
+                </a>
+                <h1><a href="VE/parroquia/choroni" target="_blank">CHORONI</a></h1>
+                <h4>{{"web.destinations.description_choroni"|trans }}</h4>
+            </div>
+            {#<div class="nvc-block" style="margin-bottom:-40px;">
+            </div>#}
+        </div>
+    </section>
+</main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        jQuery(function($) {
+
+            var hash = window.location.hash;
+            hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+            $('.nvc-destinations__tab a').click(function (e) {
+                $(this).tab('show');
+                var scrollmem = $('body').scrollTop();
+                window.location.hash = this.hash;
+                $('html,body').scrollTop(scrollmem);
+            });
+
+            $('.nvc-destinations__tab a').click(function (e) {
+                $(this).tab('show');
+            });
+
+        });
+
+        var path = window.location.hash;
+        //alert(path);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

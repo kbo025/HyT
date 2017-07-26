@@ -1,0 +1,97 @@
+# La entidad contiene los datos de los perfiles Hoteleros
+Navicu\Core\Domain\Model\Entity\AAVVProfile:
+    type: entity
+    table: aavv_profile
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVProfileRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        fullname:
+            type: string
+            nullable: true
+            length: 150
+        email:
+            type: string
+            nullable: true
+            length: 50
+        # Cargo que ocupa en la compañia
+        position:
+            type: string
+            nullable: true
+        # Cedula de identidad
+        document_id:
+            type: string
+            nullable: true
+        # Telefono
+        phone:
+            type: string
+            nullable: true
+
+        profileorder:
+            type: integer
+            nullable: true
+
+        confirmationemailreceiver:
+            type: boolean
+            nullable: true
+        
+        cancellationemailreceiver:
+            type: boolean
+            nullable: true
+
+        newsemailreceiver:
+            type: boolean
+            nullable: true
+        #Estatus del perfil:
+        # 0: inactivo en proceso de registro
+        # 1: activo
+        # 2: inactivo por mora
+        # 3: inactivado por la agencia de viajes (borrado logico)
+        status:
+            type: integer
+            nullable: false
+            options:
+              default: 0
+        last_activation:
+            type: datetime
+            nullable: true
+        deleted_at:
+            type: datetime
+            nullable: true
+
+    oneToMany:
+        aavv_reservation_group:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVVReservationGroup
+            mappedBy: aavv_profile
+            joinColumn:
+                name: aavv_reservation_group_id
+                referencedColumnName: id
+            cascade: ["persist"]
+    manyToOne:
+        location:
+            targetEntity: Location
+            cascade: {  }
+            mappedBy: aavv_profile
+            joinColumn:
+                name: location_id
+                referencedColumnName: id
+        aavv:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVV
+            inversedBy: aavv_profile
+            joinColumn:
+                name: aavv_id
+                referencedColumnName: id
+            cascade: ["persist"]
+
+    oneToOne:
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            mappedBy: aavv_profile
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            cascade: ["persist","remove"]

@@ -1,0 +1,50 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    {# Versión desktop #}
+    <main
+        class="admin nvc-admin__AAVVInvoiceList visible-md visible-lg"
+        ng-controller="InvoiceListCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/invoiceList/invoiceListHeader.html.twig" %}
+            </div>
+            <div class="nvc-topmenuTable--admin">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/invoiceList/invoiceListTopMenu.html.twig" %}
+            </div>
+            <div class="nvc-table--admin nvc-container">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/invoiceList/invoiceListTable.html.twig" %}
+            </div>
+            <div ng-if="pagination.pageCount > 1">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/invoiceList/invoiceListPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+    {# Versión movil #}
+    <main
+        class="admin nvc-admin__AAVVInvoiceList visible-sm visible-xs"
+        ng-controller="InvoiceListCtrl"
+        ng-cloak
+    >
+        <div class="nvc-secondaryTableHeader--admin--movil">
+            <div class="col-xs-16 col-sm-16">
+                {% include "NavicuInfrastructureBundle:Admin:invoicing/invoiceList/movil/invoiceListHeaderMovil.html.twig" %}
+            </div>
+        </div>
+        <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+            {% include "NavicuInfrastructureBundle:Admin:invoicing/invoiceList/movil/invoiceListTableMovil.html.twig" %}
+        </div>
+        <div ng-if="pagination.pageCount > 1">
+            {% include "NavicuInfrastructureBundle:Admin:invoicing/invoiceList/invoiceListPagination.html.twig" %}
+        </div>
+    </main>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+
+
+{% block body %}
+<div ng-app="loginExtranetModule" ng-controller="loginExtranetController">
+    <div class="body-extranet-login" style="background-image: url({{ assets.img['images/images_original/navicu/homepage/home-page-extranet.jpg'] }})" ng-style="lazyStyles.bg">
+        <div class="container">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="container">
+                    Menu administrativo<br>
+                    <a href="{{ path('extranet_logout') }}"><i class="fa fa-sign-out">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</i> </a>
+                </div>
+                {% else %}
+                <div class="col-xs-16">
+                    <div class="row" style="color:white;text-align:right;margin-top:10%">
+                        <div class="col-xs-16" >
+                            <h1 style="font-size:-webkit-xxx-large">
+                                <b>
+                                    {% filter upper %}
+                                        {{ "extranet.title.welcome_register"|trans }}
+                                    {% endfilter %}
+                                </b>
+                            </h1>
+                            <h4><b>{{ "share.message.slogan"|trans }}</b></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-11">
+
+                            {{ form_start(form) }}
+
+                            {{ form_errors(form.username)}}
+                            {{ form_errors(form.email)}}
+                            {{ form_errors(form)}}
+
+                            {{ form_widget(form.username, {'attr': {'class': 'form-control my-imput', 'placeholder': 'share.message.username'|trans }})}}
+
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control my-imput', 'placeholder': 'share.message.email'|trans }})}}
+
+                            {{ form_widget(form.password, {'attr': {'class': 'form-control my-imput', 'placeholder': 'share.message.password'|trans }})}}
+
+                            {{ form_widget(form.save, {'attr': {'class': 'btn btn-md btn-primary btn-home btn-block'}})}}
+
+                            {{ form_end(form) }}
+                            {{ form_rest(form) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 col-xs-offset-14 text-bold" >
+                            <a href="{{path('extranet_login')}}" class="btn btn-primary btn-home btn-block font-bold" >
+                                {{ 'share.action.go_back'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    {% include "NavicuInfrastructureBundle:Ascribere/PropertyForm:formContentHomePage.html.twig" %}
+
+    {% endif %}
+</div>
+{% endblock %}

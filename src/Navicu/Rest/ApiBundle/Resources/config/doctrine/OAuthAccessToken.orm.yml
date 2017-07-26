@@ -1,0 +1,21 @@
+Navicu\Rest\ApiBundle\Entity\OAuthAccessToken:
+    type: entity
+    table: oauth_access_token
+    repositoryClass: Navicu\Rest\ApiBundle\Repositories\OAuthAccessTokenRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        oauth_client:
+            targetEntity: Navicu\Rest\ApiBundle\Entity\OAuthClient
+            joinColumn:
+                name: oauth_client_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

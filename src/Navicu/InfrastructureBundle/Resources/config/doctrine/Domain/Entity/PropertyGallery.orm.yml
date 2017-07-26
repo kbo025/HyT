@@ -1,0 +1,35 @@
+Navicu\Core\Domain\Model\Entity\PropertyGallery:
+    type: entity
+    table: property_gallery
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPropertyGalleryRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        property:
+            targetEntity: Property
+            cascade: {  }
+            mappedBy: null
+            inversedBy: property_gallery
+            joinColumns:
+                property:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        type:
+            targetEntity: ServiceType
+            mappedBy: null
+            inversedBy: property_gallery_types
+            joinColumns:
+                type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+    oneToMany:
+        images_gallery:
+            targetEntity: PropertyImagesGallery
+            mappedBy: property_gallery
+            cascade: ["persist"]

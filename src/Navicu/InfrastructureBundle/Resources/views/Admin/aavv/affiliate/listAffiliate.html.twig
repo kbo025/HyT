@@ -1,0 +1,58 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    <main
+        class="visible-md visible-lg"
+        ng-controller="TravelAgencyAffiliateCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/listAffiliateHeader.html.twig" %}
+            </div>
+            <div class="nvc-table--admin nvc-container">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/listAffiliateTable.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/listAffiliatePagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+    <main
+        class="visible-sm visible-xs"
+        ng-controller="TravelAgencyAffiliateCtrl"
+        ng-cloak
+    >
+        <div class="nvc-secondaryTableHeader--admin--movil">
+            <div class="col-xs-16 col-sm-16">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/mobile/listAffiliateHeader.html.twig" %}
+            </div>
+        </div>
+        <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/mobile/listAffiliateTable.html.twig" %}
+        </div>
+        <div ng-if="pagination.pages > 1">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/affiliate/listAffiliatePagination.html.twig" %}
+        </div>
+    </main>
+
+
+{% endblock content %}
+
+{% block scripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        var route = "{{ app.request.get('extension') }}"
+        var response = {{ data | raw }};
+        console.log("response", response);
+    </script>
+
+    {{ parent() }}
+
+
+{% endblock %}

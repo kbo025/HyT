@@ -1,0 +1,60 @@
+<script id="modal-room.tpl" type="text/ng-template">
+    <div class="nvc-modal" tabindex="-1" role="dialog">
+	    <div class="nvc-modal__dialog nvc-modal__dialog--room">
+	        <div class="nvc-modal__header nvc-modal__header--white">
+	            <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+	             <h3>{[{ roomModal.name }]}</h3>
+	        </div>
+	        <div class="nvc-modal__content nvc-property" >
+	        	<div class='nvc-row post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+	        		<div class="col-xs-16 col-md-11">
+	                   {#<img src="http://placehold.it/800x800&text=00" class="img-modal-hotel">
+	                   <p align="left" class="banner-hotel" style="width:500px;">Cine privado<p>#}
+		                <div id="carousel-modal" class="carousel nvc-carousel slide" data-ride="carousel">
+				            <div class="nvc-carousel__inner">
+				                <div class="item" ng-class="{active: $first}" ng-repeat="image in roomModal.images">
+				                	{% verbatim %}
+				                    <img ng-src="/uploads/images/images_md/{[{image.url }]}" class="img-modal-hotel">
+				                    {% endverbatim %}
+				                    {#<div class="nvc-carousel__fill img-modal-hotel" style="background-image:url('/uploads/images/images_md/{[{image.url }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>#}
+				                    <p align="left" class="banner-hotel">{[{image.name}]}<p>
+				                </div>
+				            </div>
+				        </div> 
+				        <!-- Carousel pequeño hotel -->
+				        <div class="clearfix">
+				            <div id="thumbcarousel" class="nvc-carousel nvc-carousel--room slide" data-interval="false">
+				                <div class="nvc-carousel__inner">
+				                    <div class="item active">
+										<li class="pad-carusel-hotel-modal li-img-galery" data-target="#carousel-modal" 
+											data-slide-to="{[{$index}]}" ng-repeat="(id, image) in roomModal.images">
+			                              	{#<img src="/uploads/images/images_sm/{[{image.url }]}" 
+			                              		class="img-responsive img-carusel-modal">#}
+		                              		{% verbatim %}
+			                              	<div class="nvc-carousel__fill img-carusel-modal" style="background-image:url('/uploads/images/images_sm/{[{image.url }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>
+			                            	{% endverbatim %}
+			                            </li>
+				                    </div>
+				                </div>
+				                <a class="left nvc-carousel__control" href="#carousel-modal" data-slide="prev">
+				                	<span class="famodal fa fa-caret-left fa-2x"></span>
+				                </a>
+        						<a class="right nvc-carousel__control" href="#carousel-modal" data-slide="next">
+        							<span class="famodal fa fa-caret-right fa-2x"></span>
+        						</a>  
+				            </div> 
+				        </div> 
+			   		</div>
+			   		<div class="col-xs-16 col-md-5" style="padding-left:0px;">
+	                   	<li ng-if="roomModal.size" class="font-modal-content" style="margin-top:0px;">Tamaño de la habitación</li>
+	                   	<p  ng-if="roomModal.size" class="font-service3">{[{ roomModal.size }]} mts2</p>
+	                   	<li class="font-modal-content">Servicios de la habitación</li>
+	                   	<div class="services-modal-room">
+	                   		<p class="font-service3" ng-repeat="(id, feature) in roomModal.services track by $index">{[{ feature.name }]}</p>
+	                   	</div>
+			   		</div> 
+	        	</div>
+	        </div>
+	    </div>     
+    </div>
+</script>    

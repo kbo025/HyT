@@ -1,0 +1,18 @@
+# www.robotstxt.org/
+# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
+
+User-agent: *
+Sitemap: https://www.navicu.com/sitemap.xml
+User-agent: *
+Disallow: https://www.navicu.com/sitemap.html
+User-agent: *
+Disallow: /ascribere/*
+User-agent: *
+Disallow: /extranet/*
+User-agent: *
+Disallow: /paixarei-aspra/*
+User-agent: *
+Disallow: *.pdf
+Disallow: https://www.navicu.com/resumeReservationPdf/*
+User-agent: *
+Disallow: https://www.navicu.com/api/login/*

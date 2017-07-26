@@ -1,0 +1,72 @@
+{%
+    if app.user
+    and app.user.getAavvProfile()
+    and app.request.get('_route') != "aavv_login_page"
+    and app.request.get('_route') != "navicu_aavv_login"
+    and app.request.get('_route') != "aavv_register_page"
+%}
+    <ul class="nvc-nav nvc-navbar__right">
+        <li class="nvc-dropdown nvc-dropdown__block">
+            <a
+                aria-expanded="false"
+                aria-haspopup="true"
+                class="nvc-dropdown__toggle"
+                data-toggle="dropdown"
+                href="#"
+                role="button"
+            >
+                <span class="nvc-image--aavv-profile-default"></span>
+
+                <span class="nvc-navbar__label">
+                    {{ app.user.getAavvProfile().getFullName() }}
+                </span>
+
+                <i
+                    aria-hidden="true"
+                    class="fa fa-caret-down"
+                ></i>
+            </a>
+
+            <ul class="nvc-dropdown__menu">
+                {% if app.request.get('_route') != "aavv_register" %}
+
+                    {% if hasPermission('aavv_users', 'VIEW') %}
+                        <li ng-class="{ active: '{{ app.request.get('_route') }}' === 'aavv_list_users', 'nvc-disabled': !{{ hasPermission('aavv_users', 'VIEW') | json_encode | raw }} }">
+                            <a href="{{ hasPermission('aavv_users', 'VIEW') ? pathSubdomain('aavv_list_users') : '#' }}">
+                                Editar usuarios
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if hasPermission('aavv_permissions', 'VIEW') %}
+                        <li ng-class="{ active: '{{ app.request.get('_route') }}' === 'aavv_list_roles', 'nvc-disabled': !{{ hasPermission('aavv_permissions', 'VIEW') | json_encode | raw }} }">
+                            <a href="{{ hasPermission('aavv_permissions', 'VIEW') ? pathSubdomain('aavv_list_roles') : '#' }}">
+                                Permisos
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if hasPermission('aavv_customize', 'VIEW') %}
+                        <li ng-class="{ active: '{{ app.request.get('_route') }}' === 'navicu_aavv_customize_homepage', 'nvc-disabled': !{{ hasPermission('aavv_customize', 'VIEW') | json_encode | raw }} }">
+                            <a href="{{ hasPermission('aavv_customize', 'VIEW') ? pathSubdomain('navicu_aavv_customize_homepage') : '#' }}">
+                                Personalizar
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+
+                <li ng-class="{active: '{{ app.request.get('_route') }}' === 'navicu_aavv_logout' || app.request.get('subdomain')}">
+                    {% if app.request.get('subdomain') != 'www' %}
+                        <a href="{{ pathSubdomain('navicu_subdomain_logout') }}">
+                            Salir
+                        </a>
+                    {% else %}
+                        <a href="{[{ 'navicu_aavv_logout' | route }]}">
+                            Salir
+                        </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </li>
+    </ul>
+{% endif %}

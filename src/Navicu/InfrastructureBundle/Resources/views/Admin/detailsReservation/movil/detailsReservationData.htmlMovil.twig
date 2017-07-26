@@ -1,0 +1,40 @@
+<div class="dropDown-reservation" ng-click="openReservation = !openReservation">
+    <div class="nvc-container">
+        <i class='fa fn-hotel icon'></i>
+        <h1>Datos de la reserva</h1>
+        <i ng-if="!openReservation" class='fn-select arrow'></i>
+        <i ng-if="openReservation" class='fn-selectinverse arrow'></i>
+    </div>
+</div>
+<div ng-if="openReservation" class="data">
+    <div class="top">
+        <h1>
+            {[{detailsReservation.propertyName}]}
+        </h1>
+    </div>
+    <div class="nvc-container">
+        <div class="details"  ng-repeat="(key, value) in detailsReservation.packages">
+            <div class="content nvc-container">
+                <h1>Nº de habitaciones {[{value.numberRoom}]}</h1>
+                <h2>Tipo de habitación {[{value.roomName}]}</h2>
+                <h2>Tipo de pack {[{value.namePack}]}</h2>
+                <h2>Política de cancelación {[{value.nameCancellationPolicy}]}</h2>
+            </div>
+        </div>
+        <div class="nvc-container">
+            <h1>
+                Observaciones
+            </h1>
+            <div class="observations">
+                <div>
+                    <h2 ng-if="detailsReservation.observations != null">
+                        {[{detailsReservation.observations}]}
+                    </h2>
+                    <h2 ng-if="detailsReservation.observations === null">
+                        No hay observaciones
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

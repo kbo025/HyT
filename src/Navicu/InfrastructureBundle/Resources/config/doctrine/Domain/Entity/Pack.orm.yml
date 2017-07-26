@@ -1,0 +1,67 @@
+Navicu\Core\Domain\Model\Entity\Pack:
+    type: entity
+    table: pack
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPackRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        slug:
+            type: string
+            length: 255
+            nullable: true
+            unique: true
+
+    oneToMany:
+        daily_packages:
+            targetEntity: DailyPack
+            mappedBy: pack
+        i_am_child:
+            targetEntity: PackLinkage
+            mappedBy: child
+        i_am_parent:
+            targetEntity: PackLinkage
+            mappedBy: parent
+        child_room_pack:
+            targetEntity: RoomPackLinkage
+            mappedBy: parent
+
+        #reserva (Eliminar)
+        reservation_packages:
+            targetEntity: ReservationPack
+            mappedBy: pack_id
+    manyToOne:
+        room:
+            targetEntity: Room
+            cascade: ["persist"]
+            mappedBy: null
+            inversedBy: packages
+            joinColumn:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        type:
+            targetEntity: Category
+            cascade: {  }
+            mappedBy: null
+            inversedBy: types_pack
+            joinColumn:
+                type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    manyToMany:
+        pack_cancellation_policies:
+            targetEntity: PropertyCancellationPolicy
+            cascade: {  }
+            mappedBy: packages
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks:
+        prePersist: [setSlug]
+        preUpdate: [setSlug]

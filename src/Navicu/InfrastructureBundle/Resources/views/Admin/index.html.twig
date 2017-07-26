@@ -1,0 +1,54 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block title %}
+    Home | {{ parent() }}
+{% endblock title %}
+
+{% block content %}
+    <main ng-controller="TestTableCtrl">
+        <div class="nvc-secondaryTableHeader--admin">
+            <header>
+                <div class="nvc-container">
+                    <h1>
+                        Título
+                    </h1>
+                    <span>·</span>
+                    <h2>
+                        Subtítulo
+                    </h2>
+                </div>
+            </header>
+        </div>
+
+        <form class="nvc-form__top--admin nvc-container">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    Búsqueda
+                </span>
+
+                <input
+                    class="form-control"
+                    ng-model="nextQuery"
+                    role="search"
+                    tabindex="1"
+                    type="text"
+                />
+
+                <span class="input-group-addon">
+                    <button
+                        class="nvc-aavv-customize__button--primary"
+                        type="submit"
+                        ng-click="handleSearch()"
+                    >
+                        Buscar
+                    </button>
+                </span>
+            </div>
+        </form>
+
+        <div class="nvc-container">
+            <nvc-table table="table">
+            </nvc-table>
+        </div>
+    </main>
+{% endblock content %}

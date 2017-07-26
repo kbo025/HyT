@@ -1,0 +1,26 @@
+<script id="modal-gallery.tpl" type="text/ng-template">
+    <div class="nvc-modal" tabindex="-1" role="dialog">
+	    <div class="nvc-modal__dialog  nvc-modal__dialog--gallery">
+	        <div class="nvc-modal__header nvc-modal__header--white">
+	            <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+	        </div>
+	        <div class="nvc-modal__content">
+	        	<div  class='nvc-row post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+	        		<div class="col-xs-16">
+						<div id="carouselModal" class="carousel nvc-carousel nvc-carousel--property slide" data-ride="carousel">
+				            <div class="nvc-carousel__inner nvc-carousel__inner--property">
+				            	<div class="item" ng-repeat="(position, imagen) in gallery" ng-class="{active: position==idimage}" >
+				                    {#<div class="nvc-carousel__fill" style="background-image:url('/uploads/images/images_original/{[{imagen.url }]}');"></div>#}
+				                     <img ng-src="/uploads/images/images_original/{[{imagen.url }]}" class="img-responsive">
+				                    {#<p align="left" class="banner-hotel">{[{image.subGallery}]}<p>#}
+				                </div>
+				            </div>
+				            <a class="left nvc-carousel__control nvc-carousel__control--modal" href="#carouselModal" data-slide="prev"><span class="fa fa-angle-left fa-4x"></span></a>
+        					<a class="right nvc-carousel__control nvc-carousel__control--modal" href="#carouselModal" data-slide="next"><span class="fa fa-angle-right fa-4x"></span></a>
+				        </div>
+			   		</div> 
+	        	</div>
+	        </div>
+	    </div>     
+    </div>
+</script>    

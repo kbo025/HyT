@@ -1,0 +1,30 @@
+{% extends "NavicuInfrastructureBundle:Ascribere/PropertyForm/Resetting:layoutResetting.html.twig" %}
+
+{% block content_title %}
+    <div class="col-xs-16" >
+        <h1   style="font-size:-webkit-xxx-large">
+            <b>
+                {% filter upper %}
+                    {{ 'share.message.check_email'|trans }}
+                {% endfilter %}
+            </b>
+        </h1>
+        <h4>
+            <b>
+                {{ 'share.message.email_send_to_email'|trans }}{{email }}
+            </b>
+        </h4>
+    </div>
+{% endblock content_title %}
+
+{% block content_buttons %}
+    <div class="col-xs-2 col-xs-offset-14 text-bold" >
+        <a href="{{path('extranet_login')}}" class="thumbnail" >
+            <center>
+                <b>
+                    {{ 'share.action.go_back'|trans }}
+                </b>
+            </center>
+        </a>
+    </div>
+{% endblock content_buttons%}

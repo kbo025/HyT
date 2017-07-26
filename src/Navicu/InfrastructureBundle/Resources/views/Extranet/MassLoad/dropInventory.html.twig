@@ -1,0 +1,184 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'load'} %}
+{% set rateType = 1 %}
+
+{% block title %} {{ "extranet.title.drop_inventory"|trans }} {% endblock %}
+
+{%  block body %}
+    <div ng-app="massLoad" ng-controller="massLoadController" >
+        <div class="well-calendar well-sm" ng-cloak>
+            <div class="container">
+                <div class="row">
+                    <div class="pull-left">
+                        <p class="font-regular">{{ "extranet.action.select_date"|trans }}</p>
+                    </div>
+                    <div id="select-months">
+                        <strong>{{ "share.action.see"|trans }}: </strong>
+                        <label class="radio-inline">
+                            <input id="sixMonths" type="radio" name="monthsNumber" value="sixMonths" checked="checked">
+                            {{ "extranet.calendar.label.n_months"|transchoice(6) }}
+                        </label>
+                        <label class="radio-inline">
+                            <input id="twelveMonths" type="radio" name="monthsNumber" value="twelveMonths">
+                            {{ "extranet.calendar.label.n_months"|transchoice(12) }}
+                        </label>
+                        <label class="radio-inline">
+                            <input id="eighteenMonths" type="radio" name="monthsNumber" value="eighteenMonths">
+                            {{ "extranet.calendar.label.n_months"|transchoice(18) }}
+                        </label>
+                        <label class="radio-inline">
+                            <input id="twentyfourMonths" type="radio" name="monthsNumber" value="twentyfourMonths">
+                            {{ "extranet.calendar.label.n_months"|transchoice(24) }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form name="form" novalidate class="css-form"  ng-cloak>
+            <div id="calendars">
+                <div class="container" style="margin-top: 10px; padding-left: 0;">
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-3 col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-0">
+                            <div class="form-inline">
+                                <div class="form-group " style="width:30%;">
+                                    <input type="text" class="form-control datepicker-init my-input-load" size="7" id="initDate" placeholder="{{ 'share.message.start_date'|trans }}" style="width:98%;">
+                                </div>
+                                <div class="form-group " style="width:30%;">
+                                    <input type="text" class="form-control datepicker-end my-input-load" size="7" id="endDate" placeholder="{{ 'share.message.end_date'|trans }}" disabled="disabled" style="width:98%;">
+                                </div>
+                                <div class="form-group">
+                                    <button class="form-control btn btn-default" id="clear">{{ "share.action.clean"|trans }}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-16 col-sm-8 col-md-10">
+                            <div id="calendars-days" class="font-semibold">
+                                <div class="btn-group "  data-toggle="buttons" >
+                                    <label style="float: left; padding-top: 8px; margin-right: 5px;"><strong>{{ "extranet.action.exclude_days"|trans }}: </strong></label>
+                                    <label class="btn btn-primary btn-sm active" id="monday">
+                                        <input type="checkbox" value="monday" checked="checked">
+                                        <span class="hidden-xs hidden-sm">{{ "share.calendar.days.mon"|transchoice(1) }}</span>
+                                        <span class="visible-xs visible-sm">{{ "share.calendar.days.mon"|transchoice(0) }}</span>
+                                    </label>
+                                    <label class="btn btn-primary btn-sm active" id="tuesday">
+                                        <input type="checkbox" value="tuesday" checked="checked">
+                                        <span class="hidden-xs hidden-sm">{{ "share.calendar.days.tue"|transchoice(1) }}</span>
+                                        <span class="visible-xs visible-sm">{{ "share.calendar.days.tue"|transchoice(0) }}</span>
+                                    </label>
+                                    <label class="btn btn-primary btn-sm active" id="wednesday">
+                                        <input type="checkbox" value="wednesday" checked="checked">
+                                        <span class="hidden-xs hidden-sm">{{ "share.calendar.days.wen"|transchoice(1) }}</span>
+                                        <span class="visible-xs visible-sm">{{ "share.calendar.days.wen"|transchoice(0) }}</span>
+                                    </label>
+                                    <label class="btn btn-primary btn-sm active" id="thursday">
+                                        <input type="checkbox" value="thursday" checked="checked">
+                                        <span class="hidden-xs hidden-sm">{{ "share.calendar.days.thu"|transchoice(1) }}</span>
+                                        <span class="visible-xs visible-sm">{{ "share.calendar.days.thu"|transchoice(0) }}</span>
+                                    </label>
+                                    <label class="btn btn-primary btn-sm active" id="friday">
+                                        <input type="checkbox" value="friday" checked="checked">
+                                        <span class="hidden-xs hidden-sm">{{ "share.calendar.days.fri"|transchoice(1) }}</span>
+                                        <span class="visible-xs visible-sm">{{ "share.calendar.days.fri"|transchoice(0) }}</span>
+                                    </label>
+                                    <label class="btn btn-primary btn-sm active" id="saturday">
+                                        <input type="checkbox" value="saturday" checked="checked">
+                                        <span class="hidden-xs hidden-sm">{{ "share.calendar.days.sat"|transchoice(1) }}</span>
+                                        <span class="visible-xs visible-sm">{{ "share.calendar.days.sat"|transchoice(0) }}</span>
+                                    </label>
+                                    <label class="btn btn-primary btn-sm active" id="sunday">
+                                        <input type="checkbox" value="sunday" checked="checked">
+                                        <span class="hidden-xs hidden-sm">{{ "share.calendar.days.sun"|transchoice(1) }}</span>
+                                        <span class="visible-xs visible-sm">{{ "share.calendar.days.sun"|transchoice(0) }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ include('NavicuInfrastructureBundle:Extranet/MassLoad:calendar.html.twig',{'calendars': calendars, 'today' : today}) }}
+
+            <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="row panel-items">
+                    <div  class="col-xs-16 form-group" ng-repeat="room in massLoad.rooms">
+                        <div class="row history">
+                            <div class="header">
+                                <div  class="col-xs-16 title title2" style="background-color: #40226b;">
+                                    <div class="col-sm-4">
+                                        <strong>{{ "extranet.message.room_type"|trans }} </strong>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="title title2" style="padding-left:0px;">
+                                            <strong>{{ "extranet.message.services"|trans  }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fila de habitaciones -->
+                        <div class="row row-room">
+                            <div class="col-sm-4 box-items-left">
+                                <ng-form name="roomFieldForm">
+                                    <input type="checkbox" ng-model="room.deleteRoom">
+                                        <span>
+                                            <b ng-bind="room.nameRoom"></b>
+                                        </span>
+                                </ng-form>
+                            </div>
+                            <!-- Columnas de Servicios -->
+                            <div class="col-sm-12 box-items-left">
+                                <div ng-repeat="service in room.packages">
+                                    <ng-form name="serviceFieldForm">
+                                        <div class="col-sm-5">
+                                            <input type="checkbox" ng-checked="room.deleteRoom" ng-disabled="room.deleteRoom" ng-model="service.deleteService">
+                                            <span>
+                                               {[{service.namePack}]}
+                                            </span>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <!-- Boton Enviar -->
+                    <div class="col-xs-16 box-items-submit">
+                        <hr class="hr-load">
+                        <div class="row input-required">
+                            <div ng-if="form.$invalid" class="row pull-right"><strong>Error. Verifique los datos ingresados</strong></div>
+                        </div>
+                        <div class="row">
+                            <button ng-click="deleteDaily()" class="btn btn-primary pull-right btn-load"
+                                    id="btn-submit-bulk" ng-disabled="form.$invalid || form.$pristine" >{{ "share.action.submit"|trans }}</button>
+                            <button class="btn btn-primary pull-right btn-load" style="margin-right:20px;"  id="btn-submit-bulk">{{ "share.action.submit-cancel"|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Seleccion Habitaciones -->
+            </div>
+        </form>
+        {{ include("NavicuInfrastructureBundle:Extranet:Partials/modalError.html.twig") }}
+        {#-- Ventana modal para indicar que se está cargando una petición--#}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var extension ="{{ app.request.attributes.get('extension') }}";
+        var data = "{{data}}";
+        var slug = "{{slug}}"
+        var div = document.createElement('div');
+        div.innerHTML = data;
+        data = div.firstChild.nodeValue;
+        data = JSON.parse(data);
+    </script>
+
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+Navicu\Core\Domain\Model\Entity\Airport:
+    type: entity
+    table: airport
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAirportRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: false
+        slug:
+            type: string
+            length: 255
+            nullable: false
+        type:
+            type: integer
+            options:
+                default: 0
+        iata:
+            type: string
+            length: 4
+            nullable: false
+        lat:
+            type: string
+            nullable: true
+        lon:
+            type: string
+            nullable: true
+
+    manyToOne:
+        location:
+            targetEntity: Location
+            mappedBy: null
+            inversedBy: airport
+            joinColumn:
+                location_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    lifecycleCallbacks:
+        prePersist: [setSlug]

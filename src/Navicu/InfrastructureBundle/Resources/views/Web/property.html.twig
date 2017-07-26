@@ -1,0 +1,2157 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+		<title> {{ ("SEO.property." ~ app.request.attributes.get('slug') ~ ".title") | trans ({},'seo')}}</title>
+        <meta property="og:title" content="{{ ("SEO.property." ~ app.request.attributes.get('slug') ~ ".title") | trans ({},'seo')}}"/>
+        <meta property="og:description" content="{{ ("SEO.property." ~ app.request.attributes.get('slug') ~ ".description") | trans ({},'seo')}}"/>
+        <meta property="og:image:secure_url" content="{{ 'https://navicu.com' ~ asset('images/home/carousel/reserva-de-alojamiento-online.jpg') }}"/>
+
+        <meta name="title" content="{{ ("SEO.property." ~ app.request.attributes.get('slug') ~ ".title") | trans ({},'seo')}}">
+        <meta name="description" content="{{ ("SEO.property." ~ app.request.attributes.get('slug') ~ ".description") | trans ({},'seo')}}">
+		<link rel="canonical" href="{{ "https://www.navicu.com" ~ app.request.pathInfo() }}"/>
+    {% endif %}
+{% endblock  seoMetadata %}
+
+{% block body %}
+<!--- Breadcrumb -->
+<section class="nvc-container hidden-xs hidden-sm" xmlns="http://www.w3.org/1999/html">
+    <div class="col-xs-16">
+        {#<ul class="nvc-breadcrumbs">
+            <li> <a class="nvc-breadcrumbs--color" href="">Inicio</a></li>
+            <li> <a class="nvc-breadcrumbs--color" href="">Portugal</a></li>
+            <li> <a class="nvc-breadcrumbs--color" href="">Lisboa</a></li>
+            <li> <a class="nvc-breadcrumbs--color" href="">Benfica</a></li>
+            <li class="active nvc-breadcrumbs--color-current">Listado de la busqueda</li>
+        </ul>#}
+    </div>
+</section>
+
+<main class='nvc-container nvc-property' data-ng-app="propertyModule" data-ng-controller="propertyController">
+    <div class="nvc-row">
+        <div class="col-xs-16" >
+            <div class="nvc-row">
+                <div class="col-xs-16 hotel-margin ">
+                    <!--- Hotel -->
+                    <br>
+                    <!--- Alerta -->
+                    <div class="alert nvc-alert nvc-alert__info nvc-affix__alert hidden-xs">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <img src="{{ asset('images/preciogarantizadomin.png') }}" >
+                        <p>Si encuentras una mejor oferta, <br>¡te hacemos un 5% de descuento!</p>
+                    </div>
+                    <section class="col-xs-16" data-ng-cloak>
+                        <h2>{[{ data.name }]}</h2>
+                        <p class="margin-star">
+                            <span class="fa-stars fa fa-star" style="padding-left: 5px;" data-ng-repeat-n="data.star"></span>
+                            <span class="font-numRoom" style="padding-left: 5px;">
+                                {[{ data.amountRooms }]} {{ "share.register.room"|transchoice(2) }}</span>
+                        </p>
+                        <p> <span class="font-address">{[{ data.address }]}, {[{ data.municipality }]}, </span>
+                            <span class=" font-address hidden-xs hidden-sm">{[{ data.state }]}, {[{ data.country }]}</span>
+                        </p>
+                        <p class="font-opening-year hidden-xs hidden-sm"> {{ "share.preview.opening_year"|trans }}: {[{ data.openingYear }]}
+                           <span data-ng-if="data.renewalYear && data.renewalYear!=data.openingYear">, {{ "share.preview.last_reform"|trans }}: {[{ data.renewalYear }]}</span>
+                        </p>
+                        <div class="col-xs-16 hidden-xs" style="margin-top:-35px;" data-ng-if="data.information.designViewProperty==1">
+                            <img
+                                style="float: right; margin-top: -65px; width: 80px;"
+                                src="{{ asset('images/preciogarantizadobig.png') }}"
+                            >
+                        </div>
+                    </section>
+                    <section
+                        data-ng-if="data.information.designViewProperty==1"
+                        class='col-xs-16 nvc-padding--xs post-body entry-content'
+                        oncontextmenu='return false'
+                        ondragstart='return false'
+                        onmousedown='return false'
+                        onselectstart='return false'>
+                        <!-- Carrousel hotel (Imagen en grande)-->
+                        <div
+                            id="carousel"
+                            class="carousel nvc-carousel nvc-carousel--property nvc-carousel__fade"
+                            data-ride="carousel">
+                            <div class="nvc-carousel__inner nvc-carousel__inner--property">
+                                <div
+                                    class="item"
+                                    data-ng-class="{active: $first}"
+                                    data-ng-repeat="image in data.images">
+                                    {% verbatim %}
+                                    <img data-ng-src="/uploads/images/images_original/{[{ image.url }]}" class="img-responsive">
+                                    {% endverbatim %}
+                                    <p align="left" class="banner-hotel">{[{ image.name }]}<p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carrousel pequeño hotel LG MD SM -->
+                        <div class="clearfix hidden-xs">
+                            <div
+                                id="thumbcarousel"
+                                class="carousel nvc-carousel nvc-carousel--property-thumbnail slide"
+                                data-interval="false">
+                                <div class="nvc-carousel__inner nvc-carousel__inner--property">
+                                    <div class="item active">
+                                        <div
+                                            class="col-xs-4 col-sm-2 pad-carusel-hotel"
+                                            data-target="#carousel"
+                                            data-slide-to="{[{id}]}"
+                                            data-ng-repeat="(id, favorite) in data.images">
+                                            {% verbatim %}
+                                            <img class="nvc-carousel__fill img-carusel-hotel"
+                                                 data-ng-src="/uploads/images/images_sm/{[{favorite.url}]}">
+                                            </img>
+                                            {% endverbatim %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carrousel pequeño hotel XS-->
+                        <div
+                            id="thumbcarousel2"
+                            class="nvc-carousel nvc-carousel--property-thumbnail slide visible-xs"
+                            data-interval="false">
+                            <div class="nvc-carousel__inner nvc-carousel__inner--property" style="margin-top:-59px;">
+                                <div class="item active">
+                                    <div
+                                        class="col-xs-4 pad-carusel-hotel-xs"
+                                        data-target="#carousel"
+                                        data-ng-repeat-n="4"
+                                        data-slide-to="{[{ $index }]}">
+                                        {% verbatim %}
+                                        <img class="nvc-carousel__fill img-carusel-hotel"
+                                            data-ng-src="/uploads/images/images_sm/{[{ data.images[$index].url}]}">
+                                        </img>
+                                        {% endverbatim %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section
+                        data-ng-if="data.information.designViewProperty==2"
+                        class='col-xs-16 col-sm-10 nvc-padding--xs post-body entry-content'
+                        oncontextmenu='return false'
+                        ondragstart='return false'
+                        onmousedown='return false'
+                        onselectstart='return false'>
+                        <!-- Carrousel hotel (Imagen en grande)-->
+                        <div
+                            id="carousel"
+                            class="carousel nvc-carousel nvc-carousel--property-min nvc-carousel__fade"
+                            data-ride="carousel">
+                            <div class="nvc-carousel__inner nvc-carousel__inner--property">
+                                <div
+                                    class="item"
+                                    data-ng-class="{active: $first}"
+                                    data-ng-repeat="image in data.images">
+                                    {% verbatim %}
+                                    <img data-ng-src="/uploads/images/images_original/{[{ image.url }]}" class="img-responsive">
+                                    <p align="left" class="banner-hotel-min">{[{ image.name }]}<p>
+                                    {% endverbatim %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carrousel pequeño hotel LG MD SM -->
+                        <div class="clearfix hidden-xs">
+                            <div
+                                id="thumbcarousel"
+                                class="nvc-carousel nvc-carousel--property-thumbnail slide"
+                                data-interval="false">
+                                <div class="nvc-carousel__inner nvc-carousel__inner--property">
+                                    <div class="item active">
+                                        <div
+                                            class="col-xs-4 col-sm-2 pad-carusel-hotel"
+                                            data-target="#carousel"
+                                            data-slide-to="{[{id}]}"
+                                            data-ng-repeat="(id, favorite) in data.images">
+                                            {% verbatim %}
+                                                <img class="nvc-carousel__fill img-carusel-hotel" data-ng-src="/uploads/images/images_sm/{[{ favorite.url }]}">
+                                            {% endverbatim %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carrousel pequeño hotel XS-->
+                        <div
+                            id="thumbcarousel2"
+                            class="nvc-carousel nvc-carousel--property-thumbnail slide visible-xs"
+                            data-interval="false">
+                            <div class="nvc-carousel__inner nvc-carousel__inner--property" style="margin-top:-59px;">
+                                <div class="item active">
+                                    <div
+                                        class="col-xs-4 pad-carusel-hotel-xs"
+                                        data-target="#carousel"
+                                        data-ng-repeat-n="4"
+                                        data-slide-to="{[{ $index }]}">
+                                        {% verbatim %}
+                                        <img class="nvc-carousel__fill img-carusel-hotel" data-ng-src="/uploads/images/images_sm/{[{ data.images[$index].url }]}">
+                                        {% endverbatim %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Servicios Destacados-->
+                    <section
+                        data-ng-if="data.information.designViewProperty==1"
+                        class="col-xs-16 col-sm-10 col-md-8 nvc-padding nvc-row hidden-xs"
+                        data-ng-cloak
+                        style="height:215px; overflow-y:hidden; margin-bottom:25px; margin-left:10px; margin-top:20px;">
+                        <h3 style="margin-top:0px;  margin-bottom:20px;"> {{ "share.preview.service_featured"|trans }}</h3>
+                        <hr>
+                        <div    class="col-sm-8"
+                                data-ng-if="services.length>0 && service.service"
+                                data-ng-repeat="service in services | orderBy: 'priority' ">
+                            <p><i class="fa-services fa fn-{[{ service.icon }]}"></i>
+                            <span class="font-services">{[{ service.service }]}</span></p>
+                        </div>
+                    </section>
+                    <section
+                        data-ng-if="data.information.designViewProperty==2"
+                        class="col-xs-16 col-sm-6 nvc-padding nvc-row hidden-xs"
+                        data-ng-cloak
+                        style="height:220px; overflow-y:hidden; margin-bottom:5px; margin-left:10px;">
+                        <h3 style="margin-top:0px;  margin-bottom:-15px;"> {{ "share.preview.service_featured"|trans }}</h3>
+                        <hr>
+                        <div    class="col-sm-8"
+                                data-ng-if="services.length>0 && service.service"
+                                data-ng-repeat="service in services | orderBy: 'priority' ">
+                            <p><i class="fa-services fa fn-{[{ service.icon }]}"></i>
+                            <span class="font-services">{[{ service.service }]}</span></p>
+                        </div>
+                    </section>
+                    <!-- Mapa -->
+                    <section
+                        data-ng-if="data.information.designViewProperty==1"
+                        class="col-xs-16 col-sm-6 col-md-8 nvc-row hidden-xs"
+                        style="margin-top:20px;"
+                        data-ng-cloak>
+                        <div
+                            width="auto"
+                            height="auto"
+                            frameborder="0"
+                            style="border:5px solid #fff;  margin-left:40px;">
+                            <div class="nvc-map">
+                                <ui-gmap-google-map
+                                    center="map.center"
+                                    zoom="map.zoom"
+                                    draggable="true"
+                                    options="options"
+                                    control="map.control"
+                                    data-ng-click="options.scrollwheel=true">
+                                    <ui-gmap-marker
+                                        coords="marker.coords"
+                                        options="marker.options"
+                                        events="marker.events"
+                                        idkey="marker.id"
+                                        control="marker.control">
+                                    </ui-gmap-marker>
+                                </ui-gmap-google-map>
+                            </div>
+                        </div>
+                    </section>
+                    <section
+                        data-ng-if="data.information.designViewProperty==2"
+                        class="col-xs-16 col-sm-6 nvc-row hidden-xs"
+                        style="margin-top:20px;"
+                        data-ng-cloak>
+                        <div
+                            width="auto"
+                            height="auto"
+                            frameborder="0"
+                            style="border:5px solid #fff;  margin-left:10px;">
+                            <div class="nvc-map">
+                                <ui-gmap-google-map
+                                center="map.center"
+                                zoom="map.zoom"
+                                draggable="true"
+                                options="options"
+                                control="map.control"
+                                data-ng-click="options.scrollwheel=true">
+                                    <ui-gmap-marker
+                                        coords="marker.coords"
+                                        options="marker.options"
+                                        events="marker.events"
+                                        idkey="marker.id"
+                                        control="marker.control">
+                                    </ui-gmap-marker>
+                                </ui-gmap-google-map>
+                            </div>
+                        </div>
+                    </section>
+                    <!--- Nav-Tab MD LG -->
+                    <section class="col-xs-16 margin-nav-hotel hidden-xs hidden-sm" data-ng-cloak>
+                        <div id="content">
+                            <ul
+                                id="tabs"
+                                class="nvc-nav__pills nvc-nav__justified"
+                                data-tabs="tabs">
+                                <li class="active">
+                                    <a href="#hab" data-toggle="tab">
+                                        <i class="fa fn-rooms" style="padding-right:10px;"></i>
+                                        {{ "word.room"|transchoice(2) }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#service" data-toggle="tab">
+                                        <i class="fa fn-services" style="padding-right:15px;"></i>
+                                        {{ "word.service"|transchoice(2) }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#inf" data-toggle="tab">
+                                        <i class="fa fn-info"></i>
+                                        {{ "message.important_information"|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#gal" data-toggle="tab">
+                                        <i class="fa fn-galery"></i>
+                                        {{ "word.gallery"|trans }}
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="my-tab-content" class="nvc-nav__content tab-content" data-ng-cloak>
+                                <!--- Habitaciones -->
+                                <div class="nvc-nav__pane tab-pane active" id="hab">
+                                    {% if errorInventory %}
+                                        <div class="nvc-row">
+                                                <div class="alert alert-warning ">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                                    <strong>
+                                                        <i class="fa fn-info "></i> {{ "share.action.information"|trans }}!
+                                                    </strong>
+                                                    {{ "web.property.availability_has_changed"|trans }}
+                                                </div>
+                                        </div>
+                                    {% endif %}
+                                    <!--- Barra de Busqueda MD LG-->
+                                    <div class="col-sm-16 nvc-padding nvc-affix__width">
+                                        <div class="col-sm-16 nvc-nav__search nvc-form-inline">
+                                            <div class="col-sm-4 select-date">
+                                                <img class="search" src="{{ asset('images/lens.png') }}" >
+                                                <strong>Selecciona tus fechas</strong>
+                                            </div>
+                                            <div class="nvc-form-group col-sm-12">
+                                                <div class="nvc-search--destinations">
+                                                    <div class="nvc-search__input-container">
+                                                        <div class="nvc-search__select--children">
+                                                            <i class="fa fn-child pull-left"></i>
+                                                            <select
+                                                                data-ng-model="search.kid"
+                                                                tabindex="6"
+                                                            >
+                                                                <option ng-repeat="n in [] | range:0:8" value="{[{ n }]}">
+                                                                    {[{ n }]} {[{ 'share.message.child' | translate:n }]}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="nvc-search__select--adults">
+                                                            <i class="fa fn-adult pull-left"></i>
+                                                            <select
+                                                                data-ng-model="search.adult"
+                                                                tabindex="5"
+                                                            >
+                                                                <option ng-repeat="n in [] | range:1:9" value="{[{ n }]}">
+                                                                    {[{ n }]} {[{ 'share.message.adult' | translate:n }]}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="nvc-search__select--rooms">
+                                                            <i class="fa fn-bedroom pull-left"></i>
+                                                            <select
+                                                                data-ng-model="search.room"
+                                                                tabindex="4"
+                                                            >
+                                                                <option ng-repeat="n in [] | range:1:search.numTotalRooms" value="{[{ n }]}">
+                                                                    {[{ n }]} {[{ 'share.message.room' | translate:n }]}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div id="js-range-picker" style="margin-top: -31px;">
+                                                            <div class="nvc-search__input--date-end">
+                                                                <i class="fa fn-calendar pull-left"></i>
+                                                                <input
+                                                                    autocomplete="off"
+                                                                    data-ng-model="search.endDate"
+                                                                    name="startDate"
+                                                                    placeholder="{[{ 'share.message.end_date' | translate }]}"
+                                                                    tabindex="3"
+                                                                    class="js-datepicker-check-out"
+                                                                    type="text"
+                                                                />
+                                                            </div>
+                                                            <div class="nvc-search__input--date-start">
+                                                                <i class="fa fn-calendar pull-left"></i>
+                                                                <input
+                                                                    autocomplete="off"
+                                                                    data-ng-model="search.startDate"
+                                                                    name="startDate"
+                                                                    placeholder="{[{ 'share.message.start_date' | translate }]}"
+                                                                    tabindex="2"
+                                                                    class="js-datepicker-check-in"
+                                                                    type="text"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--- Tabla Habitaciones -->
+                                    <div class="col-sm-16 nvc-padding">
+                                        <div class="nvc-table__responsive" data-ng-if="flagRooms==true || isRequesting">
+                                            <div class="loading-property-rooms-gif" data-ng-show="isRequesting">
+                                                <img src="{{ asset('images/property-rooms-loading.gif') }}"/>
+                                            </div>
+                                            <form
+                                                action="{{ path('navicu_reservation_confirmation') }}"
+                                                method="post"
+                                                name="form"
+                                                data-ng-class="{ 'loading-property-rooms-overlay' : isRequesting }">
+                                                <table class="nvc-table nvc-table__property">
+                                                    <thead data-ng-if="roomProperty.length > 0">
+                                                        <tr>
+                                                            <th style="width: 26%;">{{ "share.preview.type_room"|trans }}</th>
+                                                            <th style="width: 18%; line-height: 1.1;">{{ "share.preview.max"|trans }}</th>
+                                                            <th style="width: 18%;">{{ "word.service"|transchoice (1) }}</th>
+                                                            <th style="width: 10%;">{{ "share.preview.num_room"|trans }}</th>
+                                                            <th style="width: 12%;">{{ "share.preview.price"|trans }}</th>
+                                                            <th >{{ "share.preview.reservation"|trans }}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <input type="hidden" name="checkIn" value="{[{search.startDate}]}"/>
+                                                        <input type="hidden" name="checkOut" value="{[{search.endDate}]}"/>
+                                                        <input type="hidden" name="slug" value="{[{search.slug}]}"/>
+                                                        <input type="hidden" name="numberAdult" value="{[{search.adult}]}"/>
+                                                        <input type="hidden" name="numberChild" value="{[{search.kid}]}"/>
+                                                        <input type="hidden" name="countryCode" value="{[{data.countryCode}]}"/>
+                                                        <input type="hidden" name="type" value="{[{data.type}]}"/>
+                                                        <tr
+                                                            data-ng-repeat="(id, room) in roomProperty"
+                                                            data-ng-init="indexRoom = id">
+                                                            <!--- Columna Habitación -->
+                                                            <input
+                                                                data-ng-if="room.amountPackagesSelected>0"
+                                                                type="hidden"
+                                                                value="{[{room.idRoom}]}"
+                                                                name="rooms[{[{ room.pos }]}][idRoom]"/>
+                                                            <input
+                                                                data-ng-if="room.amountPackagesSelected>0"
+                                                                type="hidden"
+                                                                value="{[{temporal[indexRoom].bed}]}"
+                                                                name="rooms[{[{ room.pos }]}][idBedsRooms]"/>
+                                                            <!--- Tipo de habitación -->
+                                                            <td
+                                                                data-ng-class="{ 'td-border' : id===roomProperty.length-1}">
+                                                                <div
+                                                                    class="table-p-pad img-table-pad"
+                                                                    data-ng-click="showRoomModal(room)">
+                                                                    <div class="room-zoom">
+                                                                        <a href="" >
+                                                                            <i class="fa-plus-img fa fa-plus-circle"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    {% verbatim %}
+                                                                        <img
+                                                                            class="nvc-carousel__fill img-table"
+                                                                            data-ng-src="/uploads/images/images_sm/{[{room.profileImage.url}]}">
+                                                                    {% endverbatim %}
+                                                                </div>
+                                                                <h4 class="table-p">{[{ room.name }]} </h4>
+                                                                <select
+                                                                    class="nvc-select--property"
+                                                                    style="width:60%; color:#A81F6E; margin-bottom:10px;"
+                                                                    data-ng-model="temporal[indexRoom].bed"
+                                                                    data-ng-options="val.id as val.name for (bedselected, val) in room.bedsRooms"
+                                                                    data-ng-change="optionDelete()"
+                                                                >
+                                                                    <option
+                                                                        ng-repeat="val.id as val.name for (bedselected, val) in room.bedsRooms"
+                                                                        ng-value="val.id"
+                                                                        ng-selected="temporal[indexRoom].bed === bedselected)"
+                                                                    >
+                                                                        {[{ val }]}
+                                                                    </option>
+                                                                </select>
+                                                                <p
+                                                                    class="table-p font-condition"
+                                                                    data-ng-if="data.information.taxRate > 0"
+                                                                >
+                                                                    {{ "share.preview.include"|trans }}: {[{ data.information.taxRate }]}%
+                                                                    {{ "share.preview.tax"|trans }}
+                                                                </p>
+                                                                <p class="table-p font-condition">
+                                                                    <span>Política de cancelación no reembolsable</span>
+                                                                </p>
+                                                            </td>
+                                                            <!--- Nº de personas -->
+                                                            <td
+                                                                data-ng-class="{ 'td-border' : id===roomProperty.length-1}"
+                                                                class="tab-center table-align"
+                                                                style="padding-top:90px;"
+                                                            >
+                                                                <div class="col-md-8">
+                                                                    <label><i class="fa fn-user"></i> Adultos</label>
+                                                                    <select
+                                                                        class="nvc-select--property"
+                                                                        style="display:inherit; width:50px;"
+                                                                        data-ng-model="room.packages[room.idPack].numPerson"
+                                                                        data-ng-options="n for n in [] | range:room.minPeople:room.maxPeople"
+                                                                        data-ng-change="changeNumberPeople(room.packages[room.idPack],room.maxPeople, data.information.conditionAge.child, room.rules)"
+                                                                    >
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <label data-ng-if="data.information.conditionAge.child==true">
+                                                                         <i class="fa fn-info info nvc-tooltips nvc-tooltips__top"
+                                                                            data-ng-if="data.information.conditionAge.agePolicy.length!=0"
+                                                                        >
+                                                                            <span style="margin-left:-38px; width:190px;">
+                                                                                Niños entre los {[{data.information.conditionAge.agePolicy.child[0]}]} y los {[{data.information.conditionAge.agePolicy.child[1]}]} años
+                                                                            </span>
+                                                                        </i>
+                                                                        <i class="fa fn-user child"></i>
+                                                                        Niños
+                                                                    </label>
+                                                                    <select
+                                                                        data-ng-if="data.information.conditionAge.child==true"
+
+                                                                        class="nvc-select--property"
+                                                                        style="display:inherit;  width:50px;"
+                                                                        data-ng-model="room.packages[room.idPack].numberChild"
+                                                                        data-ng-options="n for n in [] | range:0:room.maxPeople-room.packages[room.idPack].numPerson"
+                                                                        data-ng-change="asignPrice(room.packages[room.idPack], data.information.conditionAge.child, room.rules)"
+                                                                    >
+                                                                    </select>
+                                                                </div>
+                                                                <div
+                                                                    class="col-md-8"
+                                                                    ng-repeat="n in getRanges(room.packages[room.idPack].numberChild) track by $index"
+                                                                >
+                                                                    <label data-ng-if="data.information.conditionAge.child==true"
+                                                                    >
+                                                                        <i class="fa fn-user child"></i>
+                                                                        Edad Niño {[{ $index + 1 }]}
+                                                                    </label>
+                                                                    <select
+                                                                            data-ng-if="data.information.conditionAge.child==true"
+                                                                            class="nvc-select--property"
+                                                                            data-ng-model="room.packages[room.idPack].childAgesCount[$index]"
+                                                                            style="display:inherit;  width:50px;"
+                                                                            data-ng-options="n for n in [] | range:0:data.information.conditionAge.agePolicy.adult"
+                                                                            data-ng-change="asignPrice(room.packages[room.idPack], data.information.conditionAge.child, room.rules)">
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <!--- Servicio-->
+                                                            <td
+                                                                data-ng-class="{ 'td-border' : id===roomProperty.length-1}"
+                                                                class="table-align"
+                                                                style="padding-top: 120px;"
+                                                            >
+                                                                <select
+                                                                    type="text"
+                                                                    class="nvc-select--property"
+                                                                    data-ng-options="p as p.name for p in room.packages"
+                                                                    data-ng-model="p.name"
+                                                                    data-ng-disabled="room.packages.length==1"
+                                                                    data-ng-change="selectPack(p.name, $index)"
+                                                                >
+                                                                </select>
+                                                                <h4
+                                                                    data-ng-if="room.packages[room.idPack].description"
+                                                                >
+                                                                    <span>*{[{ room.packages[room.idPack].description }]}</span>
+                                                                </h4>
+                                                            </td>
+                                                            <!--- N° de Hab -->
+                                                            <td
+                                                                data-ng-class="{ 'td-border' : id===roomProperty.length-1}"
+                                                                class="tab-center table-align select-room"
+                                                                style="padding-top: 120px;"
+                                                            >
+                                                                <select
+                                                                    data-ng-model="room.packages[room.idPack].numRooms"
+                                                                    data-ng-change="asignPrice(room.packages[room.idPack], data.information.conditionAge.child, room.rules);"
+                                                                    class="nvc-select--property"
+                                                                    style="width:50px; margin-left:25%;"
+                                                                    data-ng-options="n for n in [] | range:0:room.packages[0].availability">
+                                                                </select>
+                                                                <span
+                                                                    class="font-last-room"
+                                                                    data-ng-if="room.packages[room.idPack].availability<5 && search.startDate">
+                                                                    ¡Nos quedan {[{room.packages[room.idPack].availability}]} habitaciones!
+                                                                </span>
+                                                                <input
+                                                                    data-ng-if="room.packages[room.idPack].numRooms>0"
+                                                                    type="hidden"
+                                                                    value="{[{room.packages[room.idPack].id}]}"
+                                                                    name="rooms[{[{ room.pos }]}][packages][{[{ room.packages[room.idPack].pos }]}][idPack]"/>
+                                                                <input
+                                                                    data-ng-if="room.packages[room.idPack].numRooms>0"
+                                                                    type="hidden"
+                                                                    value="{[{room.packages[room.idPack].cancellationPolicy[0].id}]}"
+                                                                    name="rooms[{[{ room.pos }]}][packages][{[{ room.packages[room.idPack].pos }]}][idCancellationPolicy]"/>
+                                                                <input
+                                                                    data-ng-if="room.packages[room.idPack].numRooms>0"
+                                                                    type="hidden"
+                                                                    value="{[{room.packages[room.idPack].numPerson}]}"
+                                                                    name="rooms[{[{ room.pos }]}][packages][{[{ room.packages[room.idPack].pos }]}][numberPeople]"/>
+                                                                <input
+                                                                    data-ng-if="room.packages[room.idPack].numRooms>0"
+                                                                    type="hidden"
+                                                                    value="{[{room.packages[room.idPack].numberChild}]}"
+                                                                    name="rooms[{[{ room.pos }]}][packages][{[{ room.packages[room.idPack].pos }]}][numberChildren]"/>
+                                                                <input
+                                                                    data-ng-if="room.packages[room.idPack].numRooms>0"
+                                                                    type="hidden"
+                                                                    value="{[{room.packages[room.idPack].numRooms}]}"
+                                                                    name="rooms[{[{ room.pos }]}][packages][{[{room.packages[room.idPack].pos }]}][numberRoom]"/>
+                                                                <input
+                                                                        data-ng-if="room.packages[room.idPack].numRooms>0"
+                                                                        type="hidden"
+                                                                        value="{[{room.packages[room.idPack].childAgesCount}]}"
+                                                                        name="rooms[{[{ room.pos }]}][packages][{[{ room.packages[room.idPack].pos }]}][childrenAges]"/>
+                                                            </td>
+                                                            <!--- Precio -->
+                                                            <td
+                                                                data-ng-class="{ 'td-border' : id===roomProperty.length-1}"
+                                                                class="tab-center table-align"
+                                                                style="padding-top: 105px;"
+                                                            >
+                                                                <div    class="col-md-16"
+                                                                        {# data-ng-style="{'padding-top': ['5%', '15%'][+(data.information.conditionAge.child==true)]}" #}
+                                                                        data-ng-if="room.packages[room.idPack].price>0">
+                                                                        <img
+                                                                            ng-if="room.packages[room.idPack].promotion===true"
+                                                                            class="promotion hidden-xs"
+                                                                            src="{{ asset('images/promo_logo.png') }}"
+                                                                        >
+                                                                    <span
+                                                                    class="font-ofert"
+                                                                    data-ng-if="search.startDate && lowerPrice==room.packages[room.idPack].price">
+                                                                    {{ "web.property.best_offer"|trans }}
+                                                                    </span>
+                                                                    <span class="font-ofert" data-ng-if="!search.startDate"> Desde </span>
+                                                                    <span class="font-ofert" data-ng-if="search.startDate && lowerPrice!=room.packages[0].price">Precio total</span>
+                                                                    <br>
+                                                                    <span class="font-price-lg"> {{ symbolCurrency }}</span>
+                                                                    <span class="font-price-lg" ng-if="room.packages[room.idPack].promotion===false"  data-ng-bind="room.packages[room.idPack].price | number"></span>
+                                                                    <span class="font-price-ofert" ng-if="room.packages[room.idPack].promotion===true" data-ng-bind="room.packages[room.idPack].price | number"></span>
+                                                                </div>
+                                                                <div    class="col-md-16"
+                                                                        data-ng-style="{'padding-top': ['13%', '25%'][+(data.information.conditionAge.child==true)]}"
+                                                                        data-ng-if="room.packages[room.idPack].price==0">
+                                                                    <span class="font-ofert"> No disponible </span><br>
+                                                                </div>
+                                                            </td>
+                                                            <!--- Columna Reserva -->
+                                                            <td
+                                                                data-ng-class="{ 'td-border' : id===roomProperty.length-1}"
+                                                                rowspan="{[{5*roomProperty.length}]}"
+                                                                class="td-reserve"
+                                                                data-ng-show="indexRoom==0"
+                                                                style="vertical-align: top;">
+                                                                <div class="nav-reserve">
+                                                                    <div data-ng-if="roomsSelected.roomsAmount>0">
+                                                                        <h2 class="select">Has seleccionado</h2>
+
+                                                                        <h3
+                                                                            class="reserve"
+                                                                            data-ng-repeat="(id, room) in roomProperty"
+                                                                            data-ng-if="room.amountPackagesSelected>0">
+                                                                                {[{room.amountPackagesSelected}]} x {[{room.name}]}
+                                                                                {{ symbolCurrency }} {[{room.totalPrice | number}]}
+                                                                        </h3>
+                                                                        <hr>
+                                                                        <h3
+                                                                            class="reserve"
+                                                                            data-ng-if="roomsSelected.roomsAmount==1">
+                                                                            {[{roomsSelected.roomsAmount}]} {{"share.message.room"|transchoice(1) }}
+                                                                        </h3>
+                                                                        <h3
+                                                                            class="reserve"
+                                                                            data-ng-if="roomsSelected.roomsAmount>1">
+                                                                            {[{roomsSelected.roomsAmount}]} {{"share.message.room"|transchoice(2) }}
+                                                                        </h3>
+
+                                                                        <h4 class="total"> TOTAL </h4>
+                                                                        <h4 class="total"> {{ symbolCurrency }} {[{roomsSelected.totalPrice | number }]} </h4>
+                                                                        <br>
+                                                                    </div>
+                                                                    <div data-ng-if="roomsSelected.roomsAmount==0 || !roomsSelected.roomsAmount" class="best-price">
+                                                                        <img src="{{ asset('images/preciogarantizadobig.png') }}" >
+                                                                    </div>
+                                                                    <button
+                                                                        class="nvc-button nvc-button__default"
+                                                                        data-ng-disabled="!search.startDate || roomsSelected.roomsAmount==0 || !roomsSelected.roomsAmount"
+                                                                        type="submit"
+                                                                    >
+                                                                        {{"share.preview.reserve_now"|trans }}
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <div data-ng-if="flagRooms==false && !isRequesting">
+                                            <h3 class="text-center font-bold" style="font-size:22px; color:#422675">
+                                                ¡Oooops! El hotel no está disponible en las fechas solicitadas
+                                            </h3>
+                                            <h3 class="text-center font-medium" style="font-size:15px; color:#422675; margin-bottom:200px;">
+                                                Te invitamos a consultar otras fechas, o verificar si la búsqueda que realizaste está correcta
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- Servicios -->
+                                <div class="nvc-nav__pane tab-pane" id="service">
+                                    <div class="col-md-7">
+                                        <h1>{{ "share.preview.services"|trans }}</h1>
+                                    </div>
+                                    <div
+                                        class="col-md-9"
+                                        style="margin-top:20px; margin-bottom:30px;">
+                                        <span style="float:right;" class="font-inf-tab">
+                                            {{ "share.preview.without_charge"|trans }}
+                                        </span>
+                                        <span style="float:right;" class="fa-checks fa fn-check"></span>
+                                    </div>
+                                    <!--- Recepción - Transporte  -->
+                                    <div class="col-md-4">
+                                        <div
+                                            data-ng-repeat="service in servicesBasic track by $index"
+                                            data-ng-if="(service.position==1 || service.position==81)">
+                                            <div  class="service-hotel">
+                                                <h3>{[{ service.name }]}</h3>
+                                                <div
+                                                    class="font-service2"
+                                                    data-ng-repeat="subservice in service.subServices">
+                                                    <li
+                                                        data-ng-if="subservice.data.length!=0 && subservice.data.full_time==false"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{ subservice.name }]}: {[{ subservice.data.openinga }]} hasta {[{ subservice.data.closing }]}.
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.data.length!=0 && subservice.data.full_time==true"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{ subservice.name }]}: 24 horas
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==0 && subservice.data==null"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{ subservice.name }]} ({{ "share.preview.free"|trans }})
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==1"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{ subservice.name }]} ({{ "share.preview.additional_cost"|trans }})
+                                                    </li>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!---  Servicio a la habitación - Spa - Gimnasio -->
+                                    <div  class="col-md-4">
+                                        <div
+                                            data-ng-repeat="service in servicesBasic track by $index"
+                                            data-ng-if="(service.position==25 || service.position==35 || service.position==34)">
+                                            <div  class="service-hotel" >
+                                                <h3>{[{service.name}]}</h3>
+                                                <div
+                                                    class="font-service2"
+                                                    data-ng-repeat="subservice in service.subServices">
+                                                    <li
+                                                        data-ng-if="subservice.data.length!=0 && subservice.data.full_time==false"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        Room Service desde {[{subservice.data.openinga}]} hasta {[{subservice.data.closing}]}.
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.data.length!=0 && subservice.data.full_time==true"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        Room Service 24 horas
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==0 && service.position!=34"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{subservice.name}]} ({{"share.preview.free"|trans }})
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==1 && service.position!=34"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==1 && service.position==34"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        Con {{"share.preview.additional_cost"|trans }}
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==0 && service.position==34"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        Sin {{"share.preview.additional_cost"|trans }}
+                                                    </li>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--- Deporte y recreación -Internet -->
+                                    <div class="col-md-4">
+                                        <div
+                                            data-ng-repeat="service in servicesBasic track by $index"
+                                            data-ng-if="(service.position==92 || service.position==14)">
+                                            <div  class="service-hotel" >
+                                                <h3>{[{service.name}]}</h3>
+                                                <div
+                                                    class="font-service2"
+                                                    data-ng-repeat="subservice in service.subServices"
+                                                    data-ng-if="service.position==14">
+                                                    <li
+                                                        data-ng-if="subservice.cost==0"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{subservice.name}]} ({{"share.preview.free"|trans }})
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==1"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                    </li>
+                                                    <br>
+                                                </div>
+                                                <div
+                                                    class="font-service2"
+                                                    data-ng-repeat="subservice in service.subServices"
+                                                    data-ng-if="service.position==92">
+                                                    <div data-ng-repeat="indoor in subservice.subServices">
+                                                        <h3>{[{subservice.name}]} - {[{indoor.name}]}</h3>
+                                                        <div data-ng-repeat="indoorservice in indoor.subServices">
+                                                            <li
+                                                                data-ng-if="indoorservice.cost==0"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                {[{indoorservice.name}]} ({{"share.preview.free"|trans }})
+                                                            </li>
+                                                            <li
+                                                                data-ng-if="indoorservice.cost==1"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                {[{indoorservice.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                            </li>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--- Zonas Comunes - Aparcamiento -->
+                                    <div class="col-md-4">
+                                        <div
+                                            data-ng-repeat="service in servicesBasic track by $index"
+                                            data-ng-if="(service.position==51 || service.position==18)">
+                                            <div  class="service-hotel" >
+                                                <h3>{[{service.name}]}</h3>
+                                                <div
+                                                    class="font-service2"
+                                                    data-ng-repeat="subservice in service.subServices"
+                                                    data-ng-if="service.position==18">
+                                                    <li
+                                                        data-ng-if="subservice.cost==0"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{subservice.name}]} ({{"share.preview.free"|trans }})
+                                                    </li>
+                                                    <li
+                                                        data-ng-if="subservice.cost==1"
+                                                        style="padding-bottom:5px;">
+                                                        <i class="fa fa-check icon-service-hotel"></i>
+                                                        {[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                    </li>
+                                                    <br>
+                                                    <div
+                                                        class="font-service2"
+                                                        data-ng-repeat="subservice in service.subServices"
+                                                        data-ng-if="service.position==51">
+                                                        <h3>{[{subservice.name}]}</h3>
+                                                        <div data-ng-repeat="indoor in subservice.subServices">
+                                                            <li
+                                                                data-ng-if="indoor.cost==0 && indoor.position!=73"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                {[{indoor.name}]} ({{"share.preview.free"|trans }})
+                                                            </li>
+                                                            <li
+                                                                data-ng-if="indoor.cost==1"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                {[{indoor.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                            </li>
+                                                            <li
+                                                                data-ng-if="indoor.position==73"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                {[{indoor.name}]} ({[{indoor.type}]})
+                                                            </li>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--- Restaurantes -->
+                                    <div
+                                        class="col-md-16"
+                                        data-ng-repeat="(id, service) in servicesOthers track by $index"
+                                        data-ng-if="id=='Restaurante'">
+                                        <h1>Restaurantes</h1>
+                                        <div
+                                            class="col-md-8 restaurant-border"
+                                            data-ng-repeat="restaurants in service">
+                                            <h1 class="hotel-font-restaurant">{[{restaurants.name}]}</h1>
+                                            <h3>Comida {[{restaurants.foodType}]}
+                                                <span data-ng-if="restaurants.buffetCar">- {[{restaurants.buffetCar}]}</span>
+                                            </h3>
+                                            <h3 data-ng-if="restaurants.dietaryMenu==true" style="margin-top:-5px;">Menú Dietético</h3>
+                                            <div
+                                                class="col-sm-16 col-md-5"
+                                                style="margin-top:10px; border-right:1px solid #391860;">
+                                                <li class="font-service-restaurant">Horario desayuno</li>
+                                                <li
+                                                    data-ng-if="restaurants.breakFastTime.length==0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:10px;">
+                                                    Apertura
+                                                    <span class="font-service-restaurant2">-</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.breakFastTime.length==0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:5px;">
+                                                    Cierre
+                                                    <span class="font-service-restaurant2">-</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.breakFastTime.length!=0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:10px;">
+                                                    Apertura
+                                                    <span class="font-service-restaurant2">
+                                                        {[{restaurants.breakFastTime.opening}]}
+                                                    </span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.breakFastTime.length!=0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:5px;">
+                                                    Cierre
+                                                    <span class="font-service-restaurant2">
+                                                        {[{restaurants.breakFastTime.closing}]}
+                                                    </span>
+                                                </li>
+                                            </div>
+                                            <div
+                                                class="col-sm-16 col-md-6"
+                                                style="margin-top:10px; border-right:1px solid #391860;">
+                                                <li class="font-service-restaurant">Horario almuerzo</li>
+                                                <li
+                                                    data-ng-if="restaurants.lunchTime.length==0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:10px;">
+                                                    Apertura
+                                                    <span class="font-service-restaurant2">-</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.lunchTime.length==0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:5px;">
+                                                    Cierre
+                                                    <span class="font-service-restaurant2">-</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.lunchTime.length!=0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:10px;">
+                                                    Apertura
+                                                    <span class="font-service-restaurant2">{[{restaurants.lunchTime.opening}]}</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.lunchTime.length!=0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:5px;">
+                                                    Cierre
+                                                    <span class="font-service-restaurant2">{[{restaurants.lunchTime.closing}]}</span>
+                                                </li>
+                                            </div>
+                                            <div class="col-sm-16 col-md-5" style="margin-top:10px;">
+                                                <li class="font-service-restaurant">Horario cena</li>
+                                                <li
+                                                    data-ng-if="restaurants.dinnerTime.length==0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:10px;">
+                                                    Apertura
+                                                    <span class="font-service-restaurant2">-</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.dinnerTime.length==0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:5px;">
+                                                    Cierre
+                                                    <span class="font-service-restaurant2">-</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.dinnerTime.length!=0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:10px;">
+                                                    Apertura
+                                                    <span class="font-service-restaurant2">{[{restaurants.dinnerTime.opening}]}</span>
+                                                </li>
+                                                <li
+                                                    data-ng-if="restaurants.dinnerTime.length!=0"
+                                                    class="font-service-restaurant"
+                                                    style="margin-top:5px;">
+                                                    Cierre
+                                                    <span class="font-service-restaurant2">{[{restaurants.dinnerTime.closing}]}</span>
+                                                </li>
+                                            </div>
+                                            <div class="col-sm-16" style="margin-top:20px;">
+                                                <h3 data-ng-if="restaurants.description!=null">Descripción</h3>
+                                                <p class="font-service2">{[{restaurants.description}]}</p>
+                                                <br><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--- Bares -->
+                                    <div
+                                        class="col-md-16"
+                                        data-ng-repeat="(id, service) in servicesOthers track by $index"
+                                        data-ng-if="id=='Bar'">
+                                        <h1>Bares / Discotecas</h1>
+                                        <div class="col-md-8 restaurant-border"  data-ng-repeat="bars in service">
+                                            <h1 class="hotel-font-restaurant">{[{bars.name}]}</h1>
+                                            <h3 >{[{bars.type}]}
+                                                <span data-ng-if="bars.food==true">- Comida {[{bars.foodType}]}</span>
+                                            </h3>
+                                            <h3 style="margin-top:-5px;"> A partir de {[{bars.minAge}]} años</h3>
+                                            <li class="font-service-restaurant">Horario:
+                                                <span
+                                                    class="font-service-restaurant2"
+                                                    style="float:none;">
+                                                    Desde {[{bars.schedules.opening}]} hasta {[{bars.schedules.closing}]}.
+                                                </span>
+                                            </li>
+                                            <h3 data-ng-if="bars.description!=null">Descripción</h3>
+                                            <p class="font-service2">{[{bars.description}]}</p>
+                                            <br><br>
+                                        </div>
+                                    </div>
+                                    <!--- Salones -->
+                                    <div
+                                        class="col-md-16"
+                                        data-ng-repeat="(id, service) in servicesOthers track by $index"
+                                        data-ng-if="id=='Salones'">
+                                        <h1>{{ "word.hall"|transchoice(2) }}Salones</h1>
+                                        <div
+                                            class="col-md-8 restaurant-border"
+                                            data-ng-repeat="living in service">
+                                            <h1 class="hotel-font-restaurant">{[{ living.name }]}</h1>
+                                            <h3 >{[{ living.type }]}
+                                                <span data-ng-if="living.naturalLight==true"> - Con luz natural</span>
+                                            </h3>
+                                            <li
+                                                class="font-service-restaurant">
+                                                Metraje:
+                                                <span
+                                                    class="font-service-restaurant2"
+                                                    style="float:none;">{[{living.size}]} metros
+                                                    <span><sup>2</sup></span>
+                                                </span>
+                                                </li>
+                                            <li
+                                                class="font-service-restaurant">Capacidad máxima de personas:
+                                                <span class="font-service-restaurant2" style="float:none;">
+                                                    {[{living.capacity}]}
+                                                </span>
+                                            </li>
+                                            <br><br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- Información relevante -->
+                                <div class="nvc-nav__pane tab-pane" id="inf">
+                                    <div class="col-md-7">
+                                        <h1>Información relevante</h1>
+                                    </div>
+                                    <div class="col-md-9" style="margin-top:20px; margin-bottom:30px;">
+                                        <span style="float:right;" class="font-inf-tab">
+                                            {{"share.preview.without_charge"|trans }}
+                                        </span>
+                                        <span style="float:right;" class="fa-checks fa fn-check"></span>
+                                    </div>
+                                    <div class="col-sm-16 col-md-8">
+                                        <h3
+                                            data-ng-if="data.information.allIncluded"
+                                            class="font-bold"
+                                            style="font-size:22px;">
+                                            {{ "nvc.room.all_included"|trans }}
+                                        </h3>
+                                        <h3>{{ "message.property_type"|trans }}</h3>
+                                        <h5>{[{ data.information.accommodation }]}</h5>
+                                        <div class="col-sm-8" style="padding:0px; margin-top:-20px;">
+                                            <h3>Check in</h3>
+                                            <h5>A partir de las {[{ data.information.checkIn }]}</h5>
+                                        </div>
+                                        <div class="col-sm-8" style="padding:0px; margin-top:-20px;">
+                                            <h3>Check out</h3>
+                                            <h5>Hasta las {[{ data.information.checkOut }]}</h5>
+                                        </div>
+                                        <h3>{{ "message.minimum_checkin_age"|trans }}</h3>
+                                        <h5>{[{ data.information.checkInAge }]} años.</h5>
+
+                                        <h3>{{ "message.payment_conditions"|trans }}</h3>
+                                        <h5 data-ng-if="data.information.conditionPayment.cash">No se puede cancelar en efectivo más de {{ symbolCurrency }} {[{data.information.conditionPayment.cash | number}]}.</h5>
+                                        <h5 data-ng-if="!data.information.conditionPayment.cash">No se puede cancelar en efectivo.</h5>
+                                        <h5 data-ng-if="data.information.conditionPayment.debit==false">No aceptan tarjetas de débito.</h5>
+                                        <h5 data-ng-if="data.information.conditionPayment.debit==true">Se aceptan tarjetas de débito.</h5>
+                                        <h5 data-ng-if="data.information.conditionPayment.creditCard==false">No aceptan tarjetas de crédito.</h5>
+                                        <h5 data-ng-if="data.information.conditionPayment.creditCard==true">Se aceptan tarjetas de crédito:</h5>
+                                        <h5>
+                                            <label data-ng-if="data.information.conditionPayment.creditCardAmerican==true">
+                                                <img style="margin-top: -15%;" src="{{ asset('images/american.png') }}" alt="{{"IMAGES.property.american.alt" | trans ({},'image') }}"/>
+                                            </label>
+                                            <label data-ng-if="data.information.conditionPayment.creditCardMaster==true">
+                                                <img style="margin-top: -15%;" src="{{ asset('images/master.png') }}" alt="{{"IMAGES.property.master.alt" | trans ({},'image') }}"/>
+                                            </label>
+                                            <label data-ng-if="data.information.conditionPayment.creditCardVisa==true">
+                                                <img style="margin-top: -15%;" src="{{ asset('images/visa.png') }}" alt="{{"IMAGES.property.visa.alt" | trans ({},'image') }}"/>
+                                            </label>
+                                        </h5>
+
+                                        <h3>{{ "message.complementary_beds"|trans }}</h3>
+                                        <h5 data-ng-if="data.information.extraBeds==true">Sí.</h5>
+                                        <h5 data-ng-if="data.information.extraBeds==false">No.</h5>
+                                        <h5 data-ng-if="data.information.extraBedsCost==false">Sin cargo adicional.</h5>
+                                        <h5 data-ng-if="data.information.extraBedsCost==true">Cor cargo adicional.</h5>
+
+                                        <h3>{{ "word.pet"|transchoice(2) }}</h3>
+                                        <h5 data-ng-if="data.information.pets==true">Sí se admiten.</h5>
+                                        <h5 data-ng-if="data.information.pets==false">No se admiten.</h5>
+                                        <h5 data-ng-if="data.information.petsCost==false">Sin cargo adicional.</h5>
+                                        <h5 data-ng-if="data.information.petsCost==true">Cor cargo adicional.</h5>
+
+                                        <h3>{{ "word.tax"|transchoice(2) }}</h3>
+                                        <h5 data-ng-if="data.information.taxRate > 0">IVA {[{ data.information.taxRate }]}% incluido en los precios.</h5>
+                                        <h5 data-ng-if="data.information.taxRate == 0">{{ "message.tax_free"|trans }}.</h5>
+
+                                        <h3>Condiciones sobre niños</h3>
+
+                                        <h5 data-ng-if="data.information.conditionAge.child==false">No pueden alojarse niños en el hotel.</h5>
+                                        <h5 data-ng-if="data.information.conditionAge.child==true">Pueden alojarse niños en el hotel.
+                                            <span data-ng-if="data.information.conditionAge.childAdditionalCost==false">Sin cargo adicional.</span>
+                                            <span data-ng-if="data.information.conditionAge.childAdditionalCost==true">Con cargo adicional.</span>
+                                        </h5>
+                                        <h5 data-ng-if="data.information.conditionAge.child==true">Bebés hasta {[{ data.information.conditionAge.childMaxAge }]} años.</h5>
+                                        <h5 data-ng-if="data.information.conditionAge.cribs==false">Los bebés no pueden alojarse en cunas.</h5>
+                                        <h5 data-ng-if="data.information.conditionAge.cribs==true">Los bebés se pueden alojar en cunas.
+                                            <span data-ng-if="data.information.conditionAge.cribsAdditionalCost==false">Sin cargo adicional.</span>
+                                            <span data-ng-if="data.information.conditionAge.cribsAdditionalCost==true">Con cargo adicional.</span>
+                                        </h5>
+                                        <h5 data-ng-if="data.information.conditionAge.cribs==true">Número máximo de cunas en la habitación: {[{ data.information.conditionAge.cribsMax }]}.</h5>
+
+                                        <h3>{{ "message.spoken_languages_by_staff"|trans }}</h3>
+                                        <h5>
+                                            <span style="display:inline-block;" data-ng-repeat="(id, lang) in data.information.laguages">
+                                                {[{ lang  | capitalize }]}
+                                                <span data-ng-if="id+1 != data.information.laguages.length">, &nbsp</span>
+                                                <span data-ng-if="id+1 == data.information.laguages.length">. </span>
+                                            </span>
+                                        </h5>
+                                    </div>
+                                    <div class="col-sm-16 col-md-8">
+                                        <h1 class="hotel-font-restaurant">{[{ data.name }]}</h1>
+                                        <br>
+                                        <p class="font-inf-hotel" align="justify" style="white-space: pre-line;">
+                                            {[{ data.information.description }]}
+                                        </p>
+                                        <p class="font-inf-hotel" align="justify" data-ng-if="data.information.additionalInfo"  style="white-space: pre-line;">
+                                            {[{ data.information.additionalInfo }]}
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--- Galería -->
+                                <div
+                                    class='nvc-nav__pane post-body entry-content'
+                                    oncontextmenu='return false'
+                                    ondragstart='return false'
+                                    onmousedown='return false'
+                                    onselectstart='return false'
+                                    id="gal"
+                                    data-ng-init="gallery=data.gallery[0].images">
+                                    <div class="col-md-7">
+                                        <h1>{{"share.preview.gallery"|trans }}</h1>
+                                    </div>
+                                    <div class="col-md-9"  style="margin-top:20px; margin-bottom:30px;">
+                                        <span style="float:right;" class="font-inf-tab">
+                                            {{ "share.preview.without_charge"|trans }}
+                                        </span>
+                                        <span style="float:right;" class="fa-checks fa fn-check"></span>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <ul id="tabs" class="nav li-hotel-galery" data-tabs="tabs">
+                                            <li data-ng-repeat="gal in data.gallery">
+                                                <a
+                                                    href=""
+                                                    data-toggle="tab"
+                                                    class="font-hotel-galery"
+                                                    data-ng-click="showGallery(gal.images);" >
+                                                    <span data-ng-if="gal.type=='RoomImage'"></span>
+                                                    {[{gal.name}]}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-11 galery-hotel-padding">
+                                        <li
+                                            class="li-img-galery"
+                                            data-ng-repeat="(id, image) in gallery">
+                                            <a
+                                                href=""
+                                                data-ng-click="showGalleryModal(id, image, gallery)">
+                                                {% verbatim %}
+                                                <img
+                                                    class="nvc-carousel__fill hotel-galery-img"
+                                                    data-ng-src="/uploads/images/images_sm/{[{image.url}]}"/>
+                                                {% endverbatim %}
+                                            </a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--- Barra de Busqueda XS-->
+                    <section class="nvc-container nvc-padding--xs" data-ng-cloak>
+                        <div class="col-xs-16 nvc-nav__search hidden-sm hidden-md hidden-lg">
+                            <div
+                                class="col-xs-10 col-sm-8"
+                                style="margin-top:7px; margin-bottom:7px; padding:0px;">
+                                <strong data-ng-if="search.startDate">Check-in <span> {[{startDateShort}]}</span><br></strong>
+                                <strong data-ng-if="search.endDate">Check-out <span> {[{endDateShort}]}</span><br></strong>
+                                <strong data-ng-if="!search.startDate">Check-in <span> -</span> <br></strong>
+                                <strong data-ng-if="!search.endDate">Check-out <span> -</span> <br></strong>
+                                <hr>
+                                <strong>{{ "share.message.adult"|transchoice(2) }} <span> {[{search.adult}]},</span> </strong>
+                                <strong>{{ "share.message.child"|transchoice(2) }} <span> {[{search.kid}]}</span> <br></strong>
+                                <strong>{{ "share.message.room"|transchoice(2) }} <span> {[{search.room}]}</span> </strong>
+                            </div>
+                            <div class="col-xs-6 col-sm-8" style="padding:0px;">
+                                <button
+                                    class="nvc-button nvc-button__search"
+                                    data-toggle="modal"
+                                    data-target="#modal-search">
+                                    {{"share.preview.change_search"|trans }}
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Modal Barra Búsqueda-->
+                    <section
+                        class="nvc-modal fade nvc-modal--top modal-fullscreen"
+                        id="modal-search"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="myModalLabel"
+                        aria-hidden="true"
+                        data-ng-cloak>
+                        <div class="modal-dialog nvc-modal__search" data-ng-cloak>
+                            <div class="nvc-modal__header">
+                                <strong>{{"share.preview.change_dates"|trans }}</strong>
+                                <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true">×
+                                </button>
+                            </div>
+                            <div class="nvc-modal__content">
+                                <div class="nvc-row">
+                                    <div class="col-xs-16">
+                                        <form
+                                            class="nvc-form-inline"
+                                            data-ng-submit="hideSearchModal(); movilVersion=true; getAvailability(search)"
+                                            role="form"
+                                        >
+                                            <input type="hidden" name="adult" value="{[{ adults }]}" data-ng-if="adults!=2"/>
+                                            <input type="hidden" name="kid" value="{[{ kids }]}" data-ng-if="kids != 0"/>
+                                            <input type="hidden" name="room" value="{[{ rooms }]}" data-ng-if="rooms != 1" />
+                                            <nvc-search-destinations
+                                                always-enabled="true"
+                                                route="navicu_asinc_search_destiny_by_autocompleted"
+                                                selected-option="selectedDestiny"
+                                            ></nvc-search-destinations>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--- Nav-Tab XS -->
+                    <section class="nvc-container hidden-md hidden-lg nvc-padding--xs" data-ng-cloak>
+                        <div
+                            class="col-xs-4 nvc-nav__tabs--property"
+                            style="background-color:#5C215F"
+                            data-ng-class="{'nvc-nav__tabs--property': section == 'room', 'nvc-nav__tabs--room': section != 'room'}"
+                            data-ng-click="section='room'">
+                            <i
+                                class="faa-hotel-xs-active fa fn-rooms"
+                                data-ng-class="{'faa-hotel-xs-active': section == 'room', 'faa-hotel-xs-1': section != 'room'}"
+                            >
+                            </i>
+                            <br>
+                            <span>{{"share.preview.room"|trans }}</span>
+                        </div>
+                        <div
+                            class="col-xs-4"
+                            style="background-color:#AA1A73"
+                            data-ng-click="section='service'"
+                            data-ng-class="{'nvc-nav__tabs--property': section == 'service', 'nvc-nav__tabs--service': section != 'service'}">
+                            <span class="faa-hotel-xs fa fn-services"
+                            data-ng-class="{'faa-hotel-xs-active': section == 'service', 'faa-hotel-xs-2': section != 'service'}"></span><br>
+                            <span>{{"share.preview.services"|trans }}</span>
+                        </div>
+                        <div
+                            class="col-xs-4"
+                            style="background-color:#E72A5E;"
+                            data-ng-click="section='info'"
+                            data-ng-class="{'nvc-nav__tabs--property': section == 'info', 'nvc-nav__tabs--info': section != 'info'}">
+                            <span class="faa-hotel-xs fa fn-info"
+                            data-ng-class="{'faa-hotel-xs-active': section == 'info', 'faa-hotel-xs-3': section != 'info'}"></span><br>
+                            <span>Información</span>
+                        </div>
+                        <div
+                            class="col-xs-4"
+                            style="background-color:#FCC010"
+                            data-ng-click="section='gallery'"
+                            data-ng-class="{'nvc-nav__tabs--property': section == 'gallery', 'nvc-nav__tabs--gallery': section != 'gallery'}">
+                            <span class="faa-hotel-xs fa fn-galery"
+                            data-ng-class="{'faa-hotel-xs-active': section == 'gallery', 'faa-hotel-xs-4': section != 'gallery'}"></span><br>
+                            <span>{{"share.preview.gallery"|trans }}</span>
+                        </div>
+                        <div data-ng-if="section=='room';">
+                            <div class="col-xs-16 bar-room" style="border-bottom: 7px solid #5C215F;"></div>
+                        </div>
+                        <div data-ng-if="section=='service';">
+                            <div class="col-xs-16 bar-room" style="border-bottom: 7px solid #AA1A73;"></div>
+                        </div>
+                        <div data-ng-if="section=='info';">
+                            <div class="col-xs-16 bar-room" style="border-bottom: 7px solid #E72A5E;"></div>
+                        </div>
+                        <div data-ng-if="section=='gallery';">
+                            <div class="col-xs-16 bar-room" style="border-bottom: 7px solid #FCC010;"></div>
+                        </div>
+                    </section>
+                    <!--- Habitaciones XS SM-->
+                    <section class="nvc-container" data-ng-if="section=='room';" data-ng-cloak>
+                        <div class="nvc-row">
+                            <!--- Barra de Busqueda SM -->
+                            <div class="nvc-container nvc-padding--xs visible-sm">
+                                <div class="col-xs-16 nvc-nav__search hidden-md hidden-lg">
+                                    <div
+                                        class="col-xs-10 col-sm-8"
+                                        style="margin-top:7px; margin-bottom:7px; padding:0px;">
+                                        <strong data-ng-if="search.startDate">Check-in <span> {[{startDateShort}]}</span></strong>
+                                        <strong data-ng-if="search.endDate">Check-out <span> {[{endDateShort}]}</span><br></strong>
+                                        <strong data-ng-if="!search.startDate">Check-in <span> -</span></strong>
+                                        <strong data-ng-if="!search.endDate">Check-out <span> -</span> <br></strong>
+                                        <hr>
+                                        <strong>{{ "share.message.adult"|transchoice(2) }} <span> {[{search.adult}]}</span> </strong>
+                                        <strong>{{ "share.message.child"|transchoice(2) }} <span> {[{search.kid}]}</span> </strong>
+                                        <strong>{{ "share.message.room"|transchoice(2) }} <span> {[{search.room}]}</span> </strong>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <button class="nvc-button nvc-button__search" data-toggle="modal"
+                                                data-target="#modal-search">{{"share.preview.change_search"|trans }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="col-xs-16 hidden-md hidden-lg nvc-padding--xs"
+                                data-ng-if="flagRooms!=false"
+                                style="margin-bottom:10px;">
+                                <div
+                                    class="nvc-panel nvc-panel__container"
+                                    data-ng-repeat="(idRoom, room) in roomProperty">
+                                    <div
+                                        data-ng-repeat="(idPack, pack) in room.packages" >
+                                        <form action="{{ path('navicu_reservation_confirmation') }}" method="post" name="form">
+                                            <div class="nvc-panel__title--room" >
+                                                <div class="">
+                                                    <a  data-toggle="collapse"
+                                                        aria-expanded="true"
+                                                        data-ng-init="pack.expanded=false"
+                                                        data-ng-click="pack.expanded=!pack.expanded"
+                                                        data-ng-class="{'collapsed': !pack.expanded}">
+                                                    </a>
+                                                    <div    class='post-body entry-content'
+                                                            oncontextmenu='return false'
+                                                            ondragstart='return false'
+                                                            onmousedown='return false'
+                                                            onselectstart='return false'
+                                                            data-ng-init="pack.expandedGallery=false"
+                                                            data-ng-click="pack.expandedGallery = !pack.expandedGallery">
+                                                        <img class="nvc-carousel__fill img-table-xs"
+                                                             data-ng-src="/uploads/images/images_sm/{[{ room.profileImage.url }]}">
+                                                        </img>
+                                                    </div>
+                                                    <div class="section-name">
+                                                        <h3>{[{ room.name }]}</h3>
+                                                    </div>
+                                                        {#
+                                                        <li
+                                                            class="font-last-room"
+                                                            data-ng-if="pack.availability<5 && pack.availability>1 &&search.startDate">
+                                                            ¡{{"share.preview.stay"|transchoice(0) }} {[{ pack.availability }]} {{"share.preview.rooms"|transchoice(0) }}!<br>
+                                                        </li>
+                                                        <li
+                                                            class="font-last-room"
+                                                            data-ng-if="pack.availability==1 && search.startDate">
+                                                            ¡{{"share.preview.stay"|transchoice(1) }} {[{ pack.availability }]} {{"share.preview.rooms"|transchoice(1) }}!<br>
+                                                        </li>
+                                                        <li
+                                                            class="font-ofert"
+                                                            style="font-size: 15px;"
+                                                            data-ng-if="pack.priceMovil==0">
+                                                            No disponible
+                                                        </li>
+                                                        #}
+                                                        <img
+                                                            ng-if="pack.promotion===true"
+                                                            class="promotion"
+                                                            src="{{ asset('images/promo_logo.png') }}"
+                                                        >
+                                                </div>
+                                            </div>
+                                            <div data-ng-if="pack.expandedGallery" class="panel-collapse">
+                                                <div
+                                                    id="carousel-gallery"
+                                                    class="carousel nvc-carousel nvc-carousel--property slide"
+                                                    data-ride="carousel"
+                                                    style="margin-top:5px;">
+                                                    <div class="nvc-carousel__inner nvc-carousel__inner--property">
+                                                        <div
+                                                            class="item"
+                                                            data-ng-class="{active: $first}"
+                                                            data-ng-repeat="image in room.images">
+                                                            <img class="nvc-carousel__fill" data-ng-src="/uploads/images/images_md/{[{ image.url }]}">
+                                                            <p align="left" class="banner-hotel">{[{image.name}]}<p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    id="thumbcarousel-gallery"
+                                                    class="nvc-carousel nvc-carousel--property-thumbnail slide"
+                                                    data-interval="false"
+                                                    style="margin-top:0px;">
+                                                    <div
+                                                        class="nvc-carousel__inner nvc-carousel__inner--property">
+                                                        <div class="item active">
+                                                            <div
+                                                                class="col-xs-4 pad-carusel-hotel-xs"
+                                                                data-target="#carousel-gallery"
+                                                                data-slide-to="{[{ $index }]}"
+                                                                data-ng-repeat="(id, image) in room.images">
+                                                                <img
+                                                                    class="nvc-carousel__fill img-carusel-hotel"
+                                                                    data-ng-src="/uploads/images/images_sm/{[{image.url}]}">
+                                                            </div>
+                                                        </div>
+                                                        <a
+                                                            data-ng-if="room.gallery.length>4"
+                                                            class="left nvc-carousel__control"
+                                                            href="#carousel-gallery"
+                                                            data-slide="prev">
+                                                            <span class="famodal-xs fa fa-caret-left fa-2x"></span>
+                                                        </a>
+                                                        <a
+                                                            data-ng-if="room.gallery.length>4"
+                                                            class="right nvc-carousel__control"
+                                                            href="#carousel-gallery"
+                                                            data-slide="next">
+                                                            <span class="famodal-xs fa fa-caret-right fa-2x"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                data-ng-if="pack.expanded"
+                                                class="nvc-panel__collapse"
+                                                style="height: auto;">
+                                                <div class="nvc-panel__content list-font-hotel" style="padding-left:10px; padding-right:10px;">
+                                                    <div class="section-pack nvc-row">
+                                                        <div class="col-xs-16">
+                                                            <h3 class="visible-xs">{[{ pack.name }]}</h3>
+                                                            <h3 class="visible-xs" data-ng-if="pack.description"><span>*{[{ pack.description }]}</span></h3>
+                                                            <h3 class="visible-sm"> {[{ pack.name }]} <span data-ng-if="pack.description">*{[{ pack.description }]}</span></h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="section-price nvc-row">
+                                                        <div class="col-xs-10">
+                                                            <h3  data-ng-if="!search.startDate && pack.priceMovil!=0">
+                                                                {{ symbolCurrency }} {[{ pack.priceMovil | number }]}
+                                                            </h3>
+                                                            <h3 data-ng-if="search.startDate && pack.totalPriceMovil">
+                                                                {{ symbolCurrency }} {[{pack.priceMovil * pack.numRoomsMovil | number}]}
+                                                                <span> {{"share.preview.price_for"|trans }} {[{ amountOfNights }]} {{"share.preview.night"|trans }}</span>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <button style="width:auto;"
+                                                                    class="nvc-button nvc-button__default pull-right"
+                                                                    data-ng-disabled="!search.startDate || pack.numRoomsMovil==0"
+                                                                    data-ng-click="roomSelected.idRoom=room.idRoom; roomSelected.pack=pack;" type="submit">
+                                                                    Reservar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nvc-row">
+                                                        <div class="col-xs-8" style="padding-top:10px; padding-bottom:15px;">
+                                                            <span class="font-room">N° de Adultos</span>
+                                                            <select
+                                                                class="nvc-select--property"
+                                                                data-ng-model="pack.numPersonMovil"
+                                                                data-ng-options="n for n in [] | range:room.minPeople:room.maxPeople"
+                                                                data-ng-change="changeNumberPeople(pack,room.maxPeople, data.information.conditionAge.child, room.rules)">
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-8" style="padding-top:10px; padding-bottom:15px;">
+                                                            <span class="font-room">N° de niños</span>
+                                                            <select
+                                                                class="nvc-select--property"
+                                                                data-ng-model="pack.numberChild"
+                                                                data-ng-options="n for n in [] | range:0:room.maxPeople-pack.numPersonMovil"
+                                                                data-ng-change="asignPrice(pack, data.information.conditionAge.child, room.rules);"
+                                                            >
+                                                            </select>
+                                                            <p class="font-condition" style="margin-top:-5px;">{{"share.preview.availability_hotel"|trans }}</p>
+                                                        </div>
+                                                        <div
+                                                            class="col-xs-8"
+                                                            ng-repeat="n in getRanges(pack.numberChild) track by $index"
+                                                        >
+                                                            <span
+                                                                data-ng-if="data.information.conditionAge.child==true"
+                                                                class="font-room"
+                                                            >
+                                                                Edad Niño {[{ $index + 1 }]}
+                                                            </span>
+                                                            <select
+                                                                    data-ng-if="data.information.conditionAge.child==true"
+                                                                    class="nvc-select--property"
+                                                                    data-ng-model="pack.childAgesCount[$index]"
+                                                                    data-ng-options="n for n in [] | range:0:data.information.conditionAge.agePolicy.adult"
+                                                                    data-ng-change="asignPrice(pack, data.information.conditionAge.child, room.rules)">
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-8">
+                                                            <span class="table-p font-room">{{"share.preview.number_room"|trans }}</span>
+                                                            <select
+                                                                class="nvc-select--property"
+                                                                data-ng-model="pack.numRoomsMovil"
+                                                                data-ng-change="asignPrice(pack, data.information.conditionAge.child, room.rules); selectRoom(room.idRoom, pack);"
+                                                                data-ng-options="n for n in [] | range:0:pack.availability">
+                                                            </select>
+                                                            <p class="table-p font-condition" style="margin-top:-5px;">{{"share.preview.availability_hotel"|trans }}</p>
+                                                        </div>
+                                                        <div class="col-xs-8">
+                                                            <span class="font-room">{{"share.preview.beds"|trans }}</span>
+                                                            <select
+                                                                class="nvc-select--property"
+                                                                data-ng-model="pack.bed"
+                                                                data-ng-options="val.id as val.name for (bedselected, val) in room.bedsRooms">
+                                                                <option value=''>{{"share.register.select"|trans }}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-16" style="margin-top:15px; padding-left:10px;">
+                                                            <li
+                                                                class="font-politic"
+                                                                style="padding-top:-5px;">
+                                                                {{"share.preview.politic_cancel"|trans }} {{"share.preview.non_refundable"|trans }}
+                                                            </li>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="checkIn" value="{[{search.startDate}]}"/>
+                                            <input type="hidden" name="checkOut" value="{[{search.endDate}]}"/>
+                                            <input type="hidden" name="slug" value="{[{search.slug}]}"/>
+                                            <input type="hidden" name="rooms" value="{[{search.room}]}"/>
+                                            <input type="hidden" name="numberAdult" value="{[{search.adult}]}"/>
+                                            <input type="hidden" name="numberChild" value="{[{search.kid}]}"/>
+                                            <input type="hidden" name="rooms[0][idRoom]" value="{[{roomSelected.idRoom}]}"/>
+                                            <input type="hidden" name="rooms[0][idBedsRooms]" value="{[{roomSelected.pack.bed}]}"/>
+                                            <input type="hidden" name="rooms[0][packages][0][idPack]" value="{[{roomSelected.pack.id}]}"/>
+                                            <input type="hidden" name="rooms[0][packages][0][idCancellationPolicy]" value="{[{roomSelected.pack.cancellationPolicy[0].id}]}"/>
+                                            <input type="hidden" name="rooms[0][packages][0][numberPeople]" value="{[{roomSelected.pack.numPersonMovil}]}"/>
+                                            <input type="hidden" name="rooms[0][packages][0][numberChildren]" value="{[{roomSelected.pack.numberChild}]}"/>
+                                            <input type="hidden" name="rooms[0][packages][0][numberRoom]" value="{[{roomSelected.pack.numRoomsMovil}]}"/>
+                                            <input type="hidden" id="refresh" value="no">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-16 hidden-md hidden-lg nvc-padding--xs" data-ng-if="flagRooms==false">
+                                    <h3 class="text-center font-bold" style="font-size:22px; color:#422675">
+                                        ¡Oooops! El hotel no está disponible en las fechas solicitadas
+                                    </h3>
+                                    <h3 class="text-center font-medium" style="font-size:15px; color:#422675; margin-bottom:200px;" >
+                                        Te invitamos a consultar otras fechas, o verificar si la búsqueda que realizaste está correcta
+                                    </h3>
+                                </div>
+                            </div>
+                    </section>
+
+                    <!--- Servicios XS SM -->
+                    <section class="nvc-container hidden-md hidden-lg" data-ng-if="section=='service';" data-ng-cloak>
+                        <div class="nvc-row">
+                            <div class="col-sm-7">
+                                <h1 class="hidden-md hidden-lg">{{"share.preview.services"|trans }}</h1>
+                            </div>
+                            <div class="col-xs-16 hidden-md hidden-lg nvc-padding--xs">
+                                <div class="nvc-panel nvc-panel__container">
+                                    <div
+                                        data-ng-repeat="service in servicesBasic"
+                                        style="margin-bottom:0px; margin-top:0px;"
+                                        data-ng-init="service.expanded=false">
+                                        <div
+                                            class="nvc-panel__title nvc-panel__title--service"
+                                            data-ng-class="service.colorGallery"
+                                            data-ng-click="service.expanded=!service.expanded">
+                                            <div class="nvc-row">
+                                                <a
+                                                    data-toggle="collapse"
+                                                    data-ng-class="{'collapsed': !service.expanded}"
+                                                    aria-expanded="true">
+                                                </a>
+                                                <div class="" style="margin-top:-25px; margin-left:20px;">
+                                                    <span class="service-hotel-font1">{[{service.name}]}</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="nvc-panel__collapse"
+                                            style="height: auto;"
+                                            data-ng-if="service.expanded">
+                                            <div
+                                                class="nvc-panel__content nvc-panel__content--property list-font-hotel"
+                                                style="padding-left:11px; padding-top:10px;">
+                                                <div class="nvc-row">
+                                                    <div class="col-xs-16" data-ng-repeat="subservice in service.subServices">
+                                                        <div data-ng-if="service.position!=92 && service.position!=51">
+                                                            <li
+                                                                class="service-hotel-font2"
+                                                                data-ng-if="subservice.data!=null && subservice.data.full_time==false"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                {[{subservice.name}]}: {[{subservice.data.openinga}]} hasta {[{subservice.data.closing}]}.
+                                                            </li>
+                                                            <li
+                                                                class="service-hotel-font2"
+                                                                data-ng-if="subservice.data!=null && subservice.data.full_time==true"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                {[{subservice.name}]}: 24 horas
+                                                            </li>
+                                                            <li
+                                                                class="service-hotel-font2"
+                                                                data-ng-if="subservice.cost==0 && subservice.data==null && service.position!=34"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel-xs"></i>
+                                                                {[{subservice.name}]} ({{"share.preview.free"|trans }})
+                                                            </li>
+                                                            <li
+                                                                class="service-hotel-font2"
+                                                                data-ng-if="subservice.cost==1  && service.position!=34"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel-xs"></i>
+                                                                {[{subservice.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                            </li>
+                                                            <li
+                                                                class="service-hotel-font2"
+                                                                data-ng-if="subservice.cost==1 && service.position==34"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                Con {{"share.preview.additional_cost"|trans }}
+                                                            </li>
+                                                            <li
+                                                                class="service-hotel-font2"
+                                                                data-ng-if="subservice.cost==0 && service.position==34"
+                                                                style="padding-bottom:5px;">
+                                                                <i class="fa fa-check icon-service-hotel"></i>
+                                                                Sin {{"share.preview.additional_cost"|trans }}
+                                                            </li>
+                                                            <br>
+                                                        </div>
+                                                        <div data-ng-if="service.position==92">
+                                                            <div data-ng-repeat="indoor in subservice.subServices" >
+                                                                <h3>{[{subservice.name}]} - {[{indoor.name}]}</h3>
+                                                                <div data-ng-repeat="indoorservice in indoor.subServices">
+                                                                    <li
+                                                                        class="service-hotel-font2-service"
+                                                                        data-ng-if="indoorservice.cost==0"
+                                                                        style="padding-bottom:5px;">
+                                                                        <i class="fa fa-check icon-service-hotel-xs"></i>
+                                                                        {[{indoorservice.name}]} ({{"share.preview.free"|trans }})
+                                                                    </li>
+                                                                    <li
+                                                                        class="service-hotel-font2-service"
+                                                                        data-ng-if="indoorservice.cost==1"
+                                                                        style="padding-bottom:5px;">
+                                                                        <i class="fa fa-check icon-service-hotel-xs"></i>
+                                                                        {[{indoorservice.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                                    </li>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                        </div>
+                                                        <div data-ng-if="service.position==51">
+                                                            <h3>{[{subservice.name}]}</h3>
+                                                            <div data-ng-repeat="indoor in subservice.subServices">
+                                                                <li
+                                                                    class="service-hotel-font2"
+                                                                    data-ng-if="indoor.cost==0"
+                                                                    style="padding-bottom:5px;">
+                                                                    <i class="fa fa-check icon-service-hotel-xs"></i>
+                                                                    {[{indoor.name}]} ({{"share.preview.free"|trans }})
+                                                                </li>
+                                                                <li
+                                                                    class="service-hotel-font2"
+                                                                    data-ng-if="indoor.cost==1"
+                                                                    style="padding-bottom:5px;">
+                                                                    <i class="fa fa-check icon-service-hotel-xs"></i>
+                                                                    {[{indoor.name}]} ({{"share.preview.additional_cost"|trans }})
+                                                                </li>
+                                                            </div>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        data-ng-repeat="(id, service) in servicesOthers"
+                                        style="margin-bottom:0px; margin-top:0px;"
+                                        data-ng-init="service.expanded=false">
+                                        <div
+                                            class="nvc-panel__title nvc-panel__title--service"
+                                            data-ng-class="service.colorGallery"
+                                            data-ng-click="service.expanded=!service.expanded">
+                                            <div class="nvc-row">
+                                                <a data-toggle="collapse" aria-expanded="true"> </a>
+                                                <div class="" style="margin-top:-25px; margin-left:20px;">
+                                                    <span class="service-hotel-font1">{[{id}]}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="nvc-panel__collapse"
+                                            style="height: auto;"
+                                            data-ng-if="service.expanded">
+                                            <div
+                                                class="nvc-panel__content nvc-panel__content--property list-font-hotel"
+                                                style="padding-left:11px; padding-top:10px;">
+                                                <div class="nvc-row">
+                                                    {# Restaurantes #}
+                                                    <div class="col-xs-16" data-ng-if="id=='Restaurante'">
+                                                        <div data-ng-repeat="restaurants in service">
+                                                            <h1 class="hotel-font-restaurant">{[{restaurants.name}]}</h1>
+                                                           <h3>Comida {[{restaurants.foodType}]} <span data-ng-if="restaurants.buffetCar">- {[{restaurants.buffetCar}]}</span></h3>
+                                                              <h3 data-ng-if="restaurants.dietaryMenu==true" style="margin-top:-5px;">Menú Dietético</h3>
+                                                            <div class="col-sm-16 col-md-5">
+                                                                <li
+                                                                    data-ng-if="restaurants.breakFastTime.length==0"
+                                                                    class="font-service-restaurant"
+                                                                    style="margin-top:0px;">
+                                                                    Desayuno: <span class="font-service-restaurant2">-</span>
+                                                                </li>
+                                                                <li
+                                                                    data-ng-if="restaurants.breakFastTime.length!=0"
+                                                                    class="font-service-restaurant"
+                                                                    style="margin-top:0px;">
+                                                                    Desayuno:
+                                                                    <span class="font-service-restaurant2">
+                                                                        {[{restaurants.breakFastTime.opening}]} - {[{restaurants.breakFastTime.closing}]}
+                                                                    </span>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-sm-16 col-md-6">
+                                                                <li
+                                                                    data-ng-if="restaurants.lunchTime.length==0"
+                                                                    class="font-service-restaurant"
+                                                                    style="margin-top:0px;">
+                                                                    Almuerzo: <span class="font-service-restaurant2">-</span></li>
+                                                                <li
+                                                                    data-ng-if="restaurants.lunchTime.length!=0"
+                                                                    class="font-service-restaurant"
+                                                                    style="margin-top:0px;">
+                                                                    Almuerzo:
+                                                                    <span class="font-service-restaurant2">
+                                                                        {[{restaurants.lunchTime.opening}]} - {[{restaurants.lunchTime.closing}]}
+                                                                    </span>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-sm-16 col-md-5">
+                                                                <li
+                                                                    data-ng-if="restaurants.dinnerTime.length==0"
+                                                                    class="font-service-restaurant"
+                                                                    style="margin-top:0px;">
+                                                                    Cena: <span class="font-service-restaurant2">-</span>
+                                                                </li>
+                                                                <li
+                                                                    data-ng-if="restaurants.dinnerTime.length!=0"
+                                                                    class="font-service-restaurant"
+                                                                    style="margin-top:0px;">
+                                                                    Cena:
+                                                                    <span class="font-service-restaurant2">
+                                                                        {[{restaurants.dinnerTime.opening}]} - {[{restaurants.dinnerTime.closing}]}
+                                                                    </span>
+                                                                </li>
+                                                            </div>
+                                                            <div class="col-sm-16" style="margin-top:20px;">
+                                                                <h3 data-ng-if="restaurants.description!=null">Descripción</h3>
+                                                                <p class="font-service2">{[{restaurants.Descripcion}]}</p>
+                                                                <br>
+                                                                <hr style="border-style:dashed; border-color:#A38DC7;">
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {# Bares #}
+                                                    <div class="col-xs-16" data-ng-if="id=='Bar'">
+                                                        <div data-ng-repeat="bars in service">
+                                                            <h1 class="hotel-font-restaurant">{[{bars.name}]}</h1>
+                                                            <h3 >{[{bars.Tipo}]} <span data-ng-if="bars.Comida==true">- Comida {[{bars.foodType}]}</span> </h3>
+                                                            <h3 style="margin-top:-5px;"> A partir de {[{bars.minAge}]} años</h3>
+                                                            <li class="font-service-restaurant">
+                                                                Horario:
+                                                                <span class="font-service-restaurant2" style="float:none;">
+                                                                    Desde {[{bars.schedules.opening}]} hasta {[{bars.schedules.closing}]}.
+                                                                </span>
+                                                            </li>
+                                                            <h3 data-ng-if="restaurants.description!=null">Descripción</h3>
+                                                            <p class="font-service2">{[{bars.descripcion}]}</p>
+                                                            <br>
+                                                            <hr style="border-style:dashed; border-color:#A38DC7;">
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                    {# Salones #}
+                                                    <div class="col-md-16" data-ng-if="id=='Salones'">
+                                                        <div data-ng-repeat="living in service">
+                                                            <h3 >{[{living.type}]}
+                                                                <span data-ng-if="living.naturalLight==true"> - Con luz natural</span>
+                                                            </h3>
+                                                            <li class="font-service-restaurant">
+                                                                Metraje:
+                                                                <span class="font-service-restaurant2" style="float:none;">
+                                                                    {[{living.size}]} metros <span><sup>2</sup></span>
+                                                                </span>
+                                                            </li>
+                                                            <li class="font-service-restaurant">
+                                                                Capacidad máxima de personas:
+                                                                <span class="font-service-restaurant2" style="float:none;">
+                                                                    {[{living.capacity}]}
+                                                                </span></li>
+                                                            <br>
+                                                            <hr style="border-style:dashed; border-color:#A38DC7;">
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--- Información XS SM -->
+                    <section class="nvc-container" data-ng-if="section=='info';" data-ng-cloak>
+                        <div class="col-xs-16 hidden-md hidden-lg">
+                            <h1>Información relevante </h1>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-16">
+                                <h3 data-ng-if="data.information.allIncluded!=false" class="fobold" style="font-size:22px;">Todo Incluido</h3>
+                                <h3>Tipo de establecimiento</h3>
+                                <h5>{[{data.information.accommodation}]}</h5>
+                                <h1 class="service-hotel-font3"> Check in:
+                                    <span class="service-hotel-font4" style="float:right;"> A partir de las {[{ data.information.checkIn }]}
+                                    </span>
+                                </h1>
+                                <h1 class="service-hotel-font3"> Check out:
+                                    <span class="service-hotel-font4" style="float:right;">A partir de las {[{ data.information.checkOut }]}
+                                    </span>
+                                </h1>
+                                <h3 style="padding-top:7px;">Condiciones de pago</h3>
+                                <h5 data-ng-if="data.information.conditionPayment.cash">
+                                    No se puede cancelar en efectivo más de Bs {[{ data.information.conditionPayment.cash | number }]}.</h5>
+                                <h5 data-ng-if="!data.information.conditionPayment.cash">No se puede cancelar en efectivo.</h5>
+                                <h5 data-ng-if="data.information.conditionPayment.debit==false">No aceptan tarjetas de débito.</h5>
+                                <h5 data-ng-if="data.information.conditionPayment.debit==true">Se aceptan tarjetas de débito.</h5>
+                                <h5 data-ng-if="data.information.conditionPayment.creditCard==false">No aceptan tarjetas de crédito.</h5>
+                                <h5 data-ng-if="data.information.conditionPayment.creditCard==true">Se aceptan tarjetas de crédito:</h5>
+                                <h5>
+                                    <label data-ng-if="data.information.conditionPayment.creditCardAmerican==true">
+                                        <img style="margin-top: -15%;" src="{{ asset('images/american.png') }}"alt="">
+                                    </label>
+                                    <label data-ng-if="data.information.conditionPayment.creditCardMaster==true">
+                                        <img style="margin-top: -15%;" src="{{ asset('images/master.png') }}"alt="">
+                                    </label>
+                                    <label data-ng-if="data.information.conditionPayment.creditCardVisa==true">
+                                        <img style="margin-top: -15%;" src="{{ asset('images/visa.png') }}"alt="">
+                                    </label>
+                                </h5>
+                                <h3 style="padding-top:7px;">Camas suplementarias</h3>
+                                <h5 data-ng-if="data.information.extraBeds==true">Sí.</h5>
+                                <h5 data-ng-if="data.information.extraBeds==false">No.</h5>
+                                <h5 data-ng-if="data.information.extraBedsCost==false">Sin cargo adicional.</h5>
+                                <h5 data-ng-if="data.information.extraBedsCost==true">Cor cargo adicional.</h5>
+                                <h3 style="padding-top:7px;">{{ "word.pet"|transchoice(2) }}</h3>
+                                <h5 data-ng-if="data.information.pets==true">Sí se admiten.</h5>
+                                <h5 data-ng-if="data.information.pets==false">No se admiten.</h5>
+                                <h5 data-ng-if="data.information.petsCost==false">Sin cargo adicional.</h5>
+                                <h5 data-ng-if="data.information.petsCost==true">Cor cargo adicional.</h5>
+                                <h3 style="padding-top:7px;">{{ "word.tax"|transchoice(2) }}</h3>
+                                <h5>IVA {[{ data.information.taxRate }]}% incluido en los precios.</h5>
+                                <h3 style="padding-top:7px;">Condiciones sobre niños</h3>
+                                <h5 data-ng-if="data.information.conditionAge.child==false">No pueden alojarse niños en el hotel.</h5>
+                                <h5 data-ng-if="data.information.conditionAge.child==true">Pueden alojarse niños en el hotel.
+                                    <span data-ng-if="data.information.conditionAge.childAdditionalCost==false">Sin cargo adicional.</span>
+                                    <span data-ng-if="data.information.conditionAge.childAdditionalCost==true">Con cargo adicional.</span>
+                                </h5>
+                                <h5 data-ng-if="data.information.conditionAge.child==true">Bebés hasta {[{data.information.conditionAge.childMaxAge}]} años.</h5>
+                                <h5 data-ng-if="data.information.conditionAge.cribs==false">Los bebés no pueden alojarse en cunas.</h5>
+                                <h5 data-ng-if="data.information.conditionAge.cribs==true">Los bebés se pueden alojar en cunas.
+                                    <span data-ng-if="data.information.conditionAge.cribsAdditionalCost==false">Sin cargo adicional.</span>
+                                    <span data-ng-if="data.information.conditionAge.cribsAdditionalCost==true">Con cargo adicional.</span>
+                                </h5>
+                                <h5 data-ng-if="data.information.conditionAge.cribs==true">Número máximo de cunas en la habitación: {[{data.information.conditionAge.cribsMax}]}.</h5>
+                                <h3 style="padding-top:7px;">{{ "message.spoken_languages_by_staff"|trans }}</h3>
+                                <h5 data-ng-repeat="lang in data.information.laguages">{[{ lang | uppercase }]}</h5>
+                                <hr>
+                                <h1 class="hotel-font-restaurant">{[{ data.name }]}</h1>
+                                <br>
+                                <pre class="font-inf-hotel" align="justify"  style="white-space: pre-line;">
+                                    <p>{[{ data.information.description }]}</p>
+                                </pre>
+                                <pre class="font-inf-hotel" align="justify" data-ng-if="data.information.additionalInfo"  style="white-space: pre-line;">
+                                    <p>{[{ data.information.additionalInfo }]}</p>
+                                </pre>
+                            </div>
+                        </div>
+                    </section>
+                    <!--- Galería XS SM -->
+                    <section class="nvc-container" data-ng-if="section=='gallery';" data-ng-cloak>
+                        <div class="nvc-row">
+                            <div class="col-sm-7">
+                                <h1 class="hidden-md hidden-lg">{{"share.preview.gallery"|trans }}</h1>
+                            </div>
+                            <div class="col-xs-16 hidden-md hidden-lg nvc-padding--xs">
+                                <div class="nvc-panel nvc-panel__container">
+                                    <div
+                                        style="margin-bottom:0px; margin-top:0px;"
+                                        data-ng-repeat="(idGall, gal) in data.gallery"
+                                        data-ng-init="gal.expanded=false">
+                                        <div
+                                            class="nvc-panel__title nvc-panel__title--gallery"
+                                            data-ng-class="gal.colorGallery"
+                                            data-ng-click="gal.expanded=!gal.expanded"
+                                            style="padding-top:15px; padding-bottom:15px;">
+                                            <div class="nvc-row">
+                                                <a
+                                                    data-toggle="collapse"
+                                                    data-ng-class="{'collapsed': !gal.expanded}"
+                                                    aria-expanded="true">
+                                                </a>
+                                                <div class="" style="margin-top:-25px; margin-left:20px;">
+                                                    <span class="service-hotel-font5-1">{[{ gal.name }]}</span><br>
+                                                    <span class="service-hotel-font6-1">{[{ gal.images.length }]}&nbsp imágenes</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nvc-panel__collapse" style="height: auto;" data-ng-if="gal.expanded">
+                                            <div class="nvc-panel__content nvc-panel__content--property list-font-hotel">
+                                                <div class="nvc-row">
+                                                    <div class="col-xs-16">
+                                                        <div
+                                                            class='col-xs-4 post-body entry-content'
+                                                            oncontextmenu='return false'
+                                                            ondragstart='return false'
+                                                            onmousedown='return false'
+                                                            onselectstart='return false'
+                                                            data-ng-repeat= "(id, image) in gal.images" style="padding: 0;">
+                                                            <a href="" data-ng-click="showGalleryModal(id, image, gallery)">
+                                                                {#<div class="nvc-carousel__fill img-table-gallery-xs" style="background-image:url('/uploads/images/images_sm/{[{image.url }]}');" src="http://dummyimage.com/600x400.png/fff/fff"></div>#}
+                                                                {% verbatim %}
+                                                                <img class="nvc-carousel__fill img-table-gallery-xs" data-ng-src="/uploads/images/images_sm/{[{image.url}]}">
+                                                                {% endverbatim %}
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalRoom.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalGallery.html.twig") }}
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+</main>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = {{ data | raw }};
+        console.log(response);
+        var $input = $('#refresh');
+        $input.val() == 'yes' ? location.reload(true) : $input.val('yes');
+        // console.log("response", response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% if app.environment == "dev" %}
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCkteypABffSV5FUMesiG0O-G0qngQ1Yhg"></script>
+    {% else %}
+    {% endif %}
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#js-range-picker').rangePicker({
+                checkInSelector: '.js-datepicker-check-in',
+                checkOutSelector: '.js-datepicker-check-out'
+            });
+
+            $('#js-mobile-range-picker').rangePicker({
+                checkInSelector: '.js-rangepicker-check-in',
+                checkOutSelector: '.js-rangepicker-check-out'
+            });
+
+            $('#carousel').nvc-carousel({
+                interval: 10000
+            });
+            $('#nav').affix({
+                offset: {
+                    top: 80,
+                    bottom: function () {
+                        return (this.bottom = $('.footer').outerHeight(true))
+                    }
+                }
+            });
+        });
+
+        //**** Función para mover la barra lateral cuando se haga scroll en la tabla de habitaciones
+        function updateSidebar() {
+            // Padding del elemento superior.
+            var padding = 8;
+
+            // Márgenes que queremos que tenga el elemento "móvil".
+            var marginTop = -10;
+            var marginBottom = 0;
+
+            // Elementos.
+            var element = document.querySelector('.nav-reserve');
+            if (!element) {
+                return false;
+            }
+
+            var parent = element.parentElement;
+
+            // Límites.
+            var elementBounds = element.getBoundingClientRect();
+            var parentBounds = parent.getBoundingClientRect();
+
+            // Alturas.
+            var elementHeight = elementBounds.height;
+            var parentHeight = parentBounds.height;
+
+            // No podemos mover un elemento con una altura mayor o igual a la de
+            // su elemento superior.
+            if (elementHeight >= parentHeight) {
+                return;
+            }
+
+            // La distancia que tendrá será un 25% de la altura de la ventana.
+            var distance = window.innerHeight * 0.25;
+
+            var y = window.scrollY;
+
+            // `a` es la posición absoluta del borde superior del elemento superior.
+            // `b` es la posición absoluta del borde inferior del elemento superior.
+            var a = y + parentBounds.top;
+            var b = y + parentBounds.bottom;
+
+            // Calcula la posición del affix.
+            var top = y-a + distance;
+
+            // Si la posición calculada se pasa de los límites, sustituirla
+            // por su límite más cercano.
+            //
+            // Por ejemplo, si calculamos que está más abajo de lo que debería,
+            // la ponemos lo más abajo posible, sin pasarnos del límite.
+            if (top < marginTop) {
+                top = marginTop;
+            } else if (top + elementHeight >= parentHeight-(padding*2) - marginBottom) {
+                top = parentHeight - elementHeight-(padding*2) - marginBottom;
+            }
+
+            // Aplicamos el estilo.
+            element.style.top = '' + top + 'px';
+
+            return true;
+        }
+        $(window).resize(updateSidebar);
+        $(window).scroll(updateSidebar);
+       	//****
+    </script>
+{% endblock %}

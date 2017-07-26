@@ -1,0 +1,26 @@
+#Homepage
+navicu_subdomain_homepage:
+    path: /
+    defaults: { _controller: NavicuInfrastructureBundle:Subdomain:index }
+    options:
+        expose: true
+
+#Ruta de redireccionamiento hacia login
+navicu_subdomain_login:
+    path: /login
+    defaults: { _controller: NavicuInfrastructureBundle:Security/SecuritySubdomain:login }
+
+navicu_subdomain_logout:
+    path: /logout
+    defaults: { _controller: NavicuInfrastructureBundle:Security/SecuritySubdomain:logout }
+
+navicu_subdomain_check:
+    path: /check
+    defaults: { _controller: NavicuInfrastructureBundle:Security/SecuritySubdomain:check }
+
+navicu_subdomain_access_admin:
+    path: /accessAdmin/{username}
+    defaults: { _controller: NavicuInfrastructureBundle:Security/SecuritySubdomain:accessAdmin }
+
+navicu_subdomain_module_aavv:
+    resource: @NavicuInfrastructureBundle/Resources/config/routing/AAVV.yml

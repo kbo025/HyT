@@ -1,0 +1,1337 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% set header_title = {'module_title': '2'} %}
+
+{% block body %}
+<div ng-app="servicesModule" ng-controller="servicesController" novalidate ng-cloak>
+	{% include "NavicuInfrastructureBundle:Ascribere:PropertyForm/topmenu.html.twig" with header_title %}
+	<!--Top del formualario -->
+	<div class="container" style="font-family:LatoRegular" >
+		<div class="col-md-16" style="color:#572A85; font-size:18px;">
+			<p align="justify">{{"extranet.formServices.top_message"|trans }}</p>
+			<br>
+		</div>
+	</div>
+	<br>
+	<!--Servicios modelo 2  ///////////////////////////////////////////////////////////////aqui empieza lo que es -->
+	<form name="servicesform">
+		<div class="container">
+			<div class="block-service">
+				<div class="col-sm-6 col-md-6 col-lg-5 col1">
+					<h3>{{"extranet.formServices.services"|trans }}</h3>
+					<hr>
+					<div class="services-zone margin-service-xs">
+						<ul class="list-unstyled">
+							<!--div que divide cada item's  -->
+							<div class="container" ng-model="servicio" ng-repeat="(key, value) in services">
+								<div class="col-sm-3 col-md-3 space-items">
+									<a href="">
+										<i class="fa fn-{[{key}]} fa-2x fa-key-size size-items" ng-class="{'liactive':activekey==key, 'checkinserviceicon': value.status == true, 'fa fn-Servicio-a-la-habitaci-n fa-2x fa-key-size size-items': key == 'Servicio a la habitación', 'fa fn-Zonas-comunes fa-2x fa-key-size size-items': key == 'Zonas comunes', 'fa fn-Deporte-y-recreaci-n fa-2x fa-key-size size-items': key == 'Deporte y recreación', 'fa fn-Recepci-n fa-2x fa-key-size size-items': key == 'Recepción'}">
+											<li ng-if="key!='Bar' && value.type!=5" ng-click="isType(key,value); seccion(key,value,value.type);active(key); open=!open; newRN(); {# active(key); hide(); #}" ng-class="{'liactive':activekey==key, 'checkinservice': value.status == true}">{[{key}]}</li>
+											<li ng-if="value.type==5" ng-click="isType(key,value);load(key,value,value.type);" ng-class="{'liactive':activekey==key, 'checkinservice': value.status == true}">{[{key}]}</li>
+											<li ng-if="key=='Bar'" ng-click="isType(key,value); seccion(key,value,value.type);active(key); open=!open; newRN(); {#  active(key); hide(); #}" ng-class="{'liactive':activekey==key, 'checkinservice': value.status == true}">Bar/Discoteca</li>
+										</i>
+									</a>
+								</div>
+							</div>
+						</ul>
+					</div>
+				</div>
+				<div ng-if="eventos"  class="col-sm-10 col-md-10 col-lg-11 col-restaurant">
+					<h3>{{"extranet.formServices.events"|trans }}</h3>
+					<hr>
+					<div>
+						<div class="container">
+							<h4 style="margin-bottom: 0%;">{{"extranet.formServices.message_events"|trans }}</h4>
+						</div>
+						<div class="col-md-16">
+							<h3>{{"extranet.formServices.you_have"|trans }} {[{section.length}]} {{"extranet.formServices.zones_created"|trans }}</h3><h3 style="margin-top: -5%;margin-left: 59%;" ng-if="section.length>0">{{"extranet.formServices.activate"|trans }}</h3>
+							<div style="overflow-x: hidden;overflow-y: auto;max-height: 429px;">
+								<ul class="list-unstyled">
+									<div ng-repeat="(id, content) in section">
+										<div class="container">
+											<div class="col-md-5"><li class="li2">{[{content.Tipo}]} de {[{content.Tamano}]} mts&#178;</li></div>
+											<div class="col-md-2" style="margin-left: 40px;margin-top: -11px;">
+												<md-switch ng-model="content.status" {# ng-click="marker2('Eventos', section)"  #}aria-label="Switch 2" class="md-warn">
+												<span ng-if="content.status == true">{{ "share.message.yes"|trans }}</span>
+												<span ng-if="content.status == false">{{ "share.message.no"|trans }}</span>
+												</md-switch>
+											</div>
+											<div ng-click="activeEdittZ(content, id)" class="col-md-1 message-act" style=":hover{color:#FFF;}">{{"extranet.formServices.edit"|trans }}</div>
+											<div ng-click="showModalDeleteEvents()" class="col-md-1 message-act" style=":hover{color:#FFF;}">{{"extranet.formServices.delete"|trans }}</div>
+										</div>
+									</div>
+								</ul>
+							</div>
+							<button type="button" ng-click="newZEventoss(); temporal(); isnoEventos();"class="btn btn-primary buttonAgg">{{"extranet.formServices.add_event_area"|trans }}</button>
+						</div>
+					</div>
+				</div>
+				<div ng-if="(newZEventos==true  || activeEditZ)" class="col-sm-10 col-md-10 col-lg-11 col-restaurant">
+					<h3>{{"extranet.formServices.information_meetings"|trans }}</h3>
+					<hr>
+					<div>
+						<ng-form name="event">
+							<div class="row">
+								<div class="col-sm-6 col-md-6">
+									<h4>{{"extranet.formServices.name"|trans }}</h4>
+									<input name="Nombre" ng-if="activeEditZ" ng-model="eventoEdit.Nombre" id=""style="width:100%" class="form-control" type="text" >
+									<input name="Nombre" ng-if="!activeEditZ" ng-model="temp.Nombre" id=""style="width:100%"  type="text" class="form-control">
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<h4>{{"extranet.formServices.type"|trans }}*</h4>
+									<select name="type" ng-if="activeEditZ" ng-model="eventoEdit.Tipo" class="form-control" style="width:100%" required>
+										<option value="Salón">Salón</option>
+										<option value="Auditorio">Auditorio</option>
+										<option value="Teatro">Teatro</option>
+									</select>
+									<select name="type" ng-if="!activeEditZ" ng-model="temp.Tipo" class="form-control" style="width:100%" required>
+										<option value="Salón">Salón</option>
+										<option value="Auditorio">Auditorio</option>
+										<option value="Teatro">Teatro</option>
+									</select>
+									<span class="errorG" ng-show="event.type.$error.required && event.type.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-4 col-md-4">
+									<h4>{{"extranet.formServices.natural_light"|trans }}</h4>
+									<md-switch ng-if="activeEditZ" ng-model="eventoEdit.LuzNatural" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+									<md-switch ng-if="!activeEditZ" ng-model="temp.LuzNatural" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-6 col-md-6">
+									<h4>{{"extranet.formServices.length"|trans }} (mts&#178;)*</h4>
+									<input name="Tamano" ng-if="activeEditZ" ng-model="eventoEdit.Tamano" id=""style="width:50%" class="form-control" type="number" min="1" required>
+									<input name="Tamano" ng-if="!activeEditZ" ng-model="temp.Tamano" id=""style="width:50%"  type="number" class="form-control" min="1" required>
+									<span class="errorG" ng-show="event.Tamano.$error.required && event.Tamano.$touched">{{ "share.validation.input_required"|trans }}</span>
+									<span class="errorG" ng-show="event.Tamano.$error.min">{{ "share.validation.only_number_positive"|trans }}</span>
+								</div>
+								<div class="col-sm-6 col-md-6" style="margin-left: -17%;">
+									<h4>{{"extranet.formServices.max_people"|trans }}*</h4>
+									<input name="capMax" ng-if="activeEditZ" ng-model="eventoEdit.Capacidad_Max" id=""style="width:50%" class="form-control" type="number" min="1" required>
+									<input name="capMax" ng-if="!activeEditZ" ng-model="temp.Capacidad_Max" id=""style="width:50%"  type="number" class="form-control" min="1"  required>
+									<span class="errorG" ng-show="event.capMax.$error.required && event.capMax.$touched">{{ "share.validation.input_required"|trans }}</span>
+									<span class="errorG" ng-show="event.capMax.$error.min">{{ "share.validation.only_number_positive"|trans }}</span>
+								</div>
+							</div>
+							<br><br>
+							<div align="right">
+								<div>
+									<button ng-if="activeEditZ" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEditZonaE()" type="button" class=" button2 btn btn-primary">
+										<div>{{"extranet.formServices.cancel"|trans }}</div>
+
+									</button>
+									<button ng-if="!activeEditZ" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEditZonaE()" type="button" class=" button2 btn btn-primary">
+										<div>{{"extranet.formServices.cancel"|trans }}</div>
+
+									</button>
+									<button ng-disabled="event.$invalid" ng-if="activeEditZ" style="width: 40%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEditZonaE();" type="button" class=" button1 btn btn-primary">
+										<div>{{"extranet.formServices.save_area_events"|trans }}</div>
+
+									</button>
+									<button ng-disabled="event.$invalid" ng-if="!activeEditZ" style="width: 40%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="aggZona(temp); veiwZonaE(); impress();" type="button" class=" button1 btn btn-primary">
+										<div>{{"extranet.formServices.save_area_events"|trans }}</div>
+
+									</button>
+
+								</div>
+							</div>
+						</ng-form>
+					</div>
+				</div>
+				<div ng-if="restaurant"  class="col-sm-10 col-md-10 col-lg-11 col-restaurant">
+					<h3>{{"extranet.formServices.restaurant"|trans }} </h3>
+					<hr>
+					<div>
+						<div class="container">
+							<h4 style="margin-bottom: 0%;">{{"extranet.formServices.message_restaurant"|trans }} </h4>
+						</div>
+						<div class="col-md-16">
+							<h3>{{"extranet.formServices.you_have"|trans }} {[{section.length}]} {{"extranet.formServices.restaurant_created"|trans }} </h3> <h3 style="margin-top: -5%;margin-left: 59%;" ng-if="section.length>0">{{"extranet.formServices.activate"|trans }}</h3>
+							<div style="overflow-x: hidden;overflow-y: auto;max-height: 429px;">
+								<ul class="list-unstyled">
+								<div ng-repeat="(id, content) in section">
+									<div class="container">
+										<div class="col-md-5"><li class="li2">{[{content.Nombre}]}</li></div>
+										<div class="col-md-2" style="margin-left: 40px;margin-top: -11px;">
+											<md-switch ng-model="content.status" aria-label="Switch 2" class="md-warn">
+											<span ng-if="content.status == true" >{{ "share.message.yes"|trans }}</span>
+											<span ng-if="content.status == false">{{ "share.message.no"|trans }}</span>
+										</div>
+										<div ng-click="activeEditt(content, id)" class="col-md-1 message-act" style=":hover{color:#FFF;}">{{"extranet.formServices.edit"|trans }}</div>
+										<div ng-click="showModalDeleteRestaurant();" class="col-md-1 message-act" style=":hover{color:#FFF;}">{{"extranet.formServices.delete"|trans }}</div>
+									</div>
+								</div>
+								</ul>
+							</div>
+						</div>
+						<button type="button" ng-click="newR(); temporal(); isnoRestaurant();"class="btn btn-primary buttonAgg">{{"extranet.formServices.add_restaurant"|trans }}</button>
+					</div>
+				</div>
+				<div ng-if="new || activeEdit==true" class="col-sm-10 col-md-10 col-lg-11 col-restaurant">
+					<h3>{{"extranet.formServices.information_restaurant"|trans }}</h3>
+					<hr>
+					<ng-form name="restaurant">
+						<div>
+							<div class="row">
+								<div class="col-sm-5 col-md-5">
+									<h4>{{"extranet.formServices.name"|trans }}*</h4>
+									<input name="nameR" ng-if="activeEdit" ng-model="restaurantEdit.Nombre" id=""style="width:100%" class="form-control" type="text" required>
+									<input name="nameR" ng-if="!activeEdit" ng-model="temp.Nombre" id=""style="width:100%" class="form-control" type="text" required>
+									<span class="errorG" ng-show="restaurant.nameR.$error.required && restaurant.nameR.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-4 col-md-4">
+									<h4>{{"extranet.formServices.type_kitchen"|trans }}*</h4>
+									<select name="type" ng-if="activeEdit" ng-model="restaurantEdit.TipoCocina" class="form-control" style="width:100%" required>
+										 <option value="Comida Africana">Africana</option>
+										<option value="Americana">Americana</option>
+										<option value="Árabe">Árabe</option>
+										<option value="Cubana">Cubana</option>
+										<option value="China">China</option>
+										<option value="Coreana">Coreana</option>
+										<option value="Española">Española</option>
+										<option value="Etíope">Etíope</option>
+										<option value="Francesa">Francesa</option>
+										<option value="Fusión">Fusión</option>
+										<option value="Gourmet">Gourmet</option>
+										<option value="Halal">Halal</option>
+										<option value="India">India</option>
+										<option value="Italiana">Italiana</option>
+										<option value="Japonesa">Japonesa</option>
+										<option value="Libanesa">Libanesa</option>
+										<option value="Mediterránea">Mediterránea</option>
+										<option value="Mexicana">Mexicana</option>
+										<option value="Nepalí">Nepalí</option>
+										<option value="Peruana">Peruana</option>
+										<option value="Sin Gluten">Sin Gluten</option>
+										<option value="Tailandesa">Tailandesa</option>
+										<option value="Tex-Mex">Tex-Mex</option>
+										<option value="Vegetariana">Vegetariana</option>
+										<option value="Venezolana">Venezolana</option>
+										<option value="Hamburguesas">Hamburguesas</option>
+										<option value="Otros Tipos">Otros Tipos</option>
+									</select>
+									<select name="type" ng-if="!activeEdit" ng-model="temp.TipoCocina" class="form-control" style="width:100%" required>
+										<option value="Comida Africana">Africana</option>
+										<option value="Americana">Americana</option>
+										<option value="Árabe">Árabe</option>
+										<option value="Cubana">Cubana</option>
+										<option value="China">China</option>
+										<option value="Coreana">Coreana</option>
+										<option value="Española">Española</option>
+										<option value="Etíope">Etíope</option>
+										<option value="Francesa">Francesa</option>
+										<option value="Fusión">Fusión</option>
+										<option value="Gourmet">Gourmet</option>
+										<option value="Halal">Halal</option>
+										<option value="India">India</option>
+										<option value="Italiana">Italiana</option>
+										<option value="Japonesa">Japonesa</option>
+										<option value="Libanesa">Libanesa</option>
+										<option value="Mediterránea">Mediterránea</option>
+										<option value="Mexicana">Mexicana</option>
+										<option value="Nepalí">Nepalí</option>
+										<option value="Peruana">Peruana</option>
+										<option value="Sin Gluten">Sin Gluten</option>
+										<option value="Tailandesa">Tailandesa</option>
+										<option value="Tex-Mex">Tex-Mex</option>
+										<option value="Vegetariana">Vegetariana</option>
+										<option value="Venezolana">Venezolana</option>
+										<option value="Hamburguesas">Hamburguesas</option>
+										<option value="Otros Tipos">Otros Tipos</option>
+									</select>
+									<span class="errorG" ng-show="restaurant.type.$error.required && restaurant.type.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.card_type"|trans }}*</h4>
+									<select name="type_menu" ng-if="activeEdit" ng-model="restaurantEdit.BuffetoCarta" class="form-control" style="width:100%" required>
+										<option value="Ambos">Ambos</option>
+										<option value="Buffet">Buffet</option>
+										<option value="Carta">Carta</option>
+									</select>
+									<select name="type_menu" ng-if="!activeEdit" ng-model="temp.BuffetoCarta" class="form-control" style="width:100%" required>
+										<option value="Ambos">Ambos</option>
+										<option value="Buffet">Buffet</option>
+										<option value="Carta">Carta</option>
+									</select>
+                                    <span class="errorG" ng-show="restaurant.type_menu.$error.required && restaurant.type_menu.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-4 col-md-4">
+									<h4>{{"extranet.formServices.dietary_menu"|trans }}</h4>
+									<md-switch ng-if="activeEdit" ng-model="restaurantEdit.MenuDietetico" aria-label="Switch 2" class="md-warn" >
+										<span ng-if="temp.MenuDietetico == true">{{ "share.message.yes"|trans }}</span>
+										<span ng-if="temp.MenuDietetico == false">{{ "share.message.no"|trans }}</span>
+									</md-switch>
+									<md-switch ng-if="!activeEdit" ng-model="temp.MenuDietetico" aria-label="Switch 2" class="md-warn" >
+										<span ng-if="temp.MenuDietetico == true">{{ "share.message.yes"|trans }}</span>
+										<span ng-if="temp.MenuDietetico == false">{{ "share.message.no"|trans }}</span>
+									</md-switch>
+								</div>
+
+							</div>
+							<h6>{{"extranet.formServices.opening_days"|trans }}*</h6>
+							<div class="row" style="color:#FFF !important">
+								{# <div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.opening"|trans }}*</h4>
+									<select name="apertura"ng-if="activeEdit" ng-model="restaurantEdit.Horario.Apertura" class="form-control" style="width:100%" required>
+										<option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<select name="apertura"ng-if="!activeEdit" ng-model="temp.Horario.Apertura" class="form-control" style="width:100%" required>
+										<option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<span class="errorG" ng-show="restaurant.apertura.$error.required && restaurant.apertura.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.closing"|trans }}*</h4>
+									<select name="cierre" ng-if="activeEdit" ng-model="restaurantEdit.Horario.Cierre" class="form-control" style="width:100%" required>
+										<option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<select name="cierre" ng-if="!activeEdit" ng-model="temp.Horario.Cierre" class="form-control" style="width:100%" required>
+										<option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<span class="errorG" ng-show="restaurant.cierre.$error.required && restaurant.cierre.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div> #}
+								<div class="col-lg-2">
+									<md-checkbox ng-if="activeEdit" ng-model="restaurantEdit.Dias_abirtos.Lunes" aria-label="Checkbox 1">
+									Lunes
+									</md-checkbox>
+									{#no esta editando#}
+									<md-checkbox ng-if="!activeEdit" ng-model="temp.Dias_abirtos.Lunes" aria-label="Checkbox 1">
+									Lunes
+									</md-checkbox>
+                                </div>
+								<div class="col-lg-2">
+									<md-checkbox ng-if="activeEdit" ng-model="restaurantEdit.Dias_abirtos.Martes" aria-label="Checkbox 1">
+									Martes
+									</md-checkbox>
+									{#no esta editando#}
+									<md-checkbox ng-if="!activeEdit" ng-model="temp.Dias_abirtos.Martes" aria-label="Checkbox 1">
+									Martes
+									</md-checkbox>
+								</div>
+								<div class="col-lg-2" style="margin-right: 2%;">
+									<md-checkbox ng-if="activeEdit" ng-model="restaurantEdit.Dias_abirtos.Miercoles" aria-label="Checkbox 1">
+									Miercoles
+									</md-checkbox>
+									{#no esta editando#}
+									<md-checkbox ng-if="!activeEdit" ng-model="temp.Dias_abirtos.Miercoles" aria-label="Checkbox 1">
+									Miercoles
+									</md-checkbox>
+								</div>
+								<div class="col-lg-2">
+									<md-checkbox ng-if="activeEdit" ng-model="restaurantEdit.Dias_abirtos.Jueves" aria-label="Checkbox 1">
+									Jueves
+									</md-checkbox>
+									{#no esta editando#}
+									<md-checkbox ng-if="!activeEdit" ng-model="temp.Dias_abirtos.Jueves" aria-label="Checkbox 1">
+									Jueves
+									</md-checkbox>
+								</div>
+								<div class="col-lg-2">
+									<md-checkbox ng-if="activeEdit" ng-model="restaurantEdit.Dias_abirtos.Viernes" aria-label="Checkbox 1">
+									Viernes
+									</md-checkbox>
+									{#no esta editando#}
+									<md-checkbox ng-if="!activeEdit" ng-model="temp.Dias_abirtos.Viernes" aria-label="Checkbox 1">
+									Viernes
+									</md-checkbox>
+								</div>
+								<div class="col-lg-2">
+									<md-checkbox ng-if="activeEdit" ng-model="restaurantEdit.Dias_abirtos.Sabado" aria-label="Checkbox 1">
+									Sabado
+									</md-checkbox>
+									{#no esta editando#}
+									<md-checkbox ng-if="!activeEdit" ng-model="temp.Dias_abirtos.Sabado" aria-label="Checkbox 1">
+									Sabado
+									</md-checkbox>
+								</div>
+								<div class="col-lg-2">
+									<md-checkbox ng-if="activeEdit" ng-model="restaurantEdit.Dias_abirtos.Domingo" aria-label="Checkbox 1">
+									Domingo
+									</md-checkbox>
+									{#no esta editando#}
+									<md-checkbox ng-if="!activeEdit" ng-model="temp.Dias_abirtos.Domingo" aria-label="Checkbox 1">
+									Domingo
+									</md-checkbox>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5 col-md-5 col-lg-4"  style="  margin-left: 0%; margin-right: -6%;">
+									<br>
+									<h4>{{"extranet.formServices.breakfast_time"|trans }}</h4>
+								</div>
+								<div class="col-md-1">
+									<md-switch ng-if="activeEdit" ng-model="restaurantEdit.Desayuno.status" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+									<md-switch ng-if="!activeEdit" ng-model="temp.Desayuno.status" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+								</div>
+								<div class="col-sm-5 col-md-5 col-lg-4 " style="margin-left: 6%;margin-right: -9%;">
+									<br>
+									<h4>{{"extranet.formServices.lunch_time"|trans }}</h4>
+								</div>
+								<div class="col-sm-1 col-md-1">
+									<md-switch ng-if="activeEdit" ng-model="restaurantEdit.Almuerzo.status" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+									<md-switch ng-if="!activeEdit" ng-model="temp.Almuerzo.status" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+								</div>
+								<div class="col-sm-5 col-md-5 col-lg-4" style=" margin-left: 9%;margin-right: -13%;">
+									<br>
+									<h4>{{"extranet.formServices.hours_dinner"|trans }}</h4>
+								</div>
+								<div class="col-sm-1 col-md-1">
+									<md-switch ng-if="activeEdit" ng-model="restaurantEdit.Cena.status" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+									<md-switch ng-if="!activeEdit" ng-model="temp.Cena.status" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+								</div>
+							</div>
+							<div class="row" >
+								<div class="col-sm-3 col-md-3 space col-restaurant-pad">
+									<h4>{{"extranet.formServices.since"|trans }}</h4>
+									<select ng-if="activeEdit" ng-model="restaurantEdit.Desayuno.Apertura" ng-disabled="!restaurantEdit.Desayuno.status" class="form-control" style="width:100%">
+										  <option value="05:00:00">5:00</option>
+										  <option value="05:30:00">5:30</option>
+										  <option value="06:00:00">6:00</option>
+										  <option value="06:30:00">6:30</option>
+										  <option value="07:00:00">7:00</option>
+										  <option value="07:30:00">7:30</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="08:30:00">8:30</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="09:30:00">9:30</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="10:30:00">10:30</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+									</select>
+									<select ng-if="!activeEdit" ng-model="temp.Desayuno.Apertura" ng-disabled="!temp.Desayuno.status" class="form-control" style="width:100%">
+										  <option value="05:00:00">5:00</option>
+										  <option value="05:30:00">5:30</option>
+										  <option value="06:00:00">6:00</option>
+										  <option value="06:30:00">6:30</option>
+										  <option value="07:00:00">7:00</option>
+										  <option value="07:30:00">7:30</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="08:30:00">8:30</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="09:30:00">9:30</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="10:30:00">10:30</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+									</select>
+								</div>
+								<div class="col-sm-3 col-md-3 space col-restaurant-pad" >
+									<h4>{{"extranet.formServices.until"|trans }}</h4>
+									<select ng-if="activeEdit" ng-model="restaurantEdit.Desayuno.Cierre" ng-disabled="!restaurantEdit.Desayuno.status" class="form-control" style="width:100%">
+										  <option value="05:00:00">5:00</option>
+										  <option value="05:30:00">5:30</option>
+										  <option value="06:00:00">6:00</option>
+										  <option value="06:30:00">6:30</option>
+										  <option value="07:00:00">7:00</option>
+										  <option value="07:30:00">7:30</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="08:30:00">8:30</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="09:30:00">9:30</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="10:30:00">10:30</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+									</select>
+									<select ng-if="!activeEdit" ng-model="temp.Desayuno.Cierre" ng-disabled="!temp.Desayuno.status" class="form-control" style="width:100%">
+										  <option value="05:00:00">5:00</option>
+										  <option value="05:30:00">5:30</option>
+										  <option value="06:00:00">6:00</option>
+										  <option value="06:30:00">6:30</option>
+										  <option value="07:00:00">7:00</option>
+										  <option value="07:30:00">7:30</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="08:30:00">8:30</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="09:30:00">9:30</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="10:30:00">10:30</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+									</select>
+								</div>
+								<div class="col-sm-3 col-md-3 space col-restaurant-pad">
+									<h4>{{"extranet.formServices.since"|trans }}</h4>
+									<select ng-if="activeEdit" ng-model="restaurantEdit.Almuerzo.Apertura" ng-disabled="!restaurantEdit.Almuerzo.status" class="form-control" style="width:100%">
+										  <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="12:30:00">12:30</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="13:30:00">13:30</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="14:30:00">14:30</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="15:30:00">15:30</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="16:30:00">16:30</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+									</select>
+									<select ng-if="!activeEdit" ng-model="temp.Almuerzo.Apertura" ng-disabled="!temp.Almuerzo.status" class="form-control" style="width:100%">
+										 <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="12:30:00">12:30</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="13:30:00">13:30</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="14:30:00">14:30</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="15:30:00">15:30</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="16:30:00">16:30</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+									</select>
+								</div>
+								<div class="col-sm-3 col-md-3 space col-restaurant-pad">
+									<h4>{{"extranet.formServices.until"|trans }}</h4>
+									<select ng-if="activeEdit" ng-model="restaurantEdit.Almuerzo.Cierre" ng-disabled="!restaurantEdit.Almuerzo.status" class="form-control" style="width:100%">
+										 <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="12:30:00">12:30</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="13:30:00">13:30</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="14:30:00">14:30</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="15:30:00">15:30</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="16:30:00">16:30</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+									</select>
+									<select ng-if="!activeEdit" ng-model="temp.Almuerzo.Cierre" ng-disabled="!temp.Almuerzo.status" class="form-control" style="width:100%">
+										 <option value="11:00:00">11:00</option>
+										  <option value="11:30:00">11:30</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="12:30:00">12:30</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="13:30:00">13:30</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="14:30:00">14:30</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="15:30:00">15:30</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="16:30:00">16:30</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+									</select>
+								</div>
+								<div class="col-sm-3 col-md-3 space col-restaurant-pad">
+									<h4>{{"extranet.formServices.since"|trans }}</h4>
+									<select ng-if="activeEdit" ng-model="restaurantEdit.Cena.Apertura" ng-disabled="!restaurantEdit.Cena.status" class="form-control" style="width:100%">
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="18:30:00">18:30</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="19:30:00">19:30</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="20:30:00">20:30</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="21:30:00">21:30</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="22:30:00">22:30</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="23:30:00">23:30</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="00:30:00">00:30</option>
+										  <option value="01:00:00">01:00</option>
+										  <option value="01:30:00">01:30</option>
+										  <option value="02:00:00">02:00</option>
+										  <option value="02:30:00">02:30</option>
+										  <option value="03:00:00">03:00</option>
+										  <option value="03:30:00">03:30</option>
+										  <option value="04:00:00">04:00</option>
+										  <option value="04:30:00">04:30</option>
+										  <option value="05:00:00">05:00</option>
+										  <option value="05:30:00">05:30</option>
+										  <option value="06:00:00">06:00</option>
+									</select>
+									<select ng-if="!activeEdit" ng-model="temp.Cena.Apertura" ng-disabled="!temp.Cena.status" class="form-control" style="width:100%">
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="18:30:00">18:30</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="19:30:00">19:30</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="20:30:00">20:30</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="21:30:00">21:30</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="22:30:00">22:30</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="23:30:00">23:30</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="00:30:00">00:30</option>
+										  <option value="01:00:00">01:00</option>
+										  <option value="01:30:00">01:30</option>
+										  <option value="02:00:00">02:00</option>
+										  <option value="02:30:00">02:30</option>
+										  <option value="03:00:00">03:00</option>
+										  <option value="03:30:00">03:30</option>
+										  <option value="04:00:00">04:00</option>
+										  <option value="04:30:00">04:30</option>
+										  <option value="05:00:00">05:00</option>
+										  <option value="05:30:00">05:30</option>
+										  <option value="06:00:00">06:00</option>
+									</select>
+								</div>
+								<div class="col-sm-3 col-md-3 space col-restaurant-pad">
+									<h4>{{"extranet.formServices.until"|trans }}</h4>
+									<select ng-if="activeEdit" ng-model="restaurantEdit.Cena.Cierre" ng-disabled="!restaurantEdit.Cena.status" class="form-control" style="width:100%">
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="18:30:00">18:30</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="19:30:00">19:30</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="20:30:00">20:30</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="21:30:00">21:30</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="22:30:00">22:30</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="23:30:00">23:30</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="00:30:00">00:30</option>
+										  <option value="01:00:00">01:00</option>
+										  <option value="01:30:00">01:30</option>
+										  <option value="02:00:00">02:00</option>
+										  <option value="02:30:00">02:30</option>
+										  <option value="03:00:00">03:00</option>
+										  <option value="03:30:00">03:30</option>
+										  <option value="04:00:00">04:00</option>
+										  <option value="04:30:00">04:30</option>
+										  <option value="05:00:00">05:00</option>
+										  <option value="05:30:00">05:30</option>
+										  <option value="06:00:00">06:00</option>
+									</select>
+									<select ng-if="!activeEdit" ng-model="temp.Cena.Cierre" ng-disabled="!temp.Cena.status" class="form-control" style="width:100%">
+										  <option value="17:00:00">17:00</option>
+										  <option value="17:30:00">17:30</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="18:30:00">18:30</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="19:30:00">19:30</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="20:30:00">20:30</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="21:30:00">21:30</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="22:30:00">22:30</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="23:30:00">23:30</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="00:30:00">00:30</option>
+										  <option value="01:00:00">01:00</option>
+										  <option value="01:30:00">01:30</option>
+										  <option value="02:00:00">02:00</option>
+										  <option value="02:30:00">02:30</option>
+										  <option value="03:00:00">03:00</option>
+										  <option value="03:30:00">03:30</option>
+										  <option value="04:00:00">04:00</option>
+										  <option value="04:30:00">04:30</option>
+										  <option value="05:00:00">05:00</option>
+										  <option value="05:30:00">05:30</option>
+										  <option value="06:00:00">06:00</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-16 col-md-16">
+									<br>
+									<h4>{{"extranet.formServices.field_description"|trans }}</h4>
+									<textarea ng-if="activeEdit" ng-model="restaurantEdit.Descripcion" style="width:100%" rows="5" class="form-control"></textarea>
+									<textarea ng-if="!activeEdit" ng-model="temp.Descripcion" style="width:100%" rows="5" class="form-control"></textarea>
+								</div>
+							</div>
+							<div>
+								<div align="right" style="margin-top:0.3%">
+									<button ng-if="activeEdit" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEdit()" type="button" class=" button2 btn btn-primary">
+										<div>{{"extranet.formServices.cancel"|trans }}</div>
+
+									</button>
+									<button ng-if="!activeEdit" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEdit()" type="button" class=" button2 btn btn-primary">
+										<div>{{"extranet.formServices.cancel"|trans }}</div>
+
+									</button>
+									<button ng-disabled="restaurant.$invalid" ng-if="activeEdit" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEdit()" type="button" class=" button1 btn btn-primary">
+										<div>{{"extranet.formServices.save_restaurant"|trans }}</div>
+
+									</button>
+									<button ng-disabled="restaurant.$invalid" ng-if="!activeEdit" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="agg(temp,temp.Nombre); veiwRestaurant();" type="button" class=" button1 btn btn-primary">
+										<div>{{"extranet.formServices.save_restaurant"|trans }}</div>
+
+									</button>
+								</div>
+							</div>
+						</div>
+					</ng-form>
+				</div>
+				<div ng-if="bar" class="col-sm-10 col-md-10 col-lg-11 col-restaurant">
+					<h3>{{"extranet.formServices.bar"|trans }}</h3>
+					<hr>
+					<div>
+						<div class="container">
+							<h4 style="margin-bottom: 0%;">{{"extranet.formServices.message_bar"|trans }}</h4>
+						</div>
+						<div class="col-md-16">
+							<h3>{{"extranet.formServices.you_have"|trans }} {[{section.length}]} {{"extranet.formServices.bar_created"|trans }} </h3><h3 style="margin-top: -5%;margin-left: 59%;" ng-if="section.length>0">{{"extranet.formServices.activate"|trans }}</h3>
+							<div style="overflow-x: hidden;overflow-y: auto;max-height: 429px;">
+								<ul class="list-unstyled">
+								<div ng-repeat="(id, content) in section">
+									<div class="container">
+										<div class="col-md-5"><li class="li2">{[{content.Nombre}]}</li></div>
+										<div class="col-md-2" style="margin-left: 40px;margin-top: -11px;">
+											<md-switch ng-model="content.status" aria-label="Switch 2" class="md-warn">
+											<span ng-if="content.status == true">{{ "share.message.yes"|trans }}</span>
+											<span ng-if="content.status == false">{{ "share.message.no"|trans }}</span>
+										</div>
+										<div ng-click="activeEdittb(content,id)" class="col-md-1 message-act" >{{"extranet.formServices.edit"|trans }}</div>
+										<div ng-click="showModalDeleteBar();" class="col-md-1 message-act" >{{"extranet.formServices.delete"|trans }}</div>
+									</div>
+
+								</div>
+								</ul>
+							</div>
+						</div>
+						<button type="button" ng-click=" newBar(); temporal();" class="btn btn-primary buttonAgg">{{"extranet.formServices.add_bar"|trans }}</button>
+					</div>
+				</div>
+				<div ng-if="newB==true || activeEditb" class="col-sm-10 col-md-10 col-lg-11 col-restaurant">
+					<h3>{{"extranet.formServices.information_bar"|trans }}</h3>
+					<hr>
+					<ng-form name="bar">
+						<div>
+							<div class="row">
+								<div class="col-sm-6 col-md-6">
+									<h4 ng-class="{'label-error' :restaurant.name.$error.required && restaurant.name.$touched}">{{"extranet.formServices.name"|trans }}*</h4>
+									<input name="name" ng-if="activeEditb" ng-model="barEdit.Nombre" style="width:100%" class="form-control" type="text" required>
+									<input name="name" ng-if="!activeEditb" ng-model="temp.Nombre" style="width:100%" class="form-control" type="text" required>
+									<span class="errorG" ng-show="bar.name.$error.required && bar.name.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.type"|trans }}*</h4>
+									<select name="type" style="margin-top: 15px;" ng-if="activeEditb" ng-model="barEdit.Tipo" class="form-control" style="width:100%" required>
+										<option value="Bar">Bar</option>
+										<option value="Discoteca">Discoteca</option>
+									</select>
+									<select name="type" style="margin-top: 15px;" ng-if="!activeEditb" ng-model="temp.Tipo" class="form-control" style="width:100%" required>
+										<option value="Bar">Bar</option>
+										<option value="Discoteca">Discoteca</option>
+									</select>
+									<span class="errorG" ng-show="bar.type.$error.required && bar.type.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.they_serve_food"|trans }}</h4>
+									<md-switch ng-if="activeEditb" ng-model="barEdit.Comida" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+									<md-switch ng-if="!activeEditb" ng-model="temp.Comida" aria-label="Switch 2" class="md-warn" >
+									</md-switch>
+								</div>
+								<div ng-if="barEdit.Comida" class="col-sm-4 col-md-4">
+										<h4>{{"extranet.formServices.kind_of_food"|trans }}</h4>
+										<select ng-model="barEdit.tipo_comida" class="form-control" style="width:100%; height: 37px;margin-top: 3%;">
+										  <option value="Comida Africana">Africana</option>
+										<option value="Americana">Americana</option>
+										<option value="Árabe">Árabe</option>
+										<option value="Cubana">Cubana</option>
+										<option value="China">China</option>
+										<option value="Coreana">Coreana</option>
+										<option value="Española">Española</option>
+										<option value="Etíope">Etíope</option>
+										<option value="Francesa">Francesa</option>
+										<option value="Fusión">Fusión</option>
+										<option value="Gourmet">Gourmet</option>
+										<option value="Halal">Halal</option>
+										<option value="India">India</option>
+										<option value="Italiana">Italiana</option>
+										<option value="Japonesa">Japonesa</option>
+										<option value="Libanesa">Libanesa</option>
+										<option value="Mediterránea">Mediterránea</option>
+										<option value="Mexicana">Mexicana</option>
+										<option value="Nepalí">Nepalí</option>
+										<option value="Peruana">Peruana</option>
+										<option value="Sin Gluten">Sin Gluten</option>
+										<option value="Tailandesa">Tailandesa</option>
+										<option value="Tex-Mex">Tex-Mex</option>
+										<option value="Vegetariana">Vegetariana</option>
+										<option value="Venezolana">Venezolana</option>
+										<option value="Hamburguesas">Hamburguesas</option>
+										<option value="Otros Tipos">Otros Tipos</option>
+										</select>
+								</div>
+								<div ng-if="temp.Comida" class="col-sm-4 col-md-4">
+										<h4 for="">{{"extranet.formServices.kind_of_food"|trans }}</h4>
+										<select ng-model="temp.tipo_comida" sclass="form-control" style="width:100%;height: 37px;margin-top: 3%;">
+										  <option value="Comida Africana">Africana</option>
+										<option value="Americana">Americana</option>
+										<option value="Árabe">Árabe</option>
+										<option value="Cubana">Cubana</option>
+										<option value="China">China</option>
+										<option value="Coreana">Coreana</option>
+										<option value="Española">Española</option>
+										<option value="Etíope">Etíope</option>
+										<option value="Francesa">Francesa</option>
+										<option value="Fusión">Fusión</option>
+										<option value="Gourmet">Gourmet</option>
+										<option value="Halal">Halal</option>
+										<option value="India">India</option>
+										<option value="Italiana">Italiana</option>
+										<option value="Japonesa">Japonesa</option>
+										<option value="Libanesa">Libanesa</option>
+										<option value="Mediterránea">Mediterránea</option>
+										<option value="Mexicana">Mexicana</option>
+										<option value="Nepalí">Nepalí</option>
+										<option value="Peruana">Peruana</option>
+										<option value="Sin Gluten">Sin Gluten</option>
+										<option value="Tailandesa">Tailandesa</option>
+										<option value="Tex-Mex">Tex-Mex</option>
+										<option value="Vegetariana">Vegetariana</option>
+										<option value="Venezolana">Venezolana</option>
+										<option value="Hamburguesas">Hamburguesas</option>
+										<option value="Otros Tipos">Otros Tipos</option>
+										</select>
+								</div>
+							</div>
+							<h6>{{"extranet.formServices.schedule"|trans }}*</h6>
+							<div class="row">
+								<div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.opening"|trans }}*</h4>
+									<select name="apertura" ng-if="activeEditb" ng-model="barEdit.Horario.Apertura" class="form-control" style="width:100%" required>
+										  <option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<select name="apertura" ng-if="!activeEditb" ng-model="temp.Horario.Apertura" class="form-control" style="width:100%" required>
+										<option value="7:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>0
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<span class="errorG" ng-show="bar.apertura.$error.required && bar.apertura.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.closing"|trans }}*</h4>
+									<select name="cierre"ng-if="activeEditb" ng-model="barEdit.Horario.Cierre" class="form-control" style="width:100%" required>
+										<option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<select name="cierre"ng-if="!activeEditb" ng-model="temp.Horario.Cierre" class="form-control" style="width:100%" required>
+										<option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="9:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+									</select>
+									<span class="errorG" ng-show="bar.cierre.$error.required && bar.cierre.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+								<div class="col-sm-3 col-md-3">
+									<h4>{{"extranet.formServices.age_min"|trans }}*</h4>
+									<select name="edadMin" ng-if="activeEditb" ng-model="barEdit.Edad_Min" class="form-control" style="width:100%" required number-converter>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+									</select>
+									<select name="edadMin" ng-if="!activeEditb" ng-model="temp.Edad_Min" class="form-control" style="width:100%" required number-converter>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+									</select>
+									<span class="errorG" ng-show="bar.edadMin.$error.required && bar.edadMin.$touched">{{ "share.validation.input_required"|trans }}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-16 col-md-16">
+									<br>
+									<h4>{{"extranet.formServices.field_description"|trans }}</h4>
+									<textarea ng-if="activeEditb" ng-model="barEdit.Descripcion" style="width:100%" rows="5" class="form-control"></textarea>
+									<textarea ng-if="!activeEditb" ng-model="temp.Descripcion" style="width:100%" rows="5" class="form-control"></textarea>
+								</div>
+							</div>
+						</div>
+						<br><br>
+						<div align="right">
+							<div>
+								<button ng-if="activeEditb" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEditb()" type="button" class=" button2 btn btn-primary">
+									<div>{{"extranet.formServices.cancel"|trans }}</div>
+
+								</button>
+								<button ng-if="!activeEditb" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEditb()" type="button" class=" button2 btn btn-primary">
+									<div>{{"extranet.formServices.cancel"|trans }}</div>
+
+								</button>
+								<button ng-disabled="bar.$invalid" ng-if="activeEditb" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="endEditb(); impress();" type="button" class=" button1 btn btn-primary">
+									<div>{{"extranet.formServices.save_bar"|trans }}</div>
+
+								</button>
+								<button ng-disabled="bar.$invalid" ng-if="!activeEditb" style="width: 30%; font-size: 21px; height: 35px; border-radius: 2px !important;" ng-click="aggb(temp); veiwBar(); impress();" type="button" class=" button1 btn btn-primary">
+									<div>{{"extranet.formServices.save_bar"|trans }}</div>
+
+								</button>
+
+							</div>
+						</div>
+					</ng-form>
+				</div>
+				<!--Modelo LISTADO DE SERVICIOS -->
+				<div class="col-sm-5 col-md-5 col2" ng-if="section && !restaurant && !new && !activeEdit && !bar && !newB && !newZEventos && !activeEditb && !eventos && !activeEditZ && !costo">
+					<h3>{[{service}]}</h3>
+					<hr>
+					<ng-form name="general">
+						<div class="services-zone" >
+							<ul class="list-unstyled" ng-repeat="(key, value) in section">
+								<div class="container">
+									<div class="col-sm-3 col-md-3 space-items">
+										<a href="" ng-init="type=verify(value)">
+											<li  ng-if="type!=0 && type!=9" ng-click="load(key,value,type); activesub(key);costo=true" ng-class="{'liactive': activesubservice == key , 'checkin': value.status == true}">{[{key}]}</li>
+											<li  ng-if="type==0" ng-click=" value.status=!value.status; marker(service,section);load(key,value,type); " ng-class="{'checkin': value.status == true}">{[{key}]}</li>
+											<li  ng-if="type==9" ng-click="value.status=!value.status;
+											marker(service,section);" ng-class="{'liactive': activesubservice == key , 'checkin': value.status == true}">{[{key}]}</li>
+										</a>
+
+										<div ng-if="value.status">
+											<div class="space-items" ng-repeat="(key2, value2) in value.subservices">
+												<li ng-class="{'liactive': activesubservice == key2 , 'checkin': value2.status == true}" ng-if="value2.type==9" style="width:300px;" ng-click="value2.status=!value2.status">
+													{[{key2}]}
+												</li>
+												<li  ng-class="{'liactive': activesubservice == key2 , 'checkin': value2.status == true}" ng-if="value2.type==0"  style="width:250px;"  ng-click=" value2.status=!value2.status;load(key,value,value2.type);marker(key2,value2);" ng-class="{'checkin': value2.status == true}">{[{key2}]}</li>
+												<li  ng-class="{'liactive': activesubservice == key2 , 'checkin': value2.status == true}" ng-if="value2.type==8"  style="width:250px;"  ng-click=" value2.status=!value2.status;load(key,value,value2.type);" ng-class="{'checkin': value2.status == true}">{[{key2}]}</li>
+
+												<div class="row" ng-show="value2.status && value2.type==8">
+													<div class=" col-md-3 desp">
+														<h5>{{"extranet.formProperty.amount"|trans }}:</h5>
+													</div>
+													<div class="col-md-3 desp">
+														<input ng-model="value2.data.Cantidad" name="Cantidad" type="number" placeholder="" maxlength="2" min="1">
+														<span class="error" ng-if="general.Cantidad.$error.number">No numero</span>
+													</div>
+												</div>
+												<li ng-class="{'checkin': value2.status == true}" ng-if="value2.type!=9 && value2.type!=0 && value2.type!=8" style="width:3000px;" ng-click="load(key2,value2,value2.type); costo=true">
+													{[{key2}]}
+												</li>
+
+												<div ng-if="value2.status">
+													<div ng-repeat="(key3, value3) in value2.subservices">
+														<li ng-class="{'checkin': value3.status == true}" style="font-size: 18px; width:300px; margin-left:40%;" ng-click=" load(key3,value3,value3.type); activesub(key);">
+															{[{key3}]}
+														</li>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</ul>
+						</div>
+					<ng-form>
+				</div>
+				<div class="col-sm-5 col-md-6 col3" ng-if="type==4 && !restaurant && !new  && !activeEdit &&!bar ">
+					<h3>{[{name}]}</h3>
+					<hr>
+					<div class="services-zone">
+						<h4>{{"extranet.formGeneral.schedules"|trans }}</h4>
+						<div class="container">
+							<div class="col-md-4 font-schedule" style="margin-left:-1%">
+								{{"extranet.formGeneral.open24"|trans }}
+							</div>
+							<div class="col-md-2" style="  margin-left: -8%;margin-top: -1%;">
+								<md-switch ng-model="values.data.Horario.Full_time" aria-label="Switch 2" class="md-warn" >
+									<span ng-if="values.data.Horario.Full_time == true">{{ "share.message.yes"|trans }}</span>
+									<span ng-if="values.data.Horario.Full_time == false">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+						</div>
+
+						<div class="col-sm-16 col-md-6 col-lg-5 font-schedule" ng-if="!values.data.Horario.Full_time">
+							{{"extranet.formServices.opening"|trans }}
+							<select ng-model="values.data.Horario.Apertura" class="form-control" style="width:100%">
+										 <option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+							</select>
+
+						</div>
+						<div class="col-sm-16 col-md-6 col-lg-5 font-schedule" ng-if="!values.data.Horario.Full_time">
+							{{"extranet.formServices.closing"|trans }}
+							<select ng-model="values.data.Horario.Cierre" class="form-control" style="width:100%">
+										  <option value="07:00:00">7:00</option>
+										  <option value="08:00:00">8:00</option>
+										  <option value="09:00:00">9:00</option>
+										  <option value="10:00:00">10:00</option>
+										  <option value="11:00:00">11:00</option>
+										  <option value="12:00:00">12:00</option>
+										  <option value="13:00:00">13:00</option>
+										  <option value="14:00:00">14:00</option>
+										  <option value="15:00:00">15:00</option>
+										  <option value="16:00:00">16:00</option>
+										  <option value="17:00:00">17:00</option>
+										  <option value="18:00:00">18:00</option>
+										  <option value="19:00:00">19:00</option>
+										  <option value="20:00:00">20:00</option>
+										  <option value="21:00:00">21:00</option>
+										  <option value="22:00:00">22:00</option>
+										  <option value="23:00:00">23:00</option>
+										  <option value="00:00:00">00:00</option>
+										  <option value="01:00:00">1:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="02:00:00">2:00</option>
+										  <option value="03:00:00">3:00</option>
+										  <option value="04:00:00">4:00</option>
+										  <option value="05:00:00">5:00</option>
+										  <option value="06:00:00">6:00</option>
+							</select>
+						</div>
+					</div>
+					<div>
+						<div ng-class="{'message-inactive': values.status==false, 'message-act': values.status==true}">¡Este servicio está <div ng-if="values.status==false">&nbsp;inactivo</div><div ng-if="values.status==true">&nbsp;activo</div>!</div>
+						<div align="center">
+							<button ng-class="{'button1': values.status==false, 'button2': values.status==true}" ng-click="values.status=!values.status; marker(service,section);" type="button" class="btn btn-primary">
+								<div ng-if="values.status==false">{{"extranet.formGeneral.enable_service"|trans }}</div>
+								<div ng-if="values.status==true">{{"extranet.formGeneral.disable_service"|trans }}</div>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-5 col-md-6 col3" ng-if="type==5 && !restaurant && !new  && !activeEdit && !bar" >
+					<h3>{[{name}]}</h3>
+					<hr>
+					<div class="services-zone">
+						<h4>{{"extranet.formGeneral.cost"|trans }}</h4>
+						<div class="col-sm-16 col-md-8" style="padding-left:0px;">
+							<div align="center"><button type="button"  ng-click="type='free'; values.data.costo = activeService(values.data.costo,type)" class="btn btn-primary" ng-class="{'buttom-selec-1': values.data.costo == 0, 'buttom-selec-2': values.data.costo == 1}" >{{"extranet.formGeneral.free"|trans }}</button></div>
+						</div>
+						<div class="col-sm-16 col-md-8" style="padding-left:0px;">
+							<div align="center"><button type="button"  ng-click="type='cost'; values.data.costo =activeService(values.data.costo, type)" class="btn btn-primary" ng-class="{'buttom-selec-1': values.data.costo == 1, 'buttom-selec-2': values.data.costo == 0}">{{"extranet.formGeneral.additional_cost"|trans }}</button></div>
+						</div>
+					</div>
+					<div>
+						<div ng-class="{'message-inactive': values.status==false, 'message-act': values.status==true}">¡Este servicio está <div ng-if="values.status==false">&nbsp;inactivo</div><div ng-if="values.status==true">&nbsp;activo</div>!</div>
+						<div align="center">
+							<button ng-class="{'button1': values.status==false, 'button2': values.status==true}" ng-click="values.status=!values.status;marker(service,section);" type="button" class="btn btn-primary">
+								<div ng-if="values.status==false">{{"extranet.formGeneral.enable_service"|trans }}</div>
+								<div ng-if="values.status==true">{{"extranet.formGeneral.disable_service"|trans }}</div>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-5 col-md-6 col3" ng-if="type==7 && !restaurant && !new  && !activeEdit && !bar ">
+					<h3>{[{name}]}</h3>
+					<hr>
+					<div class="check-service services-zone">
+						<div ng-repeat="(key, value) in values.subservices track by $index">
+							<div>
+								<input type="checkbox" name="checkbox" id="checkbox{[{key}]}" ng-model="value.status"/>
+								<label ng-if="value.type!=8" for="checkbox{[{key}]}">
+									{[{key}]}
+								</label>
+							</div>
+							<div ng-if="value.type==8">
+								<input type="checkbox" name="checkbox" id="checkbox{[{$index}]}" ng-model="value.status"/>
+								<label for="checkbox{[{$index}]}">{[{key}]}</label>
+								<div class="row" ng-show="value.status">
+									<div class=" col-md-3 desp">
+								        <h5>Cantidad:</h5>
+								    </div>
+								    <div class="col-md-3 desp">
+								    	<input ng-model="value.data.Cantidad" type="text" class="form-control" placeholder="" maxlength="2">
+								    </div>
+								</div>
+							</div>
+							<div ng-if="value.type==7">
+								<input type="checkbox" name="checkbox" id="checkbox{[{$index}]}" ng-model="value.status"/>
+								<label for="checkbox{[{$index}]}">{[{key}]}</label>
+
+								<div ng-if="value.status">
+									<div ng-repeat="(id, content) in value.subservices track by $index">
+									<input type="checkbox" name="checkbox" id="checkbox{[{id}]}" ng-model="content.status"/>
+									<label class="label2" for="checkbox{[{id}]}">{[{id}]}</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div ng-class="{'message-inactive': values.status==false, 'message-act': values.status==true}">¡Este servicio está <div ng-if="values.status==false">&nbsp;inactivo</div><div ng-if="values.status==true">&nbsp;activo</div>!</div>
+						<div align="center">
+							<button ng-class="{'button1': values.status==false, 'button2': values.status==true}" ng-click="values.status=!values.status;marker(service,section);" type="button" class="btn btn-primary">
+								<div ng-if="values.status==false">Activar servicio</div>
+								<div ng-if="values.status==true">Desactivar servicio</div>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="col-md-16"><hr></div>
+			</div>
+			<div class="container">
+				<div style="width:50%; height: 36px; padding-top: 0.6%; background-color: #E73D50 !important;" ng-if="errorv" class="alert alert-danger" role="alert">Debe colocar como mínimo horario de recepción</div>
+			</div>
+			<div align="center">
+				<button ng-click="changeSection('rooms');" type="button" class="btn btn-primary btn-search-list">{{"share.register.save"|trans }}</button>
+			</div>
+		</div>
+		<br>
+	</form>
+
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalErrordata.html.twig") }}
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalDeleteRestaurant.html.twig") }}
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalDeleteBar.html.twig") }}
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalDeleteEvents.html.twig") }}
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalLoading.html.twig") }}
+</div>
+{% endblock body %}
+
+{% block javascripts%}
+	{{parent()}}
+
+    <script type="text/javascript">
+		var extension = "{{ app.request.attributes.get('extension') }}";
+        var response = {{ data | raw }};
+        var slug = response.slug;
+        var progress = response.progress;
+    </script>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "NavicuInfrastructureBundle:Resetting:layoutResetting.html.twig" %}
+
+{% block body %}
+
+	<main class="nvc-resetting">
+		<style>
+			@media (min-width: 992px) {
+				.responsive-bg {
+				    background-image: url({{ assets.img['images/reset-password-desktop.jpg'] }});
+				}
+			}
+			@media (min-width: 480px) and (max-width: 991px) {
+			  	.responsive-bg {
+			      	background-image: url({{ assets.img['images/reset-password-tablet.jpg'] }});
+			  	}
+			}
+			@media (max-width: 479px) {
+			  	.responsive-bg {
+			      	background-image: url({{ assets.img['images/reset-password-phone.jpg'] }});
+			  	}
+			}
+		</style>
+		{% include "NavicuInfrastructureBundle:Resetting:top-menu.html.twig" %}
+		<div
+			class="nvc-resetting__content responsive-bg"
+			ng-app="resetPasswordModule"
+			ng-controller="resetPasswordController"
+			ng-style="backgroundImageStyle">
+
+			<div class="nvc-container">
+			    <div class="nvc-row nvc-row__instructions">
+	                <div class="col-xs-14 col-md-8 col-lg-6">
+						<p> {{ "share.message.resetting_your_password_web"|transchoice(0) }}
+							<br>
+							{{ "share.message.resetting_your_password_web"|transchoice(1) }}
+						</p>
+						{% if invalid_username is defined %}
+							<p id="error">{{'share.message.resetting.invalid_username'|trans}}</p>
+						{% endif %}
+					</div>
+				</div>
+				<div class="nvc-row">
+					<div class="col-xs-14 col-sm-8 col-md-7 col-lg-5 inputs">
+						<form
+								{% if app.request.get('_route') == 'navicu_web_resetting' %}
+									action="{{pathSubdomain('navicu_web_resetting_send_email')}}"
+								{% elseif app.request.get('_route') == 'navicu_extranet_resetting_register' %}
+									action="{{pathSubdomain('navicu_extranet_resetting_register_send_email')}}"
+								{% elseif app.request.get('_route') == 'navicu_extranet_resetting' %}
+									action="{{pathSubdomain('navicu_extranet_resetting_send_email')}}"
+								{% elseif app.request.get('_route') == 'navicu_aavv_resetting' %}
+									action="{{pathSubdomain('navicu_aavv_resetting_send_email')}}"
+                                {% endif %}
+							method="POST">
+							<div class="input1">
+								<i class="fn-mailC"></i>
+								<input
+									type="text"
+									id="username"
+									name="username"
+									required="required"
+									placeholder="ejemplo@gmail.com"/>
+							</div>
+							<div class="input1">
+								<button
+									type="button"
+									class="nvc-button nvc-button__reroute"
+									ng-click="goBack()">
+									{{"share.action.go_back"|trans}}
+								</button>
+								<button
+									type="submit"
+									id="_submit"
+									name="_submit"
+									class="nvc-button nvc-button__default" >
+									{{"share.message.resetting_send_email"|trans }}
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

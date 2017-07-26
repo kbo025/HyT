@@ -1,0 +1,165 @@
+<script id="modal-detail.tpl" type="text/ng-template">
+    <div class="modal modal-details" tabindex="-1" role="dialog">
+	    <div class="modal-dialog modal-pad centered-modal">
+	        <div class="modal-header">
+	            <button type="button" 
+	            	class="close close2" 
+	            	ng-click="$hide()" 
+	            	data-dismiss="modal" 
+	            	aria-hidden="true">×
+	            </button>
+	            <h3 class="font-sidebar-tittle" style="color: #EDA900;">
+	             	<span style="padding-left: 10px;">
+	             		{{"extranet.reservations.booking_detail"|trans }}
+	             	</span>
+	            </h3>
+	            <h3 class="state" style="padding-left: 10px;"> 
+	            	{{"share.preview.state"|trans }}: 
+	            	<span ng-style="{'background-color' : 
+	            		reservation.status==2 ? '#06CC2B' : 
+	            		reservation.status==3 ? '#ED1E79' : '#EDA900'}">
+	            		{[{ getState(reservation.status) }]}
+	            	</span>
+	            </h3>
+	        </div>
+	        <div class="modal-content">
+	        	<div class="dates padding">
+	        		<h4>{{"extranet.reservations.creation_date_booking"|trans }}: 
+	        			{[{reservation.reserveCreationDate}]}
+	        		</h4>
+	        		<h5>{{"extranet.home.check_in"|trans }}: 
+	        			{[{reservation.checkin}]} 
+	        			<span style="margin-left:15px;">
+	        				{{"extranet.home.check_out"|trans }}: 
+	        				{[{reservation.checkout}]}
+	        			</span>
+	        		</h5>
+	        	</div>
+	        	<div class="personal-data padding">
+	        		<div class="col-xs-9" style="padding:0px;">
+	        			<h4>{{"extranet.home.name_lastname"|trans }}: 
+	        				<span>{[{reservation.detailsPerson.nameClient}]}</span>
+	        			</h4>
+	        			<h4>{{"extranet.reservations.nationality"|trans }}: 
+	        				<span>{[{reservation.detailsPerson.nacionality}]}</span>
+	        			</h4>
+	        		</div>
+	        		<div class="col-xs-7" style="padding:0px;">
+	        			<h4>{{"share.message.adult"|transchoice(2) }}: 
+	        				<span>{[{reservation.detailsPerson.numberAdults}]}</span>
+	        			</h4>
+	        			<h4>{{"share.message.child"|transchoice(2) }}: 
+	        				<span>{[{reservation.detailsPerson.numberChildren}]}</span>
+	        			</h4>
+	        		</div>
+	        	</div>
+	        	<div class="content padding" style="height:70px; background-color:#fff !important;">
+	        		<div class="col-xs-9" style="padding:0px;">
+	        			<h4>{{"share.message.e-mail"|trans }}: 
+	        				<span>{[{reservation.detailsPerson.email}]}</span>
+	        			</h4>
+	        			<h4>{{"share.message.phone"|trans }}: 
+	        				<span>{[{reservation.detailsPerson.phone}]}</span>
+	        			</h4>
+	        		</div>
+	        		<div class="col-xs-7" style="padding:0px;">
+	        			<h4>{{"extranet.reservations.sub_total"|trans }}: 
+	        				<span>{[{reservation.subTotal | number}]}</span>
+	        			</h4>
+	        		</div>
+	        		<div class="col-xs-7" style="padding:0px;">
+	        			<h4>{{"extranet.reservations.tax"|trans }}: 
+	        				<span>{[{reservation.tax | number}]} </span>
+	        			</h4>
+	        		</div>
+	        	</div>
+	        	<div class="content padding" style="">
+	        		<h3>{{"extranet.reservations.reservation_data"|trans }}</h3>
+
+	        		{#<div class="reservation col-xs-16" 
+	        			style="padding:10px; background-color:#EDEDED;"
+	        			ng-repeat="(id, pack) in reservation.packages track by $index">
+		        		<div class="row">
+		        			<div class="col-xs-16">
+			        			<h5>{{"share.preview.number_room"|trans }}:
+			        				<span>{[{pack.numberRoom}]}</span>
+			        			</h5>
+			        			<h4>{{"share.preview.type_room"|trans }}: 
+			        				<span>{[{pack.roomName}]}</span>
+			        			</h4>
+		        			</div>
+			        		<div class="col-xs-8">
+			        			<h4>{{"web.reservation.type_pack"|trans }}: 
+			        				<span>{[{pack.namePack}]}</span>
+			        			</h4>
+		        			</div>
+		        			<div class="col-xs-8">
+		        				<h4>{{"extranet.reservations.type_bed"|trans }}: 
+		        					<span> Queen Size</span>
+		        				</h4>
+		        			</div>
+		        			<div class="col-xs-16">
+			        			<h4>{{"share.preview.politic_cancel"|trans }}:
+			        				<span>{[{pack.nameCancellationPolicy}]}</span>
+			        			</h4>
+		        			</div>
+		        		</div>
+		        	</div>#}
+		        	
+					<section id="carousel-pack" data-ride="carousel" class='carousel slide'>
+				        <div class="carousel-inner">
+				            	<div class="item reservation col-xs-16" 
+				            		style="padding:10px; background-color:#EDEDED;" 
+				            		ng-repeat="(id, pack) in reservation.packages track by $index"
+				            		ng-class="{'active' : id==0}">
+					                <div class="row">
+					        			<div class="col-xs-16">
+						        			<h5>{{"share.preview.number_room"|trans }}:
+						        				<span>{[{pack.numberRoom}]}</span>
+						        			</h5>
+						        			<h4>{{"share.preview.type_room"|trans }}: 
+						        				<span>{[{pack.roomName}]}</span>
+						        			</h4>
+					        			</div>
+						        		<div class="col-xs-8">
+						        			<h4>{{"web.reservation.type_pack"|trans }}: 
+						        				<span>{[{pack.namePack}]}</span>
+						        			</h4>
+					        			</div>
+					        			<div class="col-xs-8">
+					        				<h4>{{"extranet.reservations.type_bed"|trans }}: 
+					        					<span> Queen Size</span>
+					        				</h4>
+					        			</div>
+					        			<div class="col-xs-16">
+						        			<h4>{{"share.preview.politic_cancel"|trans }}:
+						        				<span>{[{pack.nameCancellationPolicy}]}</span>
+						        			</h4>
+					        			</div>
+					        		</div>
+					        	</div>
+				        </div>
+				        <!-- Controls -->
+				        <section ng-if="reservation.packages.length>1">
+				        	<a class="left carousel-control" href="#carousel-pack" data-slide="prev"><span class="famodal fa fa-caret-left fa-2x"></span></a>
+	                  		<a class="right carousel-control" href="#carousel-pack" data-slide="next"><span class="famodal fa fa-caret-right fa-2x"></span></a>
+	                  	</section>
+					</section>
+
+		        	{#<strong>{{"extranet.reservations.estimated_time_arrival"|trans }}: 7:30 PM</strong><hr>#}
+		        	<h3 style="color:#706F6F;">{{"extranet.reservations.observations"|trans }}:</h3>
+		        	<div class="reservation observations col-md-16">
+		        		<p>{[{reservation.observations}]}</p>
+		        	</div>
+	        	</div>
+        		<div align="center">
+					<a href="" ng-click="$hide()">
+						<button type="button" class="btn btn-primary">
+							{{"share.action.go_back"|trans }}
+						</button>
+					</a>
+        		</div>
+	        </div>
+	    </div>
+    </div>
+</script>    

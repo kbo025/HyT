@@ -1,0 +1,56 @@
+<div ng-repeat="property in properties">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-16">
+            <h2>
+                {[{ property.name }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-16">
+                <h2>
+                    Ciudad
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>
+                    {[{ property.city }]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>Responsable</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>{[{ property.responsible}]}</h2>
+            </div>
+        </div>
+        <div class="mainInfo">
+            <div class="col-xs-16">
+                <h2>
+                    Sin disponibilidad desde
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>
+                    {[{ property.join_date }]}
+                </h2>
+            </div>
+        </div>
+        <div class="buttonDetails">
+            <button
+                ng-click="redirectGrid(property.slug)"
+                class="form-control nvc-admin nvc-button__login">
+                Ver detalle
+            </button>
+        </div>
+    </div>
+</div>

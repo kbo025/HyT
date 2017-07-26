@@ -1,0 +1,158 @@
+ # Rutas de la carga de images en el registro del hotelero
+navicu_register_upload_image:
+    path: /registerAjax/uploadImage
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:loadImages}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_register_delete_image:
+    path: /registerAjax/deleteImage
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:deleteImage}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_register_edit_image:
+    path: /registerAjax/editImage
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:editImage}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_register_edit_favorites_images:
+    path: /registerAjax/editFavoritesImages
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:registerFavoritesImages}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_register_delete_favorite_images:
+    path: /registerAjax/deleteFavoriteImage
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:deleteFavoriteImage}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_register_validate_images:
+    path: /registerAjax/validateImages
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:validateImagesGallery}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_register_sort_images:
+    path: /registerAjax/sortImages
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:sortImages}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+
+# Secciones del formulario de registro
+navicu_register:
+    path:   /register/{slug}/section/{level}
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:register, level: null, slug: null }
+    requirements:
+        slug: "[\w]*"
+        level: "[\w]*"
+    options:
+        expose: true
+
+navicu_register_owner:
+    path:   /registerOwner
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:registerOwner }
+    options:
+        expose: true
+
+navicu_register_end:
+    path:   /register/end
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:end }
+
+navicu_register_temp_services:
+    path:   /registerAjax/registerServices
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:registerTempServices}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_register_owner0:
+    path:   /registerAjax/form
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:registerProperty}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_welcome:
+    path:   /register/welcome
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:welcomeView}
+
+save_temp_room:
+    path:   /registerAjax/saveRoom
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:saveTempRoom}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+save_temp_room_form:
+    path:   /registerAjax/saveRoomForm/{slug}/{index}
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:saveTempRoomForm, index: null, slug: null }
+    options:
+        expose: true
+    requirements:
+        slug: "[\w]*"
+        index: \d+
+
+select_temp_room:
+    path:   /registerAjax/selectRoom
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:selectTempRoom}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+delete_temp_room:
+    path:   /registerAjax/deleteRoom
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:deleteTempRoom }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+advance_section:
+    path:   /registerAjax/advanceSection
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:advanceSection}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+register_temp_payment_info:
+    path:   /registerAjax/registerPaymentInfo
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:registerPaymentInfo}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+accept_terms_conditions:
+    path:   /registerAjax/termsAndConditions
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:acceptTermsConditions}
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+register_generate_terms_and_conditions:
+    path:   /{slug}/termsAndConditions.pdf
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:termsAndConditionsPdf}

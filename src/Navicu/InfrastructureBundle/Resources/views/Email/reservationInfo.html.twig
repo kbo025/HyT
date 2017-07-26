@@ -1,0 +1,29 @@
+<html>
+<body>
+    <form action="{{ path('navicu_reservation_confirmation') }}" method="post">
+        <!--<input type="hidden" name="slug" value="as">-->
+        <input type="hidden" name="slug" value="{{ slug }}">
+        <input type="hidden" name="checkIn" value="{{ startDate }}">
+        <input type="hidden" name="checkOut" value="{{ endDate }}">
+        <input type="hidden" name="numberAdult" value="2">
+        <input type="hidden" name="numberChild" value="0">
+
+        {% set i = 2 %}
+        {% set j = random(4) %}
+        {% for currentRoom in rooms %}
+            {% set indexi = loop.index %}
+            <input type="hidden" name="rooms[{{ loop.index }}][idBedsRooms]" value="3">
+            <input type="hidden" name="rooms[{{ loop.index }}][idRoom]" value="{{ currentRoom.idRoom }}">
+
+            {% for currentPack in currentRoom.packages %}
+                {% set indexj = loop.index %}
+                <input type="hidden" name="rooms[{{ indexi }}][packages][{{ indexj }}][idCancellationPolicy]" value="3">
+                <input type="hidden" name="rooms[{{ indexi }}][packages][{{ indexj }}][idPack]" value="{{ currentPack.id }}">
+                <input type="hidden" name="rooms[{{ indexi }}][packages][{{ indexj }}][numberPeople]" value="1">
+                {{ currentRoom.name }} / {{ currentPack.name }}<input type="text" name="rooms[{{ indexi }}][packages][{{ indexj }}][numberRoom]" ><br>
+            {% endfor %}
+        {% endfor %}
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

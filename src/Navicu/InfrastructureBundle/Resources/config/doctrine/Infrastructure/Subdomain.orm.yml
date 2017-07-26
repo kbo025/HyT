@@ -1,0 +1,22 @@
+Navicu\InfrastructureBundle\Entity\Subdomain:
+    type: entity
+    table: subdomain
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbSubdomainRepository
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        # Slug del subdominio
+        slug:
+          type: string
+        # Representa el tipo de subdominio (E.g: Aavv)
+        type:
+          type: integer
+          nullable: false
+    oneToMany:
+        users:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            mappedBy: subdomain
+            cascade: ["persist","remove"]

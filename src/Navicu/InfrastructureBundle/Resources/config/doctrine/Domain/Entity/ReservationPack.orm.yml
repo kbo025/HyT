@@ -1,0 +1,105 @@
+Navicu\Core\Domain\Model\Entity\ReservationPack:
+    type: entity
+    table: reservation_pack
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbReservationPackRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        number_rooms:
+            type: integer
+        price:
+            type: float
+        number_adults:
+            type: integer
+            nullable: false
+        number_kids:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+        #reemplazaria bedroom_id
+        bedroom:
+            type: json_array
+            nullable: true
+        #guardará una imagen de las politicas de cacncelacion para un momento dado
+        cancellation_policy:
+            type: json_array
+            nullable: true
+
+    oneToMany:
+        children_age:
+            targetEntity: ChildrenAge
+            mappedBy: reservation_package
+            cascade: ["persist"]
+    manyToOne:
+        reservation_id:
+            targetEntity: Reservation
+            inversedBy: reservation_packages
+            mappedBy: null
+            joinColumn:
+                name: reservation_id
+                referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+
+        pack_id:
+            targetEntity: Pack
+            inversedBy: reservation_packages
+            mappedBy: null
+            joinColumn:
+                name: pack_id
+                referencedColumnName: id
+            orphanRemoval: false
+
+        type_pack:
+            targetEntity: Category
+            cascade: {  }
+            mappedBy: null
+            joinColumn:
+                type_pack_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+        type_room:
+            targetEntity: RoomType
+            cascade: {  }
+            mappedBy: null
+            joinColumn:
+                type_room_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+        property_cancellation_policy_id:
+            targetEntity: PropertyCancellationPolicy
+            inversedBy: reservation_packages
+            mappedBy: null
+            joinColumn:
+                name: property_cancellation_policy_id
+                referencedColumnName: id
+            orphanRemoval: false
+
+        #reemplazaria property_cancellation_policy_id
+        type_cancellation_policy:
+            targetEntity: Category
+            cascade: {  }
+            mappedBy: null
+            #inversedBy: types_cancellation_policy
+            joinColumns:
+                type_cancellation_policy_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+#No se seguira utilizando (actualizado 05/04/2017)
+        bedroom_id:
+            targetEntity: Bedroom
+            inversedBy: reservation_packages
+            mappedBy: null
+            joinColumn:
+                name: bedroom_id
+                referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks:
+        postLoad: [calculateNetRate]

@@ -1,0 +1,5 @@
+Navicu\Core\Domain\ValueObject\EmailAddress:
+    type: embeddable
+    fields:
+        address:
+            type: string

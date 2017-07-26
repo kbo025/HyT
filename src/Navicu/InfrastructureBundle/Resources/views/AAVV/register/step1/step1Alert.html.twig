@@ -1,0 +1,70 @@
+<div class="nvc-aavv-alert" style="display: none;">
+    <div class="nvc-aavv-alert__inner nvc-aavv-alert__inner--slidein">
+        <i
+            class="fn-dismiss nvc-aavv-alert__dismiss"
+        ></i>
+
+        <h1>{{ 'aavv.register.step1.welcome_alert.headings.main' | trans }}</h1>
+        <h2>{{ 'aavv.register.step1.welcome_alert.headings.secondary' | trans }}</h2>
+
+        <ul>
+            <li>
+                <p>
+                    {{ 'aavv.register.step1.welcome_alert.items.business' | trans | raw }}
+                </p>
+            </li>
+            <li>
+                <p>
+                    {{ 'aavv.register.step1.welcome_alert.items.rtn' | trans | raw }}
+                </p>
+            </li>
+            <li>
+                <p>
+                    {{ 'aavv.register.step1.welcome_alert.items.photos' | trans }}
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+(function() {
+    var modalDismissedKey = 'nvc-register-modal-dismissed';
+
+    if (window.localStorage.getItem(modalDismissedKey) === 'true') {
+        return;
+    }
+
+    window.localStorage.setItem(modalDismissedKey, 'false');
+
+    var el = document.querySelector('.nvc-aavv-alert');
+    var inner = el.querySelector('.nvc-aavv-alert__inner--slidein');
+
+    el.style.display = 'block';
+
+    document.body.classList.add('modal-open');
+
+    el.addEventListener('click', function(e) {
+        if (
+            e.target.closest('.nvc-aavv-alert__inner') &&
+            !e.target.closest('.nvc-aavv-alert__dismiss')
+        ) {
+            return;
+        }
+
+        window.localStorage.setItem(modalDismissedKey, 'true');
+
+        document.body.classList.remove('modal-open');
+        inner.classList.remove('nvc-aavv-alert__inner--slidein');
+        inner.classList.add('nvc-aavv-alert__inner--slideout');
+
+        setTimeout(function() {
+            el.classList.add('nvc-aavv-alert--hidden');
+
+            setTimeout(function() {
+                el.classList.add('hide');
+            }, 500);
+        }, 100);
+    });
+})();
+</script>

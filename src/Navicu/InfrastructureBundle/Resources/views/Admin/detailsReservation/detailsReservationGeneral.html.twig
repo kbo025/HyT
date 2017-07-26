@@ -1,0 +1,45 @@
+<div class='nvc-detailReservation--generalDetails'>
+    <div class="nvc-container">
+        <div class="col-md-10 col-lg-6 blockLeft">
+            <div class="col-md-6 col-lg-5">
+                <br>
+                <div class="nvc-row">
+                    <h5 style="font-weight: bold;">Detalle de la reserva</h5>
+                </div>
+            </div>
+            <div class="col-md-10 col-lg-11">
+                <div class="nvc-row">
+                    <i class='fa fn-nvc-calendar'></i>
+                    <h4>Creación de la reserva</h4>
+                    <h5>{[{detailsReservation.reserveCreationDate}]}</h5>
+                </div>
+                <div class="nvc-row space-row-one">
+                    <i class='fa fn-Servicio-de-despertador'></i>
+                    <h4>{[{detailsReservation.reserveCreationTime}]}</h4>
+                </div>
+            </div>           
+        </div>
+                
+        <div class="col-md-6 col-lg-5 col-md-offset-0 col-lg-offset-5 blockRigth">
+            <div class="nvc-row" style="text-align: right;">
+                <h4>Estado</h4>
+                <h5 
+                    ng-class="{
+                        'pre-reserve': detailsReservation.status == 0,
+                        'pending': detailsReservation.status == 1,
+                        'confirmate': detailsReservation.status == 2,
+                        'cancel': detailsReservation.status == 3
+                    }"
+                >
+                    {[{nameStatus}]}
+                </h5>
+            </div>
+            <div class="nvc-row" style="text-align: center;">
+                <div class="identification">
+                    <h2>ID de reserva</h2>
+                    <h3>{[{detailsReservation.idReserve}]}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

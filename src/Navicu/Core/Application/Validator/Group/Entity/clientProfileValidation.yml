@@ -1,0 +1,43 @@
+#Validación ClientProfile
+Navicu\Core\Domain\Model\Entity\ClientProfile:
+
+    properties:
+        identity_card:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        full_name:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        birth_date:
+            - Date:
+                message: is_not_date,{{ value }},{{ type }}
+        zip_code:
+            - Type:
+                type: string
+                message: is_string, {{ value }}, {{ type }}
+#        phone:
+#            - Type:
+#                type: string
+#                message: is_string, {{ value }}, {{ type }}
+        address:
+            - Type:
+                type: string
+                message: is_string, {{ value }}, {{ type }}
+        company:
+            - Type:
+                type: string
+                message: is_string, {{ value }}, {{ type }}
+        position:
+            - Type:
+                type: string
+                message: is_string, {{ value }}, {{ type }}
+        gender:
+            - Type:
+                type: integer
+                message: is_integer, {{ value }}, {{ type }}

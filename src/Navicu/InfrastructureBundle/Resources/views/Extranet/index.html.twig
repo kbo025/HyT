@@ -1,0 +1,151 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'index'} %}
+
+{% block body %}
+    <br><br>
+    <div class="home-temporal"  ng-app="homeModule" ng-controller="homeController" ng-cloak>
+        <div class="container">
+                <h1>¡{[{response.nameProperty}]}, {{ "extranet.home.welcome"|transchoice(0) }}!</h1>
+                <h2>{{ "extranet.home.you_can_manage"|trans}}</h2>
+                <br>
+                <h2><i class="fa fn-reserva" style="margin-left:7px; margin-right:8px;"></i><span>{{ "extranet.home.last_rooms_reserved"|trans}}</span></h2>
+                <h2><i class="fa fn-historial"></i><span>{{ "extranet.home.booking_history"|trans}}</span></h2>
+                <h2><i class="fa fn-tips" style="margin-left:7px; margin-right:8px;"></i><span>{{ "extranet.home.tips_content"|trans}} ¡{{ "extranet.home.content_important"|trans}}!</span></h2>
+                <h2 class="hidden-xs hidden-sm"><i class="fa fn-nvc"></i><span>{{ "extranet.home.be_navicu"|trans}}</span></h2>
+        </div>
+        <!--
+        <div class="col-xs-16">
+            <h1>¡{[{response.nameProperty}]}, {{ "extranet.home.welcome"|transchoice(0) }}!</h1>
+            <div class="col-xs-16 inventory">
+                <h1> <i class="fa fn-calendar2"></i>{{ "extranet.home.without_availability"|trans }}</h1>
+                <div ng-repeat="object in inventory">
+                    <div class="col-sm-2">
+                        <h2 class="date">{[{object.date}]} </h2>
+                    </div>
+                    <div class="col-sm-14">
+                        <h2 class="room"> <span ng-repeat="(id,room) in object.rooms"> {[{room}]}<span ng-if="id!=object.rooms.length-1">,</span></span></h2>
+                    </div>
+                </div>
+                <a href="{{path('Extranet_indexProperties',{'slug':slug})}}">
+                    <button class="btn"> {{ "extranet.home.load_availability"|trans }}</button>
+                </a>
+            </div>
+            <div class="col-xs-13 sales" style="padding-left:0px;">
+                <h1>{{ "extranet.home.last_rooms_sold"|trans }}</h1>
+                <div class="header">
+                    <div class="title col-xs-8 col-sm-3  text-center">
+                        <strong>{{ "extranet.home.creating_reserve"|trans }} </strong>
+                    </div>
+                    <div class="title col-xs-8 col-sm-2 text-center">
+                        <strong>{{ "extranet.home.check_in"|trans  }} </strong>
+                    </div>
+                    <div class="title col-xs-8 col-sm-2 text-center">
+                        <strong>{{ "extranet.home.check_out"|trans  }} </strong>
+                    </div>
+                    <div class="title col-xs-8 col-sm-5 text-center">
+                        <strong>{{ "extranet.home.room_type"|trans  }} </strong>
+                    </div>
+                    <div class="title col-xs-8 col-sm-2 text-center">
+                        <strong>{{ "extranet.home.number_people"|trans  }} </strong>
+                    </div>
+                    <div class="title col-xs-8 col-sm-2 text-center">
+                        <strong>{{ "extranet.home.amount"|trans  }} </strong>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="content col-xs-8 col-sm-3 text-center">
+                       {# <strong ng-bind="log.date|date:'dd/MM/yyyy'"></strong>#}
+                       15/04/2015
+                    </div>
+                    <div class="content col-xs-8 col-sm-2 text-center">
+                        16/04/2015
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center">
+                        17/04/2015
+                    </div>
+                    <div class="content col-xs-16 col-sm-5 text-center">
+                        Habitación individual Vista mar
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center">
+                        2
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center" style="font-family:Lato-Bold;">
+                        2.350 Bs.F
+                    </div>
+                    <br>
+                    <div class="content col-xs-8 col-sm-3 text-center">
+                       {# <strong ng-bind="log.date|date:'dd/MM/yyyy'"></strong>#}
+                       15/04/2015
+                    </div>
+                    <div class="content col-xs-8 col-sm-2 text-center">
+                        16/04/2015
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center">
+                        17/04/2015
+                    </div>
+                    <div class="content col-xs-16 col-sm-5 text-center">
+                        Habitación individual Vista mar
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center">
+                        2
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center" style="font-family:Lato-Bold;">
+                        2.350 Bs.F
+                    </div>
+                    <br>
+                    <div class="content col-xs-8 col-sm-3 text-center">
+                       {# <strong ng-bind="log.date|date:'dd/MM/yyyy'"></strong>#}
+                       15/04/2015
+                    </div>
+                    <div class="content col-xs-8 col-sm-2 text-center">
+                        16/04/2015
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center">
+                        17/04/2015
+                    </div>
+                    <div class="content col-xs-16 col-sm-5 text-center">
+                        Habitación individual Vista mar
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center">
+                        2
+                    </div>
+                    <div class="content col-xs-16 col-sm-2 text-center" style="font-family:Lato-Bold;">
+                        2.350 Bs.F
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 sales" style="padding-right:0px;">
+                <h1>{{ "extranet.home.what_happens_now"|trans  }}</h1>
+                <div class="body">
+                    <div class="content">
+                        {{ "extranet.home.arrivals"|trans }} <span style="float:right;">8</span>
+                    </div>
+                    <div class="content">
+                        {{ "extranet.home.departures"|trans }} <span style="float:right;">3</span>
+                    </div>
+                    <div class="content">
+                        {{ "extranet.home.cancellations"|trans }} <span style="float:right;">4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+       -->
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+        var response = "{{ response }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+    </script>
+
+
+{% endblock %}

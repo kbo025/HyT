@@ -1,0 +1,47 @@
+Navicu\Core\Domain\Model\Entity\AAVVAllocationOfInvoicePayment:
+    type: entity
+    table: aavv_allocation_of_invoice_Payment
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVAllocationOfInvoicePayment
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+            nullable: false
+        allocation_amount:
+            type: string
+            length: 255
+            nullable: false
+
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+
+    manyToOne:
+        invoice:
+            targetEntity: AAVVInvoice
+            inversedBy: allocation
+            joinColumn:
+                name: invoice_id
+                referencedColumnName: id
+            cascade: ["persist"]
+        payment:
+            targetEntity: AAVVInvoicePayments
+            inversedBy: allocation
+            joinColumn:
+                name: payment_id
+                referencedColumnName: id
+            cascade: ["persist"]

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="currencyCalendarApp">
+<head>
+    <title>{% block title %}Calendario Divisas | Navicu{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/ascribere{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+</head>
+<body >
+    {% include "NavicuInfrastructureBundle:Admin:CurrencyExchangeCalendar/header.html.twig" %}
+
+    <div id="wrapper">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block javascripts %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+        {% if app.environment == "dev" %}
+            <script src="/builds/vendor.bundle.js"></script>
+            <script src="/builds/admin.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.vendor }}"></script>
+            <script src="{{ assets.js.admin }}"></script>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>

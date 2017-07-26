@@ -1,0 +1,43 @@
+Navicu\Core\Domain\Model\Entity\Agreement:
+    type: entity
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAgreementRepository
+    table: agreement
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        client_ip_address:
+            type: string
+            length: 15
+            nullable: false
+        date:
+            type: datetime
+            nullable: false
+        credit_days:
+            type: integer
+            nullable: false
+            options:
+                default: 30 # 30 dias de credito por defecto
+    oneToOne:
+        property:
+            targetEntity: Property
+            cascade: [persist]
+            mappedBy: null
+            inversedBy: agreement
+            joinColumns:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false
+        pdf:
+            targetEntity: Document
+            cascade: [persist]
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+               document_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false

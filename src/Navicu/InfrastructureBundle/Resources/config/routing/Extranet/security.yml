@@ -1,0 +1,27 @@
+#Todas las rutas referentes al proceso
+#de login para el usuario Admin
+
+#Ruta de Login
+navicu_extranet_security_login:
+    pattern:  /login
+    defaults: { _controller:  NavicuInfrastructureBundle:Security\Security:login }
+
+#Ruta de redireccionamiento hacia login
+navicu_extranet_security_login_redirect:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: navicu_extranet_security_login
+        permanent: true
+
+# Verificacion de inicio de sesion
+navicu_extranet_security_check:
+    pattern:  /login_check
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:check }
+
+# Cerrar sesion
+navicu_extranet_security_logout:
+    pattern:  /logout
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:logout }
+    options:
+      expose: true

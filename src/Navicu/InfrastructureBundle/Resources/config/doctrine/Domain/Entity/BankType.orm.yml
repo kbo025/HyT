@@ -1,0 +1,25 @@
+Navicu\Core\Domain\Model\Entity\BankType:
+    type: entity
+    table: bank_type
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbBankTypeRepository
+
+    id:
+        id:
+            type: string
+            length: 4
+            generator:
+                strategy: NONE
+    fields:
+        title:
+            type: string
+            length: 255
+            nullable: false
+        receiver:
+            type: boolean
+            nullable: true
+
+        # Banco internacional o nacional
+        location_zone:
+            type: integer
+            options:
+                default: 1

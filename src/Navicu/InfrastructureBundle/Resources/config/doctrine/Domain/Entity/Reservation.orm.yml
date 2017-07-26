@@ -1,0 +1,146 @@
+Navicu\Core\Domain\Model\Entity\Reservation:
+    type: entity
+    table: reservation
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbReservationRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        public_id:
+            type: string
+            nullable: false
+        date_check_in:
+            type: date
+            nullable: false
+        date_check_out:
+            type: date
+            nullable: false
+        child_number:
+            type: integer
+        adult_number:
+            type: integer
+        special_request:
+            type: string
+            nullable: true
+        total_to_pay:
+            type: float
+#        net_rate:
+#            type: float
+#            options:
+#                default: 0
+        discount_rate:
+            type: float
+            options:
+                default: 0
+        discount_rate_aavv:
+            type: float
+            nullable: true
+            options:
+                default: 0
+        tax:
+            type: float
+            options:
+                default: 0
+        hash_url:
+            type: string
+            nullable: true
+        reservation_date:
+            type: datetime
+            nullable: true
+        guest:
+            type: json_array
+            nullable: true
+        # representa el estado de una reserva donde:
+        # 0: prereserva: reserva en espera de pago por parte del cliente
+        # 1: por confirmar: pago a la espera de confirmación por parte de navicu
+        # 2: pago confirmado: reserva con pago confirmado
+        # 3: Reserva Cancelada: reserva que no procede por diferentes razones
+        status:
+            type: integer
+            options:
+                default: 0
+            nullable: true                
+        code_prefix:
+            type: string
+            nullable: true
+            length: 4
+        state:
+            type: integer
+            nullable: true
+        ip_address:
+            type: string
+            nullable: true
+            length: 16
+            nullable: true
+        # medio de pago, valor proveido por el paymentgateway utilizado
+        # 1: TDC
+        # 2: transferencia
+        payment_type:
+            type: integer
+            nullable: true
+        #utilizada para especificar detalles importantes de la reserva como por ejemplo motivos de cancelacion por parte de admin
+        #observations:
+            #type: string
+            #nullable: true
+        currency_convertion_information:
+            type: json_array
+            nullable: true
+
+    oneToOne:
+        current_state:
+            targetEntity: ReservationChangeHistory
+            cascade: ["persist"]
+            joinColumn:
+                name: current_state
+                referencedColumnName: id
+
+    manyToOne:
+        client_id:
+            targetEntity: ClientProfile
+            inversedBy: reservations
+            mappedBy: null
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+            nullable: true
+        property_id:
+            targetEntity: Property
+            inversedBy: reservations
+            mappedBy: null
+            joinColumns:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        aavv_reservation_group:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVVReservationGroup
+            mappedBy: reservation
+            cascade: ["persist"]
+
+    oneToMany:
+        change_history:
+            targetEntity: ReservationChangeHistory
+            mappedBy: reservation
+            cascade: ["persist"]
+        reservation_packages:
+            targetEntity: ReservationPack
+            mappedBy: reservation_id
+            cascade: ["persist"]
+        payments:
+            targetEntity: Payment
+            mappedBy: reservation
+            cascade: ["persist"]
+        #bloqueos de disponibilidad
+        lockeds:
+            targetEntity: LockedAvailability
+            mappedBy: blocked_reservation
+            cascade: ["persist"]
+
+    lifecycleCallbacks:
+        prePersist: [publicIdToString, generateNetRate, setStatusByState, setHashUrl]
+        preUpdate: [setStatusByState, setHashUrl]
+        postLoad: [getNetRate]

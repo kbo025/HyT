@@ -1,0 +1,24 @@
+Navicu\Core\Domain\Model\Entity\NvcGlobal:
+    type: entity
+    table: nvc_globals
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbNvcGlobalRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+#   Clave para ejecutar las busquedas
+        name:
+            type: string
+            nullable: true
+#   Valor obtenido para aplicar
+        value:
+            type: string
+            nullable: true
+#   Breve descripcion del parametro 'name'
+        description:
+            type: string
+            length: 255
+            nullable: true

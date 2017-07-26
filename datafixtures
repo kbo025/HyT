@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ "$1" = "test" ]
+then
+test="--env=test"
+else
+test=" "
+fi
+sudo app/console doctrine:schema:drop $test --force
+sudo app/console doctrine:schema:update  $test --force
+if [ "$1" = "prod" ]
+then
+test="--fixtures=src/Navicu/InfrastructureBundle/DataFixtures/ORM/RequiredData"
+else
+test=" "
+fi
+sudo app/console doctrine:fixtures:load $test 

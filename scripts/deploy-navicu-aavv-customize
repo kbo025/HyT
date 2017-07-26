@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Utilizaremos servicios separados para stg y prod.
+export NAVICU_SOTF_ENV="$1"
+if [[ "$NAVICU_SOTF_ENV" == "" ]]
+then
+  export NAVICU_SOTF_ENV="dev"
+fi
+
+# El archivo que guarda el PID (Process ID) del servicio.
+PID_FILE=/tmp/navicu-sotf-${NAVICU_SOTF_ENV}.pid
+
+# Comprobamos si el archivo existe.
+#
+# Si existe, entonces leemos cada línea y enviamos un SIGINT
+# a los procesos con esas id (un id por línea).
+if [[ -e "$PID_FILE" ]]
+then
+  xargs -L 1 kill -SIGINT < $PID_FILE
+fi
+
+cd services/sass-on-the-fly
+
+export NODE_ENV=production
+
+(npm start > /dev/null 2> /dev/null) &
+#npm start

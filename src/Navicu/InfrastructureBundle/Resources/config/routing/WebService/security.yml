@@ -1,0 +1,26 @@
+#Login Extranet
+nvc_web_service_login:
+    pattern:  /login
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:login }
+    options:
+        expose: true
+
+# Login Redirect
+nvc_web_service_login_redirect:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: nvc_web_service_login
+        permanent: true
+
+# Verificacion de inicio de sesion
+nvc_web_service_check:
+    pattern:  /login_check
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:check }
+
+# Cerrar sesion
+nvc_web_service_logout:
+    pattern:  /logout
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:logout }
+    options:
+        expose: true

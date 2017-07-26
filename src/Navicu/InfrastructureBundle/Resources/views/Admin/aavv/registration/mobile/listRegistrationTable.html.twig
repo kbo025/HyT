@@ -1,0 +1,74 @@
+<div ng-repeat="value in agencies">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-8 separatorTitle">
+            <h2>
+                {[{ value.idAgency }]}
+            </h2>
+        </div>
+        <div class="col-xs-8">
+            <h2>
+                {[{ value.nameAgency }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    {{ 'message.signup_start_date_mobile'|trans }}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {{ 'word.city'|transchoice(1) }}
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                    {[{ value.beginDate }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ value.city}]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>{{ 'word.progress'|trans }}</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>{[{value.percentComplete}]}%</h2>
+            </div>
+        </div>
+        <div class="buttonRegister">
+            <button
+                class="nvc-button"
+                formtarget="_blank"
+                ng-click="editAgency(value.slug);"
+            >
+                Editar
+            </button>
+            <button
+                class="nvc-button"
+                ng-click="selectedAgency = value; showModalConfirmActivate(value.slug, $index);"
+                ng-disabled="value.percentComplete<100"
+                ng-class="{'nvc-disabled': value.percentComplete<100}"
+            >
+                Alta
+            </button>
+            <button
+                class="nvc-button"
+                formtarget="_blank"
+                ng-click="selectedAgency = value; showModalConfirmDelete(value.slug, $index);"
+            >
+                Borrar
+            </button>
+        </div>
+    </div>
+</div>

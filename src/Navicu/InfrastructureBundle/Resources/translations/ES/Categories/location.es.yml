@@ -1,0 +1,28 @@
+# Declaración de los codigos de traducciones de los tipos de localidades
+city: ciudad
+country: pais
+island: isla
+municipality: municipio
+parish: parroquia
+state: estado
+archipelago: archipielago
+
+# Inversa de las traducciones de los codigos
+# la funcionalidad se presenta en las url con las traducciones
+ciudad: city
+pais: country
+isla: island
+municipio: municipality
+parroquia: parish
+estado: state
+archipielago: archipelago
+
+
+# Manejo del listado de tipo de destinos
+destinationsType:
+  mar: Fanáticos del mar
+  urbanos: Favoritos urbanos
+  familia: Aventura familiar
+  clima: Climas perfectos
+  cultural: Recorrido cultural
+  pelicula: Paisajes de película

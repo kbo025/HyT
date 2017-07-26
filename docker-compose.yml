@@ -1,0 +1,109 @@
+version: '2'
+
+services:
+  php-apache:
+    network_mode: bridge
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile-php-apache
+    volumes:
+     # app folder
+     - ./:/navicu:z
+     # apache vhost
+     - ./docker/config/apache/:/etc/apache2/sites-enabled/:z
+    working_dir: /navicu
+    ports:
+     # http port
+     - "80:80"
+     # supervsord http client
+     - "9001:9001"
+    links:
+     - db:postgres
+     - sphinx:sphinx
+     - node:localhost
+    #  - kibana:kibana
+    #  - elasticsearch
+    command: /usr/bin/supervisord
+  db:
+    network_mode: bridge
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile-db
+    volumes:
+     # hold the persisted data
+     - ../data/db/postgres:/var/lib/postgresql/data:z
+    ports:
+     - "5432:5432"
+  node:
+    network_mode: bridge
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile-node
+    volumes:
+     # app folder
+     - ./:/navicu:z
+    # volumes_from:
+    #  - php-apache:rw
+    working_dir: /navicu
+    ports:
+     # supervsord http client
+     - "9002:9001"
+     - "4444:4444"
+    command: /usr/bin/supervisord
+  ruby:
+    network_mode: bridge
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile-ruby
+    volumes_from:
+     - php-apache:rw
+    working_dir: /navicu
+    ports:
+     # supervsord http client
+     - "9003:9001"
+    command: /usr/bin/supervisord
+  sphinx:
+    network_mode: bridge
+    build:
+      context: ./docker/
+      dockerfile: Dockerfile-sphinx
+    volumes:
+     # sphinx configuration files
+     - ./docker/config/sphinx/:/etc/sphinxsearch/:z
+     # hold the persisted index data
+     - ../data/sphinx/:/var/lib/sphinx/data/:z
+    ports:
+     # supervsord http client
+     - "9004:9001"
+    links:
+     - db:postgres
+    command: /usr/bin/supervisord
+  # elasticsearch:
+  #   image: elasticsearch:latest
+  #   volumes:
+  #    # hold the persisted index data
+  #    - ../data/db/elasticsearch/:/usr/share/elasticsearch/data:z
+  #   environment:
+  #    - ES_HEAP_SIZE=256m
+  #   ports:
+  #    - "9200:9200"
+  #    - "9300:9300"
+  #   command: elasticsearch -Des.network.host=0.0.0.0
+  # logstash:
+  #   image: logstash:latest
+  #   volumes:
+  #    - ./docker/config/logstash:/etc/logstash/conf.d:z
+  #   volumes_from:
+  #    - php-apache
+  #   ports:
+  #    - "5000:5000"
+  #   links:
+  #    - elasticsearch
+  #   command: logstash -f /etc/logstash/conf.d/logstash.conf
+  # kibana:
+  #   build: ./docker/
+  #   dockerfile: Dockerfile-kibana
+  #   ports:
+  #    - "5601:5601"
+  #   links:
+  #    - elasticsearch

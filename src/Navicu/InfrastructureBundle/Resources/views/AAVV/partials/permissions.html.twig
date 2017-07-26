@@ -1,0 +1,77 @@
+{%
+    if app.user
+    and (app.user.getAavvProfile() or app.user.hasRole('ROLE_ADMIN'))
+    and app.request.get('_route') != "aavv_login_page"
+    and app.request.get('_route') != "navicu_aavv_login"
+    and app.request.get('_route') != "aavv_register_page"
+%}
+    <script>
+        (function() {
+            window.PERMISSIONS = {
+                aavv_reservation: {
+                    VIEW: {{ hasPermission('aavv_reservation', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_reservation', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_reservation', 'HIDE') | json_encode | raw }},
+                },
+                aavv_reservation_list: {
+                    VIEW: {{ hasPermission('aavv_reservation_list', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_reservation_list', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_reservation_list', 'HIDE') | json_encode | raw }},
+                },
+                aavv_reservation_details: {
+                    VIEW: {{ hasPermission('aavv_reservation_details', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_reservation_details', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_reservation_details', 'HIDE') | json_encode | raw }},
+                },
+                aavv_billing: {
+                    VIEW: {{ hasPermission('aavv_billing', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_billing', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_billing', 'HIDE') | json_encode | raw }},
+                },
+                aavv_material: {
+                    VIEW: {{ hasPermission('aavv_material', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_material', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_material', 'HIDE') | json_encode | raw }},
+                },
+                aavv_logs: {
+                    VIEW: {{ hasPermission('aavv_logs', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_logs', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_logs', 'HIDE') | json_encode | raw }},
+                },
+                aavv_users: {
+                    VIEW: {{ hasPermission('aavv_users', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_users', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_users', 'HIDE') | json_encode | raw }},
+                },
+                aavv_permissions: {
+                    VIEW: {{ hasPermission('aavv_permissions', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_permissions', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_permissions', 'HIDE') | json_encode | raw }},
+                },
+                aavv_customize: {
+                    VIEW: {{ hasPermission('aavv_customize', 'VIEW') | json_encode | raw }},
+                    EDIT: {{ hasPermission('aavv_customize', 'EDIT') | json_encode | raw }},
+                    HIDE: {{ hasPermission('aavv_customize', 'HIDE') | json_encode | raw }},
+                },
+            };
+
+            var currentRoute = {{ app.request.get('_route') | json_encode | raw }};
+
+            // Key: Nombre de ruta.
+            // Value: Módulo de esa ruta.
+            var routeMappings = {
+                aavv_list_roles: 'aavv_permissions',
+                aavv_list_users: 'aavv_users',
+                navicu_aavv_billing_list: 'aavv_billing',
+                navicu_aavv_customize_homepage: 'aavv_customize',
+                navicu_aavv_detail_reservation: 'aavv_reservation_details',
+                navicu_aavv_get_list_Properties: 'aavv_reservation',
+                navicu_aavv_get_list_reservation: 'aavv_reservation_list',
+                navicu_aavv_home: 'aavv_reservation',
+                navicu_aavv_set_data_reservation: 'aavv_reservation',
+            };
+
+            window.VIEW_PERMISSIONS = window.PERMISSIONS[routeMappings[currentRoute]];
+        })();
+    </script>
+{% endif %}

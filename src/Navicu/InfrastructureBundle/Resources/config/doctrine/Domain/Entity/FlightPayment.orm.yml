@@ -1,0 +1,75 @@
+Navicu\Core\Domain\Model\Entity\FlightPayment:
+    type: entity
+    table: flight_payment
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbFlightPaymentRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: 255
+            nullable: true
+        reference:
+            type: string
+            length: 255
+            nullable: true
+        date:
+            type: datetime
+            nullable: false
+        amount:
+            type: float
+            nullable: false
+        amountTransferred:
+            type: float
+            nullable: true
+        # tipo de pago, corresponde con los paymentgateway que existen en la app
+        # 1 : instapago
+        # 2 : transferencia nacional
+        # 3 : stripe
+        # 4 : transferencia internacional
+        # 5 : Credito de AAVV
+        type:
+            type: integer
+            nullable: false
+        holder:
+            type: string
+            nullable: true
+        holderId:
+            type: string
+            nullable: true
+        response:
+            type: json_array
+            nullable: true
+        status:
+            type: integer
+            nullable: true
+            options:
+                default: 0
+        state:
+            type: integer
+            nullable: true
+            options:
+                default: 0
+        currency_convertion_information:
+            type: json_array
+            nullable: true
+        ip_address:
+            type: string
+            length: 15
+            nullable: true
+
+    manyToOne:
+        reservation:
+            targetEntity: FlightReservation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                flight_reservation:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false

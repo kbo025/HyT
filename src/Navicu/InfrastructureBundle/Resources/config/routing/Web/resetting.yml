@@ -1,0 +1,26 @@
+#Resetting Web register
+navicu_web_resetting:
+    pattern:  /resetting
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:request }
+
+navicu_web_resetting_send_email:
+    pattern:  /resetting/sendEmail
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:sendEmail}
+
+navicu_web_api_resetting_send_email:
+    pattern:  /async/resetting/sendEmail
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:apiSendEmail}
+    options:
+        expose: true
+
+navicu_web_resetting_check_email:
+    pattern:  /resetting/checkEmail
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:checkEmail}
+
+navicu_web_resetting_reset:
+    pattern:  /resetting/rest/{token}
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:reset}
+
+navicu_web_resetting_update_password_success:
+    pattern: /resetting/updatePasswordSuccess
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Resetting:passwordUpdateSuccess}

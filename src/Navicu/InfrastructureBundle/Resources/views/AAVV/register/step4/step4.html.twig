@@ -1,0 +1,123 @@
+{% extends 'NavicuInfrastructureBundle:AAVV:layout.html.twig' %}
+
+{% block body %}
+
+    <main
+        class='nvc-aavv__register nvc-aavv__step4 visible-lg visible-md'
+        ng-app='registerStep4Module'
+        ng-controller='registerStep4Controller'
+    >
+
+    {{ include('NavicuInfrastructureBundle:AAVV:register/topmenu.html.twig') }}
+
+        <div class='nvc-container'>
+            <div class='nvc-row'>
+                <div class='col-md-16'>
+                    <h2>
+                        <i class='fa fn-step4icon-05'></i>
+                        Contrato de gestión
+                    </h2>
+                </div>
+            </div>
+
+            <form class='nvc-form-inline' name='formStep4'>
+                <div class='nvc-row nvc-aavv__step4--agreement'>
+                    <div class='col-md-16 nvc-jumbotron'>
+                        {% include
+                        'NavicuInfrastructureBundle:AAVV:register/step4/AgreementAavvPdf.html.twig'
+                        %}
+                    </div>
+                </div>
+
+                <div class='nvc-row nvc-aavv__step4--agreement-bottom'>
+                    <div class='col-md-7 nvc-padding'>
+                        <div class='col-md-16 nvc-padding nvc-aavv__step4--commission'>
+                            <p>
+                                Su agencia de viajes tendrá que cobrar el importe de la reserva que se muestre en nuestra página. Una vez al mes, se le facturará por el monto total del mes descontando la comisión que se queda su agencia de viajes.
+                            </p>
+                            <p>
+                                Su agencia obtendrá el 10% de comisión de todas las reservas que efectúe por nuestra plataforma, siendo el resto facturado a NAVICU C.A.
+                            </p>
+                        </div>
+
+                        <div class='col-md-16 nvc-padding'>
+                            <nvc-checkbox ng-model="registrationDataStep4.accepted">
+                                <p><b>Acepto los términos y condiciones de afiliación al programa
+                                Vicander </b></p>
+                            </nvc-checkbox>
+                        </div>
+                        <span
+                            ng-cloak
+                            class="error"
+                            ng-show="registrationDataStep4.validations && !registrationDataStep4.accepted">
+                            {{ "aavv.register.error_agreement"|trans }}
+                        </span>
+                    </div>
+
+                    <div class='col-md-7 col-md-offset-2 nvc-padding'>
+                        <div class='text-right'>
+                            <div
+                                class='nvc-form-group'
+                            >
+                                <input
+                                    style="width:100%"
+                                    class="form-control my-imput"
+                                    type="file"
+                                    id='contract'
+                                    name="contract"
+                                    ngf-select
+                                    ng-model="contract"
+                                    ng-change="loadFile()"
+                                >
+                                <input
+                                    placeholder=''
+                                    type="text"
+                                    name="contractName"
+                                    ng-model="contractName"
+                                    disabled
+                                />
+                                <button
+                                    class='nvc-button nvc-button__default'
+                                    ng-click="onClick('contract')"
+                                >
+                                    {{"aavv.step1.attach"|trans }} contrato firmado
+                                </button>
+                                <button
+                                    type='button'
+                                    class='nvc-button nvc-button__default'
+                                    ng-click="downloadAgreement()"
+                                    ><i class='fa fn-descargar' ></i>
+                                    Descargar PDF
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nvc-row nvc-aavv__step4--agreement-bottom">
+                    <div class='col-md-2 col-md-offset-6'>
+                        <div class='text-center'>
+                            <button
+                                type='button'
+                                class='nvc-button nvc-button__search'
+                                ng-click='finishRegister()'>Finalizar registro
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {{ include("NavicuInfrastructureBundle:AAVV:register/step4/modalAavvRegister.html.twig") }}
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type='text/javascript'>
+        var slug = { slug : "{{ slug }}" };
+        var data = {{ data | raw }};
+        var route = "{{ app.request.get('extension') }}"
+        console.log("data", data);
+    </script>
+{% endblock %}

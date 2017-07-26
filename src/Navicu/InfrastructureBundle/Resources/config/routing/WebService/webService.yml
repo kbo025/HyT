@@ -1,0 +1,17 @@
+# Ruta encargada de renderizar la informacion para solicitar el token
+navicu_render_request_token:
+    path:   /restApi
+    defaults: { _controller: NavicuInfrastructureBundle:WebService\Default:renderViewRequestOauthToken }
+    options:
+        expose: true
+#    requirements:
+#        { _format: (xml | json), _method: POST}
+
+# Ruta para la peticion del generador del token
+navicu_rest_api_request_credentials:
+    path:   /requestCredentials
+    defaults: { _controller: NavicuInfrastructureBundle:WebService\Default:requestCredentials }
+    options:
+        expose: true
+#    requirements:
+#        { _format: (xml | json), _method: POST}

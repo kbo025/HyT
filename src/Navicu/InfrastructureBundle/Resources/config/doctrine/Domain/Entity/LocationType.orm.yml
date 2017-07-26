@@ -1,0 +1,14 @@
+Navicu\Core\Domain\Model\Entity\LocationType:
+    type: entity
+    table: location_type
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbLocationTypeRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            nullable: true
+            length: 255

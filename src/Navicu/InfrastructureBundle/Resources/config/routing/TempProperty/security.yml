@@ -1,0 +1,26 @@
+#Login Extranet
+extranet_login:
+    pattern:  /login
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:login }
+    options:
+        expose: true
+
+# Login Redirect
+extranet_login_redirect:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: extranet_login
+        permanent: true
+
+# Verificacion de inicio de sesion
+extranet_check:
+    pattern:  /login_check
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:check }
+
+# Cerrar sesion
+extranet_logout:
+    pattern:  /logout
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:logout }
+    options:
+        expose: true

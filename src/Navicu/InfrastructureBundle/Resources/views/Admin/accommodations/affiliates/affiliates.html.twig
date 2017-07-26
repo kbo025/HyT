@@ -1,0 +1,49 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    {# Versión desktop #}
+    <main
+        class="admin nvc-admin__AAVVDirectPayment visible-md visible-lg"
+        ng-controller="AffiliatePropertiesCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/affiliatesHeader.html.twig" %}
+            </div>
+            <div class="nvc-table--admin nvc-container">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/affiliatesTable.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/affiliatesPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+    {# Versión movil #}
+    <main
+        class="admin nvc-admin__AAVVDirectPayment visible-sm visible-xs"
+        ng-controller="AffiliatePropertiesCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin--movil">
+                <div class="col-xs-16 col-sm-16">
+                    {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/movil/affiliatesHeaderMovil.html.twig" %}
+                </div>
+            </div>
+            <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/movil/affiliatesTableMovil.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:accommodations/affiliates/affiliatesPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

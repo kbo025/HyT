@@ -1,0 +1,22 @@
+#Validación Bed
+Navicu\Core\Domain\Model\Entity\AAVVAddress:
+
+    properties:
+        swift:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        bank_account:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        address:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

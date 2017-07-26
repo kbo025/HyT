@@ -1,0 +1,7 @@
+# Ruta para las peticion de los slugs asociados a un usuario hotelero
+navicu_rest_api_get_slugs:
+    path:   /slugs/
+    defaults: { _controller: NavicuRestApiBundle:Default:getSlug }
+    methods:  [GET]
+    options:
+        expose: true

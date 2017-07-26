@@ -1,0 +1,97 @@
+#Validación DailyPack
+Navicu\Core\Domain\Model\Entity\DailyRoom:
+
+    properties:
+        date:
+            - Date:
+                message: is_not_date,{{ value }},{{ type }}
+                groups: [isData]
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+                groups: [isNullMain]
+
+        availability:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+                groups: [isData, massLoad]
+            - GreaterThan:
+                value: 0
+                message: no_positive,{{ value }},{{ type }}
+                groups: [isPositive]
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+                groups: [isNull, massLoad]
+
+        min_night:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+                groups: [isData, massLoad]
+            - GreaterThan:
+                value: 0
+                message: no_positive,{{ value }},{{ type }}
+                groups: [isPositive]
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+                groups: [isNull, massLoad]
+
+        max_night:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+                groups: [isData, massLoad]
+            - GreaterThan:
+                value: 0
+                message: no_positive,{{ value }},{{ type }}
+                groups: [isPositive]
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+                groups: [isNull, massLoad]
+
+        cut_off:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+                groups: [isData, massLoad]
+            - GreaterThan:
+                value: -1
+                message: no_positive,{{ value }},{{ type }}
+                groups: [isPositive]
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+                groups: [isNull, massLoad]
+
+        stop_sell:
+            - Type:
+                type: bool
+                message: is_Boolean,{{ value }},{{ type }}
+                groups: [isData, massLoad]
+
+        room:
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+                groups: [isNullMain]
+
+    constraints:
+        # Validar maxNight > minNight
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsDailyRoom, validMaxNightHighesrMinNight]
+            groups: [businessNight, massLoadBussines]
+        # Validar si un nuevo idDailyPack ya no existe.
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsDailyRoom, validNewIdExist]
+            groups: [business]
+        # Validar si una fecha esta por debajo de la fecha actual.
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsDailyRoom, validOldDate]
+            groups: [business]
+        # Validar si la disponibilidad de habitación existe y es mayor o 
+        # igual que la disponibilidad especifica de un dailyPack.
+#        - Callback:
+#            methods:
+#                - [Navicu\Core\Application\Validator\Contraints\ContainsDailyRoom, validBaseAvailability]
+#            groups: [businessAvailability]

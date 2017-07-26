@@ -1,0 +1,3 @@
+#Routing del módulo de Rest Api para motor de busqueda.
+navicu_api_search:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Api/search.yml"

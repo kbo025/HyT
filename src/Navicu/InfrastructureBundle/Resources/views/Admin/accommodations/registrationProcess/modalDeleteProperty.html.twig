@@ -1,0 +1,47 @@
+<script id="modal-delete-property.tpl" type="text/ng-template">
+    <div class="nvc-modal" tabindex="-1" role="dialog" style="overflow-x:hidden;  overflow-y:hidden;">
+
+        <div class="nvc-modal__admin center-block clearfix">
+
+            <div class="nvc-modal__header">
+                <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="hidden-xs">Eliminar alojamiento</h3>
+                <h3 class="visible-xs">Eliminar alojamiento</h3>
+            </div>
+
+            <div class="nvc-modal__content">
+                <div class="nvc-row">
+                    <div class="col-xs-13 col-sm-14">
+                        <div class="nvc-modal__content--message">
+                            <span>
+                            ¿Estás seguro que deseas eliminar <strong>{[{propertyName}]}</strong>?
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <img src="/images/icon-delete.png">
+                    </div>
+                </div>
+                <div class="nvc-row nvc-modal__content--margin">
+                        <button 
+                            type="button" 
+                            class="btn btn-default bottonOne" 
+                            ng-click="$hide()"
+                        >
+                            Cancelar
+                        </button>
+                        <button 
+                            type="button" 
+                            class="btn btn-default bottonTwo"
+                            ng-click="deleteProperty()"
+                        >
+                            Aceptar
+                        </button>
+                </div>  
+            </div>
+            <!-- End Contenido del Modal -->
+        </div>
+        <!-- End Modal Error -->
+    </div>
+</script>
+

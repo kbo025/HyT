@@ -1,0 +1,433 @@
+{% extends "NavicuInfrastructureBundle:Web:Client/layout.html.twig" %}
+
+{% set header_title = {'module_title': 'userData'} %}
+
+{% block body %}
+
+    <main ng-app="userDataModule" ng-controller="userDataController" ng-init="modal=false" ng-cloak>
+        <div class="nvc-userData">
+            <div class="nvc-container">
+                <!-- Items Informativos -->
+                <section class="col-xs-16 col-md-10 nvc-userData__items">
+                    <h1>{{ "web.client.userData.change_your_data"|trans }}</h1>
+                    <br>
+                    <h2><i class="fa fn-edit"></i>{{ "web.client.userData.traveler_information"|trans }}</h2>
+                    <h3>{{ "web.client.userData.userData_information"|trans }}</h3>
+                </section>
+                <!-- Formulario de registro -->
+                <section class="col-xs-16 col-md-6 nvc-userData__form hidden-xs hidden-sm">
+                    <form name="formEditRegister" class="nvc-form">
+                        <h1><i class="fa fn-calendar"></i>Fecha de registro <span>{[{form.joinedDate}]}</span></h1>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{ "word.last_name"|trans}} *</label>
+                                <input  
+                                    type="text" 
+                                    name="clientNames" 
+                                    ng-model="form.fullName" 
+                                    required/>
+                                <span
+                                    class="error"
+                                    ng-show="formEditRegister.clientNames.$error.required
+                                    && formEditRegister.clientNames.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                            <div class="col-xs-8">
+                                <label>{{ "word.identity_card"|trans}} *</label>
+                                <input 
+                                    type="text" 
+                                    name="identityCard" 
+                                    ng-model="form.identityCard" 
+                                    required/>
+                                <span
+                                    class="error"
+                                    ng-show="formEditRegister.identityCard.$error.required
+                                    && formEditRegister.identityCard.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{ "word.sex"|trans}}</label>
+                                <select 
+                                    name="gender"
+                                    ng-model="form.gender">
+                                    <option value="">Seleccione</option>
+                                    <option value="0">Masculino</option>
+                                    <option value="1">Femenino</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-8" id="js-range-picker">
+                                <label>{{ "word.birthdate"|trans}}</label>
+                                <input
+                                    id="js-date-range"
+                                    type="text"
+                                    name="birthDate.checkIn"
+                                    ng-model="form.birthDate"
+                                    class="js-range-check-in ">
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{"word.country"|trans }} *</label>
+                                <select 
+                                    name="country"
+                                    ng-model="form.country" 
+                                    ng-options="val.id as val.title for (country, val) in countries" 
+                                    required>
+                                    <option value="">Seleccione</option>
+                                </select>
+                                <span
+                                    class="error"
+                                    ng-show="formEditRegister.country.$error.required && formEditRegister.country.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                            <div class="col-xs-8">
+                                <label>{{ "word.state"|transchoice(1)}}</label>
+                                <select 
+                                    name="state" 
+                                    ng-disabled="form.country!=1 " 
+                                    ng-model="form.state"
+                                    ng-options="valEstado.id as valEstado.title for (state, valEstado) in states | orderBy:'title'" >
+                                    <option value="">Seleccione</option>
+                                </select>
+                                <span
+                                    class="error"
+                                    ng-show="infoProperty.state.$error.required && infoProperty.state.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-16">
+                                <label>{{ "word.address"|trans}}</label>
+                                <input  
+                                    type="text"
+                                    name="address" 
+                                    ng-model="form.address"/>
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{ "word.postal_code"|trans}}</label>
+                                <input  
+                                    type="text"
+                                    name="zipCode" 
+                                    ng-model="form.zipCode"/>
+                            </div>
+                            <div class="col-xs-8">
+                                <label>{{ "word.phone"|transchoice(1)}} *</label>
+                                <input 
+                                    type="text" 
+                                    name="clientPhone" 
+                                    ng-model="form.phone" 
+                                    required/>
+                                <span
+                                    class="error"
+                                    ng-show="formEditRegister.clientPhone.$error.required
+                                    && formEditRegister.clientPhone.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            <div class="col-xs-8">
+                                <label>{{ "word.mail"|trans}} *</label>
+                                <input 
+                                    type="email"
+                                    name="clientEmail" 
+                                    ng-model="form.email" 
+                                    required/>
+                                <span
+                                    class="error"
+                                    ng-show="formEditRegister.clientEmail.$error.required
+                                    && formEditRegister.clientEmail.$touched">
+                                    {{ "share.validation.input_required"|trans }}
+                                </span>
+                                <span
+                                    class="error"
+                                    ng-show="formEditRegister.clientEmail.$error.email
+                                    && formEditRegister.clientEmail.$touched">
+                                    {{ "share.validation.error_email"|trans }}
+                                </span>
+                            </div>
+                            <div class="col-xs-8">
+                                <label>{{ "word.profession"|trans}}</label>
+                                <select 
+                                    name="professions"
+                                    ng-model="form.professions[0]" 
+                                    ng-options="val.id as val.title for (profession, val) in professions">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="nvc-row">
+                            {#<div class="col-sm-8 hidden-xs">
+                                <label class="label-mail">
+                                    <input type="checkbox" value="">{{ "message.information_mail"|trans}}
+                                </label>
+                            </div>#}
+                            <div class="col-xs-8">
+                                <label>{{ "word.hobbies"|trans}}</label>
+                                <select 
+                                    name="hobbies"
+                                    ng-model="form.hobbies[0]" 
+                                    ng-options="val.id as val.title for (hobbies, val) in hobbies">
+                                    <option value="">Seleccione</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-16 col-sm-8">
+                                <button
+                                    class="btn btn-primary"
+                                    ng-disabled="formEditRegister.$invalid || notMarge"
+                                    ng-click="EditClient()"
+                                    >
+                                    {{ "word.save"|trans}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div> 
+
+        <div class="nvc-userData--block-items visible-xs visible-sm">
+            <!-- Formulario de registro -->
+            <section class="col-xs-16 col-md-6 nvc-userData__form">
+                <form name="formEditRegister" class="nvc-form">
+                    <h1><i class="fa fn-calendar"></i>Fecha de registro <span>{[{form.joinedDate}]}</span></h1>
+                    <div class="nvc-row">
+                        <div class="col-xs-8">
+                            <label>{{ "word.last_name"|trans}} *</label>
+                            <input  
+                                type="text" 
+                                name="clientNames" 
+                                ng-model="form.fullName" 
+                                required/>
+                            <span 
+                                class="error" 
+                                ng-show="formEditRegister.clientNames.$error.required 
+                                && formEditRegister.clientNames.$touched">
+                                {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+                        <div class="col-xs-8">
+                            <label>{{ "word.identity_card"|trans}} *</label>
+                            <input 
+                                type="text" 
+                                name="identityCard" 
+                                ng-model="form.identityCard" 
+                                required/>
+                            <span 
+                                class="error" 
+                                ng-show="formEditRegister.identityCard.$error.required 
+                                && formEditRegister.identityCard.$touched">
+                                {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="nvc-row">
+                        <div class="col-xs-8">
+                            <label>{{ "word.sex"|trans}}</label>
+                            <select 
+                                name="gender" 
+                                ng-model="form.gender">
+                                <option value="">Seleccione</option>
+                                <option value="0">Masculino</option>
+                                <option value="1">Femenino</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-8" id="js-range-picker">
+                            <label>{{ "word.birthdate"|trans}}</label>
+                            <input
+                                id="js-date-range"
+                                type="text"
+                                name="birthDate.checkIn"
+                                ng-model="form.birthDate"
+                                class="js-range-check-in ">
+                        </div>
+                    </div>
+                    <div class="nvc-row">
+                        <div class="col-xs-8">
+                            <label>{{"word.country"|trans }} *</label>
+                            <select 
+                                name="country"
+                                ng-model="form.country" 
+                                ng-options="val.id as val.title for (country, val) in countries" 
+                                required>
+                                <option value="">Seleccione</option>
+                            </select>
+                            <span 
+                                class="error" 
+                                ng-show="formEditRegister.country.$error.required && formEditRegister.country.$touched">
+                                {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+                        <div class="col-xs-8">
+                            <label>{{ "word.state"|transchoice(1)}}</label>
+                            <select 
+                                name="state"
+                                ng-disabled="form.country!=1 " 
+                                ng-model="form.state"
+                                ng-options="valEstado.id as valEstado.title for (state, valEstado) in states | orderBy:'title'" >
+                                <option value="">Seleccione</option>
+                            </select>
+                            <span 
+                                class="error" 
+                                ng-show="infoProperty.state.$error.required && infoProperty.state.$touched">
+                                {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="nvc-row">
+                        <div class="col-xs-16">
+                            <label>{{ "word.address"|trans}}</label>
+                            <input  
+                                type="text"
+                                name="address" 
+                                ng-model="form.address"/>
+                        </div>
+                    </div>
+                    <div class="nvc-row">
+                        <div class="col-xs-8">
+                            <label>{{ "word.postal_code"|trans}}</label>
+                            <input  
+                                type="text"
+                                name="zipCode" 
+                                ng-model="form.zipCode"/>
+                        </div>
+                        <div class="col-xs-8">
+                            <label>{{ "word.phone"|transchoice(1)}} *</label>
+                            <input 
+                                type="text"
+                                name="clientPhone" 
+                                ng-model="form.phone" 
+                                required/>
+                            <span 
+                                class="error" 
+                                ng-show="formEditRegister.clientPhone.$error.required 
+                                && formEditRegister.clientPhone.$touched">
+                                {{ "share.validation.input_required"|trans }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="nvc-row">
+                        <div class="col-xs-16 col-sm-8">
+                            <label>{{ "word.mail"|trans}} *</label>
+                            <input 
+                                type="email"  
+                                name="clientEmail" 
+                                ng-model="form.email" 
+                                required/>
+                            <span 
+                                class="error" 
+                                ng-show="formEditRegister.clientEmail.$error.required 
+                                && formEditRegister.clientEmail.$touched">
+                                {{ "share.validation.input_required"|trans }}
+                            </span>
+                            <span 
+                                class="error" 
+                                ng-show="formEditRegister.clientEmail.$error.email 
+                                && formEditRegister.clientEmail.$touched">
+                                {{ "share.validation.error_email"|trans }}
+                            </span>
+                        </div>
+                        <div class="col-xs-8 hidden-xs">
+                            <label>{{ "word.profession"|trans}}</label>
+                            <select 
+                                name="professions" 
+                                ng-model="form.professions[0]" 
+                                ng-options="val.id as val.title for (profession, val) in professions">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nvc-row hidden-sm">
+                        <div class="col-xs-8">
+                            <label>{{ "word.profession"|trans}}</label>
+                            <select 
+                                name="professions"
+                                ng-model="form.professions[0]" 
+                                ng-options="val.id as val.title for (profession, val) in professions">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-8">
+                            <label>{{ "word.hobbies"|trans}}</label>
+                            <select 
+                                name="hobbies" 
+                                ng-model="form.hobbies[0]" 
+                                ng-options="val.id as val.title for (hobbies, val) in hobbies">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nvc-row">
+                        <div class="col-xs-8 hidden-xs">
+                            <label>{{ "word.hobbies"|trans}}</label>
+                            <select 
+                                name="hobbies" 
+                                ng-model="form.hobbies[0]" 
+                                ng-options="val.id as val.title for (hobbies, val) in hobbies">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-16 col-sm-8">
+                            <button 
+                                class="btn btn-primary"
+                                ng-disabled="formEditRegister.$invalid || notMarge"
+                                ng-click="EditClient()"
+                                >
+                                {{ "word.save"|trans}}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalRegisterError.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalDataLoading.html.twig") }}
+    </main>
+
+
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = "{{ data }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+
+
+        var locations = "{{ locations }}";
+        var div = document.createElement('div');
+        div.innerHTML = locations;
+        locations = div.firstChild.nodeValue;
+        locations = JSON.parse(locations);
+    </script>
+
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript" src='//maps.googleapis.com/maps/api/js?key=AIzaSyCkteypABffSV5FUMesiG0O-G0qngQ1Yhg'></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            //*** DON´T TOUCH
+            $( ".js-range-check" ).keypress(function (evt) {  return false; });
+            //////////
+            $('#js-date-range').rangePicker({ startDate: null });
+        });
+    </script>
+
+{% endblock %}

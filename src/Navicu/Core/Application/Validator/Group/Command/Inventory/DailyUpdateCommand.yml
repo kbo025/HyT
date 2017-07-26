@@ -1,0 +1,9 @@
+#Validación DailyPack
+Navicu\Core\Application\UseCases\PropertyInventory\Grid\DailyUpdate\DailyUpdateCommand:
+    properties:
+        data:
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+        session:
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}

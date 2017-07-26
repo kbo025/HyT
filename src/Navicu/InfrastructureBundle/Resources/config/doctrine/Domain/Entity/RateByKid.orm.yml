@@ -1,0 +1,36 @@
+Navicu\Core\Domain\Model\Entity\RateByKid:
+    type: entity
+    table: rate_by_kid
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\RateByKidRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        amount_rate:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        number_kid:
+            type: integer
+            nullable: false
+        index:
+            type: integer
+            nullable: false
+            options:
+              default: 0
+
+    manyToOne:
+        room:
+            targetEntity: Room
+            cascade: ["persist"]
+            mappedBy: null
+            inversedBy: rates_by_kids
+            joinColumns:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false

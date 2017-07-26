@@ -1,0 +1,80 @@
+<nav class='nvc-navbar nvc-navbar__inverse nvc-topmenu__aavv'>
+    <div class='nvc-navbar__header'>
+        <button
+            class='nvc-navbar__toggle'
+            data-target='#menu'
+            data-toggle='collapse'
+            type='button'
+        >
+            <span class='sr-only'>Toggle navigation</span>
+            <span class='icon-bar' />
+            <span class='icon-bar' />
+            <span class='icon-bar' />
+        </button>
+        <strong
+            class='nvc-navbar__toggle'
+            data-toggle='collapse'
+        >
+        </strong>
+    </div>
+    <div
+        class='nvc-container collapse nvc-navbar__collapse'
+        id='menu'
+    >
+        <div class="nvc-container">
+            <ul class='nvc-nav nvc-nav__justified nvc-nav__arrow--foreground'>
+                <li class='col-md-4' id='step1'>
+                    <div class="nvc-arrow-container nvc-arrow-container--company">
+                        <div class="nvc-step-container">
+                            <div class="nvc-img-container">
+                                <img src="/images/aavv/paso1.png">
+                            </div>
+                            <a
+                                ng-click="sendData('company')">
+                                Datos de la empresa
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class='col-md-4' id='step2'>
+                    <div class="nvc-arrow-container nvc-arrow-container--payment">
+                        <div class="nvc-step-container">
+                            <div class="nvc-img-container">
+                                <img src="/images/aavv/paso2.png">
+                            </div>
+                            <a
+                                ng-click="sendData('payment')">Pago
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class='col-md-4' id='step3'>
+                    <div class="nvc-arrow-container nvc-arrow-container--billing">
+                        <div class="nvc-step-container">
+                            <div class="nvc-img-container">
+                                <img id="step3" src="/images/aavv/paso3.png">
+                            </div>
+                            <a
+                                ng-click="sendData('billing')">
+                                Facturación
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class='col-md-4' id='step4'>
+                    <div class="nvc-arrow-container nvc-arrow-container--agreement">
+                        <div class="nvc-step-container">
+                            <div class="nvc-img-container">
+                                <img id="step4" src="/images/aavv/paso4.png">
+                            </div>
+                            <a
+                                ng-click="sendData('agreement')">
+                                Contrato de gestión
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

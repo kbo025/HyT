@@ -1,0 +1,86 @@
+{% extends "NavicuInfrastructureBundle:Resetting:layoutResetting.html.twig" %}
+
+{% block body %}
+
+    <main class="nvc-resetting">
+        {% include "NavicuInfrastructureBundle:Resetting:top-menu.html.twig" %}
+        <div
+            class="responsive-bg nvc-resetting__content"
+            ng-app="resetPasswordModule"
+            ng-controller="resetPasswordController"
+            ng-style="backgroundImageStyle">
+            <style>
+                @media (min-width: 992px) {
+                    .responsive-bg {
+                        background-image: url({{ assets.img['images/reset-password-desktop.jpg'] }});
+                    }
+                }
+                @media (min-width: 480px) and (max-width: 991px) {
+                    .responsive-bg {
+                        background-image: url({{ assets.img['images/reset-password-tablet.jpg'] }});
+                    }
+                }
+                @media (max-width: 479px) {
+                    .responsive-bg {
+                        background-image: url({{ assets.img['images/reset-password-phone.jpg'] }});
+                    }
+                }
+            </style>
+            <div class="nvc-container">
+                <div class="nvc-row nvc-row__instructions">
+                    <div class="col-xs-14 col-md-8 col-lg-6">
+                        <p>
+                            {{ "share.message.password_update_web"|transchoice(0) }}<br>
+                            {{ "share.message.password_update_web"|transchoice(1) }}
+                        </p>
+                        {% for errorItem in form.plainPassword.first.vars.errors %}
+                            <p id="error">{{ errorItem.messageTemplate|trans }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="nvc-row">
+                    <div class="col-xs-14 col-xs-offset-1 col-sm-8 col-md-7 col-lg-5 inputs reset">
+                		<form
+                            action="{{ pathSubdomain('navicu_web_resetting_reset', {'token': token}) }}"
+                            {{ form_enctype(form) }}
+                            method="POST"
+                            class="form-out">
+                            <div class="input1">
+                                <i class="fn-lock-01"></i>
+                                {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': "share.message.password_insert_new_web"|transchoice(0),'ng-model': 'pass.first'}}) }}
+                            </div>
+                            <div class="input1">
+                                <i class="fn-lock-01 fn-lock-02"></i>
+                                {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': "share.message.password_insert_new_web"|transchoice(1),'ng-model': 'pass.second'}}) }}
+                            </div>
+                            {{ form_rest(form) }}
+                            <div class="input1">
+                                <button
+                                    type="submit"
+                                    id="_submit"
+                                    name="_submit"
+                                    ng-click="proffPassword()"
+                                    class="nvc-button nvc-button__default" >
+                                    {{"share.message.password_update_button"|trans }}
+                                </button>
+                                <div
+                                    class="nvc-row"
+                                    ng-hide="!equal">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

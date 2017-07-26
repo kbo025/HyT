@@ -1,0 +1,60 @@
+#La siguiente ruta retorna todos los datos de la galería de un establecimiento
+navicu_admin_property_galleries:
+    pattern: /propertyGalleries/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Galleries:getDataGalleries}
+
+# La siguiente ruta se encarga de subir una imagen de un establecimiento
+navicu_admin_property_upload_image:
+    pattern: /propertyGalleries/uploadImages/async/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Galleries:uploadImage }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Agregar una imagen a favoritos
+navicu_admin_property_add_image_favorite:
+    pattern: /propertyGalleries/addFavorite/async/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Galleries:addFavorite }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Eliminar una imagen de un establecimiento
+navicu_admin_property_delete_image:
+    pattern: /propertyGalleries/deleteImage/async/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Galleries:deleteImage }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Eliminar una imagen de un establecimiento
+navicu_admin_property_delete_image_favorite:
+    pattern: /propertyGalleries/deleteFavotire/async/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Galleries:deleteFavorite }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Editar el nombre de la imagen
+navicu_admin_property_edit_name_image:
+    pattern: /propertyGalleries/editName/async/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Galleries:editName }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+
+# Ordenar las imagenes
+navicu_admin_property_sort_images:
+    pattern: /propertyGalleries/sortImages/async/{slug}
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\Galleries:sortImages }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+

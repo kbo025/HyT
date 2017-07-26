@@ -1,0 +1,37 @@
+{% extends "NavicuInfrastructureBundle:Security:layout.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/admin-lite{% if app.environment != "dev" %}.min{% endif %}.css">
+{% endblock stylesheets %}
+
+{% block title %} Login Admin{% endblock title %}
+{% block fos_user_content %}
+    <div class="row" id="row-image">
+        <div class="col-xs-16">
+            <img src="{{ asset('images/logo-white-slogan.png') }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-10 col-sm-7 col-md-6 col-lg-4 absolute-center">
+            <div class="text-center">
+                <span id="welcome-text">¡Bienvenido de vuelta!</span>
+                {% if error %}
+                        <span id="error">{{'share.message.resetting.invalid_username'|trans}}</span>
+                {% endif %}
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="{{ path("navicu_admin_check") }}" class="form-signin" role="form" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        <h4><span class="fn-usercontra-04"></span><span id="info-text">Ingresa con tu usuario y contraseña</span></h4>
+                        <label for="username" class="sr-only">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Usuario" required="" autofocus="">
+                        <label for="password" class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control" placeholder="Contraseña">
+                        <button type="submit" id="submit" name="_submit" class="btn btn-sm btn-primary col-xs-7 pull-right" style="">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock fos_user_content %}

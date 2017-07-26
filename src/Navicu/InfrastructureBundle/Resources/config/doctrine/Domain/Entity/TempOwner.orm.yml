@@ -1,0 +1,94 @@
+Navicu\Core\Domain\Model\Entity\TempOwner:
+    type: entity
+    table: tempowner
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbTempOwnerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        lastsec:
+            type: integer
+            nullable: false
+        expiredate:
+            type: datetime
+            nullable: false
+        propertyForm:
+            type: json_array
+            nullable: true
+        services_form:
+            type: json_array
+            nullable: true
+        rooms_form:
+            type: json_array
+            nullable: true
+        payment_info_form:
+            type: json_array
+            nullable: true
+        terms_and_conditions_info:
+            type: json_array
+            nullable: true
+        gallery_form:
+            type: json_array
+            nullable: true
+        validations:
+            type: json_array
+            nullable: true
+        progress:
+            type: json_array
+            nullable: false
+            options:
+                default: '[]'
+        slug:
+            type: string
+            nullable: true
+    uniqueConstraints:
+        unique_slug:
+          columns: [slug]
+    oneToOne:
+        user_id:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: temp_owner
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+
+    manyToOne:
+        commercial_profile:
+            targetEntity: CommercialProfile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: properties
+            joinColumns:
+                commercial_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+
+        nvc_profile:
+            targetEntity: NvcProfile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: properties
+            joinColumns:
+                nvc_profile_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+        recruit:
+            targetEntity: NvcProfile
+            cascade: {  }
+            mappedBy: null
+            inversedBy: temp_owner_recruit
+            joinColumns:
+                recruit_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [prePersist]
+        postLoad: [postLoad]

@@ -1,0 +1,236 @@
+# Pagina de inicio
+navicu_homepage:
+    path:   /paixarei-navicu
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:index }
+
+# Pagina de inicio temporal
+navicu_homepage_temporal:
+    path:   /
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:indexTemporal }
+    options:
+        expose: true
+
+# Ruta se encarga de conseguir los estados de un pais por su codigo donde se encuentren
+# afilidados establecimientos
+navicu_search_country:
+    path:   /{countryCode}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:searchCountry }
+    requirements:
+        { countryCode:  "[a-zA-Z]{2}$"}
+
+# Ruta para el manejo de la peticion del autocompletado del motor de busqueda.
+navicu_auto_complete_search_energy:
+    path:   /search/autocomplete
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:autoCompleteSearchEnergy }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Ruta para el manejo de la vista de sugerencia del motor de busqueda.
+navicu_suggestion_search_energy:
+    path:   /search/suggestion
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:suggestionSearchEnergy }
+    options:
+        expose: true
+
+# Ruta para el manejo de la vista de Más sugerencia del motor de busqueda por medio de ajax.
+api_more_suggestion_search_energy:
+    path:   /async/search/suggestion/more
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:apiMoreSuggestionSearchEnergy }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+
+# Petición para el cambio de idioma.
+navicu_language:
+    path:   /change/{language}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:apiLanguage }
+    options:
+        expose: true
+
+# Vista de tipos de destinos
+navicu_destinations:
+    path:   /destinations
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:destinations }
+
+# Vista de preguntas más frecuentes
+navicu_faq:
+    path:   /faq
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:faq }
+
+# Vista de quienes somos
+navicu_about_us:
+    path:   /about_us
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:about_us }
+
+# Vista de términos y condiciones
+navicu_terms:
+    path:   /termsBooking
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:terms }
+
+# Vista de términos y condiciones de pre reserva
+navicu_termsPreBooking:
+    path:   /termsPreBooking
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:termsPreBooking }
+
+
+# Vista de tips de contenido
+navicu_tips:
+    path:   /tips
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:tips }
+
+# Vista de componentes navicu_sass_official
+navicu_sass_official:
+    path:   /navicu_sass_official
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:navicu_sass_official }
+
+
+# pdf de resumen de la reserva
+navicu_pdf_resume_reservation:
+    path:   /resumeReservation.pdf
+    defaults: { _controller: NavicuInfrastructureBundle:Documents\Documents:reservationResume}
+
+navicu_test_form:
+    path:   /test
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:testReservation }
+
+#Carga de las rutas relacionadas con la reserva
+navicu_reservation_property:
+     resource: "@NavicuInfrastructureBundle/Resources/config/routing/Reservation/reservation.yml"
+
+#Carga de las rutas relacionadas con la reserva
+navicu_errors:
+     resource: "@NavicuInfrastructureBundle/Resources/config/routing/errors.yml"
+
+# Petición para devolver la información de un usuario por medio de su ID de RedSocial.
+navicu_web_info_red_social:
+    path:   /async/info/redsocial
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:apiInfoRedSocial}
+    options:
+        expose: true
+
+# Petición para validar si existe un correo electronico en el registro de un usuario cliente registrado.
+navicu_web_valid_email:
+    path:   /async/valid/email
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:apiValidEmail}
+    options:
+        expose: true
+
+# Manejo de todas las rutas referente a la seguridad de la Web
+navicu_web_module_security:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Web/security.yml"
+
+# Manejo de todas las rutas referente a la seguridad de la Web
+navicu_web_module_resetting:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Web/resetting.yml"
+
+# Visualizar home de acceso cliente
+navicu_client_home:
+    path:   /client/home
+    defaults: { _controller: NavicuInfrastructureBundle:Web\ClientProfile:home }
+
+# Visualizar listado de pre reserva
+navicu_list_pre_reservation:
+    path:   /client/listPreReservation
+    defaults: { _controller: NavicuInfrastructureBundle:Web\ClientProfile:listPreReservation }
+    options:
+        expose: true
+
+# Visualizar historial de reserva
+navicu_list_record:
+    path:   /client/listRecord
+    defaults: { _controller: NavicuInfrastructureBundle:Web\ClientProfile:listRecord }
+
+# Visualizar listado de reservas con check-in mayor al día actual
+navicu_list_upcoming_reservations:
+    path:   /client/listUpcomingReservations
+    defaults: { _controller: NavicuInfrastructureBundle:Web\ClientProfile:listUpcomingReservations }
+
+# Visualizar listado de reservas en proceso de confirmación
+navicu_list_cofirmation_process:
+    path:   /client/listConfirmationProcess
+    defaults: { _controller: NavicuInfrastructureBundle:Web\ClientProfile:listConfirmationProcess }
+
+#Detalles de una reserva
+navicu_reservation_details:
+    pattern:  /client/detailsReservations/{id}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\ClientProfile:reservationDetails }
+    options:
+        expose: true
+
+# Visualizar datos de usuario de acceso cliente
+navicu_client_user:
+    path:   /client/user
+    defaults: { _controller: NavicuInfrastructureBundle:Web\ClientProfile:userData }
+    options:
+        expose: true
+
+# Manejo de todas las rutas referente a la seguridad de la Web
+navicu_web_module_search:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Web/search.yml"
+
+navicu_web_flights_module:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/Web/flights.yml"
+    prefix: flights
+
+# Peticion para editar los valores ingresados por el cliente
+navicu_web_edit_client_profile:
+    path: /edit/ClientProfile
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:editClientProfile }
+    options:
+        expose: true
+
+# Vista para los concursos
+#navicu_concurso:
+#    path:   /concurso
+#    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:concurso }
+
+# Ruta para el manejo de logout sin redireccionamiento.
+navicu_sitemap:
+    path:   /sitemap.{_format}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:sitemap, _format: xml}
+    host:     "www.%domain%"
+
+# Ruta generar el template del detalle de los marker del google map
+navicu_marker_details:
+    path:   /markerDetail
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:markerDetail}
+    host:     "www.%domain%"
+    options:
+        expose: true
+
+# Ruta para incluir en session la moneda seleccionada desde frontEnd
+navicu_set_alpha_currency:
+    path: /setAlphaCurrency
+    defaults: { _controller: NavicuInfrastructureBundle:Web/Default:SetAlphaCurrency}
+    options:
+        expose: true
+
+register_get_locations:
+    path: /getLocations
+    defaults: { _controller: NavicuInfrastructureBundle:Extranet\Default:getLocation}
+    options:
+        expose: true
+
+maintenance_view:
+    path: /maintenance
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:maintenanceView}
+    options:
+        expose: true
+# Vista de Promociones de hoteles en la Montaña
+navicu_mountain_promotion:
+    path: /hotelesenmontaña
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:promotions}
+
+# Vista de Promociones de hoteles en la Playa
+navicu_beach_promotion:
+    path: /hotelesenlaplaya
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:promotions}
+
+# Vista de Promociones de hoteles Margarita Todo Incluido
+navicu_all_in_promotion:
+    path: /margaritatodoincluido
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:promotions}

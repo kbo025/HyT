@@ -1,0 +1,206 @@
+# Representa los datos del usaurio AAVV (Agencia de viajes)
+Navicu\Core\Domain\Model\Entity\AAVV:
+    type: entity
+    table: aavv
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Rif de la agencia de viajes
+        rif:
+            type: string
+            nullable: true
+        # Rif de la agencia de viajes
+        slug:
+            type: string
+            nullable: true
+        # id publico de la aavv
+        public_id:
+            type: string
+            nullable: true
+        # Email corporativo del encargado de la encargado
+        company_email:
+            type: string
+            nullable: true
+        # Razon social de la empresa
+        social_reason:
+            type: string
+            nullable: true
+        #Numero de registro mercatil
+        merchant_id:
+            type: string
+            nullable: true
+        # Número celular
+        phone:
+            type: string
+            nullable: true
+        coordinates:
+            type: json_array
+            nullable: true
+        #nombre comercial de la aavv
+        commercial_name:
+            type: string
+            nullable: true
+        # Fecha de apertura de la agencia
+        opening_year:
+            type: integer
+            nullable: true
+        # Estatus del registro mercantil
+        status:
+            type: integer
+            nullable: true
+        # Correo personalizado
+        personalized_mail:
+            type: boolean
+            nullable: true
+        # Interfaz personalizable
+        personalized_interface:
+            type: boolean
+            nullable: true
+        # La agencia de viaje esta operativa
+        active:
+            type: boolean
+            nullable: true
+        # Credito Inicial
+        credit_initial:
+            type: float
+            nullable: true
+        # Credito Disponible
+        credit_available:
+            type: float
+            nullable: true
+        # Ganancia navicu
+        navicu_gain:
+            type: float
+            nullable: true
+        # Correo enviado por credito insuficiente
+        sent_email_for_insufficient_credit:
+            type: boolean
+            nullable: true
+            options:
+                default: false
+        # Correo enviado por credito insuficiente
+        sent_email_for_credit_less_than:
+            type: boolean
+            nullable: true
+            options:
+                default: false
+        # Razon de desactivacion de agencia
+        # 0 no desactivada
+        # 1 por razones comerciales
+        # 2 facturas sin cancelar
+        # 3 credit_available menor a 0
+        deactivate_reason:
+            type: integer
+            nullable: true
+            options:
+                default: 0
+        # fecha de inicio o finalizacion de registro o fecha de dado de alta
+        registration_date:
+            type: date
+            nullable: true
+        # estado de la agencia para navicu
+        # 0 en proceso de registro
+        # 1 registro finalizado
+        # 2 alta
+        # 3 desativacion por motivos de administracion
+        status_agency:
+            type: integer
+            options:
+                default: 0
+
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+        customize:
+            type: string
+            options:
+                default: ""
+        # indica si su credito inicial seleccionado es 0
+        have_credit_zero:
+            type: boolean
+            options:
+                default: false
+
+    oneToMany:
+        documents:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVVDocument
+            mappedBy: aavv
+            joinColumn:
+                name: documents
+                referencedColumnName: id
+            cascade: ["persist","remove"]
+        aavv_address:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVVAddress
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+        aavv_profile:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVVProfile
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+        roles:
+            targetEntity: Navicu\InfrastructureBundle\Entity\Role
+            mappedBy: aavv
+            joinColumn:
+                name: roles
+                referencedColumnName: id
+            cascade: ["persist","remove"]
+        invoices:
+            targetEntity: AAVVInvoice
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+        aavv_reservation_group:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVVReservationGroup
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+        financial_transactions:
+            targetEntity: AAVVFinancialTransactions
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+        bank_deposit:
+            targetEntity: AAVVBankPayments
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+        top_destination:
+            targetEntity: Navicu\Core\Domain\Model\Entity\AAVVTopDestination
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+    oneToOne:
+        agreement:
+            targetEntity: AAVVAgreement
+            mappedBy: aavv
+            cascade: ["persist","remove"]
+        logo:
+            targetEntity: Document
+            joinColumn:
+                name: logo_id
+                referencedColumnName: id
+            cascade: ["persist","remove"]
+        subdomain:
+            targetEntity: Navicu\InfrastructureBundle\Entity\Subdomain
+            joinColumn:
+                name: subdomain_id
+                referencedColumnName: id
+            cascade: ["persist"]
+    manyToMany:
+        additional_quota:
+            targetEntity: AAVVAdditionalQuota
+            mappedBy: aavvs
+            cascade: ["persist","remove"]
+
+    lifecycleCallbacks:
+        #prePersist: [ generatePublicId ]
+        preUpdate: [ generatePublicId ]

@@ -1,0 +1,61 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+    {% include "NavicuInfrastructureBundle:Admin:aavv/registration/listRegistrationModals.html.twig" %}
+
+    <main
+        class="visible-md visible-lg"
+        ng-controller="TravelAgencyRegistrationCtrl"
+        ng-cloak
+    >
+        <div>
+            <div class="nvc-secondaryTableHeader--admin">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/registration/listRegistrationHeader.html.twig" %}
+            </div>
+            <div class="nvc-table--admin nvc-container">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/registration/listRegistrationTable.html.twig" %}
+            </div>
+            <div ng-if="pagination.pages > 1">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/registration/listRegistrationPagination.html.twig" %}
+            </div>
+        </div>
+    </main>
+
+    <main
+        class="visible-sm visible-xs"
+        ng-controller="TravelAgencyRegistrationCtrl"
+        ng-cloak
+    >
+        <div class="nvc-secondaryTableHeader--admin--movil">
+            <div class="col-xs-16 col-sm-16">
+                {% include "NavicuInfrastructureBundle:Admin:aavv/registration/mobile/listRegistrationHeader.html.twig" %}
+            </div>
+        </div>
+        <div class="col-xs-16 col-sm-16 nvc-table--admin--movil">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/registration/mobile/listRegistrationTable.html.twig" %}
+        </div>
+        <div ng-if="pagination.pages > 1">
+            {% include "NavicuInfrastructureBundle:Admin:aavv/registration/listRegistrationPagination.html.twig" %}
+        </div>
+    </main>
+
+
+{% endblock content %}
+
+{% block scripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        var route = "{{ app.request.get('extension') }}"
+        console.log("route",route);
+        var response = {{ data | raw }};
+        console.log("response", response);
+    </script>
+
+    {{ parent() }}
+
+
+{% endblock %}

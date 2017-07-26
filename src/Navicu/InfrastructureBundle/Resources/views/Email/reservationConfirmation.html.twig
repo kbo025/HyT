@@ -1,0 +1,458 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %}
+
+{% block body %}
+
+    <!-- header -->
+    <table bgcolor="{% if customize is defined %}{{ customize['navbarPrimary'] }}{% else %}#391462{% endif %}" border="0" cellpadding="0" cellspacing="0" width="500" id="emailHeader">
+        <!-- HEADER ROW // -->
+        <tr>
+            <td align="center" valign="top">
+                <!-- CENTERING TABLE // -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600px">
+                    <tr>
+                        <td align="left" valign="top">
+                            <!-- FLEXIBLE CONTAINER // -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
+                                <tr>
+                                    <td valign="top"  class="flexibleContainerCell">
+
+                                        <!-- CONTENT TABLE // -->
+                                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="padding-left:14px;padding-top: 18px;padding-bottom: 18px">
+                                                    {% if logo is defined %}
+                                                        <img src="{{ logo }}" style="max-width: 200px">
+                                                    {% else %}
+                                                        <img src="https://www.navicu.com/images/logo-correo.png" style="max-width: 200px;">
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <!-- CONTENT TABLE // -->
+                                        <table align="right" border="0" cellpadding="0" cellspacing="0" >
+                                            <tr>
+                                                <td style="padding-right: 6px">
+                                                    <a href="https://www.navicu.com ">
+                                                        <img src="https://www.navicu.com/images/navicu/save.png" >
+                                                    </a>
+                                                </td>
+                                                <td style="padding-right:25px;padding-top: 18px;padding-bottom: 18px">
+                                                        <a
+                                                            {% if sendAavv is defined %}
+                                                                {% if sendOwner == false %}
+                                                                    href="https://www.navicu.com/resumeReservationPdf/{{ publicReservationId}}"
+                                                                {% else %}
+                                                                    href="https://www.navicu.com/resumeReservationPdf/{{ publicReservationId}}/2"
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {% if sendOwner == false %}
+                                                                    href="https://www.navicu.com/resumeReservationPdf/{{ publicReservationId}}"
+                                                                {% else %}
+                                                                    href="https://www.navicu.com/resumeReservationPdf/{{ publicReservationId}}/1"
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        >
+                                                            <span style="color:white;font-size: 14px;">
+                                                                Guardar PDF
+                                                            </span>
+                                                        </a>
+                                                </td>
+                                                <td style="padding-right: 6px">
+                                                    <a href="https://www.navicu.com ">
+                                                        <img src="https://www.navicu.com/images/navicu/print.png" >
+                                                    </a>
+                                                </td>
+                                                <td style="padding-right: 14px;">
+                                                    <a href="https://www.navicu.com ">
+                                                        <span style="color:white;font-size: 14px;">
+                                                            Imprimir
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- // FLEXIBLE CONTAINER -->
+                        </td>
+                    </tr>
+                </table>
+                <!-- // CENTERING TABLE -->
+            </td>
+
+        </tr>
+        <!-- // END -->
+    </table>
+
+
+    <table  border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #f9f9f9">
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                    <tr>
+                        <td style="height:37px;background-color: #39C93C;padding-left: 14px;font-weight: bold">
+                        <span style="font-weight: bold;font-family: arial,sans-serif;font-size:17px">
+                            {{ clientNames }}, ¡su reserva está confirmada!
+                        </span>
+                        </td>
+                    </tr>
+                </table>
+                <!-- END HEADER -->
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                    <tr style="line-height: 0px">
+                        <td align="center" valign="top" >
+                            <img src="https://www.navicu.com/uploads/images/images_email/{{ propertyImage }}" width="600px">
+                        </td>
+                    </tr>
+                    <tr style="line-height: 0px">
+                        {% if customize is defined %}
+                            <td align="center" valign="top" style="background-color: {{  customize['navbarPrimary']  }};height: 7px " >
+                            </td>
+                        {% else  %}
+                            <td align="center" valign="top">
+                                <img src="https://www.navicu.com/images/navicu/email_corporate_line.jpg" style="width: 600px" width="600px">
+                            </td>
+                        {% endif %}
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <tr>
+                        <td style="padding-left: 14px;width:60%;padding-top: 12px">
+                            <span style="color:#391462;font-weight: bold;font-size:22px !important;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">
+                                {{ propertyName }}
+                            </span>
+                        </td>
+                        <td style="padding-right: 14px;text-align: right">
+                            <span style="font-size:18px;font-weight: bold;color:#391462;{% if customize is defined  %}color:#3C3C3B !important;{% endif %}">ID de confirmación</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 5px;color:black;width:70%;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="200px" style="color:#FFFFFF;" align="left" >
+                                <tr>
+                                    {% for i in 1..propertyStars %}
+                                        <td style="width: 20%;">
+                                            <img src="https://www.navicu.com/images/navicu/star.png" style="padding-left: 10px;width: 20px">
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="font-size:19px;font-weight: bold;color:#391462;padding-right: 14px;text-align: right">
+                            <span style="color:#391462;font-weight: bold;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">{{ publicReservationId }}</span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 10px" >
+                    <tr>
+                        <td style="padding-left: 14px;width:100%;text-align: left !important;">
+                            <span style="color:#B3B3B3;font-weight: normal;font-size: 16.666667px">{{ propertyAddress }} - {{ city }}</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: 22px" >
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 10px;">
+                            <span style="color:#572A85;font-size:16px;font-weight: bold;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">
+                                Nombre de la reserva {{ clientNames }}
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 10px;line-height: 22px" >
+                    <tr>
+                        <td style="padding-left: 14px;width: 60%">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Check-in <span style="font-weight: normal">{{ checkInReservation }}</span></span>
+                        </td>
+                        <td>
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Total de Adultos <span style="font-weight: normal;">{{ numberAdult }}</span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;width: 60%">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Check-out <span style="font-weight: normal">{{ checkOutReservation }}</span></span>
+                        </td>
+                        {% if not numberChild == 0 %}
+                            <td>
+                                <span style="color:#572A85;font-weight:bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Total de Niños <span style="font-weight:normal">{{ numberChild }}</span></span>
+                            </td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %}color:#7a7a7a !important;{% endif %}">Total de habitaciones reservadas <span style="font-weight: normal">{{ totalRooms }}</span></span>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 8px">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">Condiciones</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;font-size: 14px;padding-top: 6px;color:#7a7a7a;{% if customize is defined %}color:#7a7a7a !important;{% endif %}">
+                            {% for currentCondition in propertyAdditionalInfo %}
+                                {{ currentCondition }}{% if loop.last == false %}, {% else %}.{% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%"  >
+                    <tr>
+                        <td style="padding-left: 14px;padding-bottom: 10px; padding-top: 12px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">
+                            <span style="color:#572A85;{% if customize is defined %}color:#3C3C3B !important;{% endif %}font-weight: bold;font-size: 18px;">HABITACIONES RESERVADAS</span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%"  >
+                    {% for currentPack in packages %}
+                        {% if loop.index is divisible by(2) %}
+                            <tr style="background-color: #f2f2f2">
+                        {% else %}
+                            <tr style="background-color: #e6e6e6">
+                        {% endif %}
+                        <td style="width: 30%;min-height: 116px !important;">
+                            <img src="https://www.navicu.com/uploads/images/images_sm/{{ currentPack.roomImage }}" style="height: 116px !important;width: 100%">
+                        </td>
+                        <td style="width: 70%;padding-left: 10px;padding-right: 10px;font-size:15px;line-height: 20px">
+                            <span style="font-size: 14px;color: #7A7A7A">
+                                Tipo de habitación: {{ currentPack.roomName }} <br>
+                                Tipo de servicio: {{ currentPack.namePack }}<br>
+                                {% if currentPack.bedsType == true %}
+                                    Tipo de cama solicitado: {{ currentPack.bedsType }}<br>
+                                {% endif %}
+                                Cantidad: {{ currentPack.numberPack }}<br>
+                                Nº de Adultos: {{ currentPack.numberAdults }} <br>
+                                {% if not currentPack.numberChildren == 0 %}
+                                    Nº de Niños: {{ currentPack.numberChildren }} <br>
+                                    {% for currentAge  in currentPack.childrenAges %}
+                                        Edad Niño {{ loop.index }} : {{ currentAge }} <br>
+                                    {% endfor %}
+                                {% endif %}
+                                <span style="font-weight: bold;font-size:18px ">
+                                    {% if sendAavv is defined %}
+                                        {% if sendOwner == false %}
+                                            Bs {{ currentPack.pricePack|number_format(2, ',', '.') }}
+                                        {% else %}
+                                            Bs {{ currentPack.pricePackOwner |number_format(2, ',', '.') }}
+                                        {% endif %}
+                                    {% else %}
+                                        {% if sendOwner == false %}
+                                            Bs {{ currentPack.pricePack|number_format(0, ',', '.') }}
+                                        {% else %}
+                                            Bs {{ currentPack.pricePackOwner |number_format(0, ',', '.') }}
+                                        {% endif %}
+                                    {% endif %}
+                                </span>
+                            </span>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #D8D8D8;min-height: 140px !important;">
+                    <tr>
+                        <td style="padding-left: 14px;width: 80%">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;font-size:22px;color:#666666">
+                                            {% if sendAavv is defined %}
+                                                {% if sendOwner == false %}
+                                                    Subtotal: Bs {{ subTotal |number_format(2, ',', '.') }}
+                                                {% else %}
+                                                    Subtotal: Bs {{ subTotalAavv |number_format(2, ',', '.') }}
+                                                {% endif %}
+                                            {% else %}
+                                                {% if sendOwner == false %}
+                                                    Subtotal: Bs {{ subTotal |number_format(0, ',', '.') }}
+                                                {% else %}
+                                                    Subtotal: Bs {{ subTotalOwner |number_format(0, ',', '.') }}
+                                                {% endif %}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;font-size:22px;color:#666666">
+                                            {% if sendAavv is defined %}
+                                                {% if sendOwner == false %}
+                                                    IVA: Bs {{ tax |number_format(2, ',', '.') }}
+                                                {% else %}
+                                                    IVA: Bs {{ taxAavv |number_format(2, ',', '.') }}
+                                                {% endif %}
+                                            {% else %}
+                                                {% if sendOwner == false %}
+                                                    IVA: Bs {{ tax |number_format(0, ',', '.') }}
+                                                {% else %}
+                                                    IVA: Bs {{ taxOwner |number_format(0, ',', '.') }}
+                                                {% endif %}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;font-size:24px;color:#666666">
+                                            {% if sendAavv is defined %}
+                                                {% if sendOwner == false %}
+                                                    TOTAL Bs {{ (subTotal + tax) |number_format(2,',','.') }} <br>
+                                                {% else %}
+                                                    TOTAL Bs {{ (subTotalAavv + taxAavv) |number_format(2,',','.') }}<br>
+                                                {% endif %}
+                                            {% else %}
+                                                {% if sendOwner == false %}
+                                                    TOTAL Bs {{ (subTotal + tax) |number_format(0,',','.') }} <br>
+                                                {% else %}
+                                                    TOTAL Bs {{ (subTotalOwner + taxOwner) |number_format(0,',','.') }}<br>
+                                                {% endif %}
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {% if not typePayment is defined%}
+                                            <span style="font-size:14px;color:#666666">Pago realizado correctamente con tarjeta de crédito/débito<br> en nuestro website www.navicu.com</span>
+                                        {% else %}
+                                            <span style="font-size:14px;color:#666666">Pago realizado correctamente mediante transferencia bancaria<br> en nuestro website www.navicu.com</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <img src="https://www.navicu.com/images/preciogarantizadobig.png" style="width: 115px;float:right;margin-right: 15px">
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    {% if specialRequests == true %}
+                        <tr>
+                            <td style="padding-left: 14px;padding-top: 10px">
+                                <span style="color:#572A85;font-weight: bold;font-size: 16px;">
+                                    Peticiones especiales
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 14px;padding-top: 6px;padding-right: 14px;text-align: justify">
+                                <span style="font-size:14px;color:#7A7A7A ">
+                                    {{ specialRequests }}
+                                </span>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if not methodToPay is empty or creditCard == true %}
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 10px;">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">Métodos de pago aceptados en el establecimiento</span>
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if not methodToPay is empty %}
+                        <tr>
+                            <td style="padding-left: 14px;padding-top: 10px;">
+                                <span style="font-size:14px;color:#7a7a7a">
+                                {% for currentMethod in methodToPay %}
+                                    {{ currentMethod }}{% if loop.last == false %}, {% else %}.{% endif %}
+                                {% endfor %}
+                                </span>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if creditCard == true %}
+                        <tr>
+                            <td style="padding-left: 14px;padding-top: 6px">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                                    <tr>
+                                        {% if creditCardMc != false %}
+                                            <td style="width: 8%">
+                                                <img src="https://www.navicu.com/images/master.png" >
+                                            </td>
+                                        {% endif %}
+                                        {% if creditCardVisa != false %}
+                                            <td style="width: 8%">
+                                                <img src="https://www.navicu.com/images/visa.png" >
+                                            </td>
+                                        {% endif %}
+                                        {% if creditCardAmex != false %}
+                                            <td style="width: 84%">
+                                                <img src="https://www.navicu.com/images/american.png" >
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <tr>
+                        <td style="padding-left: 14px;padding-right: 14px;padding-top: 10px">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">Política de cancelación</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;padding-right: 14px;padding-top: 6px;padding-bottom: 10px">
+                            <span style="font-size:14px;font-style: italic;color:#7A7A7A">Reserva no reembolsable</span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F2F2F2;">
+                    <tr>
+                        <td style="width: 50%;padding-left: 14px">
+                            <span style="font-weight: bold;color:#391462;font-size: 14px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">¿Cómo llegar?</span><br>
+                            <span style="font-weight: bold;color:#391462;font-size: 14px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">Teléfono del hotel: <span style="font-weight: normal">{{ propertyPhone }}</span></span><br>
+                            <span style="font-weight: bold;color:#391462;font-size: 14px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">Dirección:<span style="font-weight: normal">{{ propertyAddress }}</span></span><br>
+                            <span style="font-weight: bold;color:#391462;font-size: 14px;{% if customize is defined %}color:#3C3C3B !important;{% endif %}">Coordenadas GPS: <span style="font-weight: normal">{{ propertyGps }}</span></span><br>
+                        </td>
+                        <td style="width: 50%">
+                            {% if customize is not defined %}
+                                <img  style="width: 100%;height: 100%" src="https://maps.googleapis.com/maps/api/staticmap?center={{ propertyLatitude }},{{ propertyLongitude }}&zoom=15&size=320x170&markers=icon:http://navicu.com/images/markerNavicu.png%7C{{ propertyLatitude }},{{ propertyLongitude }}&amp;&lt;br&gt;markers=color:blue|label:A|{{ propertyLatitude }},{{ propertyLongitude }}">
+                            {% else %}
+                                <img  style="width: 100%;height: 100%" src="https://maps.googleapis.com/maps/api/staticmap?center={{ propertyLatitude }},{{ propertyLongitude }}&zoom=15&size=320x170&markers=color:0x{{ customize['navbarPrimary']|slice(1, 6)}}%7C{{ propertyLatitude }},{{ propertyLongitude }}&amp;&lt;br&gt;markers=color:blue|label:A|{{ propertyLatitude }},{{ propertyLongitude }}">
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:white;height: 149px !important;background-color: {% if customize is defined %}#E6E6E6{% else %} #572A85;{% endif %};width: 600px !important;">
+                    <tr>
+                        <td style="padding-top: 10px;text-align: center;width: 600px">
+                            {% if customize is not defined %}
+                            <span style="font-style: italic;font-size:17.666667px;">Viajar abre tu mente y amplia tu cultura</span><br>
+                            {% endif %}
+                            <span style="font-size: 17.666667px;">preguntas@navicu.com</span><br>
+                            <span style="font-size: 23.333333px;color:#F2AE00;font-weight: bold">08008 - NAVICU (628428)</span><br>
+                            {% if customize is not defined %}
+                            <span style="font-size:10.666667px;">Lunes a viernes de 8:00AM a 5:00PM</span>
+                            {% endif %}
+                            <br><br>
+                            <span style="font-size: 9.666667px;color:#CCCCCC ">
+                                Este e-mail ha sido enviado por navicu.com - 2014 &middot; 2017 navicu&trade; Todos los derechos reservados
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+{% endblock body %}

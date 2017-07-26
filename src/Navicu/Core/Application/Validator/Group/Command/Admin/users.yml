@@ -1,0 +1,173 @@
+Navicu\Core\Application\UseCases\Admin\Users\DeactivateAdvanceForUser\DeactivateAdvanceForUserCommand:
+    properties:
+        id:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        deactivateBy:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        reason:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Admin\Users\Admin\EditUserAdmin\EditUserAdminCommand:
+    properties:
+        user_id:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        treatment:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        full_name:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+ #       birth_date:
+ #          - Date:
+ #               message: is_not_date,{{ value }},{{ type }}
+        identity_card:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        email:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Email:
+                message: is_not_email,{{ value }},{{ type }}
+
+    constraints:
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsNvcProfile, editNvcProfile ]
+
+Navicu\Core\Application\UseCases\Admin\Users\Admin\CreateUserAdmin\CreateUserAdminCommand:
+    properties:
+        treatment:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        full_name:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+#        birth_date:
+#           - Date:
+#                message: is_not_date,{{ value }},{{ type }}
+        identity_card:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        email:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Email:
+                message: is_not_email,{{ value }},{{ type }}
+        cell_phone:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+    constraints:
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsNvcProfile, createNvcProfile ]
+
+Navicu\Core\Application\UseCases\Admin\Users\Owner\CreateUserOwner\CreateUserOwnerCommand:
+    properties:
+        treatment:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        full_name:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+ #       birth_date:
+ #          - Date:
+ #               message: is_not_date,{{ value }},{{ type }}
+        identity_card:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        email:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Email:
+                message: is_not_email,{{ value }},{{ type }}
+        cell_phone:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+    constraints:
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsOwnerProfile, createOwnerProfile ]
+
+Navicu\Core\Application\UseCases\Admin\Users\Owner\EditUserOwner\EditUserOwnerCommand:
+    properties:
+        user_id:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        treatment:
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+        full_name:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+#    birth_date:
+#        - Date:
+#            message: is_not_date,{{ value }},{{ type }}
+        identity_card:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        email:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Email:
+                message: is_not_email,{{ value }},{{ type }}
+        cell_phone:
+ #           - NotBlank:
+ #               message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+    constraints:
+        - Callback:
+            methods:
+                - [Navicu\Core\Application\Validator\Contraints\ContainsOwnerProfile, editOwnerProfile ]

@@ -1,0 +1,95 @@
+
+<div ng-repeat="value in reserves">
+    <div class="title" ng-class="{'colorTitleTwo': $index % 2 != 0}" ng-click="open = !open">
+        <div class="col-xs-8 separatorTitle">
+            <h2>
+                {[{ value.fullname }]}
+            </h2>
+        </div>
+        <div class="col-xs-8">
+            <h2>
+                {[{ value.publicid }]}
+            </h2>
+        </div>
+    </div>
+    <div class="content" ng-if="open">
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    {{ 'message.create_date'|trans }}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {{ 'word.city'|transchoice(1) }}
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                    {[{ value.createdate }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ value.city}]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>{{ 'word.accommodation'|trans }}</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>{[{value.property}]}</h2>
+            </div>
+        </div>
+        <div class="mainInfo">
+            <div class="col-xs-8 separatorOne">
+                <h2>
+                    {{ 'word.checkin'|trans }}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {{ 'word.checkout'|trans }}
+                </h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-8 separatorTwo">
+                <h2>
+                    {[{ value.checkin }]}
+                </h2>
+            </div>
+            <div class="col-xs-8">
+                <h2>
+                    {[{ value.checkout }]}
+                </h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>{{ 'word.price'|trans }}</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>Bs {[{value.price}]}</h2>
+            </div>
+        </div>
+        <div class="type">
+            <div class="col-xs-16">
+                <h2>{{ 'word.state'|transchoice(1) }}</h2>
+            </div>
+        </div>
+        <div class="info">
+            <div class="col-xs-16">
+                <h2>{[{value.status}]}</h2>
+            </div>
+        </div>
+    </div>
+</div>

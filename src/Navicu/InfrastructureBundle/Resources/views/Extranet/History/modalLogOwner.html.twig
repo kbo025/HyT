@@ -1,0 +1,53 @@
+<script id="modal-logs-owner.tpl" type="text/ng-template">
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog-logs modal-dialog-dailypack">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="$hide()">&times;</button>
+                    
+                    <strong>{{ "extranet.message.logs_information"|trans }}</strong><br>
+                    <strong ng-bind="log.property.name"></strong><br>
+                    <strong ng-bind="log.ownerProfile.names"></strong>
+                    <strong ng-bind="log.ownerProfile.lastNames"></strong>
+                </div>
+                <div class="modal-body" >
+                    <div class="row modal-row " ng-repeat="(key, value) in logsFile">
+                        <div ng-if="key != 'affected'">
+                            <div class="key col-xs-6">
+                                <strong ng-bind="key"></strong>:
+                            </div>
+                            <div class="value col-xs-10" >
+                                <span ng-if="key == 'sellRate'">
+                                    <strong ng-bind="value | number"></strong> Bs. F.
+                                </span>
+                                
+                                <span ng-if="key == 'date'">
+                                    <strong ng-bind="value | date:'dd-MM-yyyy'"></strong>
+                                </span>
+                                
+                                <span ng-if="key != 'sellRate' && key != 'date'">
+                                    <strong ng-bind="value"></strong>    
+                                </span>
+                            </div>
+                        </div>
+                        <div ng-if="key == 'affected'">
+                            <div class="key col-xs-16">
+                                <strong>{{ "share.message.affected"|transchoice(1) }}</strong>
+                            </div>
+                            <div ng-repeat="affected in logsFile.affected">
+                                <div ng-repeat="(key, value) in affected">
+                                    <div class="col-xs-6">
+                                       <strong ng-bind="key"></strong>
+                                    </div>
+                                    <div class="col-xs-10">
+                                       <strong ng-bind="value"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

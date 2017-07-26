@@ -1,0 +1,27 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:layoutRegister.html.twig" %}
+
+{% block body %}
+<div ng-app="loginExtranetModule" ng-controller="loginExtranetController">
+    <div class="body-extranet-login" style="background-image: url({{ assets.img['images/images_original/navicu/homepage/home-page-extranet.jpg'] }})" ng-style="lazyStyles.bg">
+        <div class="container">
+            <div class="col-xs-16">
+                <div class="row" style="color:white;text-align:right;margin-top:10%">
+                    {% block content_title %}
+                    {% endblock content_title %}
+                </div>
+                <div class="row" >
+                    {% block content_form %}
+                    {% endblock content_form %}
+                </div>
+                <div class="row">
+                    {% block content_buttons %}
+                    {% endblock content_buttons %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "NavicuInfrastructureBundle:Ascribere/PropertyForm:formContentHomePage.html.twig" %}
+
+</div>
+{% endblock %}

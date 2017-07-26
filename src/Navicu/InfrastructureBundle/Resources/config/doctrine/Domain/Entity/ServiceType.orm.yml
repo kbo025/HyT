@@ -1,0 +1,53 @@
+Navicu\Core\Domain\Model\Entity\ServiceType:
+    type: entity
+    table: service_type
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbServiceTypeRepository
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: NONE
+    fields:
+        title:
+          type: string
+          length: 64
+        lvl:
+          type: integer
+          nullable: true
+        type:
+          type: integer
+          nullable: false
+        required:
+          type: boolean
+          nullable: false
+        gallery:
+          type: boolean
+          nullable: false
+        priority:
+          type: integer
+          nullable: true
+        url_icon:
+          type: string
+          nullable: true
+    manyToOne:
+        parent:
+            targetEntity: ServiceType
+            inversedBy: children
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id
+                onDelete: CASCADE
+        root:
+            targetEntity: ServiceType
+            joinColumn:
+                name: root_id
+                referencedColumnName: id
+                onDelete: CASCADE
+
+    oneToMany:
+      children:
+        targetEntity: ServiceType
+        mappedBy: parent
+      property_gallery_types:
+        targetEntity: PropertyGallery
+        mappedBy: type

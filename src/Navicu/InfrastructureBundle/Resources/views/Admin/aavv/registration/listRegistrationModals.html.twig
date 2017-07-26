@@ -1,0 +1,127 @@
+<script id="modal-aavv-confirm-delete.tpl" type="text/ng-template">
+    <div
+        class="nvc-modal"
+        tabindex="-1"
+        role="dialog"
+        style="overflow-x: hidden; overflow-y: hidden;"
+    >
+        <div class="nvc-modal__confirm--aavv center-block clearfix slide-in">
+
+            <div class="nvc-modal__header">
+                <button
+                    type="button"
+                    class="close"
+                    ng-click="$hide()"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                >
+                    ×
+                </button>
+
+                <h3>Hey!</h3>
+            </div>
+
+            <div class="nvc-modal__content">
+                <div class="nvc-row">
+                    <div class="col-xs-16">
+                        <img
+                            class="img-responsive"
+                            role="presentation"
+                            src="/images/aavv/admin/modals/triangle-question-marks.svg"
+                        >
+
+                        <div class="nvc-modal__content--heading" >
+                            <span>
+                                Asegúrate antes de continuar
+                            </span>
+                        </div>
+
+                        <div class="nvc-modal__content--body">
+                            ¿Deseas eliminar esta agencia?
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nvc-row nvc-row--buttons clearfix">
+                    <button
+                        type="button"
+                        ng-click="handleCancelDelete()"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="button"
+                        ng-click="handleConfirmDelete()"
+                    >
+                        Continuar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="modal-aavv-confirm-activate.tpl" type="text/ng-template">
+    <div
+        class="nvc-modal"
+        tabindex="-1"
+        role="dialog"
+        style="overflow-x: hidden; overflow-y: hidden;"
+    >
+        <div class="nvc-modal__confirm--aavv center-block clearfix slide-in">
+
+            <div class="nvc-modal__header">
+                <button
+                    type="button"
+                    class="close"
+                    ng-click="$hide()"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                >
+                    ×
+                </button>
+
+                <h3>Hey!</h3>
+            </div>
+
+            <div class="nvc-modal__content">
+                <div class="nvc-row">
+                    <div class="col-xs-16">
+                        <img
+                            class="img-responsive"
+                            role="presentation"
+                            src="/images/aavv/admin/modals/triangle-question-marks.svg"
+                        >
+
+                        <div class="nvc-modal__content--heading" >
+                            <span>
+                                Asegúrate antes de continuar
+                            </span>
+                        </div>
+
+                        <div class="nvc-modal__content--body">
+                            ¿Deseas dar de alta la agencia {[{ selectedAgency.nameAgency }]}?
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nvc-row nvc-row--buttons clearfix">
+                    <button
+                        type="button"
+                        ng-click="handleCancelActivate()"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="button"
+                        ng-click="handleConfirmActivate()"
+                    >
+                        Continuar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

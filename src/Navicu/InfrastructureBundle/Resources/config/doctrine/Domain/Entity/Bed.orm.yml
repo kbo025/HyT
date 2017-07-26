@@ -1,0 +1,26 @@
+Navicu\Core\Domain\Model\Entity\Bed:
+    type: entity
+    table: bed
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbBedRepository
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        type:
+            type: integer
+            nullable: true
+        amount:
+            type: integer
+            nullable: true
+    manyToOne:
+        bedroom:
+            targetEntity: Bedroom
+            mappedBy: null
+            inversedBy: beds
+            joinColumns:
+                bedroom_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

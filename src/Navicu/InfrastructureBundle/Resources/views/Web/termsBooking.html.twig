@@ -1,0 +1,309 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+        <title>Terminos y condiciones de la reserva.</title>
+    {% endif %}
+{% endblock seoMetadata %}
+
+{% block body %}
+
+<main
+    class='post-body entry-content'
+    oncontextmenu='return false'
+    ondragstart='return false'
+    onmousedown='return false'
+    onselectstart='return false'>
+    <div class="nvc-container">
+        <section class="nvc-terms">
+            <div class="col-md-16">
+                <h1 align="center">{{"word.termsBooking"|trans }}</h1>
+            </div>
+            <div class="nvc-terms__scroll nvc-container">
+                <br>
+                <h4>Cláusula 1. Definiciones y alcance</h4>
+                <h5>1.1. Definiciones</h5>
+                <p align="justify">
+                    Las siguientes definiciones tienen el mismo significado tanto si se  menciona en plural como en singular. Por “usuario” se entiende el usuario o Usuario que reserva los servicios de hospedaje o alojamiento ofrecidos por NAVICU en el sitio web.
+                </p>
+                <p align="justify">
+                    Por “NAVICU”, se entiende la sociedad mercantil debidamente inscrita por ante el Registro Mercantil Segundo del Estado Carabobo, República Bolivariana de Venezuela, No. de Expediente 315-51698, quedando anotada bajo el No. 33, Tomo 138-A en fecha 25 de junio de 2015.
+
+                </p>
+                <p align="justify">
+                    Por “Términos y Condiciones Generales”, se entiende estos términos y condiciones generales.
+                </p>
+                 <p align="justify">
+                    Por “Términos y Condiciones Especiales”, se entiende estos términos y condiciones del ESTABLECIMIENTO AFILIADO o proveedor.
+                </p>
+                 <p align="justify">
+                    Por “Servicio”, se entiende el servicio de reserva de alojamiento u hospedaje ofrecido en el sitio Web.
+                </p>
+                <p align="justify">
+                    Por “Establecimiento Adherente”, se entiende el proveedor de servicios de alojamiento u hospedaje afiliado a la Web NAVICU.
+                    Por “Sitio Web” se entiende el Sitio Web de NAVICU <a href="https://www.navicu.com/">www.navicu.com</a>
+                </p>
+                <h5>1.2. Alcance</h5>
+                <p align="justify">
+                    Los presentes Términos y Condiciones Generales se aplican a los servicios de reservación de alojamiento u hospedaje que tramita o gestiona NAVICU a través de la presente página Web. NAVICU actúa como intermediario entre el Usuario  y los diversos ESTABLECIMIENTOS AFILIADOS o Proveedores afiliados a NAVICU.
+                </p>
+                <p align="justify">
+                    A su vez, estos Términos y Condiciones Generales están supeditados a los Términos y Condiciones Especiales que establecen los Establecimientos Adherentes o los Proveedores a NAVICU y a los Usuarios. Dichas condiciones y términos  se encuentran a disposición del Usuario al momento de consultar la información del Proveedor o ESTABLECIMIENTO AFILIADO, antes de que se formalice la reserva y que el Usuario también acepta en el momento que concreta la reservación correspondiente. Es responsabilidad del Usuario conocer los Términos y Condiciones de los Proveedores o Establecimientos Adherentesy que se evidencian de la información que los mismos proveen en la página Web.
+                </p>
+                <p align="justify">
+                    NAVICU puede modificar los Términos y Condiciones en cualquier momento y sin previo aviso. Por consiguiente, el Usuario debe leer, guardar e imprimir una copia de los Términos y Condiciones en el momento de efectuar la reserva, a los fines de que tenga conocimiento exacto de los términos y condiciones que le son aplicables a su caso concreto.
+                </p>
+                <h4>Cláusula 2. Realización de Reservas a través del Sitio Web. El servicio prestado por NAVICU.</h4>
+                <h5>2.1 Capacidad Legal del Usuario.</h5>
+                <p align="justify">
+                    El Sitio Web permite al Usuario realizar las reservas para alojamiento necesarias y de acuerdo a sus deseos, interés y capacidad. La Web actúa como intermediario entre Usuario y el proveedor o ESTABLECIMIENTO AFILIADO. El Usuario debe ser mayor de edad y tener capacidad legal para obligarse contractualmente.En caso de Usuarios persona jurídicas, debe actuar el represéntate con capacidad de obligar legal y contractualmente a la empresa.
+                </p>
+                <p align="justify">
+                    El Usuario está obligado a proveer información verdadera, exacta y actualizada.
+                </p>
+                <h5>2.2 Condiciones financieras y procedimientos de pago. Impuesto.</h5>
+                <p align="justify">
+                    A menos que se especifique lo contario en los Términos y Condiciones Especiales, los precios de los servicios que figuran en el Sitio Web están expresados en la moneda local e incluyen el IVA, Expresamente están excluidas cualquier otro impuesto, tasas o contribuciones especiales.
+                </p>
+                <p align="justify">
+                    El precio de los servicios de alojamiento u hospedaje presentados en el Sitio Web deberá pagarse a NAVICU, quien aceptará dicho precio en nombre de los proveedores de servicios o ESTABLECIMIENTOS AFILIADOS proveyendo el número de tarjeta de crédito del Usuario por medio de un sistema de pago seguro.
+                </p>
+                <p align="justify">
+                    El Usuario deberá proporcionar los datos de su tarjeta de crédito a NAVICU. NAVICU verificará (i) la validez de la tarjeta de crédito; (ii) la disponibilidad de fondos en la tarjeta de crédito; iii) cobrar el importe total del precios por el alojamiento u hospedaje correspondiente al ESTABLECIMIENTO AFILIADO o proveedor; iv) emitir una confirmación de reserva que enviara vía electrónica al Usuario y al proveedor o ESTABLECIMIENTO AFILIADO y; v) emitirá la correspondiente factura de pago.    Los pagos que se realicen en el Sitio Web a través de tarjetas de créditos se realizarán mediante un sistema de pago seguro.
+                </p>
+                <h5>2.3. Confirmación y Cancelación de Reservas.</h5>
+                <p align="justify">
+                    2.3.1 Confirmación de Reserva.
+                </p>
+                <p align="justify">
+                    La Confirmación de una reserva comporta la descripción de los servicios de alojamiento  reservados y el precio. Dicha confirmación se enviará al Usuario por correo electrónico. Si el Usuario no recibe un mensaje de correo electrónico de confirmación dentro de las 24 horas desde la realización de la reserva, deberá ponerse en contacto con el Departamento de Atención al Usuario en la siguiente dirección del correo electrónico: <a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a>
+                </p>
+                <p align="justify">
+                    Los datos almacenados en los sistemas informáticos de NAVICU y de sus proveedores o Establecimientos Adherentes constituirá prueba suficiente de la reservas efectuadas por el Usuario, los almacenados en ordenadores o medios electrónicos son prueba suficiente y, por consiguiente, serán aceptable en virtud de las mismas condiciones y con el mismo valor probatorio que un documento físico.
+                </p>
+                <p align="justify">
+                    2.3.2 No Cancelación de Reservas.
+                </p>
+                <p align="justify">
+                    El Usuario no tiene un derecho automático de cancelación.
+                    Si el Usuario no se presenta a la salida de un viaje, los únicos reembolsos a lo que tendrá derecho el Usuario serán los previstos en los Términos y Condiciones Especiales del correspondiente proveedor y notificados durante el proceso de reserva.
+                </p>
+                <p align="justify">
+                    NAVICU C.A. Se reserva el derecho de cancelar su reserva si no es recibo el pago en su totalidad y en su momento oportuno.
+                </p>
+                <p align="justify">
+                    2.3.3 Reembolsos.
+                </p>
+                <p align="justify">
+                    En caso de corresponderle un reembolso al Usuario,NAVICU transferirá la cantidad de que se trate a la tarjeta que se haya empleado para realizar la reserva original. Los cargos de reserva aplicados no tendrán derecho a reembolso.
+                </p>
+                <p align="justify">
+                    2.3.4 Tarifas de servicios.
+                </p>
+                <p align="justify">
+                    Los proveedores o Establecimientos Adherentes a NAVICU publican en la página Web NAVICU sus mejores tarifas y precios disponibles para el Usuario. En caso de que el Usuario obtenga un mejor precio o tarifa para ese mismo ESTABLECIMIENTO AFILIADO o proveedor, en las mismas fechas y condiciones de alojamiento, NAVICU igualará dicho precio o tarifa.
+                </p>
+                <p align="justify">
+                    A menos que el Usuario indique otra cosa, se entiende que solicita los Servicios menos costosos. Dichos servicios se deberán prestar sin posibilidad de modificarlos ni cancelarlos. En tales casos, los servicios no se podrán prestar de manera distinta en un momento o lugar  diferente de los contratados.
+                </p>
+                <h5>2.4 Pago a distintas partes.</h5>
+                <p align="justify">
+                    Al Usuario podrán cobrarle varias partes por una misma reserva. No obstante, la cantidad total cargada no superará el precio total de los servicios.
+                </p>
+                <h4>Cláusula 3. Servicios  específicos.</h4>
+                <p align="justify">
+                    NAVICU administra y gestiona el Sitio Web NAVICU es un intermedio entre el Usuario y los Establecimientos Adherentes o proveedores en relación ala oferta y la prestación de todos los servicios de alojamiento u hospedaje.
+                </p>
+                <p align="justify">
+                    La información aquí aportada no es exhaustiva y no sustituye los términos y condiciones especiales delos Establecimientos Adherentes o proveedores. En caso de conflicto o incoherencia entre los presentes Términos y Condiciones Generales y los Términos y Condiciones Especiales que establecen los proveedores o Establecimientos Adherentes, prevalecerán estos últimos. Los términos y Condiciones Especiales de los proveedores o Establecimientos Adherentes se encuentran disponibles antes de que se formalice la reserva.
+                </p>
+                <p align="justify">
+                    Salvo que la normativa que resulte en definitiva aplicable disponga lo contrario, dicha información establecida en los Términos y Condiciones que establecen los proveedores o Establecimientos Adherentes no genera ninguna obligación ni responsabilidad para NAVICU.
+                </p>
+                <h5>3.1. Servicio de Alojamiento.</h5>
+                <p align="justify">
+                    Los servicios de alojamiento u hospedaje están sujetos a los Términos y Condiciones Especiales de los Proveedores o Establecimientos Adherentes que ofrecen alojamiento. Los términos y Condiciones especiales  pueden incluir restricciones y cargos y/o impuestos por los proveedores.
+                </p>
+                <p align="justify">
+                    Las reservas pre pagadas de hoteles exigen que se cargue en la tarjeta de crédito del Usuario el importe completo en el momento de la reserva.
+                </p>
+                <p align="justify">
+                    Los precios mostrados en el Sitio Web no incluyen las tarifas, ni los cargos de los suplementos opcionales, tales como artículos del mini bar o llamadas telefónicas, entre otros semejantes.
+                </p>
+                <p align="justify">
+                    Si un Usuario no se presenta la primera noche de la reserva. Pero si se va registrar para las siguientes noches que ha reservado, el Usuario deberá confirmar los cambios de reserva a NAVICU como muy tarde en la fecha original de entrada, para evitar que se cancele  su reserva completa. Si el Usuario no confirma el cambio señalado anteriormente, la reserva completa podrá ser cancelada y no tendrá derecho de reembolso. El cambio en cuestión deberá notificarse a la siguiente dirección: <a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a> y teléfono 08008 NAVICU si llama desde venezuela.
+
+                    Es política de NAVICU y los Establecimientos Adherentes que no se permiten cambios ni cancelaciones de reservas una vez realizadas.
+                </p>
+                <h5>3.2. Uso de las Habitaciones.</h5>
+                <p align="justify">
+                    Las habitaciones reservadas están disponibles únicamente conforme a los horarios que establezca el proveedor o ESTABLECIMIENTO AFILIADO. Las habitaciones individuales tienen una cama y con frecuencia se paga un suplemento por ellas. Las habitaciones dobles tienen dos camas o una de matrimonio.
+                </p>
+                <p align="justify">
+                    3.2.1 Clasificación.
+                </p>
+                <p align="justify">
+                    La indicación del nivel o categoría otorgado a los proveedores o Establecimientos Adherentes que figuran en el Sitio Web corresponde a la clasificación basada en los estándares locales de de dicho país, que pueden diferir de aquellos utilizados en otros países. Esta clasificación se ofrece simplemente como referencia. Los Usuarios deben tener en cuenta que los estándares pueden variar entre hoteles de la misma clase en países  distintos o incluso dentro del mismo país. Es importante leer con atención las descripciones de los hoteles individuales. El alojamiento en todos los hoteles, con independencia de su categoría, es en habitación normal, a no ser se indique otra cosa.
+                </p>
+                <p align="justify">
+                    Por razones técnicas, un hotel, proveedor o ESTABLECIMIENTO AFILIADO puede que experimente un exceso de reserva uoverbooking por razones de fuerza mayor o por causas imputables a terceros, una reserva para alojamiento u hospedaje sea cancelada o modificada. En estos casos, NAVICU hará todo los esfuerzo razonable para notificar al Usuario esta circunstancia, tan pronto como lo sea posible y siempre que sea posible se le ofrecerá alojamiento alternativo en un hotel de al menos la misma clasificación de estrella y con servicios similares. Si lo anterior no fuera posible, se le ofrecerá al Usuario una alternativa de alojamiento en el mismo sitio, pero en alojamiento de categoría inferior, con reembolso parcial. Si esta oferta no es aceptada por el Usuario, NAVICU se asegurará de que todo el dinero pagado en concepto de reserva para alojamiento sea reembolsado.
+                </p>
+                <p align="justify">
+                    Cuando exista un problema técnico en NAVICU que implique la cancelación o modificación de reserva, NAVICU pagará una compensación razonable al Usuario.
+                </p>
+                <p align="justify">
+                    Por motivos técnicos, de fuerza mayor o por actos de terceros, el hotel que se reservó originalmente sea reemplazado por un hotel de la misma categoría que proporcione servicios similares.
+                </p>
+                <p align="justify">
+                    3.2.2. Comidas.
+                </p>
+                <p align="justify">
+                    Si las Comidas forman parte del paquete del alojamiento, la cantidad de comidas depende de la cantidad de noches incluidas en la estancia. Normalmente, la pensión completa incluye desayuno, comida y cena. La media pensión incluye desayuno y comida o cena, lo que dependerá del paquete contratado. El alojamiento que incluye comidas principales suele comenzar con la cena del día de llegada al hotel y finalizar con el desayuno (si es con media pensión) o la comida (si es pensión completa) del día de partida. Si no puede tomarse una o varias comidas, no se realizará reembolso alguno.
+                </p>
+                <p align="justify">
+                    A menos que se estipule lo contrario en el Sitio Web, las bebidas no están incluidas en las comidas;en tales casos, el Usuario deberá asumir su costo.
+                </p>
+                <p align="justify">
+                    3.2.3. Impuestos.
+                </p>
+                <p align="justify">
+                    Las autoridades locales pueden establecer impuestos adicionales pagaderos en el Establecimientos Adherente o proveedor.  El Usuario es el único responsable de pagar dicho impuestos adicionales.
+                </p>
+                <p align="justify">
+                    3.2.4. Cancelación.
+                </p>
+                <p align="justify">
+                    NAVICU se reserva el derecho decancelar la reserva en el caso de que el pago integro no se reciba en los términos y condiciones establecidos en el presente documento.
+                </p>
+                <p align="justify">
+                    3.2.5. Reservas para grupos.
+                </p>
+                <p align="justify">
+                    No se podrá reservar en el Sitio Web más de 10 habitaciones para el mismo establecimiento y las mismas fechas de estancia.
+                </p>
+                <p align="justify">
+                    Si NAVICU determina que se ha reservado más de 10 habitaciones por un mismo Usuario, NAVICU está en el derecho de cancelar las reservas y el Usuario perderá el derecho a alojamiento para las reservas efectuadas.
+                </p>
+                <p align="justify">
+                    El Usuario que deseehacer reservas de grupos deberá ponerse en contacto con NAVICU por los siguientes teléfonos o por el correo electrónico 08008 NAVICU y en <a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a>
+                </p>
+                <h5>3.3. Cambios significativos por parte de NAVICU o Establecimientos Adherentes.</h5>
+                <p align="justify">
+                    Si se produce un cambio significativo en la reserva imputable a NAVICU o al proveedor o Establecimiento Afiliado, el Usuario tiene derecho i) a aceptar un paquete de sustitución de calidad equivalente o superior sin coste adicional para él, en caso de NAVICU pueda ofrecerle dicha posibilidad o ii) aceptar una reserva de sustitución de calidad inferior, en caso de queNAVICU se lo puede ofrecer, en cuyo caso NAVICU reembolsará al Usuario la diferencia entre el costode la reserva original y aquella de sustitución o iii) a cancelar el contrato y recibir el reembolso de todo el dinero abonado. El Usuario debe ejercer sus derechos en un plazo de 2 días, después de que NAVICU le haya informado del cambio significativo de que se trate.
+                </p>
+                <h5>3.4. Términos y  Condiciones Especiales de Proveedores o Establecimientos Adherentes.</h5>
+                <p align="justify">
+                    NAVICU no ejerce un control sobre estos Proveedores o Establecimientos Adherentes. Los servicios de alojamiento están sujetos a los Términos y Condiciones Especiales de los Establecimientos Adherentes o Proveedores.
+                </p>
+                <h5>3.5. Fuerza  Mayor.</h5>
+                <p align="justify">
+                    Si se produce una causa de fuerza mayor que no habría podido evitarse aplicando todo el cuidado debido que hubiera impedido en gran medida que tenga lugar, entonces cualquiera de las partes podrá rescindir el contrato.
+                </p>
+                <p align="justify">
+                    Cuando el Usuario sea la parte afectada por la fuerza mayor, NAVICU no estará obligada a reembolsarle ninguna suma por los servicios que todavía no se hayan prestado.
+                </p>
+                <h4>Cláusula 4.   Responsabilidad de NAVICU.</h4>
+                <p align="justify">
+                    NAVICU es responsable de:
+                </p>
+                <p align="justify">
+                    <ol class="romanos_lower">
+                        <li>La diligente selección y la supervisión de los Establecimientos Adherentes o proveedores.</li>
+                        <li>La precisa presentación de la información mostrada en el Sitio Web; en el entendido que la información la aporta el Establecimiento Adherente o proveedor y es este el responsable de su contenido.</li>
+                        <li>Tramitar la reservación en el Establecimiento Adherente o proveedor escogido por el Usuario y pagado por el Usuario.</li>
+                        <li>Cobrar y facturar el servicio de alojamiento u hospedaje.</li>
+                        <li>Confirmar la reservación al Usuario e informar al Establecimiento Adherente o proveedor dicha reservación.</li>
+                    </ol>
+                </p>
+                <h5>4.1. Limitación de responsabilidad.</h5>
+                <p align="justify">
+                    NAVICU no es responsable por (i) pérdidas o daños causadas por fraude o declaraciones falsas de los proveedores o Establecimientos Adherentes; (ii) por pérdidas originadas por el fallecimiento o lesiones personales; iii) por fallas, deficiencias, desmejoras en el servicio de alojamiento u hospedaje prestado por los Establecimientos Adherentes o proveedores; o iv) robos, hurtos, pérdidas materiales en el ESTABLECIMIENTO AFILIADO o Proveedor.
+                </p>
+                <p align="justify">
+                    NAVICU sólo será responsable por daños que surjan directamente como consecuencia de su incumplimiento de estos Términos y Condiciones Generales, relativas a la reservación por un servicio de alojamiento u hospedaje en un ESTABLECIMIENTO AFILIADO o proveedor y, en todo caso, la responsabilidad está limitada al precio del producto correspondiente contratado.
+
+                </p>
+                <p align="justify">
+                    La responsabilidad de NAVICU se limita a tramitar la reservación, ser intermediario entre el Usuario y el proveedor del servicio de alojamiento u hospedaje  y comienza su responsabilidad una vez se haya concretado el pago por la reserva del alojamiento u hospedaje mediante la aprobación de pago por parte del banco emisor de la  tarjeta de crédito correspondiente y cesa en el momento del registro de entrada del Usuario en el ESTABLECIMIENTO AFILIADO o proveedor.
+                </p>
+                <p align="justify">
+                    El Usuario deberá asegurarse de verificar toda la información indicada antes de realizar la reserva.
+                </p>
+                <p align="justify">
+                    El Usuario debe tener en cuenta que todas las clasificaciones de los hoteles mostradas tienen carácter meramente informativo y de orientación al Usuario. NAVICU no acepta ninguna responsabilidad en relación con las clasificaciones hoteleras mostradas.
+                </p>
+                <p align="justify">
+                    TToda la información contenida en este sitio Web se proporciona sin garantías, ya sean explícitas o implícitas de calidad e idoneidad de los Establecimientos Adherentes o proveedores.
+                </p>
+                <p align="justify">
+                    NAVICU no es responsable de cualquier demora o incapacidad para usar el Sitio Web, o del uso por parte del Usuario de los vínculos del sitio Web.
+                </p>
+                <p align="justify">
+                    Las exclusiones y limitaciones contenidas en esta cláusula sólo son aplicables en la medida en que lo permita la normativa aplicable.
+                </p>
+                <h5>4.2.  Prescripción de la responsabilidad y período limitado de reclamaciones.</h5>
+                <p align="justify">
+                    as reclamaciones derivadas del presente  contrato deben presentarse en el plazo de 5 días continuos contados desde la fecha de la reserva. En tal supuesto de reclamación, el Usuario interesado deberá ponerse en contacto por el siguiente correo electrónico <a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a> o llame al número de nuestro Servicio de atención al Usuario, 08008 NAVICU.
+                </p>
+                <p align="justify">
+                    Las reclamaciones se presentarán por escrito y en interés del propio Usuario.
+                </p>
+                <h4>Cláusula 5. Generalidades.</h4>
+                <h5>5.1. Precios.</h5>
+                <p align="justify">
+                    El precio de los servicios será el que figure en el Sitio Web para cada proveedor o ESTABLECIMIENTO AFILIADO. Los precios pueden cambiar en cualquier momento. Pero los cambios no afectarán a la reserva que ya hayan aceptado. A pesar de que NAVICUrealiza sus mejores esfuerzos para evitarlo, algunos de los servicios enumerados en el Sitio Web podrían tener precios incorrectos y NAVICU no tiene ninguna obligación de prestar servicios al Usuario a un precio incorrecto (inferior), aunque se haya enviado al Usuarioconfirmación de su reserva.
+                </p>
+                <h5>5.2. Información, fotografía e ilustraciones.</h5>
+                <p align="justify">
+                    NAVICU hace todo lo posible para proporcionar información,  fotografías e ilustraciones que ofrezcan al Usuario una representación visual de los servicios de alojamiento u hospedaje ofrecidos. La finalidad de estas fotografías e ilustraciones es mostrar al Usuario el nivel del alojamiento y el grado de comodidad, sin pretender ninguna otro objetivo.
+                </p>
+                <h5>5.3. Seguros.</h5>
+                <p align="justify">
+                    Los precios en el Sitio Web no incluyen el seguro.
+                </p>
+                <h4>Cláusula 6. Atención al Usuario y gestión de reclamaciones.</h4>
+                <p align="justify">
+                    Las consultas y solicitudes de información deben enviarse a <a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a>
+                </p>
+                <p align="justify">
+                    Las reclamaciones deberán enviarse por correo electrónico <a href="mailto:preguntas@navicu.com">preguntas@navicu.com</a>
+                </p>
+                <h4>Cláusula 7. Privacidad.</h4>
+                <p align="justify">
+                    El Usuario, al momento de hacer su reservación, aporta datos de identificación y de ubicación personal, dirección IP, el software de su navegador Web y de tarjeta de crédito. Eventualmente se le podría solicitar información sobre preferencias de alojamiento y otros datos para completar su perfil de viajero. La información anterior es utilizada para la base de datos de NAVICU y para confirmar las reservas. Dicha información puede ser compartida con los Establecimientos Adherentes o proveedores y se comparte con la entidad bancaria emisora de las tarjetas de crédito. En caso de requerimientos de entes reguladores, fiscales  y autoridades judiciales, NAVICU se verá obligada a compartir igualmente dicha información.
+                </p>
+                <p align="justify">
+                    En caso de que la pagina Web de NAVICU tenga o permita enlaces externos, esos sitios Web no estarán bajo control de NAVICU y no atineden esta política de privacidad.
+                </p>
+                <p align="justify">
+                    NAVICU está comprometida a proteger su información y nuestro sitio Web garantiza seguridad.
+                </p>
+                <h4>Cláusula 8. Legislación Aplicable.</h4>
+                <p align="justify">
+                    Estos términos y condiciones generales se rigen por la ley de la República Bolivariana de Venezuela.
+                </p>
+            </div>
+        </section>
+        <section align="center" class="nvc-terms">
+            <a ng-if="type==2" href="{{ asset("files/TERMINOSYCONDICIONESGENERALESPARARESERVA.pdf") }}"  target="_blank" download="Condiciones_de_la_reserva_Navicu_CA.pdf">
+                <button style="width:auto;" class="nvc-button nvc-button__default">
+                    {{"word.download"|trans }}
+                </button>
+            </a>
+        </section>
+    </div>
+</main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment == "dev" %}
+
+    {% else %}
+
+    {% endif %}
+
+{% endblock %}

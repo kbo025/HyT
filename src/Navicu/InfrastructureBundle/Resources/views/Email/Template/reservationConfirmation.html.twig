@@ -1,0 +1,373 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %}
+
+{% block body %}
+
+    <!-- header -->
+    <table bgcolor="{% if customize is defined %}{{ customize['navbar_primary'] }}{% else %}#391462{% endif %}" border="0" cellpadding="0" cellspacing="0" width="600" id="emailHeader">
+        <!-- HEADER ROW // -->
+        <tr>
+            <td align="center" valign="top">
+                <!-- CENTERING TABLE // -->
+                <table border="0" cellpadding="0" cellspacing="0" width="600px">
+                    <tr>
+                        <td align="left" valign="top">
+                            <!-- FLEXIBLE CONTAINER // -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="600px" class="flexibleContainer">
+                                <tr>
+                                    <td valign="top"  class="flexibleContainerCell">
+
+                                        <!-- CONTENT TABLE // -->
+                                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="padding-left:25px;padding-top: 3%;padding-bottom: 3%;line-height: 0px;">
+                                                    {% if logo is defined %}
+                                                        <img src="https://s3.amazonaws.com/uploads.hipchat.com/172918/2700732/MwqkC2WQkphfcZ1/logoprueba.png" style="max-width: 200px;">
+                                                    {% else %}
+                                                        <img src="http://navicu.com/images/logo-correo.png" style="max-width: 200px;">
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <!-- CONTENT TABLE // -->
+                                        <!--<table align="right" border="0" cellpadding="0" cellspacing="0" >
+                                            <tr>
+                                                <td style="padding-right: 6px">
+                                                    <a href="http://www.navicu.com ">
+                                                        <img src="http://navicu.com/images/navicu/save.png" >
+                                                    </a>
+                                                </td>
+                                                <<td style="padding-right:25px;padding-top: 18px;padding-bottom: 18px">
+                                                    <a href="http://navicu.com/resumeReservationPdf/5695577d" >
+                                                        <span style="color:white;font-size: 14px;">
+                                                            Guardar PDF
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                                <td style="padding-right: 6px">
+                                                    <a href="http://www.navicu.com ">
+                                                        <img src="http://navicu.com/images/navicu/print.png" >
+                                                    </a>
+                                                </td>
+                                                <td style="padding-right: 14px;">
+                                                    <a href="http://www.navicu.com ">
+                                                        <span style="color:white;font-size: 14px;">
+                                                            Imprimir
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>-->
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- // FLEXIBLE CONTAINER -->
+                        </td>
+                    </tr>
+                </table>
+                <!-- // CENTERING TABLE -->
+            </td>
+
+        </tr>
+        <!-- // END -->
+    </table>
+
+
+    <table  border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #f9f9f9">
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                    <tr>
+                        <td style="height:37px;background-color: #39C93C;padding-left: 25px;font-weight: bold">
+                        <span style="font-weight: bold;font-family: arial,sans-serif;font-size:17px">
+                            Sr. Andrés Eladio Morales Guarín, ¡su reserva está confirmada!
+                        </span>
+                        </td>
+                    </tr>
+                </table>
+                <!-- END HEADER -->
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 600px">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                    <tr style="line-height: 0px">
+                        <td align="center" valign="top" >
+                            <img src="https://www.navicu.com/uploads/images/images_email/property/hotel-bergland/othergalleries/zonas-comunes/navicu-reserva-hotel-bergland-1878170268.jpeg" width="600px">
+                        </td>
+                    </tr>
+                    <tr style="line-height: 0px">
+                        {% if customize is defined %}
+                            <td align="center" valign="top" style="background-color: {{ customize['navbar_primary'] }};height: 7px " >
+                            </td>
+                        {% else  %}
+                            <td align="center" valign="top">
+                                <img src="https://www.navicu.com/images/navicu/email_corporate_line.jpg" style="width: 600px" width="600px">
+                            </td>
+                        {% endif %}
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <tr>
+                        <td style="padding-left: 14px;width:60%;padding-top: 12px">
+                            <span style="color:#391462;font-weight: bold;font-size:22px !important;{% if customize is defined %}color:#3C3C3B{% endif %};">
+                                Hotel Bergland
+                            </span>
+                        </td>
+                        <td style="padding-right: 14px;text-align: right">
+                            <span style="font-size:18px;font-weight: bold;color:#391462;{% if customize is defined %}color:#3C3C3B{% endif %}; ">ID de confirmación</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 5px;color:black;width:70%;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="200px" style="color:#FFFFFF;" align="left" >
+                                <tr>
+                                    {% for i in 1..3 %}
+                                        <td style="width: 20%;">
+                                            <img src="http://navicu.com/images/navicu/star.png" style="padding-left: 10px;width: 20px">
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="font-size:19px;font-weight: bold;color:#391462;padding-right: 14px;text-align: right">
+                            <span style="color:#391462;font-weight: bold;{% if customize is defined %}color:#3C3C3B{% endif %};">56cb4e48</span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 10px" >
+                    <tr>
+                        <td style="padding-left: 14px;width:100%;text-align: left !important;">
+                            <span style="color:#B3B3B3;font-weight: normal;font-size: 16.666667px;">Sector el Calvario via la Victoria</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="line-height: 22px" >
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 10px;">
+                            <span style="color:#572A85;font-size:16px;font-weight: bold{% if customize is defined %};color:#3C3C3B{% endif %};">
+                                Nombre de la reserva Andrés Eladio Morales Guarín
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 10px;line-height: 22px" >
+                    <tr>
+                        <td style="padding-left: 14px;width: 60%">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Check-in <span style="font-weight: normal">11-03-2016</span></span>
+                        </td>
+                        <td>
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Adultos <span style="font-weight: normal;">2</span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;width: 60%">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Check-out <span style="font-weight: normal">13-03-2016</span></span>
+                        </td>
+
+                        <!--<td style="width: 60%">
+                            <span style="color:#572A85;font-weight:bold;font-size: 16px;">Niños <span style="font-weight:normal">0</span></span>
+                        </td>-->
+
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 10px;line-height: 22px" >
+                    <tr>
+                        <td style="padding-left: 14px;">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %} color:#7a7a7a;{% endif %}">Total de habitaciones reservadas <span style="font-weight: normal">1</span></span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 8px">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px{% if customize is defined %};color:#3C3C3B{% endif %};">Condiciones</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;font-size: 14px;padding-top: 6px;color:#7a7a7a">
+                            {#
+                            {% for i in 1..5 %}
+                                Acepta el hospedaje de niños{% if loop.index != 5 %}, {% else %}.{% endif %}
+                            {% endfor %}
+                            #}
+                            Acepta el hospedaje de niños, Se permiten mascotas.
+                        </td>
+                    </tr>
+                </table>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%"  >
+                    <tr>
+                        <td style="padding-left: 14px;padding-bottom: 10px; padding-top: 12px">
+                            <span style="color:#572A85;font-weight: bold;font-size: 18px;{% if customize is defined %}color:#3C3C3B{%   endif %};">HABITACIONES RESERVADAS</span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    {% for i in 1..3 %}
+                        {% if loop.index is divisible by(2) %}
+                            <tr style="background-color: #f2f2f2">
+                        {% else %}
+                            <tr style="background-color: #e6e6e6">
+                        {% endif %}
+                        <td style="width: 30%;min-height: 116px !important;">
+                            <img src="https://www.navicu.com/uploads/images/images_sm/property/hotel-bergland/rooms/habitacion-doble-vista-a-la-montana/navicu-reserva-hotel-bergland-3053498510.jpeg" style="height: 116px !important;width: 100%">
+                        </td>
+                        <td style="width: 70%;padding-left: 10px;padding-right: 10px;font-size:15px;line-height: 20px">
+                            <span style="font-size: 14px;color: #7A7A7A">
+                                Tipo de habitación Habitación Doble - Vista a la montaña    <br>
+                                Tipo de servicio Sólo Habitación<br>
+                                <!--Tipo de cama solicitado: Doble 140 cm de ancho<br>-->
+
+                                Cantidad 1<br>
+                                Nº de personas 1<br>
+                                <span style="font-weight: bold;font-size:18px ">
+                                    Bs 27.000,00
+                                </span>
+                            </span>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #D8D8D8;min-height: 140px !important;">
+                    <tr>
+                        <td style="padding-left: 14px;width: 80%">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;font-size:22px;color:#666666">
+                                            Subtotal 24.107,14
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;font-size:22px;color:#666666">
+                                            IVA Bs 2.892,86 <!-- SI el iva es 0 Cero -->
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-weight: bold;font-size:24px;color:#666666">
+                                            TOTAL Bs 27.000,00 <br>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-size:14px;color:#666666">Pago realizado correctamente con tarjeta de crédito/débito<br> en nuestro website www.navicu.com</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 20%;">
+                            <img src="http://navicu.com/images/preciogarantizado.png" style="width: 115px;float:right;margin-right: 15px">
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <!--<tr>
+                        <td style="padding-left: 14px;padding-top: 10px">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;">
+                                Peticiones especiales
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 6px;padding-right: 14px;text-align: justify">
+                            <span style="font-size:14px;color:#7A7A7A ">
+                                Quisiera las sabanas limpias
+                            </span>
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 10px;">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;text-align: justify{% if customize is defined %};color:#3C3C3B{% endif %};">Métodos de pago aceptados en el establecimiento</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding-left: 14px;padding-top: 6px;">
+                           <span style="font-size: 14px;color:#666666">
+                               Acepta tarjeta de débito como forma de pago, Acepta tarjeta de crédito como forma de pago, Acepta pagos en efectivo hasta 500000 Bs.
+                           </span>
+                        </td>
+                    </tr>
+                    <!--<tr>
+                        <td style="padding-left: 14px;padding-top: 6px">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                                <tr>
+                                    <td style="width: 8%">
+                                        <img src="http://navicu.com/images/master.png" >
+                                    </td>
+
+                                    <td style="width: 8%">
+                                        <img src="http://navicu.com/images/visa.png" >
+                                    </td>
+
+                                    <td style="width: 84%">
+                                        <img src="http://navicu.com/images/american.png" >
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>-->
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                    <tr>
+                        <td style="padding-left: 14px;padding-right: 14px;padding-top: 10px">
+                            <span style="color:#572A85;font-weight: bold;font-size: 16px;{% if customize is defined %}color:#3C3C3B{% endif %};">Política de cancelación</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 14px;padding-right: 14px;padding-top: 6px;padding-bottom: 10px">
+                            <span style="font-size:14px;font-style: italic;color:#7A7A7A">Reserva no reembolsable</span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F2F2F2;">
+                    <tr>
+                        <td style="width: 50%;padding-left: 14px">
+                            <span style="font-weight: bold;color:#391462;font-size: 14px{% if customize is defined %};color:#3C3C3B{% endif %};">¿Cómo llegar?</span><br>
+                            {#{% if propertyPhone is defined %}#}
+                            <span style="font-weight: bold;color:#391462;font-size: 14px{% if customize is defined %};color:#3C3C3B{% endif %};">Teléfono del hotel: <span style="font-weight: normal">02443551229</span></span><br>
+                            {#{% endif %}#}
+                            <span style="font-weight: bold;color:#391462;font-size: 14px{% if customize is defined %};color:#3C3C3B{% endif %};">Dirección:<span style="font-weight: normal"> Sector el Calvario via la Victoria </span></span><br>
+                            <span style="font-weight: bold;color:#391462;font-size: 14px{% if customize is defined %};color:#3C3C3B{% endif %};">Coordenadas GPS: <span style="font-weight: normal"> 10°24'39.5136''N 67°17'22.218''W</span></span><br>
+                        </td>
+                        <td style="width: 50%">
+                            {% if customize is not defined %}
+                                <img  style="width: 100%;height: 100%" src="http://maps.googleapis.com/maps/api/staticmap?center=10.410945100437,-67.289531145477&zoom=15&size=320x170&markers=icon:http://navicu.com/images/markerNavicu.png%7C10.410945100437,-67.289531145477&amp;&lt;br&gt;markers=color:blue|label:A|10.410945100437,-67.289531145477">
+                            {% else %}
+                                <img  style="width: 100%;height: 100%" src="http://maps.googleapis.com/maps/api/staticmap?center=10.410945100437,-67.289531145477&zoom=15&size=320x170&markers=color:0x{{ customize['navbar_primary']|slice(1, 6)}}%7C10.410945100437,-67.289531145477&amp;&lt;br&gt;markers=color:blue|label:A|10.410945100437,-67.289531145477">
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:white;height: 149px !important;background-color: {% if customize is defined %}#E6E6E6{% else %} #572A85;{% endif %};width: 600px !important;">
+                    <tr>
+                        <td style="padding-top: 10px;text-align: center;width: 600px">
+                            {% if customize is not defined %}
+                            <span style="font-style: italic;font-size:17.666667px;">Viajar abre tu mente y amplia tu cultura</span><br>
+                            {% endif %}
+                            <span style="font-size: 17.666667px;{% if customize is defined %}color:#7C7C7C;{% endif %}">preguntas@navicu.com</span><br>
+                            <span style="font-size: 23.333333px;color:#F2AE00;font-weight: bold;{% if customize is defined %}color:#7C7C7C;{% endif %}">08008 - NAVICU (628428)</span><br>
+                            {% if customize is not defined %}
+                            <span style="font-size: 10.666667px;">Lunes a viernes de 8:00AM a 5:00PM</span><br><br>
+                            {% endif %}
+                            {% if customize is defined %}<br><br>  {% endif %}
+                            <span style="font-size: 9.666667px;color:#CCCCCC;{% if customize is defined %}color:#7C7C7C;{% endif %} ">
+                                Este e-mail ha sido enviado por navicu.com - 2014 &middot; 2017 navicu&trade; Todos los derechos reservados
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+{% endblock body %}

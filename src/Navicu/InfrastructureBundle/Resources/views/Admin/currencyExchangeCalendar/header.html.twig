@@ -1,0 +1,113 @@
+<div class="top-layout">
+    <div class="top-layout-section top-layout-purple" style="width: 30%"></div>
+    <div class="top-layout-section top-layout-magenta" style="width: 50%"></div>
+    <div class="top-layout-section top-layout-red" style="width: 5%"></div>
+    <div class="top-layout-section top-layout-yellow" style="width: 15%"></div>
+</div>
+<div>
+    <div class="top-layout-section top-layout-purple" style="width: 30%"></div>
+    <div class="top-layout-section top-layout-magenta" style="width: 50%"></div>
+    <div class="top-layout-section top-layout-red" style="width: 5%"></div>
+    <div class="top-layout-section top-layout-yellow" style="width: 15%"></div>
+</div>
+
+<header>
+    <nav class="navbar navbar-navicu" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-header">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% if is_granted("ROLE_TEMPOWNER") %}
+                    <a class="navbar-brand" href="#">
+                        <i id="layout-logo-navicu" class="fn-logo-navicu"  alt="reserva de alojamientos online"></i>
+                    </a>
+                {% else %}
+                    <a class="navbar-brand" href="{{ path('extranet_login') }}">
+                       <i id="layout-logo-navicu" class="fn-logo-navicu"  alt="reserva de alojamientos online"></i>
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-header">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!--{% set userName = "User" %}
+
+                    <li><p class="navbar-text">{{ "share.message.signed_as"|trans({"%username%": userName}) }}</p></li>-->
+                    {% if is_granted("ROLE_TEMPOWNER") %}
+                       {#  <span class="navbar-brand">
+                            {{ "share.message.welcome"|trans}}
+                            {% if is_granted("ROLE_ADMIN") %}
+                                Admin /
+                            {# {% endif %}
+                            {{ slugTemp }}
+                        </span> #}
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                <span><img src="{{asset('images/extranet_avatar.png')}}" class="img-circle user" style="background:white"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                {% if is_granted("ROLE_COMMERCIAL") %}
+                                    <li>
+                                        <a href="{{ path('navicu_admin_homepage') }}">
+                                            <i class="fa fa-home"></i>
+                                            {{ 'share.message.home'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('navicu_admin_homepage_affiliate_properties') }}">
+                                            <i class="fa fn-informacion"></i>
+                                            {{ 'message.affiliated_properties'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('navicu_admin_homepage_temp_properties') }}">
+                                            <i class="fa fn-informacion"></i>
+                                            {{ 'message.temp_properties'|trans}}
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                {% endif %}
+                                <li>
+                                    {% if is_granted("ROLE_COMMERCIAL") %}
+                                        <a href="{{ path('navicu_admin_logout') }}">
+                                    {% else %}
+                                        <a href="{{ path('extranet_logout') }}">
+                                    {% endif %}
+                                        <i class="fa fa-sign-out"></i>
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% if slug is defined %}
+        <div class="container-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-16">
+                        <span class="h4">
+                            <strong>{{ slug }}</strong>
+                            <small>
+                                <a href="{{ path('navicu_homepage') }}">
+                                    {{ "extranet.action.choose_other_property"|trans }}
+                                </a>
+                            </small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</header>

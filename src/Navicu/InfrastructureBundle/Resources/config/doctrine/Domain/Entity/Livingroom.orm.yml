@@ -1,0 +1,28 @@
+Navicu\Core\Domain\Model\Entity\Livingroom:
+    type: entity
+    table: livingroom
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbLivingroomRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        amount_couch:
+            type: integer
+            nullable: true
+        amount_people:
+            type: integer
+            nullable: true
+    manyToOne:
+        room:
+            targetEntity: Room
+            mappedBy: null
+            inversedBy: livinrooms
+            joinColumns:
+                room_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

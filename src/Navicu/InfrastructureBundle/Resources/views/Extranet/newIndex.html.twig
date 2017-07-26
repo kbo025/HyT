@@ -1,0 +1,99 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'index'} %}
+
+{% block body %}
+    {# nuevo home de extranet #}
+    <br><br>
+    <div ng-app="homeModule" ng-controller="homeController" ng-cloak>
+        <div class="home-temporal" ng-if="response.dailyRoom.length==0 && response.dailyPack.length==0">
+            <div class="container">
+                    <h1>¡{[{response.propertyName}]}, {{ "extranet.home.welcome"|transchoice(0) }}!</h1>
+                    <h2>{{ "extranet.home.you_can_manage"|trans}}</h2>
+                    <br>
+                    <h2><i class="fa fn-reserva" style="margin-left:7px; margin-right:8px;"></i><span>{{ "extranet.home.last_rooms_reserved"|trans}}</span></h2>
+                    <h2><i class="fa fn-historial"></i><span>{{ "extranet.home.booking_history"|trans}}</span></h2>
+                    <h2><i class="fa fn-tips" style="margin-left:7px; margin-right:8px;"></i><span>{{ "extranet.home.tips_content"|trans}} ¡{{ "extranet.home.content_important"|trans}}!</span></h2>
+                    <h2 class="hidden-xs hidden-sm"><i class="fa fn-nvc"></i><span>{{ "extranet.home.be_navicu"|trans}}</span></h2>
+            </div>
+        </div>
+        <div class="nvc-home" ng-if="response.dailyRoom.length>0 || response.dailyPack.length>0">
+            <div class="container">
+                <div class="row nvc-home__header">
+                    <i class="fa fn-nvc-hotel" aria-hidden="true"></i>
+                    <h1>{[{response.propertyName}]} ¡{{ "extranet.home.welcome"|transchoice(0) }}!</h1>
+                </div>
+                <div ng-if="response.dailyRoom.length>0">
+                    <div class="row nvc-home__titleBlock">
+                        <i class="fa fn-nvc-fecha" aria-hidden="true"></i>
+                        <h1>{{ "extranet.home.message_not_availability"|transchoice(0) }}:</h1>
+                    </div>
+                    <div class="row nvc-home__block scroll">
+                        <div class="container" ng-repeat="data in response.dailyRoom">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <h1>{[{data.date}]}</h1>
+                                </div>
+                                <div class="col-md-10 nvc-home__block--itemRomm">
+                                    <h2 ng-repeat="room in data.rooms">{[{room.typeRoom}]}</h2>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="form-control btn-primary" ng-click="redirectInventory(data.date, response.slug) ">
+                                        {{ "extranet.home.load_availability"|transchoice(0) }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <br>
+                </div>
+                <div ng-if="response.dailyPack.length>0">
+                    <div class="row nvc-home__titleBlock">
+                        <i class="fa fn-tarifa" aria-hidden="true"></i>
+                        <h1>{{ "extranet.home.message_not_rates"|transchoice(0) }}:</h1>
+                    </div>
+                    <div class="row nvc-home__block scroll">
+                        <div class="container" ng-repeat="data in response.dailyPack">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <h1>{[{data.date}]}</h1>
+                                </div>
+                                <div class="col-md-10 nvc-home__block--itemRomm">
+                                    <h2 ng-repeat="room in data.rooms">{[{room.typeRoom}]} {[{room.pack}]}</h2>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="form-control btn-primary" ng-click="redirectInventory(data.date, response.slug) ">
+                                        {{ "extranet.home.load_rates"|transchoice(0) }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    
+    <script>
+        var extension ="{{ app.request.attributes.get('extension') }}";
+        var response = "{{ data }}";
+        var div = document.createElement('div');
+        div.innerHTML = response;
+        response = div.firstChild.nodeValue;
+        response = JSON.parse(response);
+        console.log(response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+       
+
+
+{% endblock %}

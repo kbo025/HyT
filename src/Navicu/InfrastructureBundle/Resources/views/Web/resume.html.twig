@@ -1,0 +1,559 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block body %}
+    <main
+        class='nvc-container nvc-padding--xs resume-reservation post-body entry-content'
+        ng-app="resumeModule"
+        ng-controller="resumeController">
+        <div class="nvc-padding--sm margin-tittle">
+            {#  Bloque Derecho #}
+            <section class="col-xs-16 col-md-10"  ng-cloak>
+                <h1>{{"web.reservation.thank_you"|trans}}</h1>
+                <h2 class="font-price">
+                    {{"web.reservation.success"|trans}}
+                </h2>
+                <div class="col-xs-16" style="padding:0px;">
+                    <div class="block-mail">
+                        <div class="col-xs-2 col-sm-1">
+                            <i class="fa fn-mailbox"></i>
+                        </div>
+                        <div class="col-xs-14 col-sm-15">
+                            <h1 class="hidden-xs">
+                                <span ng-if="response.clientGender==0">Sr.</span>
+                                <span ng-if="response.clientGender==1">Sra.</span>
+                                {[{ response.clientNames }]},
+                                {{"web.reservation.success_reserve"|trans}}
+                            </h1>
+                            <h1 class="visible-xs">{{"web.reservation.resume"|trans}}</h1>
+                            <h1 class="hidden-xs hidden-sm">
+                                <strong>{{"web.reservation.email_copy"|trans}}</strong>
+                                {[{ response.clientEmail }]}
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="block-data hidden-xs hidden-sm">
+                        <h1>
+                            <i class="fa fn-checkbox"></i>
+                            {{"web.reservation.resume"|trans}}
+                        </h1>
+                    </div>
+                    <div class="nvc-jumbotron" {#ng-class="{'jumbotron jumbotron-resume': response.rooms.length==1}"#}>
+                        <div class="nvc-container">
+                            <div class="col-xs-16" style="padding:0px;">
+                                <div class="col-xs-16 col-sm-8 visible-xs visible-sm" style="padding:0px;">
+                                    <strong>{{"web.reservation.email_copy"|trans}}</strong>
+                                    <h5>{[{ response.clientEmail }]}</h5>
+                                    <div class="col-xs-10">
+                                        <center>
+                                            <a
+                                                href="{{ path('navicu_pdf_resume_reservation',{ publicId : publicId }) }}"
+                                                download="Resumen_de_la_reserva.pdf">
+                                                <button
+                                                    class="nvc-button nvc-button__confirmation">
+                                                    <span class="fa fn-save" style="margin-right:10px;"></span>
+                                                    {{"word.save_pdf"|trans}}
+                                                </button>
+                                            </a>
+                                        </center>
+                                    </div>
+                                    <br>
+                                    <hr class="visible-sm">
+                                </div>
+                                <div class="col-xs-16 col-sm-8 col-md-10 spacing">
+                                    <h1>{[{ response.propertyName }]}</h1>
+                                    <i
+                                        ng-repeat-n="response.propertyStars"
+                                        class="fa fa-star">
+                                    </i>
+                                    <h1 class="visible-xs visible-sm">
+                                        {{"web.reservation.number_confirmation"|trans}}:
+                                        {[{ response.confirmationId }]}
+                                    </h1>
+                                </div>
+                                <div class="col-xs-16 col-sm-8 col-md-6 hidden-xs hidden-sm">
+                                    <h1 style="float:right;">
+                                        {{"web.reservation.number_confirmation"|trans}}
+                                    </h1>
+                                    <h1>
+                                        <span style="float:right; margin-top: 5px;">
+                                            {[{response.confirmationId}]}
+                                        </span>
+                                    </h1>
+                                </div>
+                                <div class="col-xs-16 col-sm-16 col-md-16 spacing">
+                                    <h5 style="margin-top:25px;">
+                                        {{"web.reservation.name_reservation"|trans}}:
+                                        <span> {[{ response.clientNames }]}</span>
+                                    </h5>
+                                    <div class="col-xs-8">
+                                        <h5>Check-in:
+                                            <span> {[{ response.checkinReservation }]}</span>
+                                        </h5>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h5>Check-out:
+                                            <span> {[{ response.checkoutReservation }]}</span>
+                                        </h5>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h5>{{"word.total_adults"|trans}}:
+                                            <span> {[{ response.numberAdults }]}</span>
+                                        </h5>
+                                    </div>
+                                    <div class="col-xs-8" ng-show="response.numberChildren>0">
+                                        <h5>{{ "word.total_children"|trans }}:
+                                            <span> {[{ response.numberChildren }]} </span>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div ng-repeat="(id, value) in response.rooms" class="col-xs-16 spacing">
+                                    <div class="col-xs-16 col-md-8">
+                                        <h5>{{"web.reservation.type_room"|trans}}:
+                                            <span> {[{value.roomName}]}</span>
+                                        </h5>
+                                    </div>
+                                    <div class="col-xs-16 col-md-8">
+                                        <h5 ng-if="value.bedsType!=''">
+                                            {{"web.reservation.bed_type_requested"|trans}}:
+                                            <span> {[{value.bedsType}]}</span>
+                                        </h5>
+                                    </div>
+                                    <div >
+                                        <div class="col-xs-16 col-md-8">
+                                            <h5>
+                                                {{"web.reservation.type_pack"|trans}}:
+                                                <span> {[{ value.packages[0].namePack }]}</span>
+                                            </h5>
+                                        </div>
+                                        <div class="col-xs-16 col-md-8">
+                                            <h5>
+                                                {{"web.reservation.cancellation_policies"|trans}}:
+                                                <span> {[{ value.packages[0].namePolicyCancellation }]}</span>
+                                            </h5>
+                                        </div>
+                                        <div class="col-xs-16 col-md-8">
+                                            <h5>
+                                                {{"word.number_adults"|trans}}:
+                                                <span> {[{ value.packages[0].numberAdults }]}</span>
+                                            </h5>
+                                        </div>
+                                        <div class="col-xs-16" ng-show="value.packages[0].numberChildren>0" >
+                                            <h5>
+                                                {{"word.number_children"|trans}}:
+                                                <span> {[{ value.packages[0].numberChildren }]}</span>
+                                            </h5>
+                                        </div>
+                                        <div ng-repeat="age in value.packages[0].childrenAges track by $index" class="col-xs-16 col-md-8">
+                                            <h5>
+                                                Edad Niño {[{ $index + 1 }]}:
+                                                <span> {[{ age }]} Años</span>
+
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-16 spacing">
+                                    <img
+                                            ng-src="/uploads/images/images_sm/{[{response.rooms[0].roomImage }]}"
+                                            class="img-responsive hotel-galery-img">
+                                    <br>
+                                    <hr ng-if="response.rooms.length>1 && id != response.rooms.length-1">
+                                </div>
+                                <div class="col-sm-16 visible-sm">
+                                    <div class="col-sm-8">
+                                        <h3 ng-if="response.tax>0">
+                                            {{"web.reservation.sub_total"|trans}}
+                                            {[{ response.alphaCurrency }]}
+                                            {[{ response.subTotal | number }]}
+                                        </h3>
+                                        <br>
+                                        <h3 style="margin-top: -20px;" ng-if="response.tax>0">
+                                            {{"web.reservation.IVA"|trans}}
+                                            {[{ response.alphaCurrency }]}
+                                            {[{ response.tax  | number }]}
+                                        </h3>
+                                        <h4 style="margin-top:0px;" >
+                                            {{"word.total"|trans}}
+                                            {[{ response.alphaCurrency }]}
+                                            {[{ response.total  | number }]}
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-8 text-center">
+                                        <img style="width:22%;" src="{{ asset('images/preciogarantizado.png') }}" >
+                                        <h2  style="margin-top:10px;">
+                                            {{"web.reservation.best_price"|trans}}
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-xs-16 visible-xs" style="padding:0px; margin-top:-25px;">
+                                    <h3 ng-if="response.tax>0">
+                                        {{"web.reservation.sub_total"|trans}}
+                                        {[{ response.alphaCurrency }]}
+                                        {[{ response.subTotal | number }]}
+                                    </h3>
+                                    <br>
+                                    <h3 style="margin-top: -20px;" ng-if="response.tax>0">
+                                        {{"web.reservation.IVA"|trans}}
+                                        {[{ response.alphaCurrency }]}
+                                        {[{ response.tax | number }]}
+                                    </h3>
+                                    <h4 style="margin-bottom:10px;">
+                                        {{"word.total"|trans}}
+                                        {[{ response.alphaCurrency }]}
+                                        {[{ response.total | number }]}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-md-16 hidden-xs hidden-sm" style="margin-top:5px; padding:0px;">
+                                <div class="col-md-16" style="margin-bottom:10px; margin-top:-10px;">
+                                    <h5 ng-if="response.specialRequests != null">
+                                        {{"web.reservation.special_requests"|trans}}
+                                    </h5>
+                                    <div
+                                        ng-if="response.specialRequests != null"
+                                        class="block-special-conditions">
+                                        <span>{[{ response.specialRequests }]}</span>
+                                    </div>
+                                    <hr ng-if="response.specialRequests != null" style="margin-bottom:35px;">
+                                    <div class="col-md-8" style="padding:0px; margin-top:-10px;">
+                                        <h4 ng-if="response.tax>0">
+                                            {{"web.reservation.sub_total"|trans}}
+                                            {[{ response.alphaCurrency }]}
+                                            {[{ response.subTotal | number }]}
+                                        </h4>
+                                        <h4 ng-if="response.tax>0">
+                                            {{"web.reservation.IVA"|trans}}
+                                            {[{ response.alphaCurrency }]}
+                                            {[{ response.tax | number }]}
+                                        </h4>
+                                        <div class="col-md-14 col-lg-12 block-total">
+                                            <h1>
+                                                {{"word.total"|trans}}
+                                                {[{ response.alphaCurrency }]}
+                                                {[{ response.total | number }]}
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 text-center" style="padding:0px; margin-top:-10px;">
+                                        <img style="width:22%;" src="{{ asset('images/preciogarantizado.png') }}" >
+                                        <h2 >{{"web.reservation.best_price"|trans}}</h2>
+                                    </div>
+                                    <center>
+                                        <strong>{{"web.reservation.payment_success_credit_card"|trans}}</strong>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {# Barra lateral Izquierda#}
+            <section class="col-xs-16 col-md-6" ng-cloak>
+                <div class="col-xs-16 resume">
+                    <div class="hidden-xs hidden-sm">
+                        <div class="col-md-8" style="padding-left:0px; padding-right:5px;">
+                            <center>
+                                <a href="{{path('navicu_pdf_resume_reservation',{ publicId : publicId }) }}"
+                                    download="Resumen_de_la_reserva.pdf">
+                                    <button class="nvc-button nvc-button__confirmation">
+                                        <i class="fa fn-save"></i>
+                                        {{"word.save_pdf"|trans}}
+                                    </button>
+                                </a>
+                            </center>
+                        </div>
+                        <div class="col-md-8" style="padding-left:5px; padding-right:0px;">
+                            <center>
+                                <a target="_blank" href="{{path('navicu_pdf_resume_reservation',{ publicId : publicId }) }}">
+                                    <button class="nvc-button nvc-button__confirmation">
+                                        <i class="fa fn-print"></i>
+                                        {{"word.print"|trans}}
+                                    </button>
+                                </a>
+                            </center>
+                        </div>
+                        <strong align="justify">
+                            {{"web.reservation.message_email_information"|trans}}
+                        </strong>
+                        <br>
+                        <hr>
+                    </div>
+                    <div class="col-xs-16">
+                        <h1>
+                            <span>{{"web.reservation.how_to_get"|trans}}</span>
+                        </h1>
+                        <h5>
+                            {{"web.reservation.phone_hotel"|trans}}
+                            {[{ response.propertyReservationPhone }]}
+                        </h5>
+                        <h5>
+                            {{"web.reservation.address"|trans}}:
+                            <span>{[{ response.propertyAddress }]}</span>
+                        </h5>
+                        <h5>
+                            {{"web.reservation.GPS_coordinates"|trans}}
+                            {[{ response.propertyGps }]}
+                        </h5>
+                        <div
+                            id="carousel-reservation"
+                            data-ride="carousel"
+                            class="carousel nvc-carousel nvc-carousel--resume slide hidden-xs hidden-sm"
+                            style="margin-bottom:10px;">
+                            <div class="nvc-carousel__inner">
+                                <div
+                                    ng-repeat="(keyImage, path) in response.propertyImages"
+                                    ng-class="{'item active': keyImage == 0, 'item': keyImage != 0}">
+                                    <img
+                                        ng-src="/uploads/images/images_sm/{[{ path }]}"
+                                        class="img-responsive img-modal-hotel">
+                                </div>
+                            </div>
+                            <a
+                                class="left nvc-carousel__control"
+                                href="#carousel-reservation"
+                                data-slide="prev">
+                                <span class="famodal fa fa-caret-left fa-2x"></span>
+                            </a>
+                            <a
+                                class="right nvc-carousel__control"
+                                href="#carousel-reservation"
+                                data-slide="next">
+                                <span class="famodal fa fa-caret-right fa-2x"></span>
+                            </a>
+                        </div>
+                        <hr class="hidden-xs hidden-sm">
+                        <div class="visible-xs visible-sm">
+                            <div class="nvc-map">
+                                <ui-gmap-google-map
+                                    center="mapProperty.center"
+                                    zoom="mapProperty.zoom"
+                                    draggable="true"
+                                    options="optionsProperty"
+                                    control="mapProperty.control"
+                                    ng-click="optionsProperty.scrollwheel=true">
+                                    <ui-gmap-marker
+                                        coords="markerProperty.coords"
+                                        options="markerProperty.options"
+                                        events="markerProperty.events"
+                                        idkey="markerProperty.id"
+                                        control="markerProperty.control">
+                                    </ui-gmap-marker>
+                                </ui-gmap-google-map>
+                            </div>
+                        </div>
+                        <h1><strong>{{"web.reservation.terms"|trans}}</strong></h1>
+                        <h5
+                            ng-repeat="value in response.propertyAdditionalInfo"
+                            style="font-size:14px;">
+                            <span>{[{ value }]}</span>
+                        </h5>
+                    </div>
+                </div>
+                <div class="col-xs-16 text-center resume-footer hidden-xs hidden-sm">
+                    <h1>{{"web.reservation.message_navicu"|trans}}</h1>
+                    <h3>{{"web.reservation.email_navicu"|trans}}</h3>
+                    <h4>{{"web.reservation.phone_navicu"|trans}}</h4>
+                </div>
+            </section>
+            {# Bloque de Búsqueda #}
+            <section class="block-search" ng-cloak>
+                <div class="nvc-container">
+                    {#  Barra de búsqueda#}
+                    <div class="col-xs-16">
+                        <div class="nvc-search nvc-form-inline">
+                            <div class="col-sm-4 hidden-xs">
+                                <h1><i class="fa fn-map-02"></i>¿A dónde quieres ir?</h1>
+                            </div>
+                            <div class="col-xs-16 col-sm-12" align="right">
+                                <form
+                                    name="formDestiny"
+                                    method="get"
+                                    class="nvc-form-inline"
+                                    role="form"
+                                    novalidate>
+                                    <input type="hidden" name="adult" value="{[{ adults }]}" ng-if="adults != 2"/>
+                                    <input type="hidden" name="kid" value="{[{ kids }]}" ng-if="kids != 0"/>
+                                    <input type="hidden" name="room" value="{[{rooms}]}" ng-if="rooms != 1"/>
+                                    <label>Encuentra hoteles en toda Venezuela</label>
+                                    <select
+                                        class="nvc-form-control"
+                                        ng-class="{'error': errorForm==1}"
+                                        ng-model="selectedDestiny"
+                                        ng-options="location as location.name for location in locations"
+                                        required>
+                                        <option disabled value="">
+                                            {{ "share.message.search_textfield_legend_min"|trans }}
+                                        </option>
+                                    </select>
+                                    <button
+                                        class="btn active"
+                                        type="submit"
+                                        ng-click="redirectUrlBlockSearch(selectedDestiny)">
+                                        {{ "word.search"|trans }}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {#  Thumbnail SM MD LG #}
+                    <div
+                        id="thumbcarousel"
+                        class='nvc-section carousel nvc-carousel nvc-carousel__fade col-sm-5 hidden-xs'>
+                        <div class="nvc-carousel__inner">
+                            <div
+                                ng-repeat="(idnt, locations) in locationsGrouped"
+                                class="item"
+                                ng-class="{active: $first}">
+                                <div
+                                    ng-repeat="(id, location) in locations"
+                                    data-target="#carousel-resume"
+                                    data-ride="carousel-resume"
+                                    data-slide-to="{[{id}]}"
+                                    class="nvc-carousel__fill"
+                                    ng-class="{'pair': id % 2 == 0, 'odd': id % 2 != 0}"
+                                    ng-click="redirectSlider(idnt+1,id+1)" >
+                                    <h1>{[{ location.name }]}</h1>
+                                    <p>{[{ location.description }]}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#  Slider principal #}
+                    <div class="nvc-slider col-xs-16 col-sm-11" align="left">
+                        <div
+                            id="carousel-resume"
+                            class="nvc-carousel nvc-carousel__search nvc-carousel__fade">
+                            <div class="nvc-carousel__inner">
+                                <div
+                                    class="item"
+                                    ng-repeat="(id2,location) in locationsOrder"
+                                    ng-class="{active: idPrincipal==id2}">
+                                    <a href="{[{ url }]}" type="submit" ng-click="redirectUrl(location)">
+                                        <div class="carousel-fill">
+                                            <img ng-src="{{ asset('{[{ location.path }]}') }}"/>
+                                        </div>
+                                        <input type="hidden" name="destiny" value="{[{ location.name }]}"/>
+                                        <input type="hidden" name="adult" value="{[{ adults }]}"/>
+                                        <input type="hidden" name="kid" value="{[{ kids }]}"/>
+                                        <input type="hidden" name="room" value="{[{rooms}]}"/>
+                                        <input type="hidden" name="type" value="{[{location.type}]}"/>
+                                        <input type="hidden" name="slug" value="{[{location.slug}]}"/>
+                                        <input type="hidden" name="countryCode" value="{[{location.countryCode}]}"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#  Thumbnail XS #}
+                    <div
+                        id="thumbcarousel-xs"
+                        class='nvc-section nvc-carousel nvc-carousel__fade col-xs-16 visible-xs'>
+                        <div class="nvc-carousel__inner">
+                            <div
+                                ng-repeat="locations in locationsGrouped"
+                                class="item"
+                                ng-class="{active: $first}">
+                                <div
+                                    data-target="#carousel-resume"
+                                    ng-repeat="(id, location) in locations"
+                                    data-ride="carousel-resume"
+                                    data-slide-to="{[{id}]}"
+                                    class="nvc-carousel__fill"
+                                    ng-class="{'pair': id % 2 == 0, 'odd': id % 2 != 0}">
+                                    <h1>{[{ location.name}]}</h1>
+                                    <p>{[{ location.description}]}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalMap.html.twig") }}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+    </main>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = {{ bookingInformation | raw }};
+        var locations = {{ locations | raw }};
+        console.log(response);
+    </script>
+
+    {% if app.environment == "dev" %}
+        <script type="text/javascript" src='//maps.googleapis.com/maps/api/js?key=AIzaSyCkteypABffSV5FUMesiG0O-G0qngQ1Yhg'></script>
+        {% else %}
+    {% endif %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#carousel-resume').carousel({
+                interval: 10000
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#thumbcarousel').carousel({
+                interval: 28000
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#thumbcarousel-xs').carousel({
+                interval: 28000
+            });
+        });
+    </script>
+
+    <!-- Google Code for Reserva de SEM Conversion Page -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 953752647;
+        var google_conversion_language = "en";
+        var google_conversion_format = "3";
+        var google_conversion_color = "ffffff";
+        var google_conversion_label = "b8lPCPznhnAQx7jkxgM";
+        var google_remarketing_only = false;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/953752647/?label=b8lPCPznhnAQx7jkxgM&amp;guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
+
+    <!-- AFFILIRED CONFIRMATION CODE, PLEASE DON'T REMOVE -->
+    <script type="text/javascript">
+        var orderRef = response.confirmationId+' '+response.propertyName; /* You MUST keep the blank space */
+        var payoutCodes = '';
+        var offlineCode = '';
+        var uid = response.propertySlug;
+        var htname = '';
+        var merchantID = 4552;
+        var pixel = 0;
+        var orderValue = response.total; /* Commissionable Amount */
+        var checkOutDate = response.checkout; /* yyyy-mm-dd (separated by hypen) */
+        var currencyCode ='{{ isoCurrency | raw }}';
+        console.log("currencyCode", currencyCode);
+        console.log("checkoutReservation", response.checkout);
+    </script>
+    <script type="text/javascript" src="//scripts.affilired.com/v2/confirmation.php?merid=4552&uid=HOTEL_UID">
+    </script>
+    <script type="text/javascript">
+        recV3 (orderValue , orderRef, merchantID, uid , htname, pixel, payoutCodes, offlineCode,checkOutDate,currencyCode)
+    </script>
+    <!-- END AFFILIRED CONFIRMATION CODE -->
+
+{% endblock %}

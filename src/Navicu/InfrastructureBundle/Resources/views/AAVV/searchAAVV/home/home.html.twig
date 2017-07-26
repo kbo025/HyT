@@ -1,0 +1,45 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+    <main
+        class="nvc-aavv__searchAAVV nvc-aavv__home visible-md visible-lg"
+        ng-app="searchAAVVModule"
+        ng-controller="homeController"
+        ng-cloak
+    >
+        {% include "NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig" %}
+
+        <div class="nvc-aavv__home--searchBlock">
+            <div class='nvc-container'>
+                {% include "NavicuInfrastructureBundle:AAVV:searchAAVV/home/homeSearchBlock.html.twig" %}
+            </div>
+        </div>
+        <div class="nvc-aavv__home--destinations">
+            <div class="nvc-container">
+                {% include "NavicuInfrastructureBundle:AAVV:searchAAVV/home/homeDestinations.html.twig" %}
+            </div>
+        </div>
+
+    </main>
+
+
+{% endblock body %}
+
+{% block javascripts %}
+    {# {{ dump(app.session.get('customize')|json_encode) }} #}
+    {{ parent() }}
+     <script type="text/javascript">
+    var response = {{ data | raw }};
+    $(function() {
+        //*** DON´T TOUCH
+         $( ".js-range-check" ).keypress(function (evt) {  return false; });
+        //////////
+        $('#js-date-range').rangePicker();
+        $('#date-range').rangePicker({
+            checkInSelector: '#date-range .js-range-check-in',
+            checkOutSelector: '#date-range .js-range-check-out',
+        });
+    });
+</script>
+{% endblock %}

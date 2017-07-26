@@ -1,0 +1,148 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block body %}
+
+    <main
+        class='nvc-flight-resume clearfix visible-md visible-lg'
+        ng-app="flightResumeModule"
+        ng-controller="flightResumeController"
+    >
+
+        <section class="col-md-9 nvc-flight-resume__content">
+            <div class="nvc-container">
+                <h2>
+                    <img src="{{ asset('images/check-green.png') }}">
+                    Vuelo confirmado
+                </h2>
+                <p>La compra de tu boleto se realizó con éxito, te enviamos un correo donde prodrás ver los</p>
+                <p>datos del ticket de reserva para abordar el vuelo</p>
+                <br>
+
+                <table class="nvc-flight-resume__content--table">
+                    <tr class="head">
+                        <th colspan="4"> Verifica los detalles de tu vuelo </th>
+                    </tr>
+                    <tr class="body" style="border-bottom: 1px solid #9364CC;">
+                        <td>
+                            <h3 class="direction">Ida</h3>
+                            <h4>23 Mayo</h4>
+                            <span class="separator">|</span>
+                        </td>
+                        <td style="width: 33%;">
+                            <h3>08:50 AM</h3>
+                            <h4>CCS - AP Int. Maiquetía</h4>
+                            <span class="separator">|</span>
+                        </td>
+                        <td style="width: 33%;">
+                            <h3>10:00 AM</h3>
+                            <h4>VLN - AP Int. Arturo Michelena</h4>
+                        </td>
+                        <td class="border">
+                            <img src="{{ asset('images/airlines/QL.png') }}">
+                            <h4>Laser Airlines</h4>
+                        </td>
+                    </tr>
+                    <tr class="body" style="border-bottom: 1px solid #9364CC;">
+                        <td>
+                            <h3 class="direction">Vuelta</h3>
+                            <h4>23 Mayo</h4>
+                            <span class="separator">|</span>
+                        </td>
+                        <td>
+                            <h3>08:50 AM</h3>
+                            <h4>VLN - AP Int. Arturo Michelena</h4>
+                            <span class="separator">|</span>
+                        </td>
+                        <td>
+                            <h3>10:00 AM</h3>
+                            <h4>CCS - AP Int. Maiquetía</h4>
+                        </td>
+                        <td class="border">
+                            <img src="{{ asset('images/airlines/QL.png') }}">
+                            <h4>Laser Airlines</h4>
+                        </td>
+                    </tr>
+                    <tr class="body">
+                        <td colspan="2">
+                            <i class="fa fn-chair"></i>
+                            <h4>1 adulto</h4>
+                        </td>
+                        <td>
+                            <h3 class="subtotal">Subtotal 108.000</h3>
+                            <h3 class="subtotal">IVA Bs 7.000</h3>
+                        </td>
+                        <td class="border">
+                            <h3 class="total">TOTAL Bs 115.000</h3>
+                        </td>
+                    </tr>
+                </table>
+                <table class="nvc-flight-resume__content--table">
+                    <tr class="bottom">
+                        <th> Política de cancelación no reembolsable </th>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="col-md-7 nvc-flight-resume__sidebar">
+            <div class="nvc-container">
+                <h4>Disfruta de los mejores alojamientos en <span>Valencia</span></h4>
+                <h3 class="visible-lg">¡Reserva tu hospedaje al mejor precio!</h3>
+                <h3 class="visible-md" style="float: left; margin-top: -5px;">
+                    ¡Reserva tu hospedaje al mejor precio!
+                </h3>
+                <div
+                    class="nvc-flight-resume__sidebar--box"
+                >
+                    <a href="" target="_blank">
+                        <img src="{{ asset('images/home/oferts/hotel-aquavi.jpg') }}">
+                        <div>
+                            <div style="padding-left:5px;">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <hr>
+                            <h3> Hesperia WTC · Valencia </h3>
+                            <h4>Desde - 35.000</h4>
+                            <i class="fa fn-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div
+                    class="nvc-flight-resume__sidebar--box"
+                >
+                    <a href="" target="_blank">
+                        <img src="{{ asset('images/home/oferts/hotel-aquavi.jpg') }}">
+                        <div>
+                            <div style="padding-left:5px;">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <hr>
+                            <h3> Hesperia WTC · Valencia </h3>
+                            <h4>Desde - 35.000</h4>
+                            <i class="fa fn-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+    </script>
+
+    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

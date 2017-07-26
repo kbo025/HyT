@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <style type="text/css">
+        @font-face
+        {
+            font-family: 'lato-semibold';
+            src: url('{{ fonts }}Lato-Semibold.ttf');
+            format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-bold';
+            src: url('{{ fonts }}Lato-Bold.ttf');
+            format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-regular';
+            src: url('{{ fonts }}Lato-Regular.ttf');
+            format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-italic';
+            src: url('{{ fonts }}Lato-Italic.ttf');
+            format('ttf');
+        }
+        @font-face
+        {
+            font-family: 'lato-medium';
+            src: url('{{ fonts }}Lato-Medium.ttf');
+            format('ttf');
+        }
+        @page {
+            margin-top: 5mm;
+            margin-left: 0;
+        }
+        table,tr{width: 100%}
+        .box{padding: 0px 55px 10px;}
+        .text{padding-bottom: 5px;}
+        .stars{padding-bottom: 5px;}
+        .stars img{padding-right: 10px;}
+        .field{font-family:'Lato-Regular';font-size:12pt;color:#391462;}
+        .field2{font-family:'Lato-Medium';font-size:12pt;color:#808080;}
+        .field3{font-family:'Lato-Italic';font-size:10pt;color:#808080;}
+        .field4{font-family:'Lato-Regular';font-size:12pt;color:#706F6F;}
+        .title{font-family:'Lato-Bold';font-size:14pt;color:#391462;}
+        .title1{font-family:'Lato-Bold';font-size:12pt;color:#AA196E;padding-bottom: 10px;}
+        .title2{font-family:'Lato-Bold';font-size:12pt;color:#561855;}
+        .title3{font-family:'Lato-Semibold';color:#391462;}
+        .bold{font-family:'Lato-Bold';}
+        .align-right{text-align: right;}
+        .room{padding-top: 5px;padding-bottom: 5px;}
+        .pair{background: #F6F6F6;}
+        .odd{background: #EDEDED;}
+        .specialRequest{background: #EDEDED;border: 1px solid #DBDBDB;padding: 3px 20px;border-radius: 10px;}
+        .text-footer{font-family:lato-italic;font-size:11pt;color:#561855;text-align: center;}
+        .col100{width: 1250px;}
+        .col49{width: 49%;}
+        .col33{width: 39%;}
+        .col66{width: 59%;}
+        #footer { position: fixed; left: 0px; bottom: -90px; right: 0px; height: 100px; }
+    </style>
+    <meta charset="UTF-8">
+</head>
+<body class="col100" style="{% if customize is defined %}color:#3C3C3B !important;{% endif %}">
+<div class="col100 text-footer" id="footer">
+    <b>¡Contáctanos! llámanos al 08008-NAVICU o escríbenos al correo electrónico preguntas@navicu.com</b>
+</div>
+<div class="main col100" >
+    <table class="box" style="{% if customize is defined %}background-color: {{  customize['navbarPrimary']  }}; margin-top: -30px !important; padding-top: 30px !important; padding-bottom: 20px !important;{% endif %}">
+        <tr>
+            <td class="logo col49" >
+                {% if customize is defined %}
+                    {% if logo is defined %}
+                        <img src="{{ logo }}" style="padding-top: 6px;width:250px">
+                    {% endif %}
+                {% else %}
+                    <img src="{{ logoImage }}" style="padding-top: 6px;width:220px" />
+                {% endif %}
+            </td>
+            <td class="align-right col49 title3" >
+                <div style="font-size:16pt;" >Resumen de reservación</div>
+                <div style="font-size:14pt;" >Estado de reserva: Confirmada</div>
+            </td>
+        </tr>
+    </table>
+    <div style="height: 350px;overflow: hidden;">
+        <img src="uploads/images/images_original/{{ propertyImage }}" style="width: 100%;margin-top: -30%;"/>
+    </div>
+    <div class="barra" style="padding-bottom: 10px;">
+        {% if customize is defined %}
+            <div style="background-color: {{  customize['navbarPrimary']  }};height: 7px ">
+            </div>
+        {% else %}
+            <img src="{{ barImage }}" style="width: 100%;"/>
+        {% endif %}
+    </div>
+
+    <table class="box" >
+        <tr>
+            <td class="col66" >
+                <div class="text title">{{ propertyName|title }}</div>
+                <div class="stars" >
+                    {% if ((propertyStars>0) and (propertyStars<6)) %}
+                        {% for i in 1..propertyStars %}
+                            <img src="{{ starImage }}"/>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="text field4">{{ propertyAddress }}</div>
+            </td>
+            <td class="col33 title2 align-right" style="color:#391462;">
+                <div class="text">Nº de confirmación</div>
+                <div class="text">{{ confirmationId }}</div>
+            </td>
+        </tr>
+    </table>
+    <table class="box" >
+        <tr>
+            <td class="col66">
+                <div class="text field" >Teléfono: <span class="bold">{{ propertyReservationPhone }}</span></div>
+                <div class="text field" >Coordenadas: <span class="bold">{{ propertyGps }}</span></div>
+            </td>
+            <td class="col33 align-right">
+                <div  class="text field" >Check-in a partir de las <span class="bold" >{{ propertyCheckIn }}</span></div>
+                <div  class="text field" >Check-out hasta la <span class="bold">{{ propertyCheckOut }}</span></div>
+            </td>
+        </tr>
+    </table>
+    <div class="box title1" >DATOS DE RESERVA</div>
+    <table class="box" >
+        <tr>
+            <td class="col66" >
+                <div class="text field" >Nombre de reserva: <span class="bold">{{ clientNames }}</span></div>
+                <div class="text field" >Fecha Check-in:  <span class="bold">{{ checkinReservation }}</span></div>
+                <div class="text field" >Fecha Check-out:  <span class="bold">{{ checkoutReservation }}</span></div>
+            </td>
+            <td class="col33" >
+                <div class="text field" >Total de adultos: <span class="bold">{{ numberAdults }}</span></div>
+                {% if numberChildren > 0 %}
+                    <div class="text field" >Total de niños: <span class="bold">{{ numberChildren }}</span></div>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <div class="box title1" >HABITACIONES RESERVADAS</div>
+    <div>
+        {% for room in rooms  %}
+            {% for pack in room.packages  %}
+            <table class="box room {{ loop.index is odd ? 'odd' : 'pair' }}" >
+                <tr>
+                    <td class="text title2  col66" >{{ room.roomName }}</td>
+                    <td class="text title2 align-right col33">{{ pack.namePack }}</td>
+                </tr>
+                <tr>
+                    <td class=" col66" >
+                        <div class="text field" >Combinaciones de camas: <span class="bold">{{ room.bedsType }}</span></div>
+                        <div class="text field">Política de cancelación: <span class="bold">{{ pack.namePolicyCancellation }}</span></div>
+                    </td>
+                    <td class="col33" >
+                        <div class="text field" >Cantidad: <span class="bold">{{ pack.numberPack }}</span></div>
+                        <div class="text field">Nº de Adultos: <span class="bold">{{ pack.numberAdults }}</span></div>
+                        {% if pack.numberChildren > 0 %}
+                            <div class="text field">Nº de Niños: <span class="bold">{{ pack.numberChildren }}</span></div>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <br/>
+    <table class="box">
+        <tr>
+            <td class="col66">
+                {% if not specialRequests is empty %}
+                    <div class="title1" >Peticiones especiales:</div>
+                    <div class="field3 specialRequest" >{{ specialRequests }}</div>
+                {% endif %}
+            </td>
+            <td class="col33  align-right">
+                <div class="text field2" >Subtotal: Bs. {{ subTotal }}</div>
+                <div class="text field2" >IVA: Bs.  {{ tax }}</div>
+                <div class="text title1" style="font-size:13pt;" >TOTAL Bs. {{ total }} </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<div class='nvc-container'>
+    <h2>
+        <i class='fa fn-bag' ></i>
+        {{"aavv.step1.company_data"|trans }}
+    </h2>
+    <br />
+    <div class="row">
+        <div class='col-md-5'>
+            <div class='nvc-form-group'>
+                <label for='d1'>{{"aavv.step1.business_name"|trans }}</label>
+                <input
+                    class='nvc-input__register'
+                    id='d1'
+                    placeholder=''
+                    type="text"
+                    name="company_name"
+                    ng-model="form.company_name"
+                />
+            </div>
+            <span ng-if="form.company_name === null && validation === true" style="color:red;">
+                <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+                <br>
+            </span>
+        </div>
+        <div class='col-md-3'>
+            <div class='nvc-form-group'>
+                <label for='file-rif'>{{"aavv.step1.rif"|trans }}</label>
+                <input
+                        class='nvc-input__register'
+                        id='file-rif'
+                        placeholder=''
+                        type="file"
+                        ngf-select
+                        name="rif_document"
+                        ng-model="files.rif_document"
+                        ng-change="loadFile('file-rif')"
+                />
+                <input
+                        class='nvc-input__register'
+                        id='file-rifText'
+                        placeholder=''
+                        type="text"
+                        name="rif_documentForm"
+                        ng-model="rif_document"
+                        disabled
+                        style ="width: 50%"
+                />
+                <button
+                        class='nvc-button nvc-button__default'
+                        ng-click="onClick('file-rif')"
+                >
+                    {{"aavv.step1.attach"|trans }}
+                </button>
+            </div>
+            <span ng-if="files.rif_document === null && validation === true" style="color:red;">
+                <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+                <br>
+            </span>
+        </div>
+        <div class='col-md-3'>
+            <div class='nvc-form-group'>
+                <label for='d3'>{{"aavv.step1.phone"|trans }}</label>
+                <input
+                    class='nvc-input__register'
+                    id='d3'
+                    placeholder=''
+                    type='text'
+                    name="phone"
+                    ng-focus="formStep1.phone.$setUntouched()"
+                    ng-model="form.phone"
+                    ng-pattern="/^[0-9]{11}$|^(\+|00)(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/"
+                />
+            </div>
+            <span ng-if="form.phone === null && validation === true" style="color:red;">
+                <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+                <br>
+            </span>
+            <span   ng-show="formStep1.phone.$error.pattern && formStep1.phone.$touched"
+                    style="color:red;"
+            >
+                <strong class="error">{{ "share.validation.error_phone_lg"|trans }}</strong>
+                <br>
+            </span>
+        </div>
+        <div class='col-md-5'>
+            <div class='nvc-form-group'>
+                <label for='d4'>{{"aavv.step1.email"|trans }}</label>
+                <input
+                    class='nvc-input__register'
+                    id='d4'
+                    placeholder=''
+                    type='email'
+                    ng-focus="formStep1.company_email.$setUntouched()"
+                    name="company_email"
+                    ng-model="form.company_email"
+                />
+            </div>
+            <span
+                class="error"
+                ng-show="formStep1.company_email.$error.email
+                && formStep1.company_email.$touched">
+                {{ "share.validation.error_email"|trans }}
+            </span>
+            <span ng-if="form.company_email === null && validation === true" style="color:red;">
+                <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+                <br>
+            </span>
+        </div>
+    </div>
+    <!-- eliminado por historia NAVICU-3572
+    <div class='col-md-5'>
+        <div class='nvc-form-group'>
+            <label for='d5'>{{"aavv.step1.companies_register"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='d5'
+                placeholder=''
+                type='text'
+                name="merchant_id"
+                ng-model="form.merchant_id"
+            />
+        </div>
+        <span ng-if="form.company_email === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-3'>
+        <div class='nvc-form-group'>
+            <label for='d6'>{{"aavv.step1.state"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='d6'
+                placeholder=''
+                type='number'
+                name="status"
+                ng-model="form.status"
+                ng-focus="formStep1.status.$setUntouched()"
+                ng-pattern="/^\d+$/"
+                ng-min="1"
+                ng-max="24"
+            />
+        </div>
+        <span ng-show="formStep1.status.$error.number" style="color:red;">
+            <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+            <br>
+        </span>
+        <span ng-show="formStep1.status.$error.min" style="color:red;">
+            <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+            <br>
+        </span>
+        <span ng-show="formStep1.status.$error.max" style="color:red;">
+            <strong class="error">No debe ser mayor a 24</strong>
+            <br>
+        </span>
+        <span ng-show="formStep1.status.$error.pattern" style="color:red;">
+            <strong class="error">{{"share.validation.only_integer"|trans }}</strong>
+            <br>
+        </span>
+        <span ng-if="form.status === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    -->
+    <div class="row">
+        <div class='col-md-5'>
+            <div class='nvc-form-group'>
+                <label for='l5'>{{"aavv.step1.commercial_name"|trans }}</label>
+                <input
+                    class='nvc-input__register'
+                    id='l5'
+                    placeholder=''
+                    type='text'
+                    name="commercial_name"
+                    ng-model="form.commercial_name"
+                />
+            </div>
+            <span ng-if="form.commercial_name === null && validation === true" style="color:red;">
+                <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+                <br>
+            </span>
+        </div>
+        <div class='col-md-3'>
+            <div class='nvc-form-group'>
+                <label for='l6'>{{"aavv.step1.opening_year"|trans }}</label>
+                <select
+                    class='nvc-select__register'
+                    id='l6'
+                    placeholder=''
+                    name="opening_year"
+                    ng-options="n for n in [] | range:1900:2016 | reverse"
+                    ng-model="form.opening_year"
+                >
+                </select>
+            </div>
+            <span ng-if="form.opening_year === null && validation === true" style="color:red;">
+                <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+                <br>
+            </span>
+        </div>
+    </div>
+    <div class='col-md-16'>
+        <hr />
+    </div>
+    <div class='col-md-4'>
+        <div class='nvc-form-group'>
+            <label for='d7'>{{"aavv.step1.country"|trans }}</label>
+            <select
+                class='nvc-select__register'
+                id='d7'
+                placeholder=''
+                name="country"
+                ng-model="form.country"
+                ng-options="val.id as val.name for (country, val) in locations"
+                ng-change="changeCountry()"
+            >
+                <option value="">{{"aavv.step1.select"|trans }}</option>
+            </select>
+        </div>
+        <span ng-if="form.country === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-3'>
+        <div class='nvc-form-group'>
+            <label for='d8'>{{"aavv.step1.state"|trans }}</label>
+            <select
+                class='nvc-select__register'
+                id='d8'
+                placeholder=''
+                name="state"
+                ng-disabled="form.country != 1"
+                ng-model="form.state"
+                ng-options="val.id as val.name for (state, val) in states"
+                ng-change="changeState()"
+            >
+                <option value="">{{"aavv.step1.select"|trans }}</option>
+            </select>
+        </div>
+        <span ng-if="form.state === null && validation === true && form.country == 1" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-3'>
+        <div class='nvc-form-group'>
+            <label for='d9'>{{"aavv.step1.city"|trans }}</label>
+            <select
+                class='nvc-select__register'
+                id='d9'
+                placeholder=''
+                name="city"
+                ng-disabled="!form.state"
+                ng-model="form.city"
+                ng-options="val.id as val.name for (city, val) in cities"
+                ng-change="changeCity()"
+            >
+                <option value="">{{"aavv.step1.select"|trans }}</option>
+            </select>
+        </div>
+        <span ng-if="form.city === null && validation === true && form.country == 1" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-3'>
+        <div class='nvc-form-group'>
+            <label for='d10'>{{"aavv.step1.parish"|trans }}</label>
+            <select
+                class='nvc-select__register'
+                id='d10'
+                placeholder=''
+                name="parish"
+                ng-disabled="!form.city"
+                ng-model="form.parish"
+                ng-options="val.id as val.name for (parish, val) in parishes"
+                ng-change="changeParish()"
+            >
+                <option value="">{{"aavv.step1.select"|trans }}</option>
+            </select>
+        </div>
+        <span ng-if="form.parish === null && validation === true && form.country == 1" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-3'>
+        <div class='nvc-form-group'>
+            <label for='d11'>{{"aavv.step1.zip"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='d11'
+                placeholder=''
+                type='text'
+                name="zip"
+                ng-model="form.zip"
+                ng-min="1"
+            />
+        </div>
+        <span ng-show="formStep1.zip.$error.number" style="color:red;">
+            <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+            <br>
+        </span>
+        <span ng-show="formStep1.zip.$error.min" style="color:red;">
+            <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+            <br>
+        </span>
+        <span ng-if="form.zip === null && validation === true" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+    <div class='col-md-8'>
+        <div class='nvc-form-group'>
+            <label for='d12'>{{"aavv.step1.address"|trans }}</label>
+            <input
+                class='nvc-input__register'
+                id='d12'
+                placeholder=''
+                type='text'
+                name="address"
+                ng-disabled="!form.parish"
+                ng-model="form.address"
+            />
+        </div>
+        <span ng-if="form.address === null && validation === true && form.country == 1" style="color:red;">
+            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+            <br>
+        </span>
+    </div>
+</div>

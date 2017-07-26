@@ -1,0 +1,48 @@
+Navicu\Core\Application\UseCases\AAVV\Billing\ListBilling\ListBillingCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        word:
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\AAVV\Billing\ChangeStatusInvoice\ChangeStatusInvoiceCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        idInvoice:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        status:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: integer
+                message: is_not_integer,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\AAVV\Billing\ChangeStatusInvoice\ChangeStatusInvoiceCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}
+        idInvoice:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: is_not_string,{{ value }},{{ type }}

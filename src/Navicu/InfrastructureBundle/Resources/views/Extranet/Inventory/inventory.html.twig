@@ -1,0 +1,322 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'inventory'} %}
+
+{% block title %} {{ "extranet.title.generic"|trans }} {% endblock %}
+
+{% block body %}
+    <div ng-app="inventory" ng-controller="inventoryController" class="grid" ng-cloak name="grid">
+        <section class="js-legend">
+            <div class="container">
+                <div class="col-xs-16">
+                    <span class="text-underline">{{ "extranet.message.legend"|trans }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-16 col-sm-6">
+                        <div class="panel-body">
+                            <ul class="rates-display">
+                                <li><span class="fa fa-circle fa-lg text-danger"></span>{{ "extranet.message.room_service_type_unavailable"|trans }}</li>
+                                <li><span class="fa fa-circle fa-lg text-warning"></span>{{ "extranet.message.room_service_type_low_available"|trans }}</li>
+                                <li><span class="fa fa-circle fa-lg text-edited"></span>{{ "extranet.message.room_service_edited"|trans }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-16 col-sm-6">
+                        <div class="panel-body">
+                            <ul class="rates-display">
+                                <li><span class="fa fa-circle fa-lg text-blocked"></span>{{ "extranet.message.room_service_type_blocked"|trans }}</li>
+                                <li>
+                                    <span class="label light-dark-gray">{{ "extranet.message.sell_rate"|transchoice(3) }}</span>
+                                    &nbsp; {{ "extranet.message.sell_rate"|transchoice(0) }}
+                                </li>
+                                <li>
+                                    <span class="label light-dark-gray">{{ "extranet.message.net_rate"|transchoice(3) }}</span>
+                                    &nbsp; {{ "extranet.message.net_rate"|transchoice(0) }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-16 col-sm-4">
+                        <div class="panel-body">
+                            <ul class="rates-display">
+                                <li><strong>{{ "extranet.message.co"|trans }}</strong>&nbsp;&nbsp;Close out</li>
+                                <li><strong>{{ "extranet.message.cta"|trans }}</strong>&nbsp;&nbsp;Closed to arrival</li>
+                                <li><strong>{{ "extranet.message.ctd"|trans }}</strong>&nbsp;&nbsp;Closed to departure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <header id="navigation-grid-header" class="js-navigation-grid-header">
+                <div class="well-grid">
+                    <div class="container">
+                        <div class="row">
+                            {#-- input calendario --#}
+                            <div class="col-xs-8 col-sm-4">
+                                <div class="form-horizontal">
+                                    <div class="form-group-no-bottom">
+                                        <label class="col-xs-4 col-sm-5 col-md-7">
+                                            <span class="visible-xs-inline">
+                                                <span class="fa fa-calendar fa-lg" style="margin-top: 12px;"></span>
+                                            </span>
+                                            <span class="visible-sm-inline">
+                                                <small>{{ "share.message.start_date"|trans }}</small>
+                                            </span>
+                                            <div class="visible-md-inline visible-lg-inline">
+                                                <div class="control-label">{{ "share.message.start_date"|trans }}</div>
+                                            </div>
+                                        </label>
+                                        <div class="col-xs-12 col-sm-11 col-md-9">
+                                            <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                                                <input class="datepicker" size="8" type="text" ng-model="newDate">
+                                                <span class="add-on"><i class="icon-th"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {#-- checkboxes de visualizacion en dailypacks --#}
+                            <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-horizontal">
+                                    <div class="form-group-no-bottom">
+                                        <label class="hidden-xs col-sm-2 control-label">{{ "share.action.see"|trans }}</label>
+                                        <div class="col-xs-16 col-sm-14">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-primary btn-sm active" ng-click="netRate = !netRate">
+                                                    <input type="checkbox"> {{ "extranet.message.net_rate"|transchoice(3) }}
+                                                </label>
+                                                <label class="btn btn-primary btn-sm active" ng-click="restriccion = !restriccion">
+                                                    <input type="checkbox"> {{ "extranet.message.restrictions"|trans }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {#-- navegacion --#}
+                            <div class="col-xs-16 col-sm-4 col-md-5 col-lg-5" style="padding-left: 8px; padding-right: 8px;">
+                                {% if is_granted('ROLE_SALES_EXEC') %}
+                                    <div class="btn-prev" ng-click="previousDays(true)">
+                                        <span class="fa fa-chevron-left fa-lg brand-primary-color"></span>
+                                        <span class="hidden-sm">
+                                            {{ "extranet.message.previous_n_days"|trans({"%ndays%": "21"}) }}
+                                        </span>
+                                        <span class="visible-sm-inline">
+                                            {{ "share.message.previous"|trans }}
+                                        </span>
+                                    </div>
+                                {% else %}
+{#                                    <div class="btn-prev"  ng-click="previousDays()" ng-disabled="preDays" ng-init="preDays=true">#}
+                                      <div class="btn-prev"  ng-click="previousDays(true)">
+                                        <span class="fa fa-chevron-left fa-lg brand-primary-color"></span>
+                                        <span class="hidden-sm">
+                                            {{ "extranet.message.previous_n_days"|trans({"%ndays%": "21"}) }}
+                                        </span>
+                                        <span class="visible-sm-inline">
+                                            {{ "share.message.previous"|trans }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                                <div class="btn-next pull-right" ng-click='nextDays()'>
+                                    <span class="hidden-sm">
+                                        {{ "extranet.message.next_n_days"|trans({"%ndays%": "21"}) }}
+                                    </span>
+                                    <span class="visible-sm-inline">
+                                        {{ "share.message.next"|trans({"%ndays%": "21"}) }}
+                                    </span>
+                                    <span class="fa fa-chevron-right fa-lg brand-primary-color"></span>
+                                </div>
+                            </div>
+                        </div> {#-- row --#}
+                    </div> {#-- container --#}
+                </div> {#-- well --#}
+            </header> {#-- navigation-header --#}
+
+            <div id="container-grid">
+                <table class="table table-grid" id="table-grid" >
+                    <thead class="js-header" id="table-grid-header">
+                        <tr class="blank-row">
+                            <th class="main-col"></th>
+                            <th class="aux-col"></th>
+                            <th class="secondary-col" ng-repeat="days in daysRange.days track by $index"></th>
+                        </tr>
+                        <tr class="days-of-week-row">
+                            <th colspan="2" class="text-bottom">{% filter upper %}{{ "share.message.n_days"|trans({"%ndays%": ""}) }} {% endfilter %}</th>
+                            <th class="text-center no-padding-top-bottom no-padding-sides" ng-repeat="days in daysRange.days">
+                                <div class="inverse-cell-content">
+                                    <strong ng-bind="days"></strong>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr> {#-- attention row --#}
+                            <th class="days-of-week-row no-padding-top-bottom" colspan="2">
+                                <small>{{ "extranet.message.dates_requiring_attention"|trans }}</small>
+                            </th>
+                            <th ng-class="day" ng-repeat="day in grid.attentionLight track by $index" colspan="1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat-start="room in grid.rooms" ng-init="roomIndex = $index">
+                            <td class="vcenter grid-dark-gray" colspan="2">
+                                <a href="#" ng-if="room.expanded" ng-click="room.expanded = false" class="gray-white-link">&nbsp;
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                                <a href="#" ng-if="!room.expanded" ng-click="room.expanded = true" class="gray-white-link">&nbsp;
+                                    <span class="fa fa-chevron-down"></span>
+                                </a>
+                                <strong ng-bind="room.name"></strong>
+                            </td>
+                            <td class="text-center vcenter daily-room" ng-class="dailyRoom.light"
+                                ng-repeat="dailyRoom in room.dailyRooms track by $index"
+                                ng-click="modalRoom.doClick(roomIndex, room.name, $index, room.idRoom, dailyRoom, room.baseAvailability, $event)">
+                                <div ng-if="dailyRoom.complete == false">
+                                    <strong> {{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                                <div ng-if="dailyRoom.complete">
+                                    <div ng-class="{'line' : dailyRoom.linkage}"> </div>
+                                    <strong ng-bind="dailyRoom.availability"></strong>
+
+                                    <div ng-show="!restriccion" style="margin-top: 5px;">
+                                        <small>
+                                            <span ng-show="dailyRoom.minNight">
+                                                {{ "share.word.minimum_short"|trans }}: <span ng-bind="dailyRoom.minNight"></span>
+                                            <span ng-show="dailyRoom.maxNight && dailyRoom.maxNight != 365">
+                                                <br/>
+                                                {{ "share.word.maximum_short"|trans }}: <span ng-bind="dailyRoom.maxNight"></span>
+                                            </span>
+                                            <span ng-show="dailyRoom.cutOff > 0">
+                                                <br/>
+                                                {{ "extranet.message.cut_off_short"|trans }}: <span ng-bind="dailyRoom.cutOff"></span>
+                                            </span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-if="!room.expanded" ng-repeat-start="service in room.packages" ng-init="serviceIndex = $index">
+                            <td class="vcenter grid-darker-gray">
+                                <strong ng-bind="service.name"></strong>
+                                <br>
+                                <strong ng-bind="service.basePolicy.name"></strong>
+                                <br>
+                            </td>
+                            <td class="half-padding-sides grid-darker-gray">
+                                <span class="pull-left">
+                                    <small>
+                                        <strong>{{ "extranet.message.sell_rate"|transchoice(3) }}</strong>
+                                        <br>
+                                        <span ng-show="!netRate">{{ "extranet.message.net_rate"|transchoice(3) }}</span>
+                                    </small>
+                                </span>
+                                &nbsp;
+                                <span class="pull-right">
+                                    <small>
+                                        <strong>{{currency}}</strong>
+                                        <br>
+                                        <span ng-show="!netRate">{{currency}}</span>
+                                    </small>
+                                </span>
+                            </td>
+                            <td ng-repeat="dailyPack in service.dailyPackages track by $index" ng-class="dailyPack.light"
+                                ng-init="dailyPackIndex = $index" class="daily-pack"
+                                ng-click="modalPack.doClick(roomIndex, service.name, serviceIndex, dailyPackIndex, service.idPack,
+                                                            dailyPack, room.baseAvailability, room.dailyRooms[$index].minNight,
+                                                            room.dailyRooms[$index].maxNight, service.basePolicy,
+                                                            room.dailyRooms[$index].availability, service.cancellationPolicy,
+                                                            room.dailyRooms[$index].idDailyRoom, $event, room.kidPayAsAdult,
+                                                            room.increment, room.incrementKid)">
+                                <div ng-if="dailyPack.complete">
+                                    <div ng-class="{'line' : dailyPack.linkage}"> </div>
+                                    <div ng-class="{'line-transparent' : !dailyPack.linkage}"> </div>
+                                    <div class="text-center">
+                                        <small>
+                                            <strong class="font-bold" ng-bind="dailyPack.sellRate | number"></strong>
+                                            <br>
+                                            <span ng-bind="dailyPack.netRate | number" ng-show="!netRate"></span>
+                                            <div ng-show="!restriccion" style="margin-top: 5px;">
+                                                <span ng-show="dailyPack.minNight">
+                                                    {{ "share.word.minimum_short"|trans }}:
+                                                    <span ng-bind="dailyPack.minNight"></span>
+                                                </span>
+                                                <br/>
+                                                <span ng-show="dailyPack.maxNight && dailyPack.maxNight != 365">
+                                                    {{ "share.word.maximum_short"|trans }}:
+                                                    <span ng-bind="dailyPack.maxNight"></span>
+                                                </span>
+                                                <br/>
+                                                <span ng-show="dailyPack.specificAvailability">
+                                                    {{ "extranet.message.availability_short"|trans }}:
+                                                    <span ng-bind="dailyPack.specificAvailability"></span>
+                                                </span>
+                                            </div>
+                                        </small>
+                                    </div>
+                                </div>
+                                <div ng-if="!dailyPack.complete" class="daily-pack-new">
+                                    <strong> {{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-repeat-end> {#-- servicios --#}
+                        <tr ng-repeat-end> {#-- habitaciones --#}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        {#-- Ventana modal para editar los daily room--#}
+        {{ include("NavicuInfrastructureBundle:Extranet/Inventory:modalDailyRoom.html.twig") }}
+        {#-- Ventana modal para editar los daily packs--#}
+        {{ include("NavicuInfrastructureBundle:Extranet/Inventory:modalDailyPack.html.twig") }}
+        {#-- Ventana modal para indicar que se está cargando una petición--#}
+        {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+        {#-- Ventana modal para indicar que hubo un error al realizar una petición--#}
+        {{ include("NavicuInfrastructureBundle:Extranet:Partials/modalError.html.twig") }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var extension ="{{ app.request.attributes.get('extension') }}";
+        var slug = "{{ slug }}";
+        var locales = 'en';
+        var startDate = "{{ startDate }}";
+        var rateType = "{{rateType}}";
+        var data = "{{data}}";
+        console.log("data", data);
+    </script>
+
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script>
+        jQuery(function($) {
+            $('.datepicker').datepicker({
+                format: 'dd-mm-yyyy',
+                startDate: new Date(),
+                autoclose: true
+            });
+
+            $(".js-navigation-grid-header").affix({
+                offset: {
+                    top: $("header").height() + $("section.js-legend").height()
+                }
+            });
+
+            $('.js-navigation-grid-header').on("affix.bs.affix", function() {
+                $('#table-grid').floatThead({
+                    scrollingTop: $(".js-navigation-grid-header").height(),
+                    zIndex:1,
+                    autoReflow:true
+                });
+            });
+        });
+    </script>
+{% endblock %}

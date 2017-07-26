@@ -1,0 +1,68 @@
+{% set k = 1 %}
+
+{% for name, month in calendars %}
+    {% if k == 1 %}
+    <div class="container top-calendar" id="sixMonths-div">
+       <div class="row">
+    {% elseif k == 7 %}
+    <div class="container" id="twelveMonths-div" style="display: none;">
+        <div class="row">
+    {% elseif k == 13 %}
+    <div class="container" id="eighteenMonths-div" style="display: none;">
+        <div class="row">
+    {% elseif k == 19 %}
+    <div class="container" id="twentyfourMonths-div" style="display: none;">
+        <div class="row">
+    {% endif %}
+            <div class="col-md-2 md-calendar">
+                <table class="table-striped calendar">
+                    <thead>
+                        <tr>
+                            <th colspan="7" class="th-calendar">
+                                <a class="btn js-month-calendar" data-month="{{ month['monthNumber'] }}" data-year="{{ month['yearNumber'] }}" data-selected="no">{{ name }}</a>
+                            </th>
+                        </tr>
+                        <tr class="tr-calendar">
+                            <th>{{ "share.calendar.days.mon"|transchoice(0) }}</th>
+                            <th>{{ "share.calendar.days.tue"|transchoice(0) }}</th>
+                            <th>{{ "share.calendar.days.wen"|transchoice(0) }}</th>
+                            <th>{{ "share.calendar.days.thu"|transchoice(0) }}</th>
+                            <th>{{ "share.calendar.days.fri"|transchoice(0) }}</th>
+                            <th>{{ "share.calendar.days.sat"|transchoice(0) }}</th>
+                            <th>{{ "share.calendar.days.sun"|transchoice(0) }}</th>
+                        </tr>
+                    </thead>
+                    {% set lastday = 1 %}
+                    {% for week in month %}
+                        <tr>
+                        {% for i in 1..7 %}
+                            {% if i in week|keys %}
+                                {% if week[i] < today['mday'] and k == 1 %}
+                                    <td class="text-muted">{{ week[i] }}</td>
+                                {% else %}
+                                    {% set lastday = week[i]+1 %}
+                                        {% if month['yearNumber'] == today['year'] and month['monthNumber'] == today['mon'] and week[i] == today['mday'] %}
+                                            <td class="{{ i~" today" }}" id="{{ month['yearNumber']~'-'~month['monthNumber']~'-'~week[i] }}"><a href="#" class="dia today">{{ week[i] }}</a></td>
+                                        {% else %}
+                                            <td class="{{ i }}" id="{{ month['yearNumber']~'-'~month['monthNumber']~'-'~week[i] }}"><a href="#" class="dia">{{ week[i] }}</a></td>
+                                        {% endif %}
+                                {% endif %}
+                            {% else %}
+                                {% if lastday > today['mday'] or k > 1 %}
+                                    <td></td>
+                                {% else %}
+                                    <td class="text-muted"></td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    {% if k == 6 or k == 12 or k == 18 or k == 24 %}
+        </div>
+    </div>
+    {% endif %}
+    {% set k = k+1 %}
+{% endfor %}

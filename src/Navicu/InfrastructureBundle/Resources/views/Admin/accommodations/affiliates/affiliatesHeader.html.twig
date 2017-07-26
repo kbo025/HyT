@@ -1,0 +1,70 @@
+<div class="clearfix">
+    <header class="clearfix">
+        <div class="nvc-container">
+            <h1 class="nvc-aavv-customize__title--primary">Alojamientos afiliados</h1>
+            <span class="nvc-aavv-customize__title--primary">·</span>
+            <h3>{[{pagination.items}]} Alojamientos</h3>
+            <aside ng-show="{{ hasPermission('admin_affiliates', 'download_excel') }}">
+                <a href="{{ path('navicu_admin_list_properties_to_excel') }}">
+                    <button class="nvc-button">
+                            {{ 'aavv.reservations.list.form.buttons.download_excel' | trans }}
+                    </button>
+                </a>
+            </aside>
+        </div>
+    </header>
+</div>
+<form class="nvc-form--aavv nvc-container">
+    <div class="nvc-form__left">
+        <div class="input-group">
+            <span class="input-group-addon nvc-aavv-customize__text">
+                {{ 'aavv.reservations.list.form.labels.search' | trans }}
+            </span>
+            <input
+                class="form-control"
+                id="nvc-form__search"
+                ng-model="search"
+                role="search"
+                tabindex="1"
+                type="text"
+            />
+            <span class="input-group-addon">
+                <button
+                    class="nvc-aavv-customize__button--primary"
+                    type="submit"
+                    ng-click="getListFilter(search, 1, null)"
+                >
+                    {{ 'aavv.reservations.list.form.buttons.search' | trans }}
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="dropdown nvc-table__legend clearfix">
+        <button
+            class="btn btn-default dropdown-toggle"
+            type="button" id="dropdownlogin"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+        >
+            <img src="{{ asset('images/leyenda.png') }}"/>
+            Ver leyenda de búsqueda
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownlogin">
+            <li>
+                <strong>Alojamientos afiliados</strong>
+                <br>
+                <span>join_date:2016-01-01:2016-03-30</span>
+            </li>
+            <hr>
+            <li>
+                <strong>Detalle del alojamiento</strong>
+                <br>
+                <span>date_check_in:2016-01-30:2016-03-01</span>
+                <br>
+                <span>date_check_out:v2016-01-01:2016-02-15</span>
+            </li>
+        </ul>
+    </div>
+</form>

@@ -1,0 +1,12 @@
+# Caso de uso consulta de inventario y credito de aavv
+Navicu\Core\Application\UseCases\AAVV\Reservation\SetDataReservation\SetDataReservationCommand:
+    properties:
+        properties:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        checkIn:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        checkOut:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

@@ -1,0 +1,59 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block body %}
+
+    <main class='nvc-consurso_madres post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+        <!--- Header -->
+        <section class="nvc-header">
+            {#<img  class="carousel-fill" src="{{ asset('images/concursos/dia-madres/madres.jpg') }}"/>#}
+            <div class="nvc-container">
+                <h1>¿Y mamá?</h1>
+                <h2>¡Se fue de viaje con navicu!</h2>
+                <h3>Concursa este día de las madres</h3>
+                <h4>Si de experiencias se trata, te ayudamos a brindarle la mejor a ella en su día</h4>
+                <h4><span>Sabemos que no necesitamos una fecha para agradecerles, pero</span> ¡Feliz día mamá!</h4>
+            </div>
+        </section>
+
+        <!--- Block Content -->
+        <section class="nvc-content">
+            <div class="nvc-container">
+                <div class="col-xs-16 col-sm-14 ">
+                    <h4>Sigue estos pasos y participa por un hospedaje gratis para tu mamá y un acompañante en uno de nuestros mejores hoteles</h4>
+                    <div class="nvc-steps">
+                        <ul class="fa-ul">
+                            <li><i class="fa-li fa fn-instagram2" aria-hidden="true"></i> Síguenos en nuestra cuenta de instagram <a href="https://www.instagram.com/_navicu/" target="_blank">@_navicu</a></li>
+                            <li><i class="fa-li fa fn-photo" aria-hidden="true"></i> Sube tu foto favorita de tu mamá o con ella</li>
+                            <li><i class="fa-li fa fn-think" aria-hidden="true"></i> ¡Cuéntanos la historia tras la foto!</li>
+                            <li><i class="fa-li fa fn-hashtag" aria-hidden="true"></i> Mencionanos y utiliza el hashtag <span> <a href="https://www.instagram.com/_navicu/" target="_blank">#MamáViveNavicu</a></span></li>
+                        </ul>
+                    </div>
+                    <div class="nvc-luck text-center">
+                        <h2>Al seguir estas bases ya estás participando ¡suerte!</h2>
+                    </div>
+                    <h3>¡Recuerda que si no tienes tu cuenta de Instagram pública no podremos ver tu publicación!</h3>
+                    <img  class="img-responsive hidden-xs" src="{{ asset('images/concursos/dia-madres/phone_madres.png') }}"/>
+                </div>
+                {#<div class="col-xs-16 col-sm-5 ">
+                    <img  class="img-responsive hidden-xs" src="{{ asset('images/concursos/dia-madres/phone_madres.png') }}"/>
+                </div>#}
+            </div>
+        </section>
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% if app.environment == "dev" %}
+
+    {% else %}
+
+    {% endif %}
+
+{% endblock %}

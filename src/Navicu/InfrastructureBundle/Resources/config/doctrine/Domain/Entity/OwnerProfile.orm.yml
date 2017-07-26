@@ -1,0 +1,132 @@
+# La entidad contiene los datos de los perfiles Hoteleros
+Navicu\Core\Domain\Model\Entity\OwnerProfile:
+    type: entity
+    table: owner_profile
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbOwnerProfileRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        names:
+            type: string
+            nullable: true
+            length: 150
+        last_names:
+            type: string
+            nullable: true
+            length: 150
+        # Nombre y apellido del usuario
+        full_name:
+            type: string
+            nullable: true
+        # Cedula de indentidad
+        identity_card:
+            type: string
+            nullable: true
+        # Fecha de nacimiento
+        birth_date:
+            type: date
+            nullable: true
+        # Telefonos
+        phones:
+            type: string
+            nullable: true
+            length: null
+        # Genero
+        gender:
+            type: integer  # 1: mujer , 2: hombre, 3: señor(a)
+            nullable: true
+        # Compañia en la que trabaja
+        company:
+            type: string
+            nullable: true
+        # Cargo que ocupa en la compañia
+        position:
+            type: string
+            nullable: true
+        # Fax de comunicación
+        fax:
+            type: string
+            nullable: true
+            length: 25
+        # Fecha de creación del usuario
+        joined_date:
+            type: datetime
+            nullable: true
+        # Recibir noticias mediante correo
+        email_news:
+            type: boolean
+            nullable: true
+            options:
+                default: true
+        # Trato del hotelero
+        treatment:
+            type: integer
+            nullable: true
+        # Télefono
+        cell_phone:
+            type: string
+            nullable: true
+
+    oneToOne:
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: owner_profile
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            cascade: ["persist"]
+
+    oneToMany:
+        children:
+            targetEntity: OwnerProfile
+            mappedBy: parent
+        logs_owners:
+            targetEntity: LogsOwner
+            mappedBy: owner_profile
+
+    manyToOne:
+        parent:
+            targetEntity: OwnerProfile
+            cascade: {  }
+            inversedBy: children
+            joinColumn:
+                parent_id:
+                    referencedColumnName: id
+        office:
+            targetEntity: Category
+            cascade: {  }
+            inversedBy: offices_owners_profiles
+            joinColumn:
+                office_id:
+                    referencedColumnName: id
+        location:
+            targetEntity: Location
+            cascade: {  }
+            mappedBy: owner_profile
+            joinColumn:
+                name: location_id
+                referencedColumnName: id
+
+
+    manyToMany:
+        properties:
+            targetEntity: Property
+            inversedBy: ownerprofile
+            joinTable:
+                name: owner_property
+                joinColumns:
+                    ownerprofile_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    property_id:
+                        referencedColumnName: id
+            orderBy: null
+            cascade: ["persist"]
+    lifecycleCallbacks:
+        prePersist: [updateDate, getEmailString]
+        preUpdate: [updateDate ]
+

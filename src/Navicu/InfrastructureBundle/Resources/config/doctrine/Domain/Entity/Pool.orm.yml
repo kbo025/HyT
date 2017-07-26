@@ -1,0 +1,27 @@
+Navicu\Core\Domain\Model\Entity\Pool:
+    type: entity
+    table: pool
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPoolRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        capacity:
+            type: integer
+            nullable: false
+        description:
+            type: string
+            nullable: false
+    manyToOne:
+        service:
+            targetEntity: PropertyService
+            cascade: {  }
+            mappedBy: null
+            inversedBy: pools
+            joinColumns:
+                service_id:
+                    referencedColumnName: id
+            orphanRemoval: false

@@ -1,0 +1,38 @@
+Navicu\Core\Domain\Model\Entity\CurrencyType:
+    type: entity
+    table: currency_type
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbCurrencyTypeRepository
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: NONE
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+        alfa3:
+            type: string
+            length: 3
+            nullable: true
+        simbol:
+            type: string
+            nullable: true
+        active:
+            type: boolean
+            nullable: true
+        round:
+            type: integer
+            nullable: true
+        zero_decimal_base:
+            type: integer
+            nullable: true
+            options:
+                default: 100
+    oneToMany:
+        exchange_rate_history:
+            targetEntity: ExchangeRateHistory
+            cascade: {  }
+            mappedBy: currency_type

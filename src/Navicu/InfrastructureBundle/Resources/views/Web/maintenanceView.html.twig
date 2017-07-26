@@ -1,0 +1,37 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-maintenance.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+        <title>Periodo de Mantenimiento</title>
+    {% endif %}
+{% endblock seoMetadata %}
+
+{% block body %}
+
+<main  class='nvc-maintenance'>
+    <!--- Header -->
+    <section class="nvc-container">
+        <div class="nvc-maintenance__header">
+            <div class="nvc-row">
+                <div class="col-xs-16">
+                    <i class="fn-mantenimiento"></i>
+                    <h1>Estamos <span>trabajando en mejoras</span> para nuestro portal </h1>
+                    <h2 class="visible-lg visible-md">En poco tiempo podrás volver a disfrutar del</h2>
+                    <h2 class="visible-lg visible-md">mejor servicio de hospedaje del país</h2>
+
+                    <h2 class="visible-xs visible-sm">En poco tiempo podrás volver a disfrutar del mejor servicio de hospedaje del país</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}

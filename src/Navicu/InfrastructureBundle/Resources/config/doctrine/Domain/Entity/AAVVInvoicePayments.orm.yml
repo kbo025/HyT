@@ -1,0 +1,56 @@
+Navicu\Core\Domain\Model\Entity\AAVVInvoicePayments:
+    type: entity
+    table: aavv_invoice_payments
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAAVVInvoicePaymentsRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+            nullable: false
+        type:
+            type: integer
+            nullable: false
+        status:
+            type: integer
+            nullable: true
+        number_reference:
+            type: string
+            length: 255
+            nullable: true
+        amount:
+            type: float
+            nullable: false
+        amount_current:
+            type: float
+            nullable: false
+
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+
+    oneToMany:
+        allocation:
+            targetEntity: AAVVAllocationOfInvoicePayment
+            mappedBy: payment
+
+    manyToOne:
+        bank_type:
+            targetEntity: BankType
+            joinColumn:
+                name: bank_type
+                referencedColumnName: id
+            cascade: ["persist"]

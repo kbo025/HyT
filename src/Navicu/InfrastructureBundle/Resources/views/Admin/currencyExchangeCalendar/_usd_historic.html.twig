@@ -1,0 +1,33 @@
+<section id="usd-historic" class="container historic" ng-controller="USDHistoricCtrl" ng-cloak>
+  <header class="clearfix">
+    <form ng-submit="update(fromDate, toDate)" class="pull-right form-inline">
+      <div class="form-group date-range">
+        <i class="fa fn-calendar"></i>
+        <input type="text" class="form-control" ng-model="fromDate" placeholder="Desde">
+        <input type="text" class="form-control" value="-" disabled>
+        <input type="text" class="form-control" ng-model="toDate" placeholder="Hasta">
+      </div>
+      <div class="form-group">
+        <button type="submit">Mostrar</button>
+      </div>
+    </form>
+    <h3>Tipo de cambio con referencia al Dólar</h3>
+  </header>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Moneda</th>
+        <th>Cotización</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in rows" ng-class="{odd: row.isOdd, even: row.isEven}">
+        <td>{[{ row.date }]}</td>
+        <td>{[{ row.currency }]}</td>
+        <td>{[{ row.value | comma }]}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

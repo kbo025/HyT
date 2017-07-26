@@ -1,0 +1,55 @@
+navicu_reservation_confirmation:
+    path:   /reservation
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:confirmationReservation }
+
+navicu_reservation_email_confirmation:
+    path:   /reservation/email
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:emailConfirmation }
+
+#proceso de pago de la reservacion
+navicu_reservation_process:
+    path:   /processReservation
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:processReservation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+#registro de pagos por transferencia
+navicu_reservation_payment_process:
+    path:   /processPaymentReservation
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:processPaymentReservation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+#registro de pagos por transferencia
+navicu_reservation_recalculate_rate_reservation:
+    path:   /recalculateRateReservation
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:recalculateRateReservation }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# pdf de resumen de la reserva
+navicu_resume_reservation:
+    path:   /resumeReservation/{publicId}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:resumeReservation}
+    options:
+        expose: true
+
+# pdf de resumen de la reserva
+navicu_pdf_resume_reservation:
+    path:   /resumeReservationPdf/{publicId}/{owner}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:reservationResumePdf, owner: null}
+    options:
+        expose: true
+
+# resume de la pre-resercación
+navicu_pre_resume_reservation:
+    path:   /resumePreReservation/{publicId}/{username}/{token}
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Reservation:resumePreReservation, username: null, token: null}
+    options:
+        expose: true

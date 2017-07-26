@@ -1,0 +1,46 @@
+Navicu\Core\Domain\Model\Entity\LogsUser:
+    type: entity
+    table: logs_user
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbLogsUserRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        dateTime:
+            type: datetime
+            nullable: false
+        action:
+            type: string
+            nullable: false
+        resource:
+            type: string
+            nullable: false
+        idResource:
+            type: integer
+            nullable: true
+        description:
+            type: json_array
+            nullable: true
+
+    manyToOne:
+        user:
+            targetEntity: Navicu\InfrastructureBundle\Entity\User
+            inversedBy: logs_users
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        property:
+            targetEntity: Property
+            cascade: {  }
+            mappedBy: null
+            inversedBy: logs_users
+            joinColumn:
+                property:
+                    referencedColumnName: id
+
+#    lifecycleCallbacks:
+#        prePersist: [ createLog ]

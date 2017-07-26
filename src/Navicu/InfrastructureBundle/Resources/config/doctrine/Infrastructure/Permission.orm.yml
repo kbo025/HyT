@@ -1,0 +1,50 @@
+# Entidad representa los permisos registrados en el sistema
+Navicu\InfrastructureBundle\Entity\Permission:
+    type: entity
+    table: permission
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPermissionRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Nombre y Apellido del usuario
+        name:
+            type: string
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+    
+    manyToMany:
+        
+        roles:
+            targetEntity: Navicu\InfrastructureBundle\Entity\Role
+            cascade: ["persist"]
+            mappedBy: roles
+    manyToOne:
+        module:
+            targetEntity: Navicu\InfrastructureBundle\Entity\ModuleAccess
+            inversedBy: permissions
+            joinColumn:
+                name: module_id
+                referencedColumnName: id
+            cascade: ["persist"]
+    oneToMany:
+        translations:
+            targetEntity: Navicu\InfrastructureBundle\Entity\PermissionTranslation
+            mappedBy: permission
+            joinColumn:
+                name: translations
+                referencedColumnName: id
+            cascade: ["persist","remove"]

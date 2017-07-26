@@ -1,0 +1,4 @@
+banesco_tdc:
+    url_payment_petition: https://api.instapago.com/payment
+    public_id: 07648283086e96451e98af05fa512ccc
+    private_id: 8D24A2E1-9A22-47C3-89C9-EE4110D89765

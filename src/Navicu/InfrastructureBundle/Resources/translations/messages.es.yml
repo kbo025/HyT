@@ -1,0 +1,1363 @@
+# PresentationBundle/Resources/translations/messages.es.yml
+
+# action : Each label which describe an action (edit, delete, see, add an item, go to homepage, ...
+# description : Each meta-description (meta tag) text (this key should be under the meta one)
+# form : Everything that is relative to form. This key will contain at least the label, legend and placeholder keys.
+# label : Each field type label (this key should be under the form one).
+# legend : Each fieldset legend (this key should be under the form one).
+# message : It's the default key, it contains text that cannot be placed under another key.
+# meta : This key should typically contain only the keys title and/or description
+# placeholder : The placeholders for the different input/textarea fields.
+# title : This key can contain either title texts (you would put in h1, h2, ...tags) or page titles (title tag).
+# warn : Each exception message ("this page does not exist", ...) or confirmation ("Are you sure?", ...) messages.
+# word : This key contains all individual words (and, or, day, ...)
+
+email:
+  extranet:
+    register_property:
+      - ¡Bienvenido!, tu establecimiento ya es parte de Navicu
+      - Estás a pocos pasos de acceder a millones de viajeros que reservan sus viajes a través de Internet y dispositivos móviles.
+      - Descubre una nueva manera de gestionar tu inventario y conocer las necesidades de tu cliente.
+      - Ya puedes gestionar tu establecimiento desde cualquier lugar y en cualquier momento.
+      - ¡Una gran oportunidad para el crecimiento de tu empresa!
+      - "A continuación te facilitamos tus datos de registro:"
+      - "Nombre de usuario:"
+      - "Número identificador (ID):"
+      - "Para ingresar a tu cuenta haz click en el enlace  en el botón Ingresar:"
+      - Ahora tendrás que cargar tus precios y disponibilidad en nuestro sistema de Tarifas e inventario para poder estar visible para todos los clientes.
+      - Recuerda, si tienes alguna pregunta nos puedes contactar en 08008 - NAVICU y en el e-mail preguntas@navicu.com
+      - ¡Bienvenido a la familia Navicu!
+
+error:
+    payment:
+      - "{0} ¡Oh oh! La rapidez es una virtud | {1} El inventario del establecimiento ha cambiado | {2} ¡Prueba buscar nuevamente! |{3} | {4} ¡Oh! ¡oh! | {5} El inventario cambió | {6} ¡Prueba buscar | {7} nuevamente!"
+      - "{0} ¡Hey! | {1} Los datos de tu tarjeta son invalidos, por favor | {2} verificalos o realiza una transferencia bancaria | {3} ¡Recibe la confirmación de tu reserva al instante! | {4} Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas | {5} Los datos de tu tarjeta son invalidos | {6} | {7} Verificalos o realiza una | {8} transferencia bancaria"
+      - "{0} ¡Hey! | {1} La fecha de vencimiento de tu tarjeta no es correcta | {2} ¡Verifica tus datos e intenta colocarla nuevamente! | {3} ¡Recibe la confirmación de tu reserva al instante! | {4} Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas | {5} La fecha de vencimiento de tu | {6} tarjeta no es correcta | {7} ¡Verifica tus datos e intenta de | {8} nuevamente!"
+      - "{0} ¡Hey! | {1} La cédula de identidad no coincide con el número | {2} de tarjeta de crédito, por favor verifica tus datos | {3} ¡Recibe la confirmación de tu reserva al instante! | {4} Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas | {5} La cedula de identidad no coincide | {6} con el número de tarjeta | {7} Por favor, verifica tus datos | {8} e intenta nuevamente"
+      - "{0} ¡Hey! | {1} El código CVC parece no estar correcto | {2} ¡Intenta colocarlo de nuevo! | {3} ¡Recibe la confirmación de tu reserva al instante! | {4} Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas | {5} el codigo CVC que colocaste parece | {6} no estar correcto | {7} ¡Intenta colocarlo de nuevo! | {8} "
+      - "{0} ¡Hey! | {1} La tarjeta que utilizaste no cuenta con fondo suficiente | {2} Recarga tu saldo o realiza una transferencia bancaria | {3} ¡Recibe la confirmación de tu reserva al instante! | {4} Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas | {5} La tarjeta que utilizaste no cuenta | {6} con fondo suficiente , por favor recarga tu saldo | {7} ¡Tambien puedes realizar | {8} un transferencia bancaria!"
+      - "{0} ¡Hey! | {1} Por favor, comunícate con tu banco para activar | {2} tu tarjeta para transacciones electrónicas | {3} ¡Recibe la confirmación de tu reserva al instante! | {4} Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas | {5} Por favor, comunícate con tu banco para activar | {6} tu tarjeta para transacciones electrónicas | {7} Al activar tu tarjeta, prueba| {8} intentando de nuevo"
+      - "{0} ¡Ups! | {1} No hemos podido establecer comunicación con el banco, | {2} por favor intentalo más tarde | {3} ¡Recibe la confirmación de tu reserva al instante! | {4} Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas | {5} No hemos podido establecer comunicación  | {6} con el banco, por favor intentalo más tarde"
+      - "{0} Realizar mi pago via transferencia | {1} Intentar nuevamente | {2} Volver | {3} Transferencia"
+
+ascribere:
+    room:
+        adults_and_children_pay_same: ¿Adultos y niños pagan el mismo precio?
+        calculate_all_increments: Coloca un precio estimado para que te ayude a ver como se calcularán los incrementos por persona en la tarifa que coloques en nuestra extranet
+        info_increment_adults: Si el número de adultos no representa un incremento la tarifa se mantendrá en todas las casillas.
+        info_increment_kids: Si el número de niños no representa un incremento la tarifa se mantendrá en todas las casillas.
+        charging_prices: Precio de la habitación
+        client_will_pay: El cliente va a pagar
+        facilitate_loading_pricing: Para facilitar la carga de precios cuando cargues tarifas solo tendrás que hacerlo para 1 adulto, el resto se completará automáticamente
+        increased_by: Incremento en
+        percentage_increase_by: '{0} Porcentaje de incremento por | {1} Cantidad de incremento por'
+        prices_change_by_number_adults: ¿Tus precios cambian por número de adultos?
+        prices_change_by_number_kids: ¿Los niños representan un costo adicional en la tarifa?
+        prices_change_by_number_people: ¿Tus precios cambian por número de personas?
+        price_simulator: Simulador de precios
+        room_configured_successfully: Habitación configurada satisfactoriamente
+        same_increase_adult: ¿Es el mismo incremento por adulto?
+        same_increase_children: ¿Es el mismo incremento por niño?
+        same_increase_person: ¿Es el mismo incremento por persona?
+        seach_simulator: Simulación de búsqueda
+        section_price_simulator: En esta sección podrás visualizar si la información ha sido cargada correctamente
+        tax_free: Sin IVA
+        tax_included: IVA incluido
+        type_increase: Tipo de incremento
+        type_increment_by_adult: ¿Cuál es el tipo de incremento por adulto?
+        type_increment_by_person: ¿Cuál es el tipo de incremento por persona?
+        type_increment_by_kid: ¿Cuál es el tipo de incremento por niño?
+        your_establishment_receives: Tu establecimiento recibe
+        what_type_increase: ¿Cuál es el tipo de incremento?
+
+extranet:
+  home:
+    amount: Importe
+    arrivals: Nº de llegadas
+    be_navicu: Tu establecimiento forma parte de navicu ¡Recuérdalo a tu equipo!
+    booking_history: Todas tus tarifas e inventario
+    cancellations: Nº de cancelaciones
+    check_in: Check-in
+    check_out: Check-out
+    content_important: tu contenido es importante
+    creating_reserve: Creación de reserva
+    departures: Nº de salidas
+    dont_have_reservations: Aún no tienes reservas en tu establecimiento
+    id_reservation: ID de reserva
+    last_rooms_sold: Últimas habitaciones vendidas:
+    last_rooms_reserved: Las últimas habitaciones reservadas
+    load_availability: Cargar disponibilidad
+    log: Aquí podrás ver todo el historial de cambios
+    name_lastname: Nombre y Apellido
+    no_dates: No existen reservas en las fechas indicadas
+    number_people: Nº de personas
+    number_room: Nº de hab
+    rates_and_availability_date: Recuerda mantener tus tarifas y disponibilidad actualizadas
+    reservations: Aquí podrás ver todo el historial de reservas
+    review_your_content: Revisa tu contenido, ésta es la imagen que muestras a tus clientes
+    room_type: Tipo de habitación
+    search_reservation: Buscar reservas
+    state: Estado
+    tips_content: Tips de contenido
+    try_another_date: ¡Intenta nuevamente colocando otro rango de fechas!
+    welcome: '{0} bienvenido a la extranet | {1} Bienvenido a la extranet'
+    what_happens_now: ¿Qué ocurre hoy?
+    without_availability: Sin disponibilidad para las siguientes fechas:
+    you_can_manage: Aquí podrás gestionar
+    your_content_important: El contenido es importante
+    message_not_availability: Sin disponibilidad para las siguientes fechas
+    message_not_rates: Sin tarifas para las siguientes fechas
+    load_availability: Cargar disponibilidad
+    load_rates: Cargar tarifas
+  formGallery:
+    favorites: '{0} Fotos destacadas | {1} Estas fotos serán las principales de tu establecimiento'
+    top_message: A continuación deberás cargar las fotos de tu establecimiento. Cuantas más fotos de calidad agregues, más gente querrá reservar. Una imagen vale más que mil palabras.
+    valid_images: Las imágenes deben tener un máximo de 10 MB
+    profile_image: Foto de Perfil
+    loading: cargando
+  formProperty:
+    credit_days: Dias de credito
+    discount_rate: Tasa de descuento (%)
+    commission_percentage: Porcentaje de comisión
+    design_view_property: Vista de galería del establecimiento
+    top_message: Necesitaremos que rellenes algunos campos básicos sobre tu establecimiento para poder identificarlo.
+    location: Ubicación
+    name_property: Nombre del establecimiento
+    type_of_accommodation: Tipo de Alojamiento
+    category_start: Categoría(en estrellas)
+    fax_property: Fax
+    email_receiver: ¿Recibe correo?
+    email_receiver_message: ¿Desea que este usario reciba todos los correos relacionados a reservas, información, tarifas, etc... de Navicu.com?
+    phone: Teléfono
+    email_receiver: ¿Recibe correo?
+    email_receiver_message: ¿Desea que este usario reciba todos los correos relacionados a reservas, información, tarifas, etc... de Navicu.com?
+    country: País
+    state: Estado/Provincia
+    town: Municipio
+    parish: Parroquia
+    property_address: Dirección del establecimiento
+    marker_location_of_property: (por favor mueva la marca a la ubicación exacta de su establecimiento)
+    location_of_property: Ubicación del establecimiento
+    property_details: Datos del establecimiento
+    year_opened: Año de Apertura
+    last_renewal: Ultima Renovación
+    last_renovation: Utima renovación de áreas públicas
+    website: Sitio Web
+    hotel_chain: Cadena hotelera
+    name_chain: Nombre de cadena
+    rooms_number: N° de habitaciones
+    floors: Pisos
+    check-in: Check-in
+    message_ckeckin: Horarios de entrada a la habitación
+    check-out: Check-out
+    message_checkout: Horarios de salida a la habitación
+    spoken_languages: Idiomas hablados
+    add_language: Agregar idioma
+    error_languages: No puede colocar idiomas repetidos
+    contact_information: Datos de contacto
+    type_contact: Tipo de Contacto
+    previous_contact: Mismo datos del contacto anterior
+    name: Nombre
+    charge: Cargo
+    email: Email
+    fax: Fax
+    add_contact: Agregar contacto
+    delete: Eliminar
+    error_contact: No puede colocar tipos de contacto repetidos
+    additional_information: Información adicional
+    minimum_age: Edad mínima para hacer check-in
+    age: Edad
+    message_age: Edad mínima para registrarse en tu establecimiento
+    children_policy: '{0}Condiciones sobre niños | {1}Indica cuál es tu rango de edad para niños en el establecimiento, así el huésped lo tendrá en cuenta'
+    stay_children: Se pueden alojar niños
+    extra_charge: Cargo extra
+    age_child: Edad niño
+    message_child: Desde que edad se considera niño
+    age_adult: Edad adulto
+    message_adult: Hasta que edad es considerado niño
+    extras: Extras
+    all_inclusive_hotel: Hotel todo incluido
+    additional_beds: Camas adicionales
+    prior_notice: Previo aviso
+    cribs: Cunas
+    max_cribs: N° máximo de cunas por habitación
+    mascot: Se permiten mascotas
+    comercial_rooms: Habitaciones comerciales
+    message_comercial_rooms: Habitaciones cedidas a navicu de manera gratuita anualmente para uso no comercial
+    amount: Cantidad
+    message_comercial: (Son habitaciones que el establecimiento obsequia a navicu para que utilice internamente para alojamientos de su empresa, sin distribuir al cliente final)
+    payments_accepted: Pagos aceptados
+    message_payments: Formas de pago aceptadas en tu establecimiento (esto aplica a los servicios que contraten directamente contigo)
+    credit_card: Tarjeta de Crédito
+    cash: Efectivo
+    debit: Débito
+    until: Hasta
+    reserve_requirements: Carga de tarifas
+    tax: Impuesto
+    tax_message: ¿Qué tipo de impuesto aplica en tu establecimiento hotelero?
+    currency: Moneda
+    iva: IVA(%)
+    iva_inluid: IVA incluido en tarifas
+    message_iva: Los precios que nos facilitarás ¿serán con IVA incluido o sin IVA incluido?
+    message_rooms_amount: Cantidad de habitaciones que tiene tu establecimiento
+    city_tax: Impuesto de la ciudad
+    message_city_tax: ¿Existe algún impuesto extra que tu cliente tenga que pagar?
+    amount: Importe
+    type_of_currency: Tipo
+    nights_max: Máximo de noches
+    descriptions: Descripciones
+    description_of_property: Descripción del establecimiento
+    descriptions_message: Esta información servirá para que los usuarios vean los datos característicos de tu establecimiento para reservar en él
+    additional_information: Información adicional
+    additional_info_message: Esta información aparecerá como datos de interés en la reserva que vaya a efectuar el cliente una vez haya confirmado que reserva en tu establecimiento
+    rate: Tipo de tarifa a cargar
+    rate_message: Tipo de tarifa con que cargará su inventario
+    quota: Cupo Base
+    quota_message: Número de habitaciones garantizadas por día para vender en Navicu
+  formServices:
+    top_message: A continuación explícanos cuales son los servicios de los que dispones en tu establecimiento. Pon especial atención aquí porque la mayoría de nuestros clientes buscan en nuestra página servicios muy concretos que tu establecimiento puede ofrecer.
+    services: Servicios
+    events: Eventos
+    message_events: Solo las zonas de eventos activas podrán ser vistos en la web del establecimiento
+    zones_created: zonas de eventos creados:
+    you_have: Tienes
+    edit: Editar
+    delete: Eliminar
+    add_event_area: Agregar zona de eventos
+    activate: Activar
+    information_meetings: Información de Salones
+    name: Nombre
+    type: Tipo
+    natural_light: ¿Luz natural?
+    length: Metraje
+    max_people: Capacidad máxima de personas
+    cancel: Cancelar
+    save_area_events: Guardar Zona de eventos
+    restaurant: Restaurantes
+    message_restaurant: Solo los restaurantes activos podrán ser vistos en la web del establecimiento
+    restaurant_created: restaurantes creados:
+    add_restaurant: Agregar restaurante
+    information_restaurant: Información del restaurante
+    type_kitchen: Tipo de Cocina
+    opening_days: Días de apertura
+    opening: Apertura
+    closing: Cierre
+    card_type: Buffet o carta
+    dietary_menu: Menú dietético
+    breakfast_time: Horario de desayuno
+    lunch_time: Horario almuerzo
+    hours_dinner: Horario cena
+    since: Desde
+    until: Hasta
+    field_description: Campo de descripción
+    save_restaurant: Guardar Restaurante
+    bar: Bar/Discoteca
+    message_bar: Solo los Bar/Discoteca activos podrán ser vistos en la web del establecimiento
+    bar_created: Bar/Discoteca creados:
+    add_bar: Agregar Bar/Discoteca
+    information_bar: Información del bar
+    they_serve_food: ¿Sirven Comida?
+    kind_of_food: Tipo de Comida
+    schedule: Horario
+    age_min: Edad Min
+    save_bar: Guardar Bar/discoteca
+    save_service: Guardar
+  formPayment:
+    top_message: Aquí es donde nos deberías informar sobre cómo quieres que te paguemos
+    data_collection: Datos de cobro
+    data_collection_contract: Datos de contrato
+    same_data: Mismo datos que los del establecimiento
+    address: Dirección
+    fiscal_code: Codigo fiscal
+    message_fiscal_code: Código de registro de la empresa propietaria del establecimiento
+    form_of_payment: Forma de cobro
+    message_form_payment: (Las transferencias son a mes vencido día 10)
+    system_payment: Sistema de cobro
+    account_number: N° de cuenta
+    rif: RIF
+  formAgreement:
+    top_message: En esta sección deberás aceptar las condiciones de uso de nuestra página web
+    agreement: Términos y condiciones
+    download_pdf: Descargar PDF con Términos y Condiciones
+    accept: Acepto los términos y condiciones
+    percentage: Porcentaje sobre la tarifa de venta que Navicu cobra al establecimiento
+    commission: Porcentaje de comisión
+    credit_days:
+      title: Dias de credito
+      message: Cantidad de dias de credito acordados entre Navicu y el establecimiento afiliado
+  formGeneral:
+    schedules: Horarios
+    open24: ¿Abierto las 24 horas?
+    enable_service: Activar servicio
+    disable_service: Desactivar servicio
+    cost: Costo
+    free: Gratuito
+    additional_cost: Costo adicional
+  action:
+    choose_other_property: Seleccione otra propiedad
+    exclude_days: Excluir
+    hide_rate_plans: Ocultar tarifas
+    select_all: Selecciona Todo
+    select_all_rooms: Seleccionar todas las habitaciones
+    select_all_services: Seleccionar todos los servicios
+    select_date: Seleccione las fechas
+    old_values: Valores Antiguos
+    updated_values: Valores Actualizados
+  calendar:
+    label:
+      n_months: '{1} Mes|]2,Inf] %count% Meses'
+  login:
+    begins_trip: COMIENZA EL VIAJE
+    free_register: REGISTRO GRATUITO
+    inventory: TARIFAS E INVENTARIO
+    info_massload: Selecciona un rango de fechas e ingresa tarifas y disponibilidad de tus habitaciones y servicios
+    info_inventory: Gestiona de manera sencilla la disponibilidad y tarifas de tus habitaciones en fechas especificas
+    managed: GESTIONA DESDE DONDE ESTÉS
+    massload: CARGA MASIVA
+    market_reserves: SE PARTE DEL MERCADO DE RESERVAS ACTUAL
+    million_travelers: Millones de viajeros cada día, eligen su destino a través de un portal, conviértete en ese destino con navicu.com
+    online_reserves: reservan online desde dispositivos moviles
+  menu:
+    accounting: Contabilidad
+    bulk_update: Carga masiva
+    drop_inventory: Eliminar inventario
+    historical: Historial
+    home: Home
+    manage_reservations: Reservaciones
+    promotions: Promociones
+    property_information: Información establecimiento
+    rates_and_inventory: Gestión
+    reservations: Reservas
+    room_inventory: Tarifas e inventario
+    tips: Tips
+  message:
+    advance: Antelación
+    all_rates_hotel_currency: Tarifas actuales en hotel
+    amount: Monto
+    application_unprocessed: Solicitud no procesada
+    availability: Disponibilidad
+    availability_short: disp
+    base_availability: Disponibilidad base
+    cancellation_policies: Pol. cancelación
+    click_on_cell: Al hacer click en una celda se puede editar precio, disponibilidad y restricciones.
+    close_to_arrival: Bloqueado para llegada
+    close_to_arrival_short: BPL
+    close_to_departure: Bloqueado para salida
+    close_to_departure_short: BPS
+    close_out: Bloqueado
+    confirms_all_data: No olvides que debes confirmar todos los datos que cargaste en esta sección haciendo click en el boton Guardar
+    co: CO
+    cta: CTA
+    ctd: CTD
+    cut_off: Antelación
+    cut_off_short: ante
+    current_value: Valor actual
+    date_modified: Fecha de modificación
+    day_modified: Día modificado
+    dates_requiring_attention: Requieren atención
+    departure: Salida
+    error: Error
+    form_bulk: Selección de productos: Todos los elementos seleccionados se actualizarán con los valores (s) ingresados
+    inventory: Tarifas e inventario
+    inventory_grid_legend: Leyenda de tabla de inventario
+    lar: Tarifa más baja disponible
+    lar_short: TBD
+    legend: Leyenda
+    linked_short: Vinc.
+    login_error: Tu usuario o contraseña no es válido, prueba de nuevo
+    login_error_modal: Usuario o contraseña no es válido
+    quota_special: Disponibilidad específica
+    max_night: Máx Noches
+    min_night: Mín Noches
+    max_nights: Máx Noches
+    massload: Carga Masiva
+    min_nights: Mín Noches
+    modified_by: Modificado por
+    new_value: Valor nuevo
+    n_days: %ndays% dias¿
+    n_persons: N° de personas
+    net_rate: '{0} Tarifa neta | {1} Tarifa neta con IVA | {2} Tarifa neta sin IVA | {3} TN | {4} Neta con IVA | {5} Neta sin IVA'
+    net_rate_description: 'Es el precio sin incluir el porcentaje que se negocia con navicu.com, este precio solo será visible para el hotelero y navicu.com'
+    next_n_days: Próximos %ndays% días
+    next_n_days_short: Próx. %ndays% días
+    previous_n_days: Anteriores %ndays% días
+    previous_n_days_short: Prev. %ndays% días
+    price_for_adult: Precio para 1 adulto
+    rate_highlow_or_adjust: Tarifa muy alta o baja O se requiere un ajuste de tarifa
+    rates_information: Información de tarifas
+    rate_plan_unavailable: Tarifa no disponible
+    sign_up: Quiero ser parte de navicu
+    register_your_property: Incluye tu alojamiento
+    restrictions: Restricciones
+    room_service_edited: Habitación y/o servicio actualizado
+    room_services_linked: Habitaciones y/o servicios vinculados
+    room_service_type_blocked: Habitación y/o servicio bloqueados a la venta
+    room_service_type_unavailable: Habitación y/o servicio no disponible
+    room_service_type_low_available: Habitación y/o servicio con disponibilidad baja
+    room_type: Tipo de habitación
+    room_type_unavailable: Tipo de habitación no disponible
+    sell_rate: '{0} Tarifa de venta | {1} Tarifa de venta con IVA | {2} Tarifa de venta sin IVA | {3} TV | {4} Venta con IVA | {5} Venta sin IVA'
+    sell_rate_description: 'Precio ofrecido a los usuarios en el portal, es el costo real que maneja el hotel en su front desk.'
+    services: Servicios
+    services_linked: Servicios vinculados
+    service_type: Tipos de servicios
+    specific_availability: Disponibilidad específica
+    stop_sell: Detener ventas
+    time_modified: Hora de modificación
+    room_type: Tipo de Habitación
+    total_availability: Disponibilidad total
+  reservations:
+    amount_net: Importe neto
+    booking_detail: Detalle de la reserva
+    creation_date_booking: Fecha creación de la reserva
+    estimated_time_arrival: Hora prevista de llegada
+    tax: Iva
+    nationality: Nacionalidad
+    observations: Observaciones
+    reservation_data: Datos de la reserva
+    type_bed: Tipo de cama
+    sub_total: Subtotal
+  title:
+    generic: Extranet
+    massload: Carga Masiva
+    property: Establecimiento
+    welcome_login: ¡Bienvenido!
+    sub_welcome_login: Grandes oportunidades esperan por ti
+    welcome_register: Ingresa tus datos para registrarte
+    drop_inventory: Eliminar tarifas
+  tips:
+    content: ¡El contenido es importante!
+    constant_availability: Mantén constante tu disponibilidad durante todo el año para los mejores resultados
+    complete_the_form: Completa todo el formulario para incrementar tu visibilidad online.
+    different: Si crees que tienes algún elemento diferenciador y que no está registrado en nuestro formulario, escríbenos a través del correo preguntas@navicu.com para que podamos conseguir que tu establecimiento siga destacando
+    download: Descargar PDF
+    future_customers: Ten en cuenta que a tus futuros clientes les gusta la información clara y precisa.
+    image_showing_your_customers: Te recomendamos revisar con detenimiento tu contenido, ésta, es la imagen que muestras a tus clientes.
+    tips_photography: Te ofrecemos algunos tips para que tu establecimiento luzca increíble y consigas incrementar tus reservas
+    tips_photography_message: ¡Descarga nuestra guía fotográfica!, encontrarás excelentes tips para conseguir las mejores fotografías de tu establecimiento.
+    potential_customers: Con disponibilidad te estás asegurando que tus potenciales clientes puedan reservar en el establecimiento
+    rates_updated: Tener las tarifas actualizadas te permitirá obtener más reservas
+    rates_updated_percentage: Un 20% de la gente que entra a ver tu establecimiento, deja de reservar por no tener tarifas actualizadas
+    rates_and_availability: Mantén las tarifas y disponibilidad actualizadas
+    special_rates: Crear tarifas especiales para temporada baja ayudará a que tengas un mejor posicionamiento y crezcan tus reservas
+  tooltip:
+    click_to_fav: Haz click para agregar a fotos destacadas
+
+fos_user:
+    username:
+        already_used: 'El nombre de usuario ya está en uso'
+        blank: 'Por favor, ingrese un nombre de usuario'
+        short: '[-Inf,Inf]El nombre de usuario es demasiado corto'
+        long: '[-Inf,Inf]El nombre de usuario es demasiado largo'
+    email:
+        already_used: 'La dirección de correo ya está en uso'
+        blank: 'Por favor, ingrese una dirección de correo'
+        short: '[-Inf,Inf]La dirección de correo es demasiado corta'
+        long: '[-Inf,Inf]La dirección de correo es demasiado larga'
+        invalid: 'La dirección de correo no es válida'
+    password:
+        blank: 'Por favor, ingrese una contraseña'
+        short: '[-Inf,Inf]La contraseña es demasiado corta'
+        mismatch: 'Ooops! Las contraseñas no coinciden, intenta nuevamente'
+    new_password:
+        blank: 'Por favor, ingrese una nueva contraseña'
+        short: '[-Inf,Inf]La nueva contraseña es demasiado corta'
+    current_password:
+        invalid: 'La contraseña ingresada no es válida'
+    group:
+        blank: 'Por favor, ingrese un nombre'
+        short: '[-Inf,Inf]El nombre es demasiado corto'
+        long: '[-Inf,Inf]El nombre es demasiado largo'
+share:
+  action:
+    accept: Aceptar
+    cancel: Cancelar
+    clean: Limpiar
+    go: Ir
+    information: Información
+    see: Ver
+    search: Buscar
+    show: Mostrar
+    sign_in: Ingresar
+    sign_in2: Entrar
+    login: Iniciar Sesion
+    sign_in_fb: Ingresar con Facebook
+    sign_up: Registrarme
+    login_enter: Entrar
+    sign_into_navicu: ¡Ingresa a tu universo navicu!
+    sign_in_fb_xs: Facebook
+    submit: Enviar
+    submit_email: Enviar correo
+    go_back: Volver
+    submit-cancel: Cancelar
+  calendar:
+    months:
+      jan: Enero
+      feb: Febrero
+      mar: Marzo
+      apr: Abril
+      may: Mayo
+      jun: Junio
+      jul: Julio
+      aug: Agosto
+      sep: Septiembre
+      oct: Octubre
+      nov: Noviembre
+      dec: Diciembre
+    days:
+      mon: '{0} Lu |{1} Lunes |{2} Lun'
+      tue: '{0} Ma |{1} Martes |{2} Mar'
+      wen: '{0} Mi |{1} Miercoles |{2} Mie'
+      thu: '{0} Ju |{1} Jueves |{2} Jue'
+      fri: '{0} Vi |{1} Viernes |{2} Vie'
+      sat: '{0} Sa |{1} Sabado |{2} Sab'
+      sun: '{0} Do |{1} Domigo |{2} Dom'
+  error:
+    404: ¡Parece que lo que buscas se ha ido de vacaciones!
+    401: No estás autorizado para acceder a esta página en este momento
+    500: Disculpa, parece que existe un error interno
+    500_span: ¡Intenta ingresar más tarde!
+  home:
+    license: Licencia
+    photography: Fotografía
+  menu:
+    menu: "Menú"
+  message:
+    activation: Activación
+    adult: '{1} Adulto|]1,Inf] Adultos'
+    as_from: a partir de
+    baby: '{1} Bebé|[1,Inf] Bebés'
+    check_email: ¡Revisa tu correo, por favor!
+    child: '[-Inf,0] Niños|{1} Niño|[1,Inf] Niños'
+    date: Fecha
+    description: Descripción
+    detail: Detalle
+    e-mail: e-mail
+    email: Correo electrónico
+    email_resetting:
+      text: '{0} Has solicitado cambiar de contraseña navicu. | {1} Para ello haz click en el siguiente enlace: | {2} Si tiene alguna duda escríbenos al correo electrónico: preguntas@navicu.com'
+    enter_your_email: Ingresa tu correo
+    text: '{0} Has solicitado cambiar de contraseña navicu. | {1} Para ello haz click en el siguiente enlace: | {2} Si tiene alguna duda escríbenos al correo electrónico: preguntas@navicu.com'
+    email_error_used: El correo electrónico ya existe
+    email_send_to_email: Te enviamos un correo a la siguiente dirección
+    end_date: Fecha final
+    estimated: Estimado
+    go_sing_in: debe iniciar sesión nuevamente
+    go_sing_in2: ¡Inicia sesión nuevamente, por favor!
+    design: '{0} Resolución alta | {1} Resolución baja'
+    home: Principal
+    hour: Hora
+    indicates_pass: indica tu usuario o el correo al cual quieres que la enviemos
+    language: Ingrese un idioma
+    languages_spoken: Idiomas hablados
+    last_searches: Tus últimas busquedas
+    massload: masiva de datos
+    months: '{0} Mes |{1} Meses '
+    n_days: %ndays% Días
+    network_error: Hubo un error de conexión.
+    next: Siguiente
+    next_short: Sig.
+    new_destinations: Vive Venezuela, al mejor precio
+    no: No
+    not_available_short: N/A
+    number_short: N°
+    password: Contraseña
+    password_error: Tu contraseña tiene que ser una combinación de letras y números
+    password_error_length: Tu contraseña tiene que tener mínimo 6 caracteres
+    password_forgot: he olvidado mi contraseña
+    password_update: Actualiza tu contraseña
+    password_update_button: Actualizar
+    password_update_web: '{0} Actualiza tu contraseña | {1} ¡Ingresa tu nueva contraseña!'
+    password_update_success: Contraseña actualizada
+    password_insert_new: Ingresa tu nueva contraseña
+    password_insert_new_web: '{0} Nueva contraseña | {1} Repetir contraseña'
+    previous: Anterior
+    previous: Ant.
+    phone: Teléfono
+    rates: '{0} Tarifa | {1} Tarifas'
+    read: Leer más
+    register: Ingresa con tu cuenta o registrate
+    reserve: Reserva de alojamientos online
+    reservation:
+      accepted: '{0} Tienes 1 nueva reserva confirmada |{1} Tienes %count% nuevas reservas confirmadas'
+      canceled: '{0} Tienes 1 reserva cancelada |{1} Tienes %count% reservas canceladas'
+      per-confirm: '{0} Tienes 1 reserva por confirmar |{1} Tienes %count% reservas por confirmar'
+    resetting_your_password: Por favor, introduce tu e-mail y recibirás las instrucciones para reiniciar tu contraseña
+    resetting_your_password_paragraph_first: Danos tu correo y te enviaremos las instrucciones para
+    resetting_your_password_paragraph_second: restablecer contraseña
+    resetting_your_password_please_sign_in_email: ¡Por favor ingresa a tu correo!
+    resetting_your_password_web: '{0} Introduce tu correo o usuario y recibirás | {1} las instrucciones para restablecer tu contraseña'
+    resetting_send_email: Restablecer contraseña
+    resetting.invalid_username: Nombre de usuario o correo inválido
+    resetting.password_already_requested: '{0} La contraseña ha sido solicitada | {1} ¡Intenta nuevamente dentro de 24 horas!'
+    resetting.async.email_already_requested: La contraseña ha sido enviada a tu correo
+    resetting.email_already_requested: 'La contraseña ya ha sido solicitada, intente nuevamente dentro de 24 horas'
+    room: '{1} Habitación|]1,Inf] Habitaciones'
+    start_date: Fecha inicio
+    search_textfield_legend: Escoge tu destino, región o ciudad
+    search_textfield_legend_min: Escoge tu destino
+    search_your_accomodation: Busca tu establecimiento
+    signed_as: %username%
+    slogan: reserva de alojamientos online
+    temp_properties: Establecimientos temporales
+    update: Actualización
+    user: Usuario
+    username: Nombre de usuario
+    select: Seleccione
+    sign_login: Ingresa con tu correo y contraseña
+    sign_in_login: Ingresa con tu usuario y contraseña
+    username_error_used: El nombre de usuario ya existe
+    username_error_not_valid: El nombre de usuario no es valido
+    username_spaces: El usuario no puede contener espacios
+    username_email: Usuario o correo electrónico
+    yes: Sí
+    year: años
+    you_will_receive_instructions: ¡Recibirás las instrucciones!
+    welcome: Bienvenido
+    where_to_go: ¿A dónde quieres ir?
+    email_pass_error: ¡Ooops! Tu usuario o contraseña son inválidos, intenta nuevamente.
+    logoutWeb: Salir
+  register:
+    add_room: Agregar otra habitación
+    bedroom: Dormitorio
+    combinations_bed: Combinación de Camas
+    cooking: Cocina
+    currency: Bs
+    balcony: Balcón
+    bath: '{1} Baño|]1,Inf] Baños'
+    bath_bedroom: Baño en el dormitorio
+    diner: Comedor
+    dresser: Vestidor
+    edit: Editar
+    garden: Jardín Privado
+    increase: ¿Existe incremento?
+    increase_question: '{0} ¿Incremento? | {1} Incremento'
+    increase_question_tooltip:  El porcentaje de incremento es en relación a la tarifa base cargada, y no sumando la persona anterior al cálculo
+    increase_amount: Cantidad de incremento
+    increase_example: A continuación mostramos un ejemplo para los datos que has introducido partiendo de la base que tu habitación cuesta 1.000 Bs para que puedas ver como afecta al precio el número de personas.
+    increase_price: Precio
+    information_room: A continuación necesitamos que nos detalles cuantos tipos de habitaciones tienes en tu establecimiento y las características de cada tipo de habitación. Tendrás que decirnos dentro del tipo de habitación que estás creando los diferentes tipos de cama que tienes así como los servicios que ofrece la habitación y un precio mínimo de referencia de la habitación.
+    increase_person: N° de personas alojadas
+    laundry: Lavadero
+    livings: Sala de estar
+    livings_couch: Número de sofás cama en la habitación
+    livings_num_people: ¿Cuantas personas pueden alojarse aquí?
+    loaded_room: Habitaciones Cargadas
+    meters: metros
+    num_people: ¿Cuantas personas pueden alojarse en la habitación?
+    num_people_bedroom: ¿Cuantas personas pueden alojarse en el dormitorio
+    num_bed: Número de camas de este tipo
+    number_type_room: Habitaciones de este tipo
+    number_people_type_room: Máximo personas
+    other: Otros
+    person: '{1} persona|]1,Inf] personas'
+    price_politics: Política de precios por persona
+    pool: Piscina
+    room: '{1} Habitación|]1,Inf] Habitaciones'
+    room_type: Tipo de habitación
+    room_view: Vista de la habitación
+    room_number: Número de habitaciones
+    room_number_tooltip: Cantidad de habitaciones de esa tipología y con esas vistas que tiene el establecimiento
+    room_size: Tamaño de la habitación
+    save: Guardar
+    service_room: Servicios asociados a este tipo de habitación
+    select: Seleccione
+    smoking: Permitido Fumar
+    spa: SPA
+    terrace: Terraza
+    typologies_bed: Tipologías de camas
+    typologies_bedroom: Tipologías de dormitorios
+    type_amount: Tipo de Incremento
+    type_bed_room: ¿Qué tipo de camas hay en la habitación?
+    type_bed_bedroom: ¿Qué tipo de camas hay en el dormitorio?
+    base_availability: Cuota básica de habitaciones ofrecidas
+    base_availability_tooltip: Cuántas habitaciones se ofrecen a navicu como disponibilidad base para todo el año
+  preview:
+    address: Dirección del establecimiento
+    additional_cost: costo adicional
+    adults: Adultos
+    arrival: Llegada
+    availability: Disponibilidad
+    availability_hotel: Varía según disponibilidad del hotel
+    beds: Camas
+    breakfast_included: Desayuno incluido
+    best_price: ¡Mejor precio garantizado!
+    change_dates: Cambiar fechas
+    change_search: Cambiar búsqueda
+    conditions: Condiciones
+    city: Ciudad
+    children: Niños
+    country: País
+    features: Características
+    free: gratuito
+    gallery: Galería
+    include: Incluido
+    image_name: Nombre de la imagen
+    last_reform: Última reforma
+    max: N° de personas
+    message_inf: En esta sección podrás ver cómo está quedando tu hotel y cómo vamos a mostrar la información que estás colocando sobre tu establecimiento. Muy importante colocar buenas fotos para una mejor imagen de tu página.
+    name_room: Nombre de la habitación
+    name_property: Nombre del estableciemiento
+    night: noches
+    non_refundable: no reembolsable
+    not_include: No incluido
+    number_room: N° de habitaciones
+    num_room: N° de Hab
+    only_room: Solo habitación
+    opening_year: Año de apertura
+    output: Salida
+    parking_included: Estacionamiento incluido
+    price: Precio
+    price_politic: Política de precios
+    price_for: Precio para
+    price_for_room: Los precios son por habitación
+    politic_cancel: Política de cancelación
+    relevant_information: Información relevante
+    reserve_now: Reservar
+    reservation: Tu reservación
+    romm_service: Servicios habitación
+    room: Habitaciones
+    rooms: '{0} habitaciones | {1} habitación'
+    select: Seleccione
+    services: Servicios
+    service_featured: Servicios Destacados
+    services_room: Servicios de la habitación
+    stay: '{0} Quedan | {1} Queda'
+    state: Estado
+    tax: Impuesto
+    total_price: Precio total
+    type_room: Tipo de habitación
+    without_charge: ¡Sin cargos de gestión por pagar con tarjeta de crédito!
+  tooltip:
+    price_politics: Definimos si existe incremento en el precio que carguemos de la habitación en función del número de personas que se alojen
+    service_room: ¿Qué servicios estás ofreciendo en esta habitación?
+    typologies_bed: ¿Cuántas configuraciones de camas tienes en este tipo de habitación?
+    typologies_bedroom: ¿Cuántas configuraciones de camas tienes en cada dormitorio de este tipo de habitación?
+  validation:
+    add_room: ERROR - Verifique los datos ingresados
+    alfanumerico: Solo caracteres alfanuméricos
+    availability_higher_base: Disponibilidad no debe ser menor a la disponibilidad base
+    availability_higher_room: Disponibilidad no debe ser mayor a la
+    availability_required: Indica la disponibilidad de la habitación
+    baseRate_is_negative: Precio base no puede ser negativo
+    edit_sell_rate: Modifique el precio de venta
+    enter_more: Ingrese un número mayor
+    enter_more_one: No debe ser menor a 1
+    enter_more_zero: No debe ser menor a 0
+    error_url: Url con formato incorrecto
+    error_length_name: Este campo debe tener como mínimo 3 letras
+    error_length_identificationId: Este campo necesita como mínimo 7 números
+    error_email: Por favor, revisa que el correo esté bien
+    error_identity: Formato inválido
+    error_phone_lg: Formato inválido ej. (04XX1234567)
+    error_phone_xs: Ej. (04XX1234567)
+    error_password_lg: Tu clave debe ser de minimo 6 caracteres
+    error_password_xs: Minimo 6 caracteres
+    error_password_alphanumeric_lg: Su clave debe contar con letras y números
+    error_password_alphanumeric_xs: Solo letras y números
+    error_bank_account: Cuenta bancaria invalida
+    error_code_swift: Codigo swift invalido
+    error_postal_code: Codigo postal invalido
+    error_fax: Formato de fax inválido
+    error_card: Ingrese 16 números
+    error_cvc: Ingrese 3 números
+    error_not_available_amount_room: La disponibilidad de las habitaciones ha cambiado
+    input_required: Este campo es obligatorio
+    max_room: No debe ser mayor al número de personas de la habitación
+    maxNight_is_higher_base: Max de noches debe ser igual o menor a Máx. Noches de la habitación
+    minNight: Mínimo de noches
+    minNight_is_higher: Mínimo de noches debe ser menor o igual al Máximo de Noches
+    minNight_is_lower: Mín de noches debe ser menor
+    no_negative: no puede ser negativo
+    only_integer: Ingrese solo números enteros
+    only_number: Ingrese solo números
+    only_number_and_letters: Ingrese solo números y letras
+    only_number_positive: Ingrese solo números positivos
+    password_error: Contraseñas no coinciden
+    policy_is_negative: Precio de política de cancelación
+    room_availability : disponibilidad de la habitación
+  word:
+    for: para
+    maximum_short: max
+    minimum_short: min
+web:
+  about_us:
+    alternatives: Te damos distintas alternativas
+    booking_platform: Somos la plataforma de reservas online líder de
+    choose_your_destination: Escoge tu destino en función de tus preferencias
+    choose_the_place: Escoge el establecimiento que más te guste
+    choose_the_one: ¡Puedes escoger el que más se adapte a tus necesidades!
+    confirmed_reservation: Cuando finalmente realizas el pago te garantizamos que estará seguro y tu reserva confirmada
+    establishments: Establecimientos en toda
+    favorite_destination: Escoge tu destino favorito en cualquier momento, donde quiera que estés.
+    four_steps: En cuatro sencillos pasos tu reserva estará lista
+    know_your_country: Una nueva manera de conocer Venezuela
+    grind_salt: Hay un paisaje ideal esperando por ti, una vibrante ciudad, una cálida playa, lo mejor de la montaña y mucho más. Venezuela es la aventura que siempre querrás tener.
+    leading_platform: Descubre Venezuela como nunca antes habías podido hacerlo; busca compara y reserva fácilmente en cualquier lugar del país.
+    reliable_and_secure_payment: Un método de pago confiable y seguro
+    reserve_at_the_best_price: Reserva al mejor precio garantizado
+    reserve_mobile: Reserva desde tu móvil o tablet
+    reserve_in_four_steps: Puedes hacer tu reserva en cuatro sencillos pasos
+    room_that_you_need: Te ofrecemos la habitación que necesitas
+    room_availability: disponibilidad de la habitación
+    search_destination: Busca el destino que prefieras
+    search_the_destination_you_prefer: Busca el destino que prefieras, escoge entre los distintos establecimientos la habitación que más te guste y los servicios que deseas
+    specific_room_type: ¿Estás buscando un tipo de habitación específico?, puedes encontrarla entre la variedad de hoteles según el destino que escogiste
+    types_of_destinations_to_choose: Si tienes dudas de donde quieres pasar tus vacaciones, Navicu te ofrece los tipos de destinos para escoger como playas, montañas, ciudades ¡y más!
+    unforgettable_experience: Disfruta de una experiencia inolvidable, ahora reservar online es mucho más sencillo, rápido y seguro.
+    unrepeatable: navicu.com te ofrece distintos estilos de destinos para vivir una experiencia irrepetible, destinos románticos, playeros, urbanos y para los amantes de la aventura, destinos de montaña.
+    variety_of_destinations: Variedad en estilo de destinos
+    various_services: Cada establecimiento cuenta con distintos servicios de los que puedes disfrutar.
+    wonderful_destinations: Destinos maravillosos por ser descubiertos
+  client:
+    home:
+        booking_history: Mi historial de reservas
+        keep_up_with_your_data: Ahora podrás estar al día con tus datos, consulta
+        my_account: Mi cuenta
+        outstanding_reservations: Mis reservas pendientes de pago y confirmación
+        user_data: Mis datos de usuario
+        upcoming_reservations: Mis próximas reservas
+    list_pre_peservation:
+        welcome_message:
+            paragraph_one: ¿Listo para asegurar la experiencia?
+            paragraph_two: Es el momento de brindar los datos de tu transferencia para así poder garantizar tu reserva, recuerda que
+            paragraph_three: debes concretar este paso en un máximo de 24 horas
+            welcome: '{0}Bienvenido | {1}Bienvenida | {2}Bienvenid@'
+        modal_success:
+            head: ¡Enhorabuena!
+            content:
+                action: Tus datos han sido procesados correctamente
+                action_xs: Datos procesados
+                message_to_the_user: Tu reserva se encuentra en proceso de confirmación
+                message_to_the_user_xs: Tu reserva está en proceso de confirmación
+        payments:
+            issuingBank: Banco emisor
+            receivingBank: Banco receptor
+            referenceCode: N de Referencia
+            amount: Monto
+        button:
+            detail: Detalles
+            payment: Confirmar pago
+
+    list_record:
+        welcome_message:
+            paragraph_one: Agenda de experiencias
+            paragraph_two: Síguele el rastro a todas tus reservaciones, acá podrás verificar el estado de cada una de ellas,
+            paragraph_three: fecha, costo y más
+    list_up_coming_reservations:
+         welcome_message:
+            paragraph_one: ¡Se acercan nuevas experiencias! ¿Sabes cuándo son?
+            paragraph_two: En esta sección podrás ver las reservas que ya hiciste y están por venir
+    userData:
+        change_your_data: ¿Quieres modificar tus datos?
+        traveler_information: Información del viajero
+        userData_information: En esta sección podrás darnos todos tus datos, ayudándonos a brindarte una mejor experiencia ¡mucho más personalizada!
+    reservation_null:
+        find_the_perfect_choice: Encuentra la opción perfecta para ti, tanto en precio como en lugar
+        great_advantages_we_offer: Te recordamos 3 de las grandes ventajas que ofrecemos para que te animes a ser parte de la experiencia navicu
+        hotels_throughout_the_national_territory: Trabajamos de la mano con más de 1000 establecimientos a nivel nacional
+        make_your_first_booking: ¿Aún no realizas tu primera reserva?
+        reserves_will_be_secure: Nuestras reservas siempre serán confiables
+        save_time_and_money: Ahorras tiempo y dinero, en navicu.com siempre te garantizamos el mejor precio
+    session:
+        everything_ready: ¡Todo listo para empezar una gran experiencia!
+        everything_ready_xs: ¡Empieza una gran experiencia!
+        nothing_new: Por ahora no tienes ninguna novedad
+        sign_off: Cerrar sesión
+        visiting_profile: Viajar a mi perfil
+  destinations:
+    beach: '{0} playa |{1} Playa'
+    choice: '¡Elige el lugar perfecto para ti!'
+    choice_style: '¡Escoge entre los lugares más populares y vive increíbles experiencias!'
+    description_barquisimeto: La Capital Musical de Venezuela, es una ciudad que resalta por sus bellos atardeceres, su clima fresco y por el gran número de ferias que se celebran en ella, entre éstas los carnavales internacionales de Barquisimeto en el mes de febrero.
+    description_caracas: Capital de Venezuela, es una ciudad llena de vida aunque esté ubicada en un valle de montañas esta a sólo 15km del mar caribe es también la capital de la cultura gracias a sus diversos museos y teatros reconocidos en toda Latinoamérica.
+    description_choroni: La mayor parte de su turismo es de carácter comercial a excepción de la época de carnavales y vacaciones, en la cual recibe una gran afluencia de visitantes.
+    description_cd_bolivar: Es la capital del estado Bolívar, atractiva por su centro histórico y construcciones coloniales, viajar a esta ciudad es una oportunidad inmejorable para vivir la cultura venezolana.
+    description_colonia_tovar: Fundada en 1.843, es uno de los destinos vacacionales favoritos de los venezolanos, siendo esta la escapada perfecta gracias a su clima de montaña, las pintorescas casas coloniales y una gastronomía de origen alemán.
+    description_galipan: Ubicada en el Parque Nacional El Ávila es un lugar idóneo para disfrutar con la familia en Caracas en Galipán es obligatorio comer los conocidos sándwich de pernil, comprar flores y vino o visitar la capilla.
+    description_gran_sabana: Proclamado por la UNESCO patrimonio de la humanidad en 1994, es uno de los destinos más visitados en toda Venezuela, cuenta con uno de los un ecosistemas más diversos del mundo, un lugar de gran interés para los amantes de la naturaleza.
+    description_jarillo: Situado a sólo 30km de Los Teques, es conocido por su agradable clima y arquitectura de sus casas, a su vez los increíbles paisajes y las prácticas de vuelo en parapente lo convierten en un destino para los aventureros.
+    description_maracaibo: Entre las características que atrae al turismo en Maracaibo están las casas de diversos colores, la cercanía al lago de Maracaibo, la basílica Nuestra Señora de Chiquinquirá, una gastronomía diversa y un clima soleado la mayor parte del año.
+    description_margarita: La llamada Perla del Caribe, es el atractivo turístico más importante de Venezuela, cuenta con una variedad de playas y pueblos coloniales, además es mundialmente conocida por ser punto de referencia del Windsurf y Kitesurf.
+    description_merida: Capital de estado Mérida, se caracteriza por su clima templado y majestuosos paisajes, montañas y verdes valles se unen a numerosos lugares turísticos para atrapar al visitante, un destino que invita a recorrer sus calles ya sea en vehículo o a pie.
+    description_mochima: Situado entre el estado Sucre y Anzoátegui, es visitado principalmente por sus playas de aguas cálidas ideales para practicar deportes acuáticos.
+    description_morrocoy: Ubicado en el estado Falcón, cuenta con una gran cantidad de islas y playas que son visitadas durante todo el año por los venezolanos, siendo su mayor afluencia en semana santa.
+    description_roques: Un lugar caracterizado por su belleza en estado puro, ubicado en mitad del Mar Caribe Venezolano, esta hermosa isla acoge a un gran número de visitantes al año que vienen por sus aguas cristalinas y diversa fauna.
+    description_sanare: Es la capital del municipio Andrés Eloy Blanco en el estado Lara, este es comunmente visitado por turistas que buscan disfrutar de sus tradiciones, acampar o hacer picnics en un ambiente campestre.
+    description_valencia: Situada a 150km de Caracas, por la gran cantidad de industrias es una de las ciudades más importantes del país a su vez es conocida por sus numerosos parques y una concurrida vida nocturna.
+    getaways_beach: 'ESCAPADAS A LA PLAYA'
+    getaways_mountain: 'ESCAPADAS DE MONTAÑA'
+    getaways_romantic: 'ESCAPADAS ROMÁNTICAS'
+    getaways_urban: 'ESCAPADAS URBANAS'
+    message_beach: Las playas de Venezuela son uno de los destinos turísticos preferidos alrededor del mundo. Por su belleza natural y aguas cristalinas las hacen perfectas para disfrutar de un día soleado junto a tu familia y vivir experiencias inolvidables.
+    message_mountain: En Venezuela podrás disfrutar de la hermosa cordillera de Los Andes, una noche perfecta en la Colonia Tovar y la impactante vista de La Gran Sabana, las montañas de Venezuela te sabrán hacer feliz en cada oportunidad que las visites
+    message_urban: Las ciudades más vibrantes, contrastes, aventura y un sinfín de opciones para divertirse. Perfecta para turistas de negocios y ese viajero que busca conocer nuevos estilos de vida
+    message_romantic: Visita junto a tu pareja los destinos más románticos de los rincones desconocidos que tiene Venezuela. En compañía de un ambiente único enamórate de las deliciosas propuestas gastronómicas autóctonas. Sal de la normalidad, ¡planea tu viaje especial!
+    mountain: '{0} montaña |{1} Montaña'
+    romantic: '{0} romántico |{1} Romántico'
+    styles_destinations: 'Estilos de destinos'
+    urban: '{0} urbano |{1} Urbano'
+  faq:
+    assist_you: ¡Estamos para atenderte!
+    best_prices: En navicu.com encontrarás los mejores precios del mercado, además de ofrecerte siempre las mejores ofertas para tu reserva. Si encuentras en otro sitio un precio más económico para el mismo período que escogistes y con las mismas condiciones. ¡Te hacemos un ajuste en la tarifa para conservar el mejor precio!
+    call: o llámanos al
+    choice_address: Coloca la ubicación en donde deseas buscar hotel o alojamiento.
+    choice_room: Escoge la habitación que se adapte más a tus necesidades.
+    room_maxNight: Max de Noches de la habitación
+    communicate_with_us: Comunícate con nosotros
+    confirm_room: Confirma la habitación a reservar e indícanos los datos de tu tarjeta para realizar el pago.
+    contact: ¿Cómo puedo contactar con navicu.com?
+    contact_answer: En caso que tengas dudas, puedes comunicarte con nosotros a través de correo electrónico
+    digicert_is: uno de los principales líderes mundiales en seguridad digital.
+    equalize_prices: Si encuentras en otro sitio un precio más económico para el mismo período que escogiste y con las mismas condiciones, ¡te igualamos el mejor precio!
+    help_you: y con gusto te ayudaremos.
+    how_reserve: ¿Cómo puedo reservar?
+    good_travel: ¡Buen viaje!
+    guaranteed_reservation: ¿Está garantizada mi reserva?
+    guaranteed_reservation_answer: Sí, tu reserva está automáticamente confirmada al momento de efectuar el pago en navicu.com de esta manera nos aseguramos que puedas disfrutar de tu habitación en el establecimiento.
+    guaranteeing: ¿Qué garantiza navicu.com?
+    modify_reservation:  ¿Puedo hacer modificaciones a mi reserva?
+    modify_reservation_answer: Te recomendamos que al seguir los pasos para realizar tu reserva, te asegures que estés seleccionando lo que realmente necesitas.
+    no_charge: NO CARGAMOS GASTOS POR RESERVA.
+    nonrefundable: Las reservas son no reembolsables, por lo que no podrás modificarla.
+    payment_methods:  ¿Qué métodos de pago puedo utilizar?
+    payment_methods_answer:  Para cancerlar tu reserva en navicu.com puedes pagar con transferencia bancaria y tarjeta de credito.
+    pay_more: ¿Tengo que pagar algo más además del precio que muestra la web?
+    pay_more_answer: El monto publicado es el total a desembolsar por la habitación y el servicio contratado, este incluye los impuestos correspondientes. No tienes que pagar nada más, salvo los servicios en el establecimiento contratado que no estén incluidos en tu tarifa.
+    room_minNight: Min. Noches de la habitación
+    read_faq: Lee las preguntas frecuentes antes de comunicarte con nosotros
+    secure_payment: ¿Es un pago seguro?
+    secure_payment_answer: Tu pago estará seguro con navicu.com, contamos con una conexión a la plataforma más segura, y cumpliendo certificado PCI de nivel 2.0, con SSL Extended Validation por la compañía Digicert
+    select_property: Selecciona un establecimiento de tu preferencia entre los resultados de esa ubicación.
+    questions: Preguntas frecuentes
+    query: ¿Tienes alguna duda?
+    what_is: ¿Qué es navicu.com?
+    what_is_answer: Nacemos de la necesidad de viajar, de conocer y aventurarnos en un país tan magnífico como Venezuela, navicu.com es una empresa internacional que con mucho esfuerzo y un gran amor al país ha logrado establecerse como la plataforma líder en reservas online del país, contando con un gran abanico de opciones en establecimientos a lo largo de todo el territorio nacional. Ponemos al alcance de todos el poder viajar por Venezuela de forma rápida, segura y siempre con el mejor precio.
+    what_should_bring: ¿Qué debo llevar al hotel al hacer check-in?
+    what_should_bring_answer: Al culminar el proceso de reserva te enviaremos un correo el cual puedes guardar como PDF o imprimir. Este contiene la información de tu reserva y un código ID que presentarás en el hotel al momento de hacer check-in junto a tu identificación (cédula de identidad, NIF, o pasaporte).
+  footer:
+    about_us: ¿Quiénes somos?
+    about_us_extend: Somos la plataforma líder en reservas online desarollada en Venezuela, invita a sus usuarios a ser
+    destinations: Te ofrecemos variedad en estilos de destinos
+    faq: FAQ
+    follow_us: Sigue nuestro viaje
+    floor: Piso
+    know_us: Conócenos
+    moments: Momentos
+    terms: Términos y condiciones
+    thirst: La gran apuesta en turismo nacional
+    security: Seguridad
+    subscribe: Suscribirme
+    stay_informed: ¡Mantente informado!
+    technological_city: forma parte de la Ciudad Tecnológica
+    tourists: ¡turistas de su propio país!
+    variety_styles_destinations: te ofrece variedad en estilos de destinos para esos planes del viaje ideal que tienes en mente
+    wanderlust: ¿Ganas de viajar?
+    where_we_are: ¿Dónde estamos?
+  home:
+    error: ¡Oooops! No contamos con establecimientos en el destino solicitado
+    item_hotel: '{0} ENCUENTRA HOTELES EN TU DESTINO |{1} Contamos con una gran variedad de establecimientos registrados en toda Venezuela.'
+    item_hotel_culture: '{0} ¿Ya escogiste dónde hospedarte? | {1} Selecciona el establecimiento que prefieras entre los resultados'
+    item_room_culture: '{0} ¿Qué habitación se ajusta más a ti? | {1} Escoge la habitación que más se adapte a tus necesidades'
+    item_search_culture: '{0} ¿A dónde quieres viajar? |{1} Busca entre múltiples destinos tu alojamiento perfecto'
+    item_service: '{0} COMPARA DIFERENTES ESTABLECIMIENTOS |{1} Escoge el establecimiento que se adapte a tus necesidades entre nuestros hoteles afiliados.'
+    item_security: '{0} RESERVA DE FORMA SEGURA EN 4 PASOS |{1} Tenemos un sistema de reserva rápido y seguro de tan solo cuatro pasos.'
+    item_payment: '{0} PAGO DE FORMA SEGURA TU RESERVA |{1} Realiza  tu pago con seguridad a través de los métodos que tenemos a tu disposición.'
+    item_payment_culture: '{0} ¿Cómo prefieres pagar? |{1} Confirma tu reserva e indicanos tu método de pago'
+    discover_wonderful_destinations: Descubre maravillosos destinos
+    meet_new_destinations: Conoce nuevos destinos
+    lives_venezuela: Vive Venezuela
+    the_best_experience: para que hagas de tu viaje la mejor experiencia, al mejor precio.
+    popular_and_majestic_destinations: Venezuela te ofrece los más populares y majestuosos destinos
+  property:
+    availability_has_changed: Disculpe, la disponibilidad del establecimiento ha cambiado. Realiza tu búsqueda nuevamente
+    best_offer: Mejor oferta
+    cancellation_policies: Políticas de cancelación
+  menu_login:
+    home: Home
+    data_user: Datos del usuario
+    upcoming_reservations: Reservas próximas
+    transactions_in_process: Transacciones en proceso
+    pre_reserves: Pre-reservas
+    confirmation_process: En proceso de confirmación
+    record: Historial
+    what_do_you_need: ¿Qué necesitas ver?
+  register:
+    advantages_we_offer: Beneficiate de todas las ventajas que ofrecemos al estar registrado en
+    check_history: Revisa tu historial
+    confirmation_reservation: Recibe la confirmación de tu reserva al instante
+    exclusive_offers: Accede a ofertas exclusivas
+    free_hosting: Participa por hospedaje gratuito
+    information_mail: Recibir ofertas exclusivas e información en mi correo
+    leading_platform: Reserva a través de la plataforma líder en alojamientos de Venezuela
+    manage_your_reservations: Gestiona tus reservas
+    new_in_navicu: Eres nuevo en navicu
+    sign_up: Regístrate
+    welcome: ¡Bienvenido viajero!
+  reservation:
+    buy_button: Compro
+    purchase: compra
+    reservation_: reserva
+    reservation_button: Reservo
+    sub_total: Subtotal
+    money: Bs
+    IVA: IVA
+    email: Correo electrónico
+    phone: Teléfono
+    pre_reservation: pre-reserva
+    pre_reservation_button: Pre-reservo
+    adults: Adulto
+    almost_ready: ¡Ya estás cerca de terminar el proceso de
+    and_the: y las
+    bed: Cama
+    room: Habitación
+    best_price: ¡Mejor precio garantizado!
+    booking_conditions: condiciones de la reserva
+    pre_booking_conditions: condiciones de la pre-reserva
+    booking_details: Necesitamos que nos indiques algunos detalles para confirmar tu
+    flight_booking_details: Necesitamos que nos indiques algunos detalles para confirmar la compra de tu boleto
+    booking_details_min: Indicanos algunos detalles para confirmar tu
+    booton: Al pulsar el botón de confirmación acepto las
+    cancellation_policy: Política de cancelación
+    children: Niños
+    code_card: CVC
+    what_is_CVC: ¿Qué es?
+    code_card_message: 3 números al reverso de su tarjeta
+    confirm_reservation: al mejor precio por
+    by: por
+    date_card: Fecha de expiración
+    general_conditions: condiciones generales
+    id: Cédula
+    id_card: Cédula o RIF
+    information_cards: Información de la tarjeta de crédito
+    liked: Me gustaría
+    maps: ver mapa
+    money: Bs
+    month: Mes
+    name: Nombre y Apellido
+    name_card: Nombre en la tarjeta
+    validate_card: Número de tarjeta invalida
+    validate_dates: Tarjeta expirada
+    night: noche
+    nights: noches
+    number_card: Número de la tarjeta
+    number_people: Nº de personas
+    number_adults: Nº de adultos
+    number_children: Nº de niños
+    number_room: Nº de habitaciones
+    payment_data: A continuación tus datos para realizar el pago
+    phone: Teléfono
+    you_reservation: reservación
+    you_pre_reservation: pre-reservación
+    reservation: Tu
+    reserve: reservar
+    pre_reserve: pre-reservar
+    reservation_data: Primero necesitaremos tus datos para
+    pre_reserved_by: Pre-reservado por
+    pre_reserved_by_night: '{0} pre-reservada por |{1} pre-reservadas por'
+    reserved_by: Reservado por
+    special_conditions: Consideraciones especiales
+    services_property: Servicios del establecimiento
+    special_message: ¿Deseas solicitar algo en especial?
+    sub_payment_data: Datos para realizar el pago
+    treatment: Trato
+    type_pack: Tipo de pack
+    type_room: Tipo de habitacion
+    year: Año
+    yes_email: Deseo recibir ofertas e información en mi correo
+    message_different_payment: Escoge entre las diferentes modalidades de pago
+    modalities_payment: Pago
+    message_transfer_time: Te garantizaremos tu reserva si realizas la transferencia en las próximas 24 horas
+    message_transfer_confirmation: Una vez que hayas confirmado tu prereserva, te facilitaremos nuestros datos bancarios para realizar la transferencia
+    starting_at: a partir de las
+    # view resume
+    thank_you: ¡Gracias por reservar con navicu!
+    success: ¡Enhorabuena! El pago de su reserva se realizó con exito
+    success_reserve: tu reserva se ha realizado correctamente
+    resume: Resumen de tu reserva
+    email_copy: Hemos enviado una copia a tu correo
+    number_confirmation: Nº de confirmación
+    name_reservation: Nombre de la reserva
+    type_room: Tipo de habitación
+    bed_type_requested: Tipo de cama solicitado
+    type_pack: Tipo de pack
+    cancellation_policies: Política de cancelación
+    best_price: ¡Mejor precio garantizado!
+    special_requests: Peticiones especiales
+    payment_success_credit_card: Pago realizado correctamente con tarjeta de crédito en nuestro website navicu.com
+    message_email_information: Recibirás un correo con la información de tu reserva, lo podrás guardar como PDF o imprimir y presentarlo en el hotel al momento de hacer check-in junto a tu identificación
+    how_to_get: ¿Cómo llegar?
+    phone_hotel: Teléfono del hotel
+    address: Dirección
+    GPS_coordinates: Coordenadas GPS
+    terms: Condiciones
+    message_navicu: Viajar abre tu mente y amplía tu cultura
+    email_navicu: preguntas@navicu.com
+    phone_navicu: 08008 - NAVICU
+    #view resumePreReserva
+    thank_you_pre: Gracias por confirmar tu pre-reserva en el
+    message_pre: ¡Realiza ahora la transferencia y ahorra tiempo!
+    date_bank: Te facilitamos nuestros datos bancarios
+    date_payment: Ingresa los datos de tu pago
+    bank_entity: Entidad Bancaria
+    bank: Banco
+    thank_you_reserve_navicu: ¡Gracias por reservar con navicu!
+    message_received_correctly: Hemos recibido correctamente el código de transferencia
+    validate_payment: En un plazo de 3 días te confirmaremos la reserva una vez validemos el pago
+    payment_later: Si estás ocupado, puedes pagar más tarde
+    step_one: ¡Entra a tu correo! Haz clic en el enlace que te enviamos
+    step_two: Selecciona el banco y coloca el número referencia de la transacción
+    message_email_date_bank: Te enviamos un correo con el resumen de tu pre-reserva y nuestros datos bancarios
+    message_infomation_confirmation: Debes tener en cuenta que si no nos confirmas que has hecho la transferencia en las próximas 24 horas, no podremos confirmar tu reserva
+    message_infomation_confirmation_days: Una vez confirmada, te enviaremos el e-mail de confirmación de reserva durante los siguientes 3 días hábiles
+  result_list:
+    hotels_in: Hoteles en
+  share:
+    doubts_email: preguntas@navicu.com
+    parish: '{0} Parroquia |{1} Parroquias'
+    municipality: '{0} Municipio |{1} Municipios'
+    country: '{0} Pais |{1} Paises'
+    property: '{0} Establecimiento |{1} Establecimientos'
+    more_results: 'Mostrar todos'
+  shared_client:
+        save: Guardar
+        view_detail: Ver detalles
+        table_header:
+            amount: Monto
+            banking_entity_head_table: Entidad Bancaria
+            banking_entity_select: Ent. Bancaria
+            check_in: Check - in
+            check_out: Check - out
+            id_pre_reservation: ID Pre-reserva
+            id_reservation: ID Reserva
+            property: Hotel
+            reference_code: Código de Referencia
+            state: Estado
+  title:
+    generic: Web
+
+message:
+  accommodation_available: '{1} alojamiento disponible en |{2} alojamientos disponibles en '
+  affiliate_agencies: Agencias de viaje afiliadas
+  affiliation_date: Fecha de Alta
+  affiliated_properties: Establecimientos Afiliados
+  availability_credit: Crédito pendiente
+  temp_properties: En proceso de registro
+  best_price_guaranteed: ¡Mejor precio garantizado!
+  change_search: Cambiar búsqueda
+  create_date: Fecha creación
+  complementary_beds: Camas supletorias
+  consult_our_destinations: Te invitamos a consultar en nuestra lista de destinos, o verificar si la búsqueda que realizaste está correcta
+  forgot_your_password: ¿Olvidaste tu contraseña?
+  id_reservation: ID reserva
+  important_information: Información Relevante
+  information_mail: Recibir noticias exclusivas e información
+  invoices_accumulated: Facturación acumulada
+  invoices_month: Facturación mensual
+  mail: Correo
+  map_of_hotels: Mapa de Hoteles en búsqueda
+  minimum_checkin_age: Edad mínima para hacer check in
+  net_billing: Facturación Neta
+  room_number: Número de habitación
+  no_available_accommodations: No hay alojamientos disponibles
+  oustanding_property: Establecimiento destacado
+  oustanding_property_service: Hotel destacado por su buen servicio
+  payment_conditions: Condiciones de pago
+  property_type: Tipo de establecimiento
+  reservation_amount: N° de reservas
+  search_property: Buscar establecimientos
+  show_accommodations: Mostrar alojamientos
+  signup_start_date: Fecha de inicio de registro
+  signup_start_date_mobile: Inicio de registro
+  spoken_languages_by_staff: Idiomas hablados por el personal
+  support_email: preguntas@navicu.com
+  tax_free: Libre de impuestos
+  temporal_properties: Establecimientos en proceso de registro
+  temporal_agencies: Agencias de viaje en proceso de registro
+
+word:
+  accommodation: Alojamiento
+  address: Dirección
+  adult: '{0} adultos | {1} adulto | {2} Adultos'
+  agencies: '{1} Agencia |{2} Agencias'
+  number_adults: 'N° de adultos'
+  number_children: 'N° de niños'
+  total_adults: 'Total de adultos'
+  total_children: 'Total de niños'
+  billing: Facturación
+  birthdate: Fecha de nacimiento
+  book_in: Registrarme
+  city: '{1} Ciudad |{2} Ciudades'
+  checkin: Check-in
+  checkout: Check-out
+  children: '{0} niños | {1} niño |{2} Niños'
+  confirm_password: Confirmar contraseña
+  contact: Contacto
+  country: País
+  delete: Eliminar
+  edit: Editar
+  gallery: Galería
+  fullname: Nombre y apellido
+  from: Desde
+  hall: '{1} Salón |{2} Salones'
+  in_charge_executive: Responsable
+  in_charge_executive_email: Email responsable
+  hobbies: Hobbie
+  id: ID
+  identity_card: Cédula
+  in_charge_executive: Responsable
+  in_charge_executive_email: Email responsable
+  last_name: Nombre y Apellido
+  mail: E-mail
+  city: Ciudad
+  not_assigned: No asignado
+  message_admin_home: ESTABLECIMIENTOS SIN TARIFAS O DISPONIBILIDAD
+  unavailable: Sin disponibilidad desde
+  name: '{1} Nombre |{2} Nombres'
+  password: Contraseña
+  pet: '{1} Mascota |{2} Mascotas'
+  person: persona
+  phone: '{1} Teléfono |{2} Teléfonos'
+  postal_code: Código postal
+  price: Importe
+  profession: Profesión
+  progress: % Completado
+  property: '{1} Establecimiento |{2} Establecimientos'
+  reserve: Reservar
+  room: '{1} Habitación |{2} Habitaciones'
+  search: Buscar
+  service: '{1} Servicio |{2} Servicios'
+  sex: Sexo
+  since: Desde
+  singin: Ingresar
+  state: '{1} Estado |{2} Estados'
+  tax: '{1} Impuesto |{2} Impuestos'
+  sign_in: Ingresar
+  sign_out: Salir
+  username: Nombre de usuario
+  welcome: Bienvenido
+  year: Año
+  total: TOTAL
+  login_with: Ingresar con
+  email: Correo electrónico
+  password: Contraseña
+  repeat_password: Repetir contraseña
+  password_not_marge: Disculpa, tu contraseña no coincide
+  name_lastname: Nombre y Apellido
+  identification_id: Cédula
+  credit_card: Tarjeta de crédito
+  wire_transfer: Transferencia bancaria
+  credit_card_abbreviate: T. Crédito
+  wire_transfer_abbreviate: Transferencia
+  view_maps: ver mapa
+  save_pdf: Guardar pdf
+  people: Personas
+  children: Niños
+  print: Imprimir
+  accountOne: Banesco
+  accountTwo: Mercantil
+  accountThree: Provincial
+  save: Guardar
+  submit: Enviar
+  termsBooking: Términos y condiciones de la reserva
+  termsPreBooking: Términos y condiciones de la pre-reserva
+  download: Descargar
+  tax_included: IVA incluido
+  payment_method: Modalidad de pago
+  creation_of_the_reserve: Creación de la reserva
+nvc:
+  serv:
+    no_refundable: No reembolsable
+  room:
+    all_included: Todo Incluído
+    breakFast_included: Desayuno Incluído
+    room_only: Sólo Habitación
+    full_meal_plan: Pensión Completa
+    party_plan: Rumbea con tus panas
+    half_meal_plan: Media Pensión
+    half_meal_plus_trip_plan: 'Media Pensión + Excursión'
+    full_meal_plus_trip_plan: 'Pensión Completa + Excursión'
+aavv:
+  end:
+    instant_confirmation: con confirmación instantánea
+    make_reservations: En breve podrás comenzar a realizar reservas
+    part_our_platform: ¡Ahora formas parte de nuestra plataforma!
+    thanks_for_signing: Gracias por registrarte en
+    validate_registration: validar el proceso de registro
+    will_contact: En un plazo de máximo de 48 horas, te contactaremos para
+  footer:
+    about_us: ¿Quiénes somos?
+    about_us_extend: La plataforma líder en reservas online
+    about_us_extended: desarollada en Venezuela, invita a sus usuarios a ser
+    destinations: Te ofrecemos variedad en estilos de destinos
+    faq: FAQ
+    follow_us: Sigue nuestro viaje
+    floor: Piso
+    know_us: Conócenos
+    moments: Momentos
+    terms: Términos y condiciones
+    thirst: La gran apuesta en turismo nacional
+    security: Seguridad
+    subscribe: Suscribirme
+    stay_informed: ¡Mantente informado!
+    technological_city: forma parte de la Ciudad Tecnológica
+    tourists: ¡turistas de su propio país!
+    variety_styles: te ofrece variedad en estilos de destinos
+    variety_styles_destinations: para esos planes del viaje ideal que tienes en mente
+    wanderlust: ¿Ganas de viajar?
+    where_we_are: ¿Dónde estamos?
+  historical:
+    header: Historial
+    message: Visualiza todas los cambios realizados en tu cuenta, de forma rápida y sencilla
+  register:
+    error_agreement: Debes aceptar los terminos y condiciones
+    error_required_field: campo requerido
+  additionalQuota:
+    - '{0} Cuota de mantenimiento | {1} 2 Licencias de uso | {2} Correos electrónicos personalizados'
+  tooltips:
+    - '{0} Garantiza el buen funcionamiento de la plataforma y asistencia técnica | {1} Cantidad de usuarios que creó la agencia para el uso de la plataforma'
+  licence: '{0} Licencia | {1} Licencias'
+  mail: Correos electrónicos personalizados
+  step1:
+    address: Dirección
+    add_user: añadir usuario
+    agency_contract: Contrato Agencia
+    agency_contract_tooltip: Copia de Contrato de Arrendamiento ó Título de Propiedad a nombre de la agencia
+    attach: Adjuntar
+    business_name: Razón social
+    cancellation_email_receiver: Recibir correo de cancelación de reservas
+    city: Ciudad
+    commercial_name: Nombre comercial
+    companies_register: Nº Exp Registro Mercantil
+    company_data: Datos de la empresa
+    confirmation_email_receiver: Recibir correo de confirmación de reservas
+    country: País
+    delete_user: eliminar usuario
+    email: E-mail de contacto
+    empty: Dejar vacío para no hacer cambios
+    exact_location: Por favor mueva la marca a la ubicación exacta de su agencia
+    identity_card: C.I
+    location: Ubicación
+    logo: Logotipo
+    logo_tooltip: Debe cumplir con las especificaciones requeridas
+    name: Nombre y apellido
+    new_user: Nuevo usuario
+    news_email_receiver: Recibir comunicados de empresa con novedades de producto
+    office_photos: Fotos oficinas
+    opening_year: Año de apertura
+    parish: Parroquia
+    password: Contraseña
+    phone: Teléfono
+    repeat_password: Repetir contraseña
+    rif: RIF
+    rtn: RTN
+    select: Seleccione
+    state: Estado
+    users: Usuarios a registrar
+    users_tooltip: Cada usuario tiene un costo adicional de Bs20.000 al mes
+    zip: Código postal
+
+directives:
+  search_destinations:
+    placeholders:
+      input: 'Escoge tu destino, región o ciudad'

@@ -1,0 +1,25 @@
+<div class="nvc-container">
+    <ul class="nvc-tabs" class="clearfix">
+        <li
+            class="itemTopMenuInvoice"
+            ng-class="{active: invoiceType === 0}"
+            ng-click="invoiceType = 0;getListFilter(null, 1, null)"
+        >
+            Próximas
+        </li>
+        <li
+            class="itemTopMenuInvoice"
+            ng-class="{active: invoiceType === 2}"
+            ng-click="invoiceType = 2;getListFilter(null, 1, null)"
+        >
+            Vencidas
+        </li>
+        <li
+                class="itemTopMenuInvoice"
+                ng-class="{active: invoiceType === 1}"
+                ng-click="invoiceType = 1;getListFilter(null, 1, null)"
+        >
+            Pagadas
+        </li>
+    </ul>
+</div>

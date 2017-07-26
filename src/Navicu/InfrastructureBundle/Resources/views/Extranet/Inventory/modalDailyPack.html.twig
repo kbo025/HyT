@@ -1,0 +1,348 @@
+<script id="modal-daily-pack.tpl" type="text/ng-template">
+    <div class="modal modal-daily" tabindex="-1" role="dialog">
+        <div class="modal-dialog-daily modal-dialog-dailypack">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>
+                        <span ng-bind="pack.date"></span>
+                        <button type="button" class="close" ng-click="$hide()">&times;</button>
+                        -
+                        <span ng-bind="pack.name"></span>
+                        -
+                        {{ "share.message.detail"|trans }}
+                    </strong>
+                </div>
+                <form name="form">
+                    <div class="modal-header modal-header-daily">
+                        <strong>
+                            <span>{{ "extranet.message.price_for_adult"|trans }}</span>
+                            <input
+                                type="number"
+                                name="rate"
+                                ng-model="newPack.rate"
+                                min="0"
+                                class="form-control form-control-load input-sm">
+                        </strong>
+                    </div>
+
+                    <div class="modal-body">
+                        <!--- Tabla de precios por persona -->
+                        <div class="row clearfix">
+                            <table class="table-modal-daily">
+                                <thead>
+                                    <tr>
+                                        <th style="width:16%"></th>
+                                        <th style="width:0%" class="text-center">
+                                            <span class="hidden-xs"><strong>{{ "extranet.message.n_persons"|trans }}</strong></span>
+                                            <strong class="visible-xs"><i class="fa fa-group fa-lg"></i></strong>
+                                        </th>
+                                        <th style="width:22%" ng-if="grid.rulesRate.tax" align="center">
+                                            <strong>{{ "extranet.message.sell_rate"|transchoice(1) }}</strong>
+                                        </th>
+                                        <th style="width:22%" ng-if="!grid.rulesRate.tax" align="center">
+                                            <strong>{{ "extranet.message.sell_rate"|transchoice(2) }}</strong>
+                                        </th>
+
+                                        <th style="width:22%" ng-if="grid.rulesRate.tax" align="center">
+                                            <strong>{{ "extranet.message.net_rate"|transchoice(1) }}</strong>
+                                        </th>
+                                        <th style="width:24%" ng-if="!grid.rulesRate.tax" align="center">
+                                            <strong>{{ "extranet.message.net_rate"|transchoice(2) }}</strong>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <!--- Adultos -->
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center" rowspan="{[{rateByPersons.length+1}]}">
+                                            <span ng-if="rules.acceptsChild && !rules.kidPayAsAdult">
+                                                {{ "share.preview.adults"|trans }}
+                                            </span>
+                                            <span ng-if="!rules.acceptsChild || rules.kidPayAsAdult">
+                                                {{ "word.people"|trans }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="person in rateByPersons track by $index">
+                                        <td class="text-center"><span ng-bind="person.number"></span></td>
+                                        <td class="rowspan-top">
+                                            <strike ng-if="newPack.rate">{[{person.sellRate | number}]}</strike>
+                                            <strong ng-if="!newPack.rate">{[{person.sellRate | number}]}</strong>
+                                            <strong ng-if="newPack.rate">{[{newPack.rateByAdults[$index].sellRate | number}]}</strong>
+                                        </td>
+                                        <td class="rowspan-top" align="center">
+                                            <strike ng-if="newPack.rate">{[{person.netRate | number}]}</strike>
+                                            <strong ng-if="!newPack.rate">{[{person.netRate | number}]}</strong>
+                                            <strong ng-if="newPack.rate">{[{newPack.rateByAdults[$index].netRate | number}]}</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <!--- Niños -->
+                                <tbody ng-if="rules.acceptsChild && !rules.kidPayAsAdult && rules.incrementKid">
+                                    <tr>
+                                        <td class="text-center tooltips tooltips-top" for="" rowspan="{[{rateByKids.length+1}]}">
+                                            <span style="margin-left:-35px; margin-bottom:46px;">
+                                               Ten en cuenta que solo se podrán alojar niños si van en compañia de un adulto
+                                            </span>
+                                            <i class="fa fn-info fa-x"></i>
+                                            {{ "share.preview.children"|trans }}
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="kid in rateByKids track by $index">
+                                        <td class="text-center"><span ng-bind="kid.number"></span></td>
+                                        <td class="rowspan-top" align="center">
+                                            <strike ng-if="newPack.rate">{[{kid.sellRate | number}]}</strike>
+                                            <strong ng-if="!newPack.rate">{[{kid.sellRate | number}]}</strong>
+                                            <strong ng-if="newPack.rate">{[{newPack.rateByKids[$index].sellRate | number}]}</strong>
+                                        </td>
+                                        <td class="rowspan-top" align="center">
+                                            <strike ng-if="newPack.rate">{[{kid.netRate | number}]}</strike>
+                                            <strong ng-if="!newPack.rate">{[{kid.netRate | number}]}</strong>
+                                            <strong ng-if="newPack.rate">{[{newPack.rateByKids[$index].netRate | number}]}</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div
+                                ng-if="rules.acceptsChild"
+                                class="modal-politic-people"
+                            >
+                                <ul class="fa-ul">
+                                    <li>
+                                        Te garantizamos que la cantidad de personas por reserva cumple con el mínimo requerido
+                                        <span> (*Incluyendo adultos y niños)</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <table class="table-modal-daily">
+                                 <thead>
+                                    <tr>
+                                        <th style="width:6%" class="text-center">
+                                        </th>
+                                        <th style="width:17%"></th>
+                                        <th style="width:10%"><strong>{{ "extranet.message.current_value"|trans }}</strong></th>
+                                        <th style="width:8%; margin-right:10px;"><strong>{{ "extranet.message.new_value"|trans }}</strong></th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+
+                        <!--- Aviso política mínimo de personas -->
+                        <div class="row alert alert-danger modal-alert" role="alert"
+                            ng-show="form.sellRate.$invalid && form.sellRate.$touched">
+                            <span ng-show="form.sellRate.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de mínimo de Noches -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.min_night"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4">
+                                <div ng-if="pack.dailyPack">
+                                    <span ng-bind="pack.dailyPack.minNight"></span>
+                                </div>
+                                <div ng-if="!pack.dailyPack">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 control-group" ng-class="{'has-error' : form.minNight.$invalid && form.minNight.$touched}" >
+                                <input type="number" name="minNight" id="input" class="form-control form-control-load input-sm"
+                                       ng-model="newPack.minNight" ng-min="baseMinNight" max="newPack.maxNight" ng-pattern="/^\d+$/"/>
+                            </div>
+                        </div>
+                        <div class="row alert alert-danger modal-alert" role="alert"
+                            ng-show="form.minNight.$invalid && form.minNight.$touched">
+                            <span ng-show="form.minNight.$error.min">
+                                {{ "share.validation.minNight_is_lower"|trans }}
+                                <strong>{{ "share.validation.room_minNight"|trans }} ({[{baseMinNight}]})</strong>
+                            </span>
+                            <span ng-show="form.minNight.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.minNight.$error.max">
+                                <strong>{{ "share.validation.minNight_is_higher"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.minNight.$error.pattern">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de máximo de Noches -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.max_night"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4">
+                                <div ng-if="pack.dailyPack && pack.dailyPack.maxNight!=365">
+                                    <span ng-bind="pack.dailyPack.maxNight"></span>
+                                </div>
+                                <div ng-if="!pack.dailyPack || !pack.dailyPack.maxNight || pack.dailyPack.maxNight==365">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 control-group" ng-class="{'has-error' : form.maxNight.$invalid && form.maxNight.$touched}">
+                                <input type="number" name="maxNight" id="input" class="form-control form-control-load input-sm"
+                                       ng-model="newPack.maxNight" ng-min="newPack.minNight" ng-max="baseMaxNight" ng-pattern="/^\d+$/"/>
+                            </div>
+                        </div>
+                        <div class="row alert alert-danger modal-alert" role="alert"
+                            ng-show="form.maxNight.$invalid && form.maxNight.$touched">
+                            <span ng-show="form.maxNight.$error.max">
+                                <strong>{{ "share.validation.maxNight_is_higher_base"|trans }} ({[{baseMaxNight}]})</strong>
+                            </span>
+                            <span ng-show="form.maxNight.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.maxNight.$error.min">
+                                <strong>{{ "share.validation.minNight_is_higher"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.maxNight.$error.pattern">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de disponibilidad específica -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.specific_availability"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4">
+                                <div ng-if="pack.dailyPack">
+                                    <span ng-bind="pack.dailyPack.specificAvailability"></span>
+                                </div>
+                                <div ng-if="!pack.dailyPack">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 control-group" ng-class="{'has-error' : form.specificAvailability.$invalid && form.specificAvailability.$touched}">
+                                <input type="number" name="specificAvailability" id="input" class="form-control form-control-load input-sm"
+                                ng-model="newPack.specificAvailability" ng-min="baseAvailability" ng-max="roomAvailability" ng-pattern="/^\d+$/"/>
+                            </div>
+                        </div>
+                        <div class="row alert alert-danger modal-alert" role="alert"
+                            ng-show="form.specificAvailability.$invalid && form.specificAvailability.$touched">
+                            <span ng-show="form.specificAvailability.$error.max">
+                                {{ "share.validation.availability_higher_room"|trans }}
+                                <strong>{{ "share.validation.room_availability"|trans }} ({[{roomAvailability}]})</strong>
+                            </span><br>
+                            <span ng-show="form.specificAvailability.$error.number">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                            <span ng-show="form.specificAvailability.$error.min">
+                                {{ "share.validation.availability_higher_base"|trans }}
+                                <strong>({[{baseAvailability}]})</strong>
+                            </span>
+                            <span ng-show="form.specificAvailability.$error.pattern">
+                                <strong>{{ "share.validation.only_number"|trans }}</strong>
+                            </span>
+                        </div>
+
+                        <!--- Fila de Close Out -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.close_out"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4">
+                                <div ng-if="pack.dailyPack.closeOut == false">
+                                    <span>{{ "share.message.no"|trans }}</span>
+                                </div>
+                                <div ng-if="pack.dailyPack.closeOut == true">
+                                    <span>{{ "share.message.yes"|trans }}</span>
+                                </div>
+                                <div ng-if="!pack.dailyPack">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                               <md-switch ng-model="newPack.closeOut" aria-label="closeOut" class="md-warn no-margin-top-bottom">
+                                    <span ng-if="newPack.closeOut == true">{{ "share.message.yes"|trans }}</span>
+                                    <span ng-if="newPack.closeOut == false">{{ "share.message.no"|trans }}</span>
+                                    <span ng-if="newPack.closeOut == null">{{ "share.message.no"|trans }}</span>
+                               </md-switch>
+                            </div>
+                        </div>
+
+                        <!--- Fila de Closed to Arrival -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.close_to_arrival"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4">
+                                <div ng-if="pack.dailyPack.closedToArrival == false">
+                                    <span>{{ "share.message.no"|trans }}</span>
+                                </div>
+                                <div ng-if="pack.dailyPack.closedToArrival == true">
+                                    <span>{{ "share.message.yes"|trans }}</span>
+                                </div>
+                                <div ng-if="!pack.dailyPack">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                               <md-switch ng-model="newPack.closedToArrival" aria-label="cta" class="md-warn no-margin-top-bottom">
+                                    <span ng-if="newPack.closedToArrival == true">{{ "share.message.yes"|trans }}</span>
+                                    <span ng-if="newPack.closedToArrival == false">{{ "share.message.no"|trans }}</span>
+                                    <span ng-if="newPack.closedToArrival == null">{{ "share.message.no"|trans }}</span>
+                               </md-switch>
+                            </div>
+                        </div>
+
+                        <!--- Fila de Closed to Departure -->
+                        <div class="row modal-row">
+                            <div class="col-xs-8">
+                                <strong>{{ "extranet.message.close_to_departure"|trans }}</strong>
+                            </div>
+                            <div class="col-xs-4">
+                                <div ng-if="pack.dailyPack.closedToDeparture == false">
+                                    <span>{{ "share.message.no"|trans }}</span>
+                                </div>
+                                <div ng-if="pack.dailyPack.closedToDeparture == true">
+                                    <span>{{ "share.message.yes"|trans }}</span>
+                                </div>
+                                <div ng-if="!pack.dailyPack">
+                                    <strong>{{ "share.message.not_available_short"|trans }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                               <md-switch ng-model="newPack.closedToDeparture" aria-label="ctd" class="md-warn no-margin-top-bottom">
+                                    <span ng-if="newPack.closedToDeparture == true">{{ "share.message.yes"|trans }}</span>
+                                    <span ng-if="newPack.closedToDeparture == false">{{ "share.message.no"|trans }}</span>
+                                    <span ng-if="newPack.closedToDeparture == null">{{ "share.message.no"|trans }}</span>
+                               </md-switch>
+                            </div>
+                        </div>
+
+                        <div class="row modal-footer">
+                            <button type="button" class="nvc-button nvc-button--default" ng-click="modalPack.editPack(newPack)"
+                                    ng-disabled="form.$invalid || form.$pristine">
+                                <strong>{{ "share.register.save"|trans }}</strong>
+                            </button>
+                            <button type="button" class="nvc-button nvc-button--cancel" style="margin-right:20px;" ng-click="$hide()">
+                                <strong>{{ "share.action.cancel"|trans }}</strong>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="modal-footer-daily">
+                    <ul class="fa-ul">
+                        <li>
+                            <i class="fa-li fn-excla"></i>
+                            {{ "extranet.message.confirms_all_data"|trans }}
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+

@@ -1,0 +1,51 @@
+#Validación NvcProfile
+Navicu\Core\Domain\Model\Entity\NvcProfile:
+    properties:
+
+        identity_card:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+#            - NotBlank:
+#                message: is_null,{{ value }},{{ type }}
+        full_name:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        gender:
+            - Type:
+                type: integer
+                message: is_integer,{{ value }},{{ type }}
+        company_email:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+        cell_phone:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            #- NotBlank:
+             #   message: is_null,{{ value }},{{ type }}
+#        birth_date:
+#           - Date:
+#                message: is_not_date,{{ value }},{{ type }}
+        joined_date:
+           - DateTime:
+                message: is_not_date,{{ value }},{{ type }}
+        personal_email:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+        personal_phone:
+            - Type:
+                type: string
+                message: is_string,{{ value }},{{ type }}
+            #- NotBlank:
+             #   message: is_null,{{ value }},{{ type }}
+        incorporation_date:
+            - Date:
+                message: is_not_date,{{ value }},{{ type }}

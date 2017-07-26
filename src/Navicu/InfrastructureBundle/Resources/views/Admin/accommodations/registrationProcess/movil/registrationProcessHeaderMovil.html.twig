@@ -1,0 +1,44 @@
+<header>
+    <div class="nvc-container">
+        <h1>En proceso de registro</h1>
+        <span class="nvc-aavv-customize__title--primary">·</span>
+        <h3>{[{totalCount}]} Alojamientos</h3>
+    </div>
+</header>
+<div class="search">
+    <div>
+        <input
+            ng-model="search"
+            type="text"
+            class="form-control"
+            ng-change="getListFilter(search, 1, null)"
+        >
+    </div>
+    <div class="dropdown nvc-table__legend">
+        <button
+            class="btn btn-default dropdown-toggle"
+            type="button" id="dropdownlogin"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+        >
+            <img src="{{ asset('images/leyenda.png') }}"/>
+            Ver leyenda de búsqueda
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownlogin">
+            <li>
+                <strong>Alojamientos temporales</strong>
+                <br>
+                <span>expired_date:2016-01-01:2016-03-30</span>
+            </li>
+            <hr>
+            <li>
+                <strong>Detalle del alojamiento</strong>
+                <br>
+                <span>date_check_in:2016-01-30:2016-03-01</span>
+                <br>
+                <span>date_check_out:v2016-01-01:2016-02-15</span>
+            </li>
+        </ul>
+    </div>
+</div>

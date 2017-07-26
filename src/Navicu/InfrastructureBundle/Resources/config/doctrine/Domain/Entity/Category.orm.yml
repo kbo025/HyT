@@ -1,0 +1,71 @@
+Navicu\Core\Domain\Model\Entity\Category:
+    type: entity
+    table: categories
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbCategoryRepository
+    gedmo:
+        tree:
+            type: nested
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+        code:
+            type: string
+            nullable: true
+            length: 255
+        lft:
+            type: integer
+            nullable: true
+            gedmo:
+                - treeLeft
+        lvl:
+            type: integer
+            nullable: true
+            gedmo:
+                - treeLevel
+        rgt:
+            type: integer
+            nullable: false
+            gedmo:
+                - treeRight
+        root:
+            type: integer
+            nullable: true
+            gedmo:
+                - treeRoot
+
+
+    oneToMany:
+        types_cancellation_policy:
+            targetEntity: CancellationPolicy
+            mappedBy: type
+        children:
+            targetEntity: Category
+            mappedBy: parent
+            orderBy:
+                title: ASC
+        offices_owners_profiles:
+            targetEntity: OwnerProfile
+            mappedBy: office
+        types_pack:
+            targetEntity: Pack
+            mappedBy: type
+
+    manyToOne:
+        parent:
+            targetEntity: Category
+            cascade: {  }
+            mappedBy: null
+            inversedBy: children
+            joinColumn:
+                parent_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            gedmo:
+                - treeParent

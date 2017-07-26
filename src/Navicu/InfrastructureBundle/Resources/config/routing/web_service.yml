@@ -1,0 +1,9 @@
+# ===========Rutas del registro hotelero===========
+# Rutas de registro de usuario temporal y formulario de registro
+navicu_web_service_module:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/WebService/webService.yml"
+
+# Rutas de seguridad del registro del establecimiento temporal
+# (login, login_check, logout)
+navicu_web_service_security:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/WebService/security.yml"

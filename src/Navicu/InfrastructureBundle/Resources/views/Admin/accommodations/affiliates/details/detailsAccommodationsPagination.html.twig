@@ -1,0 +1,17 @@
+
+<div class="nvc-pagination nvc-pagination--admin">
+    <div
+        class="nvc-pagination--admin__previous"
+        ng-class="{disabled: previousPageIsDisabled}"
+        ng-click="!previousPageIsDisabled && getListReservation(search, pagination.previous, parameter)"
+    >
+        <i class="fa fa-angle-left"></i>
+    </div>
+    <div
+        class="nvc-pagination--admin__next"
+        ng-class="{disabled: nextPageIsDisabled}"
+        ng-click="!nextPageIsDisabled && getListReservation(search, pagination.next, parameter)"
+    >
+        <i class="fa fa-angle-right"></i>
+    </div>
+</div>

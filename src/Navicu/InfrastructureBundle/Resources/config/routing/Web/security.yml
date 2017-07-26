@@ -1,0 +1,32 @@
+
+# Petición de login de un usuario asincronamente.
+navicu_web_api_login:
+    path:   /async/login
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:apilogin, config : 'navicu_web'}
+    options:
+        expose: true
+
+# Página de Login
+navicu_web_login:
+    path:   /login
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:webLogin, config : 'navicu_web'}
+
+navicu_web_check:
+    path:   /login_check
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:check}
+
+navicu_web_logout:
+    path:   /logout
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:logout}
+
+# Página de Registro
+navicu_web_register:
+    path:   /client/register
+    defaults: { _controller: NavicuInfrastructureBundle:Web\Default:register}
+
+# Petición de registro de cliente.
+navicu_asinc_web_register:
+    path:   /asinc/register
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Security:clientRegister}
+    options:
+        expose: true

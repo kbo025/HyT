@@ -1,0 +1,87 @@
+<header
+    class="nvc-header"
+    ng-click="captureClick($event)"
+    ng-controller="HeaderCtrl"
+>
+    <nav class="nvc-navbar nvc-navbar__admin">
+        <div class="nvc-container">
+            <a
+                class="nvc-navbar__brand"
+                href="{{ path('navicu_admin_homepage_affiliate_properties') }}"
+            >
+                navicu.com
+            </a>
+
+            {% if app.request.get('_route') != "navicu_admin_login" %}
+                <ul class="nvc-nav nvc-navbar__right">
+                    <li class="nvc-dropdown nvc-dropdown__block">
+                        <a
+                            aria-expanded="false"
+                            aria-haspopup="true"
+                            class="nvc-dropdown__toggle"
+                            data-toggle="dropdown"
+                            href="#"
+                            role="button"
+                        >
+                            <span class="nvc-image--profile-default"></span>
+
+                            <span class="nvc-navbar__label">
+                                {{ app.user.username }}
+                            </span>
+
+                            <i
+                                aria-hidden="true"
+                                class="fa fa-caret-down"
+                            ></i>
+                        </a>
+
+                        <ul class="nvc-dropdown__menu">
+                            <li>
+                                <a href="{{ path('roles_and_permissions_page') }}"
+                                   ng-show="{{ hasPermission('admin_roles_and_permissions', 'read') }}">
+                                    Roles y Permisos
+                                </a>
+                                <hr ng-show="{{ hasPermission('admin_roles_and_permissions', 'read') }}">
+                                <a href="{{ path('navicu_admin_logout') }}">
+                                    Salir
+
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <a
+                    class="nvc-navbar__bars"
+                    ng-click="toggleNav()"
+                >
+                    <i class="fa fa-bars"></i>
+                </a>
+
+                <ul
+                    class="nvc-nav nvc-navbar__right"
+                    ng-class="{'nvc-dropdown--expanded': isExpanded}"
+                >
+                    {% include "NavicuInfrastructureBundle:Admin:_header_nav_items.html.twig" %}
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="nvc-ribbon" style="height: 10px;">
+        <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+    </div>
+
+    {% if app.request.get('_route') != "navicu_admin_login" %}
+        <div class="nvc-navbar nvc-header__menu">
+            <div class="nvc-container">
+                <ul class="nvc-nav nvc-navbar-nav">
+                    {% include "NavicuInfrastructureBundle:Admin:_header_nav_items.html.twig" %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+</header>

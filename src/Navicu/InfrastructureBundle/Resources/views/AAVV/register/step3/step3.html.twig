@@ -1,0 +1,68 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+    <main
+        class="nvc-aavv__register nvc-aavv__step3 visible-lg visible-md"
+        ng-app="registerStep3Module"
+        ng-controller="registerStep3Controller"
+        ng-cloak
+    >
+    {{ include("NavicuInfrastructureBundle:AAVV:register/topmenu.html.twig") }}
+
+        <div class="nvc-container">
+            <div class="nvc-row">
+                <div class="col-md-16">
+                    <h2>
+                        <i class='fa fn-icon-facturacion-01' ></i>
+                        Facturación
+                    </h2>
+                </div>
+            </div>
+
+            <div class="nvc-row hidden-xs">
+                <div class="col-md-16">
+                    <p>Nuestro sistema de facturación está basado en cargos mensuales mediante giro bancario</p>
+                </div>
+            </div>
+
+            <form class='nvc-form-inline' name='formStep3'>
+
+                <div class='nvc-aavv__step3--billing'>
+                    {% include 'NavicuInfrastructureBundle:AAVV:register/step3/step3BillingForm.html.twig' %}
+                </div>
+
+                <div class='col-md-16 nvc-aavv__step3--membership'>
+                    {% include "NavicuInfrastructureBundle:AAVV:register/step3/step3Membership.html.twig" %}
+                </div>
+            </form>
+        </div>
+
+        <div class="nvc-form-inline">
+            <div class='col-md-16 col-lg-16 nvc-aavv__step3--blockEmail'>
+                {% include "NavicuInfrastructureBundle:AAVV:register/step3/step3BlockEmail.html.twig" %}
+            </div>
+            <div class='col-md-16 col-lg-16'>
+                {% include "NavicuInfrastructureBundle:AAVV:register/step3/blockChecks.html.twig" %}
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button
+                type="button"
+                class="nvc-button nvc-button__search"
+                ng-click="sendData('agreement')">Continuar
+            </button>
+        </div>
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+        var dataStep3 = {{ data | raw }};
+        var route = "{{ app.request.get('extension') }}"
+    </script>
+{% endblock %}

@@ -1,0 +1,9 @@
+Navicu\Core\Application\UseCases\Admin\RemoveRoom\RemoveRoomCommand:
+    properties:
+        id:
+            - Type:
+                type: integer
+                message: is_Integer,{{ value }},{{ type }}
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+

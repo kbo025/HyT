@@ -1,0 +1,39 @@
+<section id="vef-historic" class="container historic" ng-controller="VEFHistoricCtrl" ng-cloak>
+  <header class="clearfix">
+    <form ng-submit="update(fromDate, toDate)" class="pull-right form-inline">
+      <div class="form-group date-range">
+        <i class="fa fn-calendar"></i>
+        <input type="text" class="form-control" ng-model="fromDate" placeholder="Desde">
+        <input type="text" class="form-control" value="-" disabled>
+        <input type="text" class="form-control" ng-model="toDate" placeholder="Hasta">
+      </div>
+      <div class="form-group">
+        <button type="submit">Mostrar</button>
+      </div>
+    </form>
+    <h3>Tipo de cambio con referencia al Bolívar</h3>
+  </header>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Moneda</th>
+        <th>Dicom</th>
+        <th>Promedio</th>
+        <th>% Diferencia</th>
+        <th>Tasa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in rows" ng-class="{odd: row.isOdd, even: row.isEven}">
+        <td>{[{ row.date }]}</td>
+        <td>{[{ row.currency }]}</td>
+        <td>{[{ row.dicom | comma }]}</td>
+        <td>{[{ row.rateApi | comma }]}</td>
+        <td>{[{ row.diff }]}</td>
+        <td>{[{ row.rate | comma }]}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

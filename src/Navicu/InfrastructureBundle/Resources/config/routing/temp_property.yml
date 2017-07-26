@@ -1,0 +1,16 @@
+# ===========Rutas del registro hotelero===========
+# Rutas de registro de usuario temporal y formulario de registro
+navicu_temp_property_module_registration:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/TempProperty/registration.yml"
+# Rutas para el registro de un hotelero desde la aplicacion de escritorio
+navicu_temp_owner_desktop_registration:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/TempProperty/desktop.yml"
+
+# Rutas de seguridad del registro del establecimiento temporal
+# (login, login_check, logout)
+navicu_temp_property_module_security:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/TempProperty/security.yml"
+
+# Rutas de resetting del clave del usuario
+navicu_temp_property_module_resseting:
+    resource: "@NavicuInfrastructureBundle/Resources/config/routing/TempProperty/resetting.yml"

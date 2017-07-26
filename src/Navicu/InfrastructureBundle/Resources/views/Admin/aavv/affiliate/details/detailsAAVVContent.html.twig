@@ -1,0 +1,84 @@
+<section>
+    <div ng-repeat="user in users">
+        <h2 ng-if="$index==0">Datos de usuarios <span>Administrador</span></h2>
+        <h2
+            ng-if="$index>0"
+            ng-style="{'background-color': ['#DADADA', '#E7D8F2'][+($index%2!=0)]}"
+        >
+            Usuario {[{$index+1}]}
+        </h2>
+        <div class="nvc-admin__details--table clearfix">
+            <div class="col-md-4 border">
+                <h3>Nombre</h3>
+                <p ng-if="user.name != null">{[{user.name}]}</p>
+                <p ng-if="user.name == null">---</p>
+                <h3>País</h3>
+                <p ng-if="user.country != null">{[{user.country}]}</p>
+                <p ng-if="user.country == null">---</p>
+            </div>
+            <div class="col-md-4 border">
+                <h3>C.I</h3>
+                <p ng-if="user.identityCard != null">{[{user.identityCard}]}</p>
+                <p ng-if="user.identityCard == null">---</p>
+                <h3>Estado</h3>
+                <p ng-if="user.state != null">{[{user.state}]}</p>
+                <p ng-if="user.state == null">---</p>
+            </div>
+            <div class="col-md-4 border">
+                <h3>Teléfono</h3>
+                <p ng-if="user.phone != null">{[{user.phone}]}</p>
+                <p ng-if="user.phone == null">---</p>
+                <h3>Tipo de rol</h3>
+                <p ng-if="user.position != null">{[{user.position}]}</p>
+                <p ng-if="user.position == null">---</p>
+            </div>
+            <div class="col-md-4">
+                <h3>E-mail de contacto</h3>
+                <p ng-if="user.email != null">{[{user.email}]}</p>
+                <p ng-if="user.email == null">---</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 >Datos Financieros</h2>
+    <div class="nvc-admin__details--table clearfix">
+        <div class="col-md-4 border">
+            <h3>Crédito total</h3>
+            <p ng-if="finance.creditInitial != null">{[{finance.creditInitial}]}</p>
+            <p ng-if="finance.creditInitial == null">---</p>
+            <h3>Crédito disponible</h3>
+            <p ng-if="finance.creditAvailable != null">{[{finance.creditAvailable}]}</p>
+            <p ng-if="finance.creditAvailable == null">---</p>
+        </div>
+        <div class="col-md-4 border">
+            <h3>Crédito total consumido</h3>
+            <p ng-if="finance.consumedCredit != null">{[{finance.consumedCredit}]}</p>
+            <p ng-if="finance.consumedCredit == null">---</p>
+            <h3>Volumen total acumulado</h3>
+            <p ng-if="finance.cumulativeVolume != null">{[{finance.cumulativeVolume}]}</p>
+            <p ng-if="finance.cumulativeVolume == null">---</p>
+        </div>
+        <div class="col-md-8">
+            <h3>Volumen medio mensual</h3>
+            <p ng-if="finance.averageVolume != null">{[{finance.averageVolume}]}</p>
+            <p ng-if="finance.averageVolume == null">---</p>
+            <h3>N° de reservas</h3>
+            <p ng-if="finance.numberReservation != null">{[{finance.numberReservation}]}</p>
+            <p ng-if="finance.numberReservation == null">---</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 >Módulos contratados</h2>
+    <div class="nvc-admin__details--table clearfix module">
+        <div class="col-md-16">
+            <p ng-repeat="quota in quotas">
+                <i class="fa fn-check-02"></i>
+                {[{quota.description}]} por <span>{[{quota.amount | number }]}</span>
+            </p>
+        </div>
+    </div>
+</section>

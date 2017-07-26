@@ -1,0 +1,153 @@
+<section>
+    <h2 style="padding: 50px 10px 15px 10px;">
+        Datos del Establecimiento
+    </h2>
+    <div class="nvc-admin__details--table clearfix">
+        <div class="col-xs-16">
+            <h3>País</h3>
+            <p ng-if="response.details.country != null">{[{response.details.country}]}</p>
+            <p ng-if="response.details.country == null">---</p>
+            <hr>
+            <h3>Estado</h3>
+            <p ng-if="response.details.state != null">{[{response.details.state}]}</p>
+            <p ng-if="response.details.state == null">---</p>
+            <hr>
+            <h3>Ciudad</h3>
+            <p ng-if="response.details.city != null">{[{response.details.city}]}</p>
+            <p ng-if="response.details.city == null">---</p>
+            <hr>
+            <h3>Dirección</h3>
+            <p ng-if="response.details.address != null">{[{response.details.address}]}</p>
+            <p ng-if="response.details.address == null">---</p>
+            <hr>
+            <h3>Fecha de registro</h3>
+            <p ng-if="response.details.registrationDate != null">{[{response.details.registrationDate}]}</p>
+            <p ng-if="response.details.registrationDate == null">---</p>
+            <hr>
+            <h3>Captador</h3>
+            <p ng-if="response.details.collector != null">{[{response.details.collector}]}</p>
+            <select
+                    ng-if="response.details.collector == null"
+                    class="form-control"
+                    ng-model="property.nvc_profile_id"
+                    ng-change="setCollector($index, property.nvc_profile_id)"
+                    ng-options="item as item.name for item in response.commercials track by item.id"
+            >
+            </select>
+            <hr>
+            <h3>Ejecutivo</h3>
+            <p ng-if="response.details.accountExecutive != null">{[{response.details.accountExecutive}]}</p>
+            <p ng-if="response.details.accountExecutive == null">---</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2> Responsables del establecimiento </h2>
+    <div class="nvc-admin__details--table clearfix">
+        <div class="col-xs-16" ng-repeat="value in response.propertyResponsible">
+            <h3>Responsable {[{$index+1}]}</h3>
+            <p ng-if="response.propertyResponsible[$index].name != null">
+                {[{response.propertyResponsible[$index].name}]}
+            </p>
+            <p ng-if="response.propertyResponsible[$index].name == null">---</p>
+            <hr>
+            <h3>Cargo</h3>
+            <p ng-if="response.propertyResponsible[$index].position != null">
+                {[{response.propertyResponsible[$index].position}]}
+            </p>
+            <p ng-if="response.propertyResponsible[$index].position == null">---</p>
+            <hr>
+            <h3>Teléfono</h3>
+            <p ng-if="response.propertyResponsible[$index].phone != null">
+                {[{response.propertyResponsible[$index].phone}]}
+            </p>
+            <p ng-if="response.propertyResponsible[$index].phone == null">---</p>
+            <hr>
+            <h3>e-mail</h3>
+                <p ng-if="response.propertyResponsible[$index].email != null">
+                    {[{response.propertyResponsible[$index].email}]}
+                </p>
+                <p ng-if="response.propertyResponsible[$index].email == null">---</p>
+            <hr ng-if="$index+1 !== response.propertyResponsible.length">
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 >Números del hotel</h2>
+    <div class="nvc-admin__details--table clearfix">
+        <div class="col-xs-16">
+            <h3>Producción</h3>
+            <p ng-if="response.propertyStatistics.production != null">
+                {[{response.propertyStatistics.production| number}]}
+            </p>
+            <p ng-if="response.propertyStatistics.production == null">---</p>
+            <hr>
+            <h3>Producción neta</h3>
+            <p ng-if="response.propertyStatistics.netProduction != null">
+                {[{response.propertyStatistics.netProduction| number}]}
+            </p>
+            <p ng-if="response.propertyStatistics.netProduction == null">---</p>
+            <hr>
+            <h3>Nº reservas</h3>
+            <p ng-if="response.propertyStatistics.reservationsNumbers != null">
+                {[{response.propertyStatistics.reservationsNumbers}]}
+            </p>
+            <p ng-if="response.propertyStatistics.reservationsNumbers == null">---</p>
+            <hr>
+            <h3>ADR vendido</h3>
+            <p ng-if="response.propertyStatistics.adrSold != null">
+                {[{response.propertyStatistics.adrSold| number}]}
+            </p>
+            <hr>
+            <h3>RevPAR</h3>
+            <p ng-if="response.propertyStatistics.revPAR != null">
+                {[{response.propertyStatistics.revPAR| number}]}
+            </p>
+            <p ng-if="response.propertyStatistics.revPAR == null">---</p>
+            <hr>
+            <h3>Dispo media</h3>
+            <p ng-if="response.propertyStatistics.averageAvailability != null">
+                {[{response.propertyStatistics.averageAvailability}]}
+            </p>
+            <p ng-if="response.propertyStatistics.averageAvailability == null">---</p>
+            <hr>
+            <h3>Antelación</h3>
+            <p ng-if="response.propertyStatistics.advance != null">
+                {[{response.propertyStatistics.advance}]}
+            </p>
+            <p ng-if="response.propertyStatistics.advance == null">---</p>
+            <hr>
+            <h3>Habitación más vendida</h3>
+            <p ng-if="response.propertyStatistics.roomTypeTopSellers != null">
+                {[{response.propertyStatistics.roomTypeTopSellers}]}
+            </p>
+            <p ng-if="response.propertyStatistics.roomTypeTopSellers == null">---</p>
+            <hr>
+            <h3>% Perfil completo</h3>
+            <p ng-if="response.propertyStatistics.fullProfile != null">
+                {[{response.propertyStatistics.fullProfile}]}%
+            </p>
+            <p ng-if="response.propertyStatistics.fullProfile == null">---</p>
+            <hr>
+            <h3>% Comisión</h3>
+            <p ng-if="response.propertyStatistics.commission != null">
+                {[{response.propertyStatistics.commission}]}%
+            </p>
+            <p ng-if="response.propertyStatistics.commission == null">---</p>
+            <hr>
+            <h3>Ratio de conversión</h3>
+            <p ng-if="response.propertyStatistics.conversion != null">
+                {[{response.propertyStatistics.conversion}]}%
+            </p>
+            <p ng-if="response.propertyStatistics.conversion == null">---</p>
+            <hr>
+            <h3>Disp base</h3>
+            <p ng-if="response.propertyStatistics.basedAvailability != null">
+                {[{response.propertyStatistics.basedAvailability}]}
+            </p>
+            <p ng-if="response.propertyStatistics.basedAvailability == null">---</p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+Navicu\Core\Domain\Model\Entity\AAVVLog:
+    type: entity
+    table: aavvlogs
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbAavvLogRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+      aavv_id:
+        type: integer
+        nullable: true
+      date:
+        type: datetime
+        nullable: false
+      entity:
+        type: string
+        nullable: false
+      type:
+        type: string
+        nullable: true
+      entity_id:
+        type: integer
+        nullable: true
+      field:
+        type: string
+        nullable: true
+      oldvalue:
+        type: string
+        nullable: true
+      newvalue:
+        type: string
+        nullable: true
+      user_id:
+        type: integer
+        nullable: false

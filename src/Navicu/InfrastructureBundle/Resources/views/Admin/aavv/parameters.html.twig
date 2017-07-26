@@ -1,0 +1,401 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+
+<div class="nvc-admin__parameter"
+    data-ng-app = 'nvc.admin'
+    data-ng-controller='ParametersCtrl'>
+
+    <p> Parámetros de configuración del módulo Agencia de viajes </p>
+
+    <div class='nvc-container'>
+        <h2><i class='fn-param-icon'></i>Tipos de depósito</h2>
+        <hr>
+
+        <div class='nvc-row nvc-jumbotron'>
+            <!-- Calendario -->
+            <div class="col-md-offset-11 col-md-5 visible-lg visible-md">
+                <div class="row">
+                    <div class="col-md-9 col-xs-8">
+                        <p>Nuevas cuotas a partir de</p>
+                    </div>
+                    <div id="day" class="col-md-7 col-sm-4" >
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon">
+                                <i class='fn-calendar2'></i>
+                            </span>
+                            <input
+                                id = 'inputDateMd'
+                                type='text'
+                                name='quotaLicence'
+                                pattern='^[0-9]+$'
+                                class='form-control js-range-check-in'
+                                onblur='resizedDatePicker()'
+                                onchange='updateDate()'
+                                >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin de calendario-->
+
+            <!--Select Bs o %-->
+            <div class="nvc-row visible-xs">
+                <div class="col-xs-offset-8 col-xs-8" align="right">
+                    <select
+                        name="typeCredit"
+                        data-ng-model='parameter.typeCredit'
+                        data-ng-change='clearInputs()'>
+                      <option value='0'>Bs</option>
+                      <option value='1'>%</option>
+                    </select>
+                </div>
+            </div>
+            <!--Fin Select-->
+
+            <!--Monto y Credito-->
+            <div class='col-md-6 col-sm-16 col-xs-16'>
+                <div class='nvc-row'>
+                    <div class='col-md-6 col-sm-8 col-xs-8'>
+                        <label>Monto</label>
+                    </div>
+
+                    <div class='col-lg-6 col-sm-8 col-xs-8'>
+                        <label>Crédito otorgado</label>
+                    </div>
+                </div>
+
+                <form class='nvc-form-inline' name='typesDeposit'>
+                    <div class='nvc-row' data-ng-repeat='deposit in parameter.depositTypes'>
+                        <div class='col-md-6 col-sm-6 col-xs-8'>
+                            <div class='nvc-input-group--aavv'>
+                                <span
+                                    class="nvc-input-group-addon"><b>Bs</b>
+                                </span>
+                                <input
+                                    only-letters-input
+                                    class='form-control'
+                                    name='amount{[{$index}]}'
+                                    type="text"
+                                    data-ng-model='deposit.amount'>
+                            </div>
+
+                            <span
+                                data-ng-cloak
+                                class="error"
+                                data-ng-show="deposit.amount > 0
+                                && typesDeposit.amount{[{$index}]}.$touched">
+                            </span>
+                        </div>
+
+                        <div class='col-md-6 col-sm-6 col-xs-8'>
+                            <div class='nvc-input-group--aavv'>
+                                <span
+                                    data-ng-if='parameter.typeCredit === "0"'
+                                    class="nvc-input-group-addon"> <b>Bs</b>
+                                </span>
+                                <span
+                                    data-ng-if='parameter.typeCredit === "1"'
+                                    class="nvc-input-group-addon"> <b>%</b>
+                                </span>
+                                <input
+                                    only-letters-input
+                                    class='form-control'
+                                    name='credit_awarded{[{$index}]}'
+                                    type="text"
+                                    ng-model='deposit.credit_awarded'
+                                    pattern='^[0-9]+$'>
+                            </div>
+                        </div>
+
+                        <div class='
+                            col-md-4 col-md-offset-0
+                            col-sm-4 col-sm-offset-0
+                            col-xs-8 col-xs-offset-8'
+                            data-ng-if='deposit.delete'>
+                            <button
+                                class='nvc-button
+                                nvc-button__search
+                                hide-bottom-delete'
+                                data-ng-click='deleteDeposit(deposit.id,deposit.$$hashKey)'>
+                                <i class='fn-trash'></i>
+                            </button>
+                        </div>
+
+                        <div class='col-lg-3
+                            col-md-4 col-sm-4
+                            visible-lg
+                            visible-md
+                            visible-sm'
+                            data-ng-if='$index == 0'>
+                            <select
+                                name="typeCredit"
+                                data-ng-model='parameter.typeCredit'
+                                data-ng-change='clearInputs()'>
+                              <option value='0'>Bs</option>
+                              <option value='1'>%</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+
+                <div class='nvc-row'>
+                    <div class='col-md-2'>
+                        <button class='
+                            nvc-button
+                            nvc-button__default'
+                            data-ng-click='addDeposit()'>
+                            + agregar nuevo
+                        </button>
+                    </div>
+                </div>
+
+                <div class='row visible-xs visible-sm'>
+                    <hr>
+                </div>
+            </div>
+            <!--Fin Monto y Credito-->
+
+            <!-- Cuotas -->
+            <form id='quota' class='nvc-form-inline' name='quota'>
+                <div class='col-md-5 col-sm-8 col-xs-16'>
+                    <div class='col-md-16 col-sm-16 col-xs-16 nvc-vertical-bar'>
+                        <label for='Cuota de mantenimiento'>
+                            <i class='fn-info nvc-tooltips nvc-tooltips__top' >
+                                <span>
+                                    Garantiza el buen funcionamiento de la plataforma y asistencia técnica
+                                </span>
+                            </i>
+                            Cuota de mantenimiento
+                        </label>
+
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon"><b>Bs</b>
+                            </span>
+                            <input
+                                only-letters-input
+                                class='form-control'
+                                type='text'
+                                name='quotaLicence'
+                                data-ng-model='parameter.quotaMaintenance'
+                                pattern='^[0-9]+$'
+                                disabled>
+                        </div>
+
+                        <label for='Costo por usuario'>
+                            <i class='fn-info nvc-tooltips nvc-tooltips__top' >
+                                <span>
+                                    Costo adicional mensual
+                                </span>
+                            </i>
+                            Cuota por personalización de correos
+                        </label>
+
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon"><b>Bs</b>
+                            </span>
+                            <input
+                                only-letters-input
+                                class='form-control'
+                                type="text"
+                                name='quotaEmail'
+                                data-ng-model='parameter.quotaEmail'
+                                pattern='^[0-9]+$'
+                                disabled>
+                        </div>
+
+                        <label for='Costo por usuario'>
+                             <i class='fn-info nvc-tooltips nvc-tooltips__top' >
+                                <span>
+                                    Cantidad de usuarios que creó la agencia para el uso de la plataforma
+                                </span>
+                            </i>
+                            Costo por usuario
+                        </label>
+
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon"><b>Bs</b>
+                            </span>
+                            <input
+                                only-letters-input
+                                class='form-control'
+                                type="text"
+                                name='quotaUser'
+                                data-ng-model='parameter.quotaLicence'
+                                pattern='^[0-9]+$'
+                                disabled>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class='row visible-xs visible-sm'>
+                <hr>
+            </div>
+            <!-- Fin Cuotas -->
+
+            <!-- Proximas Cuotas -->
+            <form id='quota' class='nvc-form-inline' name='quota'>
+                <div class="col-sm-8 col-xs-16 visible-sm visible-xs">
+                    <p>Nuevas cuotas a partir de</p>
+
+                    <div id="day">
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon">
+                                <i class='fn-calendar2'></i>
+                            </span>
+                            <input
+                                id = 'inputDateXs'
+                                type ='text'
+                                name ='quotaLicence'
+                                class ='form-control js-range-check-in'
+                                onblur ='resizedDatePicker()'
+                                onload ='loadDate()'>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='col-md-5 col-sm-16 col-xs-16'>
+                    <div class='col-md-16 col-sm-8 nvc-vertical-bar'>
+                        <label for='Cuota de mantenimiento'>
+                            <i class='fn-info nvc-tooltips nvc-tooltips__top' >
+                                <span>
+                                    Garantiza el buen funcionamiento de la plataforma y asistencia técnica
+                                </span>
+                            </i>
+                            Cuota de mantenimiento
+                        </label>
+
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon"><b>Bs</b>
+                            </span>
+                            <input
+                                only-letters-input
+                                class='form-control'
+                                type='text'
+                                name='quotaLicence'
+                                data-ng-model='parameter.nextQuotaMaintenance'
+                                pattern='^[0-9]+$'>
+                        </div>
+
+                        <label for='Costo por usuario'>
+                            <i class='fn-info nvc-tooltips nvc-tooltips__top' >
+                                <span>
+                                    Costo adicional mensual
+                                </span>
+                            </i>
+                            Cuota por personalización de correos
+                        </label>
+
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon"><b>Bs</b>
+                            </span>
+                            <input
+                                only-letters-input
+                                class='form-control'
+                                type="text"
+                                name='quotaEmail'
+                                data-ng-model='parameter.nextQuotaEmail'
+                                pattern='^[0-9]+$'>
+                        </div>
+
+                        <label for='Costo por usuario'>
+                             <i class='fn-info nvc-tooltips nvc-tooltips__top' >
+                                <span>
+                                    Cantidad de usuarios que creó la agencia para el uso de la plataforma
+                                </span>
+                            </i>
+                            Costo por usuario
+                        </label>
+
+                        <div class='nvc-input-group--aavv'>
+                            <span
+                                class="nvc-input-group-addon"><b>Bs</b>
+                            </span>
+                            <input
+                                only-letters-input
+                                class='form-control'
+                                type="text"
+                                name='quotaUser'
+                                data-ng-model='parameter.nextQuotaLicence'
+                                pattern='^[0-9]+$'
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- Fin de Proximas Cuotas -->
+        </div>
+
+         <div class='nvc-row'>
+            <button class='
+                center-block
+                nvc-button
+                nvc-button__default'
+                data-ng-disabled = 'isSendingData'
+                data-ng-click='sendData()'>
+                Guardar
+            </button>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var data = {{ data | raw }};
+
+        console.log("data", data);
+
+        /* Carga la fecha al cargar la vista */
+        document.getElementById('inputDateMd','inputDateXs').addEventListener('load', loadDate());
+        function loadDate () {
+            setTimeout(function() {
+                document.getElementById("inputDateMd").value = data.nextDate;
+            }, 1000);
+
+            setTimeout(function() {
+                document.getElementById("inputDateXs").value = data.nextDate;
+            }, 1000);
+        }
+        /****************************************/
+
+        /*  Al producirse un cambio en la fecha en md este lo refleja
+            en xs y viceversa.
+         */
+       function resizedDatePicker () {
+            if (window.innerWidth > 991) {
+                setTimeout(function() {
+                    document.getElementById("inputDateXs").value = document.getElementById('inputDateMd').value;
+                }, 1000);
+            } else {
+                setTimeout(function() {
+                       document.getElementById("inputDateMd").value = document.getElementById('inputDateXs').value;
+                }, 1000);
+            }
+        }
+        /***********************************************************/
+
+        jQuery(function($) {
+            $( ".js-range-check").keypress(function (evt) {  return false; });
+            $('#js-date-range').rangePicker();
+            $('#day').rangePicker({
+                checkInSelector: '#day [name="quotaLicence"]',
+            });
+        });
+    </script>
+{% endblock scripts %}

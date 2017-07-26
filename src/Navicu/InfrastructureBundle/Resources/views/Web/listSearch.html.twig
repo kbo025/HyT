@@ -1,0 +1,394 @@
+{% extends "NavicuInfrastructureBundle:Web:layout-destiny.html.twig" %}
+
+{% block seoMetadata %}
+    {{parent()}}
+    {% if app.environment == "prod" %}
+
+        <title> {{ ("SEO.city." ~ app.request.attributes.get('slug') ~ ".title") | trans ({},'seo')}} </title>
+        <meta property="og:title" content="{{ ("SEO.city." ~ app.request.attributes.get('slug') ~ ".title") | trans ({},'seo')}}"/>
+        <meta property="og:description" content="{{ ("SEO.city." ~ app.request.attributes.get('slug') ~ ".description") | trans ({},'seo')}}"/>
+        <meta property="og:image:secure_url" content="{{ 'https://navicu.com' ~ asset('images/home/carousel/reserva-de-alojamiento-online.jpg') }}"/>
+        <meta name="title" content="{{ ("SEO.city." ~ app.request.attributes.get('slug') ~ ".title") | trans ({},'seo')}}">
+        <meta name="description" content="{{ ("SEO.city." ~ app.request.attributes.get('slug') ~ ".description") | trans ({},'seo')}}">
+        <link rel="canonical" href="{{ "https://www.navicu.com" ~ app.request.pathInfo() }}"/>
+    {% endif %}
+{% endblock seoMetadata %}
+
+{% block body %}
+
+    <main class="nvc-list-search" data-ng-app="searchModule" data-ng-controller="searchController">
+        <!--- Barra de Busqueda -->
+        <section
+            class="nvc-navbar__search nvc-affix__width"
+            data-offset-top="0"
+            data-spy="affix"
+            id="nav"
+            data-ng-cloak
+        >
+            <div class="nvc-container">
+
+                <form
+                    action="{[{ url }]}"
+                    class="nvc-form-inline col-xs-14"
+                    method="{[{ method }]}"
+                    data-ng-submit="createUrlLocation()"
+                    role="form"
+                >
+                    <input
+                        name="adult"
+                        data-ng-if="adults != 2"
+                        type="hidden"
+                        value="{[{ adults }]}"
+                    />
+
+                    <input
+                        name="kid"
+                        data-ng-if="kids != 0"
+                        type="hidden"
+                        value="{[{ kids }]}"
+                    />
+
+                    <input
+                        name="room"
+                        data-ng-if="rooms != 1"
+                        type="hidden"
+                        value="{[{ rooms }]}"
+                    />
+
+                    <input
+                        name="startDate"
+                        data-ng-if="startDate"
+                        type="hidden"
+                        value="{[{ startDate }]}"
+                    />
+
+                    <input
+                        name="endDate"
+                        data-ng-if="endDate"
+                        type="hidden"
+                        value="{[{ endDate }]}"
+                    />
+
+                    <div class="nvc-form-group">
+                        <nvc-search-destinations
+                            class="nvc-search--navicu-topmenu"
+                            route="navicu_asinc_search_destiny_by_autocompleted"
+                            selected-option="selectedDestiny"
+                            callback="redirectUrl"
+
+                            adults="adults"
+                            children="kids"
+                            end-date="endDate"
+                            rooms="rooms"
+                            start-date="startDate"
+                            calendar-image-url="{{ asset('images/calendar.png') }}"
+                        ></nvc-search-destinations>
+                    </div>
+                </form>
+
+                <div class="col-xs-12 visible-xs" style="float:right;">
+                    <button
+                        class="nvc-button nvc-button__search active"
+                        data-target="#modal-search"
+                        data-toggle="modal"
+                        data-ng-click="convertDataSearch();"
+                    >
+                        Cambiar búsqueda
+                    </button>
+                </div>
+
+                <!-- Modal Barra Búsqueda-->
+                <div  class="nvc-modal fade nvc-modal--top modal-fullscreen "
+                      id="modal-search"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="myModalLabel"
+                      aria-hidden="true" >
+                    <div class="modal-dialog nvc-modal__search">
+                        <div class="nvc-modal__header">
+                          <strong>Buscar Establecimiento</strong>
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="nvc-modal__content">
+                          <div class="nvc-row">
+                            <form
+                                data-ng-submit="createUrlLocation()"
+                                action="{[{ url }]}"
+                                method="{[{method}]}"
+                                class="nvc-form-inline"
+                                role="form">
+                                <input type="hidden" name="adult" value="{[{ adults }]}" data-ng-if="adults!=2"/>
+                                <input type="hidden" name="kid" value="{[{ kids }]}" data-ng-if="kids != 0"/>
+                                <input type="hidden" name="room" value="{[{ rooms }]}" data-ng-if="rooms != 1" />
+                                <div class="col-xs-16 col-sm-12 nvc-dropdown">
+                                    <nvc-search-destinations
+                                        route="navicu_asinc_search_destiny_by_autocompleted"
+                                        selected-option="selectedDestiny"
+                                    ></nvc-search-destinations>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contenido -->
+        <div class="nvc-container" data-ng-cloak>
+            <!--- Alerta -->
+            <div class="alert nvc-alert nvc-alert__info nvc-affix__alert hidden-xs">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <img src="{{ asset('images/preciogarantizadomin.png') }}" >
+                <p>Si encuentras una mejor oferta, <br>¡te hacemos un 5% de descuento!</p>
+            </div>
+            <div class="col-xs-16 nvc-padding--xs" >
+                <!--- Breadcrumb -->
+                <section class="col-xs-16 hidden-xs">
+                    <ul class="nvc-breadcrumbs">
+                        <li> <a class="nvc-breadcrumbs--color" href="{{ path('navicu_homepage_temporal') }}">Inicio</a></li>
+                        <li class="active nvc-breadcrumbs--color-current">Listado de la búsqueda</li>
+                    </ul>
+                </section>
+                <!--- Encabezado de la Busqueda -->
+                <section class="col-xs-16">
+                    <div data-ng-if="propertiesAmount">
+                        <h1 data-ng-if="propertiesAmount==1">
+                            <i class="fa fn-hotelnew"></i>
+                            {[{ propertiesAmount }]} alojamiento disponible en {[{ selectedCity }]}
+                        </h1>
+                        <h1 data-ng-if="propertiesAmount>1">
+                            <i class="fa fn-hotelnew"></i>
+                            {[{ propertiesAmount }]} alojamientos disponibles en {[{ selectedCity }]}
+                        </h1>
+                    </div>
+                    <div data-ng-if="!propertiesAmount">
+                        <h1><i class="fa fn-hotelnew"></i> 0 alojamientos disponibles</h1>
+                    </div>
+                    <hr class="hidden-xs"/>
+                    <div data-ng-if="!propertiesAmount">
+                        <h1>{{ "web.home.error"|trans }}</h1>
+                        <h2>Te invitamos a consultar en nuestra lista de destinos, o verificar si la búsqueda que realizaste está correcta</h2>
+                    </div>
+                    <!--- Tags -->
+                    <div class="nvc-container nvc-tags hidden-xs">
+                        <div class="col-xs-16">
+                            <ul>
+                                <li data-ng-repeat="type in propertiesTypes"> <a href="">{[{ type.count }]} {[{ type.name }]}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <br>
+                <!--- Listado de Hoteles -->
+                <section
+                    class='col-xs-16 list-hotel-margin2 post-body entry-content'
+                    oncontextmenu='return false'
+                    ondragstart='return false'
+                    onmousedown='return false'
+                    data-ng-repeat="property in properties">
+                    <form
+                        action="{[{ urlProperty }]}"
+                        class="form-inline"
+                        method="{[{ method }]}"
+                        name="form"
+                        data-ng-submit="createUrlWithSlug($event, property.slug)"
+                        role="form"
+                        target="_blank"
+                    >
+                        <div class="col-xs-6 col-sm-5 col-lg-4 nvc-list-search__img">
+                            <button type="submit">
+                                {% verbatim %}
+                                <img
+                                    class="img-responsive"
+                                    data-ng-src="/uploads/images/images_md/{[{ property.profileImageName }]}"
+                                />
+                                {% endverbatim %}
+                            </button>
+                        </div>
+                        <div class="col-xs-10 col-sm-11 col-lg-12">
+                            <div class="nvc-jumbotron">
+                                <div class="col-xs-10 col-sm-11 col-md-12 nvc-list-search__content">
+                                    <button
+                                        type="submit">
+                                        <span class="visible-lg name-inline">{[{ formatNameLG(property.name) }]}</span>
+                                        <span class="visible-md name-inline">{[{ formatNameMD(property.name) }]}</span>
+                                        <span class="visible-sm name-inline">{[{ formatNameSM(property.name) }]}</span>
+                                        <span class="visible-xs">{[{ property.name }]}</span>
+                                        <span class="hidden-xs">
+                                          <span data-ng-if="property.star>=1" class="fa fa-star"></span>
+                                          <span data-ng-if="property.star>=2" class="fa fa-star"></span>
+                                          <span data-ng-if="property.star>=3" class="fa fa-star"></span>
+                                          <span data-ng-if="property.star>=4" class="fa fa-star"></span>
+                                          <span data-ng-if="property.star==5" class="fa fa-star"></span>
+                                        </span>
+                                    </button>
+                                    <em class="visible-xs">
+                                        <span class="fa fa-star" data-ng-repeat-n="property.star"></span>
+                                    </em>
+                                    <!--Modal Angular -->
+                                    {#<address class="visible-md visible-lg">
+                                        <a href="#" data-ng-click="createMap(property.latitude, property.longitude)">
+                                            {[{ property.address }]} {[{ property.state }]}
+                                        </a>
+                                    </address>#}
+                                    <address class="hidden-xs">
+                                        <a href="" data-ng-click="createMapProperty(property.latitude,property.longitude, property.name, property.addressmin)">
+                                            {[{ property.addressmin }]} - <span>ver mapa</span>
+                                        </a>
+                                    </address>
+                                    <address class="visible-xs">
+                                        <a href="" data-ng-click="createMapProperty(property.latitude,property.longitude, property.name)">
+                                            {[{ property.addressmin }]}
+                                        </a>
+                                    </address>
+                                    <div    class="col-lg-5 visible-lg"
+                                            data-ng-repeat="(id, service) in property.services | orderBy: 'priority' "
+                                            data-ng-if="id < 6 && service.service">
+                                        <p ><i class="fa-services fa fn-{[{ service.icon }]}"></i>
+                                        <span class="font-services">{[{ service.service }]}</span></p>
+                                    </div>
+                                    <div    class="col-sm-8 visible-sm visible-md"
+                                            data-ng-repeat="(id, service) in property.services | orderBy: 'priority' "
+                                            data-ng-if="id < 6 && service.service">
+                                        <p><i class="fa-services fa fn-{[{ service.icon }]}"></i>
+                                        <span class="font-services">{[{ service.service }]}</span></p>
+                                    </div>
+                                    <p class="visible-xs">
+                                        <i
+                                            data-ng-repeat="(id, service) in property.services | orderBy: 'priority'"
+                                            data-ng-if="id < 4 && service.service"
+                                            class="faa-list fa fn-{[{ service.icon }]} nvc-tooltips nvc-tooltips__top">
+                                            <span>
+                                                {[{ service.service }]}
+                                            </span>
+                                        </i>
+                                    </p>
+                                </div>
+                                <div class="col-xs-6 col-sm-5 col-md-4 pull-right nvc-list-search__reserve">
+                                    <button type="submit">
+                                        <img
+                                            ng-if="property.promotion===true"
+                                            class="promotion"
+                                            src="{{ asset('images/promo_logo.png') }}"
+                                        >
+                                        <h4 class="hidden-xs"
+                                            data-ng-style="{'margin-top': ['80px'][+(property.sellrate!=0)]}">
+                                            <strike data-ng-if="property.sellrate!=0">
+                                                {{ symbolCurrency }} {[{ property.priceExpensive | number }]}
+                                            </strike>
+                                            <br>
+                                            <strong  data-ng-if="property.sellrate!=0">
+                                                {{ "word.from"|trans }}: &nbsp &nbsp
+                                                <br class="visible-xs">
+                                                {{ symbolCurrency }} {[{ property.sellrate | number }]}
+                                            </strong>
+                                            <br>
+                                            {{ "word.reserve"|trans }}
+                                        </h4>
+                                        <h4 class="visible-xs">
+                                            <strike data-ng-if="property.sellrate!=0">
+                                                {{ symbolCurrency }} {[{ property.priceExpensive | number }]}
+                                            </strike>
+                                        </h4>
+                                        <div style="background-color: #6939A9;">
+                                            <h4 class="visible-xs">
+                                                <strong  data-ng-if="property.sellrate!=0">
+                                                    {{ "word.from"|trans }}: &nbsp &nbsp
+                                                    <br class="visible-xs">
+                                                     {{ symbolCurrency }} {[{ property.sellrate | number }]}
+                                                </strong>
+                                            </h4>
+                                        </div>
+                                        <h4 class="visible-xs"
+                                            data-ng-style="{'margin-top': ['75px'][+(property.sellrate!=0)]}">
+                                            {{ "word.reserve"|trans }}
+                                        </h4>
+                                    <button>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="adult" value="{[{ adults }]}" data-ng-if="adults!=2"/>
+                        <input type="hidden" name="kid" value="{[{ kids }]}" data-ng-if="kids != 0"/>
+                        <input type="hidden" name="room" value="{[{ rooms }]}" data-ng-if="rooms != 1" />
+                        <input type="hidden" name="startDate" value="{[{ search.startDate }]}" data-ng-disabled="inputStartDate"/>
+                        <input type="hidden" name="endDate" value="{[{ search.endDate }]}" data-ng-disabled="inputEndDate"/>
+                    </form>
+                </section>
+                <!--- Paginación -->
+                <section class="col-xs-16 text-center" style="margin-top:20px;" data-ng-if="!page">
+                </section>
+                <section class="col-xs-16 text-center" style="margin-top:20px;" data-ng-if="page!=0 && page">
+                    <ul class="nvc-pagination">
+                        <li data-ng-if="page.previous != null">
+                            <a href=# data-ng-click="loadPage(page.previous)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nvc-pagination" data-ng-repeat="t in getPages(page.pageCount) track by $index">
+                        <li data-ng-if="page.current == $index+1" class="active">
+                            <a href="#" ><strong data-ng-bind="$index+1"></strong></a>
+                        </li>
+                        <li data-ng-if="page.current != $index+1">
+                            <a href=# data-ng-click="loadPage($index+1)">{[{ $index + 1 }]}</a>
+                        </li>
+                    </ul>
+                    <ul class="nvc-pagination">
+                        <li data-ng-if="page.next != null">
+                            <a href="#" data-ng-click="loadPage(page.next)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+          </div>
+          {{ include("NavicuInfrastructureBundle:Web:Partials/modalMap.html.twig") }}
+          {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+        </div>
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var response = {{ data | raw }};
+        console.log("response", response);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% if app.environment == "dev" %}
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCkteypABffSV5FUMesiG0O-G0qngQ1Yhg"></script>
+    {% else %}
+    {% endif %}
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            //*** DON´T TOUCH
+            $( ".js-range-check" ).keypress(function (evt) {  return false; });
+            //////////
+
+            $('#js-rangepicker').rangePicker();
+            $('#js-mobile-rangepicker').rangePicker({
+                checkInSelector: '.js-datepicker-check-in',
+                checkOutSelector: '.js-datepicker-check-out'
+            });
+
+            $('#nav').affix({
+                offset: {
+                    top: 80,
+                    bottom: function () {
+                        return (this.bottom = $('.footer').outerHeight(true))
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <script> window.prerenderReady = false; </script>
+{% endblock %}

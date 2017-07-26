@@ -1,0 +1,47 @@
+<script id="modal-change-state.tpl" type="text/ng-template">
+    <div class="nvc-modal" tabindex="-1" role="dialog" style="overflow-x:hidden;  overflow-y:hidden;">
+
+        <div class="nvc-modal__admin center-block clearfix">
+
+            <div class="nvc-modal__header">
+                <button type="button" class="close" ng-click="$hide()" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="hidden-xs">Cambiar estado de usuario</h3>
+                <h3 class="visible-xs">Cambiar estado de usuario</h3>
+            </div>
+
+            <div class="nvc-modal__content">
+                <div class="nvc-row">
+                    <div class="col-xs-16 col-sm-16">
+                        <div class="nvc-modal__content--message">
+                            <span>
+                            ¿Estás seguro que desea
+                            <etiqueta ng-if="stateAdvance == '1'">Desactivar</etiqueta>
+                            <etiqueta ng-if="stateAdvance == '0'">Activar</etiqueta>
+                            la antelación del usuario al usuario <strong>{[{userName}]}</strong>?
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="nvc-row nvc-modal__content--margin">
+                        <button 
+                            type="button" 
+                            class="btn btn-default bottonOne" 
+                            ng-click="$hide()"
+                        >
+                            Cancelar
+                        </button>
+                        <button 
+                            type="button" 
+                            class="btn btn-default bottonTwo"
+                            ng-click="changeAdvanceState()"
+                        >
+                            Aceptar
+                        </button>
+                </div>  
+            </div>
+            <!-- End Contenido del Modal -->
+        </div>
+        <!-- End Modal Error -->
+    </div>
+</script>
+

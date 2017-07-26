@@ -1,0 +1,4 @@
+ # Rutas de la carga de un establecimiento temporal desde la aplicacion de escritorio
+navicu_desktop_register:
+    path: /desktopregistration
+    defaults: { _controller: NavicuInfrastructureBundle:Ascribere\Ascribere:desktopRegister}

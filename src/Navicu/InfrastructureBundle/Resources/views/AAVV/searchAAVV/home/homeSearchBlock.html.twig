@@ -1,0 +1,50 @@
+{# Alert para cambio de inventario #}
+{# Falta variable de backend que indique cuando mostrar el mensaje #}
+<div class="col-md-7">
+    {% if app.request.get('warning') == 1 or app.request.get('warning') == 2 %}
+        <div class="nvc-jumbotron">
+            <h4>Por favor inicia la búsqueda nuevamente</h4>
+            <h5>Hubo un cambio mientras realizabas tu reserva</h5>
+            <img src="/images/aavv/home/alert-home.png"/>
+        </div>
+    {% endif %}
+    {% if app.request.get('warning') == 3 %}
+        <div class="nvc-jumbotron">
+            <h4>Por favor inicia la búsqueda nuevamente</h4>
+            <h5>Se agoto el tiempo para realizar la reserva</h5>
+            <img src="/images/aavv/home/alert-home.png"/>
+        </div>
+    {% endif %}
+    {% if app.request.get('warning') == 4 %}
+        <div class="nvc-jumbotron">
+            <h4>No dispones de crédito suficiente</h4>
+            <h5>Consulta tu estado financiero para continuar</h5>
+            <img src="/images/aavv/home/alert-home.png"/>
+        </div>
+    {% endif %}
+</div>
+
+<div class="col-md-7 col-md-offset-2">
+    <div class="mainBlock">
+        <div class="topBlock">
+            <h1 class="nvc-aavv-customize__title--primary">Bienvenido a Vicander</h1>
+            <h2 class="nvc-aavv-customize__title--primary">El poder de viajar</h2>
+        </div>
+
+        <div class="contentBlock">
+            <form
+                ng-submit="handleSubmit()"
+                role="form"
+            >
+                <nvc-search-destinations
+                    adults="form.adult"
+                    children="form.kids"
+                    end-date="form.endDate"
+                    rooms="form.rooms"
+                    selected-option="selectedDestiny"
+                    start-date="form.startDate"
+                ></nvc-search-destinations>
+            </form>
+        </div>
+    </div>
+</div>

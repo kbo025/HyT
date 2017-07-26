@@ -1,0 +1,338 @@
+Navicu\InfrastructureBundle\Entity\User:
+    constraints:
+        - Callback:
+            methods:
+                - [ Navicu\InfrastructureBundle\Validator\Constraints\ContainsUser, isValidPassword ]
+
+Navicu\Core\Application\UseCases\Prueba\PruebaCommand:
+    properties:
+        text:
+            - NotBlank: ~
+            - Length:
+                min: 6
+        num:
+            - NotBlank: ~
+
+Navicu\Core\Application\UseCases\CreateTempOwner\CreateTempOwnerCommand:
+    properties:
+        username:
+            - NotBlank: ~
+            - Regex:
+                pattern: "/^[A-z0-9]*$/i"
+                message: share.message.username_spaces
+        email:
+            - NotBlank: ~
+            - Email:
+                message: The value is not a valid email.
+        password:
+            - NotBlank: ~
+
+Navicu\Core\Application\UseCases\RegisterTempProperty\RegisterTempPropertyCommand:
+    properties:
+        slug:
+            - NotBlank: ~
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        name:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        description:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+            - Length:
+                max: 1800
+        additional_info:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+            - Length:
+                max: 4000
+        comercial_rooms:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        #amount_comercial_rooms:
+            #- Type:
+                #type: integer
+                #message: The value {{ value }} is not a valid {{ type }}.
+        address:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        number_floor:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        hotel_chain_name:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        amount_room:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        check_in:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        check_out:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        check_in_age:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        star:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        currency:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        phones:
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+#        tax:
+#            - Type:
+#                type: boolean
+#                message: The value {{ value }} is not a valid {{ type }}.
+#        tax_rate:
+#            - Type:
+#                type: integer
+#                message: The value {{ value }} is not a valid {{ type }}.
+        opening_year:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        renewal_year:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        public_areas_renewal_year:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        longitude:
+            - Type:
+                type: float
+                message: The value {{ value }} is not a valid {{ type }}.
+            #- Range:
+                #min: -180.0
+                #max: 180.0
+                #minMessage: You must be at least {{ limit }}cm tall to enter
+                #maxMessage: You cannot be taller than {{ limit }}cm to enter
+        latitude:
+            - Type:
+                type: float
+                message: The value {{ value }} is not a valid {{ type }}.
+            #- Range:
+                #min: -90.0
+                #max: 90.0
+                #minMessage: You must be at least {{ limit }}cm tall to enter
+                #maxMessage: You cannot be taller than {{ limit }}cm to enter
+        accommodation:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        beds:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        beds_additional_cost:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        city:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        child:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        cribs_additional_cost:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        cribs_max:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        cribs:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        pets:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        pets_additional_cost:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        cash:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        city_tax:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        city_tax_currency:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        city_tax_type:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        city_tax_max_nights:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        credit_card:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        credit_card_amex:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        credit_card_mc:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        credit_card_visa:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        beds_prior_notice:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        cribs_prior_notice:
+            - Type:
+                type: boolean
+                message: The value {{ value }} is not a valid {{ type }}.
+        #discount_rate:
+            #- Type:
+                #type: float
+                #message: The value {{ value }} is not a valid {{ type }}.
+        basic_quota:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+        rate_type:
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+
+Navicu\Core\Application\UseCases\RegisterTempServices\RegisterTempServicesCommand:
+    properties:
+        slug:  
+            - NotBlank: ~   
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        services:
+            - NotBlank: ~
+
+Navicu\Core\Application\UseCases\AdvanceSection\AdvanceSectionCommand:
+    properties:
+        slug:  
+            - NotBlank: ~
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+
+Navicu\Core\Application\UseCases\RegisterTempImage\RegisterTempImageCommand:
+    properties:
+        image:
+            - NotBlank: ~
+            - NotNull: ~
+            - Image:                
+                maxSize: 10M
+                mimeTypes: 
+                    - image/jpg
+                    - image/png
+                    - image/jpeg
+                #minWidth: 920
+                #maxWidth: 3000
+                #minHeight: 640
+                #maxHeight: 2200
+        slug:
+            - NotBlank: ~
+            - Type:
+                type: string
+        idSubGallery:
+            - NotBlank: ~
+            - Type:
+                type: integer
+        gallery:
+            - NotBlank: ~
+            - Type:
+                type: string
+        subGallery:
+            - NotBlank: ~
+            - Type:
+                type: string
+
+Navicu\Core\Application\UseCases\Admin\RegisterOwnerUserCommand:
+    properties:
+        slug:
+            - NotBlank: ~
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+
+    # Navicu\Core\Application\UseCases\Reservation\ReservationForm\PropertyReservationFormCommand:
+    # properties:
+    #     slug:
+    #         - NotBlank: ~
+    #         - Type:
+    #             type: string
+    #             message: The Slug {{ value }} is not a valid {{ type }}.
+
+    #     checkIn:
+    #         - NotBlank: ~
+    #         - Date: ~
+
+    #     checkOut:
+    #         - NotBlank: ~
+    #         - Date: ~
+
+    #     numberAdult:
+    #         - NotBlank: ~
+    #         - Type:
+    #             type: integer
+    #             message: The Numero de adultos {{ type }} is not a valid {{ type }}.
+
+    #     numberChild:
+    #         - NotBlank: ~
+    #         - Type:
+    #             type: integer
+    #             message: The \#Niños {{ type }} is not a valid {{ type }}.
+
+    #     rooms:
+    #         - NotBlank: ~
+    #         - Type:
+    #             type: array
+    #             message: The Habitaciones {{ type }} is not a valid {{ type }}.
+
+Navicu\Core\Application\UseCases\Admin\ChangeStatusProperty\ChangeStatusPropertyCommand:
+    properties:
+        id:
+            - NotBlank: ~
+            - Type:
+                type: string
+                message: The id {{ value }} is not a valid {{ type }}.
+        status:
+            - Type:
+                type: boolean
+                message: The status {{ value }} is not a valid {{ type }}.

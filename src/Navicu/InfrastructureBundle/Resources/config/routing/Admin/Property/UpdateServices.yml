@@ -1,0 +1,27 @@
+# Informacion de los servicios del establesimiento
+admin_update_property_services:
+    pattern: /{slug}/services
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\GeneralInformation:services }
+    options:
+        expose: true
+
+#actualizar el estado de alguno de los servicios del establesimiento
+admin_save_property_service:
+    pattern: /saveService
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\GeneralInformation:saveService }
+    options:
+        expose: true
+
+#eliminar algun bar, restaurant o salon del establesimiento
+admin_delete_service_instance:
+    pattern: /deleteServicesInstance
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\GeneralInformation:deleteServiceInstance }
+    options:
+        expose: true
+
+#crea o actualiza un bar, restaurant o salon
+admin_save_service_instance:
+    pattern: /saveServiceInstance
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\Property\GeneralInformation:updateServiceInstance }
+    options:
+        expose: true

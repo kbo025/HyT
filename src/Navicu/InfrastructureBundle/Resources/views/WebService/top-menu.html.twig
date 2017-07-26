@@ -1,0 +1,53 @@
+{% block topmenu%}
+    <nav class="navbar navbar-default navbar-default2" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-menu-extranet">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="top-menu-extranet" style="margin-left:-15px;">
+                <ul class="nav navbar-nav">
+                    <li>
+                    </li>
+                    <li class="dropdown dropdown-hover">
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="divider visible-xs-block"></li>
+                        </ul>
+                    </li>
+                    <li>
+                    </li>
+                    {% if  not is_granted('ROLE_ADMIN') %}
+                        <li>
+                        </li>
+                    {% endif %}
+                    {% if module_title == "historyOwner" %}
+                        <li>
+                        </li>
+                     {% elseif module_title == "historyMassload"%}
+                        <li>
+                    {% elseif module_title == "historyInventory"%}
+                        <li>
+                        </li>
+                    {% else %}
+                        <li>
+                        </li>
+                    {% endif %}
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% if module_title != "index" and module_title != "tips" %}
+        <div id="background-historic">
+            <div class="container">
+                <div class="col-sm-12" style="color: #FFF;">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock topmenu %} 

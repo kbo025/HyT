@@ -1,0 +1,20 @@
+# Homepage del modulo de personalización de agencia de viajes
+navicu_aavv_customize_homepage:
+    path: /
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Customize:index }
+    options:
+      expose: true
+
+# Entrada de los datos a actualizar
+navicu_aavv_customize_update:
+    path: /update
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Customize:update }
+    options:
+        expose: true
+
+# La siguiente ruta se encarga de subir el logo de un establecimiento
+navicu_aavv_upload_logo:
+    path: /uploadlogo
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV/Customize:uploadLogo }
+    options:
+        expose: true

@@ -1,0 +1,420 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="" ng-click="getList(search, 1, 'ceco')">
+                    CeCo
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'ceco'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'ceco'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'type')">
+                    Tipo
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'type'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'type'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'name_property')">
+                    Hotel
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'name_property'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'name_property'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'public_id')">
+                    {[{
+                        [
+                            STATUS_ALL,
+                            STATUS_ACCEPTED,
+                            STATUS_CANCELLED,
+                            STATUS_PRE,
+                        ].indexOf(selectedTab) > -1
+                            ? 'ID reserva'
+                            : 'ID Pre-reserva'
+                    }]}
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'public_id'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'public_id'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'city')">
+                    Ciudad
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'city'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'city'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'create_date')">
+                    Fecha creación
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'create_date'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'create_date'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th ng-if="selectedTab === STATUS_CANCELLED">
+                <a href="" ng-click="getList(search, 1, 'status_date')">
+                    Fecha cancelación
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'status_date'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'status_date'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th ng-if="selectedTab === STATUS_PRE">
+                <a href="" ng-click="getList(search, 1, 'due_date')">
+                    Fecha expiración
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'due_date'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'due_date'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th ng-if="selectedTab !== STATUS_PENDING">
+                <a href="" ng-click="getList(search, 1, 'check_in')">
+                    Check-in
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'check_in'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'check_in'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'client_name')">
+                    Nombre y apellido
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'client_name'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'client_name'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'mp')">
+                    MP
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'mp'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'mp'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'total_to_pay')">
+                    {[{
+                        selectedTab === STATUS_PENDING
+                            ? 'Monto total de la reserva'
+                            : 'Importe'
+                    }]}
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'total_to_pay'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'total_to_pay'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th>
+                <a href="" ng-click="getList(search, 1, 'currency')">
+                    $
+                    <i
+                        ng-if="orderType == 'ASC' && parameter == 'currency'"
+                        class="fa fn-arrow-down"
+                    >
+                    </i>
+                    <i
+                        ng-if="orderType == 'DESC' && parameter == 'currency'"
+                        class="fa fn-arrow-up"
+                    >
+                    </i>
+                </a>
+            </th>
+
+            <th ng-if="selectedTab === STATUS_PENDING">
+                Estado
+            </th>
+
+            <th>Detalle</th>
+        </tr>
+    </thead>
+
+    <tbody ng-repeat="reservation in reservations">
+        <tr>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.ceco }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.type }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.name_property }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.public_id }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.city }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+                style="white-space: nowrap"
+            >
+                {[{ reservation.create_date }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-if="selectedTab === STATUS_CANCELLED"
+                ng-style="getRowStyles(reservation)"
+                style="white-space: nowrap"
+            >
+                {[{ reservation.status_date }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-if="selectedTab === STATUS_PRE"
+                ng-style="getRowStyles(reservation)"
+                style="white-space: nowrap"
+            >
+                {[{ reservation.due_date }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-if="selectedTab !== STATUS_PENDING"
+                ng-style="getRowStyles(reservation)"
+                style="white-space: nowrap"
+            >
+                {[{ reservation.check_in }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.client_name }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.mp }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.total_to_pay | number }]}
+            </td>
+            <td
+                ng-click="toggleReservation(reservation.public_id)"
+                ng-style="getRowStyles(reservation)"
+            >
+                {[{ reservation.currency }]}
+            </td>
+            <td
+                ng-if="selectedTab === STATUS_PENDING"
+                ng-style="getRowStyles(reservation)"
+            >
+                <center>
+                    <select
+                        ng-change="onBlurInput(reservation.public_id, true)"
+                        ng-class="{
+                                    'nvc-select--pending': reservation.status == STATUS_PENDING,
+                                    'nvc-select--accepted': reservation.status == STATUS_ACCEPTED,
+                                    'nvc-select--cancelled': reservation.status == STATUS_CANCELLED
+                                }"
+                        ng-model="reservation.status"
+                    >
+                        <option
+                            class="nvc-option--pending"
+                            ng-value="STATUS_PENDING"
+                            ng-selected="reservation.status === STATUS_PENDING"
+                        >
+                            En proceso
+                        </option>
+                        <option
+                            class="nvc-option--accepted"
+                            ng-value="STATUS_ACCEPTED"
+                            ng-selected="reservation.status === STATUS_ACCEPTED"
+                        >
+                            Aceptada
+                        </option>
+                        <option
+                            class="nvc-option--cancelled"
+                            ng-value="STATUS_CANCELLED"
+                            ng-selected="reservation.status === STATUS_CANCELLED"
+                        >
+                            Cancelada
+                        </option>
+                    </select>
+                </center>
+            </td>
+            <td ng-show="{{ hasPermission('admin_reservation', 'view_details') }}">
+                <a
+                    href=""
+                    ng-click="goToDetailPage(reservation.public_id)"
+                >
+                    <img src="{{ asset('images/detalle.png') }}"/>
+                </a>
+            </td>
+        </tr>
+
+        <tr ng-if="reservation.isExpanded">
+            <td colspan="99">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Banco emisor</th>
+                            <th>Banco receptor</th>
+                            <th>Nº de referencia</th>
+                            <th>Monto parcial</th>
+                            <th>Monto transferido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="payment in reservation.payment">
+                            <td>
+                                <input
+                                    disabled
+                                    ng-model="payment.sender_bank"
+                                >
+                            </td>
+                            <td>
+                                <input
+                                    disabled
+                                    ng-model="payment.receiver_bank"
+                                >
+                            </td>
+                            <td>
+                                <input
+                                    disabled
+                                    ng-model="payment.confirmation_id"
+                                >
+                            </td>
+                            <td>
+                                <input
+                                    disabled
+                                    type = "text"
+                                    ng-model="payment.amount_decimal"
+                                >
+                            </td>
+                            <td>
+                                <input
+                                    type = "number"
+                                    ng-blur="onBlurInput(reservation.public_id)"
+                                    ng-model="payment.amountTransferred"
+                                >
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

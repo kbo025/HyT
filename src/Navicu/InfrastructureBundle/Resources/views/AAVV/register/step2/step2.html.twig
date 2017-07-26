@@ -1,0 +1,58 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+    <main
+        class="nvc-aavv__register nvc-aavv__step2 visible-md visible-lg"
+        ng-app="step2Module"
+        ng-controller="step2Controller"
+        ng-cloak
+    >
+
+    {{ include("NavicuInfrastructureBundle:AAVV:register/topmenu.html.twig") }}
+        <div class="loader-properties col-md-offset-6" ng-show="isRequesting">
+                <img src="{{ asset('images/aavv/home/aavv-loader.gif') }}"/>
+        </div>
+        <div ng-show="!isRequesting">
+            <form
+                class='nvc-form-inline'
+                name="formStep2"
+                novalidate
+            >
+                <div class='nvc-container'>
+                    <div class='col-md-16'>
+                        {% include "NavicuInfrastructureBundle:AAVV:register/step2/step2Amount.html.twig" %}
+                    </div>
+                    <br>
+                    <div class='col-md-16'>
+                        {% include "NavicuInfrastructureBundle:AAVV:register/step2/step2Payment.html.twig" %}
+                    </div>
+                    <div class="col-md-16">
+                        <button
+                            class='nvc-button nvc-button__search'
+                            type='button'
+                            ng-click = "sendData('billing')";
+                        >
+                            Continuar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {{ include("NavicuInfrastructureBundle:AAVV:partials/loading.html.twig") }}
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var route = "{{ app.request.get('extension') }}"
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+Navicu\Core\Application\UseCases\Admin\GetRooms\GetRoomsCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}

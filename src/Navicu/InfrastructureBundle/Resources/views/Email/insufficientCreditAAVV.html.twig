@@ -1,0 +1,104 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %} {% block body %}
+
+<!-- header -->
+<table border="0" cellpadding="0" cellspacing="0" width="600" align="left">
+    <!-- HEADER ROW // -->
+    <tr>
+        <td align="center" valign="top">
+            <!-- CENTERING TABLE // -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+                <td style="padding-left:10px;padding-top: 18px;padding-bottom: 18px">
+                    <img src="https://www.navicu.com/images/logo-correo-contrasena.png" style="width:200px;">
+                </td>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #F2F2F2">
+                <tr>
+                    <td style="padding-left: 20px;padding-top: 12px">
+                        <span style="font-size: 18px;font-weight: bold;color: #391860">¡Hey! Crédito insuficiente</span>
+                    </td>
+                </tr>
+            </table>
+            {% if deactivateAavv %}
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #F2F2F2">
+                    <tr>
+                        <td style="padding-left: 20px;padding-top: 5px">
+                            <span style="font-weight: bold;color: #B42371;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">Estimado {{ agencyName }}, esta cuenta no tiene saldo para generar más reservas, por lo que ha sido desactivada temporalmente.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;padding-top: 5px">
+                            <span style="font-weight: bold;color: #808080;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">Esperamos que puedas recargar próximamente y así poder seguir</span>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;padding-bottom: 20px">
+                            <span style="font-weight: bold;color: #808080;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">disfrutando de Vicander.</span>
+                        </td>
+                    </tr>
+                </table>
+            {% elseif creditLessThan %}
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #F2F2F2">
+                    <tr>
+                        <td style="padding-left: 20px;padding-top: 5px">
+                            <span style="font-weight: bold;color: #B42371;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">¡Hey!</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;padding-top: 5px">
+                            <span style="font-weight: bold;color: #808080;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">Has consumido el monto de crédito disponible para reservas</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;padding-bottom: 20px">
+                            <span style="font-weight: bold;color: #808080;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">pero hemos aumentado tú monto de crédito en {{ increase }} Bsf para que puedas seguir haciendo reservas</span>
+                        </td>
+                    </tr>
+                </table>
+            {% else %}
+                <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #F2F2F2">
+                    <tr>
+                        <td style="padding-left: 20px;padding-top: 5px">
+                            <span style="font-weight: bold;color: #B42371;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">Lo sentimos, has superado el crédito disponible.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;padding-top: 5px">
+                            <span style="font-weight: bold;color: #808080;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">Te invitamos a revisar tu estado para seguir disfrutando de </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;padding-bottom: 20px">
+                            <span style="font-weight: bold;color: #808080;font-family:'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif">los beneficios que te ofrece Vicander </span>
+                        </td>
+                    </tr>
+                </table>
+            {% endif %}
+            <table border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: white">
+                <tr>
+                    <td style="text-align: right;padding-right: 10px;padding-top: 10px !important;">
+                        <span style="font-size: 12px !important;color:#572A85;font-weight: bold;">¿Tienes alguna duda?</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;padding-right: 10px;padding-bottom: 10px !important;">
+                        <span style="font-size: 12px !important;color: #4D4D4D">preguntas@navicu.com</span>
+                    </td>
+                </tr>
+                <tr style="line-height: 0px">
+                    <td align="left" valign="top">
+                        <img src="https://www.navicu.com/images/navicu/corporate_line.png" style="width: 600px !important;" width="600px">
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{% endblock body %}

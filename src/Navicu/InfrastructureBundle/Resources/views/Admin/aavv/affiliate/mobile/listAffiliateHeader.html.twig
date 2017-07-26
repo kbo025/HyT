@@ -1,0 +1,36 @@
+<header>
+    <div class="nvc-container">
+        <h1>
+            {{ "message.affiliate_agencies"|trans }}
+        </h1>
+    </div>
+</header>
+<div class="search">
+    <div>
+        <input
+            ng-model="search"
+            type="text"
+            class="form-control"
+            ng-change="getListFilter(search, 1, null)"
+        >
+    </div>
+    <div class="dropdown nvc-table__legend">
+        <button
+            class="btn btn-default dropdown-toggle"
+            type="button" id="dropdownlogin"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+        >
+            <img src="{{ asset('images/leyenda.png') }}"/>
+            Ver leyenda de búsqueda
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownlogin">
+            <li>
+                <strong>AAVV afiliadas</strong>
+                <br>
+                <span>join_date:2016-01-01:2016-03-30</span>
+            </li>
+        </ul>
+    </div>
+</div>

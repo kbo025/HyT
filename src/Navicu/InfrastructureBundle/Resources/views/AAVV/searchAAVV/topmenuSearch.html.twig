@@ -1,0 +1,87 @@
+<nav class='nvc-navbar nvc-navbar__inverse nvc-topmenu__aavv nvc-topmenu__aavv--search
+nvc-aavv-customize__navbar-menu'>
+    <div class='nvc-navbar__header'>
+        <button
+            class='nvc-navbar__toggle'
+            data-target='#menu'
+            data-toggle='collapse'
+            type='button'
+        >
+            <span class='sr-only'>Toggle navigation</span>
+            <span class='icon-bar' />
+            <span class='icon-bar' />
+            <span class='icon-bar' />
+        </button>
+        <strong
+            class='nvc-navbar__toggle'
+            data-toggle='collapse'
+        >
+        </strong>
+    </div>
+    <div
+        class='nvc-container collapse nvc-navbar__collapse'
+        id='menu'
+    >
+        <ul class='nvc-nav nvc-nav__justified nvc-nav__arrow--background'>
+            <li class="nvc-step--1 step" id="arrow"></li>
+        </ul>
+
+        <ul class='nvc-nav nvc-nav__justified nvc-nav__arrow--foreground'>
+            {% if hasPermission('aavv_reservation', 'VIEW') %}
+            <li
+                class='col-md-3'
+                id='step1'
+                ng-class="{ 'nvc-disabled': !{{ hasPermission('aavv_reservation', 'VIEW') | json_encode | raw }} }"
+            >
+                <a href="{{ hasPermission('aavv_reservation', 'VIEW') ? pathSubdomain('navicu_aavv_home') : '#' }}">
+                    Búsqueda
+                </a>
+            </li>
+            {% endif %}
+
+            {% if hasPermission('aavv_reservation_list', 'VIEW') %}
+            <li
+                class='col-md-3'
+                id='step2'
+                ng-class="{ 'nvc-disabled': !{{ hasPermission('aavv_reservation_list', 'VIEW') | json_encode | raw }} }"
+            >
+                <a href="{{ hasPermission('aavv_reservation_list', 'VIEW') ? pathSubdomain('navicu_aavv_get_list_reservation') : '#' }}">
+                    Reservas
+                </a>
+            </li>
+            {% endif %}
+
+            {% if hasPermission('aavv_billing', 'VIEW') %}
+            <li
+                class='col-md-3'
+                id='step3'
+                ng-class="{ 'nvc-disabled': !{{ hasPermission('aavv_billing', 'VIEW') | json_encode | raw }} }"
+            >
+                <a
+                    href="{{ hasPermission('aavv_billing', 'VIEW') ? pathSubdomain('navicu_aavv_billing_list', {
+                        slug: app.user.getAavvProfile() == null ? app.user.getAavvProfile() : app.user.getAavvProfile().getAavv().getSlug()
+                    }) : '#' }}"
+                >
+                    Facturación
+                </a>
+            </li>
+            {% endif %}
+
+            {% if hasPermission('aavv_logs', 'VIEW') %}
+            <li
+                class='col-md-3'
+                id='step5'
+                ng-class="{ 'nvc-disabled': !{{ hasPermission('aavv_logs', 'VIEW') | json_encode | raw }} }"
+            >
+                <a
+                    href="{{ hasPermission('aavv_logs', 'VIEW') ? pathSubdomain('aavv_logs_index', {
+                        slug: app.user.getAavvProfile() == null ? app.user.getAavvProfile() : app.user.getAavvProfile().getAavv().getSlug()
+                    }) : '#' }}"
+                >
+                    Historial
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

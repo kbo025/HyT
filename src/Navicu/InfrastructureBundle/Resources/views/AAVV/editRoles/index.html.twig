@@ -1,0 +1,266 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+<main ng-app="editRolesModule" ng-cloak>
+    {{ include("NavicuInfrastructureBundle:AAVV:searchAAVV/topmenuSearch.html.twig") }}
+
+    <header class="clearfix nvc-header--aavv">
+        <div class="container">
+            <h1 class="nvc-aavv-customize__title--primary">
+                {{ 'aavv.edit.roles.headings.main' | trans }}
+            </h1>
+            <span class="nvc-aavv-customize__title--primary">·</span>
+            <h2 class="nvc-aavv-customize__title--primary">
+                {{ 'aavv.edit.roles.headings.secondary' | trans }}
+            </h2>
+        </div>
+    </header>
+
+    <section class="container nvc-aavvEditRoles" ng-controller="editRolesController">
+        <div class="nvc-aavvEditRoles__mainHeader nvc-aavv-customize__navbar--primary">
+            <i class="fn-icon-roles"></i>
+            {{ 'aavv.edit.roles.headings.table.main' | trans }}
+        </div>
+
+        <div class="nvc-aavvEditRoles__secondaryHeader nvc-aavv-customize__button--active">
+            {{ 'aavv.edit.roles.headings.table.role_type' | trans }}
+        </div>
+
+        <div
+            class="clearfix nvc-aavvEditRoles__item"
+            ng-repeat="role in rolesForm"
+        >
+            <div class="clearfix">
+                <div
+                    class="col-xs-10 nvc-aavvEditRoles__leftSide"
+                    ng-class="{'has-error': roleErrors[role.id]}"
+                >
+                    <input
+                        class="col-xs-9"
+                        id="input-role-{[{ role.id }]}"
+                        ng-blur="validateRole(role) && saveRole(role)"
+                        ng-change="validateRole(role)"
+                        ng-disabled="role.admin || !VIEW_PERMISSIONS.EDIT"
+                        ng-focus="originalNames[role.id] = role.role"
+                        ng-keydown="roleNameOnKeyDown($event)"
+                        ng-model="role.role"
+                        placeholder="Nombre del rol"
+                    />
+
+                    <span ng-if="roleErrors[role.id]">
+                        {[{ roleErrors[role.id].message | translate }]}
+                    </span>
+                </div>
+
+                <div
+                    class="col-xs-6 nvc-aavvEditRoles__actions"
+                    ng-if="role.id > 0"
+                >
+                    <button
+                        class="btn col-xs-4 nvc-aavv-customize__button--primary"
+                        ng-click="deleteRole(role.id)"
+                        ng-disabled="role.admin || !VIEW_PERMISSIONS.EDIT"
+                        type="button"
+                    >
+                        {{ 'aavv.edit.roles.labels.module_delete' | trans }}
+                    </button>
+
+                    <button
+                        class="btn col-xs-4 nvc-aavv-customize__button--primary"
+                        ng-class="{active: isEditingRole[role.id]}"
+                        ng-click="editRolePermissions(role.id)"
+                        ng-disabled="!VIEW_PERMISSIONS.EDIT"
+                        type="button"
+                    >
+                        {{ 'aavv.edit.roles.labels.module_permissions' | trans }}
+                    </button>
+
+                    <button
+                        class="btn col-xs-4 nvc-aavv-customize__button--primary"
+                        ng-click="editRoleName(role.id)"
+                        ng-disabled="role.admin || !VIEW_PERMISSIONS.EDIT"
+                        type="button"
+                    >
+                        {{ 'aavv.edit.roles.labels.module_edit' | trans }}
+                    </button>
+                </div>
+            </div>
+
+            <div
+                ng-style="{height: rolePermissionsHeight[role.id], left: rolePermissionsHeight[role.id] === undefined ? '-999999999em' : 0}"
+                style="transition: height 500ms; height: 0; position: relative; margin: 0; padding: 0;"
+            >
+                <div
+                    id="role-{[{ role.id }]}-permissions"
+                    class="nvc-aavvEditRoles__permissions"
+                    ng-class="{active: isEditingRole[role.id]}"
+                    ng-if="isEditingRole[role.id] || (Date.now() - hiddenAt[role.id] < 500)"
+                >
+                    <div class="nvc-aavvEditRoles__heading nvc-aavv-customize__navbar-menu">
+                        <h3 class="nvc-aavv-customize__button--primary-fg">
+                            {{ 'aavv.edit.roles.aavv_module' | trans }}
+                        </h3>
+
+                        <button
+                            class="btn"
+                            ng-click="addNewPermissionToRole(role.id)"
+                            ng-disabled="role.admin || !VIEW_PERMISSIONS.EDIT"
+                            type="button"
+                        >
+                            {{ 'aavv.edit.roles.labels.module_add' | trans }}
+                        </button>
+
+                        <span
+                            class="nvc-aavvEditRoles__collapse"
+                            ng-click="editRolePermissions(role.id)"
+                        >
+                            &#x25b2;
+                        </span>
+                    </div>
+
+                    <div
+                        class="clearfix"
+                        ng-repeat="item in rolesPermissions[role.id]"
+                    >
+
+                        <div class="col-xs-10 nvc-aavv-customize__text">
+                            {[{ (item.module.indexOf('aavv_') === 0 ? 'aavv.edit.roles.roles.' + item.module : item.module) | translate }]}
+                        </div>
+
+                        <ul class="col-xs-6 nvc-aavvEditRoles__checkboxGroup">
+                            <li
+                                class="col-xs-4"
+                                ng-click="!role.admin && togglePermission(role.id, item.module, 'HIDE')"
+                                ng-class="{'nvc-disabled': role.admin}"
+                            >
+                                <span>
+                                    <span
+                                        class="nvc-aavvEditRoles__checkbox"
+                                        ng-class="{active: item.permissions.indexOf('HIDE') >= 0, 'nvc-aavvEditRoles__checkbox--disabled': role.admin}"
+                                    ></span>
+                                    {{ 'aavv.edit.roles.labels.permission_hide' | trans }}
+                                </span>
+                            </li>
+
+                            <li
+                                class="col-xs-4"
+                                ng-click="!role.admin && togglePermission(role.id, item.module, 'EDIT')"
+                                ng-class="{'nvc-disabled': role.admin}"
+                            >
+                                <span>
+                                    <span
+                                        class="nvc-aavvEditRoles__checkbox"
+                                        ng-class="{active: item.permissions.indexOf('EDIT') >= 0, 'nvc-aavvEditRoles__checkbox--disabled': role.admin}"
+                                    ></span>
+                                    {{ 'aavv.edit.roles.labels.permission_edit' | trans }}
+                                </span>
+                            </li>
+
+                            <li
+                                class="col-xs-4"
+                                ng-click="!role.admin && togglePermission(role.id, item.module, 'VIEW')"
+                                ng-class="{'nvc-disabled': role.admin}"
+                            >
+                                <span>
+                                    <span
+                                        class="nvc-aavvEditRoles__checkbox"
+                                        ng-class="{active: item.permissions.indexOf('VIEW') >= 0, 'nvc-aavvEditRoles__checkbox--disabled': role.admin}"
+                                    ></span>
+                                    {{ 'aavv.edit.roles.labels.permission_view' | trans }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div
+                        class="clearfix nvc-aavvEditRoles__newPermissions"
+                        ng-repeat="permissions in newRolePermissions[role.id]"
+                    >
+
+                        <div class="col-xs-10">
+                            <div
+                                class="nvc-select"
+                                ng-class="{active: permissions.selectIsActive}"
+                                ng-click="permissions.nextState = !permissions.selectIsActive; hideAllSelects(); permissions.selectIsActive = permissions.nextState"
+                            >
+                                <div class="nvc-select__visible">
+                                    {[{ permissions.selectedModuleLabel }]}
+                                </div>
+
+                                <div class="nvc-select__options">
+                                    <div
+                                        ng-click="permissions.selectedModuleId = module; permissions.selectedModuleLabel = label;"
+                                        ng-repeat="(module, label) in availableModules"
+                                    >
+                                        {[{ label }]}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                class="nvc-aavv-customize__button--primary"
+                                ng-click="savePermission(role.id, $index)"
+                                ng-disabled="!VIEW_PERMISSIONS.EDIT || permissions.permissions.length === 0"
+                                type="button"
+                            >
+                                {{ 'aavv.edit.roles.labels.module_save' | trans }}
+                            </button>
+                        </div>
+
+                        <ul class="col-xs-6 nvc-aavvEditRoles__checkboxGroup">
+                            <li
+                                class="col-xs-4"
+                                ng-click="toggleNewRolePermission(role.id, $index, 'HIDE')"
+                            >
+                                <span>
+                                    <span
+                                        class="nvc-aavvEditRoles__checkbox"
+                                        ng-class="{active: permissions.permissions.indexOf('HIDE') >= 0}"
+                                    ></span>
+                                    {{ 'aavv.edit.roles.labels.permission_hide' | trans }}
+                                </span>
+                            </li>
+
+                            <li
+                                class="col-xs-4"
+                                ng-click="toggleNewRolePermission(role.id, $index, 'EDIT')"
+                            >
+                                <span>
+                                    <span
+                                        class="nvc-aavvEditRoles__checkbox"
+                                        ng-class="{active: permissions.permissions.indexOf('EDIT') >= 0}"
+                                    ></span>
+                                    {{ 'aavv.edit.roles.labels.permission_edit' | trans }}
+                                </span>
+                            </li>
+
+                            <li
+                                class="col-xs-4"
+                                ng-click="toggleNewRolePermission(role.id, $index, 'VIEW')"
+                            >
+                                <span>
+                                    <span
+                                        class="nvc-aavvEditRoles__checkbox"
+                                        ng-class="{active: permissions.permissions.indexOf('VIEW') >= 0}"
+                                    ></span>
+                                    {{ 'aavv.edit.roles.labels.permission_view' | trans }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button
+            class="btn nvc-aavvEditRoles__button--addRole nvc-aavv-customize__navbar-menu"
+            ng-click="addNewRole()"
+            ng-disabled="!VIEW_PERMISSIONS.EDIT"
+            type="button"
+        >
+            {{ 'aavv.edit.roles.labels.role_add' | trans }}
+        </button>
+    </section>
+</main>
+{% endblock body %}

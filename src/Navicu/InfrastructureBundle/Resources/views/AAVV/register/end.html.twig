@@ -1,0 +1,43 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+
+    <main class="nvc-aavv__end">
+        <div class="nvc-container hidden-xs hidden-sm">
+            <h1>{{"aavv.end.part_our_platform"|trans }}</h1>
+            <h2><span>{{"aavv.end.thanks_for_signing"|trans }} <strong>Vicander</strong></span></h2>
+            <br><br>
+            <section>
+                <div class="col-md-1">
+                    <img
+                        src="{{ asset('images/aavv/end/check.png') }}"
+                         class="img-responsive"
+                    />
+                </div>
+                <div class="col-md-15">
+                    <h3>{{"aavv.end.will_contact"|trans }}</h3>
+                    <h3>{{"aavv.end.validate_registration"|trans }}</h3>
+                </div>
+            </section>
+            <section style="margin-top:100px;">
+                <div class="col-md-1">
+                    <img
+                        src="{{ asset('images/aavv/end/hotel.png') }}"
+                         class="img-responsive"
+                    />
+                </div>
+                <div class="col-md-15">
+                    <h3>{{"aavv.end.make_reservations"|trans }}</h3>
+                    <h3>{{"aavv.end.instant_confirmation"|trans }}</h3>
+                </div>
+            </section>
+        </div>
+    </main>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+{% endblock %}

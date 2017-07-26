@@ -1,0 +1,59 @@
+# Representa los datos del usaurio AAVV (Agencia de viajes)
+Navicu\Core\Domain\Model\Entity\LockedAvailability:
+    type: entity
+    table: locked_availability
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbLockedAvailabilityRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        #sesion que bloquea la disponibilidad
+        id_session:
+            type: string
+
+        #disponibilidad bloqueada
+        number_packages:
+            type: integer
+
+        #disponibilidad bloqueada
+        number_packages:
+            type: integer
+
+        #tiempo de expiracion
+        expiry:
+            type: integer
+
+    manyToOne:
+        #relación con el DailyPack que bloquea
+        blocked_dp:
+            targetEntity: DailyPack
+            inversedBy: lockeds
+            mappedBy: null
+            joinColumn:
+                name: dp_id
+                referencedColumnName: id
+            orphanRemoval: false
+
+        #relacion con el DailyRoom que bloquea
+        blocked_dr:
+            targetEntity: DailyRoom
+            inversedBy: lockeds
+            mappedBy: null
+            joinColumn:
+                name: dr_id
+                referencedColumnName: id
+            orphanRemoval: false
+
+        #relacion con reserva bloqueada
+        blocked_reservation:
+            targetEntity: Reservation
+            inversedBy: lockeds
+            mappedBy: null
+            joinColumn:
+                name: reservation_id
+                referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]

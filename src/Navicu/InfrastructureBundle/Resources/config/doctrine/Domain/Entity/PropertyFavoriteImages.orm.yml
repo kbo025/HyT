@@ -1,0 +1,37 @@
+Navicu\Core\Domain\Model\Entity\PropertyFavoriteImages:
+    type: entity
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPropertyFavoriteImagesRepository
+    table: property_favorite_images
+
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+
+    fields:
+        order_gallery:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+    manyToOne:
+        property:
+            targetEntity: Property
+            cascade: {  }
+            mappedBy: property
+            inversedBy: property_favorite_images
+            joinColumns:
+                property_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+            cascade: ["persist"]
+    oneToOne:
+        image:
+            targetEntity: Document
+            inversedBy: property_favorite_images
+            joinColumn:
+                name: image_document_id
+                referencedColumnName: id
+                onDelete: CASCADE
+            cascade: ["persist"]

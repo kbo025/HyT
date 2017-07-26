@@ -1,0 +1,62 @@
+{% extends "NavicuInfrastructureBundle:AAVV:layout.html.twig" %}
+
+{% block body %}
+    <main
+        class="nvc-aavv__detailReservation visible-md visible-lg"
+        ng-app="detailsReservationModule"
+        ng-controller="detailsReservationController"
+        ng-cloak
+    >
+
+{#     {{ include("NavicuInfrastructureBundle:AAVV:register/topmenu.html.twig") }} #}
+    <div>
+        {% include "NavicuInfrastructureBundle:AAVV:listReservation/detailsReservation/detailsReservationGeneral.html.twig" %}
+    </div>
+
+    <div class="nvc-table--admin nvc-table--admin--detailReservationPay" ng-if="detailsReservation.statusNumber === 0">
+        {% include "NavicuInfrastructureBundle:AAVV:listReservation/detailsReservation/detailReservationPayment.html.twig" %}
+    </div>
+    <hr class="nvc-aavv__detailReservation--between_blockPay">
+
+    <div class='nvc-aavv__detailReservation--specificDetails'>
+        {% include "NavicuInfrastructureBundle:AAVV:listReservation/detailsReservation/detailsReservationSpecific.html.twig" %}
+    </div>
+    <br>
+    <div class='nvc-aavv__detailReservation--dataDetails'>
+        {% include "NavicuInfrastructureBundle:AAVV:listReservation/detailsReservation/detailsReservationData.html.twig" %}
+    </div>
+    <div align="center">
+        <a href="javascript:history.back()">
+            <button
+                class='nvc-button nvc-button__back_simple'
+                type='button'
+            >
+                Volver
+            </button>
+        </a>
+    </div>
+    <br>
+{#    ModalView #}
+    {{ include("NavicuInfrastructureBundle:Web:Partials/modalLoading.html.twig") }}
+{# End ModalView #}
+</main>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var detailsReservation = {{ data | raw }};
+        detailsReservation.amountPaid = 0;
+        detailsReservation.payments = [{
+            confirmationId: null,
+            bank: null,
+            receivingBank: null,
+            amount: null,
+            description: null,
+        }];
+        console.log(detailsReservation);
+    </script>
+
+
+{% endblock %}

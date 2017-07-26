@@ -1,0 +1,79 @@
+
+#lista de roles asociados a la agencia de viajes del usuario logeado
+aavv_roles:
+    path:   /getroles
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:getRoles }
+    options:
+      expose: true
+
+aavv_modules:
+    path:   /getmodules
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:getModules }
+    options:
+      expose: true
+
+#lista de permisos por modulo asociados a un rol
+aavv_role_perms:
+    path:   /getroleperms/{id}
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:getRolePerms, id: null }
+    options:
+      expose: true
+
+aavv_list_roles:
+    path:   /edit/roles
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:rolesList }
+    options:
+      expose: true
+aavv_create_role:
+    path:   /roles/create
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:createRole }
+    options:
+      expose: true
+
+aavv_edit_role:
+    path:   /roles/edit
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:editRole }
+    options:
+      expose: true
+
+aavv_delete_role:
+    path:   /roles/delete
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:deleteRole }
+    options:
+      expose: true
+
+aavv_role_editpermissions:
+    path:   /roles/editpermissions
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:editPermissions }
+    options:
+      expose: true
+
+aavv_list_users:
+    path:   /edit/users
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:usersList }
+    options:
+      expose: true
+
+aavv_users:
+    path:   /getusers
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:getUsers }
+    options:
+      expose: true
+
+aavv_save_users:
+    path:   /users/edit
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:editUsers }
+    options:
+      expose: true
+
+aavv_valid_user_email:
+    path:   /validuseremail
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Default:validEmail }
+    options:
+        expose: true
+
+aavv_delete_user:
+    path:   /users/delete
+    defaults: { _controller: NavicuInfrastructureBundle:AAVV\Security:deleteUser }
+    options:
+        expose: true

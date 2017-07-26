@@ -1,0 +1,35 @@
+# Página homepage de establecimientos temporales
+navicu_admin_homepage_temp_properties:
+    pattern: /
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\TempProperties:tempProperties }
+
+navicu_admin_register_owner:
+    pattern: /adminRegisterOwner
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\TempProperties:registerOwner }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+navicu_admin_delete_temp_properties:
+    pattern: /deleteTempOwner
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\TempProperties:deleteTempOwner }
+    options:
+        expose: true
+    requirements:
+        { _format: (xml | json), _method: POST}
+
+# Exportacion de listado de properties temporales a excel
+navicu_admin_list_temp_properties_to_excel:
+    pattern: /list_temp_properties.xls
+    defaults: { _controller: NavicuInfrastructureBundle:Admin/TempProperties:listTempPropertiesToExcel }
+    requirements:
+        { _format: (json) }
+
+navicu_admin_list_temp_properties:
+    pattern: /listTempProperties
+    defaults: { _controller: NavicuInfrastructureBundle:Admin\TempProperties:listTempProperties }
+    options:
+        expose: true
+#    requirements:
+#        { _format: (xml | json), _method: POST}

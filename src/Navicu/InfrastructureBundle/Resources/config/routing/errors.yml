@@ -1,0 +1,16 @@
+# =========== Rutas de Errores ===========
+
+#Routing error 404
+navicu_error_404:
+    path: 	/error_404
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Errors:error404 }
+
+#Routing error 401
+navicu_error_401:
+    path: 	/error_401
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Errors:error401 }
+
+#Routing error 500
+navicu_error_500:
+    path: 	/error_500
+    defaults: { _controller: NavicuInfrastructureBundle:Security\Errors:error500 }

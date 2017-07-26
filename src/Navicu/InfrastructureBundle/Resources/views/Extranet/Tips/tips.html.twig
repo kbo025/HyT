@@ -1,0 +1,73 @@
+{% extends "NavicuInfrastructureBundle:Extranet:layout.html.twig" %}
+
+{% set header_title = {'module_title': 'tips'} %}
+
+{% block title %} {{ "extranet.title.generic"|trans }} {% endblock %}
+
+{% block body %}
+
+<div class='tips post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+	<div class="tips_photography">
+		<div class="container">
+			<h1>{{"extranet.tips.tips_photography"|trans }}</h1>
+			<p>{{"extranet.tips.tips_photography_message"|trans }}</p>
+			<center>
+				<div class="download">
+					<img src="{{ asset('images/tips/tips.jpg') }}" class="img-responsive">
+					<a href="{{ asset('files/guiafotografica.pdf') }}" {#download="guiafotografica"#} target="_blank">
+	                    <button class="btn">
+	                        <span class="fa fa-upload"></span> {{"extranet.tips.download"|trans }}
+	                    </button>
+	                </a>
+				</div>
+			</center>
+		</div>
+	</div>
+	<div class="tips_content">
+		<div class="container">
+			<div class="col-xs-16 col-sm-10">
+				<h1>{{"extranet.tips.content"|trans }}</h1>
+				<ul>
+					<li>{{"extranet.tips.image_showing_your_customers"|trans }}</li>
+					<li>{{"extranet.tips.complete_the_form"|trans }}</li>
+					<li>{{"extranet.tips.future_customers"|trans }}</li>
+				</ul>
+				<h2>{{"extranet.tips.different"|trans }}.</h2>
+			</div>
+			<div class="col-xs-16 col-sm-6">
+				<img src="{{ asset('images/tips/form.jpg') }}" class="img-responsive">
+			</div>
+
+		</div>
+	</div>
+	<div class="tips_rates">
+		<div class="container">
+			<div class="col-xs-16 col-sm-6">
+				<img src="{{ asset('images/tips/laptop.jpg') }}" class="img-responsive">
+			</div>
+			<div class="col-xs-16 col-sm-10" align="right" dir="rtl">
+				<h1>{{"extranet.tips.rates_and_availability"|trans }}</h1>
+				<ul>
+					<li>{{"extranet.tips.constant_availability"|trans }}</li>
+					<li>{{"extranet.tips.rates_updated"|trans }}</li>
+					<li>{{"extranet.tips.rates_updated_percentage"|trans }}</li>
+					<li>{{"extranet.tips.special_rates"|trans }}</li>
+					<li>{{"extranet.tips.potential_customers"|trans }}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment == "dev" %}
+
+    {% else %}
+
+    {% endif %}
+{% endblock %}

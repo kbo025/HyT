@@ -1,0 +1,96 @@
+Navicu\Core\Application\UseCases\Search\getPorpertyByLocation\getPorpertyByLocationCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: not_is_string,{{ value }},{{ type }}
+        countryCode:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: not_is_string,{{ value }},{{ type }}
+        startDate:
+            - Type:
+                type: integer
+                message: not_is_date,{{ value }},{{ type }}
+        endDate:
+            - Type:
+                type: integer
+                message: not_is_date,{{ value }},{{ type }}
+        adult:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        kid:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        room:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        page:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        type:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: not_is_string,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Search\getRoomByProperty\getRoomByPropertyCommand:
+    properties:
+        slug:
+            - NotBlank:
+                message: is_null,{{ value }},{{ type }}
+            - Type:
+                type: string
+                message: not_is_string,{{ value }},{{ type }}
+        startDate:
+            - Type:
+                type: integer
+                message: not_is_date,{{ value }},{{ type }}
+        endDate:
+            - Type:
+                type: integer
+                message: not_is_date,{{ value }},{{ type }}
+        adult:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        kid:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        room:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+
+Navicu\Core\Application\UseCases\Search\getPropertyByCoordenate\getPropertyByCoordenateCommand:
+    properties:
+        startDate:
+            - Type:
+                type: integer
+                message: not_is_date,{{ value }},{{ type }}
+        endDate:
+            - Type:
+                type: integer
+                message: not_is_date,{{ value }},{{ type }}
+        adult:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        kid:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}
+        room:
+            - Type:
+                type: integer
+                message: not_is_integer,{{ value }},{{ type }}

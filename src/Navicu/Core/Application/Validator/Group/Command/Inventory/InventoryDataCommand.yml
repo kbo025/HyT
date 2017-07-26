@@ -1,0 +1,13 @@
+Navicu\Core\Application\UseCases\PropertyInventory\Grid\InventoryData\InventoryDataCommand:
+    properties:
+        startDate:
+            - NotBlank: 
+                message: is_null,{{ value }},{{ type }}
+            - Date:
+                message: is_not_date,{{ value }},{{ type }}
+
+        session:
+            - NotNull:
+                message: is_not_login,{{ null }},{{ type }}
+            - "True":
+                message: is_not_access,{{ value }},{{ type }}

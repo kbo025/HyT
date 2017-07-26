@@ -1,0 +1,84 @@
+Navicu\Core\Domain\Model\Entity\DailyPack:
+    type: entity
+    table: daily_pack
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbDailyPackRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+            nullable: false
+        is_completed:
+            type: boolean
+            nullable: false
+        min_night:
+            type: integer
+            nullable: true
+        max_night:
+            type: integer
+            nullable: true
+        specific_availability:
+            type: integer
+            nullable: true
+        base_rate:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        sell_rate:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        net_rate:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+        close_out:
+            type: boolean
+            nullable: true
+            options:
+                default: null
+        closed_to_arrival:
+            type: boolean
+            nullable: true
+            options:
+                default: null
+        closed_to_departure:
+            type: boolean
+            nullable: true
+            options:
+                default: null
+        last_modified:
+            type: datetime
+            nullable: true
+        promotion:
+            type: boolean
+            options:
+                default: false
+            
+    manyToOne:
+        pack:
+            targetEntity: Pack
+            cascade: {  }
+            mappedBy: null
+            inversedBy: daily_packages
+            joinColumn:
+                pack_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    oneToMany:
+        #bloqueos de disponibilidad
+        lockeds:
+            targetEntity: LockedAvailability
+            mappedBy: blocked_dp
+
+    lifecycleCallbacks:
+        preUpdate: [ isCompleted , setLastModified ]
+        prePersist: [ isCompleted, setLastModified ]

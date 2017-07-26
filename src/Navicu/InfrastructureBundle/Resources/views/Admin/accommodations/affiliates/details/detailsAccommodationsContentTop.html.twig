@@ -1,0 +1,58 @@
+
+<section>
+    <div class="col-md-8">
+        <h3 class="accomodations">
+            <strong> {[{response.propertyName}]}</strong>
+        </h3>
+        <h3 class="accomodations">
+            <span>ID #{[{response.id}]}</span>
+        </h3>
+        <h3 class="accomodations">
+            <span>Ranking #{[{response.ranking}]}</span>
+        </h3>
+    </div>
+    <div class="col-md-8">
+        <div class='nvc-form-group'>
+            {% if hasPermission("extranet_inventory","read") %}
+                <button
+                    type="button"
+                    class='nvc-button nvc-button__search--inverse'
+                    ng-click="redirectGrid(slug)"
+                >
+                    Ir grilla
+                </button>
+            {% endif %}
+            {% if hasPermission("extranet_inventory","read") %}
+                <button
+                    type="button"
+                    class='nvc-button nvc-button__search--inverse'
+                    ng-click="redirectMassload(slug)"
+                >
+                    Ir carga masiva
+                </button>
+            {% endif %}
+            {% if hasPermission("admin_affiliates","update") %}
+                <button
+                    type="button"
+                    class='nvc-button nvc-button__search--inverse'
+                    ng-click="redirectRegister(slug)"
+                >
+                    Ir a la ficha del establecimiento
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-16" ng-show="{{ hasPermission('admin_property_details', 'publish') }}">
+            <select
+                class="button-rigth up accomodations"
+                ng-class="{'up':status=='Publicado', 'down':status=='Despublicado'}"
+                ng-model="status"
+                ng-change="changeStatus()"
+            >
+
+                <option value="Publicado">Publicado</option>
+                <option value="Despublicado">Despublicado</option>
+            </select>
+    </div>
+</section>
+

@@ -1,0 +1,44 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # Página en mantenimiento
+    maintenance:    false
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            es
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # Domain and sub-domains to be used by the app
+    domain: domain.tld
+    registration_subdomain: subdomain1.domain.tld
+    extranet_subdomain: subdomain2.domain.tld
+    admin_subdomain: subdomain3.domain.tld
+    blog_domain: subdomain4.domain.tld
+
+    # Email form notifications will be send to hotels and admins
+    email_account: user@server.com
+    email_password: SecretPassword
+
+    # Multiple payment gateways
+    payment_gateway:
+        gateway1:
+            custom_field_1: value_1
+            custom_field_2: value_2
+
+    # Motor de busqueda (Sphinx)
+    search_engine:
+        host: localhost
+        port: ~

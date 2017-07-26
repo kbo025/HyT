@@ -1,0 +1,41 @@
+Navicu\Core\Domain\Model\Entity\Passenger:
+    type: entity
+    table: passenger
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbPassengerRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        lastname:
+            type: string
+            nullable: false
+        document_type:
+            type: string
+            nullable: false
+        document_number:
+            type: integer
+            nullable: false
+        phone:
+            type: string
+            nullable: false
+        email:
+            type: string
+            nullable: false
+
+    manyToOne:
+        reservation:
+            targetEntity: FlightReservation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                flight_reservation:
+                    referencedColumnName: id
+            orphanRemoval: false
+            nullable: false

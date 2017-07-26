@@ -1,0 +1,50 @@
+#Navicu\Core\Application\UseCases\AAVV\Register\Step3\SetBillingAddress\SetBillingAddressCommand:
+#    properties:
+#        address:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        bank_account:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        email:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        phone:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        swift:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+
+# preguntar a ISA
+#Navicu\Core\Application\UseCases\AAVV\Register\Step3\SetBillingAddress\SetBillingAddressCommand:
+#    properties:
+#        address:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        bank_account:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        email:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        phone:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        swift:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}
+#        zip_code:
+#            - Type:
+#                type: string
+#                message: is_string,{{ value }},{{ type }}

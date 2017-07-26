@@ -1,0 +1,346 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %}
+{% block body %}
+
+{% set grayColor = "#3C3C3B" %}
+{% set grayColorSecunday = "#DADADA" %}
+{% set grayFooter = '#EDEDED' %}
+
+<!-- header -->
+    <table bgcolor="{% if isCustomize == true  %}{{ customize['navbarPrimary'] }}{% else %}{{ customize['navbarMenu'] }}{% endif %}" border="0" cellpadding="0" cellspacing="0" width="600"
+       id="emailHeader"
+       style="background-color: {% if isCustomize == true  %}{{ customize['navbarPrimary'] }}{% else %}{{ customize['navbarMenu'] }}{% endif %}">
+    <!-- HEADER ROW // -->
+    <tr>
+        <td align="center" valign="top">
+            <!-- CENTERING TABLE // -->
+            <table border="0" cellpadding="0" cellspacing="0" width="600px">
+                <tr>
+                    <td align="left" valign="top" >
+                        <!-- FLEXIBLE CONTAINER // -->
+                        <table border="0" cellpadding="0" cellspacing="0" width="600px" class="flexibleContainer">
+                            <tr>
+                                <td valign="top"  class="flexibleContainerCell" style="font-size: 0px !important;">
+
+                                    <!-- CONTENT TABLE // -->
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-size: 0px !important;">
+                                        <tr>
+                                            <td style="padding-left:16px;padding-top: 3%;padding-bottom: 3%;line-height: 0px;font-size: 0px !important;">
+                                                {% if logo is defined %}
+                                                    <img src="{{ logo }}" style="max-width: 200px;">
+                                                {% else %}
+                                                    <img src="https://navicu.com/images/logo-correo.png" style="max-width: 200px;">
+                                                {% endif %}
+                                            </td>
+
+                                            <td style="font-size: 0px !important;">
+                                                <img src="
+                                                            {% if isCustomize == true %}
+                                                                https://s3.amazonaws.com/uploads.hipchat.com/172918/2700732/5n87WkTMI9VhqiN/aavv-trip-friends.png
+                                                            {% else %}
+                                                                https://s3.amazonaws.com/uploads.hipchat.com/172918/2700732/2S15NPLRkWXUkEf/navicu-aavv-trip-friends-05.png
+                                                            {% endif  %}
+                                                         "
+                                                     style="max-width:100%; float: right">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- // FLEXIBLE CONTAINER -->
+                    </td>
+                </tr>
+            </table>
+            <!-- // CENTERING TABLE -->
+        </td>
+
+    </tr>
+    <!-- // END -->
+</table>
+
+
+<table  border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody" style="background-color: #f9f9f9">
+    <tr>
+        <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                <tr>
+                    <td style="height:37px;background-color: #EDEDED;padding-left: 16px;font-weight: bold">
+                        <table align="right" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td style=" padding-right:16px;padding-top: 8px;padding-bottom: 8px">
+                                    <a href="https://www.navicu.com" style="color:blue;
+                                            background-color:{% if isCustomize == true  %}{{ customize['navbarPrimary'] }}{% else %}{{ customize['navbarMenu'] }}{% endif %};
+                                            border:1px solid {% if isCustomize == true  %}{{ customize['navbarPrimary'] }}{% else %}{{ customize['navbarMenu'] }}{% endif %};
+                                        border-radius:3px;color:#ffffff;display:inline-block;
+                                        font-family:sans-serif;font-size:12px;line-height:24px;
+                                        text-align:center;text-decoration:none;width:70px;
+                                        -webkit-text-size-adjust:none;mso-hide:all;">
+                                        <span style="font-family: 'Lato', sans-serif !important;">Imprimir</span>
+                                    </a>
+                                    <a href="{{ domain }}/downloadPdf/{{ reservationGroup.getLocation().getSlug() }}/{{ reservationGroup.getPublicId() }}/{{ reservationGroup.getHashUrl() }}/1" style="
+                                            background-color:{% if isCustomize == true  %}{{ customize['navbarPrimary'] }}{% else %}{{ customize['navbarMenu'] }}{% endif %};
+                                            border:1px solid {% if isCustomize == true  %}{{ customize['navbarPrimary'] }}{% else %}{{ customize['navbarMenu'] }}{% endif %};
+                                        border-radius:3px;color:#ffffff;display:inline-block;
+                                        font-family:sans-serif;font-size:12px;line-height:24px;
+                                        text-align:center;text-decoration:none;width:86px;
+                                        -webkit-text-size-adjust:none;mso-hide:all;">
+                                        <span style="font-family: 'Lato', sans-serif !important;">Guardar PDF</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color:#F9F9F9 !important;height:37px;padding-left: 16px;font-weight: bold;padding-top: 10px">
+                        <table align="right" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td>
+                                     <span style="
+                                     font-size: 16px;
+                                     font-weight: bold;
+                                     color:#5FC031;">
+                                         {% if reservationType == 2 %}
+                                            Reserva realizada exitosamente por
+                                         {% else %}
+                                            Bloqueo de reserva por 24h efectuado por
+                                         {% endif %}
+                                     </span>
+                                    <span style="
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        color:{% if isCustomize == true  %}{{ grayColor }};{% else %}#391860{% endif %};">
+                                         Bs {{ totalToPay|number_format(2, ',', '.') }}</span>
+                                </td>
+                                <td>
+                                    <img src="https://www.navicu.com/images/preciogarantizadobig.png" style="width: 80px;float:right;margin-right: 15px">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 16px;padding-right: 16px;padding-top: 8px !important;">
+                        <table style="width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td style="background:none; border:dotted 1px #999999; border-width:1px 0 0 0; height:1px; width:100%; margin:0px 0px 0px 0px;font-size: 8px !important;">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom: 8px !important;">
+                        <table align="left" border="0" cellpadding="0" cellspacing="0" style="">
+                            <tr>
+                                <td style="font-weight: bold !important;padding-left: 16px;">
+                                    <span style="font-size: 14px;color:{% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %}">{{ location }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color:blue; padding-top: 6px !important; padding-left: 16px">
+                                    <span style="color:#808080;font-size: 14px">
+                                        Check-in {{ reservationGroup.dateCheckIn | date('Y-m-d') }} · Check-out {{ reservationGroup.dateCheckOut | date('Y-m-d')}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table align="right" border="0" cellpadding="0" cellspacing="0" style="">
+                            <tr>
+                                <td style="color: #391860; font-weight: bold !important;padding-right: 16px;">
+                                    <span style="font-size: 14px;color:{% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %}">ID Grupo {{ reservationGroup.publicId }}</span>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                {% set lastProperty = null %}
+
+                {% for currentReservation in reservationGroup.reservation %}
+
+                    {# Defención de variables en cada iteración del for #}
+                    {% set currentProperty = currentReservation.propertyId %}
+                    {% set rPack = currentReservation.reservationPackages[0] %}
+                    {% set pack = rPack.packId %}
+                    {% set room = pack.room %}
+                    {% set clientProfile = currentReservation.clientId %}
+
+                    {% if loop.index == 0 %}
+                        {% set lastProperty = currentProperty %}
+                    {% endif %}
+
+                    {# Verificación de reservas pertenecientes al mismo establecimiento #}
+                    {% if  lastProperty != currentProperty and loop.index != 0 %}
+                    <tr>
+                        <td style="padding-top: 8px !important;padding-bottom: 8px !important;background-color: #EBEBEB !important;">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="">
+                                <tr>
+                                    <td style="color: #391860; font-weight: bold !important;padding-left: 16px;">
+                                        <span style="font-size: 14px;color:{% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %}">ID Establecimiento {{ currentProperty.publicId }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table align="right" border="0" cellpadding="0" cellspacing="0" style="">
+                                <tr>
+                                    <td style="color: #783CBD; font-weight: bold !important;">
+                                        <span style="font-size: 14px;color:{% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %}">{{ currentProperty.name }}</span>
+                                    </td>
+                                    {% for i in 1..currentProperty.star %}
+                                        {% if i == loop.last %}
+                                            <td style="padding-right:16px">
+                                        {% else %}
+                                            <td>
+                                        {% endif %}
+                                        <img src="https://www.navicu.com/images/navicu/star.png" style="width: 12px;padding-left: 4px">
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {# Se actualiza el ultimo establecimiento #}
+                    {% set lastProperty = currentProperty %}
+
+                    <tr>
+                        <td style="background-color: {% if isCustomize == true %}{{ grayColorSecunday }};{% else %}#F1E6F7;{% endif %}padding-top: 8px; padding-bottom: 8px;">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+                                <tr>
+                                    <td style="color: {% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %} font-weight: bold !important;padding-left: 16px;width: 33.3%">
+                                        <span style="font-size:14px;">ID
+                                            {% if reservationType == 2 %}
+                                                reserva
+                                            {% else %}
+                                                pre-reserva
+                                            {% endif %}
+
+                                            <br>{{  currentReservation.publicId }}</span>
+                                    </td>
+                                    <td  style="color: {% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %} font-weight: bold !important;width: 33.3%">
+                                        <span style="font-size:14px;">{{ room.generateName() }}</span>
+                                    </td>
+                                    <td align="right" style="color: {% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %} font-weight: bold !important;padding-right: 16px;width: 33.3%">
+                                        <span style="font-size:14px;">{{ pack.type.code|trans }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: {% if isCustomize == true %}{{ grayColorSecunday }};{% else %}#F1E6F7;{% endif %}padding-left: 16px;padding-right: 16px;">
+                            <table style="width: 100%;">
+                                <tbody>
+                                <tr>
+                                    <td style="background:none; border:dotted 1px #999999; border-width:1px 0 0 0; height:1px; width:100%; margin:0px 0px 0px 0px;font-size: 8px !important;">&nbsp;</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: {% if isCustomize == true %}{{ grayColorSecunday }};{% else %}#F1E6F7;{% endif %}padding-bottom: 8px !important;">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td style="color: {% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %} font-weight: bold !important;padding-left: 16px;width: 33.3%">
+                                        <span style="font-size:14px;">
+                                            {{ rPack.numberAdults }} {% if rPack.numberAdults != 1 %}adultos{% else %}adulto{% endif %}
+                                            {{ rPack.numberkids }} {% if rPack.numberKids != 1 %}niños{% else %}niño{% endif %}
+                                        </span>
+                                    </td>
+                                    <td  style="color: {% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %} font-weight: bold !important;">
+                                        <span style="font-size:14px;">
+                                            {{ rPack.numberRooms }} {% if rPack.numberRooms != 1 %}habitaciones{% else %}habitación{% endif %}
+                                        </span>
+                                    </td>
+                                    <td align="right" style="color: {% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %} font-weight: bold !important;padding-right: 16px;">
+                                        <span style="font-size:14px;">
+                                            No reembolsable
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F9F9F9 !important;padding-top: 8px !important;padding-bottom: 8px !important;">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td style="padding-left: 16px;width: 33.3%">
+                                        <span style="color: #808080;font-size: 14px;line-height: 24px;font-weight: bold !important;">Nombre y apellido</span><br>
+                                        <span style="color: #808080;padding-top: 4px;font-size: 14px">{{ clientProfile.fullName }}</span>
+                                    </td>
+                                    <td >
+                                        <span style="color: #808080;font-size: 14px;line-height: 24px;font-weight: bold !important;">Cédula</span><br>
+                                        <span style="color: #808080;padding-top: 4px;font-size: 14px">{{ clientProfile.identityCard }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #F9F9F9 !important;padding-top: 8px !important;padding-bottom: 8px !important;">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td style="color: #808080; padding-left: 16px;width: 33.3%">
+                                        <span style="color: #808080;font-size: 14px;line-height: 24px;font-weight: bold !important;">Correo electrónico</span><br>
+                                        <a href="" style="text-decoration:none;color: #808080;padding-top: 4px;font-size: 14px;border:none;">{{ clientProfile.user.email }}</a>
+                                    </td>
+                                    <td  style="color: #808080;">
+                                        <span style="color: #808080;font-size: 14px;line-height: 24px;font-weight: bold !important;">Teléfono</span><br>
+                                        <a href="" style="text-decoration:none;color: #808080;padding-top: 4px;font-size: 14px;border:none;">{{ clientProfile.phone }}</a>
+                                    </td>
+                                    <td  align="right" style="font-weight: bold !important;padding-right:16px;">
+                                    <span style="color:{% if isCustomize == true  %}{{ grayColor }};{% else %}#391860;{% endif %}
+                                        font-size: 14px;background-color:#DADADA;
+                                        border-radius:3px;display:inline-block;
+                                        font-family:sans-serif;font-size:16px;line-height:24px;
+                                        text-align:center;text-decoration:none;
+                                        padding-right: 6px; padding-left: 6px;
+                                        -webkit-text-size-adjust:none;mso-hide:all;">TOTAL Bs {{ (currentReservation.getTotaltoPay() - currentReservation.getTotalForAavv() )|number_format(2, ',', '.') }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td>
+                        {% if isCustomize == true %}
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:white;background-color: {{ grayFooter }};width: 600px !important;">
+                                <tr>
+                                    <td style="padding-top: 10px;text-align: center;width: 600px;padding-top: 16px !important; padding-bottom: 16px !important;">
+                                        <a href="" style="text-decoration:none;color: #EDA900 !important;padding-top: 4px;font-weight:bold !important;font-size: 16px;border:none;">preguntas@navicu.com</a>
+                                        <br>
+                                        <span style="font-size: 16px;color:#EDA900;font-weight: bold;color:#7C7C7C;"> 08008 - NAVICU</span><br>
+                                    </td>
+                                </tr>
+                            </table>
+                        {% else %}
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:white;background-color: #62269D;width: 600px !important;">
+                                <tr>
+                                    <td style="padding-top: 10px;text-align: center;width: 600px;padding-top: 16px !important; padding-bottom: 16px !important;">
+                                        <span style="font-style: italic;font-size:16px;">Viajar abre tu mente y amplia tu cultura</span><br>
+                                        <a href="" style="text-decoration:none;color: #EDA900 !important;padding-top: 4px;font-weight:bold !important;font-size: 16px;border:none;">preguntas@navicu.com</a>
+                                        <span style="font-size: 16px;color:#EDA900;font-weight: bold;">· 08008 - NAVICU</span><br>
+                                        <span style="font-size:12px;font-style: italic;color:#ffffff">Lunes a viernes de 8:00AM a 5:00PM</span><br><br>
+                                    <span style="font-size: 14.666667px;color:#CCCCCC;{% if customize is defined %}color:#7C7C7C;{% endif %} ">
+                                        <img src="https://www.navicu.com/images/copyright.png" style="display: inline">
+                                        <span style="font-size: 12px !important;">  navicu LLC All rights reserved 2014 - 2016</span>
+                                    </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <!-- END HEADER -->
+        </td>
+    </tr>
+
+
+    {% endblock body %}

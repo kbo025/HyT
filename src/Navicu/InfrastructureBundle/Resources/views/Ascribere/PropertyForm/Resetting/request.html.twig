@@ -1,0 +1,56 @@
+{% extends "NavicuInfrastructureBundle:Ascribere/PropertyForm/Resetting:layoutResetting.html.twig" %}
+
+{% block content_title %}
+    <div class="hidden-xs">
+        <h1 style="font-size:-webkit-xxx-large">
+            <b>
+                {% filter upper %}
+                    {{ "share.message.resetting_your_password"|trans }}
+                {% endfilter %}
+            </b>
+        </h1>
+        <h4>
+            <b>
+                {{ "share.message.indicates_pass"|trans }}
+            </b>
+        </h4>
+    </div>
+    <div class="visible-xs" style="margin-top: -30px">
+        <p>
+            <b>
+                {% filter upper %}
+                    {{ "share.message.resetting_your_password"|trans }}
+                {% endfilter %}
+            </b>
+        </p>
+        <p>
+            <b>
+                {{ "share.message.indicates_pass"|trans }}
+            </b>
+        </p>
+    </div>
+{% endblock content_title %}
+
+{% block  content_form %}
+    <div class="col-xs-10 col-xs-offset-6 col-md-5 col-md-offset-11">
+        <form action="{{ path('navicu_extranet_resetting_register_send_email') }}" method="POST" class="fos_user_resetting_request">
+            {% if invalid_username is defined %}
+                <div class="alert alert-danger">
+                    <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <span>{{ 'share.message.resetting.invalid_username'|trans({'%username%': invalid_username}) }}</span>
+                </div>
+            {% endif %}
+            <input type="text" id="username" name="username" class="form-control my-imput" required="required" placeholder="{{ 'share.message.username_email'|trans }}"/>
+            <button type="submit" id="_submit" name="_submit" class="btn btn-md btn-primary btn-home btn-block" >{{ 'share.message.resetting_send_email'|trans }}</button>
+        </form>
+    </div>
+{% endblock content_form %}
+
+{% block content_buttons %}
+    <div class="col-xs-6 col-xs-offset-10 col-md-2 col-md-offset-14 text-bold" >
+        <a href="{{path('extranet_login')}}" class="thumbnail" >
+            <center><b>{{ 'share.action.go_back'|trans }}</b></center>
+        </a>
+    </div>
+{% endblock content_buttons %}

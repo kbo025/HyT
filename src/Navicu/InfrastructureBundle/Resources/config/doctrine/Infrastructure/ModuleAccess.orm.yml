@@ -1,0 +1,59 @@
+# Entidad representa los modulos registrados en el sistema
+Navicu\InfrastructureBundle\Entity\ModuleAccess:
+    type: entity
+    table: module
+    repositoryClass: Navicu\InfrastructureBundle\Repositories\DbModuleAccessRepository
+    # Clave primaria
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        # Nombre y Apellido del usuario
+        name:
+            type: string
+            unique: true
+        createdAt:
+            type: datetime
+            nullable: true
+        createdBy:
+            type: integer
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+        updatedBy:
+            type: integer
+            nullable: true
+    
+    manyToMany:
+        
+        roles:
+            targetEntity: Navicu\InfrastructureBundle\Entity\Role
+            cascade: ["persist"]
+            mappedBy: roles
+
+    manyToOne:
+        parent:
+            targetEntity: ModuleAccess
+            inversedBy: children
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+
+    oneToMany:
+        permissions:
+            targetEntity: Navicu\InfrastructureBundle\Entity\Permission
+            mappedBy: module
+        children:
+            targetEntity: ModuleAccess
+            mappedBy: parent
+        translations:
+            targetEntity: Navicu\InfrastructureBundle\Entity\ModuleTranslation
+            mappedBy: module
+            joinColumn:
+                name: translations
+                referencedColumnName: id
+            cascade: ["persist","remove"]

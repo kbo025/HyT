@@ -1,0 +1,1040 @@
+{% extends "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/layout.html.twig" %}
+
+{% set header_title = {'module_title': '3'} %}
+
+{% block body %}
+<!--Iconos del formulario -->
+<div  ng-app="roomAdminModule" ng-controller="roomAdminController" novalidate ng-cloak>
+	{% include "NavicuInfrastructureBundle:Ascribere:affiliateAdmin/topmenu.html.twig" with header_title %}
+	<!--Top del formualario -->
+	<div class="container" style="font-family:Lato-Regular" >
+		<div class="col-md-16" style="color:#572A85">
+			<p align="justify">{{"share.register.information_room"|trans }}</p>
+		</div>
+	</div>
+	<br>
+	<form name="formRoom">
+		<!--Habitacion-->
+		<div class="container form-font" >
+				<div class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-6 right"><h3>Habitación </h3></div>
+						<div class="col-md-8"></div>
+						<div class="col-md-2 left"></div>
+					</div>
+					<br>
+					<div class="container" style="color:#808080">
+						<div class="col-md-6 col-lg-7">
+							<label for="">{{"share.register.room_type"|trans }}*</label>
+							<select class="form-control my-select" name="availability" style="width:100%"
+									ng-model="temporal.typeroom"
+									ng-options="typeroom as val.name for (typeroom, val) in rooms " required>
+								<option value=''>{{"share.register.select"|trans }}</option>
+							</select>
+						</div>
+						<div class="col-md-6 col-lg-5" ng-class="{'has-error' : formRoom.availability1.$invalid}">
+							<label class="tooltips tooltips-right" for="">{{"share.register.room_number"|trans }}*
+								<i class="fa fn-info fa-x"></i>
+								<span style="width: 100% !important;margin-left: 30px !important;">{{"share.register.room_number_tooltip"|trans }}</span>
+							</label>
+							<input type="number" name="availability1" ng-model="room.numRooms" class="form-control my-imput" style="width:50%;" ng-min="1" min="1" ng-pattern="/^\d+$/" required/>
+							  <span ng-show="formRoom.availability1.$error.number" style="color:red;">
+                                <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+                                <br>
+                            </span>
+                            <span ng-show="formRoom.availability1.$error.min" style="color:red;">
+                                <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+                                <br>
+                            </span>
+                            <span ng-show="formRoom.availability1.$error.pattern" style="color:red;">
+	                            <strong class="error">{{"share.validation.only_integer"|trans }}</strong>
+	                        	<br>
+                            </span>
+                            <span ng-show="formRoom.availability1.$error.required" style="color:red;">
+	                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+	                        	<br>
+                            </span>
+						</div>
+						<div class="col-md-4 col-lg-4">
+							<label for="">{{"share.register.smoking"|trans }}</label>
+							<br>
+							 <md-switch ng-model="temporal.smoking" aria-label="Switch 1" class="md-warn">
+									    <span ng-if="temporal.smoking == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.smoking == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.smoking == null">{{ "share.message.no"|trans }}</span>
+							</md-switch>
+						</div>
+						<div class="col-md-6 col-lg-7">
+							<label for="">{{"share.register.room_view"|trans }}</label>
+							<select ng-disabled="!temporal.typeroom" class="form-control my-select" style="width:100%"
+									ng-model="room.subRoom"
+									ng-options="valSubroom.id as valSubroom.name for (subroom, valSubroom) in rooms[temporal.typeroom].subtypes">
+								<option value=''>{{"share.register.select"|trans }}</option>
+							</select>
+						</div>
+						<div class="col-md-6 col-lg-5" ng-hide="rooms[temporal.typeroom].flag==2 || rooms[temporal.typeroom].flag==3">
+							<label class="tooltips tooltips-right">{{"share.register.typologies_bed"|trans }} <i class="fa fn-info fa-x"></i>
+								<span style="width: 100% !important;margin-left: 30px !important;">{{"share.tooltip.typologies_bed"|trans }}</span>
+							</label>
+
+							<select ng-disabled="!temporal.typeroom" class="form-control my-select" style="width:50%" ng-options="n for n in [] | range:1:10" ng-model="room.numBedroom" ></select>
+						</div>
+						<div class="col-md-6 col-lg-5" ng-hide="!temporal.typeroom || rooms[temporal.typeroom].flag==1">
+							<label class="tooltips tooltips-right">{{"share.register.typologies_bedroom"|trans }} <i class="fa fn-info fa-x"></i>
+								<span style="width: 100% !important;margin-left: 30px !important;">{{"share.tooltip.typologies_bedroom"|trans }}</span>
+							</label>
+								<select class="form-control my-select" style="width:50%" ng-options="n for n in [] | range:1:10" ng-model="room.numBedroom"></select>
+						</div>
+						<div class="col-md-4 col-lg-4" ng-class="{'has-error' : formRoom.availability2.$invalid}">
+							<label for="">{{"share.register.room_size"|trans }}</label>
+							<div class="input-group">
+								<input type="number" name="availability2" ng-model="temporal.sizeRoom" class="form-control my-imput" style="width:100%;" ng-min="0" min="0"/>
+	                            <span class="input-group-addon color-money" id="basic-addon1">{{"share.register.meters"|trans }} <span><sup>2</sup></span></span>
+							</div>
+						  	<span ng-show="formRoom.availability2.$error.number" style="color:red;">
+                                <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+                                <br>
+                            </span>
+                            <span ng-show="formRoom.availability2.$error.min">
+                                <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+                                <br>
+                            </span>
+						</div>
+					</div>
+					<br>
+					<div class="container" style="color:#808080">
+						<div class="col-md-16 col-lg-16" style="margin-bottom:15px;">
+							<div class="col-md-2 col-lg-2">
+								<label for="">{{"share.register.bath"|transchoice(2) }} </label>
+								<select class="form-control my-select" style="width:100%" ng-options="n for n in [] | range:0:10" ng-model="room.bath"></select>
+                            </span>
+							</div>
+							<div class="col-md-2 col-lg-2">
+								<label for="">{{"share.register.balcony"|trans }}</label>
+								<br>
+								<md-switch ng-model="temporal.balcony" aria-label="Switch 2" class="md-warn">
+									    <span ng-if="temporal.balcony == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.balcony == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.balcony == null">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+							<div class="col-md-2 col-lg-2">
+								<label for="">{{"share.register.terrace"|trans }}</label>
+								<br>
+								<md-switch ng-model="temporal.terrace" aria-label="Switch 3" class="md-warn">
+									    <span ng-if="temporal.terrace == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.terrace == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.terrace == null">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+							<div class="col-md-1 col-lg-1"	>
+								<label for=""></label>
+							</div>
+							<div class="col-md-3 col-lg-2" ng-if="temporal.typeroom && (rooms[temporal.typeroom].flag!=1)">
+								<label for="">{{"share.register.livings"|trans }}</label>
+									<select class="form-control my-select" style="width:100%"
+											ng-options="n for n in [] | range:0:10"
+											ng-model="temporal.numLiving"  ng-disabled="!temporal.typeroom || rooms[temporal.typeroom].flag==1"></select>
+							</div>
+							<div class="col-md-2 col-lg-2" ng-if="rooms[temporal.typeroom].flag==3 || rooms[temporal.typeroom].flag==2">
+								<label for="">{{"share.register.dresser"|trans }}</label>
+									<select class="form-control my-select" style="width:100%"
+											ng-options="n for n in [] | range:0:10" ng-model="temporal.dresser"
+											ng-disabled="!temporal.typeroom || rooms[temporal.typeroom].flag==1"></select>
+							</div>
+							<div class="col-md-2 col-lg-2" ng-if="rooms[temporal.typeroom].flag==3 || rooms[temporal.typeroom].flag==2">
+								<label for="">{{"share.register.diner"|trans }}</label>
+									<select class="form-control my-select" style="width:100%"
+											ng-options="n for n in [] | range:0:10" ng-model="temporal.diner"
+											ng-disabled="!temporal.typeroom || rooms[temporal.typeroom].flag==1"></select>
+							</div>
+							<div class="col-md-2 col-lg-2" ng-if="rooms[temporal.typeroom].flag==3 || rooms[temporal.typeroom].flag==2">
+								<label for="">{{"share.register.cooking"|trans }}</label>
+								<br>
+								 <md-switch ng-model="temporal.cooking" aria-label="Switch 4" class="md-warn">
+									    <span ng-if="temporal.cooking == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.cooking == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.cooking == null">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+						</div>
+
+						<div class="col-md-16 col-lg-16" style="margin-bottom:15px;" ng-class="{'has-error' : formRoom.availability3.$invalid}">
+							<div class="col-md-6 col-lg-7">
+								<label for="">{{"share.register.num_people"|trans }}</label>
+								<input type="number" name="availability3" style="width:50%;" class="form-control my-imput"
+										ng-model="room.numPeople" min="1" ng-pattern="/^\d+$/" required/>
+							  	<span ng-show="formRoom.availability3.$error.number" style="color:red;">
+	                                <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+	                                <br>
+	                            </span>
+	                            <span ng-show="formRoom.availability3.$error.min" style="color:red;">
+	                                <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+	                                <br>
+	                            </span>
+	                            <span ng-show="formRoom.availability3.$error.pattern" style="color:red;">
+		                            <strong class="error">{{"share.validation.only_integer"|trans }}</strong>
+		                        	<br>
+                           	 	</span>
+	                            <span ng-show="formRoom.availability3.$error.required" style="color:red;">
+		                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+		                        	<br>
+	                            </span>
+							</div>
+							<div class="col-md-2 col-lg-2" ng-if="rooms[temporal.typeroom].flag==3">
+								<label for="">{{"share.register.spa"|trans }}</label>
+								<br>
+								 <md-switch ng-model="temporal.spa" aria-label="Switch 5" class="md-warn">
+									    <span ng-if="temporal.spa == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.spa == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.spa == null">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+							<div class="col-md-2 col-lg-2" ng-if="rooms[temporal.typeroom].flag==3">
+								<label for="">{{"share.register.pool"|trans }}</label>
+								<br>
+								 <md-switch ng-model="temporal.pool" aria-label="Switch 6" class="md-warn">
+									    <span ng-if="temporal.pool == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.pool == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.pool == null">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+							<div class="col-md-3 col-lg-2" ng-if="rooms[temporal.typeroom].flag==3">
+								<label for="">{{"share.register.garden"|trans }}</label>
+								<br>
+								 <md-switch ng-model="temporal.garden" aria-label="Switch 7" class="md-warn">
+									    <span ng-if="temporal.garden == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.garden == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.garden == null">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+							<div class="col-md-3 col-lg-2" ng-if="rooms[temporal.typeroom].flag==3">
+								<label for="">{{"share.register.laundry"|trans }}</label>
+								<br>
+								 <md-switch ng-model="temporal.laundry" aria-label="Switch 8" class="md-warn">
+									    <span ng-if="temporal.laundry == true">{{ "share.message.yes"|trans }}</span>
+									    <span ng-if="temporal.laundry == false">{{ "share.message.no"|trans }}</span>
+									    <span ng-if="temporal.laundry == null">{{ "share.message.no"|trans }}</span>
+								</md-switch>
+							</div>
+						</div>
+                        <div class="col-md-16 col-lg-16" style="margin-bottom:15px;">
+
+                            <div
+                                class="col-md-6 col-lg-6"
+                                ng-class="{'has-error' : formRoom.minPeople.$invalid && formRoom.minPeople.$touched}"
+                            >
+                                <label class="tooltips tooltips-right" for="">
+                                    Minímo de personas permitidas por habitación
+                                </label>
+                                <input
+                                    type="number"
+                                    name="minPeople"
+                                    style="width:50%;"
+                                    class="form-control my-imput"
+                                    ng-focus="formRoom.minPeople.$setUntouched()"
+                                    ng-model="room.minPeople"
+                                    min="1"
+                                    ng-max="{[{ room.numPeople }]}"
+                                    ng-pattern="/^\d+$/"
+                                    required
+                               />
+							  	<span ng-show="formRoom.minPeople.$error.number" style="color:red;">
+	                                <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+	                                <br>
+	                            </span>
+	                            <span ng-show="formRoom.minPeople.$error.min" style="color:red;">
+	                                <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+	                                <br>
+	                            </span>
+	                            <span ng-show="formRoom.minPeople.$error.pattern" style="color:red;">
+		                            <strong class="error">{{"share.validation.only_integer"|trans }}</strong>
+		                        	<br>
+                           	 	</span>
+                                <span ng-show="formRoom.minPeople.$error.max" style="color:red;">
+                                    <strong class="error">
+                                        No debe ser mayor al número de personas permitidas
+                                    </strong>
+                                    <br>
+                                </span>
+	                            <span
+                                    ng-show="formRoom.minPeople.$error.required
+                                            && formRoom.minPeople.$touched"
+                                    style="color:red;"
+                                >
+		                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+		                        	<br>
+	                            </span>
+                            </div>
+
+                            <div
+                                class="col-md-6 col-lg-7"
+                                ng-class="{'has-error' : formRoom.availability10.$invalid}"
+                            >
+                                <label class="tooltips tooltips-right" for="">{{"share.register.base_availability"|trans }}
+                                    <i class="fa fn-info fa-x"></i>
+                                    <span style="width: 100% !important;margin-left: 30px !important;">{{"share.register.base_availability_tooltip"|trans }}</span>
+                                </label>
+                                <input type="number" name="availability10" style="width:50%;" class="form-control my-imput"
+                                       ng-model="room.baseAvailability" min="0" ng-max="{[{ basicQuota }]}" ng-pattern="/^\d+$/" required/>
+                                <span ng-show="formRoom.availability10.$error.number" style="color:red;">
+                                    <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+                                    <br>
+                                </span>
+                                <span ng-show="formRoom.availability10.$error.min" style="color:red;">
+                                    <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+                                    <br>
+                                </span>
+                                <span ng-show="formRoom.availability10.$error.pattern" style="color:red;">
+                                    <strong class="error">{{"share.validation.only_integer"|trans }}</strong>
+                                    <br>
+                                </span>
+                                <span ng-show="formRoom.availability10.$error.required" style="color:red;">
+                                    <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+                                    <br>
+                                </span>
+                            </div>
+
+                        </div>
+					</div>
+				</div>
+		</div>
+		<!--Precios -->
+		<div class="container form-font room-service" ng-if="temporal.typeroom!=null">
+			<div class="jumbotron form-font-top form-group panel-price-by-person">
+				<h3>
+					{{"share.register.price_politics"|trans }} -
+					{[{rooms.TypeRoom[temporal.typeroom].name}]}
+					<span ng-if="room.subroom">- {[{subroom_name}]}</span>
+				</h3>
+				<hr>
+
+				<div class="container">
+
+					{#<div class="row sub-title">
+						<div class="col-md-4 col-md-offset-1">
+							<h4> ¿Con qué tarifas cargo precios? </h4>
+							<span ng-if="rooms.rateType==2 && rooms.tax">{{ "extranet.message.sell_rate"|transchoice(1) }}</span>
+							<span ng-if="rooms.rateType==2 && !rooms.tax">{{ "extranet.message.sell_rate"|transchoice(2) }}</span>
+							<span ng-if="rooms.rateType==1 && rooms.tax">{{ "extranet.message.net_rate"|transchoice(1) }}</span>
+							<span ng-if="rooms.rateType==1 && !rooms.tax">{{ "extranet.message.net_rate"|transchoice(2) }}</span>
+						</div>
+					</div>#}
+
+					<div
+						class="row"
+						ng-if="room.numPeople>1">
+						<div
+							class="col-md-7 col-md-offset-1"
+							ng-class="{'col-md-15' : !room.prices.incrementKid && room.prices.increment}"
+							ng-show="rules.acceptsChild">
+							<h4>{{"ascribere.room.prices_change_by_number_kids"|trans }}</h4>
+							{#<i class="fa fn-select pull-rigth"></i>
+							<select
+								class="form-control select-price"
+								ng-model="room.prices.incrementKid"
+								ng-options="boolToStr(item) for item in [true, false]"
+								width="20%">
+								<option value="">{{"share.message.select"|trans }}</option>
+							</select>#}
+                            <md-switch
+                                    ng-model="room.prices.incrementKid"
+                                    aria-label="Switch 9"
+                                    class="md-warn">
+                                <span ng-if="room.prices.incrementKid == true">
+                                    {{ "share.message.yes"|trans }}
+                                </span>
+                                <span ng-if="room.prices.incrementKid == null || room.prices.incrementKid == false">
+                                    {{ "share.message.no"|trans }}
+                                </span>
+                            </md-switch>
+						</div>
+						{# ¿Adultos y niños pagan el mismo precio? #}
+						<div class="col-md-7 col-md-offset-1" ng-if="rules.acceptsChild && room.prices.incrementKid">
+							<h4>{{"ascribere.room.adults_and_children_pay_same"|trans }}</h4>
+							{#<i class="fa fn-select pull-rigth"></i>
+							<select
+								class="form-control select-price"
+								ng-model="room.prices.kidPayAsAdult"
+								ng-options="boolToStr(item) for item in [true, false]">
+								<option value="">{{"share.message.select"|trans }}</option>
+							</select>#}
+                            <md-switch
+                                    ng-model="room.prices.kidPayAsAdult"
+                                    aria-label="Switch 10"
+                                    class="md-warn">
+                                <span ng-if="room.prices.kidPayAsAdult == true">
+                                    {{ "share.message.yes"|trans }}
+                                </span>
+                                <span ng-if="room.prices.kidPayAsAdult == null || room.prices.kidPayAsAdult == false">
+                                    {{ "share.message.no"|trans }}
+                                </span>
+                            </md-switch>
+						</div>
+
+						{# ¿Tus precios cambian en función del número de adultos? #}
+						{#<div
+							ng-class="{'row' : !room.prices.kidPayAsAdult && room.prices.incrementKid && !room.prices.increment}">
+							<div>#}
+						<div class="col-md-7 col-md-offset-1"
+							ng-show="!rules.acceptsChild || room.prices.kidPayAsAdult==false || room.prices.incrementKid==false">
+							<h4 ng-if="room.prices.kidPayAsAdult || !rules.acceptsChild">
+								{{"ascribere.room.prices_change_by_number_people"|trans }}
+							</h4>
+							<h4 ng-if="!room.prices.kidPayAsAdult && rules.acceptsChild">
+								{{"ascribere.room.prices_change_by_number_adults"|trans }}
+							</h4>
+							{#<i class="fa fn-select pull-rigth"></i>
+							<select
+								class="form-control select-price"
+								ng-model="room.prices.increment"
+								ng-options="boolToStr(item) for item in [true, false]"
+								width="20%">
+								<option value="">{{"share.message.select"|trans }}</option>
+							</select>#}
+                            <md-switch
+                                ng-model="room.prices.increment"
+                                aria-label="Switch 11"
+                                class="md-warn">
+                                <span ng-if="room.prices.increment == true">
+                                    {{ "share.message.yes"|trans }}
+                                </span>
+                                <span ng-if="room.prices.increment == null || room.prices.increment == false">
+                                    {{ "share.message.no"|trans }}
+                                </span>
+                            </md-switch>
+						</div>
+                    </div>
+                    <div class="row">
+                        <div
+                            class="col-md-7 col-md-offset-1"
+                            ng-show="(room.prices.increment) || (room.prices.kidPayAsAdult)">
+
+    						{# ¿Cuál es el tipo de incremento? #}
+    						<div
+    							class="panel-increment"
+    							style="margin-left: 0;"
+    							ng-show="(room.prices.increment) || (room.prices.kidPayAsAdult)">
+    							<h4 ng-if="room.prices.kidPayAsAdult || !rules.acceptsChild">
+    								{{"ascribere.room.type_increment_by_person"|trans }}
+    							</h4>
+    							<h4 ng-if="!room.prices.kidPayAsAdult && rules.acceptsChild">
+    								{{"ascribere.room.type_increment_by_adult"|trans }}
+    							</h4>
+    							<div class="col-xs-8 type-increment">
+    								<h4>Tipo de incremento</h4>
+    							</div>
+    							<div class="col-xs-8 type-increment">
+    								<i class="fa fn-select pull-rigth"></i>
+    								<select
+    									class="form-control select-price"
+    									ng-model="room.prices.variationTypePeople"
+    									convert-to-number>
+    									<option value="1">%</option>
+    									<option value="2">Bs</option>
+    								</select>
+    							</div>
+    							<div
+    								style="margin:0;"
+    								ng-show="room.prices.sameIncrementAdult">
+    								<div class="col-xs-8 type-increment">
+    									<h4>Incremento en {[{getTypeIncrement(room.prices.variationTypePeople)}]} por persona</h4>
+    								</div>
+    							</div>
+    							<section class="col-md-12">
+    								<h4 ng-if="room.prices.variationTypePeople==1">
+    								{{"ascribere.room.percentage_increase_by"|transchoice(0) }}
+    								{{"word.person"|trans }}
+    								</h4>
+    								<h4 ng-if="room.prices.variationTypePeople!=1">
+    									{{"ascribere.room.percentage_increase_by"|transchoice(1) }}
+    									{{"word.person"|trans}}
+    								</h4>
+    								<div class="col-xs-10 tooltips tooltips-top" style="padding-left: 0;">
+    									<i class="fa fn-info fa-x"></i>
+    									{{"ascribere.room.charging_prices"|trans }}
+    									<span style="width:300px; margin-left:-51%;">
+    										{{"ascribere.room.calculate_all_increments"|trans }}
+    									</span>
+    								</div>
+    								<div class="col-xs-6">
+    									<input
+    										class="form-control my-imput"
+    										ng-model="simulator.priceSimulate"
+    										type="number"
+    										style="margin-left:16%; margin-top:-4%;"
+    										ng-disabled="!pricesConfigured"
+    										max="99999999">
+    								</div>
+    								<div class="col-xs-5" style="padding: 0;">
+    									<h5>Personas</h5>
+    									<div
+    										ng-repeat="i in getNumber(room.numPeople - room.minPeople) track by $index"
+    										ng-if="rules.acceptsChild === false"
+    										class="num-person">
+    										<span>{[{ room.minPeople + $index + 1 }]} adultos</span>
+    									</div>
+                                        <div
+                                            ng-repeat="i in getNumber(room.numPeople) track by $index"
+                                            ng-if="$index>0 && rules.acceptsChild === true"
+                                            class="num-person">
+                                            <span>{[{ $index + 1 }]} adultos</span>
+                                        </div>
+    								</div>
+    								<div class="col-xs-6" style="padding: 0; padding-left: 4%;">
+    									<h5 class="tooltips tooltips-top">
+                                            <i class="fa fn-info fa-x"></i>
+                                            {{"share.register.increase_question"|transchoice(1) }}
+                                            <span style="width:280px; margin-left:-55%;">
+                                                {{"share.register.increase_question_tooltip" |trans }}
+                                            </span>
+                                        </h5>
+    									<div
+    										ng-repeat="i in getNumber(room.numPeople - room.minPeople ) track by $index"
+    										ng-if="rules.acceptsChild === false"
+                                        >
+    										<input
+    											type="number"
+    											ng-model="room.prices.ratePeople[room.minPeople + $index].amountRate"
+    											class="form-control my-imput"
+    											name="person" ng-min="0">
+    									</div>
+                                        <div
+                                            ng-repeat="i in getNumber(room.numPeople) track by $index"
+                                            ng-if="$index>0 && rules.acceptsChild === true"
+                                        >
+                                            <input
+                                                type="number"
+                                                ng-model="room.prices.ratePeople[$index].amountRate"
+                                                class="form-control my-imput"
+                                                name="person" ng-min="0">
+                                        </div>
+    								</div>
+    								<div
+                                        class="col-xs-5"
+                                        style="padding: 0; padding-left:2%;"
+                                        ng-if="simulator.priceSimulate"
+                                    >
+    									<h5 ng-if="rules.rateType==2 && rules.tax">
+    										{{ "extranet.message.sell_rate"|transchoice(4) }}
+    									</h5>
+    									<h5 ng-if="rules.rateType==2 && !rules.tax">
+    										{{ "extranet.message.sell_rate"|transchoice(5) }}
+    									</h5>
+    									<h5 ng-if="rules.rateType==1 && rules.tax">
+    										{{ "extranet.message.net_rate"|transchoice(4) }}
+    									</h5>
+    									<h5 ng-if="rules.rateType==1 && !rules.tax">
+    										{{ "extranet.message.net_rate"|transchoice(5) }}
+    									</h5>
+    									<div
+                                            ng-repeat="rate in pricesByAdults track by $index"
+    										ng-if="$index>0 && rules.acceptsChild === true"
+                                            class="num-person"
+                                            style="margin-right: 0px;"
+                                        >
+    										<span ng-if="rules.rateType==2">
+    											{[{ rate.sellRate | number:0 }]}Bs.
+    										</span>
+    										<span ng-if="rules.rateType==1">
+    											{[{ rate.netRate | number:0 }]}Bs.
+    										</span>
+    									</div>
+                                        <div
+                                            ng-repeat="rate in pricesByAdults track by $index"
+                                            ng-if="$index>2 && rules.acceptsChild === false"
+                                            class="num-person"
+                                            style="margin-right: 0px;"
+                                        >
+                                            <span ng-if="rules.rateType==2">
+                                                {[{ rate.sellRate | number:0 }]}Bs.
+                                            </span>
+                                            <span ng-if="rules.rateType==1">
+                                                {[{ rate.netRate | number:0 }]}Bs.
+                                            </span>
+                                       </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+						{# ¿Tus precios cambian en función del número de niños? #}
+						<div
+							class="col-md-7 col-md-offset-1 childBox"
+							ng-show="room.prices.kidPayAsAdult==false && rules.acceptsChild"
+                            ng-repeat="policy in agePolicy.child track by $index"
+                        >
+							<!--Niños -->
+							<div class="panel-increment-child" ng-show="room.prices.incrementKid==true && room.prices.increment!=null">
+								<div
+								 	ng-class="{'space-up': !room.prices.kidPayAsAdult && rules.acceptsChild && room.prices.increment}"
+									class="row"
+									style="margin:0;">
+									<h4> {{"ascribere.room.type_increment_by_kid"|trans }} </h4>
+
+									<div class="col-xs-8 type-increment">
+										<h4> {{"ascribere.room.type_increase"|trans }} </h4>
+									</div>
+									<div class="col-xs-8 type-increment">
+										<i class="fa fn-select pull-rigth"></i>
+										<select
+											class="form-control select-price"
+											ng-model="room.prices.variationTypeKid[$index]"
+											convert-to-number>
+											<option value="1">%</option>
+											<option value="2">Bs</option>
+										</select>
+									</div>
+								</div>
+								<section
+									class="col-xs-12"
+									style="margin:0;">
+                                    <h4 ng-if="room.prices.variationTypeKid[$index]==1">
+                                        {{"ascribere.room.percentage_increase_by"|transchoice(0) }}
+                                        {{"word.children"|transchoice(1) }}
+                                        {[{ policy[0] }]} - {[{ policy[1] }]}
+                                    </h4>
+                                    <h4 ng-if="room.prices.variationTypeKid[$index]!=1">
+                                        {{"ascribere.room.percentage_increase_by"|transchoice(1) }}
+                                        {{"word.children"|transchoice(1) }}
+                                        {[{ policy[0] }]} - {[{ policy[1] }]}
+                                    </h4>
+									<div
+										class="col-xs-10 tooltips tooltips-top"
+										style="padding-left: 0;"
+										ng-if="room.prices.incrementKid && !room.prices.increment">
+										<i class="fa fn-info fa-x"></i>
+										{{"ascribere.room.charging_prices"|trans }}
+										<span style="width:500px; margin-left:-51%;">
+											{{"ascribere.room.calculate_all_increments"|trans }}
+										</span>
+									</div>
+									<div
+										class="col-xs-6"
+										ng-if="room.prices.incrementKid && !room.prices.increment">
+										<input
+											class="form-control my-imput"
+											ng-model="simulator.priceSimulate"
+											type="number"
+											style="margin-left:16%; margin-top:-4%;"
+											ng-disabled="!pricesConfigured">
+									</div>
+									<div class="col-xs-5" style="padding: 0;">
+										<h5>{{"word.children"|transchoice(2) }}</h5>
+										<div ng-repeat="i in getNumber(room.numKids) track by $index" class="num-person">
+											<span>{[{ $index + 1 }]} {{"word.children"|transchoice(0) }}</span>
+										</div>
+									</div>
+									<div class="col-xs-6" style="padding: 0; padding-left: 4%;">
+										<h5 class="tooltips tooltips-top">
+                                                <i class="fa fn-info fa-x"></i>
+                                                {{"share.register.increase_question"|transchoice(1) }}
+                                                <span style="width:280px; margin-left:-55%;">
+                                                    {{"share.register.increase_question_tooltip" |trans }}
+                                                </span>
+                                            </h5>
+										<div ng-repeat="i in getNumber(room.numKids) track by $index">
+											<input
+												type="number"
+												ng-model="room.prices.rateKids[$parent.$index][$index].amountRate"
+												class="form-control my-imput"
+												name="kid" ng-min="0">
+										</div>
+									</div>
+									<div class="col-xs-5" style="padding: 0; padding-left:2%;" ng-if="simulator.priceSimulate">
+                                        <h5 ng-if="rules.rateType==2 && rules.tax">{{ "extranet.message.sell_rate"|transchoice(4) }}</h5>
+                                        <h5 ng-if="rules.rateType==2 && !rules.tax">{{ "extranet.message.sell_rate"|transchoice(5) }}</h5>
+                                        <h5 ng-if="rules.rateType==1 && rules.tax">{{ "extranet.message.net_rate"|transchoice(4) }}</h5>
+                                        <h5 ng-if="rules.rateType==1 && !rules.tax">{{ "extranet.message.net_rate"|transchoice(5) }}</h5>
+                                        <div ng-repeat="rate in pricesByKids[$parent.$index] track by $index"
+                                            class="num-person" style="margin-right: 0px;">
+                                            <span ng-if="rules.rateType==2">
+                                                {[{ rate.sellRate | number:0 }]}Bs.
+                                            </span>
+                                            <span ng-if="rules.rateType==1">
+                                                {[{ rate.netRate | number:0 }]}Bs.
+                                            </span>
+                                        </div>
+                                    </div>
+								</section>
+							</div>
+						</div>
+
+    					<!--Simulador -->
+    					<div
+    						class="col-xs-12 col-md-7 col-md-offset-1 simulator"
+    						style="margin-left: 4.25%;"
+    						{#ng-class="{'simulator-right' : !room.prices.kidPayAsAdult && room.prices.increment && rules.acceptsChild,
+    								   'simulator-space-up' : (rules.acceptsChild && room.prices.incrementKid==false && room.prices.increment ||
+    														  room.prices.incrementKid && room.prices.increment==false && room.prices.kidPayAsAdult==false)
+    														  && room.numPeople>1}"#}
+    						ng-if="pricesConfigured">
+    						<h4>{{"ascribere.room.price_simulator"|trans }}</h4>
+    						<section class="text-simulator">
+    							<i class="fa fn-info fa-x"></i>
+    							{{"ascribere.room.facilitate_loading_pricing"|trans }}
+    						</section>
+
+    						<section class="row">
+    							<div class="col-xs-16">
+    								<strong>{{"ascribere.room.section_price_simulator"|trans }}<strong>
+    							</div>
+    							<br>
+    							<div
+    								class="col-xs-12 tooltips tooltips-top text-price"
+    								ng-if="room.numPeople==1 || !room.prices.increment && !room.prices.incrementKid">
+    								<i class="fa fn-info fa-x"></i>
+    								{{"ascribere.room.charging_prices"|trans }} navicu.com
+    								<span style="width:500px; margin-left:-51%;">
+    									{{"ascribere.room.calculate_all_increments"|trans }}
+    								</span>
+    							</div>
+    							<div
+    								class="col-xs-4"
+    								ng-if="room.numPeople==1 || !room.prices.increment && !room.prices.incrementKid">
+    								<input
+    									class="form-control"
+    									ng-model="simulator.priceSimulate"
+    									type="number">
+    							</div>
+    							<div class="col-xs-16" style="margin-top: 16px;">
+    								<h4>{{"ascribere.room.seach_simulator"|trans }} </h4>
+    								<div class="row box-simulator">
+                                        <div class="col-xs-8">
+                                            <label> {{"word.adult"|transchoice(2) }}</label>
+                                            <select
+                                                class="form-control my-select"
+                                                ng-model="simulator.numPersons.adults"
+                                                number-converter>
+                                                <option
+                                                    ng-repeat="n in [] | range:1:room.numPeople"
+                                                    value="{[{n}]}">{[{n}]}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-8"
+                                             ng-repeat="policy in agePolicy.child track by $index"
+                                             ng-if="!room.prices.kidPayAsAdult"
+                                        >
+                                            <label>{{"word.children"|transchoice(2) }} {[{ policy[0] }]} - {[{ policy[1] }]}</label>
+                                            <select
+                                                class="form-control my-select"
+                                                ng-model="simulator.numPersons.kids[$index]"
+                                                number-converter>
+                                                <option
+                                                    ng-repeat="n in [] | range:0:calculateSimulatorRange($index)"
+                                                    value="{[{n}]}">{[{n}]}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <hr>
+    									<div class="row">
+    										<div class="col-xs-8" style="padding-left: 5%;">
+    											{{"ascribere.room.client_will_pay"|trans }}
+    										</div>
+    										<div class="col-xs-5 col-xs-offset-1">
+    											<p class="result"> {[{simulator.sellRate | number:0}]} Bs</p>
+    										</div>
+    										<span style="color: #EDA900; font-size: 7pt; margin-left: -10px;">
+    											{{"ascribere.room.tax_included"|trans }}
+    										</span>
+    									</div>
+    									<div class="row">
+    										<div class="col-xs-8" style="padding-left: 5%;">
+    											{{"ascribere.room.your_establishment_receives"|trans }}
+    										</div>
+    										<div class="col-xs-5 col-xs-offset-1">
+    											<p class="result"> {[{simulator.netRate | number:0}]} Bs</p>
+    										</div>
+    										<span style="color: #EDA900; font-size: 7pt; margin-left: -10px;">
+    											{{"ascribere.room.tax_included"|trans }}
+    										</span>
+    									</div>
+    									<div class="row">
+    										<div class="col-xs-8" style="padding-left: 5%;">
+    											{{"ascribere.room.your_establishment_receives"|trans }}
+    										</div>
+    										<div class="col-xs-5 col-xs-offset-1">
+    											<p class="result"> {[{simulator.netRateWithoutIva| number:0}]} Bs</p>
+    										</div>
+    										<span style="color: #EDA900; font-size: 7pt; margin-left: -10px;">
+    											{{"ascribere.room.tax_free"|trans }}
+    										</span>
+    									</div>
+    								</div>
+    							</div>
+    						</section>
+    					</div>
+				    </div>
+                </div>
+            </div>
+        </div>
+		<!--Features -->
+		<div class="container form-font room-service" >
+			<div class="jumbotron form-font-top form-group ">
+				<div class="container form-font">
+					<div class="col-md-12 col-lg-9  right">
+						<h3 class="tooltips tooltips-right">
+							{{"share.register.service_room"|trans }} <i class="fa fn-info fa-x"></i>
+							<span style="margin-left:-5px; margin-top:-20px;">{{"share.tooltip.service_room"|trans }}</span>
+						</h3>
+					</div>
+				</div>
+				<br>
+				<div class="container" style="color:#808080">
+					<h3>{{"share.register.room"|transchoice(1) }}</h3>
+					<br>
+					<div class="col-md-8 col-lg-5" ng-repeat="(id, feature) in featuresRoomBeedRoom track by $index">
+						<md-checkbox aria-label="" ng-if="feature.length!=0" ng-model="room.featuresRoomBeedRoom[feature.id]">
+				         	{[{feature.name}]}
+				        </md-checkbox>
+						<br>
+					</div>
+				</div>
+				<div class="container" style="color:#808080">
+					<h3>{{"share.register.bath"|transchoice(1) }}</h3>
+					<br>
+					<div class="col-md-8 col-lg-5" ng-repeat="(id, feature) in featuresRoomBath track by $index">
+						<md-checkbox aria-label="" ng-if="feature.length!=0" ng-model="room.featuresRoomBath[feature.id]">
+				         	{[{feature.name}]}
+				        </md-checkbox>
+						<br>
+					</div>
+					<br>
+				</div>
+				<div class="container" style="color:#808080">
+					<h3>{{"share.register.other"|trans }}</h3>
+					<br>
+					<div class="col-md-8 col-lg-5" ng-repeat="(id, feature) in featuresRoomOthers track by $index">
+						<md-checkbox aria-label="" ng-if="feature.length!=0" ng-model="room.featuresRoomOthers[feature.id]">
+				         	{[{feature.name}]}
+				        </md-checkbox>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Camas -->
+		<div class="container form-font room-service" ng-if="rooms[temporal.typeroom].flag==1" ng-repeat-n="room.numBedroom">
+			<div class="jumbotron form-font-top form-group " ng-init="indexNumBeds = $index">
+				<div class="container form-font">
+					<div class="col-md-6 right"><h3>{{"share.register.combinations_bed"|trans }} {[{flagBed+$index}]}</h3></div>
+					<div class="col-md-8"></div>
+					<div class="col-md-2 left"></div>
+				</div>
+				<br>
+				<div class="container" style="color:#808080">
+					<div>
+						<div  ng-repeat="bed in room.combinationsBeds[indexNumBeds].beds">
+							<ng-form name="formBeds">
+								<div class="col-md-6 col-lg-7" ng-class="{'has-error' : formBeds.availability4.$invalid && formBeds.availability4.$touched}">
+									<label for="">{{"share.register.type_bed_room"|trans }}</label>
+									<select class="form-control my-select"
+											style="width:50%" name="availability4"
+											ng-model="room.combinationsBeds[indexNumBeds].beds[$index].typeBed"
+											ng-options="val.id as val.name for (bedselected, val) in typeBeds " required>
+										<option value=''>{{"share.register.select"|trans }}</option>
+									</select>
+		                            <span ng-show="formBeds.availability4.$error.required && formBeds.availability4.$touched" style="color:red;">
+			                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+			                        	<br>
+		                            </span>
+									<br>
+								</div>
+								<div class="col-md-5 col-lg-4" ng-class="{'has-error' : formBeds.availability44.$invalid && formBeds.availability44.$touched}">
+									<label for="">{{"share.register.num_bed"|trans }}</label>
+									<select class="form-control my-select" style="width:70%"
+											ng-options="n for n in [] | range:1:10" name="availability44"
+											{#ng-init="room.combinationsBeds[indexNumBeds].beds[$index].numTypeBed=1" #}
+											ng-model="room.combinationsBeds[indexNumBeds].beds[$index].numTypeBed" required>
+									</select>
+		                            <span ng-show="formBeds.availability44.$error.required && formBeds.availability44.$touched" style="color:red;">
+			                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+			                        	<br>
+		                            </span>
+									<br>
+								</div>
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<button type="button" class="btn btn-primary" ng-click="deleteBed($index,indexNumBeds);" style="width:80%; margin-top:25px;"><i class="fa fa-times-circle-o  fa-lg"></i> Eliminar cama</button>
+								</div>
+							</ng-form>
+						</div>
+						<div class="col-md-9">
+							<div align="left">
+								<button type="button" class="btn btn-primary" ng-click="addBed(indexNumBeds);" ><i class="fa fa-plus-circle fa-lg"></i> Agregar cama</button>
+							</div>
+							<br>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!--Dormitorios -->
+		<div class="container form-font room-service" ng-if="rooms[temporal.typeroom].flag==3 || rooms[temporal.typeroom].flag==2" ng-repeat-n="room.numBedroom">
+			<div class="jumbotron form-font-top form-group " ng-init="indexNumBeds = $index">
+				<div class="container form-font">
+					<div class="col-md-6 right"><h3>{{"share.register.bedroom"|trans }} {[{flagBedroom+$index}]}</h3></div>
+					<div class="col-md-8"></div>
+					<div class="col-md-2 left"></div>
+				</div>
+				<br>
+				<div class="container" style="color:#808080">
+					<div>
+						<div  ng-repeat="bed in room.combinationsBeds[indexNumBeds].beds">
+							<ng-form name="formBedRoom">
+								<div class="col-md-6 col-lg-7" ng-class="{'has-error' : formBedRoom.availability5.$invalid && formBedRoom.availability5.$touched}">
+									<label for="">{{"share.register.type_bed_bedroom"|trans }}</label>
+									<select class="form-control my-select" style="width:50%" name="availability5"
+											ng-model="room.combinationsBeds[indexNumBeds].beds[$index].typeBed"
+											ng-options="val.id as val.name for (bedselected, val) in typeBeds " required>
+										<option value=''>{{"share.register.select"|trans }}</option>
+									</select>
+		                            <span ng-show="formBedRoom.availability5.$error.required && formBedRoom.availability5.$touched" style="color:red;">
+			                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+			                        	<br>
+		                            </span>
+									<br>
+								</div>
+								<div class="col-md-5 col-lg-4" ng-class="{'has-error': formBedRoom.availability55.$invalid  && formBedRoom.availability55.$touched}">
+									<label for="">{{"share.register.num_bed"|trans }}</label>
+									<select class="form-control my-select" style="width:70%" name="availability55"
+											ng-options="n for n in [] | range:1:10"
+											{#ng-init="room.combinationsBeds[indexNumBeds].beds[$index].numTypeBed=1" #}
+											ng-model="room.combinationsBeds[indexNumBeds].beds[$index].numTypeBed" required>
+									</select>
+		                            <span ng-show="formBedRoom.availability55.$error.required  && formBedRoom.availability55.$touched" style="color:red;">
+			                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+			                        	<br>
+		                            </span>
+		                            <br>
+								</div>
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<button type="button" class="btn btn-primary" ng-click="deleteBed($index,indexNumBeds);" style="width:80%; margin-top:25px;"><i class="fa fa-times-circle-o  fa-lg"></i> Eliminar cama</button>
+								</div>
+							</ng-form>
+						</div>
+						<ng-form name="formBedRoom2">
+							<div class="col-md-9" ng-class="{'has-error' : formBedRoom2.availability6.$invalid  && formBedRoom2.availability6.$touched}">
+								<div align="left"><button type="button" class="btn btn-primary"  ng-click="addBed(indexNumBeds);" ><i class="fa fa-plus-circle fa-lg"></i> Agregar cama</button></div>
+								<br>
+								<label for="">{{"share.register.num_people_bedroom"|trans }} {[{flagBedroom+$index}]}?</label>
+								<input type="number" class="form-control my-imput" name="availability6" style="width:30%;"
+									{#ng-init="room.combinationsBeds[indexNumBeds].numPersonBedroom=1"#}
+									ng-model="room.combinationsBeds[indexNumBeds].numPersonBedroom "
+									min="1" ng-max="room.numPeople" required
+									ng-change="room.validNumPerson=validateNumPerson(room);">
+							  	<span ng-show="formBedRoom2.availability6.$error.number" style="color:red;">
+		                            <strong class="error">{{"share.validation.only_number"|trans }}</strong>
+		                            <br>
+		                        </span>
+		                        <span ng-show="formBedRoom2.availability6.$error.min" style="color:red;">
+		                            <strong class="error">{{"share.validation.enter_more_one"|trans }}</strong>
+		                            <br>
+		                        </span>
+		                        <span ng-show="room.validNumPerson==false" style="color:red;">
+		                            <strong class="error">{{"share.validation.max_room"|trans }}</strong>
+		                            <br>
+		                        </span>
+		                        <span ng-show="formBedRoom2.availability6.$error.required  && formBedRoom2.availability6.$touched" style="color:red;">
+		                            <strong class="error">{{"share.validation.input_required"|trans }}</strong>
+		                        	<br>
+		                        </span>
+							</div>
+						</ng-form>
+						<div class="col-md-6 col-lg-4" style="margin-top:53px;">
+							<label for="">{{"share.register.bath_bedroom"|trans }}*</label>
+							 <md-switch ng-model="room.combinationsBeds[indexNumBeds].bathBedroom" aria-label="Switch 2" class="md-warn" >
+							    <span ng-if="room.combinationsBeds[indexNumBeds].bathBedroom == true">{{ "share.message.yes"|trans }}</span>
+							    <span ng-if="room.combinationsBeds[indexNumBeds].bathBedroom == false">{{ "share.message.no"|trans }}</span>
+							 </md-switch>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Salones -->
+		<div class="container form-font room-service" ng-if="rooms[temporal.typeroom].flag==3 || rooms[temporal.typeroom].flag==2" ng-repeat-n="temporal.numLiving">
+			<ng-form name="formLiving">
+				<div class="jumbotron form-font-top form-group ">
+					<div class="container form-font">
+						<div class="col-md-6 right"><h3>{{"share.register.livings"|trans }} {[{flagLiving+$index}]}</h3></div>
+						<div class="col-md-8"></div>
+						<div class="col-md-2 left"></div>
+					</div>
+					<br>
+					<div class="container" style="color:#808080">
+						<div class="col-md-8 col-lg-9">
+							<label for="">{{"share.register.livings_couch"|trans }}*</label>
+							<select class="form-control my-select" style="width:30%"
+									ng-options="n for n in [] | range:0:10"
+									{#ng-init="temporal.livings[$index].numCouchRoom=1"#}
+									ng-model="temporal.livings[$index].numCouchRoom"></select>
+						</div>
+						<div class="col-md-8 col-lg-5">
+							<label for="">{{"share.register.livings_num_people"|trans }}</label>
+							<select class="form-control my-select" style="width:50%"
+									ng-options="n for n in [] | range:0:10"
+									{#ng-init="temporal.livings[$index].numLivingPerson=1"#}
+									ng-model="temporal.livings[$index].numLivingPerson"></select>
+						</div>
+						<div class="col-md-3">
+						</div>
+					</div>
+				</div>
+			</ng-form>
+		</div>
+		<!--Boton de Continuar -->
+		<div class="container">
+			<div class="col-md-16"><hr class="hr-style"></div>
+		</div>
+		<div class="container">
+			<div ng-if="formRoom.$invalid && formRoom.$dirty"
+			class="pull-left" style="color:red; align"><strong>{{"share.validation.add_room"|trans }}</strong></div>
+		</div>
+		<div align="center">
+			<a href="">
+				<button type="button" class="btn btn-primary btn-search-list"
+					ng-click="roomsubmission('rooms');"
+					ng-disabled="formRoom.$invalid || room.validNumPerson==false || !pricesConfigured">
+					{{"share.register.save"|trans }}
+				</button>
+			</a>
+		</div>
+		<br>
+	</form>
+
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalSuccessRoom.html.twig") }}
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalErrordata.html.twig") }}
+	{{ include("NavicuInfrastructureBundle:Ascribere:PropertyForm/Partials/modalLoading.html.twig") }}
+
+
+</div>
+{% endblock body %}
+
+{% block javascripts%}
+	{{parent()}}
+	<script type="text/javascript">
+		var extension = "{{ app.request.attributes.get('extension') }}";
+
+        var response = "{{ data }}";
+		var div = document.createElement('div');
+		div.innerHTML = response;
+		response = div.firstChild.nodeValue;
+		response = JSON.parse(response);
+		var slug = "{{ slugTemp}}";
+		console.log("rooms", response);
+    </script>
+	<script>
+		$(document).ready(function(){
+		    $('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}

@@ -1,0 +1,293 @@
+{% extends "NavicuInfrastructureBundle:Email:layout.html.twig" %}
+
+{% block body %}
+    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;">
+        <tr>
+            <td align="center" valign="top" id="bodyCell">
+
+                <!-- EMAIL HEADER // -->
+                <!--
+                    The table "emailBody" is the email's container.
+                    Its width can be set to 100% for a color band
+                    that spans the width of the page.
+                -->
+                <table bgcolor="#391462" border="0" cellpadding="0" cellspacing="0" width="500" id="emailHeader">
+
+                    <!-- HEADER ROW // -->
+                    <tr>
+                        <td align="center" valign="top">
+                            <!-- CENTERING TABLE // -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="600px">
+                                <tr>
+                                    <td align="left" valign="top">
+                                        <!-- FLEXIBLE CONTAINER // -->
+                                        <table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
+                                            <tr>
+                                                <td valign="top" width="600" class="flexibleContainerCell">
+
+                                                    <!-- CONTENT TABLE // -->
+                                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td style="padding-left:25px;padding-top: 18px;padding-bottom: 18px">
+                                                                <img src="http://navicu.com/images/logo-correo.png" style="width:200px;" width="200px">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- // FLEXIBLE CONTAINER -->
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- // CENTERING TABLE -->
+                        </td>
+                    </tr>
+                    <!-- // END -->
+
+                </table>
+                <!-- // END -->
+
+                <!-- EMAIL BODY // -->
+                <!--
+                    The table "emailBody" is the email's container.
+                    Its width can be set to 100% for a color band
+                    that spans the width of the page.
+                -->
+                <table bgcolor="#FFFFFF"  border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody">
+
+                    <!-- MODULE ROW // -->
+                    <!--
+                        To move or duplicate any of the design patterns
+                        in this email, simply move or copy the entire
+                        MODULE ROW section for each content block.
+                    -->
+                    <tr>
+                        <td align="center" valign="top">
+                            <!-- CENTERING TABLE // -->
+                            <!--
+                                The centering table keeps the content
+                                tables centered in the emailBody table,
+                                in case its width is set to 100%.
+                            -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                                <tr>
+                                    <td style="height:37px;background-color: #EC285B;padding-left: 25px;font-weight: bold">
+                                        <span style="font-weight: bold;font-family: arial,sans-serif;font-size:17px">
+                                            Freddy Contreras, su reserva está cancelada
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;width: 600px" >
+                                <tr style="line-height: 0px">
+                                    <td align="center" valign="top" >
+                                        <img src="https://www.navicu.com/uploads/images/images_email/property/hesperia-playa-el-agua/rooms/Habitación%20Premium%20-%20Vista%20al%20jardín/navicu_reserva_online_mejor_precio_garantizado_Hesperia%20Playa%20el%20Agua_Habitación_2147501988.jpeg" width="600px">
+                                    </td>
+                                </tr>
+                                <tr style="line-height: 0px">
+                                    <td align="center" valign="top">
+                                        <img src="http://navicu.com/images/navicu/corporate_line.png" style="width: 600px" width="600px">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                                <tr>
+                                    <td class="line" align="left" valign="top" style="padding-left: 25px;padding-top: 15px">
+                                        <span style="color:#391462;font-weight: bold;font-size:22px !important;">HESPERIA PLAYA EL AGUA</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" width="600px" style="color:#FFFFFF;" align="left" >
+                                <tr >
+                                    <td style="padding-left: 15px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="200px" style="color:#FFFFFF;" align="left" >
+                                            <tr>
+                                                {% for i in 1..5 %}
+                                                    <td style="width: 20%;">
+                                                        <img src="http://navicu.com/images/navicu/star.png" style="padding-left: 10px;width: 20px">
+                                                    </td>
+                                                {% endfor %}
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" >
+                                <tr>
+                                    <td class="line" style="padding-left: 25px;">
+                                        <span style="color:#B3B3B3;font-weight: normal;font-size: 16.666667px">Av. 31 de Julio (Sector la Mira)</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                                <tr style="vertical-align: top">
+                                    <td width="50%" style="padding-left: 25px;">
+                                        <span style="color:#391462;font-weight: bold;font-size: 17px">
+                                            ID reserva
+                                        </span >
+                                    </td>
+                                    <td>
+                                        <span style="color:#391462;font-weight: bold;font-size: 17px">
+                                            ID cancelación de reserva
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  width="50%" style="padding-left: 25px;">
+                                        <span style="color:#AA196E;font-weight: bold;font-size: 17px">
+                                            56c5d813
+                                        </span >
+                                    </td>
+                                    <td>
+                                        <span style="color:#AA196E;font-weight: bold;font-size: 17px">
+                                            56c5d813
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <td width="50%" style="padding-left: 25px;padding-top: 10px">
+                                        <span style="color:#391462;font-weight: bold;font-size: 17px">
+                                            Fecha creación de la reserva
+                                        </span >
+                                    </td>
+                                    <td style="padding-top: 10px">
+                                        <span style="color:#391462;font-weight: bold;font-size: 17px;">
+                                            Fecha cancelación de la reserva
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50%" style="padding-left: 25px;padding-bottom: 10px">
+                                        <span style="color:#AA196E;font-weight: bold;font-size: 17px;padding-bottom: 10px">
+                                           11-03-2016
+                                        </span >
+                                    </td>
+                                    <td style="padding-bottom: 10px">
+                                        <span style="color:#AA196E;font-weight: bold;font-size: 17px;padding-bottom: 10px">
+                                            11-03-2016
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F2F2F2;min-height: 98px !important;">
+                                <tr >
+                                    <td width="100%" style="padding-left: 25px;" width="100%">
+                                        <span style="color:#572A85;font-size:16px;font-weight: bold">Nombre de la reserva Freddy Contreras </span>
+                                    </td>
+                                </tr>
+                                <tr  >
+                                    <td style="padding-left: 25px;padding-top: 0px" width="100%">
+                                        <span style="color:#391462;font-size:16px;"><span style="font-weight: bold">CI </span> 21335506</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 25px;" width="100%">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td width="50%">
+                                                    <span style="color:#391462;font-size:16px"><span style="font-weight: bold">E-mail </span> freddycontreras3@gmail.com</span>
+                                                </td>
+                                                <td width="50%">
+                                                    <span style="color:#391462;font-size:16px"><span style="font-weight: bold">Teléfono </span> freddycontreras3@gmail.com</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #D8D8D8;min-height: 70px !important;">
+                                <tr>
+                                    <td  style="padding-left: 25px" width="100%">
+                                        <span style="color:#572A85;font-weight: bold;font-size: 16px">Datos de la reserva</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 25px" width="100%">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td width="50%">
+                                                    <span style="color:#572A85;font-size:16px"><span style="font-weight: bold">Check-in </span> 11-03-2016</span>
+                                                </td>
+                                                <td width="50%">
+                                                    <span style="color:#572A85;font-size:16px"><span style="font-weight: bold">Check-out </span> 11-03-2016</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            {% for i in 1..2 %}
+                                {% if loop.index is divisible by(2) %}
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #B7B7B7;height: 70px !important;">
+                                {% else %}
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #E6E6E6;height: 70px !important;">
+                                    {% endif %}
+                                    <tr>
+                                        <td width="40%" style="padding-left: 25px;">
+                                            <span style="color:#572A85;font-size:13px"><span style="font-weight: bold">Nº de habitaciones </span> 2</span>
+                                        </td>
+                                        <td width="40%">
+                                            <span style="color:#572A85;font-size:13px"><span style="font-weight: bold">Tipo de habitación </span> Habitación Doble - Vista a la montaña</span>
+                                        </td>
+                                        <td width="10%">
+                                            <span style="color:#572A85;font-size:13px"><span style="font-weight: bold">Adultos </span> 2</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" style="padding-left: 25px;">
+                                            <span style="color:#572A85;font-size:13px"><span style="font-weight: bold">Tipo de servicio </span> Solo habitación</span>
+                                        </td>
+
+                                            <td width="35%">
+                                                <span style="color:#572A85;font-size:13px"><span style="font-weight: bold">Tipo de cama </span> Doble 140 cm de ancho</span>
+                                            </td>
+
+                                            <td width="20%">
+                                                <span style="color:#572A85;font-size:13px"><span style="font-weight: bold">Niños </span> 0</span>
+                                            </td>
+
+                                    </tr>
+                                </table>
+                                {% endfor %}
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #D8D8D8;height: 50px !important;width: 600px">
+                                    <tr>
+                                        <td style="padding-left: 25px;width: 600px">
+                                            <span style="font-weight: bold;font-size:20px;color:#666666">Total pagado Bs 24.107,14</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="height: 75px !important;">
+                                    <tr>
+                                        <td style="padding-left: 25px;padding-top: 5px;">
+                                            <span style="color:#391462;font-weight: bold;font-size: 15px"> Política de cancelación</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="100%" style="padding-left: 25px !important; padding-bottom: 20px !important;padding-top: 0px">
+                                            <span style="color:#808080;font-style: italic;font-size: 15px"> Su reserva ha sido cancelada, sin embargo según las políticas de cancelación contratadas, no recibirá importe correspondiente al pago de su reserva.</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:white;height: 149px !important;background-color: #572A85;width: 600px;">
+                                    <tr>
+                                        <td align="center" style="padding-top: 10px;width: 600px;">
+                                            <span style="font-style: italic;font-size:17.666667px;">Viajar abre tu mente y amplia tu cultura</span><br>
+                                            <span style="font-size: 17.666667px;">preguntas@navicu.com</span><br>
+                                            <span style="font-size: 23.333333px;color:#F2AE00;font-weight: bold">08008 - NAVICU</span><br>
+                                            <span style="font-size:14.666667px;">Lunes a viernes de 8:00AM a 5:00PM</span><br><br>
+                                            <span style="font-size: 14.666667px;color:#CCCCCC ">Todos los derechos reservados 2015 navicu © LLC.</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- // CENTERING TABLE -->
+                                </td>
+                                </tr>
+                                <!-- // MODULE ROW -->
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+{% endblock body %}

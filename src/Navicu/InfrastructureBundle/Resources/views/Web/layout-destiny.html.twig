@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="fragment" content="!" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="all" />
+    <meta name="google-site-verification" content="0KzUyXw3vPb94qIl_1szAI7Jy8LcigoAe9JJYuEqp9U" />
+    <meta name="revisit-after" content="1 days" />
+    <meta name="distribution" content="global" />
+    <meta name="msvalidate.01" content="F1B5555FB12D48A8D688FB45279E49AE" />
+    <meta name='B-verify' content='156520dd9e3509b6d279197b524184acc0b469ef' />
+    <meta name="verification" content="305240f0fee158769184124d64e1c61a" />
+    <img src="//bat.bing.com/action/0?ti=5104974&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" />
+    <meta http-equiv=" content-Language" content="es_VE" />
+    <meta name="author" content="navicu.com" />
+
+    {% block seoMetadata %}
+        {% if app.environment == "prod" %}
+            <meta property='fb:app_id' content='1007500219296006' />
+            <meta property="og:url" content="{{ app.request.uri }}">
+            <meta property="og:type" content="website">
+        {% else %}
+            <meta name="robots" content="noindex,nofollow">
+            <meta name="googlebot" content="noindex,nofollow">
+        {% endif %}
+    {% endblock seoMetadata %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/web{% if app.environment != "dev" %}.min{% endif %}.css">
+    {% endblock %}
+    {% block seoTagsBodyOpen %}{% endblock %}
+</head>
+<body>
+
+    {% set userName = app.session.get("userName") %}
+    {% set fosUserError= app.session.flashbag.get('fosUserError') %}
+    {% set notifications = app.session.get("notifications") %}
+    {% set destinationsFooter = destinationsFooter() %}
+
+    {% set alphaCurrency = app.session.get("alphaCurrency") %}
+    {% set userCurrency = app.session.get("userCurrency") %}
+    {% set symbolCurrency = app.session.get("symbolCurrency") %}
+    {% set userLocation = app.session.get("userLocation") %}
+
+
+    <header>
+        <nav class="nvc-navbar nvc-navbar__default" role="navigation">
+            <div class="nvc-container">
+                <div class='nvc-navbar__header post-body entry-content' oncontextmenu='return false' ondragstart='return false' onmousedown='return false' onselectstart='return false'>
+                    <a class="nvc-navbar__brand" href="{{ path('navicu_homepage_temporal') }}">
+                        navicu.com
+                    </a>
+                </div>
+                {% if app.security.token is not null %}
+                    {% if is_granted("ROLE_WEB") %}
+                        <!-- Vista del logout-->
+                        <ul class="nvc-navbar__signedin nvc-navbar__right">
+                            <li class="nvc-dropdown">
+                                <!-- Sesión cliente -->
+                                <a href="#" data-toggle="dropdown" data-hover="dropdown" align="right" class="hidden-xs">
+                                    <strong>{{ userName }}</strong>
+                                    <img src="{{asset('images/iconuser.png')}}">
+                                    {% if notifications!=null %}
+                                        <i  class="fa fn-bellRed"></i>
+                                    {% endif %}
+                                    <span class="caret"></span>
+                                    <br>
+                                </a>
+                                <!-- Sesión cliente vista móvil -->
+                                <a href="#modalNotifications" id="toggleLogIn" data-toggle="modal" align="right" class=" visible-xs">
+                                    <img src="{{asset('images/iconuser.png')}}">
+                                    {% if notifications!=null %}
+                                        <i  class="fa fn-bellRed"></i>
+                                    {% endif %}
+                                    <span class="caret"></span>
+                                    <br>
+                                </a>
+                                <!-- Panel dropdown notificaciones-->
+                                <ul class="nvc-dropdown__menu nvc-notifications hidden-xs" role="menu">
+                                    <li class="nvc-notifications__title">
+                                        <i class="fa fn-bellYellow"></i> {{ 'web.client.session.everything_ready'|trans }}
+                                    </li>
+                                    {% if notifications==null %}
+                                        <li>
+                                            <a href="">
+                                                <span style="background-color:#E73D50;">0</span>{{ 'web.client.session.nothing_new'|trans }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if notifications!=null %}
+                                        {% for notification in notifications.data %}
+                                            {% if notification.type==0 %}
+                                                <li>
+                                                    <a href="{{ path('navicu_list_upcoming_reservations') }}">
+                                                        <span style="background-color:#4DD146;">{{notification.count}}</span>{{notification.message}}
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                            {% if notification.type==1 %}
+                                                <li>
+                                                    <a href="{{ path('navicu_list_pre_reservation') }}">
+                                                        <span style="background-color:#EDA900;">{{notification.count}}</span>{{notification.message}}
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                            {% if notification.type==2 %}
+                                                <li>
+                                                    <a href="{{ path('navicu_list_record') }}">
+                                                        <span style="background-color:#E73D50;">{{notification.count}}</span>{{notification.message}}
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <hr>
+                                     <li>
+                                        <a href="{{ path('navicu_client_home') }}">
+                                            <button id="" type="submit" class="nvc-button nvc-button__default">
+                                                {{ 'web.client.session.visiting_profile'|trans }}
+                                            </button>
+                                        </a>
+                                        <a href="{{ path('navicu_web_logout') }}">
+                                            <button id="" type="button" class="nvc-button nvc-button__reroute">
+                                                 {{ 'web.client.session.sign_off'|trans }}
+                                            </button>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Modal notificaciones solo vista móvil-->
+                                <div class="nvc-modal fade nvc-modal__notification" id="modalNotifications" tabindex="-1" role="dialog" aria-labelledby="modalLoginMobil">
+                                  <div class="nvc-modal__dialog" role="document">
+                                        <ul class="nvc-modal__content nvc-notifications">
+                                            <li class="nvc-notifications__title">
+                                                <i class="fa fn-bellYellow"></i> {{ 'web.client.session.everything_ready_xs'|trans }}
+                                                <button
+                                                    type="button"
+                                                    class="close"
+                                                    style="width:10%;"
+                                                    data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </li>
+                                            {% if notifications==null %}
+                                                <li>
+                                                    <a href="">
+                                                        <span style="background-color:#E73D50;">0</span>{{ 'web.client.session.nothing_new'|trans }}
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                            {% if notifications!=null %}
+                                                {% for notification in notifications.data %}
+                                                    {% if notification.type==0 %}
+                                                        <li>
+                                                            <a href="{{ path('navicu_list_upcoming_reservations') }}">
+                                                                <span style="background-color:#4DD146;">{{notification.count}}</span>{{notification.message}}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if notification.type==1 %}
+                                                        <li>
+                                                            <a href="{{ path('navicu_list_pre_reservation') }}">
+                                                                <span style="background-color:#EDA900;">{{notification.count}}</span>{{notification.message}}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if notification.type==2 %}
+                                                        <li>
+                                                            <a href="{{ path('navicu_list_record') }}">
+                                                                <span style="background-color:#E73D50;">{{notification.count}}</span>{{notification.message}}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            <hr>
+                                            <li>
+                                                <a href="{{ path('navicu_client_home') }}">
+                                                    <button id="" type="button" class="col-xs-8 nvc-button nvc-button__default">
+                                                        {{ 'web.client.session.visiting_profile'|trans }}
+                                                    </button>
+                                                </a>
+                                                <a href="{{ path('navicu_web_logout') }}">
+                                                    <button id="" type="button" class="col-xs-8 nvc-button nvc-button__reroute">
+                                                         {{ 'web.client.session.sign_off'|trans }}
+                                                    </button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                  </div>
+                                </div>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <div class="nvc-navbar__signin" >
+                           <!-- Vista del tab-registro-->
+                            <div class="nvc-navbar__signin--register col-sm-8 hidden-xs">
+                                <a id="register" href="{{ path('navicu_web_register') }}">{{"share.action.sign_up"|trans}}</a>
+                            </div>
+                           <!-- Vista del tab-login -->
+                           <div class="nvc-navbar__signin--login col-xs-8 nvc-dropdown dropdown" data-toggle="dropdown" data-hover="dropdown">
+                                <strong class="hidden-xs">|</strong>
+                                <a class="hidden-xs" href="#" id = "toggleLogIn" data-toggle="dropdown">
+                                    <span>
+                                        {{"share.action.sign_in"|trans}}&nbsp;&nbsp;
+                                        <img src="{{ asset('images/iconuser.png') }}">
+                                    </span>
+                                    <i class="fn-select"></i>
+                                </a>
+                                <!-- Accion para la vista del modal unicamente para la version móvil -->
+                                <a class="visible-xs" href="#modalLoginMobil" id = "toggleLogIn" data-toggle="modal">
+                                    <span>
+                                        <img src="{{ asset('images/iconuser.png') }}">
+                                    </span>
+                                    <i class="fn-select"></i>
+                                </a>
+                                <section class="nvc-dropdown__menu hidden-xs" role="menu">
+                                    <div class="welcome">
+                                            Bienvenido
+                                    </div>
+                                    <div class="register">
+                                        <a href="">¿Ya tienes una cuenta?</a>
+                                    </div>
+                                    <form name="formLogin" >
+                                        <span>
+                                            <i class="fn-email"></i>
+                                            <input name="_username" id="username" type="text" placeholder="{{"message.mail"|trans}}" class="required">
+                                        </span>
+                                        <span>
+                                            <i class="fn-pass" style="font-size:14px; margin-top:6px;"></i>
+                                            <input name="_password" id="password" type="password" placeholder="{{"share.message.password"|trans}}" class="required">
+                                        </span>
+                                        <div>
+                                            <label for="forgotPassword">
+                                                <a class="forgotPassword" id ="forgotPassword" href="{{path('navicu_web_resetting')}}">
+                                                    {{"message.forgot_your_password"|trans}}
+                                                </a>
+                                            </label>
+                                            <button id="btn_showOrHideError" type="submit" class="nvc-button nvc-button__search">
+                                                Ingresar
+                                            </button>
+                                        </div>
+                                        <div class="error">
+                                            <div id="errorPasswordOrUser">
+                                                    {{"share.message.email_pass_error"|trans}}
+                                            </div>
+                                        </div>
+                                    </form>
+                                </section>
+                                <!-- Modal de la vista mobil-->
+                                <section class="nvc-modal fade nvc-modal__signin" id="modalLoginMobil" tabindex="-1" role="dialog" aria-labelledby="modalLoginMobil">
+                                  <div class="nvc-modal__dialog" role="document">
+                                    <div class="nvc-modal__content">
+                                      <div class="nvc-modal__header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 id="modalLoginMobil">
+                                            {{"share.action.sign_into_navicu"|trans}}
+                                        </h4>
+                                      </div>
+                                      <div class="nvc-modal__body">
+                                        <hr>
+                                        <form name="formLogin" >
+                                            <span>
+                                                <i class="fn-icon-login"></i>
+                                                <label for="username">
+                                                    {{"share.message.user"|trans}}
+                                                </label>
+                                                <input name="_username" id="usernameModal" type="text" placeholder="{{"share.message.username"|trans}}" class="required">
+                                            </span>
+                                            <span class="nvc-row">
+                                                <i class="fn-locker-02"></i>
+                                                <label for="password" >
+                                                    {{"share.message.password"|trans}}
+                                                </label>
+                                                <label for="forgotPassword" class="pull-right">
+                                                    <a class="forgotPassword pull-right" id ="forgotPassword" href="{{path('navicu_web_resetting')}}">
+                                                        {{"message.forgot_your_password"|trans}}
+                                                    </a>
+                                                </label>
+                                                <input name="_password" id="passwordModal" type="password" placeholder="{{"share.message.password"|trans}}" class="required">
+                                            </span>
+                                            <div class="nvc-row error">
+                                                <div id="errorPasswordOrUserModal" class="col-xs-16">
+                                                        {{"share.message.email_pass_error"|trans}}
+                                                </div>
+                                            </div>
+                                            <div class="nvc-row sign">
+                                                <span>¿{{ "web.register.new_in_navicu"|trans}}?</span>
+                                                <br>
+                                                <a href="{{ path('navicu_web_register') }}">
+                                                    <strong>¡{{ "web.register.sign_up"|trans}}!</strong>
+                                                </a>
+                                                <button id="btn_showOrHideErrorModal" type="button" class="col-xs-8 nvc-button nvc-button__search">
+                                                    {{"share.action.login_enter"|trans}}
+                                                </button>
+                                            </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </section>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if userLocation is null %}
+                    <ul id="navbar-currency-select" class="nvc-navbar__currency hidden-xs">
+                        <li data-toggle="#navbar-currency-select-dropdown">
+                            <span>Moneda</span>
+                        </li>
+                        <li class="nvc-dropdown" data-toggle="#navbar-currency-select-dropdown">
+                            <span>
+                                {{ alphaCurrency }}
+                                <i class="fn-select"></i>
+                                <i class="caret"></i>
+                            </span>
+                            <ul id="navbar-currency-select-dropdown">
+                                {% for currency in getListCurrency() %}
+
+                                <li class="clearfix" onclick="updateCurrency('{{ currency.alpha }}', '{{ currency.title }}')">
+                                    <span class="nvc-dropdown__currency--symbol">{{ currency.alpha }}</span>
+                                    <span class="nvc-dropdown__currency--title">{{ currency.title }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="visible-xs nvc-navbar__currency--xs">
+                        <section data-toggle="modal" data-target="#currencyModal">
+                            <img src="{{asset('images/icon-divisa-64.png')}}">
+                            <i class="fn-select"></i>
+                            <span class="caret"></span>
+                        </section>
+
+                        <div class="nvc-modal fade nvc-modal__notification nvc-modal__notification--currency" id="currencyModal" tabindex="-1" role="dialog">
+                            <div class="nvc-modal__dialog" role="document">
+                                <div class="nvc-modal__content">
+                                    <div class="nvc-modal__body nvc-dropdown" data-toggle="dropdown">
+                                        Escoge tu moneda
+                                        <i class="fn-select"></i>
+                                        <ul class="nvc-dropdown__menu">
+                                            {% for currency in getListCurrency() %}
+                                            <li class="clearfix" onclick="updateCurrency('{{ currency.alpha }}', '{{ currency.title }}')">
+                                                <span class="nvc-dropdown__currency--symbol">
+                                                    {{ currency.alpha }}
+                                                </span>
+                                                <span class="nvc-dropdown__currency--title">
+                                                    {{ currency.title }}
+                                                </span>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                    (function() {
+                        var ul = document.getElementById('navbar-currency-select');
+                        var dropdown = ul.querySelector('.nvc-dropdown');
+
+                        if (!dropdown) {
+                            throw new Error('dropdown not found');
+                        }
+
+                        ul.addEventListener('click', function(e) {
+                            e.preventDefault();
+
+                            var active = e.target.closest('.nvc-dropdown--active');
+
+                            if (active &&
+                                active !== e.target &&
+                                active.querySelector('span') !== e.target) {
+                                return;
+                            }
+
+                            return toggle();
+                        });
+
+                        document.addEventListener('click', function(e) {
+                            if (e.target.closest('.nvc-navbar__currency')) {
+                                return;
+                            }
+
+                            return hide();
+                        });
+
+                        function toggle() {
+                            dropdown.classList.toggle('nvc-dropdown--active');
+                        }
+
+                        function hide() {
+                            dropdown.classList.remove('nvc-dropdown--active');
+                        }
+                    })();
+                    </script>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <div class="nvc-ribbon" style="height:10px;">
+        <div class="nvc-ribbon__section nvc-ribbon__section--alpha"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--beta"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--gamma"></div>
+        <div class="nvc-ribbon__section nvc-ribbon__section--delta"></div>
+    </div>
+
+    {% block body %}{% endblock %}
+
+    {% block footer%}
+         {% include "NavicuInfrastructureBundle:Web:footer.html.twig" %}
+    {% endblock footer%}
+
+    {% block javascripts %}
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+
+        {% if app.environment == "dev" %}
+            <script src="/builds/vendor.bundle.js"></script>
+            <script src="/builds/client.bundle.js"></script>
+        {% else %}
+            <script src="{{ assets.js.vendor }}"></script>
+            <script src="{{ assets.js.client }}"></script>
+        {% endif %}
+
+        {% if app.environment != "dev" %}
+            <script> document.oncontextmenu = function(){return false}</script>
+        {% endif %}
+
+        <script type="text/javascript">
+            (function($) {
+                $('#errorPasswordOrUser').hide();
+                $('#errorPasswordOrUserModal').hide();
+
+                var loginNavicu = function(id_error_to_show) {
+                    var url = '{{path('navicu_web_api_login')}}';
+                    if (id_error_to_show.data == "errorPasswordOrUser")
+                    {
+                        var values = {
+                            pass: $("#password").val(),
+                            userName: $("#username").val()
+                        };
+                    }
+                    else {
+                        var values = {
+                            pass: $("#passwordModal").val(),
+                            userName: $("#usernameModal").val()
+                        };
+                    }
+
+                    var json = angular.toJson(values);
+
+                    $.ajax({
+                        method: 'POST',
+                        url: url,
+                        data : json,
+                        success: function(data) {
+                            location.reload();
+                        },
+                        error: function(e) {
+                            if (id_error_to_show.data == "errorPasswordOrUser")
+                                $("#errorPasswordOrUser").show();
+                            else
+                                $("#errorPasswordOrUserModal").show();
+                        }
+                    });
+                }
+
+                $("#login input").keydown(function(event) {
+                    var isOnModal = event.target.closest('form').querySelector('#btn_showOrHideErrorModal');
+
+                    var data = 'errorPasswordOrUser';
+                    if (isOnModal) {
+                        data += 'Modal';
+                    }
+
+                    if (event.keyCode == 13) {
+                        loginNavicu({
+                            data: data,
+                        });
+                    }
+                });
+
+                $("#btn_showOrHideError").on("click", null, "errorPasswordOrUser", loginNavicu);
+                $("#btn_showOrHideErrorModal").on("click", null, "errorPasswordOrUserModal", loginNavicu);
+            }(jQuery));
+        </script>
+
+        {% if app.environment == "prod" %}
+            {#-- SEO stuff --#}
+            <script>
+                (function(i,s,o,g,r,a,m) {
+                    i['GoogleAnalyticsObject']=r;i[r]=i[r]||
+                    function() {
+                        (i[r].q=i[r].q||[]).push(arguments)
+                    },
+                    i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })
+                (window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+                ga('create', 'UA-96290392-1', 'auto');
+                ga('send', 'pageview');
+            </script>
+            <script type="text/javascript">
+                /* <![CDATA[ */
+                var google_conversion_id = 895584312;
+                var google_custom_params = window.google_tag_params;
+                var google_remarketing_only = true;
+                /* ]]> */
+            </script>
+            <div style="display:none">
+                <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+            </div>
+            <noscript>
+                <div style="display:inline;">
+                    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/895584312/?value=0&amp;guid=ON&amp;script=0"/>
+                </div>
+            </noscript>
+            {#-- /SEO stuff --#}
+
+            <!-- Start Alexa Certify Javascript -->
+            <script type="text/javascript">
+                _atrk_opts = { atrk_acct:"btNsm1akGFL1vg", domain:"navicu.com",dynamic: true};
+                (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+            </script>
+            <noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=btNsm1akGFL1vg" style="display:none" height="1" width="1" alt="" /></noscript>
+            <!-- End Alexa Certify Javascript -->
+
+
+            <!--------------------------------------------------
+            Es posible que las etiquetas de remarketing todavía no estén asociadas a la información de identificación personal o que estén en páginas relacionadas con las categorías delicadas. Para obtener más información e instrucciones sobre cómo configurar la etiqueta, consulte http://google.com/ads/remarketingsetup.
+            ------------------------------------------------ -->
+            <script type="text/javascript">
+                /* <![CDATA[ */
+                var google_conversion_id = 953752647;
+                var google_custom_params = window.google_tag_params;
+                var google_remarketing_only = true;
+                /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+            <noscript>
+                <div style="display:inline;">
+                    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/953752647/?value=0&amp;guid=ON&amp;script=0"/>
+                </div>
+            </noscript>
+        {% endif %}
+
+        <script type="text/javascript" src="{{ asset('bundles/navicuinfrastructure/assets/navicu/dist/angular-locale/angular-locale_es.js') }}"></script>
+
+        <script type="text/javascript">
+            var __dcid = __dcid || [];
+            __dcid.push(["DigiCertClickID_RSxHdSRb", "11", "s", "white", "RSxHdSRb"]);
+
+            __dcid.push(["DigiCertClickID2_RSxHdSRb", "11", "s", "white", "RSxHdSRb"]);
+        </script>
+
+        <script type="text/javascript" src="//seal.digicert.com/seals/cascade/seal.min.js" async></script>
+
+        <script type="text/javascript">
+             jQuery(function($) {
+
+                $('.nvc-up').click(function(){
+                    $('body, html').animate({
+                        scrollTop: '0px'
+                    }, 300);
+                });
+
+                $(window).scroll(function(){
+                    if( $(this).scrollTop() > 0 ){
+                        $('.nvc-up').slideDown(300);
+                    } else {
+                        $('.nvc-up').slideUp(300);
+                    }
+                });
+
+            });
+        </script>
+
+        <script>
+        $(function() {
+            var timeout = null;
+
+            // Cuando se muestra el modal de las monedas, añade una clase
+            // al body para que el backdrop no tape el header.
+
+            var className = 'nvc-body--currencyModal';
+            $('.nvc-modal__notification--currency').on('show.bs.modal', function() {
+                if (timeout) {
+                    clearTimeout(timeout);
+                    timeout = null;
+                }
+
+                document.body.classList.add(className);
+
+                // Mostrar automáticamente el select.
+                setTimeout(function() {
+                    document.querySelector('.nvc-modal__notification--currency .nvc-dropdown').click();
+                }, 100);
+            });
+            $('.nvc-modal__notification--currency').on('hide.bs.modal', function() {
+                timeout = setTimeout(function() {
+                    document.body.classList.remove(className);
+                }, 1000);
+            });
+        });
+        </script>
+
+        <script>
+        function updateCurrency(alpha, title) {
+            if (title) {
+                document.querySelector('.nvc-navbar__currency--xs .nvc-modal__body')
+                    .childNodes[0]
+                    .textContent = title;
+            }
+            var URL = Routing.generate('navicu_set_alpha_currency');
+
+            var data = {
+                data: {
+                    alphaCurrency: alpha,
+                },
+            };
+
+            $.ajax(URL, {
+                method: 'post',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                complete: function(data) {
+                    window.location.reload(true);
+                },
+            });
+        }
+        </script>
+
+        <!-- AFFILIRED MASTER TAG, PLEASE DON'T REMOVE -->
+        <script type="text/javascript">
+         (function() {
+         var sc = document.createElement('script'); sc.type = 'text/javascript'; sc.async = true;
+         sc.src = '//customs.affilired.com/track/?merchant=4552';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sc, s);
+         })();
+        </script>
+        <!-- END AFFILIRED MASTER TAG -->
+
+    {% endblock %}
+</body>
+</html>

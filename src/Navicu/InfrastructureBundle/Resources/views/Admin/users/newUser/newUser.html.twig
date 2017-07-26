@@ -1,0 +1,60 @@
+{% extends "NavicuInfrastructureBundle:Admin:layout.html.twig" %}
+
+{% block content %}
+    <div
+        ng-controller="UserNewEditCtrl"
+        ng-cloak
+    >
+        <form name="userNavicuForm"class="nvc-form-inline"novalidate>
+            {# Versión desktop #}
+            <main
+                class="nvc-admin--user visible-md visible-lg"
+            >
+                <div>
+                    {% include "NavicuInfrastructureBundle:Admin:users/topMenuUsers.html.twig" %}
+                    <div>
+                        {% include "NavicuInfrastructureBundle:Admin:users/newUser/newUserHeader.html.twig" %}
+                    </div>
+                    <div class="nvc-container">
+                        {% include "NavicuInfrastructureBundle:Admin:users/newUser/newUserData.html.twig" %}
+                    </div>
+                    <div>
+                        <button
+                            type="submit"
+                            class="nvc-button nvc-button__search"
+                            ng-click="sendData()">Guardar
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            {# Versión movil #}
+            <main
+                class="admin nvc-admin--user nvc-admin--user--movil visible-xs visible-sm"
+            >
+                <div>
+                    <div>
+                        {% include "NavicuInfrastructureBundle:Admin:users/newUser/newUserHeader.html.twig" %}
+                    </div>
+                    <div class="nvc-container">
+                        {% include "NavicuInfrastructureBundle:Admin:users/newUser/movil/newUserDataMovil.html.twig" %}
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </main>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var total = {{ total | raw }};
+        var roles = {{ roles | raw }};
+        console.log("total", total);
+    </script>
+
+    {{ parent() }}
+
+
+{% endblock %}

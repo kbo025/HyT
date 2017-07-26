@@ -1,0 +1,129 @@
+<div class="extranet-login">
+    <div class="container">
+        <h5 style="margin-top:-30px;">Los Roques - Venezuela</h5>
+        <div class="col-md-16 text-center" style="margin-bottom:30px;">
+            <center>
+                <img src="{{ assets.img['images/images_original/navicu/extranet_register/responsiveweb.png'] }}" ng-src="{[{ images.responsiveweb }]}" class="img-responsive" style="width:600px;">
+            </center>
+            <h1>{{"extranet.login.market_reserves"|trans }}</h1>
+            <h6>{{"extranet.login.million_travelers"|trans }}</h6>
+        </div>
+    </div>
+    <div class="text-center" style="margin-bottom:30px; background-color:#783CBD !important;">
+        <div class="container" style="padding-top:50px; padding-bottom:25px;">
+            <div class="col-md-4">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/1-16.png') }}" class="img-responsive img-items">
+                <h2>{{"extranet.login.free_register"|trans }}</h2>
+                <h5>Se parte de navicu sin <br>costo adicional.</h5>
+            </div>
+            <div class="col-md-4 ">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/2-16.png') }}" class="img-responsive img-items">
+                <h2>VALIDACIÓN EN 48HRS</h2>
+                <h5>Empieza a recibir reservas <br>en el menor tiempo posible.</h5>
+            </div>
+            <div class="col-md-4 ">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/3-16.png') }}" class="img-responsive img-items">
+                <h2>GESTIONA TU ESTABLECIMIENTO</h2>
+                <h5>Disfruta de las herramientas <br>más potentes del mercado.</h5>
+            </div>
+            <div class="col-md-4 ">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/4-16.png') }}" class="img-responsive img-items">
+                <h2>PAGO GARANTIZADO</h2>
+                <h5>Recibe el monto de tus <br>reservas a final de mes.</h5>
+            </div>
+        </div>
+        <div class="container" style="padding-top:25px; padding-bottom:50px;">
+            <div class="col-md-4 ">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/5-16.png') }}" class="img-responsive img-items">
+                <h2>SISTEMA PAPERLESS</h2>
+                <h5>Deja de gastar papel,<br> todo por email.</h5>
+            </div>
+            <div class="col-md-4 ">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/6-16.png') }}" class="img-responsive img-items">
+                <h2>SOPORTE TECNICO 24/7</h2>
+                <h5>Estaremos a tu disposición <br>cada vez que nos necesites.</h5>
+            </div>
+            <div class="col-md-4 ">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/7-16.png') }}" class="img-responsive img-items">
+                <h2>MARKETING GRATUITO</h2>
+                <h5>Benefíciate de nuestras <br>campañas publicitarias.</h5>
+            </div>
+            <div class="col-md-4 ">
+                <img src="{{ asset('images/images_original/navicu/extranet_register/200x200/8-16.png') }}" class="img-responsive img-items">
+                <h2>EVOLUCIÓN CONSTANTE</h2>
+                <h5>Creemos que la formula<br> del éxito es evolucionar.</h5>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-md-9 text-center" style="margin-bottom:30px;">
+            <h1 align="right" style="padding-top:70px;">{{ "extranet.login.managed"|trans }}</h1>
+            <h6 align="right">Contamos con el sistema de gestión online<br>
+                más avanzado del mundo para que puedas <br>
+                centrarte en lo realmente importante <br>
+                para la satisfacción de tu cliente.
+            </h6>
+        </div>
+        <div class="col-md-7 text-center" style="margin-bottom:30px;">
+            <img src="{{ assets.img['images/images_original/navicu/extranet_register/9.png'] }}" ng-src="{[{ images.gestion }]}" class="img-responsive" style="width:350px">
+        </div>
+    </div>
+    <div class="container pad">
+        <div class="col-md-8 text-center pad">
+            <img src="{{ assets.img['images/images_original/navicu/extranet_register/carga-masiva.jpg'] }}" ng-src="{[{ images.cargaMasiva }]}" class="img-responsive" style="height:340px">
+            <h3 align="left" class="banner-login text-center">
+                {{ "extranet.login.massload"|trans }}<br>
+                <span class="font-regular-italic" style="font-size:18px;">{{ "extranet.login.info_massload"|trans }}</span>
+            </h3>
+        </div>
+        <div class="col-md-8 text-center pad">
+            <img src="{{ assets.img['images/images_original/navicu/extranet_register/tarifaseinventario.jpg'] }}" ng-src="{[{ images.tarifas }]}" class="img-responsive" style="height:340px">
+            <h3 align="left" class="banner-login text-center">
+                {{ "extranet.login.inventory"|trans }}<br>
+                <span class="font-regular-italic" style="font-size:18px;">{{ "extranet.login.info_inventory"|trans }}</span>
+            </h3>
+        </div>
+    </div>
+
+    {% if form2 is defined %}
+    <div style="background-color:rgba(120, 60, 189, 0.8)">
+        <div class="container register-footer" style="padding-top:100px; padding-bottom:70px;">
+            <div class="col-md-10" style="margin-bottom:30px;">
+                <h1 align="right" style="padding-top:0; color:#fff;">{{ "extranet.login.begins_trip"|trans }}</h1>
+                <h6 align="right" style="color:#fff;">lleva tu establecimiento hacia la excelencia<br>
+                     con miles de viajeros, se parte de <br>
+                    la familia navicu.com<br>
+                </h6>
+            </div>
+            <div class="col-md-6">
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="container">
+                        Menu administrativo<br>
+                        <a href="{{ path('extranet_logout') }}"><i class="fa fa-sign-out">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</i> </a>
+                    </div>
+                {% else %}
+                    <div class="col-xs-16">
+                        {{ form_start(form2) }}
+
+                        {{ form_errors(form2.username)}}
+                        {{ form_errors(form2.email)}}
+                        {{ form_errors(form2)}}
+
+                        {{ form_widget(form2.username, {'attr': {'class': 'form-control my-imput', 'placeholder': 'share.message.username'|trans }})}}
+
+                        {{ form_widget(form2.email, {'attr': {'class': 'form-control my-imput', 'placeholder': 'share.message.email'|trans }})}}
+
+                        {{ form_widget(form2.password, {'attr': {'class': 'form-control my-imput', 'placeholder': 'share.message.password'|trans }})}}
+
+                        {{ form_widget(form2.save, {'attr': {'class': 'btn btn-md btn-primary btn-home btn-block'}})}}
+
+                        {{ form_end(form2) }}
+                        {{ form_rest(form2) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,183 @@
+<script id="modal-login.tpl" type="text/ng-template" data-animation="static">
+	<style type="text/css">
+	.romanos_lower{list-style-type:lower-roman;}
+	</style>
+
+    <div class="nvc-modal" tabindex="-1" role="dialog" style="overflow-x:hidden;  overflow-y:hidden;">
+	    
+	    <!-- Modal Login -->
+	    <div class="nvc-modal__login center-block clearfix " ng-if="!resetPassword.showOrHide">
+	        
+	        <div class="nvc-modal__header">	     
+	            <button type="button" class="close" ng-click="hideModalLogin()" data-dismiss="modal" aria-hidden="true">×</button>
+	            <h3><span class="fn-usercontra-05"></span> {{"share.message.sign_login"|trans}}</h3>
+	        </div>
+
+	        <div class="nvc-modal__content">
+            	<div class="nvc-row" align="center">
+
+            		<!-- Botton Facebook -->
+	            	<div class="col-xs-8">
+	            		 <a class="nvc-button nvc-button__facebook" ng-click="login()" ng-hide="isLoggedIn">
+                            	<span class="fa fa-facebook"></span> 
+                            	<strong class="visible-lg">Ingresar con Facebook</strong>
+                            	<strong class="hidden-lg">Facebook</strong> 
+                         </a>
+	            	</div>
+					<!-- Botton Google -->
+	            	<div class="col-xs-8">
+	            		<div ng-app="directive.g+signin">
+                            <google-plus-signin autorender="false" clientid="533158999432-p2qg5qoqjimnm1i34r7k3isnb3o020rj.apps.googleusercontent.com">
+                            </google-plus-signin>           
+                        </div>
+	            	</div>
+
+            	</div>
+            	<br>
+	            <form name="formLogin">
+	            	<!-- Formulario en LG MD -->
+	            	<div class="nvc-row hidden-sm hidden-xs">
+	            		<div class="col-md-8">
+	            			<label>
+            					<i class="fn-usercontra-04"></i>{{"share.message.email"|trans}}
+            				</label>
+
+	            			<input type="text" ng-model="clientUserName" placeholder="{{"word.username"|trans}}" required>
+	            		</div>
+	            		<div class="col-md-8">
+	            			<label>
+            					<i class="fn-usercontra-05"></i>{{"share.message.password"|trans}}
+            				</label>
+
+	            			<input type="password" name="password" ng-model="clientPass" placeholder="{{"word.password"|trans}}" minlength="6" required>
+	            		</div>
+	            	</div>
+
+					<!-- Formulario en SM XS -->
+	            	<div class="nvc-row visible-sm visible-xs">
+	            		<div class="col-xs-16">
+	            			<label>
+            					<i class="fn-usercontra-04"></i>{{"share.message.email"|trans}}
+            				</label>
+
+	            			<input type="text" ng-model="clientUserName" placeholder="{{"word.username"|trans}}" required>
+	            		</div>
+	            	</div>
+
+	            	<div class="nvc-row visible-sm visible-xs">
+	            		<div class="col-xs-16">
+	            			<label>
+            					<i class="fn-usercontra-05"></i>{{"share.message.password"|trans}}
+            				</label>
+	            			<input type="password" ng-model="clientPass" placeholder="{{"word.password"|trans}}" required>
+	            		</div>
+	            	</div>
+
+
+	            	<div class="nvc-row">
+	            		<div class="col-xs-16 nvc-modal__content--error" ng-show="messageErrorLogin">
+	            			{{"extranet.message.login_error_modal"|trans}}
+	            		</div>
+	            	</div>
+	            	<div class="nvc-row">
+	            		<div class="col-md-8 hidden-sm hidden-xs">
+	            			<label class="nvc-modal__content--password" ng-click="resetPassword.showOrHide=true">
+	            				{{"message.forgot_your_password"|trans}}
+	            			</label>
+	            		</div>
+	            		<div class="col-md-8 hidden-sm hidden-xs">
+		            		<button class="nvc-button nvc-button__default" ng-click="loginNavicu(clientUserName, clientPass)" ng-disabled="formLogin.$invalid">
+		            			<strong>{{ "word.sign_in" |trans}}</strong>
+		            		</button>
+	            		</div>
+
+	            		<div class="col-xs-16 visible-sm visible-xs">
+		            		<button class="nvc-button nvc-button__default" ng-click="loginNavicu(clientUserName, clientPass)" ng-disabled="formLogin.$invalid">
+		            			<strong>{{ "word.sign_in" |trans}}</strong>
+		            		</button>
+	            		</div>
+
+	            		<div class="col-xs-16 visible-sm visible-xs">
+	            			<label class="nvc-modal__content--password" ng-click="resetPassword.showOrHide=true">
+	            				{{"message.forgot_your_password"|trans}}
+	            			</label>
+	            		</div>
+            		</div>		            	
+            	</form>              	
+	        </div>
+	    </div>
+
+		<!-- Modal Recuperar Contraseña -->
+	    <div class="nvc-modal__password center-block clearfix" ng-if="resetPassword.showOrHide">
+
+	    	<div class="nvc-modal__header">
+				<button type="button" class="close" ng-click="hideModalLogin()" data-dismiss="modal" aria-hidden="true">×</button>
+        		<h3><span class="fn-maillocker-01"></span> {{ "share.message.resetting_send_email"|trans }}</h3>  	
+	    	</div>
+	
+			<div class="nvc-modal__content">		
+				<div class="nvc-row">
+					<!-- Mensajes del Modal en LG MD -->
+					<div class="col-md-16 hidden-sm hidden-xs">
+						<p>
+							{{ "share.message.resetting_your_password_paragraph_first" | trans  }} 
+							{{ "share.message.resetting_your_password_paragraph_second" | trans  }}
+						</p>
+					</div>
+
+					<!-- Mensajes del Modal en SM XS -->
+					<div class="col-xs-16 visible-sm visible-xs">
+						<p>{{ "share.message.enter_your_email" | trans  }}</p>
+						<b>{{ "share.message.you_will_receive_instructions" | trans  }}</b>
+					</div>
+				</div>
+				<div class="nvc-row">
+					<div class="col-md-10 nvc-modal__content--margin">
+						<!--INPUT-->
+						<form name="formRecoverPassword">
+							<input 
+								type="email" 
+								name="email" 
+								id="username" 
+								ng-model="user.email" 
+								required="required" 
+								placeholder="{{ "share.message.username_email"|trans }}"/>
+						</form>
+
+						<div ng-show="response" class="nvc-modal__content--margin"> 
+							<div class="col-xs-16">
+								{[{response.acceptOrDeny}]}
+							</div>
+						</div>
+						<div class="nvc-row">
+							<!--BOTON VOLVER-->
+							<div class="col-md-8">
+								<button 
+										type="button" 
+										class="nvc-button nvc-button__reroute" 
+										ng-click="goBack()">
+									{{"share.action.go_back"|trans}}
+								</button>
+							</div>
+							<!--BOTON ENVIAR-->
+							<div class="col-md-8">
+								<button type="button" 
+										class="nvc-button nvc-button__default" 
+										ng-click="resettingSendEmail()" 
+										ng-disabled="formRecoverPassword.email.$invalid">
+									{{"share.action.submit"|trans}}
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!--Imagen y Mensaje de la imagen-->
+					<div class="col-md-5 nvc-modal__content--margin">
+						<img src="/images/iconpass.png" class="img-responsive center-block" alt="Image">
+						<center><b><span>{{ "share.message.resetting_your_password_please_sign_in_email" |trans }}</span></b></center>						
+					</div>
+				</div>
+	    	</div>	    	   	
+	    </div> 
+    </div>
+</script>    

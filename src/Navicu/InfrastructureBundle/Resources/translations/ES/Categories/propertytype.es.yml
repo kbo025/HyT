@@ -1,0 +1,35 @@
+# Representa los tipos de establecimientos del sistema
+property:
+  apartament: apartamento
+  aparthotel: aparta-hotel
+  bed-and-breakfast: bed-and-breakfast
+  boat: barco
+  camping: camping
+  cottage: casa-rural
+  hostel: hostal
+  hotel: hotel
+  inn: posada
+  love-hotel: love-hotel
+  motel: motel
+  mountain-home: casa-montaña
+  pension: pension
+  resorts: resorts
+  villa: villa
+
+
+# Inversa de las traducciones de los tipos de establecimientos
+apartamento: property.apartament
+aparta-hotel: property.aparthotel
+bed-and-breakfast: property.bed-and-breakfast
+barco: property.boat
+camping: property.camping
+casa-rural: property.cottage
+hostal: property.hostel
+hotel: property.hotel
+posada : property.inn
+love-hotel: property.love-hotel
+motel: property.motel
+casa-montaña: property.mountain-home
+pension: property.pension
+resorts: property.resorts
+villa: property.villa

@@ -1,0 +1,17 @@
+parameters:
+    nvc_api.class_create_user: Navicu\Rest\ApiBundle\Resources\Services\CreateAuthUser
+    nvc_api.class_validate_user: Navicu\Rest\ApiBundle\Resources\Services\ValidateOAuthUser
+
+services:
+    # Servicio para la creacion de usuarios
+    nvc_rest_api.create_auth_user:
+        class: %nvc_api.class_create_user%
+        arguments: [@service_container]
+    # Servicio para la verificar si existe el usuario
+    nvc_rest_api.validate_auth_user:
+        class: %nvc_api.class_validate_user%
+        arguments: [@service_container]
+
+#    navicu_rest_api.example:
+#        class: Navicu\Rest\ApiBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

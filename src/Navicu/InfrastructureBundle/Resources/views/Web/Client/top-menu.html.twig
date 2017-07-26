@@ -1,0 +1,61 @@
+{% block topmenu%}
+    <nav class="nvc-navbar nvc-navbar__inverse nvc-topmenu">
+      <div class="nvc-container__fluid nvc-container">
+
+            <div class="nvc-navbar__header">
+                <button type="button" class="nvc-navbar__toggle" data-toggle="collapse" data-target="#menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <strong class="nvc-navbar__toggle" data-toggle="collapse">{{"web.menu_login.what_do_you_need"|trans}}</strong>
+            </div>
+            <div class="collapse nvc-navbar__collapse" id="menu" style="margin-left:-15px;">
+                <ul class="nvc-nav">
+                    <li>
+                        {% if module_title == "home"%}
+                            <a style="color:#ffcf48;" href="{{ path('navicu_client_home') }}">{{"web.menu_login.home"|trans}}</a>
+                        {% else %}
+                            <a href="{{ path('navicu_client_home') }}">{{"web.menu_login.home"|trans}}</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if module_title == "upcomingReservation"%}
+                            <a style="color:#ffcf48;" href="{{ path('navicu_list_upcoming_reservations') }}">{{"web.menu_login.upcoming_reservations"|trans}}</a>
+                        {% else %}
+                            <a href="{{ path('navicu_list_upcoming_reservations') }}">{{"web.menu_login.upcoming_reservations"|trans}}</a>
+                        {% endif %}
+                    </li>
+                    <li class="nvc-dropdown nvc-dropdown__block">
+                        {% if module_title == "preReservation" or module_title == "confirmationProcess"%}
+                            <a style="color:#ffcf48;" class="nvc-dropdown__toggle" data-toggle="dropdown">{{"web.menu_login.transactions_in_process"|trans}} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        {% else %}
+                            <a href="#" class="nvc-dropdown__toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{"web.menu_login.transactions_in_process"|trans}} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                    {% endif %}
+                        <ul class="nvc-dropdown__menu">
+                            <li>
+                               <a href="{{ path('navicu_list_pre_reservation') }}">{{"web.menu_login.pre_reserves"|trans}}
+                           
+                               <a href="{{ path('navicu_list_cofirmation_process') }}">{{"web.menu_login.confirmation_process"|trans}}</a> 
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        {% if module_title == "record"%}
+                            <a style="color:#ffcf48;" href="#">{{"web.menu_login.record"|trans}}</a>
+                        {% else %}
+                            <a href="{{ path('navicu_list_record') }}">{{"web.menu_login.record"|trans}}</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if module_title == "userData"%}
+                            <a style="color:#ffcf48;" href="{{ path('navicu_client_user') }}">{{"web.menu_login.data_user"|trans}}</a>
+                        {% else %}
+                            <a href="{{ path('navicu_client_user') }}">{{"web.menu_login.data_user"|trans}}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+    </nav>
+{% endblock topmenu %} 

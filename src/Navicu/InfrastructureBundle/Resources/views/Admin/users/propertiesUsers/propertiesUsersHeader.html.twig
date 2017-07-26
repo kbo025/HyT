@@ -1,0 +1,26 @@
+<form class="nvc-form--aavv nvc-container">
+    <div class="nvc-form__left">
+        <div class="input-group">
+            <span class="input-group-addon nvc-aavv-customize__text">
+                {{ 'aavv.reservations.list.form.labels.search' | trans }}
+            </span>
+            <input
+                class="form-control"
+                id="nvc-form__search"
+                ng-model="search"
+                role="search"
+                tabindex="1"
+                type="text"
+            />
+            <span class="input-group-addon">
+                <button
+                    class="nvc-aavv-customize__button--primary"
+                    type="submit"
+                    ng-click="getListFilter(search, 1, null)"
+                >
+                    {{ 'aavv.reservations.list.form.buttons.search' | trans }}
+                </button>
+            </span>
+        </div>
+    </div>
+</form>

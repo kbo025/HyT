@@ -1,0 +1,179 @@
+<section>
+    <h2>Datos del Establecimiento
+        <span><a ng-href="{[{propertyUrl}]}" target="_blank">{[{ response.details.web}]}</a></span>
+    </h2>
+    <div class="nvc-admin__details--table clearfix">
+        <div class="col-md-4 border">
+            <h3>País</h3>
+            <p ng-if="response.details.country != null">{[{response.details.country}]}</p>
+            <p ng-if="response.details.country == null">---</p>
+            <br>
+            <h3>Fecha de registro</h3>
+            <p ng-if="response.details.registrationDate != null">{[{response.details.registrationDate}]}</p>
+            <p ng-if="response.details.registrationDate == null">---</p>
+        </div>
+        <div class="col-md-4 border">
+            <h3>Estado</h3>
+            <p ng-if="response.details.state != null">{[{response.details.state}]}</p>
+            <p ng-if="response.details.state == null">---</p>
+            <br>
+            <h3>Fecha de alta del hotel</h3>
+            <p ng-if="response.details.joinDate != null">{[{response.details.joinDate}]}</p>
+            <p ng-if="response.details.joinDate == null">---</p>
+        </div>
+        <div class="col-md-4 border">
+            <h3>Ciudad</h3>
+            <p ng-if="response.details.city != null">{[{response.details.city}]}</p>
+            <p ng-if="response.details.city == null">---</p>
+            <br>
+            <h3>Captador</h3>
+            <p ng-if="response.details.collector != null">{[{response.details.collector}]}</p>
+            <select
+                    ng-if="response.details.collector == null"
+                    class="form-control"
+                    ng-model="property.nvc_profile_id"
+                    ng-change="setCollector($index, property.nvc_profile_id)"
+                    ng-options="item as item.name for item in response.commercials track by item.id"
+            >
+            </select>
+        </div>
+        <div class="col-md-4">
+            <h3>Dirección</h3>
+            <p ng-if="response.details.address != null">{[{response.details.address}]}</p>
+            <p ng-if="response.details.address == null">---</p>
+            <br>
+            <h3>Ejecutivo</h3>
+            <p ng-if="response.details.accountExecutive != null">{[{response.details.accountExecutive}]}</p>
+            <p ng-if="response.details.accountExecutive == null">---</p>
+        </div>
+
+        <div class="col-md-8">
+            <h3>Usuario registrado</h3>
+            <p ng-if="response.details.registeredUser != null">{[{response.details.registeredUser}]}</p>
+            <p ng-if="response.details.registeredUser == null">---</p>
+        </div>
+        <div class="col-md-8">
+            <h3>Enlace del establecimiento</h3>
+            <p ng-if="propertyUrl != null">{[{propertyUrl}]}</p>
+            <p ng-if="propertyUrl == null">---</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 >Responsables del establecimiento</h2>
+    <div class="nvc-admin__details--table clearfix">
+        <div ng-repeat="value in response.propertyResponsible">
+            <div class="col-md-4 border">
+                <h3>Responsable {[{$index+1}]}</h3>
+                <p ng-if="response.propertyResponsible[$index].name != null">
+                    {[{response.propertyResponsible[$index].name}]}
+                </p>
+                <p ng-if="response.propertyResponsible[$index].name == null">---</p>
+            </div>
+            <div class="col-md-4 border">
+                <h3>Cargo</h3>
+                <p ng-if="response.propertyResponsible[$index].position != null">
+                    {[{response.propertyResponsible[$index].position}]}
+                </p>
+                <p ng-if="response.propertyResponsible[$index].position == null">---</p>
+            </div>
+            <div class="col-md-4 border">
+                <h3>Teléfono</h3>
+                <p ng-if="response.propertyResponsible[$index].phone != null">
+                    {[{response.propertyResponsible[$index].phone}]}
+                </p>
+                <p ng-if="response.propertyResponsible[$index].phone == null">---</p>
+            </div>
+            <div class="col-md-4">
+                <h3>e-mail</h3>
+                <p ng-if="response.propertyResponsible[$index].email != null">
+                    {[{response.propertyResponsible[$index].email}]}
+                </p>
+                <p ng-if="response.propertyResponsible[$index].email == null">---</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section ng-show="{{ hasPermission('admin_property_details', 'hotel_numbers') }}">
+    <h2>Números del hotel</h2>
+    <div class="nvc-admin__details--table clearfix">
+        <div class="col-md-4 border">
+            <h3>Producción</h3>
+            <p ng-if="response.propertyStatistics.production != null">
+                {[{response.propertyStatistics.production| number}]}
+            </p>
+            <p ng-if="response.propertyStatistics.production == null">---</p>
+            <br>
+            <h3>RevPAR</h3>
+            <p ng-if="response.propertyStatistics.revPAR != null">
+                {[{response.propertyStatistics.revPAR| number}]}
+            </p>
+            <p ng-if="response.propertyStatistics.revPAR == null">---</p>
+            <br>
+            <h3>% Perfil completo</h3>
+            <p ng-if="response.propertyStatistics.fullProfile != null">
+                {[{response.propertyStatistics.fullProfile}]}%
+            </p>
+            <p ng-if="response.propertyStatistics.fullProfile == null">---</p>
+        </div>
+        <div class="col-md-4 border">
+            <h3>Producción neta</h3>
+            <p ng-if="response.propertyStatistics.netProduction != null">
+                {[{response.propertyStatistics.netProduction| number}]}
+            </p>
+            <p ng-if="response.propertyStatistics.netProduction == null">---</p>
+            <br>
+            <h3>Dispo media</h3>
+            <p ng-if="response.propertyStatistics.averageAvailability != null">
+                {[{response.propertyStatistics.averageAvailability}]}
+            </p>
+            <p ng-if="response.propertyStatistics.averageAvailability == null">---</p>
+            <br>
+            <h3>% Comisión</h3>
+            <p ng-if="response.propertyStatistics.commission != null">
+                {[{response.propertyStatistics.commission}]}%
+            </p>
+            <p ng-if="response.propertyStatistics.commission == null">---</p>
+        </div>
+        <div class="col-md-4 border">
+            <h3>Nº reservas</h3>
+            <p ng-if="response.propertyStatistics.reservationsNumbers != null">
+                {[{response.propertyStatistics.reservationsNumbers}]}
+            </p>
+            <p ng-if="response.propertyStatistics.reservationsNumbers == null">---</p>
+            <br>
+            <h3>Antelación</h3>
+            <p ng-if="response.propertyStatistics.advance != null">
+                {[{response.propertyStatistics.advance}]}
+            </p>
+            <p ng-if="response.propertyStatistics.advance == null">---</p>
+            <br>
+            <h3>Ratio de conversión</h3>
+            <p ng-if="response.propertyStatistics.conversion != null">
+                {[{response.propertyStatistics.conversion}]}%
+            </p>
+            <p ng-if="response.propertyStatistics.conversion == null">---</p>
+        </div>
+        <div class="col-md-4">
+            <h3>ADR vendido</h3>
+            <p ng-if="response.propertyStatistics.adrSold != null">
+                {[{response.propertyStatistics.adrSold| number}]}
+            </p>
+            <p ng-if="response.propertyStatistics.adrSold == null">---</p>
+            <br>
+            <h3>Habitación más vendida</h3>
+            <p ng-if="response.propertyStatistics.roomTypeTopSellers != null">
+                {[{response.propertyStatistics.roomTypeTopSellers}]}
+            </p>
+            <p ng-if="response.propertyStatistics.roomTypeTopSellers == null">---</p>
+            <br>
+            <h3>Disp base</h3>
+            <p ng-if="response.propertyStatistics.basedAvailability != null">
+                {[{response.propertyStatistics.basedAvailability}]}
+            </p>
+            <p ng-if="response.propertyStatistics.basedAvailability == null">---</p>
+        </div>
+    </div>
+</section>
